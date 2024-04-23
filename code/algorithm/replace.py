@@ -1,6 +1,5 @@
 import os
 code_repo_path = os.environ.get("CODE_REPO_PATH")
-from summary_information import SummaryInformation
 
 
 class Replace():
@@ -51,12 +50,7 @@ class Replace():
         updated_hyp_bank: the updated hypothesis bank
 
         """
-        # match args.replace_style:
-        #     # to add new cases add "case 'fill_this_in':" above the 'case _' 
-        #     # then write the code under it
-        #     case _:
-        #         # default is to use the old replace method
-        #         updated_hyp_bank = self.default_replace(args, hypotheses_bank, new_generated_hypotheses)
+
         if args.replace_style == 'default':
             updated_hyp_bank = self.default_replace(args, hypotheses_bank, new_generated_hypotheses)
 

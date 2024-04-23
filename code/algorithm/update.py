@@ -6,6 +6,7 @@ from summary_information import SummaryInformation
 from utils import get_num_examples
 import math
 
+
 class Update(ABC):
     """Update class. To use it implement the update function"""
     def __init__(self, generation_class, inference_class, replace_class):
@@ -138,6 +139,7 @@ class DefaultUpdate(Update):
                 self.save_to_json(args, f"{i+1}_seed_{args.current_seed}", hypotheses_bank)
 
         return hypotheses_bank
+
 
 class SamplingUpdate(Update):
     def __init__(self, generation_class, inference_class, replace_class):
