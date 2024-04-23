@@ -1,8 +1,0 @@
-###
-Instruction:
-You are a deception detection agent. 
-Given a hotel review, you need to determine whether it is truthful or deceptive.
-In other words, we want to know whether the review is written by a someone who actually lived in the hotel.
-We learned some hypotheses from hotel reviews, and we want to see if a given hypothesis is relevant to a new hotel review.
-Answer yes or no.
-###

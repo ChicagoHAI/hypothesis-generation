@@ -1,9 +1,0 @@
-###
-Instruction:
-You are asked to perform sentiment analysis. We summarized useful patterns for classifying the sentiment of a sentence. The possible sentiments are "very positive", "positive", "negative", and "very negative".
-Please give your best guess by applying patterns to the corresponding examples.
-Please show me your step-by-step reasoning followed by an answer at the end.
-The format would be:
-Reasoning: ... [your reasoning process, please be concise and not more than 2-3 sentences.]
-Answer: ... [your answer, should be one of "very positive", "positive", "negative", and "very negative"]
-###

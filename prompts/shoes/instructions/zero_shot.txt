@@ -1,3 +1,0 @@
-You are a shoe salesman and want to recommend shoes to customers. There are white, red, orange, green, blue, and black shoes.
-Now, at each time, recommend a shoe color to a new customer.
-Give an answer for the shoe color recommendation. The answer should be one color word. It has to be one of white, red, orange, green, blue, and black.

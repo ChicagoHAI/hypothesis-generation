@@ -1,8 +1,0 @@
-###
-Instruction:
-Please give your best guess by applying knowledge to the corresponding examples.
-Please show me your step-by-step reasoning followed by an answer at the end.
-The format would be:
-Reasoning: ... [your reasoning process, please be concise and not more than 2-3 sentences.]
-Answer: ... [your answer, a color word, must be one word and nothing else.]
-###
