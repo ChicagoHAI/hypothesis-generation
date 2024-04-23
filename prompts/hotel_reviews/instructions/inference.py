@@ -5,4 +5,3 @@ You need to determine whether each of the patterns holds for the current hotel r
 Give an answer. The answer should be one word (truthful or deceptive).
 Give your final answer in the format of {{Final answer: answer}}
 """
-#If the hypothesis is not applicable, however, you may choose to also give "other" as an answer.
