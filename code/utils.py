@@ -17,18 +17,12 @@ from claude_api_cache import ClaudeAPICache, MixtralAPICache
 from consts.model_consts import INST_WRAPPER
 
 code_repo_path = os.environ.get("CODE_REPO_PATH")
-server = os.environ.get("SERVER")
 PORT = int(os.environ.get("PORT"))
 
 if code_repo_path:
     print(f"Code repo path: {code_repo_path}")
 else:
     print("Environment variable CODE_REPO_PATH not set.")
-
-if server:
-    print(f"Server: {server}")
-else:
-    print("Environment variable SERVER not set.")
 
 
 GPT_MODELS = {
@@ -201,12 +195,7 @@ class LLMWrapper:
             device = "cpu"
 
         if path_name is None:
-            if server == 'indigo':
-                path_name="/data/LLAMA2_chat_hf/llama2_chat_7B/"
-            elif server == 'dsi':
-                path_name="/net/projects/veitch/LLMs/llama2-based-models/llama2-hf/Llama-2-7b-chat-hf/"
-            else:
-                raise ValueError(f"Server {server} not recognized.")
+            path_name = f'meta-llama/{self.model}-hf'
 
         config = LlamaConfig.from_pretrained(path_name, cache_dir=cache_dir)
         tokenizer = LlamaTokenizer.from_pretrained(path_name, cache_dir=cache_dir)
@@ -233,7 +222,7 @@ class LLMWrapper:
 
         if path_name is None:
             if model=='Mixtral-8x7B':
-                path_name = "/net/projects/chai-lab/tejes/Mixtral-8x7B-Instruct-v0.1"
+                path_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
             elif model == 'Mistral-7B':
                 path_name = "mistralai/Mistral-7B-Instruct-v0.2"
             else:
