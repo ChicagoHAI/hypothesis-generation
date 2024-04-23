@@ -1,8 +1,0 @@
-{"inference_method": "zero_shot", "model_name": "turbo35_0613", "task": "shoe", "acc": 0.39}
-{"inference_method": "few_shot", "model_name": "turbo35_0613", "task": "shoe", "acc": 0.49}
-{"inference_method": "zero_shot", "model_name": "turbo35_0613", "task": "hotel_reviews", "acc": 0.5}
-{"inference_method": "few_shot", "model_name": "turbo35_0613", "task": "hotel_reviews", "acc": 0.55}
-{"inference_method": "zero_shot", "model_name": "turbo35_0613", "task": "headline_binary", "acc": 0.56}
-{"inference_method": "few_shot", "model_name": "turbo35_0613", "task": "headline_binary", "acc": 0.6}
-{"inference_method": "zero_shot", "model_name": "turbo35_0613", "task": "retweet", "acc": 0.41}
-{"inference_method": "few_shot", "model_name": "turbo35_0613", "task": "retweet", "acc": 0.62}
