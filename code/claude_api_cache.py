@@ -142,80 +142,6 @@ class APICache(ABC):
         return resp
 
 
-# class OpenAIAPICache(APICache):
-#     """A cache wrapper for OpenAI's Chat and Completion API calls.
-
-#     Typical usage example:
-
-#       api = OpenAIAPICache(open("key.txt").read().strip(), 6379)
-#       resp = api.generate(model="text-davinci-002", prompt="This is a test", temperature=0.0)
-#     """
-
-#     import openai
-
-#     service = "OpenAI"
-#     exceptions_to_catch = (
-#         openai.error.RateLimitError,
-#         openai.error.APIError,
-#         openai.error.Timeout,
-#         openai.error.ServiceUnavailableError,
-#     )
-
-#     def __init__(self, mode: str = "completion", **redis_kwargs: dict):
-#         """Initializes an OpenAIAPICache Object.
-
-#         Args:
-#             port: Port of the Redis backend.
-#             mode: "completion" or "chat", determines which API to call
-#         """
-#         self.mode = mode
-#         if mode == "completion":
-#             self.api_call = self.openai.Completion.create
-#         elif mode == "chat":
-#             self.api_call = self.openai.ChatCompletion.create
-#         super().__init__(**redis_kwargs)
-
-
-# class CohereAPICache(APICache):
-#     """A cache wrapper for Cohere Generate API calls."""
-
-#     import cohere
-
-#     service = "cohere"
-
-#     def __init__(self, client: cohere.Client, **redis_kwargs: dict):
-#         """Initializes a CohereAPICache Object.
-
-#         Args:
-#             port: Port of the Redis backend.
-#             client: Authenticated cohere client
-#         """
-#         self.api_call = client.generate
-#         super().__init__(**redis_kwargs)
-
-
-# class ClaudeAPICache(APICache):
-#     """A cache wrapper for Anthropic Completion API calls."""
-
-#     import anthropic
-
-#     service = "Claude"
-#     exceptions_to_catch = (
-#         anthropic.RateLimitError, 
-#         # TODO: add more exceptions
-#     )
-
-#     def __init__(self, client, **redis_kwargs: dict):
-#         """Initializes an ClaudeAPICache Object.
-
-#         Args:
-#             port: Port of the Redis backend.
-#             client: Authenticated Claude client
-#         """
-#         self.api_call = client.completions.create
-#         super().__init__(**redis_kwargs)
-
-
 class ClaudeAPICache(APICache):
     """A cache wrapper for Anthropic Message API calls."""
 
@@ -234,6 +160,7 @@ class ClaudeAPICache(APICache):
         """
         self.api_call = client.messages.create
         super().__init__(**redis_kwargs)
+
 
 class MixtralAPICache(APICache):
     """A cache wrapper for Anthropic Message API calls."""

@@ -9,19 +9,6 @@ OOD_REVIEWS_SUBSET = [
     'non-Chicago'
 ]
 
-"""
-Rosa: commented out these two functions (get_test_data, get_train_data) because using get_data will be more replicable.
-"""
-# def get_test_data(args):
-#     print('get test data')
-#     _, test_data = get_data(args.task, 0, args.num_test)
-#     return test_data
-
-# def get_train_data(args):
-#     print('get train data')
-#     train_data, _ = get_data(args.task, args.num_train, 0)
-#     return train_data
-
 def get_data(args):
     task_name = args.task
     num_train = args.num_train
