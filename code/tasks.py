@@ -20,7 +20,6 @@ class Task(ABC):
         pass
 
 
-
 class Shoe(Task):
     def __init__(self):
         self.task = 'shoe'
@@ -31,25 +30,7 @@ class Shoe(Task):
     def extract_label(self, text):
         if text == None:
             return 'other'
-            
-        """
-        # only keep the part after "label:"
-        text = text.lower()
-        if "label:" in text:
-            text = text[text.index("label:") + len("label:"):]
-
-        # only keep the part after "Final answer:"
-        if "final answer:" in text:
-            text = text[text.index("final answer:") + len("final answer:"):]
-            # keep the 10 characters after "final answer:"
-            text = text[:10]
-
-        # remove the trailing period
-        if '.' == text[-1]:
-            text = text[:-1]
-        text = text.lower()
-        """
-
+        
         pattern = r"final answer:\s+(white|red|orange|green|blue|black)"
 
         match = re.search(pattern, text.lower())
@@ -61,14 +42,6 @@ class Shoe(Task):
                 return "other"               
             
         return 'other'
-
-        """
-        for color in ['white', 'red', 'orange', 'green', 'blue', 'black']:
-            if color in text:
-                return color
-
-        return 'other'
-        """
 
 
 class HotelReviews(Task):
@@ -84,9 +57,6 @@ class HotelReviews(Task):
         self.ood_test_data_path = f'{code_repo_path}/data'
 
     def extract_label(self, text):
-        """
-        This seems old, I'm commenting this out for now (Haokun)
-        """
         if text == None:
             return 'other'
         

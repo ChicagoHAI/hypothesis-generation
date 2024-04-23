@@ -39,7 +39,6 @@ def setup_LLM(args):
 def setup(args, seed, api):
     set_seed(seed)
     train_data, _, _ = get_data(args)
-    # api = LLMWrapper(args.model)
     prompt_class = PROMPT_DICT[args.task]()
     inference_class = INFERENCE_DICT[args.inference_style](api, prompt_class, train_data)
     generation_class = GENERATION_DICT[args.generation_style](api, prompt_class, inference_class)
