@@ -1,0 +1,12 @@
+{"inference_method": "upperbound", "inference_model": "turbo35_0613", "task": "shoe", "train_size": 200, "hyp_size": 20, "acc": 1.0}
+{"inference_method": "upperbound", "inference_model": "turbo35_0613", "task": "hotel_reviews", "train_size": 200, "hyp_size": 20, "acc": 0.967}
+{"inference_method": "upperbound", "inference_model": "turbo35_0613", "task": "headline_binary", "train_size": 200, "hyp_size": 20, "acc": 0.833}
+{"inference_method": "upperbound", "inference_model": "turbo35_0613", "task": "retweet", "train_size": 200, "hyp_size": 20, "acc": 0.82}
+{"inference_method": "upperbound", "inference_model": "claude_2", "task": "shoe", "train_size": 200, "hyp_size": 20, "acc": 1.0}
+{"inference_method": "upperbound", "inference_model": "claude_2", "task": "hotel_reviews", "train_size": 200, "hyp_size": 20, "acc": 0.83}
+{"inference_method": "upperbound", "inference_model": "claude_2", "task": "headline_binary", "train_size": 200, "hyp_size": 20, "acc": 0.857}
+{"inference_method": "upperbound", "inference_model": "claude_2", "task": "retweet", "train_size": 200, "hyp_size": 20, "acc": 0.88}
+{"inference_method": "upperbound", "inference_model": "Mixtral-8x7B", "task": "shoe", "train_size": 200, "hyp_size": 20, "acc": 0.96}
+{"inference_method": "upperbound", "inference_model": "Mixtral-8x7B", "task": "hotel_reviews", "train_size": 200, "hyp_size": 20, "acc": 0.86}
+{"inference_method": "upperbound", "inference_model": "Mixtral-8x7B", "task": "headline_binary", "train_size": 200, "hyp_size": 20, "acc": 0.833}
+{"inference_method": "upperbound", "inference_model": "Mixtral-8x7B", "task": "retweet", "train_size": 200, "hyp_size": 20, "acc": 0.94}

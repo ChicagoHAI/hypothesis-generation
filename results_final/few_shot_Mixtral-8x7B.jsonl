@@ -1,0 +1,8 @@
+{"inference_method": "zero_shot", "model_name": "Mixtral-8x7B", "task": "shoe", "acc": 0.43}
+{"inference_method": "few_shot", "model_name": "Mixtral-8x7B", "task": "shoe", "acc": 0.79}
+{"inference_method": "zero_shot", "model_name": "Mixtral-8x7B", "task": "hotel_reviews", "acc": 0.55}
+{"inference_method": "few_shot", "model_name": "Mixtral-8x7B", "task": "hotel_reviews", "acc": 0.563}
+{"inference_method": "zero_shot", "model_name": "Mixtral-8x7B", "task": "headline_binary", "acc": 0.55}
+{"inference_method": "few_shot", "model_name": "Mixtral-8x7B", "task": "headline_binary", "acc": 0.553}
+{"inference_method": "zero_shot", "model_name": "Mixtral-8x7B", "task": "retweet", "acc": 0.027}
+{"inference_method": "few_shot", "model_name": "Mixtral-8x7B", "task": "retweet", "acc": 0.487}

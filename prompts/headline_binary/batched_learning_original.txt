@@ -1,0 +1,7 @@
+###
+Instruction:
+Given a set of observations, we want to generate hypotheses that are useful for determining headlines which will cause more clicks. 
+Please be concise and keep each hypothesis to be one-sentence long. Propose {num_hypotheses} possible hypotheses. 
+Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... n. [hypothesis]. 
+Please make the hypotheses general enough to be applicable to new observations.
+###

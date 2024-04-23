@@ -1,0 +1,4 @@
+###
+Instruction:
+Given a set of observations, we want to generate a summary that is useful for predicting the color of the shoes given the appearance of the person. Please be concise and keep the summary to be one-sentence long. Propose 5 possible summaries. Generate them in the format of 1. [summary], 2. [summary], ... 5. [summary]
+###

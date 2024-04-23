@@ -1,0 +1,9 @@
+###
+Instruction:
+You are asked to perform sentiment analysis.
+We would like to summarize useful patterns for classifying the sentiment of a sentence. The possible sentiments are "very positive", "positive", "negative", and "very negative".
+
+We have some summaries and new sentences. 
+For each summary, we want to see if the corresponding new sentences can be used to update the summary.
+Answer yes or no.
+###

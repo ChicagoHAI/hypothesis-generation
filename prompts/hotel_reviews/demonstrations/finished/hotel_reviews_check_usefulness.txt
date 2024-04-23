@@ -1,0 +1,75 @@
+***
+We have the knowledge that: A truthful hotel review is the following: "Arrived on 06/04/05, greeted by friendly doorman, and zipped up to the 5th Floor Lobby. Very open lobby area with friendly reception staff. Room was on the 12th Floor and very nice. Everything was in order and very clean! The king size bed was nice and each night I had a restful sleep. Bathroom was large with separate glass shower stall. The room was furnished with everything I needed including internet hook-up access. Also, you can walk thru on the 5th Fl to the Westfield North Bridge Shopping Mall, where you will enjoy Nordstrom and other stores. Of course, you're steps from Michigan Ave. too. The central location of the hotel was great, as I could walk to most places. The CTA Subway stop (Grand Ave. on Red Line) was an easy 2 block walk. I will stay here again on my next trip to Chicago!"
+
+Now we have a new hotel review: "My wife and I had to stay downtown for event that we were attending at the Drake Hotel. I have stayed at the Drake before and while it is nice, it is bit stuffy and a little outdated for the price. We opted to walk across the street and stay at the Millenium instead. I know this property has under gone many renovations in past year and I have to say they have done a great job. This place used to be the hotel you would crash in when you came to Chicago on a college roadtrip (I did). But that is not the case any more. This property is directly across from the Drake Hotel and for 1/2 the price you get their great location with a newer (albeit smaller) room and every ammenity you would expect from a 4* hotel. The rooms are tastefully decorated (Asian influence w/flat screen tv) and the bed is very comfortable. The bath is small (no tub), but very clean and the shower is great. You are not going to be spending a bunch of time in your room when visting Chicago, so the room's size is not a big deal. (It works well with a couple, but a family of four may be a bit cramped.) The service was attentive and friendly and the location can't be beat. I would definitely stay here again, but the next time I would leave the car at home ($49/night parking is a bit steep)."
+
+Is the new review truthful or deceptive? In other words, is it written by a someone who actually lived in the hotel?
+Please give your best guess by applying the knowledge to the example.
+Please show me your step-by-step reasoning followed by an answer at the end.
+The format would be:
+Reasoning: ... [your reasoning process, please be concise and not more than 1-2 sentences.]
+Answer: ... [your answer, should be 'truthful' or 'deceptive']
+
+Reasoning: Based on the knowledge, it seems like a truthful hotel review has a lot details about their experiences both within the hotel and with the city. The new hotel review also seems to provide details with this quality. Therefore, the new hotel review is likely to be truthful as well.
+Answer: truthful
+***
+***
+We have the knowledge that: Truthful reviews tend to have nuanced perspectives and balanced descriptions of multiple aspects of the hotel.
+
+Now we have a new hotel review: "I booked this via Priceline, and was not sure I'd like it, as some Sheratons have fallen off the cliff. This hotel absolutely surpassed my expectations. Despite booking with Priceline, I was treated like a king. They let me check in early, gave me a beautiful room, and even went so far as to look up my Starwood number so I could get some credit for the stay. The staff was unfailingly pleasant, the property immaculate, and the room very comfortable. I highly recommend this hotel."
+
+Is the review truthful or deceptive? In other words, is it written by a someone who actually lived in the hotel?
+Please give your best guess by applying the knowledge to the example.
+Please show me your step-by-step reasoning followed by an answer at the end.
+The format would be:
+Reasoning: ... [your reasoning process, please be concise and not more than 1-2 sentences.]
+Answer: ... [your answer, should be 'truthful' or 'deceptive']
+
+Reasoning: This new hotel review does not seem to support the knowledge. In particular, the descriptions for the different aspects of the hotel were a bit too general. 
+Answer: deceptive
+***
+***
+We have the knowledge that: Reviews focused on the overall exceptional or disappointing stay, rather than specifics, may be exaggerated and less truthful.  
+
+Now we have a new hotel review: "A friend highly recommended this hotel and we couldn't have been happier! It was wonderful ~ my husband and kids were already planning our next trip there before we had even left the hotel. The kids loved the goldfish in the room and thought the window seats were the best."
+
+Is the review truthful or deceptive? In other words, is it written by a someone who actually lived in the hotel?
+Please give your best guess by applying the knowledge to the example.
+Please show me your step-by-step reasoning followed by an answer at the end.
+The format would be:
+Reasoning: ... [your reasoning process, please be concise and not more than 1-2 sentences.]
+Answer: ... [your answer, should be 'truthful' or 'deceptive']
+
+Reasoning: Based on the knowledge, it seems like the new hotel review is likely deceptive, because it focuses on the overall exceptional stay and the tone is a bit exaggerating.
+Answer: deceptive
+***
+***
+We have the knowledge that: Reviews that describe memorable interactions with hotel staff or details that seem unlikely to be fabricated are more likely to be truthful accounts.
+
+Now we have a new hotel review: "Stayed for 3 nights for our anniversary. The desk clerk was great and since it was our anniversary, he gave us an upgrade...imagine our surprise when we got off on a floor with only 3 other rooms! Corner tower suite with a view of the river and Michigan ave. Beautiful! Cabs available right outside the lobby... Never paid more than $7 for a cab ride. If you go in Dec. you must go to the ChrisKindl Festival for strudel!"
+
+Is the review truthful or deceptive? In other words, is it written by a someone who actually lived in the hotel?
+Please give your best guess by applying the knowledge to the example.
+Please show me your step-by-step reasoning followed by an answer at the end.
+The format would be:
+Reasoning: ... [your reasoning process, please be concise and not more than 1-2 sentences.]
+Answer: ... [your answer, should be 'truthful' or 'deceptive']
+
+Reasoning: The review contains details about interactions with hotel staff, and other details such as cab price and local events seems unlikely to be fabricated. Based on the knowledge we know about truthful accounts, this review is likely to be truthful.
+Answer: truthful
+***
+***
+We have the knowledge that: A deceptive review is the following: "I must say, this hotel is absolutely beautiful. My wife and I were blown away by the penthouse fitness center and pool all the way up on the 42nd floor. Very well designed rooms with great linens and pillows. The bathrooms were a nice change of pace from the boring hotel bathrooms we usually see. Overall an excellent experience here, great views and close to everything you could want to do in Chicago."
+
+Now we have a new hotel review: "Not impressed at ALL. The hotel itself looks really nice, especially in the big foyer area. Our room was small, and the bathroom needed some major upgrades. It had the green tile, like at your grandmother's house, all over the walls, and 2 people couldn't fit in it if you tried. We could hear the people beside us in the early morning every morning, so obvioulsy the walls aren't so thick. Our room looked directly on to a brick building outside, VERY close, we couldn't even tell if it was nice outside or not. We are assuming we were not in a renovated room from the looks of it, and I felt yucky the whole time in it. I just wouldn't pay lots of money to stay here, there is nothing exceptional about it at all."
+
+Is the review truthful or deceptive? In other words, is it written by a someone who actually lived in the hotel?
+Please give your best guess by applying the knowledge to the example.
+Please show me your step-by-step reasoning followed by an answer at the end.
+The format would be:
+Reasoning: ... [your reasoning process, please be concise and not more than 1-2 sentences.]
+Answer: ... [your answer, should be 'truthful' or 'deceptive']
+
+Reasoning: The knowledge is a deceptive review, which commented on the fitness center, room details, and bathroom. The new review has even more detailed descriptions of the hotel. Since the new review has a strong negative sentiment, it mainly focused on the two things that were bad, rather than describing multiple aspects of the hotel. The amount of details suggest that the new review is truthful.
+Answer: truthful
+***

@@ -1,0 +1,12 @@
+###
+Instruction:
+You are asked to perform sentiment analysis. The possible sentiments are "very positive", "positive", "negative", and "very negative".
+From past experiences, you summarized some useful patterns for classifying the sentiment of a sentence. 
+Now, at each time, you should apply a learned pattern to a new sentence and predict the sentiment.
+Give your reasoning processing, as well as your answer for the sentiment.
+Keep the reasoning concise (1-2 sentence), and the answer should be one of "very positive", "positive", "negative", and "very negative".
+
+The format is:
+Reasoning: [1-2 sentence for reasoning process]
+Answer: [one of "very positive", "positive", "negative", and "very negative".]
+###

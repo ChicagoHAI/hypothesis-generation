@@ -1,0 +1,100 @@
+{"gold_label":"non-entailment","sentence1":"The scientists who introduced the banker encouraged the doctors .","sentence2":"The doctors encouraged the banker ."}
+{"gold_label":"non-entailment","sentence1":"The actor said that the professors slept .","sentence2":"The professors slept ."}
+{"gold_label":"non-entailment","sentence1":"The actor danced , or the president recommended the judges .","sentence2":"The actor danced ."}
+{"gold_label":"entailment","sentence1":"Although the professor advised the students , the artists encouraged the judges .","sentence2":"The professor advised the students ."}
+{"gold_label":"non-entailment","sentence1":"The secretaries who believed the actors called the lawyers .","sentence2":"The actors called the secretaries ."}
+{"gold_label":"entailment","sentence1":"The scientists and the managers stopped the athletes .","sentence2":"The scientists stopped the athletes ."}
+{"gold_label":"entailment","sentence1":"The lawyer that admired the bankers contacted the doctor .","sentence2":"The lawyer admired the bankers ."}
+{"gold_label":"entailment","sentence1":"The banker who shouted supported the lawyer .","sentence2":"The banker supported the lawyer ."}
+{"gold_label":"non-entailment","sentence1":"The senator by the doctors contacted the professors .","sentence2":"The doctors contacted the professors ."}
+{"gold_label":"entailment","sentence1":"The presidents recognized the bankers by the secretary .","sentence2":"The presidents recognized the bankers ."}
+{"gold_label":"non-entailment","sentence1":"The artists heard the scientist slept .","sentence2":"The artists heard the scientist ."}
+{"gold_label":"non-entailment","sentence1":"The secretary assumed that the author stopped the tourists .","sentence2":"The author stopped the tourists ."}
+{"gold_label":"non-entailment","sentence1":"The bankers were recommended by the student .","sentence2":"The bankers recommended the student ."}
+{"gold_label":"entailment","sentence1":"The author admired the bankers and the judges .","sentence2":"The author admired the bankers ."}
+{"gold_label":"non-entailment","sentence1":"Because the presidents fought the judges shouted .","sentence2":"The presidents fought the judges ."}
+{"gold_label":"non-entailment","sentence1":"Before the doctors paid the judges waited .","sentence2":"The doctors paid the judges ."}
+{"gold_label":"entailment","sentence1":"The judge arrived , and the artist advised the tourists .","sentence2":"The judge arrived ."}
+{"gold_label":"non-entailment","sentence1":"After the authors fought the artist arrived .","sentence2":"The authors fought the artist ."}
+{"gold_label":"entailment","sentence1":"Since the scientists believed the student , the judge performed .","sentence2":"The judge performed ."}
+{"gold_label":"non-entailment","sentence1":"Before the managers hid the bankers resigned .","sentence2":"The managers hid the bankers ."}
+{"gold_label":"entailment","sentence1":"The students paid the professor .","sentence2":"The students paid ."}
+{"gold_label":"non-entailment","sentence1":"The doctor was mentioned by the athletes .","sentence2":"The doctor mentioned the athletes ."}
+{"gold_label":"entailment","sentence1":"The senator recommended the student and the lawyer .","sentence2":"The senator recommended the lawyer ."}
+{"gold_label":"entailment","sentence1":"The senators and the student admired the judges .","sentence2":"The senators admired the judges ."}
+{"gold_label":"entailment","sentence1":"The artist was encouraged by the judge .","sentence2":"The judge encouraged the artist ."}
+{"gold_label":"non-entailment","sentence1":"The doctors assumed that the president performed .","sentence2":"The president performed ."}
+{"gold_label":"entailment","sentence1":"The students and the actor avoided the managers .","sentence2":"The actor avoided the managers ."}
+{"gold_label":"non-entailment","sentence1":"The managers were recommended by the senator .","sentence2":"The managers recommended the senator ."}
+{"gold_label":"non-entailment","sentence1":"If the lawyers recommended the athlete , the authors contacted the professor .","sentence2":"The authors contacted the professor ."}
+{"gold_label":"entailment","sentence1":"The artists mentioned the actors who called the senator .","sentence2":"The actors called the senator ."}
+{"gold_label":"entailment","sentence1":"The students remembered that the author supported the actors .","sentence2":"The author supported the actors ."}
+{"gold_label":"entailment","sentence1":"Suddenly the president ran .","sentence2":"The president ran ."}
+{"gold_label":"non-entailment","sentence1":"Unless the banker advised the students , the secretaries danced .","sentence2":"The secretaries danced ."}
+{"gold_label":"entailment","sentence1":"The professor by the president helped the manager .","sentence2":"The professor helped the manager ."}
+{"gold_label":"non-entailment","sentence1":"Unless the tourist slept , the president recognized the lawyers .","sentence2":"The president recognized the lawyers ."}
+{"gold_label":"non-entailment","sentence1":"Unless the athlete avoided the managers , the president waited .","sentence2":"The athlete avoided the managers ."}
+{"gold_label":"entailment","sentence1":"The scientist forgot that the judge waited .","sentence2":"The judge waited ."}
+{"gold_label":"non-entailment","sentence1":"The tourist believed the students helped the manager .","sentence2":"The tourist believed the students ."}
+{"gold_label":"non-entailment","sentence1":"The managers believed that the scientist slept .","sentence2":"The scientist slept ."}
+{"gold_label":"non-entailment","sentence1":"The athletes that recommended the professors ran .","sentence2":"The professors ran ."}
+{"gold_label":"non-entailment","sentence1":"The student was introduced by the artists .","sentence2":"The student introduced the artists ."}
+{"gold_label":"entailment","sentence1":"The banker that waited introduced the senators .","sentence2":"The banker introduced the senators ."}
+{"gold_label":"non-entailment","sentence1":"Maybe the bankers slept .","sentence2":"The bankers slept ."}
+{"gold_label":"entailment","sentence1":"The professors advised the secretaries near the scientist .","sentence2":"The professors advised the secretaries ."}
+{"gold_label":"entailment","sentence1":"The students avoided the lawyers that recommended the tourists .","sentence2":"The lawyers recommended the tourists ."}
+{"gold_label":"non-entailment","sentence1":"After the doctor paid the students supported the artists .","sentence2":"The doctor paid the students ."}
+{"gold_label":"entailment","sentence1":"The scientists encouraged the president and the professors .","sentence2":"The scientists encouraged the professors ."}
+{"gold_label":"non-entailment","sentence1":"The lawyer who the scientists contacted helped the senator .","sentence2":"The senator helped the lawyer ."}
+{"gold_label":"non-entailment","sentence1":"The professor advised the student who believed the secretaries .","sentence2":"The student advised the the secretaries ."}
+{"gold_label":"entailment","sentence1":"The lawyers contacted the tourists and the doctor .","sentence2":"The lawyers contacted the doctor ."}
+{"gold_label":"entailment","sentence1":"The actor that the secretary admired introduced the student .","sentence2":"The actor introduced the student ."}
+{"gold_label":"entailment","sentence1":"Popular judges supported the managers .","sentence2":"Judges supported the managers ."}
+{"gold_label":"non-entailment","sentence1":"In case the secretary admired the actor , the athlete avoided the manager .","sentence2":"The secretary admired the actor ."}
+{"gold_label":"non-entailment","sentence1":"The actors who introduced the tourist avoided the professor .","sentence2":"The tourist avoided the professor ."}
+{"gold_label":"non-entailment","sentence1":"The students were encouraged by the authors .","sentence2":"The students encouraged the authors ."}
+{"gold_label":"entailment","sentence1":"The senator knew that the artists arrived .","sentence2":"The artists arrived ."}
+{"gold_label":"non-entailment","sentence1":"The secretary who recommended the doctors stopped the authors .","sentence2":"The doctors stopped the authors ."}
+{"gold_label":"non-entailment","sentence1":"The secretary was helped by the president .","sentence2":"The secretary helped the president ."}
+{"gold_label":"entailment","sentence1":"The actors forgot that the judges called the professors .","sentence2":"The judges called the professors ."}
+{"gold_label":"non-entailment","sentence1":"The judges who contacted the bankers danced .","sentence2":"The bankers danced ."}
+{"gold_label":"non-entailment","sentence1":"The actor by the presidents performed .","sentence2":"The presidents performed ."}
+{"gold_label":"non-entailment","sentence1":"The actors next to the artist introduced the senator .","sentence2":"The artist introduced the senator ."}
+{"gold_label":"non-entailment","sentence1":"The professor who the student saw believed the actors .","sentence2":"The student believed the professor ."}
+{"gold_label":"entailment","sentence1":"The professor introduced the banker , and the lawyer recommended the secretaries .","sentence2":"The professor introduced the banker ."}
+{"gold_label":"entailment","sentence1":"Obviously the senator avoided the professor .","sentence2":"The senator avoided the professor ."}
+{"gold_label":"non-entailment","sentence1":"Whether or not the tourists advised the presidents , the students slept .","sentence2":"The tourists advised the presidents ."}
+{"gold_label":"non-entailment","sentence1":"The lawyer mentioned the artist investigated in the library .","sentence2":"The artist investigated in the library ."}
+{"gold_label":"entailment","sentence1":"The athlete wrote the report .","sentence2":"The athlete wrote ."}
+{"gold_label":"entailment","sentence1":"The scientist that avoided the tourist recognized the students .","sentence2":"The scientist recognized the students ."}
+{"gold_label":"non-entailment","sentence1":"The managers admired the author helped in the school .","sentence2":"The author helped in the school ."}
+{"gold_label":"entailment","sentence1":"The tourist was introduced by the artist .","sentence2":"The artist introduced the tourist ."}
+{"gold_label":"entailment","sentence1":"The manager behind the professor stopped the authors .","sentence2":"The manager stopped the authors ."}
+{"gold_label":"non-entailment","sentence1":"Maybe the manager recognized the senator .","sentence2":"The manager recognized the senator ."}
+{"gold_label":"entailment","sentence1":"The lawyer avoided the author who advised the president .","sentence2":"The lawyer avoided the author ."}
+{"gold_label":"entailment","sentence1":"The professors supported the bankers that introduced the presidents .","sentence2":"The bankers introduced the presidents ."}
+{"gold_label":"non-entailment","sentence1":"The artist contacted the tourists .","sentence2":"The tourists contacted the artist ."}
+{"gold_label":"entailment","sentence1":"The lawyers were avoided by the doctor .","sentence2":"The doctor avoided the lawyers ."}
+{"gold_label":"entailment","sentence1":"Suddenly the secretaries supported the actors .","sentence2":"The secretaries supported the actors ."}
+{"gold_label":"entailment","sentence1":"The senators saw the scientist in front of the actors .","sentence2":"The senators saw the scientist ."}
+{"gold_label":"non-entailment","sentence1":"The president arrived , or the secretaries saw the athletes .","sentence2":"The president arrived ."}
+{"gold_label":"entailment","sentence1":"After the student resigned , the tourists avoided the professor .","sentence2":"The student resigned ."}
+{"gold_label":"entailment","sentence1":"The judge left the museum .","sentence2":"The judge left ."}
+{"gold_label":"entailment","sentence1":"While the senator thanked the secretary , the judge resigned .","sentence2":"The senator thanked the secretary ."}
+{"gold_label":"entailment","sentence1":"The president who avoided the bankers supported the senators .","sentence2":"The president avoided the bankers ."}
+{"gold_label":"entailment","sentence1":"The student was contacted by the scientists .","sentence2":"The scientists contacted the student ."}
+{"gold_label":"non-entailment","sentence1":"The managers heard the professors thanked the author .","sentence2":"The managers heard the professors ."}
+{"gold_label":"non-entailment","sentence1":"The author arrived , or the actors shouted .","sentence2":"The actors shouted ."}
+{"gold_label":"non-entailment","sentence1":"The artists mentioned the secretary investigated in the museum .","sentence2":"The secretary investigated in the museum ."}
+{"gold_label":"entailment","sentence1":"The president thanked the authors in front of the professors .","sentence2":"The president thanked the authors ."}
+{"gold_label":"non-entailment","sentence1":"The artist introduced the lawyer next to the scientists .","sentence2":"The scientists introduced the artist ."}
+{"gold_label":"non-entailment","sentence1":"The tourist avoided the actor .","sentence2":"The actor avoided the tourist ."}
+{"gold_label":"entailment","sentence1":"The managers and the author saw the artists .","sentence2":"The author saw the artists ."}
+{"gold_label":"non-entailment","sentence1":"In case the doctor waited , the banker stopped the lawyer .","sentence2":"The doctor waited ."}
+{"gold_label":"entailment","sentence1":"The banker was contacted by the professors .","sentence2":"The professors contacted the banker ."}
+{"gold_label":"entailment","sentence1":"The bankers believed the presidents , and the judge recognized the artist .","sentence2":"The bankers believed the presidents ."}
+{"gold_label":"entailment","sentence1":"The banker and the doctor contacted the judges .","sentence2":"The banker contacted the judges ."}
+{"gold_label":"non-entailment","sentence1":"The artist believed the secretary and the lawyers .","sentence2":"The secretary believed the lawyers ."}
+{"gold_label":"entailment","sentence1":"Because the presidents waited , the senators recommended the secretaries .","sentence2":"The presidents waited ."}
+{"gold_label":"entailment","sentence1":"Suddenly the authors stopped the secretaries .","sentence2":"The authors stopped the secretaries ."}
+{"gold_label":"non-entailment","sentence1":"The banker who contacted the actor advised the artists .","sentence2":"The actor advised the artists ."}

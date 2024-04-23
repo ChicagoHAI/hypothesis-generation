@@ -1,0 +1,64 @@
+###
+Instruction:
+We are recommending shoes to customers. We want to determine the color of the shoes given the appearance of the person.
+We learned some hypotheses from previous customers, and we want to see if a given hypothesis is relevant to a new customer.
+Answer yes or no.
+###
+
+Here are some examples: 
+***
+Previous hypothesis:
+Younger customers are more likely to choose shoe colors that match their shirt color.
+
+New customer:
+Now a young and tall woman with white hat, green shirt, and a small orange bag bought a pair of shoes. 
+
+We want to determine the color of the shoes.
+
+Is the hypothesis relevant to the specific example we are considering?
+Answer: Yes. The hypothesis is about young customers, so it relevant for the new customer who is a young woman.
+***
+Previous hypothesis:
+The choice of shoe color seems to be more strongly correlated with shirt color than hat or bag color.
+
+New customer:
+a old and tall man with orange hat, red shirt, and a small blue bag bought a pair of shoes.
+
+We want to determine the color of the shoes.
+
+Is the hypothesis relevant to the specific example we are considering?
+Answer: Yes. The hypothesis suggests the shoe color is more strongly correlated with shirt color, so the shoe color is more likely to be red.
+***
+Previous hypothesis:
+Younger customers are more likely to choose shoe colors that match their shirt color.
+
+New customer:
+a old and tall woman with black hat, blue shirt, and a large blue bag bought a pair of shoes.
+
+We want to determine the color of the shoes.
+
+Is the hypothesis relevant to the specific example we are considering?
+Answer: No. The hypothesis is about young customers, but the new customer is an old person.
+***
+Previous hypothesis:
+The color of the shirt is a better indicator of shoe color preference than the color of the hat or bag.
+
+New customer:
+a old and tall man with orange hat, red shirt, and a small blue bag bought a pair of shoes.
+
+We want to determine the color of the shoes.
+
+Is the hypothesis relevant to the specific example we are considering?
+Answer: Yes. The hypothesis says that the shoe color indicator is likely the shirt color, and we know the shirt color of the new customer.
+***
+Previous hypothesis:
+Consistency in color choices is observed, with customers often selecting shoes that match or harmonize with the color of their hat, shirt, or both.
+
+New customer:
+a young and tall woman with white hat, green shirt, and a small orange bag bought a pair of shoes.
+
+We want to determine the color of the shoes.
+
+Is the hypothesis relevant to the specific example we are considering?
+Answer: Yes. The hypothesis suggests that the shoe color often matches with the color or hat or shirt. So the shoe color is white or green.
+***

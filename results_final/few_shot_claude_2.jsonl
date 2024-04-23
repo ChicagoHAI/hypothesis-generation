@@ -1,0 +1,8 @@
+{"inference_method": "zero_shot", "model_name": "claude_2", "task": "shoe", "acc": 0.36}
+{"inference_method": "few_shot", "model_name": "claude_2", "task": "shoe", "acc": 0.75}
+{"inference_method": "zero_shot", "model_name": "claude_2", "task": "hotel_reviews", "acc": 0.31}
+{"inference_method": "few_shot", "model_name": "claude_2", "task": "hotel_reviews", "acc": 0.51}
+{"inference_method": "zero_shot", "model_name": "claude_2", "task": "headline_binary", "acc": 0.59}
+{"inference_method": "few_shot", "model_name": "claude_2", "task": "headline_binary", "acc": 0.6}
+{"inference_method": "zero_shot", "model_name": "claude_2", "task": "retweet", "acc": 0.503}
+{"inference_method": "few_shot", "model_name": "claude_2", "task": "retweet", "acc": 0.003}
