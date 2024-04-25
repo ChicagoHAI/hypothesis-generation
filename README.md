@@ -32,12 +32,12 @@ make
 ```
 
 ## Usage
-1. [Optional] Start Redis server
+### 1. [Optional] Start Redis server
 ```bash
 cd $PATH_PREFIX/redis-stable/src
 ./redis-server
 ```
-2. Hypothesis generation
+### 2. Hypothesis generation
 ```
 python $CODE_REPO_PATH/algorithm/algorithm_generation.py  
     --seeds SEEDS --task TASK --model MODEL 
@@ -141,8 +141,81 @@ optional arguments:
     --num_epochs NUM_EPOCHS
         Set the number of epochs to run.
     --output_folder OUTPUT_FOLDER
-        Set the output folder to save results.
-                               
+        Set the output folder to save results.                           
+```
+### 3. Hypothesis-based inference
+```
+python $CODE_REPO_PATH/algorithm/algorithm_generation.py  
+    --seeds SEEDS --task TASK --model MODEL 
+    --inference_style INFERENCE_STYLE
+    [--model_path MODLE_PATH] 
+    [--use_cache USE_CACHE]
+    [--verbose] [--use_system_prompt] 
+    [--num_train NUM_TRAIN] 
+    [--num_test NUM_TEST]
+    [--num_val NUM_VAL]
+    [--use_valid]
+    [--k K] 
+    [--knn_hypotheses KNN_HYPOTHESES]
+    [--knn_num_examples KNN_NUM_EXAMPLES]
+    [--knn_threshold KNN_THRESHOLD]
+    [--use_ood_reviews USE_OOD_REVIEWS]
+    [--hypothesis_file HYPOTHESIS_FILE]
+
+required arguments: 
+    --seeds SEEDS
+        Set random seeds. If a list of seeds is passed, the 
+        program will run aloop for all seeds.
+    --task TASK
+        Set task to run. 
+        Options: [shoe,hotel_reviews,
+                  headline_binary,retweet]
+    -- model MODEL
+        Set model to run.
+        Options: Please see consts/model_consts.py
+    --inference_style INFERENCE_STYLE
+        Set inference style
+        Options: [default, knn, knn_separate_steps
+                  filter_and_weight, upperbound]
+optional arguments:
+    --model_path MODEL_PATH
+        Set model path for loading locally. 
+        If not set, the program will download from huggingface. 
+    --use_cache USE_CACHE
+        Set whether to use cache. 
+        Default: 1 (True)
+        If set to 1, the program will use Redis server to cache.
+    --verbose
+        Default: True
+        If True, the program will print out more information.
+    --use_system_prompt
+        Default: True
+        If True, the instructions will be put in system prompt.    
+    --num_train NUM_TRAIN
+        Set the number of training examples.
+    --num_test NUM_TEST
+        Set the number of test examples.
+    --num_val NUM_VAL
+        Set the number of validation examples.
+    --use_valid
+        Default: False
+        If True, the program will use validation set.
+    --k K
+        Set the number of top-k hypotheses 
+        to evaluate.
+    --knn_hypotheses KNN_HYPOTHESES
+        Set the number of hypotheses to use for the 
+        adaptive inference method.
+    --knn_num_examples KNN_NUM_EXAMPLES
+        Set the number of examples associated to each hypothesis 
+        for the adaptive inference method.
+    --knn_threshold KNN_THRESHOLD
+        Set the threshold for the adaptive inference method.
+    --use_ood_reviews USE_OOD_REVIEWS
+        Options: [None, all, chicago, non-chicago]
+        Set the out-of-distribution reviews to use.
+    --hypothesis_file HYPOTHESIS_FILE
+        Set the file path to load generated hypotheses.
 ```
 <!-- ## Add your own dataset
 1. Add your dataset to `data` directory.
