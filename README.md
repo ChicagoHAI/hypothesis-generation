@@ -1,6 +1,6 @@
 # LLM Hypothesis Generation to Improve Inductive Reasoning Abilities
 
-![](hypogenic_figure1_large_font.svg)
+![](hypogenic_figure1_large_font.jpg)
 
 To mimic the human cognitive process in inductive reasoning, we prompt LLMs to generate hypothesis while performing online learning.
 
