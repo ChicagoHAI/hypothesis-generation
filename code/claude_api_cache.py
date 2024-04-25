@@ -175,7 +175,7 @@ class OpenAIAPICache(APICache):
             self.api_call = self.openai.ChatCompletion.create
         super().__init__(**redis_kwargs)
 
-        
+
 class ClaudeAPICache(APICache):
     """A cache wrapper for Anthropic Message API calls."""
 
@@ -197,6 +197,24 @@ class ClaudeAPICache(APICache):
 
 
 class MixtralAPICache(APICache):
+    """A cache wrapper for Anthropic Message API calls."""
+
+    service = "Mixtral"
+    exceptions_to_catch = (
+        # TODO: add more exceptions
+    )
+
+    def __init__(self, client, **redis_kwargs: dict):
+        """Initializes an ClaudeAPICache Object.
+
+        Args:
+            port: Port of the Redis backend.
+            client: Authenticated Claude client
+        """
+        self.api_call = client.generate
+        super().__init__(**redis_kwargs)
+
+class LlamaAPICache(APICache):
     """A cache wrapper for Anthropic Message API calls."""
 
     service = "Mixtral"

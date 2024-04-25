@@ -13,7 +13,7 @@ from tasks import TASKS
 # from openai_api_cache import OpenAIAPICache
 from anthropic import Anthropic
 
-from claude_api_cache import ClaudeAPICache, MixtralAPICache, OpenAIAPICache
+from claude_api_cache import ClaudeAPICache, MixtralAPICache, OpenAIAPICache, LlamaAPICache
 from consts.model_consts import INST_WRAPPER, GPT_MODELS, CLAUDE_MODELS, LLAMA_MODELS, MISTRAL_MODELS
 
 code_repo_path = os.environ.get("CODE_REPO_PATH")
@@ -170,6 +170,7 @@ class LLMWrapper:
     def _set_up_llama(self,
                       cache_dir=f"{code_repo_path}/llama_cache",
                       path_name=None,
+                      use_cache=1,
                       **kwargs):
         if torch.cuda.is_available(): 
             device = "cuda" 
@@ -187,10 +188,16 @@ class LLMWrapper:
                                                  device_map='auto',
         )
 
+        client = LlamaAPI(llama,tokenizer,device)
+        api = LlamaAPICache(
+            client=client,
+            port=PORT
+        )
 
-        api = LlamaAPI(llama, tokenizer, device)
-
-        return api
+        if use_cache == 1:
+            return api
+        else:
+            return client
     
     def _set_up_mistral(self,
                         model,
@@ -233,7 +240,7 @@ class LLMWrapper:
         # Call OpenAI's GPT-3.5 API to generate inference
 
         system_prompt, user_prompt = transform_sys_prompt(self.model,prompt,inst_in_sys)
-        if self.use_cache:
+        if self.use_cache == 1:
             resp = self.api.generate(
                 # model="gpt-3.5-turbo-0613",
                 model=GPT_MODELS[self.model],
@@ -263,7 +270,7 @@ class LLMWrapper:
     def _claude_2_message_generate(self, prompt,inst_in_sys=True, max_tokens=500):
         system_prompt, user_prompt = transform_sys_prompt(self.model,prompt,inst_in_sys)
 
-        if self.use_cache:
+        if self.use_cache == 1:
             response = self.api.generate(
                 model=CLAUDE_MODELS[self.model],
                 max_tokens=max_tokens,
@@ -274,7 +281,7 @@ class LLMWrapper:
                 ]
             )
         else:
-            response = self.messages.create(
+            response = self.api.messages.create(
                 model=CLAUDE_MODELS[self.model],
                 max_tokens=max_tokens,
                 temperature=0,
