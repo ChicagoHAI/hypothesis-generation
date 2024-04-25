@@ -10,10 +10,10 @@ import openai
 from transformers import LlamaForCausalLM, LlamaTokenizer, LlamaConfig, AutoModelForCausalLM, AutoTokenizer
 from pprint import pprint
 from tasks import TASKS
-from openai_api_cache import OpenAIAPICache
+# from openai_api_cache import OpenAIAPICache
 from anthropic import Anthropic
 
-from claude_api_cache import ClaudeAPICache, MixtralAPICache
+from claude_api_cache import ClaudeAPICache, MixtralAPICache, OpenAIAPICache
 from consts.model_consts import INST_WRAPPER, GPT_MODELS, CLAUDE_MODELS, LLAMA_MODELS, MISTRAL_MODELS
 
 code_repo_path = os.environ.get("CODE_REPO_PATH")
@@ -105,18 +105,23 @@ class MistralAPI:
 class LLMWrapper:
     def __init__(self, 
                  model,
+                 use_cache=1,
                  **kwargs):
         assert model in VALID_MODELS, print('Invalid model name: ', model)
         self.model = model
-            
+        self.use_cache = use_cache
         if self.model in GPT_MODELS.keys():
-            self.api = self._set_up_chatgpt(**kwargs)
+            self.api = self._set_up_chatgpt(use_cache=use_cache,
+                                            **kwargs)
         elif self.model in CLAUDE_MODELS.keys():
-            self.api = self._set_up_claude_2(**kwargs)
+            self.api = self._set_up_claude_2(use_cache=use_cache,
+                                             **kwargs)
         elif self.model in LLAMA_MODELS:
-            self.api = self._set_up_llama(**kwargs)
+            self.api = self._set_up_llama(use_cache=use_cache,
+                                          **kwargs)
         elif self.model in MISTRAL_MODELS:
             self.api = self._set_up_mistral(model,
+                                            use_cache=use_cache,
                                             **kwargs)
         else:
             raise NotImplementedError
@@ -228,33 +233,56 @@ class LLMWrapper:
         # Call OpenAI's GPT-3.5 API to generate inference
 
         system_prompt, user_prompt = transform_sys_prompt(self.model,prompt,inst_in_sys)
-        resp = self.api.generate(
-            # model="gpt-3.5-turbo-0613",
-            model=GPT_MODELS[self.model],
-            temperature=0.7,
-            max_tokens=max_tokens,
-            n=1,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
-        )
+        if self.use_cache:
+            resp = self.api.generate(
+                # model="gpt-3.5-turbo-0613",
+                model=GPT_MODELS[self.model],
+                temperature=0.7,
+                max_tokens=max_tokens,
+                n=1,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ]
+            )
+        else:
+            resp = openai.ChatCompletion.create(
+                # model="gpt-3.5-turbo-0613",
+                model=GPT_MODELS[self.model],
+                temperature=0.7,
+                max_tokens=max_tokens,
+                n=1,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ]
+            )
         
         return resp['choices'][0]['message']['content']
     
     def _claude_2_message_generate(self, prompt,inst_in_sys=True, max_tokens=500):
         system_prompt, user_prompt = transform_sys_prompt(self.model,prompt,inst_in_sys)
 
-        response = self.api.generate(
-            model=CLAUDE_MODELS[self.model],
-            max_tokens=max_tokens,
-            temperature=0,
-            system=system_prompt, # <-- system prompt
-            messages=[
-                {"role": "user", "content": user_prompt} # <-- user prompt
-            ]
-        )
-
+        if self.use_cache:
+            response = self.api.generate(
+                model=CLAUDE_MODELS[self.model],
+                max_tokens=max_tokens,
+                temperature=0,
+                system=system_prompt, # <-- system prompt
+                messages=[
+                    {"role": "user", "content": user_prompt} # <-- user prompt
+                ]
+            )
+        else:
+            response = self.messages.create(
+                model=CLAUDE_MODELS[self.model],
+                max_tokens=max_tokens,
+                temperature=0,
+                system=system_prompt, # <-- system prompt
+                messages=[
+                    {"role": "user", "content": user_prompt} # <-- user prompt
+                ]
+            )
         if response == "Output blocked by content filtering policy":
             return None
         return response.content[0].text
