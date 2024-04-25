@@ -1,6 +1,8 @@
 # LLM Hypothesis Generation to Improve Inductive Reasoning Abilities
 
-To mimic human cognitive process in inductive reasoning, we prompt LLM to generate hypothesis while performing online learning.
+![](hypogenic_figure1_large_font.svg)
+
+To mimic the human cognitive process in inductive reasoning, we prompt LLMs to generate hypothesis while performing online learning.
 
 Our method is able to
 * overcome context window size limit,
@@ -219,6 +221,37 @@ optional arguments:
     --hypothesis_file HYPOTHESIS_FILE
         Set the file path to load generated hypotheses.
 ```
+
+## Adding your own dataset
+To add your own dataset, follow these steps:
+
+1. Add your dataset to the `data` directory. Create seperate files for the train, validation, and test splits.
+2. Update `code/data_processor.py` by creating a new DataProcessor class for the new dataset.
+    - Implement the `__init__` function. There should be 4 class variables: 
+        * `task_name` 
+        * `file_path` [passed in to `__init__`] 
+        * `is_train` [passed in to `__init__`] 
+        * `data` A dictionary containing the dataset. There must be a key called `label` which has a corresponding list of all the labels. (You can follow the examples provided.)
+    - Add the new DataProcessor class to the `DataProcessors` dictionary
+3. Update `code/prompt.py` by creating a new class that inherits from the `Prompt` class. Implement the following functions:
+    - `_information_prompt`: This should return a string that contains the data along with its label.
+    - `few_shot_baseline`: Returns a string with few shot examples and prompting the model to find the correct label given few shot. 
+    - `batched_generation`: Returns a string which prompts the LLM to generate hypotheses based upon examples.
+    - `inference`: Returns a string which prompts the LLM do inference given 1 hypothesis and 1 example.
+    - `knn_inference`: Returns a string which prompts the LLM to do single step adaptive inference.
+    - `is_relevant`: Returns a string which prompts the LLM to check if a given hypothesis is relevant to a specific example.
+    - `knn_selection`: Returns a string that prompts the LLM to find which set of examples is closest to the current example.
+4. Update `code/tasks.py` by creating a new class for the new dataset by inheriting from the `Task` class.
+    - Implement the `__init__` function. There should be 5 class variables:
+        * `task`: the task name
+        * `label_classes`: A list of the possible labels
+        * `train_data_path`: The path to the training data location
+        * `test_data_path`: The path to the test data location
+        * `val_data_path`: The path to the validation data location
+    - Implement the `extract_label` function, which extracts the label from the LLM's response. (It is probably easiest to use regex.)
+
+5. Create a new folder for the new task in the folder `prompts`. Make sure to have two subfolders: `instruction` and `user`. Follow the examples for already implemented datasets.
+
 <!-- ## Add your own dataset
 1. Add your dataset to `data` directory.
 2. Update code accordingly:
