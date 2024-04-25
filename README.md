@@ -75,7 +75,8 @@ required arguments:
                   headline_binary,retweet]
     -- model MODEL
         Set model to run.
-        Options: []
+        Options: Please see consts/model_consts.py
+    
                                 
 ```
 <!-- ## Add your own dataset
