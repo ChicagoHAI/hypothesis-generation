@@ -1,4 +1,4 @@
-name: LLMs-new
+name: hypogenic
 channels:
   - pytorch
   - huggingface
@@ -271,4 +271,3 @@ dependencies:
       - tokenizers==0.15.1
       - transformers==4.37.2
       - yarl==1.9.4
-prefix: /home/haokunliu/miniconda3/envs/LLMs-new
