@@ -32,10 +32,12 @@ make
 ```
 
 ## Usage
+Note: example shell scripts can be found in the `experiments/` folder.
 ### 1. [Optional] Start Redis server
 ```bash
+export PORT=<port_number>
 cd $PATH_PREFIX/redis-stable/src
-./redis-server
+./redis-server --port $PORT
 ```
 ### 2. Hypothesis generation
 ```
