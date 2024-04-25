@@ -112,6 +112,9 @@ def parse_args():
     parser.add_argument('--use_ood_reviews', type=str, default="None", help="Use out-of-distribution hotel reviews.")
     parser.add_argument('--model_path', type=str, default=None, help="Path for loading models locally.")
     
+    # argument for using api cache, default true (1)
+    parser.add_argument('--use_cache', type=int, default=1, help='Use cache for API calls.')
+    
     args = parser.parse_args()
 
     return args
@@ -123,7 +126,9 @@ def main():
     set_seed(args)
 
     prompt_class = PROMPT_DICT[args.task]()
-    api = LLMWrapper(args.inference_model, path_name=args.model_path)
+    api = LLMWrapper(args.inference_model, 
+                     path_name=args.model_path,
+                     use_cache=args.use_cache)
 
     train_data, test_data, _ = get_data(args)
 

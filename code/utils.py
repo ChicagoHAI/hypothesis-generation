@@ -164,6 +164,7 @@ class LLMWrapper:
         
 
     def _set_up_chatgpt(self,
+                        use_cache=1,
                         **kwargs):
 
         openai.api_key_path = f'{code_repo_path}/openai_key.txt'
@@ -172,7 +173,9 @@ class LLMWrapper:
         return api
 
 
-    def _set_up_claude_2(self, **kwargs):
+    def _set_up_claude_2(self, 
+                         use_cache=1,
+                         **kwargs):
         api_key = open(f'{code_repo_path}/claude_key.txt', 'r').read().strip()
         client = Anthropic(
             api_key=api_key,
@@ -182,8 +185,11 @@ class LLMWrapper:
             client=client,
             port=PORT
         )
-
-        return api
+        
+        if use_cache == 1:
+            return api
+        else:
+            return client
 
     def _set_up_llama(self,
                       cache_dir=f"{code_repo_path}/llama_cache",
@@ -214,6 +220,7 @@ class LLMWrapper:
                         model,
                         cache_dir=f"{code_repo_path}/Mixtral_cache",
                         path_name=None,
+                        use_cache=1,
                         **kwargs):
         if torch.cuda.is_available(): 
             device = "cuda" 
@@ -241,8 +248,10 @@ class LLMWrapper:
             port=PORT
         )
 
-        # return MistralAPI(model,tokenizer,device)
-        return api
+        if use_cache == 1:
+            return api
+        else:
+            return client
         
     def _chatgpt_generate(self, prompt, inst_in_sys=True, max_tokens=500):
         # Call OpenAI's GPT-3.5 API to generate inference
@@ -343,6 +352,10 @@ def extract_hypotheses(args, text):
         print(f"Expected {args.num_hypothesis} hypotheses, but got {len(hypotheses)}.")
 
     return hypotheses
+
+def extract_label(task_name, pred):
+    task = TASKS[task_name]()
+    return task.extract_label(pred)
 
 def set_seed(args):
     print(f"Setting seed to {args.seed}")

@@ -33,7 +33,9 @@ def set_seed(seed):
     np.random.seed(seed)
 
 def setup_LLM(args):
-    api = LLMWrapper(args.model, path_name=args.model_path)
+    api = LLMWrapper(args.model, 
+                     path_name=args.model_path,
+                     use_cache=args.use_cache)
     return api
 
 def setup(args, seed, api):
@@ -59,6 +61,8 @@ def parse_args():
                                                      ], help='task to run')
     parser.add_argument('--model', type=str, default='claude_2', choices=VALID_MODELS, help='Model to use.')
     parser.add_argument('--model_path', type=str, default=None, help="Path for loading models locally.")
+    # argument for using api cache, default true (1)
+    parser.add_argument('--use_cache', type=int, default=1, help='Use cache for API calls.')
 
     parser.add_argument('--verbose', type=bool, default=True, help='Print more information.')
     parser.add_argument('--use_system_prompt', type=bool, default=True, help="Use instruction as system prompt.")

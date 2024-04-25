@@ -61,6 +61,8 @@ def parse_args():
     parser.add_argument('--hypothesis_file', type=str, default='', help='Place to load the generated hypothesis.')
     parser.add_argument('--use_ood_reviews', type=str, default="None", help="Use out-of-distribution hotel reviews.")
     parser.add_argument('--model_path', type=str, default=None, help="Path for loading models locally.")
+    # argument for using api cache, default true (1)
+    parser.add_argument('--use_cache', type=int, default=1, help='Use cache for API calls.')
 
     args = parser.parse_args()
 
@@ -86,7 +88,9 @@ def main():
 
     # initialization
     prompt_class = PROMPT_DICT[args.task]()
-    api = LLMWrapper(args.inference_model, path_name=args.model_path)
+    api = LLMWrapper(args.inference_model, 
+                     path_name=args.model_path,
+                     use_cache=args.use_cache)
 
     # get the training accuracy of each hypothesis
     training_accuracies = []

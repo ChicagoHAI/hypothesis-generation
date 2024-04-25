@@ -5,9 +5,14 @@ export PATH_PREFIX=/home/haokunliu
 export CODE_REPO_PATH=${PATH_PREFIX}/hypothesis_generation
 
 # Optional: specify port number and change directory to for redis server
-cd ${PATH_PREFIX}/redis-stable/src/
-./redis-server --port 6380 &
+USE_CACHE=0
+export PORT=6382
+if [ "$USE_CACHE" -eq 1 ]; then
+    cd ${PATH_PREFIX}/redis-stable/src/
+    ./redis-server --port $PORT &
+fi
 
+MODEL_PATH=/net/projects/chai-lab/tejes/Mixtral-8x7B-Instruct-v0.1
 MODEL=Mixtral-8x7B
 TASK=hotel_reviews
 SEEDS=49
@@ -34,6 +39,8 @@ python ${PATH_PREFIX}/hypothesis_generation/code/algorithm/algorithm_generation.
     --seeds 49\
     --task $TASK \
     --model $MODEL \
+    --model_path $MODEL_PATH \
+    --use_cache $USE_CACHE \
     --num_train $NUM_TRAIN \
     --num_init $NUM_INIT \
     --init_batch_size $INIT_BATCH_SIZE \
