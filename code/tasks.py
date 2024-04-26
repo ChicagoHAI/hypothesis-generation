@@ -24,8 +24,9 @@ class Shoe(Task):
     def __init__(self):
         self.task = 'shoe'
         self.label_classes = ['white', 'red', 'orange', 'green', 'blue', 'black']
-        self.train_data_path =  f'{code_repo_path}/data/shoe_rec_1100.pkl'
-        self.eval_data_path = None # because we use train_data_path to do the train/test split
+        self.train_data_path =  f'{code_repo_path}/data/shoe_train.txt'
+        self.test_data_path =  f'{code_repo_path}/data/shoe_test.txt'
+        self.val_data_path =  f'{code_repo_path}/data/shoe_validation.txt'
 
     def extract_label(self, text):
         if text == None:

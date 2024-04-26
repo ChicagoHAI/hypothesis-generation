@@ -16,15 +16,8 @@ def get_data(args):
     num_val = args.num_val
 
     print('task_name:', task_name)
-    task = TASKS[task_name]()
-    if task_name == 'shoe':
-        data_processor = DATA_PROCESSORS[task_name](task.train_data_path, num_train, num_test)
-
-        train_data = data_processor.get_train_data()
-        test_data = data_processor.get_test_data()
-        val_data = None
-
-    elif task_name in ['hotel_reviews', 'headline_binary', 'retweet']:
+    if task_name in TASKS.keys():
+        task = TASKS[task_name]()
         train_data_processor = DATA_PROCESSORS[task_name](task.train_data_path, num_train, is_train=True)
         test_data_processor = DATA_PROCESSORS[task_name](task.test_data_path, num_test)
         val_data_processor = DATA_PROCESSORS[task_name](task.val_data_path, num_val)
@@ -32,9 +25,8 @@ def get_data(args):
         train_data = train_data_processor.get_data()
         test_data = test_data_processor.get_data()
         val_data = val_data_processor.get_data()
-
     else:
-        raise ValueError('task_name defined:', task_name)
+        raise ValueError('task_name undefined:', task_name)
     
     if task_name == 'hotel_reviews' and args.use_ood_reviews in OOD_REVIEWS_SUBSET:
         print(f"Loading {args.use_ood_reviews} OOD hotel reviews.")

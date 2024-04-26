@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Enter your path for the code repository
-export PATH_PREFIX=/home/haokunliu
+export PATH_PREFIX=/net/scratch/tejess
 export CODE_REPO_PATH=${PATH_PREFIX}/hypothesis_generation
 
 # Optional: specify port number and change directory to for redis server
@@ -14,18 +14,21 @@ fi
 
 MODEL_PATH=/net/projects/chai-lab/tejes/Mixtral-8x7B-Instruct-v0.1
 # Set experiment parameters
-MODEL=Mixtral-8x7B
-TASK=hotel_reviews
+MODEL=claude_2
+TASK=shoe
 SEEDS=49
 HYP_SIZE=20
 INFERENCE=default
-NUM_TRAIN=200
-NUM_TEST=300
-NUM_VAL=100
+NUM_TRAIN=20
+NUM_TEST=10
+NUM_VAL=10
 EPOCH=0
+FILE_LOAD_NUM_TRAIN=final
+
+mkdir -p ${CODE_REPO_PATH}/logs/${MODEL}/${INFERENCE}
 
 # Set file path for generated hypotheses
-FILE=${PATH_PREFIX}/hypothesis_generation/outputs/$TASK/$MODEL/hyp_${HYP_SIZE}/hypotheses_training_sample_${NUM_TRAIN}_seed_${SEEDS}_epoch_${EPOCH}.json
+FILE=${PATH_PREFIX}/hypothesis_generation/outputs/$TASK/$MODEL/hyp_${HYP_SIZE}/hypotheses_training_sample_${FILE_LOAD_NUM_TRAIN}_seed_${SEEDS}_epoch_${EPOCH}.json
 python ${PATH_PREFIX}/hypothesis_generation/code/algorithm/algorithm_inference.py \
     --seeds $SEEDS \
     --task $TASK \
@@ -37,4 +40,4 @@ python ${PATH_PREFIX}/hypothesis_generation/code/algorithm/algorithm_inference.p
     --num_test $NUM_TEST \
     --inference_style $INFERENCE \
     --hypothesis_file $FILE \
-    > ${CODE_REPO_PATH}/logs/${INFERENCE}/${model}/${TASK}_train_${NUM_TRAIN}_hyp_${HYP_SIZE}.txt
+    > ${CODE_REPO_PATH}/logs/${MODEL}/${INFERENCE}/${TASK}_train_${NUM_TRAIN}_hyp_${HYP_SIZE}.txt

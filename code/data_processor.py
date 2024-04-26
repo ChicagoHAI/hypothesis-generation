@@ -16,54 +16,89 @@ else:
 
 
 class ShoeRecommendationDataProcessor:
-    def __init__(self, file_path, num_train, num_test):
+    def __init__(self, file_path, num, is_train=False):
         self.task_name = 'shoe'
         self.file_path = file_path
-        train_data, test_data = self.read_data(file_path, num_train, num_test)
-        self.train_data = self.preprocess_data(train_data)
-        self.test_data = self.preprocess_data(test_data)
+        self.is_train = is_train
+        self.data = self.read_data(file_path, num)
 
-    def read_data(self, file_path, num_train, num_test):
-        """
-        Read data from file_path and return train and test data.
+    def parse_complex_tuple(self, line):
+        items = []
+        in_quote = False
+        buffer = ''
+        for char in line:
+            if char == "'":
+                in_quote = not in_quote
+            elif char == ',' and not in_quote:
+                items.append(buffer.strip())
+                buffer = '' 
+            else:
+                buffer += char
 
-        data format:
-        [
-            (
-                'a young and tall man with blue hat, black shirt, and a small white bag',
-                'the color of shoes is black'
-            ),
-            ...
-        ]
-        """
-        examples = pickle.load(open(file_path, 'rb'))
+        if buffer:
+            items.append(buffer.strip())
 
-        train_data = examples[:1000]
-        test_data = examples[1000:]
+        return tuple(item.strip("'") for item in items)
 
-        # shuffle data
-        random.shuffle(train_data)
-        random.shuffle(test_data)
+    def read_data(self, file_path, num_examples):
+        data = []
 
-        # sample 20 test examples
-        train_data = train_data[:num_train]
-        test_data = test_data[:num_test]
+        with open(file_path, 'r') as file:
+            for line in file:
+                clean_line = line.strip().strip('()')
+                tuple_data = self.parse_complex_tuple(clean_line)
+                data.append(tuple_data)
+        if self.is_train:
+            random.shuffle(data)
         
-        return train_data, test_data
+        data = self.preprocess_data(data, num_examples)
 
-    def preprocess_data(self, data):
-        # takes in output from read_data, turn into a dictionary
         output = {}
-        output['appearance'] = [item[0] for item in data]
-        output['shoe'] = [item[1] for item in data]
-        output['label'] = [item[1][len('the color of shoe is ')+1:] for item in data]
+        for key in data:
+            output[key] = data[key][:num_examples]
+        
         return output
 
-    def get_train_data(self):
-        return self.train_data
-    
-    def get_test_data(self):
-        return self.test_data
+        
+
+    # def read_data(self):
+    #     """
+    #     Read data from file_path and return train and test data.
+
+    #     data format:
+    #     [
+    #         (
+    #             'a young and tall man with blue hat, black shirt, and a small white bag',
+    #             'the color of shoes is black'
+    #         ),
+    #         ...
+    #     ]
+    #     """
+    #     examples = pickle.load(open(file_path, 'rb'))
+
+    #     train_data = examples[:1000]
+    #     test_data = examples[1000:]
+
+    #     # shuffle data
+    #     random.shuffle(train_data)
+    #     random.shuffle(test_data)
+
+    #     # sample 20 test examples
+    #     train_data = train_data[:num_train]
+    #     test_data = test_data[:num_test]
+        
+    #     return train_data, test_data
+
+    def preprocess_data(self, data, num_examples):
+        # takes in output from read_data, turn into a dictionary
+        output = {}
+        output['appearance'] = [item[0] for item in data[:num_examples]]
+        output['shoe'] = [item[1] for item in data[:num_examples]]
+        output['label'] = [item[1][len('the color of shoe is ')+1:] for item in data[:num_examples]]
+        return output
+
+    def get_data(self):
+        return self.data
 
 
 class HotelReviewsDataProcessor:

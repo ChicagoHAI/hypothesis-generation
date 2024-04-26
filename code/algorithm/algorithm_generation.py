@@ -110,6 +110,9 @@ def parse_args():
 
     parser.add_argument('--num_epochs', type=int, default=1, help="Number of epochs to run the algorithm")
     parser.add_argument('--output_folder', type=str, default=None, help="Specifies the output path")
+
+    parser.add_argument('--use_ood_reviews', type=str, default="None", help="Use out-of-distribution hotel reviews.")
+
     args = parser.parse_args()
     if args.output_folder is None:
         args.output_folder = f'{code_repo_path}/print_log_{args.message}/{args.task}/{args.model}_{args.seed}_{args.hotel_inference_prompt}/'
@@ -147,7 +150,7 @@ def main():
         for epoch in range(args.epoch_to_start_from,args.epoch_to_start_from+args.num_epochs):
             args.current_epoch = epoch
             hypotheses_bank = update_class.update(args, hypotheses_bank)
-            update_class.save_to_json(args, f"final_seed_{seed}_epoch_{args.current_epoch}", hypotheses_bank)
+            update_class.save_to_json(args, f"final_seed_{seed}", hypotheses_bank)
 
         
         
