@@ -2,12 +2,8 @@
 
 ![](hypogenic_figure1_large_font.jpg)
 
-To mimic the human cognitive process in inductive reasoning, we prompt LLMs to generate hypothesis while performing online learning.
+Welcome to the GitHub repository for our paper, ["Hypothesis Generation with Large Language Models"](https://arxiv.org/abs/2404.04326). This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our work, presented in detail in the accompanying paper, highlights the capability of LLMs not just to assist but to innovate in the hypothesis generation process for scientific inquiry.
 
-Our method is able to
-* overcome context window size limit,
-* provide interpretability,
-* and improve model ability across various tasks.
 
 ## Install environment
 The environment configuration file is located at conda_env_configs/hypogenic.yml
