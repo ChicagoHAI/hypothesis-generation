@@ -1,4 +1,4 @@
-# LLM Hypothesis Generation to Improve Inductive Reasoning Abilities
+# Hypothesis Generation with Large Language Models
 
 ![](hypogenic_figure1_large_font.jpg)
 
