@@ -22,6 +22,7 @@ def get_data(args):
         test_data_processor = DATA_PROCESSORS[task_name](task.test_data_path, num_test)
         val_data_processor = DATA_PROCESSORS[task_name](task.val_data_path, num_val)
 
+
         train_data = train_data_processor.get_data()
         test_data = test_data_processor.get_data()
         val_data = val_data_processor.get_data()

@@ -24,9 +24,9 @@ class Shoe(Task):
     def __init__(self):
         self.task = 'shoe'
         self.label_classes = ['white', 'red', 'orange', 'green', 'blue', 'black']
-        self.train_data_path =  f'{code_repo_path}/data/shoe_train.txt'
-        self.test_data_path =  f'{code_repo_path}/data/shoe_test.txt'
-        self.val_data_path =  f'{code_repo_path}/data/shoe_validation.txt'
+        self.train_data_path =  f'{code_repo_path}/data/shoe_train.json'
+        self.test_data_path =  f'{code_repo_path}/data/shoe_test.json'
+        self.val_data_path =  f'{code_repo_path}/data/shoe_val.json'
 
     def extract_label(self, text):
         if text == None:
@@ -52,9 +52,9 @@ class HotelReviews(Task):
         # The order matters! preceding word should not be substrings of following words
         self.label_classes = ['deceptive', 'truthful']
 
-        self.train_data_path =  f'{code_repo_path}/data/hotel_reviews_train.jsonl'
-        self.val_data_path =  f'{code_repo_path}/data/hotel_reviews_val.jsonl'
-        self.test_data_path =  f'{code_repo_path}/data/hotel_reviews_test.jsonl'
+        self.train_data_path =  f'{code_repo_path}/data/hotel_reviews_train.json'
+        self.val_data_path =  f'{code_repo_path}/data/hotel_reviews_val.json'
+        self.test_data_path =  f'{code_repo_path}/data/hotel_reviews_test.json'
         self.ood_test_data_path = f'{code_repo_path}/data'
 
     def extract_label(self, text):
@@ -93,9 +93,9 @@ class HeadlineBinary(Task):
     def __init__(self):
         self.task = 'headline_binary'
         self.label_classes = ['headline 1', 'headline 2']
-        self.train_data_path =  f'{code_repo_path}/data/headline_binary_training_dataset.csv'
-        self.test_data_path =  f'{code_repo_path}/data/headline_binary_test_dataset.csv'
-        self.val_data_path =  f'{code_repo_path}/data/headline_binary_validation_dataset.csv'
+        self.train_data_path =  f'{code_repo_path}/data/headline_binary_train.json'
+        self.test_data_path =  f'{code_repo_path}/data/headline_binary_test.json'
+        self.val_data_path =  f'{code_repo_path}/data/headline_binary_val.json'
 
     def extract_label(self, text):
         if text == None:
@@ -126,9 +126,9 @@ class Retweet(Task):
     def __init__(self):
         self.task = 'retweet'
         self.label_classes = ['first', 'second']
-        self.train_data_path =  f'{code_repo_path}/data/retweet_train.csv'
-        self.val_data_path =  f'{code_repo_path}/data/retweet_val.csv'
-        self.test_data_path =  f'{code_repo_path}/data/retweet_test.csv'
+        self.train_data_path =  f'{code_repo_path}/data/retweet_train.json'
+        self.val_data_path =  f'{code_repo_path}/data/retweet_val.json'
+        self.test_data_path =  f'{code_repo_path}/data/retweet_test.json'
 
 
     def extract_label(self, text):
