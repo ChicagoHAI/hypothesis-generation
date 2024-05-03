@@ -14,7 +14,7 @@ fi
 
 MODEL_PATH=/net/projects/chai-lab/tejes/Mixtral-8x7B-Instruct-v0.1
 MODEL=claude_2
-TASK=shoe
+TASK=headline_binary
 SEEDS=49
 HYP_SIZE=20
 DIR=${PATH_PREFIX}/hypothesis_generation/outputs/$TASK/$MODEL/hyp_${HYP_SIZE}/
@@ -23,7 +23,7 @@ INFERENCE=default
 REPLACE=default
 GENERATION=default
 
-NUM_TRAIN=25
+NUM_TRAIN=75
 NUM_INIT=10
 INIT_BATCH_SIZE=10
 INIT_HYPOTHESES_PER_BATCH=10

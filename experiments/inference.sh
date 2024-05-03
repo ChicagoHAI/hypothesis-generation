@@ -15,12 +15,12 @@ fi
 MODEL_PATH=/net/projects/chai-lab/tejes/Mixtral-8x7B-Instruct-v0.1
 # Set experiment parameters
 MODEL=claude_2
-TASK=shoe
+TASK=headline_binary
 SEEDS=49
 HYP_SIZE=20
 INFERENCE=default
-NUM_TRAIN=20
-NUM_TEST=10
+NUM_TRAIN=75
+NUM_TEST=25
 NUM_VAL=10
 EPOCH=0
 FILE_LOAD_NUM_TRAIN=final

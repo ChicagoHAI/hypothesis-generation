@@ -34,7 +34,7 @@ class ShoeRecommendationDataProcessor:
         appearance_all = data['appearance']
         shoe_all = data['shoe']
         label_all = data['label']
-        num_samples = min(num,len(data['label']))
+        num_samples = min(num, len(data['label']))
         appearance, shoe, label = zip(*random.sample(list(zip(appearance_all, shoe_all, label_all)), num_samples))
         processed_data = {
             'appearance': appearance,

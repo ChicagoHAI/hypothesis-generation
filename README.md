@@ -29,6 +29,13 @@ cd redis-stable
 make
 ```
 
+## Verification
+
+To verify repository is working as expected, please conduct tests using the Shoe and Headline datasets with the default configurations specified in generation.sh and inference.sh. The expected outcomes should approximately be:
+| Shoe | Headline |
+|----------|----------|
+| 76%   | 64%  |
+
 ## Usage
 Note: example shell scripts can be found in the `experiments/` folder.
 ### 1. [Optional] Start Redis server
@@ -218,6 +225,7 @@ optional arguments:
         Set the file path to load generated hypotheses.
 ```
 
+
 ## Adding your own dataset
 To add your own dataset, follow these steps:
 
@@ -248,10 +256,5 @@ To add your own dataset, follow these steps:
 
 5. Create a new folder for the new task in the folder `prompts`. Make sure to have two subfolders: `instruction` and `user`. Follow the examples for already implemented datasets.
 
-<!-- ## Add your own dataset
-1. Add your dataset to `data` directory.
-2. Update code accordingly:
-    * `code/tasks.py`: define the new task.
-    * `code/data_loader.py`: add the data path to load the new data.
-    * `code/data_processor.py`: write processor for the new dataset.
-    * `code/prompt.py`: add prompt for the new dataset. -->
+
+

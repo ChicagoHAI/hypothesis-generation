@@ -70,7 +70,7 @@ def parse_args():
     # generation specific arguments
     parser.add_argument('--num_train', type=int, default=25, help='Number of training examples.')
     parser.add_argument('--num_test', type=int, default=100, help='Number of testing examples')
-    parser.add_argument('--num_val', type=int, default=0, help='Number of validation examples')
+    parser.add_argument('--num_val', type=int, default=10, help='Number of validation examples')
 
     parser.add_argument('--use_valid', type=bool, default=False, help="Whether to use valid set as the testing set")
     # inference specific arguments
