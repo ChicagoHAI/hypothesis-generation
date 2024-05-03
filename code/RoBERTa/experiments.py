@@ -45,7 +45,6 @@ def finetune_roberta(max_steps, per_device_batch_size, learning_rate, num_train,
             "seed": seed
         })
 
-    # Haokun's args
     args = {
         'num_train_epochs':20,
         'per_device_train_batch_size':per_device_batch_size,
@@ -62,26 +61,6 @@ def finetune_roberta(max_steps, per_device_batch_size, learning_rate, num_train,
         'report_to': "wandb" if wandb else None,
         'output_dir': output_dir
     }
-
-    # Rosa's args
-    # args = {
-    #     'num_train_epochs': 3,
-    #     'per_device_train_batch_size': per_device_batch_size,
-    #     'per_device_eval_batch_size': per_device_batch_size,
-    #     'logging_dir': 'roberta_logs',
-    #     'logging_steps': 10,
-    #     'logging_strategy': "steps",
-    #     'evaluation_strategy': "steps",
-    #     'save_strategy': "steps",
-    #     'report_to': "wandb" if wandb else None,
-    #     'load_best_model_at_end': True,
-    #     'metric_for_best_model': "accuracy",
-    #     'greater_is_better': True,
-    #     'max_steps': max_steps,
-    #     'learning_rate': learning_rate,
-    #     'warmup_ratio': 0.1,
-    #     'output_dir': output_dir
-    # }
 
     prepare_trainer(model_id="roberta-base",
         task_name=task,

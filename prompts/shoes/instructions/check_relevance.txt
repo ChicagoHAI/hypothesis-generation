@@ -1,6 +1,0 @@
-###
-Instruction:
-We are recommending shoes to customers. We want to determine the color of the shoes given the appearance of the person.
-We learned some hypotheses from previous customers, and we want to see if a given hypothesis is relevant to a new customer.
-Answer yes or no.
-###

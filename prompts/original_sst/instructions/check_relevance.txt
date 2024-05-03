@@ -1,6 +1,0 @@
-###
-Instruction:
-You are asked to perform sentiment analysis. The possible sentiments are "very positive", "positive", "negative", and "very negative".
-We learned some hypotheses from previous sentences, and we want to see if a given hypothesis is relevant to a new sentence.
-Answer yes or no.
-###

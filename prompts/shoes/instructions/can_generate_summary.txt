@@ -1,8 +1,0 @@
-###
-Instruction:
-We are shoe sellers and we recommend shoes to customers. We know the appearance of customers and past shoe purchase data.
-We would like to summarize useful patterns for future shoe recommendation.
-We have some summaries and new observations. 
-For each summary, we want to see if the corresponding new observations can be used to update the summary.
-Answer yes or no.
-###

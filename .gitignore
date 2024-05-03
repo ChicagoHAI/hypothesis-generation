@@ -1,0 +1,5 @@
+claude_key.txt
+openai_key.txt
+openai_organization.txt
+*.pyc
+logs/

@@ -1,4 +1,0 @@
-[INST] You are a shoe salesman and want to recommend shoes to customers. There are white, red, orange, green, blue, and black shoes.
-From past experiences, you learned some patterns. 
-Now, at each time, you should apply the learned pattern, given below, to a new customer and recommend a shoe color.
-Give an answer for the shoe color recommendation. The answer should be one color word. It has to be one of white, red, orange, green, blue, and black.[/INST]

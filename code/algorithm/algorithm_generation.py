@@ -33,13 +33,14 @@ def set_seed(seed):
     np.random.seed(seed)
 
 def setup_LLM(args):
-    api = LLMWrapper(args.model)
+    api = LLMWrapper(args.model, 
+                     path_name=args.model_path,
+                     use_cache=args.use_cache)
     return api
 
 def setup(args, seed, api):
     set_seed(seed)
     train_data, _, _ = get_data(args)
-    # api = LLMWrapper(args.model)
     prompt_class = PROMPT_DICT[args.task]()
     inference_class = INFERENCE_DICT[args.inference_style](api, prompt_class, train_data)
     generation_class = GENERATION_DICT[args.generation_style](api, prompt_class, inference_class)
@@ -59,6 +60,10 @@ def parse_args():
                                                      'retweet'
                                                      ], help='task to run')
     parser.add_argument('--model', type=str, default='claude_2', choices=VALID_MODELS, help='Model to use.')
+    parser.add_argument('--model_path', type=str, default=None, help="Path for loading models locally.")
+    # argument for using api cache, default true (1)
+    parser.add_argument('--use_cache', type=int, default=1, help='Use cache for API calls.')
+
     parser.add_argument('--verbose', type=bool, default=True, help='Print more information.')
     parser.add_argument('--use_system_prompt', type=bool, default=True, help="Use instruction as system prompt.")
     # initialization specific arguments
@@ -105,6 +110,9 @@ def parse_args():
 
     parser.add_argument('--num_epochs', type=int, default=1, help="Number of epochs to run the algorithm")
     parser.add_argument('--output_folder', type=str, default=None, help="Specifies the output path")
+
+    parser.add_argument('--use_ood_reviews', type=str, default="None", help="Use out-of-distribution hotel reviews.")
+
     args = parser.parse_args()
     if args.output_folder is None:
         args.output_folder = f'{code_repo_path}/print_log_{args.message}/{args.task}/{args.model}_{args.seed}_{args.hotel_inference_prompt}/'
@@ -142,7 +150,7 @@ def main():
         for epoch in range(args.epoch_to_start_from,args.epoch_to_start_from+args.num_epochs):
             args.current_epoch = epoch
             hypotheses_bank = update_class.update(args, hypotheses_bank)
-            update_class.save_to_json(args, f"final_seed_{seed}_epoch_{args.current_epoch}", hypotheses_bank)
+            update_class.save_to_json(args, f"final_seed_{seed}", hypotheses_bank)
 
         
         

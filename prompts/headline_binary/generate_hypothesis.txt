@@ -1,4 +1,0 @@
-###
-Instruction:
-Given a set of observations, we want to generate a summary that is useful for predicting the headline which causes more clicks. Please be concise and keep the summary to be one-sentence long. Propose 5 possible summaries. Generate them in the format of 1. [summary], 2. [summary], ... 5. [summary]
-###

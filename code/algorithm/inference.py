@@ -10,6 +10,7 @@ import pulp
 import random
 import re
 
+
 class Inference(ABC):
     """ Inference abstract class. For each style of inference implement the inference function. """
     def __init__(self, api, prompt_class, train_data):
@@ -62,6 +63,7 @@ class Inference(ABC):
         """
         pass
 
+
 class DefaultInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
@@ -91,81 +93,7 @@ class DefaultInference(Inference):
             label_list.append(label)
 
         return pred_list, label_list
-
-
-class MultiHypInference(DefaultInference):
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
     
-    def concat_hypotheses(self, args, hyp_bank):
-        k=args.k
-        # get the top k hypotheses by reward (save as dictionary)
-        if k > len(hyp_bank):
-            k = len(hyp_bank)
-        top_k_hypotheses = sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[:k]
-        multi_k_hypothesis = ""
-        for hypothesis in top_k_hypotheses:
-            multi_k_hypothesis += hypothesis + "\n"
-        multi_k_hypothesis_class = SummaryInformation(hypothesis=multi_k_hypothesis)
-        return {multi_k_hypothesis: multi_k_hypothesis_class}
-
-    def run_inference_final(self, args, data, hyp_bank):
-        top_hypothesis = self.concat_hypotheses(args,hyp_bank)
-        num_samples = get_num_examples(data)
-
-        pred_list = []
-        label_list = []
-        for i in range(num_samples):
-            pred, label = self.predict(args, data, i, top_hypothesis)
-            pred_list.append(pred)
-            label_list.append(label)
-
-        return pred_list, label_list
-    
-
-class ProbabilityInference(Inference):
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
-    
-    def predict(self, args, data, index, hyp_bank):
-        assert len(hyp_bank.keys()) == 1, 'default inference only supports one hypothesis at a time'
-        prompt_input = self.prompt_class.inference(hyp_bank, data, index, prob=True)
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-        response = self.api.generate(prompt_input, args.use_system_prompt)
-        print(f"Response: {response}")
-        task = TASKS[args.task]()
-        prediction = task.extract_label(response)
-        print(f"Prediction: {prediction}")
-        import re
-        pattern = r"Confidence: (\w+)}"
-        match = re.search(pattern, response)
-        if match:
-            prob = match.group(1)
-            print(f"Confidence: {prob}")
-        else:
-            print("Confidence output incorrect.")
-            prob = None
-        actual_label = data['label'][index]
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label, prob
-    
-    def run_inference_final(self, args, data, hyp_bank):
-        top_hypothesis = sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[0]
-        num_samples = get_num_examples(data)
-
-        pred_list = []
-        label_list = []
-        prob_list = []
-        for i in range(num_samples):
-            pred, label, prob = self.predict(args, data, i, {top_hypothesis : hyp_bank[top_hypothesis]})
-            pred_list.append(pred)
-            label_list.append(label)
-            prob_list.append(prob)
-
-        return pred_list, label_list, prob_list
-    
-    def run_two_side_inference(self, args, data, hyp_bank):
-        pass
 
 class KNNInference(Inference):
     def __init__(self, api, prompt_class, train_data):
@@ -268,95 +196,6 @@ class KNNInference(Inference):
         selected_indices = [i for i, var in enumerate(selection_vars) if var.value() == 1]
 
         return selected_indices
-
-
-class BalancedExamplesKNNInference(Inference):
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
-    
-    def predict(self, args, data, index, hyp_bank):
-        prompt_input = self.prompt_class.knn_inference(hyp_bank, self.train_data, data, index)
-        response = self.api.generate(prompt_input, args.use_system_prompt)
-        task = TASKS[args.task]()
-        prediction = task.extract_label(response)
-        actual_label = data['label'][index]
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-        print(f"Response: {response}")
-        print(f"Prediction: {prediction}")
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label
-
-    def run_inference_final(self, args, data, hyp_bank):
-        knn_num_examples_per_class = args.knn_num_examples // 2 
-        """
-        # filter out hypotheses without enough examples
-        for hyp in hyp_bank:
-            if len(hyp_bank[hyp].correct_examples) < knn_num_examples:
-                del hyp_bank[hyp]
-
-        if len(hyp_bank) == 0:
-            print("No hypotheses have enough examples")
-            return 0
-        """
-        num_train_data_samples = get_num_examples(self.train_data)
-        similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(hyp_bank, num_train_data_samples)
-        assert list(one_hot_encoded_dict.keys()) == list(hyp_bank.keys()), "The keys of the one hot encoded dict and the hyp_bank should be the same"
-        similarity_per_hypothesis = [np.sum(similarity_matrix[i]) for i, _ in enumerate(one_hot_encoded_dict.keys())]
-        accuracy_per_hypothesis = [hyp_bank[hyp].acc for hyp in one_hot_encoded_dict] 
-        print("Initial examples per hyp:")
-        for hyp in hyp_bank:
-            print(f"Hypothesis {hyp}, Examples: {hyp_bank[hyp].correct_examples}")
-        
-        print()
-        print("One hot encoded dict:")
-        for hyp in one_hot_encoded_dict:
-            print(f"Hypothesis {hyp}, Encoded Examples: {one_hot_encoded_dict[hyp]}")
-        print()
-        print("Similarity matrix:\n", similarity_matrix, "\n")
-
-        # choose hypotheses with the least similarities
-        selected_indices = self.select_hypotheses_ilp(similarity_matrix, accuracy_per_hypothesis, similarity_per_hypothesis, args.knn_threshold)
-        key_list = list(one_hot_encoded_dict.keys())
-        selected_hypotheses = [key_list[idx] for idx in selected_indices]
-        print("Selected hypotheses based upon non-similarity:", selected_hypotheses)
-        
-        top_k_hypotheses = sorted(selected_hypotheses, key=lambda x: hyp_bank[x].acc, reverse=True)[:args.knn_hypotheses]
-
-        selected_hyp_bank = {}
-        for hypothesis in top_k_hypotheses:
-            selected_hyp_bank[hypothesis] = hyp_bank[hypothesis]
-        to_del = []
-        for hyp in selected_hyp_bank:
-            selected_hyp_bank[hyp].set_hypothesis(hyp)
-            # selected_hyp_bank[hyp].set_example(random.sample(selected_hyp_bank[hyp].correct_examples, args.knn_num_examples))
-
-            # sample relatively balanced set of examples
-            num_truthful = len([ex for ex in selected_hyp_bank[hyp].correct_examples if ex[1] == 'truthful'])
-            num_deceptive = len([ex for ex in selected_hyp_bank[hyp].correct_examples if ex[1] == 'deceptive'])
-
-            # filter out hypotheses without enough examples
-            if num_truthful < knn_num_examples_per_class or num_deceptive < knn_num_examples_per_class:
-                to_del.append(hyp)
-                continue
-
-            sampled_examples = random.sample([ex for ex in selected_hyp_bank[hyp].correct_examples if ex[1] == 'truthful'], knn_num_examples_per_class) + random.sample([ex for ex in selected_hyp_bank[hyp].correct_examples if ex[1] == 'deceptive'], knn_num_examples_per_class)
-            random.shuffle(sampled_examples)
-            assert len(sampled_examples) == knn_num_examples_per_class*2, "The number of examples should be equal to the number of examples per class"
-            selected_hyp_bank[hyp].set_example(sampled_examples)
-
-        # filter out hypotheses without enough examples
-        for hyp in to_del:
-            del selected_hyp_bank[hyp]
-
-        num_samples = get_num_examples(data)
-        pred_list = []
-        label_list = []
-        for i in range(num_samples):
-            pred, label = self.predict(args, data, i, selected_hyp_bank)
-            pred_list.append(pred)
-            label_list.append(label)
-
-        return pred_list, label_list
 
 
 class FilterAndWeightInference(Inference):
@@ -469,141 +308,6 @@ class FilterAndWeightInference(Inference):
         return pred_list, label_list
 
 
-class WeightedVoteInference(Inference):
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
-
-    def predict(self, args, data, index, hyp_bank):
-        """
-        Make prediction on one sample (index) of the dataset.
-        Use the hypotheses in hyp_bank to make a weighted-vote prediction.
-
-        Note this function may be called in generation as well. 
-        Therefore, I only implement it to perform weighted-vote prediction (but not filtering).
-        """
-        assert len(hyp_bank.keys()) >= 1, 'Filter and weight inference requires at least one hypothesis'
-        actual_label = data['label'][index]
-        pred_dict = {}
-        for hypothesis in hyp_bank:
-            hypothesis_dict = {hypothesis: hyp_bank[hypothesis]}
-            prompt_input = self.prompt_class.inference(hypothesis_dict, data, index)
-            response = self.api.generate(prompt_input, args.use_system_prompt)
-            task = TASKS[args.task]()
-            pred = task.extract_label(response)
-            weight = hyp_bank[hypothesis].acc
-            if pred in pred_dict:
-                pred_dict[pred] += weight
-            else:
-                pred_dict[pred] = weight
-        prediction = max(pred_dict, key=pred_dict.get)
-
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-        print(f"Response: {response}")
-        print(f"Predictions (weights): {pred_dict}")
-        print(f"Prediction (final): {prediction}")
-        print(f"Ground truth: {actual_label}")
-        
-        return prediction, actual_label
-    
-    def run_inference_final(self, args, data, hyp_bank):
-        """
-        Run over the entire dataset and make predictions.
-        Use the top k hypotheses in hyp_bank to make a weighted-vote prediction.
-        """
-        k=args.k
-        # get the top k hypotheses by reward (save as dictionary)
-        if k > len(hyp_bank):
-            k = len(hyp_bank)
-        top_hypotheses = {}
-        for hypothesis in sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[:k]:
-            top_hypotheses[hypothesis] = hyp_bank[hypothesis]
-
-        # iterate over the dataset and make predictions
-        num_samples = get_num_examples(data)
-        pred_list = []
-        label_list = []
-        for i in range(num_samples):
-            pred, label = self.predict(args, data, i, top_hypotheses)
-            pred_list.append(pred)
-            label_list.append(label)
-
-        return pred_list, label_list
-
-
-class TestAllHypothesisInference(Inference):
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
-
-    def predict(self, args, data, index, hyp_bank):
-        assert len(hyp_bank.keys()) == 1, 'default inference only supports one hypothesis at a time'
-        prompt_input = self.prompt_class.inference(hyp_bank, data, index)
-        response = self.api.generate(prompt_input, args.use_system_prompt)
-        task = TASKS[args.task]()
-        prediction = task.extract_label(response)
-        actual_label = data['label'][index]
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-        print(f"Response: {response}")
-        print(f"Prediction: {prediction}")
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label
-    
-    def run_inference_final(self, args, data, hyp_bank):
-        num_samples = get_num_examples(data)
-        accuracy_list = []
-        for hyp in hyp_bank:
-            correct = 0
-            for i in range(num_samples):
-                pred, ground_truth = self.predict(args, data, i, {hyp : hyp_bank[hyp]})
-                if pred == ground_truth:
-                    correct += 1
-
-            accuracy = correct / num_samples
-            accuracy_list.append(accuracy)
-            print(f"Hypothesis: {hyp}")
-            print(f"Accuracy: {accuracy}")
-
-        return sum(accuracy_list)/len(accuracy_list)
-
-class TopKAndExamplesInference(Inference):
-    """
-    This class is essentially KNN inference without the hypotheses selection step
-    """
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
-
-    def predict(self, args, data, index, hyp_bank):
-        prompt_input = self.prompt_class.knn_inference(hyp_bank, self.train_data, data, index)
-        response = self.api.generate(prompt_input, args.use_system_prompt)
-        task = TASKS[args.task]()
-        prediction = task.extract_label(response)
-        actual_label = data['label'][index]
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-        print(f"Response: {response}")
-        print(f"Prediction: {prediction}")
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label
-    
-    def run_inference_final(self, args, data, hyp_bank):
-        k=args.k
-        top_hypotheses = {}
-        for hypothesis in sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[:k]:
-            top_hypotheses[hypothesis] = hyp_bank[hypothesis]
-
-        for hyp in top_hypotheses:
-            top_hypotheses[hyp].set_hypothesis(hyp)
-            top_hypotheses[hyp].set_example(random.sample(top_hypotheses[hyp].correct_examples, args.knn_num_examples)) 
-
-        num_samples = get_num_examples(data)
-        pred_list = []
-        label_list = []
-        for i in range(num_samples):
-            pred, label = self.predict(args, data, i, top_hypotheses)
-            pred_list.append(pred)
-            label_list.append(label)
-
-        return pred_list, label_list
-
-
 class SeparateStepsKNNInference(KNNInference):
     """
     This class is essentially KNN inference with separate calls for
@@ -671,100 +375,6 @@ class SeparateStepsKNNInference(KNNInference):
         # make prediction using default_predict
         return self.default_predict(args, data, index, {hyp: hyp_bank[hyp]})
 
-
-class DefaultInferenceFavorExploitation(DefaultInference):
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
-
-    def run_inference_final(self, args, data, hyp_bank):
-        # get top hypothesis in terms of accuracy - (reward - accuracy)
-        tmp_hyp_bank = {}
-        for hyp in hyp_bank:
-            if hyp_bank[hyp].num_visits >= 200:
-                tmp_hyp_bank[hyp] = hyp_bank[hyp].acc - (hyp_bank[hyp].reward - hyp_bank[hyp].acc)
-        top_hypothesis = max(tmp_hyp_bank, key=tmp_hyp_bank.get)
-
-        num_samples = get_num_examples(data)
-        pred_list = []
-        label_list = []
-        for i in range(num_samples):
-            pred, label = self.predict(args, data, i, {top_hypothesis : hyp_bank[top_hypothesis]})
-            pred_list.append(pred)
-            label_list.append(label)
-
-        return pred_list, label_list
-
-class CoverageBasedSelectionInference(Inference):
-    
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
-
-    def predict(self, args, data, index, hyp_bank):
-        '''
-        TODO: decide how to implement this, could try one-step KNN, two-step KNN, or FAW
-        '''
-        pass
-
-    def get_coverage(self, args, hyp):
-        num_samples = get_num_examples(self.train_data)
-        coverage = [0] * num_samples
-        for i in range(num_samples):
-            prompt_input = self.prompt_class.is_relevant(hyp, self.train_data, i)
-            response = self.api.generate(prompt_input, args.use_system_prompt)
-
-            print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-            print(f"Response: {response}")
-            
-            # only keep the part after "Final answer:"
-            if "Final answer:" in response:
-                response = response[response.index("Final answer:") + len("Final answer:"):]
-                response = response[:5]
-                response = response.lower()
-
-            print(f"Response (truncated): {response}")
-            
-            if 'yes' in response and 'no' in response:
-                if 'yes or no' in response:
-                    print(f"Hypothsis is not relevant")
-                else:
-                    raise ValueError(f'The response should not contain both "yes" and "no". Response: {response}')
-            elif 'yes' in response:
-                coverage[i] = 1
-                print('Hypothesis is relevant')
-            else:
-                print(f"Hypothsis is not relevant")
-        return coverage
-
-    def get_recall(self, args, hyp, hyp_bank):
-        num_samples = get_num_examples(self.train_data)
-        recall = [0] * num_samples
-        for i in range(num_samples):
-            hypothesis_dict = {hyp: hyp_bank[hyp]}
-            prompt_input = self.prompt_class.inference(hypothesis_dict, self.train_data, i)
-            response = self.api.generate(prompt_input, args.use_system_prompt)
-            task = TASKS[args.task]()
-            pred = task.extract_label(response)
-            if pred == self.train_data['label'][i]:
-                recall[i] = 1
-        return recall
-
-
-    def run_inference_final(self, args, data, hyp_bank):
-        # get the coverage and recall of each hypothesis
-        # key = hypothesis, value = (coverage, recall), where coverage and recall are one hot lists
-        coverage_recall = {}
-        for hyp in hyp_bank:
-            coverage = self.get_coverage(args, hyp)
-            recall = self.get_recall(args, hyp, hyp_bank)
-            coverage_recall[hyp] = (coverage, recall)
-
-        print(coverage_recall)
-
-        # compute similarity of hypotheses
-
-        # integer programming
-
-        pass
 
 class UpperboundInference(Inference):
     def __init__(self, api, prompt_class, train_data):
@@ -836,17 +446,8 @@ class UpperboundInference(Inference):
     
 INFERENCE_DICT = {
     'default': DefaultInference,
-    'multi_k': MultiHypInference,
     'knn': KNNInference,
     'filter_and_weight': FilterAndWeightInference,
-    'weighted_vote': WeightedVoteInference,
-    'top_k_and_examples': TopKAndExamplesInference,
-    'knn_balanced_examples': BalancedExamplesKNNInference,
     'knn_separate_steps': SeparateStepsKNNInference,
-    'weighted_vote': WeightedVoteInference,
-    'test_all' : TestAllHypothesisInference,
-    'probability': ProbabilityInference,
-    'default_favor_exploitation': DefaultInferenceFavorExploitation,
-    'coverage_based_selection': CoverageBasedSelectionInference,
     'upperbound': UpperboundInference,
 }
