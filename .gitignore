@@ -4,3 +4,4 @@ openai_organization.txt
 *.pyc
 logs/
 data_final_processing.ipynb
+tests.ipynb
