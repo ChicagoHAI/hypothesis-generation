@@ -11,7 +11,7 @@ from abc import ABC
 import redis
 
 import anthropic
-logger = logging.getLogger(name="claude_api_cache")
+logger = logging.getLogger(name="LLM_cache")
 
 
 def deterministic_hash(data) -> int:

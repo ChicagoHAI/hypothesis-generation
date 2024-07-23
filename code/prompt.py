@@ -62,8 +62,8 @@ class ShoePrompt(Prompt):
         Few shot prompt for baseline
         """
 
-        instruction_path = f"{code_repo_path}/prompts/shoes/instructions/few_shot_baseline.py"
-        user_prompt_path = f"{code_repo_path}/prompts/shoes/user/few_shot_baseline.py"
+        instruction_path = f"{code_repo_path}/prompts/shoes/few_shot_baseline/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/shoes/few_shot_baseline/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
         appearance = test_data['appearance'][i]
@@ -88,8 +88,8 @@ class ShoePrompt(Prompt):
         Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
         """
 
-        instruction_path = f"{code_repo_path}/prompts/shoes/instructions/batched_generation.py"
-        user_prompt_path = f"{code_repo_path}/prompts/shoes/user/batched_generation.py"
+        instruction_path = f"{code_repo_path}/prompts/shoes/batched_generation/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/shoes/batched_generation/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -114,8 +114,8 @@ class ShoePrompt(Prompt):
         
         hypothesis_high_reward = list(hypotheses_dict.keys())[0]
 
-        instruction_path = f"{code_repo_path}/prompts/shoes/instructions/inference.py"
-        user_prompt_path = f"{code_repo_path}/prompts/shoes/user/inference.py"
+        instruction_path = f"{code_repo_path}/prompts/shoes/inference/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/shoes/inference/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -141,8 +141,8 @@ class ShoePrompt(Prompt):
                 knn_info_prompt += f'Example {ex_idx+1}:\n'
                 knn_info_prompt += self._information_prompt(train_data, example_info[0])
 
-        instruction_path = f"{code_repo_path}/prompts/shoes/instructions/knn.py"
-        user_prompt_path = f"{code_repo_path}/prompts/shoes/user/knn.py"
+        instruction_path = f"{code_repo_path}/prompts/shoes/knn/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/shoes/knn/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -168,8 +168,8 @@ class ShoePrompt(Prompt):
                 knn_info_prompt += f'Example {ex_idx+1}:\n'
                 knn_info_prompt += self._information_prompt(train_data, example_info[0])
 
-        instruction_path = f"{code_repo_path}/prompts/shoes/instructions/knn_selection.py"
-        user_prompt_path = f"{code_repo_path}/prompts/shoes/user/knn_selection.py"
+        instruction_path = f"{code_repo_path}/prompts/shoes/knn_selection/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/shoes/knn_selection/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -185,8 +185,8 @@ class ShoePrompt(Prompt):
         Check if a hypothesis is relevant to a specific example
         """
 
-        instruction_path = f"{code_repo_path}/prompts/shoes/instructions/is_relevant.py"
-        user_prompt_path = f"{code_repo_path}/prompts/shoes/user/is_relevant.py"
+        instruction_path = f"{code_repo_path}/prompts/shoes/is_relevant/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/shoes/is_relevant/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -226,8 +226,8 @@ class RetweetPrompt(Prompt):
         Few shot prompt for baseline
         """
 
-        instruction_path = f"{code_repo_path}/prompts/retweet/instructions/few_shot_baseline.py"
-        user_prompt_path = f"{code_repo_path}/prompts/retweet/user/few_shot_baseline.py"
+        instruction_path = f"{code_repo_path}/prompts/retweet/few_shot_baseline/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/retweet/few_shot_baseline/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -253,8 +253,8 @@ class RetweetPrompt(Prompt):
         Generate hypotheses that is useful for predicting which tweets get retweeted more.
         """
 
-        instruction_path = f"{code_repo_path}/prompts/retweet/instructions/batched_generation.py"
-        user_prompt_path = f"{code_repo_path}/prompts/retweet/user/batched_generation.py"
+        instruction_path = f"{code_repo_path}/prompts/retweet/batched_generation/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/retweet/batched_generation/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -279,8 +279,8 @@ class RetweetPrompt(Prompt):
         
         hypothesis_high_reward = list(hypotheses_dict.keys())[0]
 
-        instruction_path = f"{code_repo_path}/prompts/retweet/instructions/inference.py"
-        user_prompt_path = f"{code_repo_path}/prompts/retweet/user/inference.py"
+        instruction_path = f"{code_repo_path}/prompts/retweet/inference/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/retweet/inference/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -309,8 +309,8 @@ class RetweetPrompt(Prompt):
                 knn_info_prompt += f'The second tweet: {example[0][1]}\n'
                 knn_info_prompt += f'Label: {example[1]}\n'
 
-        instruction_path = f"{code_repo_path}/prompts/retweet/instructions/knn.py"
-        user_prompt_path = f"{code_repo_path}/prompts/retweet/user/knn.py"
+        instruction_path = f"{code_repo_path}/prompts/retweet/knn/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/retweet/knn/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -328,8 +328,8 @@ class RetweetPrompt(Prompt):
         Check if a hypothesis is relevant to a specific example
         """
 
-        instruction_path = f"{code_repo_path}/prompts/retweet/instructions/is_relevant.py"
-        user_prompt_path = f"{code_repo_path}/prompts/retweet/user/is_relevant.py"
+        instruction_path = f"{code_repo_path}/prompts/retweet/is_relevant/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/retweet/is_relevant/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -362,8 +362,8 @@ class RetweetPrompt(Prompt):
                 knn_info_prompt += f'The second tweet: {example[0][1]}\n'
                 knn_info_prompt += f'Label: {example[1]}\n'
 
-        instruction_path = f"{code_repo_path}/prompts/retweet/instructions/knn_selection.py"
-        user_prompt_path = f"{code_repo_path}/prompts/retweet/user/knn_selection.py"
+        instruction_path = f"{code_repo_path}/prompts/retweet/knn_selection/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/retweet/knn_selection/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -402,8 +402,8 @@ class HotelReviewsPrompt(Prompt):
         Few shot prompt for baseline
         """
 
-        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/instructions/few_shot_baseline.py"
-        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/user/few_shot_baseline.py"
+        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/few_shot_baseline/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/few_shot_baseline/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -429,8 +429,8 @@ class HotelReviewsPrompt(Prompt):
         Generate hypotheses that is useful for predicting if a hotel review is truthful or deceptive.
         """
 
-        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/instructions/batched_generation.py"
-        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/user/batched_generation.py"
+        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/batched_generation/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/batched_generation/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -456,8 +456,8 @@ class HotelReviewsPrompt(Prompt):
         
         hypothesis_high_reward = list(hypotheses_dict.keys())[0]
 
-        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/instructions/inference.py"
-        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/user/inference.py"
+        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/inference/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/inference/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -485,8 +485,8 @@ class HotelReviewsPrompt(Prompt):
                 knn_info_prompt += f'Label: {example[1]}\n'
             knn_info_prompt += "\n"
 
-        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/instructions/knn.py"
-        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/user/knn.py"
+        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/knn/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/knn/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -502,8 +502,8 @@ class HotelReviewsPrompt(Prompt):
         Check if a hypothesis is relevant to a specific example
         """
         
-        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/instructions/is_relevant.py"
-        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/user/is_relevant.py"
+        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/is_relevant/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/is_relevant/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -530,8 +530,8 @@ class HotelReviewsPrompt(Prompt):
                 knn_info_prompt += f'Label: {example[1]}\n'
             knn_info_prompt += "\n"
 
-        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/instructions/knn_selection.py"
-        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/user/knn_selection.py"
+        instruction_path = f"{code_repo_path}/prompts/hotel_reviews/knn_selection/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/hotel_reviews/knn_selection/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -567,8 +567,8 @@ class HeadlineBinary(Prompt):
         Few shot prompt for baseline
         """
 
-        instruction_path = f"{code_repo_path}/prompts/headline_binary/instructions/few_shot_baseline.py"
-        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/user/few_shot_baseline.py"
+        instruction_path = f"{code_repo_path}/prompts/headline_binary/few_shot_baseline/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/few_shot_baseline/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -595,8 +595,8 @@ class HeadlineBinary(Prompt):
         Generate hypotheses that is useful for predicting if a hotel review is truthful or deceptive.
         """
 
-        instruction_path = f"{code_repo_path}/prompts/headline_binary/instructions/batched_generation.py"
-        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/user/batched_generation.py"
+        instruction_path = f"{code_repo_path}/prompts/headline_binary/batched_generation/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/batched_generation/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -623,8 +623,8 @@ class HeadlineBinary(Prompt):
         
         hypothesis_high_reward = list(hypotheses_dict.keys())[0]
 
-        instruction_path = f"{code_repo_path}/prompts/headline_binary/instructions/inference.py"
-        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/user/inference.py"
+        instruction_path = f"{code_repo_path}/prompts/headline_binary/inference/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/inference/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -654,8 +654,8 @@ class HeadlineBinary(Prompt):
                 knn_info_prompt += f'Headline 2: {example[0][1]}\n'
                 knn_info_prompt += f'Label: {example[1]}\n'
 
-        instruction_path = f"{code_repo_path}/prompts/headline_binary/instructions/knn.py"
-        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/user/knn.py"
+        instruction_path = f"{code_repo_path}/prompts/headline_binary/knn/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/knn/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -675,8 +675,8 @@ class HeadlineBinary(Prompt):
         headlines_0 = data['headline'][index][0]
         headlines_1 = data['headline'][index][1]
         
-        instruction_path = f"{code_repo_path}/prompts/headline_binary/instructions/is_relevant.py"
-        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/user/is_relevant.py"
+        instruction_path = f"{code_repo_path}/prompts/headline_binary/is_relevant/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/is_relevant/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
@@ -705,33 +705,8 @@ class HeadlineBinary(Prompt):
                 knn_info_prompt += f'Headline 2: {example[0][1]}\n'
                 knn_info_prompt += f'Label: {example[1]}\n'
 
-        instruction_path = f"{code_repo_path}/prompts/headline_binary/instructions/knn_selection.py"
-        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/user/knn_selection.py"
-
-        instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
-
-        headlines_0 = test_data['headline'][i][0]
-        headlines_1 = test_data['headline'][i][1]
-
-        instruction_prompt = eval(instruction_prompt)
-        user_prompt = eval(user_prompt)
-
-        return (instruction_prompt,user_prompt)
-    
-    def inference_with_examples(self, hypotheses_dict, train_data, test_data, i):
-        hypothesis_with_examples = ""
-        for hyp_idx, (_, hypothesis_class) in enumerate(hypotheses_dict.items()):
-            hypothesis_text = hypothesis_class.hypothesis
-            hypothesis_related_examples = hypothesis_class.get_examples(train_data,'headline_binary')
-            hypothesis_with_examples += f'Pattern: {hypothesis_text}\n'
-
-            for ex_idx, example in enumerate(hypothesis_related_examples):
-                hypothesis_with_examples += f'Example {ex_idx+1}:\nHeadline 1: {example[0][0]}\n'
-                hypothesis_with_examples += f'Headline 2: {example[0][1]}\n'
-                hypothesis_with_examples += f'Label: {example[1]}\n'
-
-        instruction_path = f"{code_repo_path}/prompts/headline_binary/instructions/inference_with_examples.py"
-        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/user/inference_with_examples.py"
+        instruction_path = f"{code_repo_path}/prompts/headline_binary/knn_selection/instructions.py"
+        user_prompt_path = f"{code_repo_path}/prompts/headline_binary/knn_selection/user.py"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 

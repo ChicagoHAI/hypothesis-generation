@@ -13,7 +13,7 @@ from tasks import TASKS
 # from openai_api_cache import OpenAIAPICache
 from anthropic import Anthropic
 
-from claude_api_cache import ClaudeAPICache, MixtralAPICache, OpenAIAPICache, LlamaAPICache
+from LLM_cache import ClaudeAPICache, MixtralAPICache, OpenAIAPICache, LlamaAPICache
 from consts.model_consts import INST_WRAPPER, GPT_MODELS, CLAUDE_MODELS, LLAMA_MODELS, MISTRAL_MODELS
 
 code_repo_path = os.environ.get("CODE_REPO_PATH")

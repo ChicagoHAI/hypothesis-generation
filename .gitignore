@@ -3,3 +3,4 @@ openai_key.txt
 openai_organization.txt
 *.pyc
 logs/
+data_final_processing.ipynb
