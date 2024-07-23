@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+import json
 import os
+import random
 import re
 
 code_repo_path = os.environ.get("CODE_REPO_PATH")
@@ -19,19 +21,23 @@ class Task(ABC):
     def extract_label(self, text):
         pass
 
+    @abstractmethod
+    def get_data(self, num_train, num_test, num_val):
+        pass
+
 
 class Shoe(Task):
     def __init__(self):
         self.task = 'shoe'
         self.label_classes = ['white', 'red', 'orange', 'green', 'blue', 'black']
-        self.train_data_path =  f'{code_repo_path}/data/shoe_train.json'
-        self.test_data_path =  f'{code_repo_path}/data/shoe_test.json'
-        self.val_data_path =  f'{code_repo_path}/data/shoe_val.json'
+        self.train_data_path = f'{code_repo_path}/data/shoe_train.json'
+        self.test_data_path = f'{code_repo_path}/data/shoe_test.json'
+        self.val_data_path = f'{code_repo_path}/data/shoe_val.json'
 
     def extract_label(self, text):
-        if text == None:
+        if text is None:
             return 'other'
-        
+
         pattern = r"final answer:\s+(white|red|orange|green|blue|black)"
 
         match = re.search(pattern, text.lower())
@@ -40,9 +46,36 @@ class Shoe(Task):
             if answer in ['white', 'red', 'orange', 'green', 'blue', 'black']:
                 return answer
             else:
-                return "other"               
-            
+                return "other"
+
         return 'other'
+
+    def get_data(self, num_train, num_test, num_val):
+        def read_data(file_path, num, is_train=False):
+            # Read from json
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+            # shuffle and subsample from data
+            if not is_train:
+                random.seed(49)
+
+            appearance_all = data['appearance']
+            shoe_all = data['shoe']
+            label_all = data['label']
+            num_samples = min(num, len(data['label']))
+            appearance, shoe, label = zip(*random.sample(list(zip(appearance_all, shoe_all, label_all)), num_samples))
+            processed_data = {
+                'appearance': appearance,
+                'shoe': shoe,
+                'label': label
+            }
+            return processed_data
+
+        train_data = read_data(self.train_data_path, num_train, is_train=True)
+        test_data = read_data(self.test_data_path, num_test)
+        val_data = read_data(self.val_data_path, num_val)
+
+        return train_data, test_data, val_data
 
 
 class HotelReviews(Task):
@@ -52,28 +85,28 @@ class HotelReviews(Task):
         # The order matters! preceding word should not be substrings of following words
         self.label_classes = ['deceptive', 'truthful']
 
-        self.train_data_path =  f'{code_repo_path}/data/hotel_reviews_train.json'
-        self.val_data_path =  f'{code_repo_path}/data/hotel_reviews_val.json'
-        self.test_data_path =  f'{code_repo_path}/data/hotel_reviews_test.json'
+        self.train_data_path = f'{code_repo_path}/data/hotel_reviews_train.json'
+        self.val_data_path = f'{code_repo_path}/data/hotel_reviews_val.json'
+        self.test_data_path = f'{code_repo_path}/data/hotel_reviews_test.json'
         self.ood_test_data_path = f'{code_repo_path}/data'
 
     def extract_label(self, text):
-        if text == None:
+        if text is None:
             return 'other'
-        
+
         # only keep the part after "Final answer:"
         text = text.lower()
         '''
         if "final answer:" in text:
             text = text[text.index("final answer:") + len("final answer:"):]
-            
-        
+
+
 
         if "label:" in text:
             # only keep the part after "label:"
             text = text[text.index("label:") + len("label:"):]
         '''
-        
+
         pattern = r"final answer:\s+(truthful|deceptive|other)"
 
         match = re.search(pattern, text.lower())
@@ -84,21 +117,46 @@ class HotelReviews(Task):
             elif answer == "deceptive":
                 return "deceptive"
             else:
-                return "other"               
-            
+                return "other"
+
         return 'other'
+
+    def get_data(self, num_train, num_test, num_val):
+        def read_data(file_path, num, is_train=False):
+            # Read from json
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+            # shuffle and subsample from data
+            if not is_train:
+                random.seed(49)
+
+            review_all = data['review']
+            label_all = data['label']
+            num_samples = min(num, len(data['label']))
+            review, label = zip(*random.sample(list(zip(review_all, label_all)), num_samples))
+            processed_data = {
+                'review': review,
+                'label': label
+            }
+            return processed_data
+
+        train_data = read_data(self.train_data_path, num_train, is_train=True)
+        test_data = read_data(self.test_data_path, num_test)
+        val_data = read_data(self.val_data_path, num_val)
+
+        return train_data, test_data, val_data
 
 
 class HeadlineBinary(Task):
     def __init__(self):
         self.task = 'headline_binary'
         self.label_classes = ['headline 1', 'headline 2']
-        self.train_data_path =  f'{code_repo_path}/data/headline_binary_train.json'
-        self.test_data_path =  f'{code_repo_path}/data/headline_binary_test.json'
-        self.val_data_path =  f'{code_repo_path}/data/headline_binary_val.json'
+        self.train_data_path = f'{code_repo_path}/data/headline_binary_train.json'
+        self.test_data_path = f'{code_repo_path}/data/headline_binary_test.json'
+        self.val_data_path = f'{code_repo_path}/data/headline_binary_val.json'
 
     def extract_label(self, text):
-        if text == None:
+        if text is None:
             return 'other'
         text = text.lower()
         pattern = r"answer:\s+(headline 1|headline 2|other)"
@@ -117,25 +175,49 @@ class HeadlineBinary(Task):
             elif answer == "headline 2":
                 return "headline 2"
             else:
-                return "other"               
+                return "other"
 
         return 'other'
-    
+
+    def get_data(self, num_train, num_test, num_val):
+        def read_data(file_path, num, is_train=False):
+            # Read from json
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+            # shuffle and subsample from data
+            if not is_train:
+                random.seed(49)
+
+            headline_all = data['headline']
+            label_all = data['label']
+            num_samples = min(num, len(data['label']))
+            headline, label = zip(*random.sample(list(zip(headline_all, label_all)), num_samples))
+            processed_data = {
+                'headline': headline,
+                'label': label
+            }
+            return processed_data
+
+        train_data = read_data(self.train_data_path, num_train, is_train=True)
+        test_data = read_data(self.test_data_path, num_test)
+        val_data = read_data(self.val_data_path, num_val)
+
+        return train_data, test_data, val_data
+
 
 class Retweet(Task):
     def __init__(self):
         self.task = 'retweet'
         self.label_classes = ['first', 'second']
-        self.train_data_path =  f'{code_repo_path}/data/retweet_train.json'
-        self.val_data_path =  f'{code_repo_path}/data/retweet_val.json'
-        self.test_data_path =  f'{code_repo_path}/data/retweet_test.json'
-
+        self.train_data_path = f'{code_repo_path}/data/retweet_train.json'
+        self.val_data_path = f'{code_repo_path}/data/retweet_val.json'
+        self.test_data_path = f'{code_repo_path}/data/retweet_test.json'
 
     def extract_label(self, text):
         """
         `text` follows the format "the <label> tweet got more retweets"
         """
-        if text == None:
+        if text is None:
             return 'other'
         text = text.lower()
         import re
@@ -146,10 +228,35 @@ class Retweet(Task):
         else:
             return 'other'
 
+    def get_data(self, num_train, num_test, num_val):
+        def read_data(file_path, num, is_train=False):
+            # Read from json
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+            # shuffle and subsample from data
+            if not is_train:
+                random.seed(49)
+
+            tweets_all = data['tweets']
+            label_all = data['label']
+            num_samples = min(num, len(data['label']))
+            tweets, label = zip(*random.sample(list(zip(tweets_all, label_all)), num_samples))
+            processed_data = {
+                'tweets': tweets,
+                'label': label
+            }
+            return processed_data
+
+        train_data = read_data(self.train_data_path, num_train, is_train=True)
+        test_data = read_data(self.test_data_path, num_test)
+        val_data = read_data(self.val_data_path, num_val)
+
+        return train_data, test_data, val_data
+
 
 TASKS = {
     'shoe': Shoe,
-    'hotel_reviews': HotelReviews, 
+    'hotel_reviews': HotelReviews,
     'headline_binary': HeadlineBinary,
     'retweet': Retweet,
 }
