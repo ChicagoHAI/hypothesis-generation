@@ -9,7 +9,7 @@ import openai
 
 from transformers import LlamaForCausalLM, LlamaTokenizer, LlamaConfig, AutoModelForCausalLM, AutoTokenizer
 from pprint import pprint
-from tasks import TASKS
+from tasks import BaseTask
 # from openai_api_cache import OpenAIAPICache
 from anthropic import Anthropic
 
@@ -360,7 +360,7 @@ def extract_hypotheses(args, text):
     return hypotheses
 
 def extract_label(task_name, pred):
-    task = TASKS[task_name](task_name)
+    task = BaseTask(task_name)
     return task.extract_label(pred)
 
 def set_seed(args):

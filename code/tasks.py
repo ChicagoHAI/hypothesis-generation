@@ -65,11 +65,3 @@ class BaseTask(Task):
         val_data = read_data(self.val_data_path, num_val)
 
         return train_data, test_data, val_data
-
-
-TASKS = {
-    'shoe': BaseTask,
-    'hotel_reviews': BaseTask,
-    'headline_binary': BaseTask,
-    'retweet': BaseTask,
-}

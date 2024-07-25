@@ -1,4 +1,4 @@
-from tasks import TASKS
+from tasks import BaseTask
 import json
 import random
 
@@ -16,11 +16,11 @@ def get_data(args):
     num_val = args.num_val
 
     print('task_name:', task_name)
-    if task_name in TASKS.keys():
-        task = TASKS[task_name](task_name)
+    try:
+        task = BaseTask(task_name)
 
         train_data, test_data, val_data = task.get_data(num_train, num_test, num_val)
-    else:
+    except FileNotFoundError:
         raise ValueError('task_name undefined:', task_name)
 
     if task_name == 'hotel_reviews' and args.use_ood_reviews in OOD_REVIEWS_SUBSET:
