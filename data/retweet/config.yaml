@@ -1,0 +1,23 @@
+task_name: retweet
+label_classes:
+  - first
+  - second
+train_data_path: ./data/retweet/retweet_train.json
+val_data_path: ./data/retweet/retweet_val.json
+test_data_path: ./data/retweet/retweet_test.json
+parser: |
+  import re
+  
+  def extract_label(text):
+        """
+        `text` follows the format "the <label> tweet got more retweets"
+        """
+        if text is None:
+            return 'other'
+        text = text.lower()
+        pattern = r"answer: the (\w+) tweet"
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+        else:
+            return 'other'

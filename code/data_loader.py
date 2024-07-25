@@ -17,7 +17,7 @@ def get_data(args):
 
     print('task_name:', task_name)
     if task_name in TASKS.keys():
-        task = TASKS[task_name]()
+        task = TASKS[task_name](task_name)
 
         train_data, test_data, val_data = task.get_data(num_train, num_test, num_val)
     else:

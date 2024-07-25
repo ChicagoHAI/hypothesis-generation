@@ -5,3 +5,4 @@ openai_organization.txt
 logs/
 data_final_processing.ipynb
 tests.ipynb
+outputs

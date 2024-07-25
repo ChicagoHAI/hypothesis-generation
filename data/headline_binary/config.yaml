@@ -1,0 +1,33 @@
+task_name: headline_binary
+label_classes:
+    - headline 1
+    - headline 2
+train_data_path: ./data/headline_binary/headline_binary_train.json
+val_data_path: ./data/headline_binary/headline_binary_test.json
+test_data_path: ./data/headline_binary/headline_binary_val.json
+parser: |
+    import re
+    
+    def extract_label(text):
+        if text is None:
+            return 'other'
+        text = text.lower()
+        pattern = r"answer:\s+(headline 1|headline 2|other)"
+        match = re.search(pattern, text.lower())
+        '''
+        if "Answer:" in text:
+            text = text[text.index("Answer:") + len("Answer:"):]
+        for x in self.label_classes:
+            if x.lower() in text.lower():
+                return x
+        '''
+        if match:
+            answer = match.group(1)
+            if answer == "headline 1":
+                return "headline 1"
+            elif answer == "headline 2":
+                return "headline 2"
+            else:
+                return "other"
+
+        return 'other'

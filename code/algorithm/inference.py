@@ -74,7 +74,7 @@ class DefaultInference(Inference):
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
         response = self.api.generate(prompt_input, args.use_system_prompt)
         print(f"Response: {response}")
-        task = TASKS[args.task]()
+        task = TASKS[args.task](args.task)
         prediction = task.extract_label(response)
         print(f"Prediction: {prediction}")
         actual_label = data['label'][index]
@@ -102,7 +102,7 @@ class KNNInference(Inference):
     def predict(self, args, data, index, hyp_bank):
         prompt_input = self.prompt_class.knn_inference(hyp_bank, self.train_data, data, index)
         response = self.api.generate(prompt_input, args.use_system_prompt)
-        task = TASKS[args.task]()
+        task = TASKS[args.task](args.task)
         prediction = task.extract_label(response)
         actual_label = data['label'][index]
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
@@ -217,7 +217,7 @@ class FilterAndWeightInference(Inference):
             hypothesis_dict = {hypothesis: hyp_bank[hypothesis]}
             prompt_input = self.prompt_class.inference(hypothesis_dict, data, index)
             response = self.api.generate(prompt_input, args.use_system_prompt)
-            task = TASKS[args.task]()
+            task = TASKS[args.task](args.task)
             pred = task.extract_label(response)
             weight = hyp_bank[hypothesis].acc
             if pred in pred_dict:
@@ -325,7 +325,7 @@ class SeparateStepsKNNInference(KNNInference):
             prompt_input = self.prompt_class.inference(hyp_bank, data, index)
             
         response = self.api.generate(prompt_input, args.use_system_prompt)
-        task = TASKS[args.task]()
+        task = TASKS[args.task](args.task)
         prediction = task.extract_label(response)
         actual_label = data['label'][index]
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
@@ -386,7 +386,7 @@ class UpperboundInference(Inference):
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
         response = self.api.generate(prompt_input, args.use_system_prompt)
         print(f"Response: {response}")
-        task = TASKS[args.task]()
+        task = TASKS[args.task](args.task)
         prediction = task.extract_label(response)
         print(f"Prediction: {prediction}")
         actual_label = data['label'][index]

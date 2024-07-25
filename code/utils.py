@@ -360,7 +360,7 @@ def extract_hypotheses(args, text):
     return hypotheses
 
 def extract_label(task_name, pred):
-    task = TASKS[task_name]()
+    task = TASKS[task_name](task_name)
     return task.extract_label(pred)
 
 def set_seed(args):

@@ -2,6 +2,7 @@ GPT_MODELS = {
     'turbo35_0613': 'gpt-3.5-turbo-0613',
     'turbo35_1106': 'gpt-3.5-turbo-1106',
     'turbo4': 'gpt-4-1106-preview',
+    'gpt-4o-mini': 'gpt-4o-mini',
 }
 
 CLAUDE_MODELS = {
