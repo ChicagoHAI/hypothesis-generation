@@ -1,7 +1,7 @@
 f"""Here are some previously generated patterns with some examples where it predicted which tweet will will be retweeted more.
 {knn_info_prompt}
-The first tweet: {first_text}
-The second tweet: {second_text}
+New tweets:
+{info}
 Which one of the two tweets will get more retweets?
 Think step by step.
 Step 1: Look at the new pair of tweets and compare them with the examples associated with each pattern.

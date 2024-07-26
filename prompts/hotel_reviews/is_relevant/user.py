@@ -1,4 +1,4 @@
 f"""Our learned pattern: {hypothesis}                            
-{review}
+{info}
 Answer:
 """

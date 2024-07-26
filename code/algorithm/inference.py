@@ -70,7 +70,7 @@ class DefaultInference(Inference):
     
     def predict(self, args, data, index, hyp_bank):
         assert len(hyp_bank.keys()) == 1, 'default inference only supports one hypothesis at a time'
-        prompt_input = self.prompt_class.inference(hyp_bank, data, index, prob=args.generate_prob)
+        prompt_input = self.prompt_class.inference(hyp_bank, data, index)
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
         response = self.api.generate(prompt_input, args.use_system_prompt)
         print(f"Response: {response}")
@@ -250,7 +250,8 @@ class FilterAndWeightInference(Inference):
         """
         relevant_hypotheses = {}
         for hypothesis in hyp_bank:
-            prompt_input = self.prompt_class.is_relevant(hypothesis, data, index)
+            temp_hyp_bank = {hypothesis: hyp_bank[hypothesis]}
+            prompt_input = self.prompt_class.is_relevant(temp_hyp_bank, data, index)
             response = self.api.generate(prompt_input, args.use_system_prompt)
 
             print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
@@ -319,10 +320,7 @@ class SeparateStepsKNNInference(KNNInference):
     def default_predict(self, args, data, index, hyp_bank):
         assert len(hyp_bank.keys()) == 1, 'default inference only supports one hypothesis at a time'
 
-        if args.add_examples:
-            prompt_input = self.prompt_class.inference_with_examples(hyp_bank, self.train_data, data, index)
-        else:
-            prompt_input = self.prompt_class.inference(hyp_bank, data, index)
+        prompt_input = self.prompt_class.inference(hyp_bank, data, index)
             
         response = self.api.generate(prompt_input, args.use_system_prompt)
         task = BaseTask(args.task)
@@ -335,7 +333,7 @@ class SeparateStepsKNNInference(KNNInference):
         return prediction, actual_label
     
     def select_hypotheses(self, args, data, index, hyp_bank):
-        prompt_input = self.prompt_class.knn_selection(hyp_bank, self.train_data, data, index, args)
+        prompt_input = self.prompt_class.knn_selection(hyp_bank, self.train_data, data, index)
         response = self.api.generate(prompt_input, args.use_system_prompt)
 
         print('Prompt:', prompt_input[0], prompt_input[1])

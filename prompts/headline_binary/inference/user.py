@@ -1,7 +1,6 @@
-f"""Learned pattern: {hypothesis_high_reward}
+f"""Learned pattern: {hypothesis}
 Given the pattern you learned above, predict which of the following headlines will get more clicks:
-Headline 1: {headlines_0}
-Headline 2: {headlines_1}
+{info}
 Only answer if the pattern above can be applied.
 Think step by step.
 Step 1: Think about whether the pattern can be applied to the headlines.

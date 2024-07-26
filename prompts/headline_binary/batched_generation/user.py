@@ -1,5 +1,5 @@
 f"""Here are the Observations:
-{prev_observations}
+{observations}
 
 Please generate hypotheses that can help determine which headlines have more clicks.
 Please propose {num_hypotheses} possible hypotheses.
