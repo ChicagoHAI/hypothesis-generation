@@ -1,0 +1,3 @@
+${few_shot_prefix}${observations}
+New customer: ${appearance} is buying a pair of shoes, the shoes should be which color?
+Answer:

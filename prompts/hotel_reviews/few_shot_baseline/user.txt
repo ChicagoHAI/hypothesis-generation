@@ -1,0 +1,6 @@
+${few_shot_prefix}${observations}
+New hotel review:
+A hotel review is the following: "${review_sentence}"
+
+Is this hotel review truthful or deceptive?
+Answer:

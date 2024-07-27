@@ -1,0 +1,5 @@
+${few_shot_prefix}${observations}
+Which of the following headlines has more clicks:
+Headline 1: ${headline_1}
+Headline 2: ${headline_2}
+

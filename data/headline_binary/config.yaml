@@ -5,6 +5,19 @@ label_classes:
 train_data_path: ./data/headline_binary/headline_binary_train.json
 val_data_path: ./data/headline_binary/headline_binary_test.json
 test_data_path: ./data/headline_binary/headline_binary_val.json
+prompt_templates:
+    observations: |
+        Headline 1: ${headline_1}
+        Headline 2: ${headline_2}
+        Observation: ${label}
+
+    knn_info_prompt: |
+        Headline 1: ${headline_1}
+        Headline 2: ${headline_2}
+        Observation: ${label}
+        
+    few_shot_prefix: |
+        Here are some previous examples to help you.
 parser: |
     import re
     

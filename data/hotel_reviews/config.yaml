@@ -6,6 +6,17 @@ train_data_path: ./data/hotel_reviews/hotel_reviews_train.json
 val_data_path: ./data/hotel_reviews/hotel_reviews_val.json
 test_data_path: ./data/hotel_reviews/hotel_reviews_test.json
 ood_test_data_path: ./data
+prompt_templates:
+    observations: |
+        A hotel review is the following: "${review_sentence}"
+        The review is: ${label}.
+        
+    knn_info_prompt: |
+        A hotel review is the following: "${review_sentence}"
+        The review is: ${label}.
+        
+    few_shot_prefix: |
+        We have seen some hotel reviews:
 parser: |
     import re
     

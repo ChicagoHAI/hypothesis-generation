@@ -29,7 +29,7 @@ class Task(ABC):
 
 class BaseTask(Task):
     def __init__(self, task_name):
-        self.task = task_name
+        self.task_name = task_name
 
         with open(f'{code_repo_path}/data/{task_name}/config.yaml', 'r') as f:
             data = yaml.safe_load(f)
@@ -41,6 +41,8 @@ class BaseTask(Task):
 
         if "ood_test_data_path" in data:
             self.ood_test_data_path = os.path.join(code_repo_path, data['ood_test_data_path'])
+
+        self.prompt_template = data['prompt_templates']
 
         extract_label = {}
         exec(data["parser"], extract_label)

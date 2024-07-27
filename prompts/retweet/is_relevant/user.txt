@@ -1,0 +1,6 @@
+Pattern: ${hypothesis}
+New tweets:
+The first tweet: ${first_tweet}
+The second tweet: ${second_tweet}
+
+Is the given pattern relevant to the two tweets above?

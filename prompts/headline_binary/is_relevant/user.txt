@@ -1,0 +1,6 @@
+Pattern: ${hypothesis}
+New headlines:
+Headline 1: ${headline_1}
+Headline 2: ${headline_2}
+
+Answer:

@@ -9,7 +9,14 @@ label_classes:
 train_data_path: ./data/shoe/shoe_train.json
 val_data_path: ./data/shoe/shoe_val.json
 test_data_path: ./data/shoe/shoe_test.json
-parser: |
+prompt_templates:
+    observations: |
+        A customer is ${appearance}. This customer bought a pair of ${label} shoes.
+    knn_info_prompt: |
+        A customer is ${appearance}. This customer bought a pair of ${label} shoes.
+    few_shot_prefix: |
+        Here are some examples of customers with certain features buying certain products:
+parser: |-
     import re
     
     def extract_label(text):
