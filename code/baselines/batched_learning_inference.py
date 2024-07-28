@@ -15,9 +15,10 @@ else:
     print("Environment variable not set.")
 
 sys.path.append(f'{code_repo_path}/code')
+from tasks import BaseTask
 from utils import LLMWrapper, VALID_MODELS, extract_label, extract_hypotheses,set_seed
 from data_loader import get_data
-from prompt import PROMPT_DICT
+from prompt import BasePrompt
 
 
 def get_accuracy(args, api, hypothesis, data, prompt_class):
@@ -87,7 +88,7 @@ def main():
     train_data, test_data, _ = get_data(args)
 
     # initialization
-    prompt_class = PROMPT_DICT[args.task]()
+    prompt_class = BasePrompt(BaseTask(args.task))
     api = LLMWrapper(args.inference_model, 
                      path_name=args.model_path,
                      use_cache=args.use_cache)

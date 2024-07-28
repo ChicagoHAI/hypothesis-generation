@@ -17,8 +17,9 @@ else:
     print("Environment variable not set.")
 
 sys.path.append(f'{code_repo_path}/code/')
+from tasks import BaseTask
 from utils import LLMWrapper, get_num_examples, create_directory, VALID_MODELS, GPT_MODELS, set_seed
-from prompt import PROMPT_DICT
+from prompt import BasePrompt
 from data_loader import get_data
 
 
@@ -60,7 +61,7 @@ def main():
                      path_name=args.model_path,
                      use_cache=args.use_cache)
 
-    prompt_class = PROMPT_DICT[args.task]()
+    prompt_class = BasePrompt(BaseTask(args.task))
 
     print("**** batched_learning_hypothesis_generation ****")
     prompt_input = prompt_class.batched_generation(train_data, args.num_hypothesis)

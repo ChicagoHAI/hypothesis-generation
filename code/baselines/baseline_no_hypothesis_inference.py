@@ -13,9 +13,10 @@ else:
     print("Environment variable CODE_REPO_PATH not set.")
 
 sys.path.append(f'{code_repo_path}/code/')
+from tasks import BaseTask
 from utils import LLMWrapper, get_num_examples, extract_label, create_directory, set_seed, VALID_MODELS, GPT_MODELS
 from data_loader import get_data
-from prompt import PROMPT_DICT
+from prompt import BasePrompt
 
 
 def compute_accuracy(results):
@@ -125,7 +126,7 @@ def main():
     args = parse_args()
     set_seed(args)
 
-    prompt_class = PROMPT_DICT[args.task]()
+    prompt_class = BasePrompt(BaseTask(args.task))
     api = LLMWrapper(args.inference_model, 
                      path_name=args.model_path,
                      use_cache=args.use_cache)

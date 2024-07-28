@@ -12,7 +12,8 @@ import numpy as np
 
 code_repo_path = os.environ.get("CODE_REPO_PATH")
 sys.path.append(f'{code_repo_path}/code/')
-from prompt import PROMPT_DICT
+from tasks import BaseTask
+from prompt import BasePrompt
 from data_loader import get_data
 from utils import LLMWrapper, set_seed, get_results, GPT_MODELS, VALID_MODELS
 from summary_information import dict_to_summary_information
@@ -38,7 +39,7 @@ def setup_LLM(args):
 def setup(args, seed, api):
     set_seed(seed)
     train_data, test_data, val_data = get_data(args)
-    prompt_class = PROMPT_DICT[args.task]()
+    prompt_class = BasePrompt(BaseTask(args.task))
     inference_class = INFERENCE_DICT[args.inference_style](api, prompt_class, train_data)
 
     # return api, test_data, inference_class
