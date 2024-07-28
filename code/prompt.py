@@ -37,8 +37,7 @@ class BasePrompt(ABC):
     def __init__(self, task: Union[BaseTask, None]):
         self.task = task
 
-    def _get_substitute_dict(self, data_dict, example_idx, no_label_info=False) -> Dict[str, str]:
-        # TODO: get specific entry from prompt_template
+    def _get_substitute_dict(self, data_dict, example_idx) -> Dict[str, str]:
         example = {k: v[example_idx] for k, v in data_dict.items()}
         substitute_dict = {}
         for key, value in self.task.prompt_template.items():
@@ -47,9 +46,9 @@ class BasePrompt(ABC):
         substitute_dict.update(example)
         return substitute_dict
 
-    # @abstractmethod
-    def _information_prompt(self, data_dict, example_idx, no_label_info=False) -> Dict[str, str]:
-        return self._get_substitute_dict(data_dict, example_idx)
+    def _information_prompt(self, data_dict, example_idx, info_key: str) -> Dict[str, str]:
+        example = {k: v[example_idx] for k, v in data_dict.items()}
+        return Template(self.task.prompt_template[info_key]).substitute(example)
 
     def few_shot_baseline(self, train_data, num_few_shot, test_data, test_idx):
         """
@@ -60,14 +59,14 @@ class BasePrompt(ABC):
         user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/few_shot_baseline/user.txt"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
-        substitute_dict = self._information_prompt(test_data, test_idx, no_label_info=True)
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
 
         observations = ""
         few_shot_prefix = ""
         if num_few_shot > 0:
             few_shot_prefix = substitute_dict['few_shot_prefix']
             for j in range(num_few_shot):
-                observations += self._information_prompt(train_data, j)['observations']
+                observations += self._information_prompt(train_data, j, 'observations')
 
         substitute_dict['observations'] = observations
         substitute_dict['few_shot_prefix'] = few_shot_prefix
@@ -91,7 +90,7 @@ class BasePrompt(ABC):
 
         observations = ""
         for example_idx in range(len(train_data['label'])):
-            observations += self._information_prompt(train_data, example_idx)['observations']
+            observations += self._information_prompt(train_data, example_idx, 'observations')
 
         substitute_dict = {"num_hypotheses": num_hypotheses, "observations": observations}
 
@@ -115,7 +114,7 @@ class BasePrompt(ABC):
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
-        substitute_dict = self._information_prompt(test_data, test_idx, no_label_info=True)
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['hypothesis'] = hypothesis
 
         instruction_prompt = Template(instruction_prompt).substitute(substitute_dict)
@@ -136,14 +135,14 @@ class BasePrompt(ABC):
 
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
                 knn_info_prompt += f'Example {ex_idx + 1}:\n'
-                knn_info_prompt += self._information_prompt(train_data, example_info[0])['knn_info_prompt']
+                knn_info_prompt += self._information_prompt(train_data, example_info[0], 'knn_info_prompt')
 
         instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn/instructions.txt"
         user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn/user.txt"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
-        substitute_dict = self._information_prompt(test_data, test_idx, no_label_info=True)
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['knn_info_prompt'] = knn_info_prompt
 
         instruction_prompt = Template(instruction_prompt).substitute(substitute_dict)
@@ -164,14 +163,14 @@ class BasePrompt(ABC):
 
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
                 knn_info_prompt += f'Example {ex_idx + 1}:\n'
-                knn_info_prompt += self._information_prompt(train_data, example_info[0])['knn_info_prompt']
+                knn_info_prompt += self._information_prompt(train_data, example_info[0], 'knn_info_prompt')
 
         instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn_selection/instructions.txt"
         user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn_selection/user.txt"
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
-        substitute_dict = self._information_prompt(test_data, test_idx, no_label_info=True)
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['knn_info_prompt'] = knn_info_prompt
 
         instruction_prompt = Template(instruction_prompt).substitute(substitute_dict)
@@ -191,7 +190,7 @@ class BasePrompt(ABC):
 
         instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
 
-        substitute_dict = self._information_prompt(test_data, test_idx, no_label_info=True)
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['hypothesis'] = hypothesis
 
         instruction_prompt = Template(instruction_prompt).substitute(substitute_dict)
