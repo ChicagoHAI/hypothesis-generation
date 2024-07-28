@@ -5,6 +5,8 @@ import os
 import random
 import re
 
+# TODO: Generate one single task object for every use
+
 code_repo_path = os.environ.get("CODE_REPO_PATH")
 
 if code_repo_path:
@@ -28,7 +30,11 @@ class Task(ABC):
 
 
 class BaseTask(Task):
-    def __init__(self, task_name):
+    def __init__(
+            self,
+            task_name
+            # TODO: extract_label: function
+    ):
         self.task_name = task_name
 
         with open(f'{code_repo_path}/data/{task_name}/config.yaml', 'r') as f:

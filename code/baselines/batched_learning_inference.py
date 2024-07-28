@@ -47,6 +47,7 @@ def parse_args():
 
     parser.add_argument('--num_train', type=int, default=25, help='Number of training examples.')
     parser.add_argument('--seed', type=int, default=42, help='Random seed.')
+    # TODO: config path instead of task name
     parser.add_argument('--task', type=str, choices=['binary_original_sst',
                                                      'shoe',
                                                      'retweet',

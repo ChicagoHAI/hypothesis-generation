@@ -5,6 +5,8 @@ from string import Template
 from tasks import BaseTask
 from typing import Union, Dict
 
+# TODO: add all prompt templates to one file
+
 code_repo_path = os.environ.get("CODE_REPO_PATH")
 
 if code_repo_path:

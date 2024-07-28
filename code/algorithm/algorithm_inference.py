@@ -55,6 +55,7 @@ def parse_args():
 
     # general arguments
     parser.add_argument('--seeds', nargs='+', type=int, help='Random seed.')
+    # TODO: config path instead of task name
     parser.add_argument('--task', type=str, choices=['shoe',
                                                      'hotel_reviews',
                                                      'headline_binary',

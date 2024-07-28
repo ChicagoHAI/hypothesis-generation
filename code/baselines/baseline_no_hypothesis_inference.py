@@ -98,6 +98,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--seed', type=int, default=42, help='Random seed.')
+    # TODO: config path instead of task name
     parser.add_argument('--task', type=str, choices=['headline_binary',
                                                      'shoe',
                                                      'retweet',

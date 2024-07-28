@@ -30,6 +30,7 @@ def parse_args():
     parser.add_argument('--num_test', type=int, default=0, help='Number of test examples.')
     parser.add_argument('--num_val', type=int, default=0, help='Number of validation examples.')
     parser.add_argument('--seed', type=int, default=42, help='Random seed.')
+    # TODO: config path instead of task name
     parser.add_argument('--task', type=str, choices=['binary_original_sst', 
                                                      'shoe',
                                                      'retweet',
