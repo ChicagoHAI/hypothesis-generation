@@ -3,7 +3,7 @@ import os
 import textwrap
 from string import Template
 from tasks import BaseTask
-from typing import Union, Dict
+from typing import Tuple, Union, Dict
 
 # TODO: add all prompt templates to one file
 
@@ -34,31 +34,38 @@ def read_prompt(instruction_path, user_prompt_path):
 
 
 class BasePrompt(ABC):
-    def __init__(self, task: Union[BaseTask, None]):
+    def __init__(self, task: BaseTask):
         self.task = task
 
     def _get_substitute_dict(self, data_dict, example_idx) -> Dict[str, str]:
         example = {k: v[example_idx] for k, v in data_dict.items()}
         substitute_dict = {}
+
         for key, value in self.task.prompt_template.items():
+            if not isinstance(value, str):
+                continue
             # TODO: safe_substitute or substitute?
             substitute_dict[key] = Template(value).substitute(example)
+
         substitute_dict.update(example)
+
         return substitute_dict
 
     def _information_prompt(self, data_dict, example_idx, info_key: str) -> Dict[str, str]:
         example = {k: v[example_idx] for k, v in data_dict.items()}
         return Template(self.task.prompt_template[info_key]).substitute(example)
 
+    def _get_prompt_template(self, key: str) -> Tuple[str, str]:
+        instruction_prompt = self.task.prompt_template[key]["instructions"]
+        user_prompt = self.task.prompt_template[key]["user"]
+        return instruction_prompt, user_prompt
+
     def few_shot_baseline(self, train_data, num_few_shot, test_data, test_idx):
         """
         Few shot prompt for baseline
         """
 
-        instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/few_shot_baseline/instructions.txt"
-        user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/few_shot_baseline/user.txt"
-
-        instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
+        instruction_prompt, user_prompt = self._get_prompt_template('few_shot_baseline')
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
 
         observations = ""
@@ -83,10 +90,7 @@ class BasePrompt(ABC):
         Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
         """
 
-        instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/batched_generation/instructions.txt"
-        user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/batched_generation/user.txt"
-
-        instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
+        instruction_prompt, user_prompt = self._get_prompt_template('batched_generation')
 
         observations = ""
         for example_idx in range(len(train_data['label'])):
@@ -109,10 +113,7 @@ class BasePrompt(ABC):
 
         hypothesis = list(hypotheses_dict.keys())[0]
 
-        instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/inference/instructions.txt"
-        user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/inference/user.txt"
-
-        instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
+        instruction_prompt, user_prompt = self._get_prompt_template('inference')
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['hypothesis'] = hypothesis
@@ -137,10 +138,7 @@ class BasePrompt(ABC):
                 knn_info_prompt += f'Example {ex_idx + 1}:\n'
                 knn_info_prompt += self._information_prompt(train_data, example_info[0], 'knn_info_prompt')
 
-        instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn/instructions.txt"
-        user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn/user.txt"
-
-        instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
+        instruction_prompt, user_prompt = self._get_prompt_template('knn')
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['knn_info_prompt'] = knn_info_prompt
@@ -165,10 +163,7 @@ class BasePrompt(ABC):
                 knn_info_prompt += f'Example {ex_idx + 1}:\n'
                 knn_info_prompt += self._information_prompt(train_data, example_info[0], 'knn_info_prompt')
 
-        instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn_selection/instructions.txt"
-        user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/knn_selection/user.txt"
-
-        instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
+        instruction_prompt, user_prompt = self._get_prompt_template('knn_selection')
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['knn_info_prompt'] = knn_info_prompt
@@ -185,10 +180,7 @@ class BasePrompt(ABC):
 
         hypothesis = list(hypotheses_dict.keys())[0]
 
-        instruction_path = f"{code_repo_path}/prompts/{self.task.task_name}/is_relevant/instructions.txt"
-        user_prompt_path = f"{code_repo_path}/prompts/{self.task.task_name}/is_relevant/user.txt"
-
-        instruction_prompt, user_prompt = read_prompt(instruction_path, user_prompt_path)
+        instruction_prompt, user_prompt = self._get_prompt_template('is_relevant')
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict['hypothesis'] = hypothesis

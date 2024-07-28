@@ -1,4 +1,0 @@
-Our learned pattern: ${hypothesis}                            
-A hotel review is the following: "${review_sentence}"
-
-Answer:

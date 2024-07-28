@@ -1,6 +1,0 @@
-${few_shot_prefix}${observations}
-New tweets:
-The first tweet: ${first_tweet}
-The second tweet: ${second_tweet}
-
-Which one of the two tweets will get more retweets?

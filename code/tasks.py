@@ -4,6 +4,7 @@ import json
 import os
 import random
 import re
+from typing import Callable
 
 # TODO: Generate one single task object for every use
 
@@ -15,24 +16,11 @@ else:
     print("Environment variable not set.")
 
 
-class Task(ABC):
-    @abstractmethod
-    def __init__(self):
-        pass
-
-    # @abstractmethod
-    # def extract_label(self, text):
-    #     pass
-
-    @abstractmethod
-    def get_data(self, num_train, num_test, num_val):
-        pass
-
-
-class BaseTask(Task):
+class BaseTask(ABC):
     def __init__(
             self,
-            task_name
+            task_name,
+            extract_label: Callable[[str], str] = None
             # TODO: extract_label: function
     ):
         self.task_name = task_name
