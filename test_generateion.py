@@ -47,7 +47,7 @@ def load_dict(file_path):
 
 
 def setup_LLM(model, model_path, use_cache):
-    api = LLMWrapper(model, path_name=model_path, use_cache=use_cache)
+    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache)
     return api
 
 
