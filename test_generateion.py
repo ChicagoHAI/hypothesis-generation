@@ -93,7 +93,23 @@ def main():
         prompt_class = BasePrompt(task)
         inference_class = DefaultInference(api, prompt_class, train_data)
         generation_class = DefaultGeneration(api, prompt_class, inference_class)
-        update_class = SamplingUpdate(generation_class, inference_class, Replace())
+        update_class = SamplingUpdate(
+            generation_class=generation_class, 
+            inference_class=inference_class, 
+            replace_class=Replace(),
+            sample_num_to_restart_from=sample_num_to_restart_from,
+            num_init=num_init,
+            epoch_to_start_from=epoch_to_start_from,
+            num_wrong_scale=num_wrong_scale,
+            k=k,
+            use_system_prompt=use_system_prompt,
+            alpha=alpha,
+            update_batch_size=update_batch_size,
+            num_hypotheses_to_update=num_hypotheses_to_update,
+            update_hypotheses_per_batch=update_hypotheses_per_batch,
+            only_best_hypothesis=only_best_hypothesis,
+            save_every_n_examples=save_every_n_examples,
+        )
 
         hypotheses_bank = {}
         if old_hypothesis_file is None:
@@ -106,25 +122,12 @@ def main():
                 hypotheses_bank[hypothesis] = dict_to_summary_information(dict[hypothesis])
 
         for epoch in range(epoch_to_start_from, epoch_to_start_from + num_epochs):
-            current_epoch = epoch
             hypotheses_bank = update_class.update(
-                hypotheses_bank,
-                sample_num_to_restart_from,
-                num_init,
-                current_epoch,
-                epoch_to_start_from,
-                num_wrong_scale,
-                k,
-                use_system_prompt,
-                alpha,
-                update_batch_size,
-                num_hypotheses_to_update,
-                update_hypotheses_per_batch,
-                only_best_hypothesis,
-                save_every_n_examples,
-                current_seed
+                current_epoch=epoch,
+                hypotheses_bank=hypotheses_bank,
+                current_seed=current_seed,
             )
-            update_class.save_to_json(f"final_seed_{seed}", hypotheses_bank, output_folder, current_epoch)
+            update_class.save_to_json(f"final_seed_{seed}", hypotheses_bank, output_folder, epoch)
 
     # print experiment info
     print(f'Total time: {time.time() - start_time} seconds')
