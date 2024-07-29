@@ -12,16 +12,16 @@ from typing import Callable, Tuple, Union
 import torch
 import numpy as np
 
-from hypothesis_teneration.tasks import BaseTask
-from hypothesis_teneration.prompt import BasePrompt
-from hypothesis_teneration.data_loader import get_data
-from hypothesis_teneration.utils import LLMWrapper, set_seed, create_directory, get_num_examples, GPT_MODELS, VALID_MODELS
-from hypothesis_teneration.algorithm.summary_information import SummaryInformation, dict_to_summary_information
+from hypothesis_generation.tasks import BaseTask
+from hypothesis_generation.prompt import BasePrompt
+from hypothesis_generation.data_loader import get_data
+from hypothesis_generation.utils import LLMWrapper, set_seed, create_directory, get_num_examples, GPT_MODELS, VALID_MODELS
+from hypothesis_generation.algorithm.summary_information import SummaryInformation, dict_to_summary_information
 
-from hypothesis_teneration.algorithm.generation import DefaultGeneration
-from hypothesis_teneration.algorithm.inference import DefaultInference, KNNInference, FilterAndWeightInference, SeparateStepsKNNInference, UpperboundInference
-from hypothesis_teneration.algorithm.replace import Replace
-from hypothesis_teneration.algorithm.update import SamplingUpdate, DefaultUpdate
+from hypothesis_generation.algorithm.generation import DefaultGeneration
+from hypothesis_generation.algorithm.inference import DefaultInference, KNNInference, FilterAndWeightInference, SeparateStepsKNNInference, UpperboundInference
+from hypothesis_generation.algorithm.replace import Replace
+from hypothesis_generation.algorithm.update import SamplingUpdate, DefaultUpdate
 
 def load_dict(file_path):
     with open(file_path, 'r') as file:
