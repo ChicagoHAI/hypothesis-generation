@@ -19,37 +19,35 @@ else:
 class BaseTask(ABC):
     def __init__(
             self,
-            task_name,
-            extract_label: Callable[[str], str] = None
+            extract_label: Callable[[str], str],
+            config_path: str
             # TODO: extract_label: function
     ):
-        self.task_name = task_name
-
-        with open(f'{code_repo_path}/data/{task_name}/config.yaml', 'r') as f:
+        with open(config_path, 'r') as f:
             data = yaml.safe_load(f)
 
+        self.task_name = data['task_name']
+
         self.label_classes = data['label_classes']
-        self.train_data_path = os.path.join(code_repo_path, data['train_data_path'])
-        self.test_data_path = os.path.join(code_repo_path, data['test_data_path'])
-        self.val_data_path = os.path.join(code_repo_path, data['val_data_path'])
+        self.train_data_path = data['train_data_path']
+        self.test_data_path = data['test_data_path']
+        self.val_data_path = data['val_data_path']
 
         if "ood_test_data_path" in data:
-            self.ood_test_data_path = os.path.join(code_repo_path, data['ood_test_data_path'])
+            self.ood_test_data_path = data['ood_test_data_path']
 
         self.prompt_template = data['prompt_templates']
 
-        extract_label = {}
-        exec(data["parser"], extract_label)
-        self.extract_label = extract_label['extract_label']
+        self.extract_label = extract_label
 
-    def get_data(self, num_train, num_test, num_val):
+    def get_data(self, num_train, num_test, num_val, seed=49):
         def read_data(file_path, num, is_train=False):
             # Read from json
             with open(file_path, 'r') as f:
                 data = json.load(f)
             # shuffle and subsample from data
             if not is_train:
-                random.seed(49)
+                random.seed(seed)
 
             num_samples = min(num, len(data['label']))
             sampled_data = zip(*random.sample(list(zip(*list(data.values()))), num_samples))

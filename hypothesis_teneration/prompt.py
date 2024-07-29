@@ -2,25 +2,11 @@ from abc import ABC, abstractmethod
 import os
 import textwrap
 from string import Template
-from tasks import BaseTask
 from typing import Tuple, Union, Dict
 
+from .tasks import BaseTask
+
 # TODO: add all prompt templates to one file
-
-code_repo_path = os.environ.get("CODE_REPO_PATH")
-
-if code_repo_path:
-    print(f"Code repo path: {code_repo_path}")
-else:
-    print("Environment variable not set.")
-
-model_postfix = {
-    'Mistral-7B': '_mixtral',
-    'Mixtral-8x7B': '_mixtral',
-    'Others': ''
-}
-
-MISTRAL_MODELS = ['Mistral-7B', 'Mixtral-8x7B']
 
 
 def read_prompt(instruction_path, user_prompt_path):

@@ -1,6 +1,7 @@
-from tasks import BaseTask
 import json
 import random
+
+from .tasks import BaseTask
 
 OOD_REVIEWS_SUBSET = [
     'all',
@@ -9,7 +10,7 @@ OOD_REVIEWS_SUBSET = [
 ]
 
 
-def get_data(args):
+def get_data(task, args):
     task_name = args.task
     num_train = args.num_train
     num_test = args.num_test

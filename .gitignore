@@ -6,5 +6,6 @@ logs/
 data_final_processing.ipynb
 tests.ipynb
 test.yaml
+test.py
 outputs
 .idea

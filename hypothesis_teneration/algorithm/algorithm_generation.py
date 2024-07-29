@@ -30,12 +30,6 @@ def load_dict(file_path):
     return data
 
 
-def set_seed(seed):
-    random.seed(seed)
-    torch.manual_seed(seed)
-    np.random.seed(seed)
-
-
 def setup_LLM(args):
     api = LLMWrapper(args.model,
                      path_name=args.model_path,

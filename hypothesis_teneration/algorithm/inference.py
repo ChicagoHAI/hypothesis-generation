@@ -1,19 +1,19 @@
 from abc import ABC, abstractmethod
 import os
-code_repo_path = os.environ.get("CODE_REPO_PATH")
-from summary_information import SummaryInformation
-from tasks import BaseTask
-from utils import get_num_examples
 from collections import OrderedDict
 import numpy as np
 import pulp
 import random
 import re
 
+from .summary_information import SummaryInformation
+from ..prompt import BasePrompt
+from ..tasks import BaseTask
+from ..utils import get_num_examples
 
 class Inference(ABC):
     """ Inference abstract class. For each style of inference implement the inference function. """
-    def __init__(self, api, prompt_class, train_data):
+    def __init__(self, api, prompt_class:BasePrompt, train_data):
         """ Initialize the inference class.
 
         Parameters
@@ -29,7 +29,7 @@ class Inference(ABC):
         self.train_data = train_data
 
     @abstractmethod
-    def predict(self, args, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_system_prompt):
         """Implements a specific type of prediction
 
         Parameters
@@ -47,7 +47,7 @@ class Inference(ABC):
         pass
     
     @abstractmethod
-    def run_inference_final(self, args, data, hyp_bank):
+    def run_inference_final(self, data, hyp_bank, use_system_prompt, **kwargs):
         """Implements a specific type of prediction
 
         Parameters
@@ -68,27 +68,26 @@ class DefaultInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
     
-    def predict(self, args, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_system_prompt):
         assert len(hyp_bank.keys()) == 1, 'default inference only supports one hypothesis at a time'
         prompt_input = self.prompt_class.inference(hyp_bank, data, index)
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-        response = self.api.generate(prompt_input, args.use_system_prompt)
+        response = self.api.generate(prompt_input, use_system_prompt)
         print(f"Response: {response}")
-        task = BaseTask(args.task)
-        prediction = task.extract_label(response)
+        prediction = self.prompt_class.task.extract_label(response)
         print(f"Prediction: {prediction}")
         actual_label = data['label'][index]
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
     
-    def run_inference_final(self, args, data, hyp_bank):
+    def run_inference_final(self, data, hyp_bank, use_system_prompt, **kwargs):
         top_hypothesis = sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[0]
         num_samples = get_num_examples(data)
 
         pred_list = []
         label_list = []
         for i in range(num_samples):
-            pred, label = self.predict(args, data, i, {top_hypothesis : hyp_bank[top_hypothesis]})
+            pred, label = self.predict(data, i, {top_hypothesis : hyp_bank[top_hypothesis]}, use_system_prompt)
             pred_list.append(pred)
             label_list.append(label)
 
@@ -99,11 +98,10 @@ class KNNInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
     
-    def predict(self, args, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_system_prompt):
         prompt_input = self.prompt_class.knn_inference(hyp_bank, self.train_data, data, index)
-        response = self.api.generate(prompt_input, args.use_system_prompt)
-        task = BaseTask(args.task)
-        prediction = task.extract_label(response)
+        response = self.api.generate(prompt_input, use_system_prompt)
+        prediction = self.prompt_class.task.extract_label(response)
         actual_label = data['label'][index]
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
         print(f"Response: {response}")
@@ -111,7 +109,7 @@ class KNNInference(Inference):
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
 
-    def run_inference_final(self, args, data, hyp_bank):
+    def _run_inference_final(self, data, hyp_bank, use_system_prompt, knn_threshold, knn_hypotheses, knn_num_examples):
         num_train_data_samples = get_num_examples(self.train_data)
         similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(hyp_bank, num_train_data_samples)
         assert list(one_hot_encoded_dict.keys()) == list(hyp_bank.keys()), "The keys of the one hot encoded dict and the hyp_bank should be the same"
@@ -129,30 +127,33 @@ class KNNInference(Inference):
         print("Similarity matrix:\n", similarity_matrix, "\n")
 
         # choose hypotheses with the least similarities
-        selected_indices = self.select_hypotheses_ilp(similarity_matrix, accuracy_per_hypothesis, similarity_per_hypothesis, args.knn_threshold)
+        selected_indices = self.select_hypotheses_ilp(similarity_matrix, accuracy_per_hypothesis, similarity_per_hypothesis, knn_threshold)
         key_list = list(one_hot_encoded_dict.keys())
         selected_hypotheses = [key_list[idx] for idx in selected_indices]
         print("Selected hypotheses based upon non-similarity:", selected_hypotheses)
 
-        top_k_hypotheses = sorted(selected_hypotheses, key=lambda x: hyp_bank[x].acc, reverse=True)[:args.knn_hypotheses]
+        top_k_hypotheses = sorted(selected_hypotheses, key=lambda x: hyp_bank[x].acc, reverse=True)[:knn_hypotheses]
 
         selected_hyp_bank = {}
         for hypothesis in top_k_hypotheses:
             selected_hyp_bank[hypothesis] = hyp_bank[hypothesis]
         for hyp in selected_hyp_bank:
             selected_hyp_bank[hyp].set_hypothesis(hyp)
-            if len(selected_hyp_bank[hyp].correct_examples) > args.knn_num_examples:
-                selected_hyp_bank[hyp].set_example(random.sample(selected_hyp_bank[hyp].correct_examples, args.knn_num_examples))
+            if len(selected_hyp_bank[hyp].correct_examples) > knn_num_examples:
+                selected_hyp_bank[hyp].set_example(random.sample(selected_hyp_bank[hyp].correct_examples, knn_num_examples))
 
         num_samples = get_num_examples(data)
         pred_list = []
         label_list = []
         for i in range(num_samples):
-            pred, label = self.predict(args, data, i, selected_hyp_bank)
+            pred, label = self.predict(data, i, selected_hyp_bank, use_system_prompt)
             pred_list.append(pred)
             label_list.append(label)
             
         return pred_list, label_list
+
+    def run_inference_final(self, data, hyp_bank, use_system_prompt, **kwargs):
+        return self._run_inference_final(data, hyp_bank, use_system_prompt, **kwargs)
 
     def compute_similarity_matrix(self, hyp_bank, num_train_data_samples):
         one_hot_encoded_dict = OrderedDict()
@@ -202,7 +203,7 @@ class FilterAndWeightInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
         
-    def predict(self, args, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_system_prompt):
         """
         Make prediction on one sample (index) of the dataset.
         Use the hypotheses in hyp_bank to make a weighted-vote prediction.
@@ -216,9 +217,8 @@ class FilterAndWeightInference(Inference):
         for hypothesis in hyp_bank:
             hypothesis_dict = {hypothesis: hyp_bank[hypothesis]}
             prompt_input = self.prompt_class.inference(hypothesis_dict, data, index)
-            response = self.api.generate(prompt_input, args.use_system_prompt)
-            task = BaseTask(args.task)
-            pred = task.extract_label(response)
+            response = self.api.generate(prompt_input, use_system_prompt)
+            pred = self.prompt_class.task.extract_label(response)
             weight = hyp_bank[hypothesis].acc
             if pred in pred_dict:
                 pred_dict[pred] += weight
@@ -234,7 +234,7 @@ class FilterAndWeightInference(Inference):
         
         return prediction, actual_label
 
-    def filter_hypotheses(self, args, data, index, hyp_bank):
+    def filter_hypotheses(self, data, index, hyp_bank, use_system_prompt):
         """
         Filter the hypotheses in hyp_bank to only include relevant hypotheses for the sample at index.
 
@@ -252,7 +252,7 @@ class FilterAndWeightInference(Inference):
         for hypothesis in hyp_bank:
             temp_hyp_bank = {hypothesis: hyp_bank[hypothesis]}
             prompt_input = self.prompt_class.is_relevant(temp_hyp_bank, data, index)
-            response = self.api.generate(prompt_input, args.use_system_prompt)
+            response = self.api.generate(prompt_input, use_system_prompt)
 
             print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
             print(f"Response: {response}")
@@ -278,13 +278,7 @@ class FilterAndWeightInference(Inference):
                 
         return relevant_hypotheses
 
-    def run_inference_final(self, args, data, hyp_bank):
-        """
-        Run over the entire dataset and make predictions.
-        For each sample, prompt LLM to determine whether a hypothesis is relevant.
-        Use the relevant hypotheses to make a weighted-vote prediction.
-        """
-        k = args.k
+    def _run_inference_final(self, data, hyp_bank, use_system_prompt, k):
         # get the top k hypotheses by reward (save as dictionary)
         if k > len(hyp_bank):
             k = len(hyp_bank)
@@ -297,16 +291,24 @@ class FilterAndWeightInference(Inference):
         pred_list = []
         label_list = []
         for i in range(num_samples):
-            filtered_hypotheses = self.filter_hypotheses(args, data, i, top_hypotheses)
+            filtered_hypotheses = self.filter_hypotheses(data, i, top_hypotheses, use_system_prompt)
             # if no hypothesis is relevant, use the hypothesis with the highest accuracy
             if len(filtered_hypotheses) == 0:
                 best_hypothesis = max(top_hypotheses, key=lambda x: top_hypotheses[x].acc)
                 filtered_hypotheses[best_hypothesis] = top_hypotheses[best_hypothesis]
-            pred, label = self.predict(args, data, i, filtered_hypotheses)
+            pred, label = self.predict(data, i, filtered_hypotheses, use_system_prompt)
             pred_list.append(pred)
             label_list.append(label)
 
         return pred_list, label_list
+
+    def run_inference_final(self, data, hyp_bank, use_system_prompt, **kwargs):
+        """
+        Run over the entire dataset and make predictions.
+        For each sample, prompt LLM to determine whether a hypothesis is relevant.
+        Use the relevant hypotheses to make a weighted-vote prediction.
+        """
+        return self._run_inference_final(data, hyp_bank, use_system_prompt, **kwargs)
 
 
 class SeparateStepsKNNInference(KNNInference):
@@ -317,14 +319,13 @@ class SeparateStepsKNNInference(KNNInference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
 
-    def default_predict(self, args, data, index, hyp_bank):
+    def default_predict(self, data, index, hyp_bank, use_system_prompt):
         assert len(hyp_bank.keys()) == 1, 'default inference only supports one hypothesis at a time'
 
         prompt_input = self.prompt_class.inference(hyp_bank, data, index)
             
-        response = self.api.generate(prompt_input, args.use_system_prompt)
-        task = BaseTask(args.task)
-        prediction = task.extract_label(response)
+        response = self.api.generate(prompt_input, use_system_prompt)
+        prediction = self.prompt_class.task.extract_label(response)
         actual_label = data['label'][index]
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
         print(f"Response: {response}")
@@ -332,9 +333,9 @@ class SeparateStepsKNNInference(KNNInference):
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
     
-    def select_hypotheses(self, args, data, index, hyp_bank):
+    def select_hypotheses(self, data, index, hyp_bank, use_system_prompt):
         prompt_input = self.prompt_class.knn_selection(hyp_bank, self.train_data, data, index)
-        response = self.api.generate(prompt_input, args.use_system_prompt)
+        response = self.api.generate(prompt_input, use_system_prompt)
 
         print('Prompt:', prompt_input[0], prompt_input[1])
         print('Response:', response)
@@ -366,36 +367,37 @@ class SeparateStepsKNNInference(KNNInference):
 
         return hyp
     
-    def predict(self, args, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_system_prompt):
         # select one hypothesis that is most relevant to the sample
-        hyp = self.select_hypotheses(args, data, index, hyp_bank)
+        hyp = self.select_hypotheses(data, index, hyp_bank, use_system_prompt)
  
         # make prediction using default_predict
-        return self.default_predict(args, data, index, {hyp: hyp_bank[hyp]})
+        return self.default_predict(data, index, {hyp: hyp_bank[hyp]}, use_system_prompt)
 
 
 class UpperboundInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
     
-    def predict(self, args, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_system_prompt):
         assert len(hyp_bank.keys()) == 1, 'default inference only supports one hypothesis at a time'
         prompt_input = self.prompt_class.inference(hyp_bank, data, index)
         print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
-        response = self.api.generate(prompt_input, args.use_system_prompt)
+        response = self.api.generate(prompt_input, use_system_prompt)
         print(f"Response: {response}")
-        task = BaseTask(args.task)
-        prediction = task.extract_label(response)
+        prediction = self.prompt_class.task.extract_label(response)
         print(f"Prediction: {prediction}")
         actual_label = data['label'][index]
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
-    
-    def run_inference_final(self, args, data, hyp_bank):
+
+    def _run_inference_final(self, data, hyp_bank, use_system_prompt, k):
+        arg_k = k
+
         # sort hyp_bank by training accuracy from high to low
         hyp_bank = {k: v for k, v in sorted(hyp_bank.items(), key=lambda item: item[1].acc, reverse=True)}
         # keep top args.k hypotheses
-        hyp_bank = {k: v for k, v in list(hyp_bank.items())[:args.k]}
+        hyp_bank = {k: v for k, v in list(hyp_bank.items())[:arg_k]}
 
         # run inference for each hypothesis
         num_samples = get_num_examples(data)
@@ -405,7 +407,7 @@ class UpperboundInference(Inference):
         for hyp in hyp_bank:
             print(f'The {count}th hypothesis')
             for i in range(num_samples):
-                pred, label = self.predict(args, data, i, {hyp : hyp_bank[hyp]})
+                pred, label = self.predict(data, i, {hyp : hyp_bank[hyp]}, use_system_prompt)
                 pred_list[hyp].append(pred)
                 label_list.append(label)
             count += 1
@@ -441,6 +443,9 @@ class UpperboundInference(Inference):
         print(f"Upperbound accuracy (if one hyp is correct): {accuracy}")
 
         return pred_list, label_list
+    
+    def run_inference_final(self, data, hyp_bank, use_system_prompt, **kwargs):
+        return self._run_inference_final(data, hyp_bank, use_system_prompt, **kwargs)
     
 INFERENCE_DICT = {
     'default': DefaultInference,
