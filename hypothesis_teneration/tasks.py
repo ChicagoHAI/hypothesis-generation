@@ -21,7 +21,6 @@ class BaseTask(ABC):
             self,
             extract_label: Callable[[str], str],
             config_path: str
-            # TODO: extract_label: function
     ):
         with open(config_path, 'r') as f:
             data = yaml.safe_load(f)

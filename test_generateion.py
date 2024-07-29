@@ -18,10 +18,10 @@ from hypothesis_teneration.data_loader import get_data
 from hypothesis_teneration.utils import LLMWrapper, set_seed, create_directory, get_num_examples, GPT_MODELS, VALID_MODELS
 from hypothesis_teneration.algorithm.summary_information import SummaryInformation, dict_to_summary_information
 
-from hypothesis_teneration.algorithm.generation import GENERATION_DICT, DefaultGeneration, Generation
-from hypothesis_teneration.algorithm.inference import INFERENCE_DICT, DefaultInference, Inference
-from hypothesis_teneration.algorithm.replace import REPLACE_CHOICES, Replace
-from hypothesis_teneration.algorithm.update import UPDATE_DICT, SamplingUpdate, Update
+from hypothesis_teneration.algorithm.generation import DefaultGeneration
+from hypothesis_teneration.algorithm.inference import DefaultInference, KNNInference, FilterAndWeightInference, SeparateStepsKNNInference, UpperboundInference
+from hypothesis_teneration.algorithm.replace import Replace
+from hypothesis_teneration.algorithm.update import SamplingUpdate, DefaultUpdate
 
 def load_dict(file_path):
     with open(file_path, 'r') as file:
@@ -129,8 +129,8 @@ def main():
     # print experiment info
     print(f'Total time: {time.time() - start_time} seconds')
     # TODO: No Implementation for session_total_cost
-    if api.model in GPT_MODELS:
-        print(f'Estimated cost: {api.api.session_total_cost()}')
+    # if api.model in GPT_MODELS:
+    #     print(f'Estimated cost: {api.api.session_total_cost()}')
 
 
 if __name__ == '__main__':

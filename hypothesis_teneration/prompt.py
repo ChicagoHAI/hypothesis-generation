@@ -6,8 +6,6 @@ from typing import Tuple, Union, Dict
 
 from .tasks import BaseTask
 
-# TODO: add all prompt templates to one file
-
 
 def read_prompt(instruction_path, user_prompt_path):
     with open(instruction_path, 'r') as f:
