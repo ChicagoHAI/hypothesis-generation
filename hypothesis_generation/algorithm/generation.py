@@ -2,11 +2,15 @@ from abc import ABC, abstractmethod
 import math
 import os
 
+from hypothesis_generation.prompt import BasePrompt
+
 from .summary_information import SummaryInformation
 from .inference import Inference
 
+
 def extract_hypotheses(text, num_hypotheses):
     import re
+
     pattern = re.compile(r"\d+\.\s(.+?)(?=\d+\.\s|\Z)", re.DOTALL)
     print("Text provided", text)
     hypotheses = pattern.findall(text)
@@ -19,10 +23,17 @@ def extract_hypotheses(text, num_hypotheses):
 
     return hypotheses[:num_hypotheses]
 
+
 class Generation(ABC):
     """Generation class. Implement the initialize function"""
-    def __init__(self, api, prompt_class, inference_class: Inference):
-        """ Initialize the update class
+
+    def __init__(
+        self,
+        api,
+        prompt_class: BasePrompt,
+        inference_class: Inference,
+    ):
+        """Initialize the update class
 
         Parameters:
         ____________
@@ -31,7 +42,7 @@ class Generation(ABC):
         prompt_class: the class containing specific prompts for the task
         inference_class: The Inference Class to call when checking for accuracy
         ____________
-        
+
         """
         super().__init__()
         self.api = api
@@ -40,8 +51,10 @@ class Generation(ABC):
         self.train_data = self.inference_class.train_data
 
     @abstractmethod
-    def initialize_hypotheses(self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs):
-        """ Initialization method for generating hypotheses. Make sure to only loop till args.num_init
+    def initialize_hypotheses(
+        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
+    ):
+        """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
         Parameters:
         ____________
@@ -57,8 +70,15 @@ class Generation(ABC):
         """
         pass
 
-    def batched_hypothesis_generation(self, example_indices, current_sample, num_hypotheses_generate, alpha, use_system_prompt):
-        """ Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
+    def batched_hypothesis_generation(
+        self,
+        example_indices,
+        current_sample,
+        num_hypotheses_generate,
+        alpha,
+        use_system_prompt,
+    ):
+        """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
 
         Parameters:
         ____________
@@ -83,35 +103,40 @@ class Generation(ABC):
             example_bank[key] = [self.train_data[key][idx] for idx in example_indices]
 
         # Prompt LLM to generate hypotheses
-        prompt_input = self.prompt_class.batched_generation(example_bank, num_hypotheses_generate)
+        prompt_input = self.prompt_class.batched_generation(
+            example_bank, num_hypotheses_generate
+        )
         response = self.api.generate(prompt_input)
         extracted_hypotheses = extract_hypotheses(response, num_hypotheses_generate)
 
         # create Summary Information for each
         new_generated_hypotheses = {}
-        
+
         for hyp in extracted_hypotheses:
             correct = 0
             ex = []
             new_generated_hypotheses[hyp] = SummaryInformation(
-                hypothesis=hyp,
-                acc=0,
-                num_visits=0,
-                reward=0,
-                correct_examples=ex
+                hypothesis=hyp, acc=0, num_visits=0, reward=0, correct_examples=ex
             )
             for index in example_indices:
-                prediction, actual_label = self.inference_class.predict(self.train_data, index, {hyp: new_generated_hypotheses[hyp]}, use_system_prompt) 
+                prediction, actual_label = self.inference_class.predict(
+                    self.train_data,
+                    index,
+                    {hyp: new_generated_hypotheses[hyp]},
+                    use_system_prompt,
+                )
                 if prediction == actual_label:
                     correct += 1
                     ex.append((index, actual_label))
             acc = correct / len(example_indices)
             new_generated_hypotheses[hyp].set_accuracy(acc)
             new_generated_hypotheses[hyp].set_num_visits(len(example_indices))
-            reward = acc + alpha * math.sqrt(math.log(current_sample) / len(example_indices))
+            reward = acc + alpha * math.sqrt(
+                math.log(current_sample) / len(example_indices)
+            )
             new_generated_hypotheses[hyp].set_reward(reward)
             new_generated_hypotheses[hyp].set_example(ex)
-        
+
         return new_generated_hypotheses
 
 
@@ -119,15 +144,23 @@ class DefaultGeneration(Generation):
     def __init__(self, api, prompt_class, inference_class):
         super().__init__(api, prompt_class, inference_class)
 
-    def initialize_hypotheses(self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, use_system_prompt, **kwargs):
-        """ Initialization method for generating hypotheses. Make sure to only loop till args.num_init
+    def initialize_hypotheses(
+        self,
+        num_init,
+        init_batch_size,
+        init_hypotheses_per_batch,
+        alpha,
+        use_system_prompt,
+        **kwargs
+    ):
+        """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
         Parameters:
         ____________
 
-        num_init: 
-        init_batch_size: 
-        init_hypotheses_per_batch: 
+        num_init:
+        init_batch_size:
+        init_hypotheses_per_batch:
 
         ____________
 
@@ -136,17 +169,25 @@ class DefaultGeneration(Generation):
 
         hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
         """
-        assert num_init % init_batch_size == 0, "Number of initial examples must be divisible by the batch size"
+        assert (
+            num_init % init_batch_size == 0
+        ), "Number of initial examples must be divisible by the batch size"
         num_batches = num_init // init_batch_size
         hypotheses_bank = {}
         for i in range(num_batches):
-            example_indices = list(range(i*init_batch_size, (i+1)*init_batch_size))
-            new_hypotheses = self.batched_hypothesis_generation(example_indices, len(example_indices), init_hypotheses_per_batch, alpha, use_system_prompt)
+            example_indices = list(
+                range(i * init_batch_size, (i + 1) * init_batch_size)
+            )
+            new_hypotheses = self.batched_hypothesis_generation(
+                example_indices,
+                len(example_indices),
+                init_hypotheses_per_batch,
+                alpha,
+                use_system_prompt,
+            )
             hypotheses_bank.update(new_hypotheses)
 
         return hypotheses_bank
 
 
-GENERATION_DICT = {
-    'default': DefaultGeneration
-}
+GENERATION_DICT = {"default": DefaultGeneration}

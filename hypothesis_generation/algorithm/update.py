@@ -19,6 +19,7 @@ class Update(ABC):
         generation_class: Generation,
         inference_class: Inference,
         replace_class: Replace,
+        save_path: str,
         sample_num_to_restart_from=-1,
         num_init=25,
         epoch_to_start_from=0,
@@ -38,6 +39,7 @@ class Update(ABC):
         :param generation_class: The generation class that needs to be called in update for generating new hypotheses
         :param inference_class: The inference class that is called for inference in update for making predictions
         :param replace_class: The replace class that is called for replacing the old hypotheses with the new hypotheses
+        :param save_path: Path to save the hypotheses.
         :param sample_num_to_restart_from: Sample number to resume from. Default is -1
         :param num_init: Number of examples to use for initializing hypotheses. Default is 25
         :param epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
@@ -51,10 +53,10 @@ class Update(ABC):
         :param only_best_hypothesis: If only the best hypothesis should be added in the newly generated hypotheses of the batch. Default is False
         :param save_every_n_examples: Save hypotheses every n examples. Default is 100
         """
-        super().__init__()
         self.generation_class = generation_class
         self.inference_class = inference_class
         self.replace_class = replace_class
+        self.save_path = save_path
         self.train_data = self.inference_class.train_data
         self.sample_num_to_restart_from = sample_num_to_restart_from
         self.num_init = num_init
@@ -82,12 +84,12 @@ class Update(ABC):
         """
         pass
 
-    def save_to_json(self, hypotheses_bank: Dict[str, SummaryInformation], file_name):
+    def save_to_json(self, file_name, hypotheses_bank: Dict[str, SummaryInformation]):
         """
         Saves hypotheses bank to a json file
 
         :param hypotheses_bank: the hypotheses which are to be written
-        :param file_name: the name of the file to write the hypotheses to
+        :param file_name: the name of the file to save the hypotheses
 
         """
         temp_dict = {}
@@ -96,7 +98,7 @@ class Update(ABC):
             temp_dict[hypothesis] = serialized_dict
 
         json_string = json.dumps(temp_dict)
-        with open(file_name, "w") as f:
+        with open(os.path.join(self.save_path, file_name), "w") as f:
             f.write(json_string)
 
     def initialize_hypotheses(
@@ -130,6 +132,7 @@ class DefaultUpdate(Update):
         generation_class: Generation,
         inference_class: Inference,
         replace_class: Replace,
+        save_path: str,
         sample_num_to_restart_from=-1,
         num_init=25,
         epoch_to_start_from=0,
@@ -147,6 +150,7 @@ class DefaultUpdate(Update):
             generation_class,
             inference_class,
             replace_class,
+            save_path,
             sample_num_to_restart_from,
             num_init,
             epoch_to_start_from,
@@ -269,6 +273,7 @@ class SamplingUpdate(Update):
         generation_class: Generation,
         inference_class: Inference,
         replace_class: Replace,
+        save_path: str,
         sample_num_to_restart_from=-1,
         num_init=25,
         epoch_to_start_from=0,
@@ -286,6 +291,7 @@ class SamplingUpdate(Update):
             generation_class,
             inference_class,
             replace_class,
+            save_path,
             sample_num_to_restart_from,
             num_init,
             epoch_to_start_from,
@@ -373,6 +379,8 @@ class SamplingUpdate(Update):
                                 wrong_example_ids,
                                 current_example,
                                 self.update_hypotheses_per_batch,
+                                self.alpha,
+                                self.use_system_prompt,
                             )
                         )
                         max_visited = max(

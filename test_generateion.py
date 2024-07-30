@@ -36,7 +36,7 @@ from hypothesis_generation.algorithm.inference import (
     SeparateStepsKNNInference,
     UpperboundInference,
 )
-from hypothesis_generation.algorithm.replace import Replace
+from hypothesis_generation.algorithm.replace import DefaultReplace, Replace
 from hypothesis_generation.algorithm.update import SamplingUpdate, DefaultUpdate
 
 
@@ -46,18 +46,14 @@ def load_dict(file_path):
     return data
 
 
-def setup_LLM(model, model_path, use_cache):
-    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache)
-    return api
-
-
 def main():
     # set up tools
     start_time = time.time()
 
     task_config_path = "./data/retweet/config.yaml"
+    model_name = "Llama-2-7b-chat"
     max_num_hypotheses = 20
-    output_folder = f"./outputs/retweet/gpt-4o-mini/hyp_{max_num_hypotheses}/"
+    output_folder = f"./outputs/retweet/{model_name}/hyp_{max_num_hypotheses}/"
     old_hypothesis_file = None
     num_init = 10
     num_train = 75
@@ -78,8 +74,12 @@ def main():
         else:
             return "other"
 
-    create_directory(output_folder)
-    api = setup_LLM("gpt-4o-mini", "", 0)
+    os.makedirs(output_folder, exist_ok=True)
+    api = LLMWrapper.from_model(
+        model_name,
+        path_name="/net/projects/veitch/LLMs/llama2-based-models/llama2-hf/Llama-2-7b-chat-hf",
+        use_cache=0,
+    )
 
     task = BaseTask(task_extract_label, task_config_path)
 
@@ -93,7 +93,8 @@ def main():
         update_class = SamplingUpdate(
             generation_class=generation_class,
             inference_class=inference_class,
-            replace_class=Replace(),
+            replace_class=DefaultReplace(max_num_hypotheses),
+            save_path=output_folder,
             num_init=num_init,
             k=10,
             alpha=5e-1,
@@ -110,11 +111,8 @@ def main():
                 init_hypotheses_per_batch=10,
             )
             update_class.save_to_json(
+                f"hypotheses_training_sample_{num_init}_seed_{seed}_epoch_0.json",
                 hypotheses_bank,
-                file_name=os.path.join(
-                    output_folder,
-                    f"hypotheses_training_sample_{num_init}_seed_{seed}_epoch_0.json",
-                ),
             )
         else:
             dict = load_dict(old_hypothesis_file)
@@ -130,11 +128,8 @@ def main():
                 current_seed=seed,
             )
             update_class.save_to_json(
+                f"hypotheses_training_sample_final_seed_{seed}_epoch_{epoch}.json",
                 hypotheses_bank,
-                file_name=os.path.join(
-                    output_folder,
-                    f"hypotheses_training_sample_final_seed_{seed}_epoch_{epoch}.json",
-                ),
             )
 
     # print experiment info
