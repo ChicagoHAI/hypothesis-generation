@@ -31,13 +31,7 @@ from .consts.model_consts import (
 
 from .tasks import BaseTask
 
-code_repo_path = os.environ.get("CODE_REPO_PATH")
 PORT = int(os.environ.get("PORT"))
-
-if code_repo_path:
-    print(f"Code repo path: {code_repo_path}")
-else:
-    print("Environment variable CODE_REPO_PATH not set.")
 
 VALID_MODELS = (
     list(GPT_MODELS.keys()) + list(CLAUDE_MODELS.keys()) + LLAMA_MODELS + MISTRAL_MODELS
@@ -201,7 +195,7 @@ class ClaudeWrapper(LLMWrapper):
 
     def _setup(self, use_cache=1, **kwargs):
         # TODO: get api key from environment variable
-        api_key = open(f"{code_repo_path}/claude_key.txt", "r").read().strip()
+        api_key = open(f"./claude_key.txt", "r").read().strip()
         client = Anthropic(
             api_key=api_key,
         )
@@ -252,7 +246,7 @@ class MixtralWrapper(LLMWrapper):
     def _setup(
         self,
         model,
-        cache_dir=f"{code_repo_path}/Mixtral_cache",
+        cache_dir=f"./Mixtral_cache",
         path_name=None,
         use_cache=1,
         **kwargs,
@@ -303,7 +297,7 @@ class LlamaWrapper(LLMWrapper):
 
     def _setup(
         self,
-        cache_dir=f"{code_repo_path}/llama_cache",
+        cache_dir=f"./llama_cache",
         path_name=None,
         use_cache=1,
         **kwargs,
@@ -346,13 +340,13 @@ class LlamaWrapper(LLMWrapper):
         return output
 
 
-def get_results(args, pred_list, label_list):
+def get_results(task_name, pred_list, label_list):
     """
     Compute tp, tn, fp, fn for binary classification.
     Note that if predicted output is 'other', it is considered as negative.
     """
     tp, tn, fp, fn = 0, 0, 0, 0
-    positive_label = POSITIVE_LABELS[args.task]
+    positive_label = POSITIVE_LABELS[task_name]
     for i in range(len(pred_list)):
         pred = pred_list[i]
         label = label_list[i]

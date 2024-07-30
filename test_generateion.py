@@ -84,8 +84,6 @@ def main():
     task = BaseTask(task_extract_label, task_config_path)
 
     for seed in [49]:
-        current_seed = seed
-
         set_seed(seed)
         train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
         prompt_class = BasePrompt(task)
@@ -115,7 +113,7 @@ def main():
                 hypotheses_bank,
                 file_name=os.path.join(
                     output_folder,
-                    f"hypotheses_training_sample_{num_init}_seed_{current_seed}_epoch_0.json",
+                    f"hypotheses_training_sample_{num_init}_seed_{seed}_epoch_0.json",
                 ),
             )
         else:
@@ -129,7 +127,7 @@ def main():
             hypotheses_bank = update_class.update(
                 current_epoch=epoch,
                 hypotheses_bank=hypotheses_bank,
-                current_seed=current_seed,
+                current_seed=seed,
             )
             update_class.save_to_json(
                 hypotheses_bank,
