@@ -14,6 +14,7 @@ from transformers import (
     LlamaConfig,
     AutoModelForCausalLM,
     AutoTokenizer,
+    pipeline,
 )
 from pprint import pprint
 
@@ -73,18 +74,18 @@ def transform_sys_prompt(prompt, instruction_wrapper, inst_in_sys=True):
 
 
 class LlamaAPI:
-    def __init__(self, llama, tokenizer, device):
+    def __init__(self, llama):
         self.llama = llama
-        self.tokenizer = tokenizer
-        self.device = device
 
-    def generate(self, prompt, max_tokens=500):
-        inputs = self.tokenizer(text=prompt, return_tensors="pt").to(self.device)
-        out = self.llama.generate(inputs=inputs.input_ids, max_new_tokens=max_tokens)
-        output_text = self.tokenizer.batch_decode(out, skip_special_tokens=True)[0]
-        # remove the prompt from the output
-        output_text = output_text[len(prompt) :]
-        return output_text
+    def generate(self, system_prompt, user_prompt, max_tokens=500):
+        output = self.llama(
+            [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            max_new_tokens=max_tokens,
+        )
+        return output[0]["generated_text"][-1]["content"]
 
 
 class MistralAPI:
@@ -128,16 +129,7 @@ class LLMWrapper(ABC):
 
     @abstractmethod
     def generate(self, prompt, inst_in_sys=True, max_tokens=500):
-        if self.model in GPT_MODELS.keys():
-            return self._chatgpt_generate(prompt, inst_in_sys, max_tokens)
-        elif self.model in CLAUDE_MODELS.keys():
-            return self._claude_2_message_generate(prompt, inst_in_sys, max_tokens)
-        elif self.model in LLAMA_MODELS:
-            return self._llama_generate(prompt, inst_in_sys, max_tokens)
-        elif self.model in MISTRAL_MODELS:
-            return self._mistral_generate(prompt, inst_in_sys, max_tokens)
-        else:
-            raise NotImplementedError
+        pass
 
 
 class GPTWrapper(LLMWrapper):
@@ -310,16 +302,14 @@ class LlamaWrapper(LLMWrapper):
         if path_name is None:
             path_name = f"meta-llama/{self.model}-hf"
 
-        config = LlamaConfig.from_pretrained(path_name, cache_dir=cache_dir)
-        tokenizer = LlamaTokenizer.from_pretrained(path_name, cache_dir=cache_dir)
-        llama = LlamaForCausalLM.from_pretrained(
-            path_name,
-            config=config,
-            cache_dir=cache_dir,
+        llama = pipeline(
+            "text-generation",
             device_map="auto",
+            model=path_name,
+            model_kwargs=kwargs,
         )
 
-        client = LlamaAPI(llama, tokenizer, device)
+        client = LlamaAPI(llama)
         api = LlamaAPICache(client=client, port=PORT)
 
         if use_cache == 1:
@@ -328,15 +318,14 @@ class LlamaWrapper(LLMWrapper):
             return client
 
     def generate(self, prompt, inst_in_sys=True, max_tokens=500):
-        # For llama, because the system tokens are different, we handle it in _llama_generate
-        instruction_wrapper = INST_WRAPPER["llama"]
-        system_prompt, user_prompt = transform_sys_prompt(
-            prompt, instruction_wrapper, inst_in_sys
+        system_prompt = prompt[0]
+        user_prompt = prompt[1]
+
+        output = self.api.generate(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            max_tokens=max_tokens,
         )
-        prompt = (
-            f"""[INST] <<SYS>> {system_prompt} <</SYS>>""" + user_prompt + " [/INST]"
-        )
-        output = self.api.generate(prompt, max_tokens)
         return output
 
 

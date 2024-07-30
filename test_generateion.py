@@ -51,7 +51,7 @@ def main():
     start_time = time.time()
 
     task_config_path = "./data/retweet/config.yaml"
-    model_name = "Llama-2-7b-chat"
+    model_name = "Meta-Llama-3.1-8B-Instruct"
     max_num_hypotheses = 20
     output_folder = f"./outputs/retweet/{model_name}/hyp_{max_num_hypotheses}/"
     old_hypothesis_file = None
@@ -77,7 +77,7 @@ def main():
     os.makedirs(output_folder, exist_ok=True)
     api = LLMWrapper.from_model(
         model_name,
-        path_name="/net/projects/veitch/LLMs/llama2-based-models/llama2-hf/Llama-2-7b-chat-hf",
+        path_name="/net/scratch/llama/Meta-Llama-3.1-8B-Instruct",
         use_cache=0,
     )
 
