@@ -31,9 +31,9 @@ from hypothesis_generation.algorithm.summary_information import (
 from hypothesis_generation.algorithm.generation import DefaultGeneration
 from hypothesis_generation.algorithm.inference import (
     DefaultInference,
-    KNNInference,
+    OneStepAdaptiveInference,
     FilterAndWeightInference,
-    SeparateStepsKNNInference,
+    TwoStepAdaptiveInference,
     UpperboundInference,
 )
 from hypothesis_generation.algorithm.replace import DefaultReplace, Replace

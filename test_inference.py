@@ -30,9 +30,9 @@ from hypothesis_generation.algorithm.summary_information import (
 )
 from hypothesis_generation.algorithm.inference import (
     DefaultInference,
-    KNNInference,
+    OneStepAdaptiveInference,
     FilterAndWeightInference,
-    SeparateStepsKNNInference,
+    TwoStepAdaptiveInference,
     UpperboundInference,
 )
 
@@ -53,7 +53,7 @@ def main():
 
     task_config_path = "./data/retweet/config.yaml"
     hypothesis_file = f"./outputs/retweet/gpt-4o-mini/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
-    knn_hypotheses = 0
+    adaptive_num_hypotheses = 0
     num_train = 75
     num_test = 25
     num_val = 10
@@ -86,9 +86,9 @@ def main():
     for hypothesis in dict:
         hyp_bank[hypothesis] = dict_to_summary_information(dict[hypothesis])
 
-    assert knn_hypotheses <= len(
+    assert adaptive_num_hypotheses <= len(
         hyp_bank
-    ), f"The number of hypotheses chosen in KNN must be less than the total number of hypotheses"
+    ), f"The number of hypotheses chosen in adaptive inference must be less than the total number of hypotheses"
 
     api = setup_LLM("gpt-4o-mini", "", use_cache=0)
 

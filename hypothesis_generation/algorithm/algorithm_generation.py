@@ -108,9 +108,9 @@ def parse_args():
     # replace specific arguments
     parser.add_argument('--replace_style', type=str, choices=REPLACE_CHOICES, help='types of replace methods')
 
-    # KNN specific arguments
-    parser.add_argument('--knn_num_examples', type=int, default=0,
-                        help='Number of examples per hypotheses to use for KNN')
+    # adaptive inference specific arguments
+    parser.add_argument('--adaptive_num_examples', type=int, default=0,
+                        help='Number of examples per hypotheses to use for adaptive inference')
 
     # Restart specific arguments
     parser.add_argument('--old_hypothesis_file', type=str, default=None,

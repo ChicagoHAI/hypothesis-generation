@@ -102,12 +102,12 @@ class DefaultInference(Inference):
         return pred_list, label_list
 
 
-class KNNInference(Inference):
+class OneStepAdaptiveInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
 
     def predict(self, data, index, hyp_bank, use_system_prompt):
-        prompt_input = self.prompt_class.knn_inference(
+        prompt_input = self.prompt_class.one_step_adaptive_inference(
             hyp_bank, self.train_data, data, index
         )
         response = self.api.generate(prompt_input, use_system_prompt)
@@ -124,9 +124,9 @@ class KNNInference(Inference):
         data,
         hyp_bank,
         use_system_prompt=True,
-        knn_threshold=0.0,
-        knn_hypotheses=0,
-        knn_num_examples=0,
+        adaptive_threshold=0.0,
+        adaptive_num_hypotheses=0,
+        adaptive_num_examples=0,
     ):
         num_train_data_samples = get_num_examples(self.train_data)
         similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(
@@ -156,7 +156,7 @@ class KNNInference(Inference):
             similarity_matrix,
             accuracy_per_hypothesis,
             similarity_per_hypothesis,
-            knn_threshold,
+            adaptive_threshold,
         )
         key_list = list(one_hot_encoded_dict.keys())
         selected_hypotheses = [key_list[idx] for idx in selected_indices]
@@ -164,17 +164,17 @@ class KNNInference(Inference):
 
         top_k_hypotheses = sorted(
             selected_hypotheses, key=lambda x: hyp_bank[x].acc, reverse=True
-        )[:knn_hypotheses]
+        )[:adaptive_num_hypotheses]
 
         selected_hyp_bank = {}
         for hypothesis in top_k_hypotheses:
             selected_hyp_bank[hypothesis] = hyp_bank[hypothesis]
         for hyp in selected_hyp_bank:
             selected_hyp_bank[hyp].set_hypothesis(hyp)
-            if len(selected_hyp_bank[hyp].correct_examples) > knn_num_examples:
+            if len(selected_hyp_bank[hyp].correct_examples) > adaptive_num_examples:
                 selected_hyp_bank[hyp].set_example(
                     random.sample(
-                        selected_hyp_bank[hyp].correct_examples, knn_num_examples
+                        selected_hyp_bank[hyp].correct_examples, adaptive_num_examples
                     )
                 )
 
@@ -373,9 +373,9 @@ class FilterAndWeightInference(Inference):
         return self._run_inference_final(data, hyp_bank, use_system_prompt, **kwargs)
 
 
-class SeparateStepsKNNInference(KNNInference):
+class TwoStepAdaptiveInference(OneStepAdaptiveInference):
     """
-    This class is essentially KNN inference with separate calls for
+    This class separate adaptive inference with separate calls for
     selecting hypotheses and making predictions.
     """
 
@@ -399,7 +399,7 @@ class SeparateStepsKNNInference(KNNInference):
         return prediction, actual_label
 
     def select_hypotheses(self, data, index, hyp_bank, use_system_prompt):
-        prompt_input = self.prompt_class.knn_selection(
+        prompt_input = self.prompt_class.adaptive_selection(
             hyp_bank, self.train_data, data, index
         )
         response = self.api.generate(prompt_input, use_system_prompt)
@@ -530,8 +530,8 @@ class UpperboundInference(Inference):
 
 INFERENCE_DICT = {
     "default": DefaultInference,
-    "knn": KNNInference,
+    "one_step_adaptive": OneStepAdaptiveInference,
     "filter_and_weight": FilterAndWeightInference,
-    "knn_separate_steps": SeparateStepsKNNInference,
+    "two_step_adaptive": TwoStepAdaptiveInference,
     "upperbound": UpperboundInference,
 }

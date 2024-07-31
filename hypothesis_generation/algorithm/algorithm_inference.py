@@ -79,12 +79,12 @@ def parse_args():
     parser.add_argument('--inference_style', type=str, choices=INFERENCE_DICT.keys(), help='types of inference methods')
     parser.add_argument('--k', type=int, default=1, help='Number of hypotheses to use')
 
-    # knn specific arguments
-    parser.add_argument('--knn_hypotheses', type=int, default=0, help="Number of hypotheses to choose from during KNN")
-    parser.add_argument('--knn_num_examples', type=int, default=0, help='Number of examples per hypotheses to use for KNN')
-    parser.add_argument('--knn_threshold', type=float, default=0.0, help='Threshold value for similarity matrix. If it is higher than these, then hypotheses are not selected')
-    parser.add_argument('--add_examples', type=bool, default=False, help='Whether to add examples at the inference step (when we use KNN with separate steps).')
-    parser.add_argument('--example_only_selection', type=bool, default=False, help='Whether to use only examples at the selection step (when we use KNN with separate steps).')
+    # adaptive inference specific arguments
+    parser.add_argument('--adaptive_num_hypotheses', type=int, default=0, help="Number of hypotheses to choose from during adaptive inference")
+    parser.add_argument('--adaptive_num_examples', type=int, default=0, help='Number of examples per hypotheses to use for adaptive inference')
+    parser.add_argument('--adaptive_threshold', type=float, default=0.0, help='Threshold value for similarity matrix. If it is higher than these, then hypotheses are not selected')
+    parser.add_argument('--add_examples', type=bool, default=False, help='Whether to add examples at the inference step (when we use adaptive inference with separate steps).')
+    parser.add_argument('--example_only_selection', type=bool, default=False, help='Whether to use only examples at the selection step (when we use adaptive inference with separate steps).')
     parser.add_argument('--generate_prob', type=bool, default=False, help="Output probabilities.")
     # file specific arguments
     parser.add_argument('--use_ood_reviews', type=str, default="None", help="Use out-of-distribution hotel reviews.")
@@ -107,7 +107,7 @@ def main():
     for hypothesis in dict:
         hyp_bank[hypothesis] = dict_to_summary_information(dict[hypothesis])
 
-    assert args.knn_hypotheses <= len(hyp_bank), f'The number of hypotheses chosen in KNN must be less than the total number of hypotheses'
+    assert args.adaptive_num_hypotheses <= len(hyp_bank), f'The number of hypotheses chosen in adaptive inference must be less than the total number of hypotheses'
     api = setup_LLM(args)
     for seed in seeds:
         args.current_seed = seed

@@ -11,7 +11,7 @@ prompt_templates:
     A hotel review is the following: "${review_sentence}"
     The review is: ${label}.
     
-  knn_info_prompt: |
+  adaptive_info_prompt: |
     A hotel review is the following: "${review_sentence}"
     The review is: ${label}.
     
@@ -88,7 +88,7 @@ prompt_templates:
 
       Answer:
 
-  knn:
+  adaptive_inference:
     instructions: |-
       You are a professional hotel review analyst and you are able to determine whether a hotel review is deceptive or truthful. 
       In other words, your job is to analyze if a hotel review review is written by someone who had genuine experiences with the hotel. 
@@ -105,7 +105,7 @@ prompt_templates:
 
     user: |-
       Here are some previously generated patterns with some example where it predicted correctly if a hotel review is deceptive or truthful.
-      ${knn_info_prompt}
+      ${adaptive_info_prompt}
       New hotel review:
       A hotel review is the following: "${review_sentence}"
 
@@ -117,7 +117,7 @@ prompt_templates:
       Step 4: Give your final answer.
       Answer:
 
-  knn_selection:
+  adaptive_selection:
     instructions: |-
       You are a professional hotel review analyst and you are able to determine whether a hotel review is deceptive or truthful. 
       In other words, your job is to analyze if a hotel review review is written by someone who had genuine experiences with the hotel. 
@@ -130,7 +130,7 @@ prompt_templates:
 
     user: |-
       Here are some previously generated patterns with some examples where it predicted correctly for whether a hotel review is deceptive or truthful.
-      ${knn_info_prompt}
+      ${adaptive_info_prompt}
       New hotel review:
       A hotel review is the following: "${review_sentence}"
 

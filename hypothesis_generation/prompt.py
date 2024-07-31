@@ -107,50 +107,50 @@ class BasePrompt(ABC):
 
         return (instruction_prompt, user_prompt)
 
-    def knn_inference(self, hypotheses_dict, train_data, test_data, test_idx):
+    def one_step_adaptive_inference(self, hypotheses_dict, train_data, test_data, test_idx):
         """
-        KNN inference prompt
+        One step adaptive inference prompt
         """
 
-        knn_info_prompt = ""
+        adaptive_info_prompt = ""
         for hyp_idx, (_, hypothesis_class) in enumerate(hypotheses_dict.items()):
             hypothesis_text = hypothesis_class.hypothesis
             hypothesis_related_examples = hypothesis_class.correct_examples
-            knn_info_prompt += f'Pattern {hyp_idx + 1}: {hypothesis_text}\n'
+            adaptive_info_prompt += f'Pattern {hyp_idx + 1}: {hypothesis_text}\n'
 
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
-                knn_info_prompt += f'Example {ex_idx + 1}:\n'
-                knn_info_prompt += self._information_prompt(train_data, example_info[0], 'knn_info_prompt')
+                adaptive_info_prompt += f'Example {ex_idx + 1}:\n'
+                adaptive_info_prompt += self._information_prompt(train_data, example_info[0], 'adaptive_info_prompt')
 
-        instruction_prompt, user_prompt = self._get_prompt_template('knn')
+        instruction_prompt, user_prompt = self._get_prompt_template('adaptive_inference')
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        substitute_dict['knn_info_prompt'] = knn_info_prompt
+        substitute_dict['adaptive_info_prompt'] = adaptive_info_prompt
 
         instruction_prompt = Template(instruction_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
 
         return (instruction_prompt, user_prompt)
 
-    def knn_selection(self, hypotheses_dict, train_data, test_data, test_idx):
+    def adaptive_selection(self, hypotheses_dict, train_data, test_data, test_idx):
         """
-        KNN hypothesis selection prompt
+        Hypothesis selection prompt for two step adaptive inference
         """
 
-        knn_info_prompt = ""
+        adaptive_info_prompt = ""
         for hyp_idx, (_, hypothesis_class) in enumerate(hypotheses_dict.items()):
             hypothesis_text = hypothesis_class.hypothesis
             hypothesis_related_examples = hypothesis_class.correct_examples
-            knn_info_prompt += f'Pattern {hyp_idx + 1}: {hypothesis_text}\n'
+            adaptive_info_prompt += f'Pattern {hyp_idx + 1}: {hypothesis_text}\n'
 
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
-                knn_info_prompt += f'Example {ex_idx + 1}:\n'
-                knn_info_prompt += self._information_prompt(train_data, example_info[0], 'knn_info_prompt')
+                adaptive_info_prompt += f'Example {ex_idx + 1}:\n'
+                adaptive_info_prompt += self._information_prompt(train_data, example_info[0], 'adaptive_info_prompt')
 
-        instruction_prompt, user_prompt = self._get_prompt_template('knn_selection')
+        instruction_prompt, user_prompt = self._get_prompt_template('adaptive_selection')
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        substitute_dict['knn_info_prompt'] = knn_info_prompt
+        substitute_dict['adaptive_info_prompt'] = adaptive_info_prompt
 
         instruction_prompt = Template(instruction_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
