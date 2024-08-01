@@ -34,6 +34,19 @@ class BasePrompt(ABC):
         user_prompt = self.task.prompt_template[key]["user"]
         return system_prompt, user_prompt
 
+    def _convert_to_messages(self, system_prompt: str, user_prompt: str) -> list[Dict]:
+        messages = [
+            {
+                "role": "system",
+                "content": system_prompt
+            },
+            {
+                "role": "user",
+                "content": user_prompt
+            }
+        ]
+        return messages
+    
     def few_shot_baseline(self, train_data, num_few_shot, test_data, test_idx):
         """
         Few shot prompt for baseline
@@ -55,7 +68,7 @@ class BasePrompt(ABC):
         system_prompt = Template(system_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
 
-        return (system_prompt, user_prompt)
+        return self._convert_to_messages(system_prompt, user_prompt)
 
     def batched_generation(self,
                            train_data,
@@ -75,7 +88,7 @@ class BasePrompt(ABC):
         system_prompt = Template(system_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
 
-        return (system_prompt, user_prompt)
+        return self._convert_to_messages(system_prompt, user_prompt)
 
     def inference(self,
                   hypotheses_dict,
@@ -95,7 +108,7 @@ class BasePrompt(ABC):
         system_prompt = Template(system_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
 
-        return (system_prompt, user_prompt)
+        return self._convert_to_messages(system_prompt, user_prompt)
 
     def one_step_adaptive_inference(self, hypotheses_dict, train_data, test_data, test_idx):
         """
@@ -120,7 +133,7 @@ class BasePrompt(ABC):
         system_prompt = Template(system_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
 
-        return (system_prompt, user_prompt)
+        return self._convert_to_messages(system_prompt, user_prompt)
 
     def adaptive_selection(self, hypotheses_dict, train_data, test_data, test_idx):
         """
@@ -145,7 +158,7 @@ class BasePrompt(ABC):
         system_prompt = Template(system_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
 
-        return (system_prompt, user_prompt)
+        return self._convert_to_messages(system_prompt, user_prompt)
 
     def is_relevant(self, hypotheses_dict, test_data, test_idx):
         """
@@ -162,4 +175,4 @@ class BasePrompt(ABC):
         system_prompt = Template(system_prompt).substitute(substitute_dict)
         user_prompt = Template(user_prompt).substitute(substitute_dict)
 
-        return (system_prompt, user_prompt)
+        return self._convert_to_messages(system_prompt, user_prompt)

@@ -77,12 +77,9 @@ class LlamaAPI:
     def __init__(self, llama):
         self.llama = llama
 
-    def generate(self, system_prompt, user_prompt, max_tokens=500):
+    def generate(self, messages, max_tokens=500):
         output = self.llama(
-            [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
+            messages,
             max_new_tokens=max_tokens,
         )
         return output[0]["generated_text"][-1]["content"]
@@ -104,12 +101,9 @@ class MixtralAPI:
     #     )[0]
     #     output_text = output_text[len(prompt) :]
     #     return output_text
-    def generate(self, system_prompt, user_prompt, max_tokens=500):
-        output = self.llama(
-            [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
+    def generate(self, messages, max_tokens=500):
+        output = self.mixtral(
+            messages,
             max_new_tokens=max_tokens,
         )
         return output[0]["generated_text"][-1]["content"]
@@ -285,13 +279,9 @@ class MixtralWrapper(LLMWrapper):
         else:
             return client
 
-    def generate(self, prompt, inst_in_sys=True, max_tokens=500):
-        system_prompt = prompt[0]
-        user_prompt = prompt[1]
-
+    def generate(self, messages, inst_in_sys=True, max_tokens=500):
         output = self.api.generate(
-            system_prompt=system_prompt,
-            user_prompt=user_prompt,
+            messages=messages,
             max_tokens=max_tokens,
         )
         return output
@@ -333,13 +323,9 @@ class LlamaWrapper(LLMWrapper):
         else:
             return client
 
-    def generate(self, prompt, inst_in_sys=True, max_tokens=500):
-        system_prompt = prompt[0]
-        user_prompt = prompt[1]
-
+    def generate(self, messages, inst_in_sys=True, max_tokens=500):
         output = self.api.generate(
-            system_prompt=system_prompt,
-            user_prompt=user_prompt,
+            messages=messages,
             max_tokens=max_tokens,
         )
         return output
