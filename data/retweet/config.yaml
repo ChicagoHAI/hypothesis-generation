@@ -17,7 +17,7 @@ prompt_templates:
   few_shot_prefix: |
     Here are some examples:
   batched_generation:
-    instructions: |-
+    system: |-
       You are a social media expert. You are an expert at determining which tweet will be retweeted more.
       Given a set of observations, you want to generation hypotheses that will help predict which tweet out of a pair of tweets is more likely to be retweeted.
       Please note that the paired tweets are about the same content and are posted by the same user, so you should focus on the wording difference between the two tweets in each pair.
@@ -43,7 +43,7 @@ prompt_templates:
       Proposed hypotheses:
 
   few_shot_baseline:
-    instructions: |-
+    system: |-
       Instruction: 
       You are a social media expert.
       Given two tweets, you are asked to predict which tweet will attract more retweets.
@@ -58,7 +58,7 @@ prompt_templates:
       Which one of the two tweets will get more retweets?
 
   inference:
-    instructions: |-
+    system: |-
       You are a social media expert.
       Given a pair of tweets, you are asked to predict which tweet will be retweeted more.
       Please note that the paired tweets are about the same content and are posted by the same user, so you should focus on the wording difference between the two tweets.
@@ -81,7 +81,7 @@ prompt_templates:
       Final answer:
 
   is_relevant:
-    instructions: |-
+    system: |-
       You are a social media expert.
       You are an expert at predicting which tweet our of a pair of tweets will be retweeted more.
       Please note that the paired tweets are about the same content and are posted by the same user, so you should focus on the wording difference between the two tweets.
@@ -100,7 +100,7 @@ prompt_templates:
       Is the given pattern relevant to the two tweets above?
 
   adaptive_inference:
-    instructions: |-
+    system: |-
       You are a social media expert.
       Given a pair of tweets, you are asked to predict which tweet will be retweeted more.
       Please note that the paired tweets are about the same content and are posted by the same user, so you should focus on the wording difference between the two tweets.
@@ -132,7 +132,7 @@ prompt_templates:
       Step 5: Give your final answer.
 
   adaptive_selection:
-    instructions: |-
+    system: |-
       You are a social media expert.
       You are an expert at predicting which tweet our of a pair of tweets will be retweeted more.
       From past experiences, you learned some patterns.

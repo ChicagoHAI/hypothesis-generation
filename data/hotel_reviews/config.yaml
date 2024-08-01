@@ -18,7 +18,7 @@ prompt_templates:
   few_shot_prefix: |
     We have seen some hotel reviews:
   batched_generation:
-    instructions: |-
+    system: |-
       You're a professional hotel review analyst.
       Given a set of hotel reviews, we want to generate hypotheses that are useful for predicting whether a review is truthful or deceptive. In other words, we want to know whether the review is written by a someone who actually lived in the hotel.
 
@@ -40,7 +40,7 @@ prompt_templates:
       Proposed hypotheses:
 
   few_shot_baseline:
-    instructions: |-
+    system: |-
       You are a deceptive detection agent and want to determine whether a hotel review is truthful or deceptive.
       In other words, we want to know whether the review is written by a someone who actually lived in the hotel.
       You need to determine whether this pattern holds for the current hotel review, and also predict whether the current hotel review is truthful or deceptive.
@@ -56,7 +56,7 @@ prompt_templates:
       Answer:
 
   inference:
-    instructions: |-
+    system: |-
       You are a professional deceptive detection agent and your job is to determine whether a hotel review is truthful or deceptive. 
       In other words, we want to know whether the review is written by someone who had real experiences with the hotel. 
       From past experiences, you learned a pattern. 
@@ -74,7 +74,7 @@ prompt_templates:
       Second step: Based on the pattern, is this hotel review deceptive or truthful?
 
   is_relevant:
-    instructions: |-
+    system: |-
       You are a deceptive detection agent for hotel reviews. 
       From past experiences, you learned a pattern about how to judge whether a hotel review is truthful or deceptive.
       Now, given a new hotel review, you need to determine whether this pattern is relevant or not.
@@ -89,7 +89,7 @@ prompt_templates:
       Answer:
 
   adaptive_inference:
-    instructions: |-
+    system: |-
       You are a professional hotel review analyst and you are able to determine whether a hotel review is deceptive or truthful. 
       In other words, your job is to analyze if a hotel review review is written by someone who had genuine experiences with the hotel. 
       From past experiences, you learned some patterns. 
@@ -118,7 +118,7 @@ prompt_templates:
       Answer:
 
   adaptive_selection:
-    instructions: |-
+    system: |-
       You are a professional hotel review analyst and you are able to determine whether a hotel review is deceptive or truthful. 
       In other words, your job is to analyze if a hotel review review is written by someone who had genuine experiences with the hotel. 
       From past experiences, you learned some patterns. 

@@ -88,24 +88,31 @@ class LlamaAPI:
         return output[0]["generated_text"][-1]["content"]
 
 
-class MistralAPI:
-    def __init__(self, mistral, tokenizer, device):
-        self.mistral = mistral
-        self.tokenizer = tokenizer
-        self.device = device
+class MixtralAPI:
+    def __init__(self, mixtral):
+        self.mixtral = mixtral
 
-    def generate(self, prompt, max_tokens=500):
-        model_inputs = self.tokenizer([prompt], return_tensors="pt").to(self.device)
-        generated_ids = self.mistral.generate(
-            **model_inputs,
+    # def generate(self, prompt, max_tokens=500):
+    #     model_inputs = self.tokenizer([prompt], return_tensors="pt").to(self.device)
+    #     generated_ids = self.mistral.generate(
+    #         **model_inputs,
+    #         max_new_tokens=max_tokens,
+    #         pad_token_id=self.tokenizer.eos_token_id,
+    #     )
+    #     output_text = self.tokenizer.batch_decode(
+    #         generated_ids, skip_special_tokens=True
+    #     )[0]
+    #     output_text = output_text[len(prompt) :]
+    #     return output_text
+    def generate(self, system_prompt, user_prompt, max_tokens=500):
+        output = self.llama(
+            [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
             max_new_tokens=max_tokens,
-            pad_token_id=self.tokenizer.eos_token_id,
         )
-        output_text = self.tokenizer.batch_decode(
-            generated_ids, skip_special_tokens=True
-        )[0]
-        output_text = output_text[len(prompt) :]
-        return output_text
+        return output[0]["generated_text"][-1]["content"]
 
 
 class LLMWrapper(ABC):
@@ -256,14 +263,21 @@ class MixtralWrapper(LLMWrapper):
             else:
                 raise ValueError(f"Model {model} not recognized.")
 
-        model = AutoModelForCausalLM.from_pretrained(
-            path_name,
-            cache_dir=cache_dir,
-            device_map="auto",
-        )
-        tokenizer = AutoTokenizer.from_pretrained(path_name, cache_dir=cache_dir)
+        # model = AutoModelForCausalLM.from_pretrained(
+        #     path_name,
+        #     cache_dir=cache_dir,
+        #     device_map="auto",
+        # )
+        # tokenizer = AutoTokenizer.from_pretrained(path_name, cache_dir=cache_dir)
 
-        client = MistralAPI(model, tokenizer, device)
+        mixtral = pipeline(
+            "text-generation",
+            device_map="auto",
+            model=path_name,
+            model_kwargs=kwargs,
+        )
+
+        client = MixtralAPI(mixtral)
         api = MixtralAPICache(client=client, port=PORT)
 
         if use_cache == 1:
@@ -272,11 +286,13 @@ class MixtralWrapper(LLMWrapper):
             return client
 
     def generate(self, prompt, inst_in_sys=True, max_tokens=500):
-        # Mistral always requires putting instructions around the [INST] [/INST] tokens
-        instruction_wrapper = INST_WRAPPER["mistral"]
-        system_prompt, user_prompt = transform_sys_prompt(prompt, instruction_wrapper)
+        system_prompt = prompt[0]
+        user_prompt = prompt[1]
+
         output = self.api.generate(
-            prompt=system_prompt + user_prompt, max_tokens=max_tokens
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            max_tokens=max_tokens,
         )
         return output
 

@@ -21,7 +21,7 @@ prompt_templates:
   few_shot_prefix: |
     Here are some previous examples to help you.
   batched_generation:
-    instructions: |-
+    system: |-
       You are a professional writer for an online newspaper company. 
       Given a pair of headlines created for the same article, you are asked to determine which will get more clicks. It is likely that the pair of headlines shares similarities, so please focus on their differences. 
       What difference in two headlines leads to more clicks on one than the other?
@@ -45,7 +45,7 @@ prompt_templates:
       Proposed hypotheses:
 
   few_shot_baseline:
-    instructions: |-
+    system: |-
       You are a writer for an online newspaper company. So you are excellent at determining which headlines are more likely to cause users to click on the article.
       You will be given two headlines, and determine which headline was clicked more often.
       You are only asked to give your answer.
@@ -61,7 +61,7 @@ prompt_templates:
 
 
   inference:
-    instructions: |-
+    system: |-
       You are a professional writer for an online newspaper company. 
       Given a pair of headlines created for the same article, you are asked to determine which will get more clicks. It is likely that the pair of headlines shares similarities, so please focus on their differences. 
       From past experiences, you learned some patterns.
@@ -82,7 +82,7 @@ prompt_templates:
       Step 3: Based on the pattern, which headline is likely to get more clicks?
 
   is_relevant:
-    instructions: |-
+    system: |-
       You are a professional writer for an online newspaper company. 
       You are excellent at determining which headlines are more likely to attract users to click on the article.
       From past experiences, you learned a pattern about what makes some headlines more clicked than others.  
@@ -100,7 +100,7 @@ prompt_templates:
       Answer:
 
   adaptive_inference:
-    instructions: |-
+    system: |-
       You are a professional writer for an online newspaper company.
       You are excellent at determining which headlines are more likely to be clicked by users.
       From past experiences, you learned some patterns.
@@ -128,7 +128,7 @@ prompt_templates:
       Step 4: Give your final answer.
 
   adaptive_selection:
-    instructions: |-
+    system: |-
       You are a professional writer for an online newspaper company. 
       Given a pair of headlines created for the same article, you are asked to determine which will get more clicks. It is likely that the pair of headlines shares similarities, so please focus on their differences. 
       From past experiences, you learned some patterns.
