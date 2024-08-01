@@ -111,8 +111,10 @@ def main():
                 init_hypotheses_per_batch=10,
             )
             update_class.save_to_json(
-                f"hypotheses_training_sample_{num_init}_seed_{seed}_epoch_0.json",
                 hypotheses_bank,
+                sample=num_init,
+                seed=seed,
+                epoch=0,
             )
         else:
             dict = load_dict(old_hypothesis_file)
@@ -128,8 +130,10 @@ def main():
                 current_seed=seed,
             )
             update_class.save_to_json(
-                f"hypotheses_training_sample_final_seed_{seed}_epoch_{epoch}.json",
                 hypotheses_bank,
+                sample="final",
+                seed=seed,
+                epoch=epoch,
             )
 
     # print experiment info

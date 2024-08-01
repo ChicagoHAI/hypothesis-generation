@@ -3,6 +3,7 @@ import os
 import json
 import math
 from typing import Dict
+from string import Template
 
 from .generation import Generation
 from .inference import Inference
@@ -20,6 +21,7 @@ class Update(ABC):
         inference_class: Inference,
         replace_class: Replace,
         save_path: str,
+        file_name_template: str = "hypotheses_training_sample_${sample}_seed_${seed}_epoch_${epoch}.json",
         sample_num_to_restart_from=-1,
         num_init=25,
         epoch_to_start_from=0,
@@ -40,6 +42,7 @@ class Update(ABC):
         :param inference_class: The inference class that is called for inference in update for making predictions
         :param replace_class: The replace class that is called for replacing the old hypotheses with the new hypotheses
         :param save_path: Path to save the hypotheses.
+        :param file_name_template: Template for the file name. Default is "hypotheses_training_sample\_${sample}\_seed\_${seed}\_epoch\_${epoch}.json"
         :param sample_num_to_restart_from: Sample number to resume from. Default is -1
         :param num_init: Number of examples to use for initializing hypotheses. Default is 25
         :param epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
@@ -57,6 +60,7 @@ class Update(ABC):
         self.inference_class = inference_class
         self.replace_class = replace_class
         self.save_path = save_path
+        self.file_name_template = file_name_template
         self.train_data = self.inference_class.train_data
         self.sample_num_to_restart_from = sample_num_to_restart_from
         self.num_init = num_init
@@ -72,19 +76,31 @@ class Update(ABC):
         self.save_every_n_examples = save_every_n_examples
 
     @abstractmethod
-    def update(self, hypotheses_bank):
+    def update(
+        self,
+        hypotheses_bank: Dict[str, SummaryInformation],
+        current_epoch,
+        current_seed,
+    ):
         """Implements how the algorithm runs through the samples. To run through the updated samples, start from args.num_init
         Call self.train_data for the train_data
 
         :param args: the parsed arguments
         :param hypotheses_bank: a dictionary of hypotheses that is generated with the initial training data
+        :param current_epoch: the current epoch number
+        :param current_seed: the current seed number
 
         :returns final_hypotheses_bank: a dictionary of the final hypotheses as keys and the values being corresponding SummaryInformation of the hypotheses
 
         """
         pass
 
-    def save_to_json(self, file_name, hypotheses_bank: Dict[str, SummaryInformation]):
+    def save_to_json(
+        self,
+        hypotheses_bank: Dict[str, SummaryInformation],
+        file_name_template=None,
+        **kwargs,
+    ):
         """
         Saves hypotheses bank to a json file
 
@@ -92,13 +108,23 @@ class Update(ABC):
         :param file_name: the name of the file to save the hypotheses
 
         """
+        if file_name_template is None:
+            file_name_template = self.file_name_template
+
         temp_dict = {}
         for hypothesis in hypotheses_bank.keys():
             serialized_dict = hypotheses_bank[hypothesis].__dict__
             temp_dict[hypothesis] = serialized_dict
 
         json_string = json.dumps(temp_dict)
-        with open(os.path.join(self.save_path, file_name), "w") as f:
+        kwargs = {k: str(v) for k, v in kwargs.items()}
+        with open(
+            os.path.join(
+                self.save_path,
+                Template(file_name_template).substitute(kwargs),
+            ),
+            "w",
+        ) as f:
             f.write(json_string)
 
     def initialize_hypotheses(
@@ -133,6 +159,7 @@ class DefaultUpdate(Update):
         inference_class: Inference,
         replace_class: Replace,
         save_path: str,
+        file_name_template: str = "hypotheses_training_sample_${sample}_seed_${seed}_epoch_${epoch}.json",
         sample_num_to_restart_from=-1,
         num_init=25,
         epoch_to_start_from=0,
@@ -151,6 +178,7 @@ class DefaultUpdate(Update):
             inference_class,
             replace_class,
             save_path,
+            file_name_template,
             sample_num_to_restart_from,
             num_init,
             epoch_to_start_from,
@@ -167,7 +195,7 @@ class DefaultUpdate(Update):
 
     def update(
         self,
-        hypotheses_bank,
+        hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
     ):
@@ -260,9 +288,12 @@ class DefaultUpdate(Update):
 
             # save hypotheses to json
             if (i + 1) % self.save_every_n_examples == 0:
-                self.save_to_json(f"{i+1}_seed_{current_seed}", hypotheses_bank)
-            if ((i + 1) == 25) and (current_epoch == 0):
-                self.save_to_json(f"{i+1}_seed_{current_seed}", hypotheses_bank)
+                self.save_to_json(
+                    hypotheses_bank,
+                    sample=i + 1,
+                    seed=current_seed,
+                    epoch=current_epoch,
+                )
 
         return hypotheses_bank
 
@@ -274,6 +305,7 @@ class SamplingUpdate(Update):
         inference_class: Inference,
         replace_class: Replace,
         save_path: str,
+        file_name_template: str = "hypotheses_training_sample_${sample}_seed_${seed}_epoch_${epoch}.json",
         sample_num_to_restart_from=-1,
         num_init=25,
         epoch_to_start_from=0,
@@ -292,6 +324,7 @@ class SamplingUpdate(Update):
             inference_class,
             replace_class,
             save_path,
+            file_name_template,
             sample_num_to_restart_from,
             num_init,
             epoch_to_start_from,
@@ -416,9 +449,12 @@ class SamplingUpdate(Update):
 
             # save hypotheses to json
             if (i + 1) % self.save_every_n_examples == 0:
-                self.save_to_json(f"{i+1}_seed_{current_seed}", hypotheses_bank)
-            if ((i + 1) == 25) and (current_epoch == 0):
-                self.save_to_json(f"{i+1}_seed_{current_seed}", hypotheses_bank)
+                self.save_to_json(
+                    hypotheses_bank,
+                    sample=i + 1,
+                    seed=current_seed,
+                    epoch=current_epoch,
+                )
 
         return hypotheses_bank
 
