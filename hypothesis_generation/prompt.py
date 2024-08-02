@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import os
 import textwrap
 from string import Template
-from typing import Tuple, Union, Dict
+from typing import List, Tuple, Union, Dict
 
 from .tasks import BaseTask
 
@@ -25,92 +25,90 @@ class BasePrompt(ABC):
 
         return substitute_dict
 
-    def _information_prompt(self, data_dict, example_idx, info_key: str) -> Dict[str, str]:
+    def _information_prompt(
+        self, data_dict, example_idx, info_key: str
+    ) -> Dict[str, str]:
         example = {k: v[example_idx] for k, v in data_dict.items()}
         return Template(self.task.prompt_template[info_key]).substitute(example)
 
-    def _get_prompt_template(self, key: str) -> Tuple[str, str]:
-        system_prompt = self.task.prompt_template[key]["system"]
-        user_prompt = self.task.prompt_template[key]["user"]
-        return system_prompt, user_prompt
+    def _get_prompt_template(self, key: str) -> List[Dict[str, str]]:
+        return self.task.prompt_template[key].copy()
 
     def _convert_to_messages(self, system_prompt: str, user_prompt: str) -> list[Dict]:
         messages = [
-            {
-                "role": "system",
-                "content": system_prompt
-            },
-            {
-                "role": "user",
-                "content": user_prompt
-            }
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
         ]
         return messages
-    
+
     def few_shot_baseline(self, train_data, num_few_shot, test_data, test_idx):
         """
         Few shot prompt for baseline
         """
 
-        system_prompt, user_prompt = self._get_prompt_template('few_shot_baseline')
+        prompt = self._get_prompt_template("few_shot_baseline")
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
 
         observations = ""
         few_shot_prefix = ""
         if num_few_shot > 0:
-            few_shot_prefix = substitute_dict['few_shot_prefix']
+            few_shot_prefix = substitute_dict["few_shot_prefix"]
             for j in range(num_few_shot):
-                observations += self._information_prompt(train_data, j, 'observations')
+                observations += self._information_prompt(train_data, j, "observations")
 
-        substitute_dict['observations'] = observations
-        substitute_dict['few_shot_prefix'] = few_shot_prefix
+        substitute_dict["observations"] = observations
+        substitute_dict["few_shot_prefix"] = few_shot_prefix
 
-        system_prompt = Template(system_prompt).substitute(substitute_dict)
-        user_prompt = Template(user_prompt).substitute(substitute_dict)
+        for idx, p in enumerate(prompt):
+            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
 
-        return self._convert_to_messages(system_prompt, user_prompt)
+        return prompt
 
-    def batched_generation(self,
-                           train_data,
-                           num_hypotheses):
+    def batched_generation(self, train_data, num_hypotheses):
         """
         Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
         """
 
-        system_prompt, user_prompt = self._get_prompt_template('batched_generation')
+        prompt = self._get_prompt_template("batched_generation")
 
         observations = ""
-        for example_idx in range(len(train_data['label'])):
-            observations += self._information_prompt(train_data, example_idx, 'observations')
+        for example_idx in range(len(train_data["label"])):
+            observations += self._information_prompt(
+                train_data, example_idx, "observations"
+            )
 
-        substitute_dict = {"num_hypotheses": num_hypotheses, "observations": observations}
+        substitute_dict = {
+            "num_hypotheses": num_hypotheses,
+            "observations": observations,
+        }
 
-        system_prompt = Template(system_prompt).substitute(substitute_dict)
-        user_prompt = Template(user_prompt).substitute(substitute_dict)
+        for idx, p in enumerate(prompt):
+            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
 
-        return self._convert_to_messages(system_prompt, user_prompt)
+        return prompt
 
-    def inference(self,
-                  hypotheses_dict,
-                  test_data,
-                  test_idx):
+    def inference(self, hypotheses_dict, test_data, test_idx):
         """
         Create inference prompt.
         """
 
         hypothesis = list(hypotheses_dict.keys())[0]
 
-        system_prompt, user_prompt = self._get_prompt_template('inference')
+        prompt = self._get_prompt_template("inference")
+        print(prompt)
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        substitute_dict['hypothesis'] = hypothesis
+        substitute_dict["hypothesis"] = hypothesis
 
-        system_prompt = Template(system_prompt).substitute(substitute_dict)
-        user_prompt = Template(user_prompt).substitute(substitute_dict)
+        for idx, p in enumerate(prompt):
+            print(p)
+            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
 
-        return self._convert_to_messages(system_prompt, user_prompt)
+        return prompt
 
-    def one_step_adaptive_inference(self, hypotheses_dict, train_data, test_data, test_idx):
+    def one_step_adaptive_inference(
+        self, hypotheses_dict, train_data, test_data, test_idx
+    ):
         """
         One step adaptive inference prompt
         """
@@ -119,21 +117,23 @@ class BasePrompt(ABC):
         for hyp_idx, (_, hypothesis_class) in enumerate(hypotheses_dict.items()):
             hypothesis_text = hypothesis_class.hypothesis
             hypothesis_related_examples = hypothesis_class.correct_examples
-            adaptive_info_prompt += f'Pattern {hyp_idx + 1}: {hypothesis_text}\n'
+            adaptive_info_prompt += f"Pattern {hyp_idx + 1}: {hypothesis_text}\n"
 
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
-                adaptive_info_prompt += f'Example {ex_idx + 1}:\n'
-                adaptive_info_prompt += self._information_prompt(train_data, example_info[0], 'adaptive_info_prompt')
+                adaptive_info_prompt += f"Example {ex_idx + 1}:\n"
+                adaptive_info_prompt += self._information_prompt(
+                    train_data, example_info[0], "adaptive_info_prompt"
+                )
 
-        system_prompt, user_prompt = self._get_prompt_template('adaptive_inference')
+        prompt = self._get_prompt_template("adaptive_inference")
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        substitute_dict['adaptive_info_prompt'] = adaptive_info_prompt
+        substitute_dict["adaptive_info_prompt"] = adaptive_info_prompt
 
-        system_prompt = Template(system_prompt).substitute(substitute_dict)
-        user_prompt = Template(user_prompt).substitute(substitute_dict)
+        for idx, p in enumerate(prompt):
+            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
 
-        return self._convert_to_messages(system_prompt, user_prompt)
+        return prompt
 
     def adaptive_selection(self, hypotheses_dict, train_data, test_data, test_idx):
         """
@@ -144,21 +144,23 @@ class BasePrompt(ABC):
         for hyp_idx, (_, hypothesis_class) in enumerate(hypotheses_dict.items()):
             hypothesis_text = hypothesis_class.hypothesis
             hypothesis_related_examples = hypothesis_class.correct_examples
-            adaptive_info_prompt += f'Pattern {hyp_idx + 1}: {hypothesis_text}\n'
+            adaptive_info_prompt += f"Pattern {hyp_idx + 1}: {hypothesis_text}\n"
 
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
-                adaptive_info_prompt += f'Example {ex_idx + 1}:\n'
-                adaptive_info_prompt += self._information_prompt(train_data, example_info[0], 'adaptive_info_prompt')
+                adaptive_info_prompt += f"Example {ex_idx + 1}:\n"
+                adaptive_info_prompt += self._information_prompt(
+                    train_data, example_info[0], "adaptive_info_prompt"
+                )
 
-        system_prompt, user_prompt = self._get_prompt_template('adaptive_selection')
+        prompt = self._get_prompt_template("adaptive_selection")
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        substitute_dict['adaptive_info_prompt'] = adaptive_info_prompt
+        substitute_dict["adaptive_info_prompt"] = adaptive_info_prompt
 
-        system_prompt = Template(system_prompt).substitute(substitute_dict)
-        user_prompt = Template(user_prompt).substitute(substitute_dict)
+        for idx, p in enumerate(prompt):
+            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
 
-        return self._convert_to_messages(system_prompt, user_prompt)
+        return prompt
 
     def is_relevant(self, hypotheses_dict, test_data, test_idx):
         """
@@ -167,12 +169,12 @@ class BasePrompt(ABC):
 
         hypothesis = list(hypotheses_dict.keys())[0]
 
-        system_prompt, user_prompt = self._get_prompt_template('is_relevant')
+        prompt = self._get_prompt_template("is_relevant")
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        substitute_dict['hypothesis'] = hypothesis
+        substitute_dict["hypothesis"] = hypothesis
 
-        system_prompt = Template(system_prompt).substitute(substitute_dict)
-        user_prompt = Template(user_prompt).substitute(substitute_dict)
+        for idx, p in enumerate(prompt):
+            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
 
-        return self._convert_to_messages(system_prompt, user_prompt)
+        return prompt

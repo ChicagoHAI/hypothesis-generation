@@ -28,7 +28,14 @@ class BaseTask(ABC):
         if "ood_test_data_path" in data:
             self.ood_test_data_path = data["ood_test_data_path"]
 
-        self.prompt_template = data["prompt_templates"]
+        self.prompt_template = {
+            k: (
+                [{"role": kk, "content": vv} for kk, vv in v.items()]
+                if isinstance(v, dict)
+                else v
+            )
+            for k, v in data["prompt_templates"].items()
+        }
 
         self.extract_label = extract_label
 
