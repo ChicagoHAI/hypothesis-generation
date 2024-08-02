@@ -3,6 +3,7 @@ import os
 import textwrap
 from string import Template
 from typing import List, Tuple, Union, Dict
+from copy import deepcopy
 
 from .tasks import BaseTask
 
@@ -32,9 +33,9 @@ class BasePrompt(ABC):
         return Template(self.task.prompt_template[info_key]).substitute(example)
 
     def _get_prompt_template(self, key: str) -> List[Dict[str, str]]:
-        return self.task.prompt_template[key].copy()
+        return deepcopy(self.task.prompt_template[key])
 
-    def _convert_to_messages(self, system_prompt: str, user_prompt: str) -> list[Dict]:
+    def _convert_to_messages(self, system_prompt: str, user_prompt: str) -> List[Dict]:
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
@@ -95,13 +96,11 @@ class BasePrompt(ABC):
         hypothesis = list(hypotheses_dict.keys())[0]
 
         prompt = self._get_prompt_template("inference")
-        print(prompt)
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict["hypothesis"] = hypothesis
 
         for idx, p in enumerate(prompt):
-            print(p)
             prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
 
         return prompt

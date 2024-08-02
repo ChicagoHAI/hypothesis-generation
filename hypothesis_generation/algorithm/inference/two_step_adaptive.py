@@ -32,7 +32,7 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         response = self.api.generate(prompt_input, use_system_prompt)
         prediction = self.prompt_class.task.extract_label(response)
         actual_label = data["label"][index]
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
+        print(f"Prompt: {prompt_input}\n")
         print(f"Response: {response}")
         print(f"Prediction: {prediction}")
         print(f"Ground truth: {actual_label}")
@@ -44,7 +44,7 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         )
         response = self.api.generate(prompt_input, use_system_prompt)
 
-        print("Prompt:", prompt_input[0], prompt_input[1])
+        print("Prompt:", prompt_input)
         print("Response:", response)
 
         hyp_idx = re.search(r"Chosen Pattern:\s*Pattern\s*(\d+)", response)

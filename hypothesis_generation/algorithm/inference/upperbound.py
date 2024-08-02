@@ -22,7 +22,7 @@ class UpperboundInference(Inference):
             len(hyp_bank.keys()) == 1
         ), "default inference only supports one hypothesis at a time"
         prompt_input = self.prompt_class.inference(hyp_bank, data, index)
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
+        print(f"Prompt: {prompt_input}\n")
         response = self.api.generate(prompt_input, use_system_prompt)
         print(f"Response: {response}")
         prediction = self.prompt_class.task.extract_label(response)

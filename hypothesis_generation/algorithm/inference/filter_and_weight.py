@@ -42,7 +42,7 @@ class FilterAndWeightInference(Inference):
                 pred_dict[pred] = weight
         prediction = max(pred_dict, key=pred_dict.get)
 
-        print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
+        print(f"Prompt: {prompt_input}\n")
         print(f"Response: {response}")
         print(f"Predictions (weights): {pred_dict}")
         print(f"Prediction (final): {prediction}")
@@ -70,7 +70,7 @@ class FilterAndWeightInference(Inference):
             prompt_input = self.prompt_class.is_relevant(temp_hyp_bank, data, index)
             response = self.api.generate(prompt_input, use_system_prompt)
 
-            print(f"Prompt: {prompt_input[0]}\n{prompt_input[1]}\n")
+            print(f"Prompt: {prompt_input}\n")
             print(f"Response: {response}")
 
             # only keep the part after "Final answer:"
