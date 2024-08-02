@@ -34,7 +34,7 @@ class BasePrompt(ABC):
     def _get_prompt_template(self, key: str) -> List[Dict[str, str]]:
         return self.task.prompt_template[key].copy()
 
-    def _convert_to_messages(self, system_prompt: str, user_prompt: str) -> list[Dict]:
+    def _convert_to_messages(self, system_prompt: str, user_prompt: str) -> List[Dict]:
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
