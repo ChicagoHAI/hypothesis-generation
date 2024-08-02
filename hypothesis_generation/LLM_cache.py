@@ -196,28 +196,10 @@ class ClaudeAPICache(APICache):
         super().__init__(**redis_kwargs)
 
 
-class MixtralAPICache(APICache):
+class LocalModelAPICache(APICache):
     """A cache wrapper for Anthropic Message API calls."""
 
-    service = "Mixtral"
-    exceptions_to_catch = (
-        # TODO: add more exceptions
-    )
-
-    def __init__(self, client, **redis_kwargs: dict):
-        """Initializes an ClaudeAPICache Object.
-
-        Args:
-            port: Port of the Redis backend.
-            client: Authenticated Claude client
-        """
-        self.api_call = client.generate
-        super().__init__(**redis_kwargs)
-
-class LlamaAPICache(APICache):
-    """A cache wrapper for Anthropic Message API calls."""
-
-    service = "Mixtral"
+    service = "LocalModel"
     exceptions_to_catch = (
         # TODO: add more exceptions
     )

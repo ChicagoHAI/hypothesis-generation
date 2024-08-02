@@ -21,7 +21,7 @@ from pprint import pprint
 # from openai_api_cache import OpenAIAPICache
 from anthropic import Anthropic
 
-from .LLM_cache import ClaudeAPICache, MixtralAPICache, OpenAIAPICache, LlamaAPICache
+from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from .consts.model_consts import (
     INST_WRAPPER,
     GPT_MODELS,
@@ -53,56 +53,12 @@ def get_device():
     return device
 
 
-def transform_sys_prompt(prompt, instruction_wrapper, inst_in_sys=True):
-    system_prompt = prompt[0]
-    user_prompt = prompt[1]
+class LocalModelAPI:
+    def __init__(self, localmodel, **kwargs):
+        self.localmodel = localmodel
 
-    if inst_in_sys:
-        # If we put instructions in system prompt, wrap them by corresponding tokens for each model
-        system_prompt = (
-            f"{instruction_wrapper[0]}{system_prompt}{instruction_wrapper[1]}"
-        )
-    else:
-        # Else, we just put the default system prompt and put instructions in user prompt, default wrapped by ### Instructions ###
-        system_prompt = "You're a helpful assistant."
-        user_prompt = (
-            f"{INST_WRAPPER['default'][0]}{prompt[0]}{INST_WRAPPER['default'][1]}"
-            + prompt[1]
-        )
-
-    return system_prompt, user_prompt
-
-
-class LlamaAPI:
-    def __init__(self, llama):
-        self.llama = llama
-
-    def generate(self, messages, max_tokens=500):
-        output = self.llama(
-            messages,
-            max_new_tokens=max_tokens,
-        )
-        return output[0]["generated_text"][-1]["content"]
-
-
-class MixtralAPI:
-    def __init__(self, mixtral):
-        self.mixtral = mixtral
-
-    # def generate(self, prompt, max_tokens=500):
-    #     model_inputs = self.tokenizer([prompt], return_tensors="pt").to(self.device)
-    #     generated_ids = self.mistral.generate(
-    #         **model_inputs,
-    #         max_new_tokens=max_tokens,
-    #         pad_token_id=self.tokenizer.eos_token_id,
-    #     )
-    #     output_text = self.tokenizer.batch_decode(
-    #         generated_ids, skip_special_tokens=True
-    #     )[0]
-    #     output_text = output_text[len(prompt) :]
-    #     return output_text
-    def generate(self, messages, max_tokens=500):
-        output = self.mixtral(
+    def generate(self, messages, max_tokens=500, **kwargs):
+        output = self.localmodel(
             messages,
             max_new_tokens=max_tokens,
         )
@@ -122,9 +78,9 @@ class LLMWrapper(ABC):
         elif model in CLAUDE_MODELS.keys():
             return ClaudeWrapper(model, use_cache=use_cache, **kwargs)
         elif model in LLAMA_MODELS:
-            return LlamaWrapper(model, use_cache=use_cache, **kwargs)
+            return LocalModelWrapper(model, use_cache=use_cache, **kwargs)
         elif model in MISTRAL_MODELS:
-            return MixtralWrapper(model, use_cache=use_cache, **kwargs)
+            return LocalModelWrapper(model, use_cache=use_cache, **kwargs)
         else:
             raise NotImplementedError
 
@@ -144,14 +100,11 @@ class GPTWrapper(LLMWrapper):
 
         return api
 
-    def generate(self, prompt, inst_in_sys=True, max_tokens=500):
+    def generate(self, messages, max_tokens=500, **kwargs):
         # Call OpenAI's GPT-3.5 API to generate inference
 
         # basically adding ### Instructions ### around the instructions prompt
-        instruction_wrapper = INST_WRAPPER["default"]
-        system_prompt, user_prompt = transform_sys_prompt(
-            prompt, instruction_wrapper, inst_in_sys
-        )
+
         if self.use_cache == 1:
             resp = self.api.generate(
                 # model="gpt-3.5-turbo-0613",
@@ -159,10 +112,7 @@ class GPTWrapper(LLMWrapper):
                 temperature=0.7,
                 max_tokens=max_tokens,
                 n=1,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
+                messages=messages,
             )
         else:
             resp = openai.ChatCompletion.create(
@@ -171,10 +121,7 @@ class GPTWrapper(LLMWrapper):
                 temperature=0.7,
                 max_tokens=max_tokens,
                 n=1,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
+                messages=messages,
             )
 
         return resp["choices"][0]["message"]["content"]
@@ -200,12 +147,12 @@ class ClaudeWrapper(LLMWrapper):
         else:
             return client
 
-    def generate(self, prompt, inst_in_sys=True, max_tokens=500):
+    def generate(self, messages, max_tokens=500, **kwargs):
         # basically adding ### Instructions ### around the instructions prompt
-        instruction_wrapper = INST_WRAPPER["default"]
-        system_prompt, user_prompt = transform_sys_prompt(
-            prompt, instruction_wrapper, inst_in_sys
-        )
+
+        for idx, msg in enumerate(messages):
+            if msg["role"] == "system":
+                system_prompt = messages.pop(idx)["content"]
 
         if self.use_cache == 1:
             response = self.api.generate(
@@ -213,7 +160,7 @@ class ClaudeWrapper(LLMWrapper):
                 max_tokens=max_tokens,
                 temperature=0,
                 system=system_prompt,  # <-- system prompt
-                messages=[{"role": "user", "content": user_prompt}],  # <-- user prompt
+                messages=messages,  # <-- user prompt
             )
         else:
             response = self.api.messages.create(
@@ -221,14 +168,14 @@ class ClaudeWrapper(LLMWrapper):
                 max_tokens=max_tokens,
                 temperature=0,
                 system=system_prompt,  # <-- system prompt
-                messages=[{"role": "user", "content": user_prompt}],  # <-- user prompt
+                messages=messages,  # <-- user prompt
             )
         if response == "Output blocked by content filtering policy":
             return None
         return response.content[0].text
 
 
-class MixtralWrapper(LLMWrapper):
+class LocalModelWrapper(LLMWrapper):
     def __init__(self, model, use_cache=1, **kwargs):
         super().__init__(
             model,
@@ -239,7 +186,7 @@ class MixtralWrapper(LLMWrapper):
     def _setup(
         self,
         model,
-        cache_dir=f"./Mixtral_cache",
+        cache_dir=f"./local_models_cache",
         path_name=None,
         use_cache=1,
         **kwargs,
@@ -254,6 +201,7 @@ class MixtralWrapper(LLMWrapper):
                 path_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
             elif model == "Mistral-7B":
                 path_name = "mistralai/Mistral-7B-Instruct-v0.2"
+            
             else:
                 raise ValueError(f"Model {model} not recognized.")
 
@@ -264,66 +212,22 @@ class MixtralWrapper(LLMWrapper):
         # )
         # tokenizer = AutoTokenizer.from_pretrained(path_name, cache_dir=cache_dir)
 
-        mixtral = pipeline(
+        localmodel = pipeline(
             "text-generation",
             device_map="auto",
             model=path_name,
             model_kwargs=kwargs,
         )
 
-        client = MixtralAPI(mixtral)
-        api = MixtralAPICache(client=client, port=PORT)
+        client = LocalModelAPI(localmodel)
+        api = LocalModelAPICache(client=client, port=PORT)
 
         if use_cache == 1:
             return api
         else:
             return client
 
-    def generate(self, messages, inst_in_sys=True, max_tokens=500):
-        output = self.api.generate(
-            messages=messages,
-            max_tokens=max_tokens,
-        )
-        return output
-
-
-class LlamaWrapper(LLMWrapper):
-    def __init__(self, model, use_cache=1, **kwargs):
-        super().__init__(
-            model, use_cache=use_cache, api=self._setup(use_cache=use_cache, **kwargs)
-        )
-
-    def _setup(
-        self,
-        cache_dir=f"./llama_cache",
-        path_name=None,
-        use_cache=1,
-        **kwargs,
-    ):
-        if torch.cuda.is_available():
-            device = "cuda"
-        else:
-            device = "cpu"
-
-        if path_name is None:
-            path_name = f"meta-llama/{self.model}-hf"
-
-        llama = pipeline(
-            "text-generation",
-            device_map="auto",
-            model=path_name,
-            model_kwargs=kwargs,
-        )
-
-        client = LlamaAPI(llama)
-        api = LlamaAPICache(client=client, port=PORT)
-
-        if use_cache == 1:
-            return api
-        else:
-            return client
-
-    def generate(self, messages, inst_in_sys=True, max_tokens=500):
+    def generate(self, messages, max_tokens=500):
         output = self.api.generate(
             messages=messages,
             max_tokens=max_tokens,
