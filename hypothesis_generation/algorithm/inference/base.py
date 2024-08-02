@@ -31,7 +31,7 @@ class Inference(ABC):
         self.train_data = train_data
 
     @abstractmethod
-    def predict(self, data, index, hyp_bank, use_system_prompt=True):
+    def predict(self, data, index, hyp_bank):
         """Implements a specific type of prediction
 
         Parameters
@@ -49,7 +49,7 @@ class Inference(ABC):
         pass
 
     @abstractmethod
-    def run_inference_final(self, data, hyp_bank, use_system_prompt=True, **kwargs):
+    def run_inference_final(self, data, hyp_bank, **kwargs):
         """Implements a specific type of prediction
 
         Parameters

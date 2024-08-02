@@ -60,7 +60,6 @@ class Generation(ABC):
         current_sample,
         num_hypotheses_generate,
         alpha,
-        use_system_prompt,
     ):
         """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
 
@@ -107,7 +106,6 @@ class Generation(ABC):
                     self.train_data,
                     index,
                     {hyp: new_generated_hypotheses[hyp]},
-                    use_system_prompt,
                 )
                 if prediction == actual_label:
                     correct += 1

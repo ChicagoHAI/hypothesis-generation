@@ -17,13 +17,13 @@ class UpperboundInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
 
-    def predict(self, data, index, hyp_bank, use_system_prompt):
+    def predict(self, data, index, hyp_bank):
         assert (
             len(hyp_bank.keys()) == 1
         ), "default inference only supports one hypothesis at a time"
         prompt_input = self.prompt_class.inference(hyp_bank, data, index)
         print(f"Prompt: {prompt_input}\n")
-        response = self.api.generate(prompt_input, use_system_prompt)
+        response = self.api.generate(prompt_input)
         print(f"Response: {response}")
         prediction = self.prompt_class.task.extract_label(response)
         print(f"Prediction: {prediction}")
@@ -31,7 +31,7 @@ class UpperboundInference(Inference):
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
 
-    def _run_inference_final(self, data, hyp_bank, use_system_prompt=True, k=1):
+    def _run_inference_final(self, data, hyp_bank, k=1):
         arg_k = k
 
         # sort hyp_bank by training accuracy from high to low
@@ -53,7 +53,7 @@ class UpperboundInference(Inference):
             print(f"The {count}th hypothesis")
             for i in range(num_samples):
                 pred, label = self.predict(
-                    data, i, {hyp: hyp_bank[hyp]}, use_system_prompt
+                    data, i, {hyp: hyp_bank[hyp]}
                 )
                 pred_list[hyp].append(pred)
                 label_list.append(label)
@@ -91,5 +91,5 @@ class UpperboundInference(Inference):
 
         return pred_list, label_list
 
-    def run_inference_final(self, data, hyp_bank, use_system_prompt=True, **kwargs):
-        return self._run_inference_final(data, hyp_bank, use_system_prompt, **kwargs)
+    def run_inference_final(self, data, hyp_bank, **kwargs):
+        return self._run_inference_final(data, hyp_bank, **kwargs)

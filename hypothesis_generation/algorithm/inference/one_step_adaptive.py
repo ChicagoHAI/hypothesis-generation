@@ -17,11 +17,11 @@ class OneStepAdaptiveInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
 
-    def predict(self, data, index, hyp_bank, use_system_prompt):
+    def predict(self, data, index, hyp_bank):
         prompt_input = self.prompt_class.one_step_adaptive_inference(
             hyp_bank, self.train_data, data, index
         )
-        response = self.api.generate(prompt_input, use_system_prompt)
+        response = self.api.generate(prompt_input)
         prediction = self.prompt_class.task.extract_label(response)
         actual_label = data["label"][index]
         print(f"Prompt: {prompt_input}\n")
@@ -34,7 +34,6 @@ class OneStepAdaptiveInference(Inference):
         self,
         data,
         hyp_bank,
-        use_system_prompt=True,
         adaptive_threshold=0.0,
         adaptive_num_hypotheses=0,
         adaptive_num_examples=0,
@@ -93,14 +92,14 @@ class OneStepAdaptiveInference(Inference):
         pred_list = []
         label_list = []
         for i in range(num_samples):
-            pred, label = self.predict(data, i, selected_hyp_bank, use_system_prompt)
+            pred, label = self.predict(data, i, selected_hyp_bank)
             pred_list.append(pred)
             label_list.append(label)
 
         return pred_list, label_list
 
-    def run_inference_final(self, data, hyp_bank, use_system_prompt=True, **kwargs):
-        return self._run_inference_final(data, hyp_bank, use_system_prompt, **kwargs)
+    def run_inference_final(self, data, hyp_bank, **kwargs):
+        return self._run_inference_final(data, hyp_bank, **kwargs)
 
     def compute_similarity_matrix(self, hyp_bank, num_train_data_samples):
         one_hot_encoded_dict = OrderedDict()

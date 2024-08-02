@@ -18,7 +18,6 @@ class DefaultGeneration(Generation):
         init_batch_size,
         init_hypotheses_per_batch,
         alpha,
-        use_system_prompt,
         **kwargs
     ):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
@@ -51,7 +50,6 @@ class DefaultGeneration(Generation):
                 len(example_indices),
                 init_hypotheses_per_batch,
                 alpha,
-                use_system_prompt,
             )
             hypotheses_bank.update(new_hypotheses)
 

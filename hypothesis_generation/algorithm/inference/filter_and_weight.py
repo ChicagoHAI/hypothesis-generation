@@ -17,7 +17,7 @@ class FilterAndWeightInference(Inference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
 
-    def predict(self, data, index, hyp_bank, use_system_prompt):
+    def predict(self, data, index, hyp_bank):
         """
         Make prediction on one sample (index) of the dataset.
         Use the hypotheses in hyp_bank to make a weighted-vote prediction.
@@ -33,7 +33,7 @@ class FilterAndWeightInference(Inference):
         for hypothesis in hyp_bank:
             hypothesis_dict = {hypothesis: hyp_bank[hypothesis]}
             prompt_input = self.prompt_class.inference(hypothesis_dict, data, index)
-            response = self.api.generate(prompt_input, use_system_prompt)
+            response = self.api.generate(prompt_input)
             pred = self.prompt_class.task.extract_label(response)
             weight = hyp_bank[hypothesis].acc
             if pred in pred_dict:
@@ -50,7 +50,7 @@ class FilterAndWeightInference(Inference):
 
         return prediction, actual_label
 
-    def filter_hypotheses(self, data, index, hyp_bank, use_system_prompt):
+    def filter_hypotheses(self, data, index, hyp_bank):
         """
         Filter the hypotheses in hyp_bank to only include relevant hypotheses for the sample at index.
 
@@ -68,7 +68,7 @@ class FilterAndWeightInference(Inference):
         for hypothesis in hyp_bank:
             temp_hyp_bank = {hypothesis: hyp_bank[hypothesis]}
             prompt_input = self.prompt_class.is_relevant(temp_hyp_bank, data, index)
-            response = self.api.generate(prompt_input, use_system_prompt)
+            response = self.api.generate(prompt_input)
 
             print(f"Prompt: {prompt_input}\n")
             print(f"Response: {response}")
@@ -98,7 +98,7 @@ class FilterAndWeightInference(Inference):
 
         return relevant_hypotheses
 
-    def _run_inference_final(self, data, hyp_bank, use_system_prompt=True, k=1):
+    def _run_inference_final(self, data, hyp_bank, k=1):
         # get the top k hypotheses by reward (save as dictionary)
         if k > len(hyp_bank):
             k = len(hyp_bank)
@@ -114,7 +114,7 @@ class FilterAndWeightInference(Inference):
         label_list = []
         for i in range(num_samples):
             filtered_hypotheses = self.filter_hypotheses(
-                data, i, top_hypotheses, use_system_prompt
+                data, i, top_hypotheses
             )
             # if no hypothesis is relevant, use the hypothesis with the highest accuracy
             if len(filtered_hypotheses) == 0:
@@ -122,16 +122,16 @@ class FilterAndWeightInference(Inference):
                     top_hypotheses, key=lambda x: top_hypotheses[x].acc
                 )
                 filtered_hypotheses[best_hypothesis] = top_hypotheses[best_hypothesis]
-            pred, label = self.predict(data, i, filtered_hypotheses, use_system_prompt)
+            pred, label = self.predict(data, i, filtered_hypotheses)
             pred_list.append(pred)
             label_list.append(label)
 
         return pred_list, label_list
 
-    def run_inference_final(self, data, hyp_bank, use_system_prompt=True, **kwargs):
+    def run_inference_final(self, data, hyp_bank, **kwargs):
         """
         Run over the entire dataset and make predictions.
         For each sample, prompt LLM to determine whether a hypothesis is relevant.
         Use the relevant hypotheses to make a weighted-vote prediction.
         """
-        return self._run_inference_final(data, hyp_bank, use_system_prompt, **kwargs)
+        return self._run_inference_final(data, hyp_bank, **kwargs)

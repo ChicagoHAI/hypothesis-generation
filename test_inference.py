@@ -53,7 +53,7 @@ def main():
 
     task_config_path = "./data/retweet/config.yaml"
     hypothesis_file = f"./outputs/retweet/gpt-4o-mini/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
-    adaptive_num_hypotheses = 0
+    adaptive_num_hypotheses = 5
     num_train = 75
     num_test = 25
     num_val = 10
@@ -107,7 +107,7 @@ def main():
             print("Using test data")
 
         pred_list, label_list = inference_class.run_inference_final(
-            test_data, hyp_bank
+            test_data, hyp_bank, adaptive_num_hypotheses=adaptive_num_hypotheses
         )
 
         if task.task_name == "shoe":
@@ -147,6 +147,7 @@ def main():
     print(f"Total time: {time.time() - start_time} seconds")
     # if api.model in GPT_MODELS:
     #     print(f'Estimated cost: {api.api.session_total_cost()}')
+
 
 if __name__ == "__main__":
     main()

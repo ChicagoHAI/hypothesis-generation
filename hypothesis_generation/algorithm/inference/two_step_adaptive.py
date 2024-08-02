@@ -22,14 +22,14 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
     def __init__(self, api, prompt_class, train_data):
         super().__init__(api, prompt_class, train_data)
 
-    def default_predict(self, data, index, hyp_bank, use_system_prompt):
+    def default_predict(self, data, index, hyp_bank):
         assert (
             len(hyp_bank.keys()) == 1
         ), "default inference only supports one hypothesis at a time"
 
         prompt_input = self.prompt_class.inference(hyp_bank, data, index)
 
-        response = self.api.generate(prompt_input, use_system_prompt)
+        response = self.api.generate(prompt_input)
         prediction = self.prompt_class.task.extract_label(response)
         actual_label = data["label"][index]
         print(f"Prompt: {prompt_input}\n")
@@ -38,11 +38,11 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
 
-    def select_hypotheses(self, data, index, hyp_bank, use_system_prompt):
+    def select_hypotheses(self, data, index, hyp_bank):
         prompt_input = self.prompt_class.adaptive_selection(
             hyp_bank, self.train_data, data, index
         )
-        response = self.api.generate(prompt_input, use_system_prompt)
+        response = self.api.generate(prompt_input)
 
         print("Prompt:", prompt_input)
         print("Response:", response)
@@ -76,11 +76,11 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
 
         return hyp
 
-    def predict(self, data, index, hyp_bank, use_system_prompt):
+    def predict(self, data, index, hyp_bank):
         # select one hypothesis that is most relevant to the sample
-        hyp = self.select_hypotheses(data, index, hyp_bank, use_system_prompt)
+        hyp = self.select_hypotheses(data, index, hyp_bank)
 
         # make prediction using default_predict
         return self.default_predict(
-            data, index, {hyp: hyp_bank[hyp]}, use_system_prompt
+            data, index, {hyp: hyp_bank[hyp]}
         )

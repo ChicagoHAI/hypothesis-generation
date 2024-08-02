@@ -85,7 +85,7 @@ class LLMWrapper(ABC):
             raise NotImplementedError
 
     @abstractmethod
-    def generate(self, prompt, inst_in_sys=True, max_tokens=500):
+    def generate(self, prompt, max_tokens=500):
         pass
 
 

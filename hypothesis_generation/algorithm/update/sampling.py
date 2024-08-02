@@ -26,7 +26,6 @@ class SamplingUpdate(Update):
         epoch_to_start_from=0,
         num_wrong_scale=0.8,
         k=-1,
-        use_system_prompt=True,
         alpha=5e-1,
         update_batch_size=5,
         num_hypotheses_to_update=5,
@@ -45,7 +44,6 @@ class SamplingUpdate(Update):
             epoch_to_start_from,
             num_wrong_scale,
             k,
-            use_system_prompt,
             alpha,
             update_batch_size,
             num_hypotheses_to_update,
@@ -95,7 +93,6 @@ class SamplingUpdate(Update):
                     self.train_data,
                     i,
                     {hypothesis: hypotheses_bank[hypothesis]},
-                    self.use_system_prompt,
                 )
                 if pred != label:
                     num_wrong_hypotheses += 1
@@ -128,7 +125,6 @@ class SamplingUpdate(Update):
                                 current_example,
                                 self.update_hypotheses_per_batch,
                                 self.alpha,
-                                self.use_system_prompt,
                             )
                         )
                         max_visited = max(
@@ -140,7 +136,6 @@ class SamplingUpdate(Update):
                             hypotheses_bank[max_visited].num_visits,
                             self.num_init,
                             self.alpha,
-                            self.use_system_prompt,
                         )
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
@@ -180,7 +175,6 @@ class SamplingUpdate(Update):
         max_visits,
         num_init,
         alpha,
-        use_system_prompt,
     ):
         if max_visits > 60:
             val = num_init
@@ -196,7 +190,6 @@ class SamplingUpdate(Update):
                     self.train_data,
                     i,
                     {hypothesis: hypotheses_bank[hypothesis]},
-                    use_system_prompt,
                 )
                 if pred == label:
                     num_right += 1

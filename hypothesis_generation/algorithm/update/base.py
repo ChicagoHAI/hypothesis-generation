@@ -27,7 +27,6 @@ class Update(ABC):
         epoch_to_start_from=0,
         num_wrong_scale=0.8,
         k=-1,
-        use_system_prompt=True,
         alpha=5e-1,
         update_batch_size=5,
         num_hypotheses_to_update=5,
@@ -48,7 +47,6 @@ class Update(ABC):
         :param epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
         :param num_wrong_scale: Scale for dynamic num_wrong_to_add_bank. Default is 0.8
         :param k: The number of hypotheses checked per sample during training. Default is -1
-        :param use_system_prompt: Use instruction as system prompt. Default is True
         :param alpha: Exploration parameter. Default is 5e-1
         :param update_batch_size: Number of examples to use per prompt. Default is 5
         :param num_hypotheses_to_update: Number of lowest-ranking hypotheses to update once we reach the maximum number of hypotheses. Default is 5
@@ -67,7 +65,6 @@ class Update(ABC):
         self.epoch_to_start_from = epoch_to_start_from
         self.num_wrong_scale = num_wrong_scale
         self.k = k
-        self.use_system_prompt = use_system_prompt
         self.alpha = alpha
         self.update_batch_size = update_batch_size
         self.num_hypotheses_to_update = num_hypotheses_to_update
@@ -144,5 +141,4 @@ class Update(ABC):
             init_batch_size,
             init_hypotheses_per_batch,
             self.alpha,
-            self.use_system_prompt,
         )
