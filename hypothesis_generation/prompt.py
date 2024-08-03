@@ -4,6 +4,7 @@ import textwrap
 from string import Template
 from typing import List, Tuple, Union, Dict
 from copy import deepcopy
+import pandas as pd
 
 from .tasks import BaseTask
 
@@ -12,8 +13,10 @@ class BasePrompt(ABC):
     def __init__(self, task: BaseTask):
         self.task = task
 
-    def _get_substitute_dict(self, data_dict, example_idx) -> Dict[str, str]:
-        example = {k: v[example_idx] for k, v in data_dict.items()}
+    def _get_substitute_dict(
+        self, data_dict: pd.DataFrame, example_idx
+    ) -> Dict[str, str]:
+        example = data_dict.loc[example_idx].to_dict()
         substitute_dict = {}
 
         for key, value in self.task.prompt_template.items():
@@ -27,9 +30,9 @@ class BasePrompt(ABC):
         return substitute_dict
 
     def _information_prompt(
-        self, data_dict, example_idx, info_key: str
+        self, data_dict: pd.DataFrame, example_idx, info_key: str
     ) -> Dict[str, str]:
-        example = {k: v[example_idx] for k, v in data_dict.items()}
+        example = data_dict.loc[example_idx].to_dict()
         return Template(self.task.prompt_template[info_key]).substitute(example)
 
     def _get_prompt_template(self, key: str) -> List[Dict[str, str]]:
@@ -73,7 +76,7 @@ class BasePrompt(ABC):
         prompt = self._get_prompt_template("batched_generation")
 
         observations = ""
-        for example_idx in range(len(train_data["label"])):
+        for example_idx in range(len(train_data)):
             observations += self._information_prompt(
                 train_data, example_idx, "observations"
             )

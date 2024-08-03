@@ -58,7 +58,7 @@ class SamplingUpdate(Update):
         current_epoch,
         current_seed,
     ):
-        num_train_examples = get_num_examples(self.train_data)
+        num_train_examples = len(self.train_data)
         wrong_example_ids = set()
 
         # go through training examples

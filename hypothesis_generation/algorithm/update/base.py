@@ -5,6 +5,8 @@ import math
 from typing import Dict
 from string import Template
 
+import pandas as pd
+
 from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
@@ -59,7 +61,7 @@ class Update(ABC):
         self.replace_class = replace_class
         self.save_path = save_path
         self.file_name_template = file_name_template
-        self.train_data = self.inference_class.train_data
+        self.train_data: pd.Dataframe = self.inference_class.train_data
         self.sample_num_to_restart_from = sample_num_to_restart_from
         self.num_init = num_init
         self.epoch_to_start_from = epoch_to_start_from

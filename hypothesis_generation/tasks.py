@@ -5,6 +5,7 @@ import os
 import random
 import re
 from typing import Callable
+import pandas as pd
 
 # TODO: Generate one single task object for every use
 
@@ -55,7 +56,7 @@ class BaseTask(ABC):
             processed_data = {
                 key: value for key, value in zip(data.keys(), sampled_data)
             }
-            return processed_data
+            return pd.DataFrame.from_dict(processed_data)
 
         train_data = read_data(self.train_data_path, num_train, is_train=True)
         test_data = read_data(self.test_data_path, num_test)

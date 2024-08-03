@@ -81,9 +81,10 @@ class Generation(ABC):
         """
 
         # gather the examples to use for generation
-        example_bank = {}
-        for key in self.train_data:
-            example_bank[key] = [self.train_data[key][idx] for idx in example_indices]
+        # TODO: need copy()?
+        example_bank = (
+            self.train_data.loc[list(example_indices)].copy().reset_index(drop=True)
+        )
 
         # Prompt LLM to generate hypotheses
         prompt_input = self.prompt_class.batched_generation(
