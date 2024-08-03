@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
 import numpy as np
+import pandas as pd
 import pulp
 import random
 import re
@@ -19,8 +20,14 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
     selecting hypotheses and making predictions.
     """
 
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
+    def __init__(
+        self,
+        api,
+        prompt_class: BasePrompt,
+        train_data: pd.DataFrame,
+        task: BaseTask,
+    ):
+        super().__init__(api, prompt_class, train_data, task)
 
     def default_predict(self, data, index, hyp_bank):
         assert (

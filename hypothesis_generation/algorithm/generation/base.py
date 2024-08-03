@@ -2,9 +2,11 @@ from abc import ABC, abstractmethod
 import math
 import os
 
+
 from .utils import extract_hypotheses
 from ..summary_information import SummaryInformation
 from ..inference import Inference
+from ...tasks import BaseTask
 from ...prompt import BasePrompt
 
 
@@ -16,6 +18,7 @@ class Generation(ABC):
         api,
         prompt_class: BasePrompt,
         inference_class: Inference,
+        task: BaseTask,
     ):
         """Initialize the update class
 
@@ -32,6 +35,7 @@ class Generation(ABC):
         self.api = api
         self.prompt_class = prompt_class
         self.inference_class = inference_class
+        self.task = task
         self.train_data = self.inference_class.train_data
 
     @abstractmethod

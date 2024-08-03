@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
 import numpy as np
+import pandas as pd
 import pulp
 import random
 import re
@@ -14,8 +15,14 @@ from ...utils import get_num_examples
 
 
 class UpperboundInference(Inference):
-    def __init__(self, api, prompt_class, train_data):
-        super().__init__(api, prompt_class, train_data)
+    def __init__(
+        self,
+        api,
+        prompt_class: BasePrompt,
+        train_data: pd.DataFrame,
+        task: BaseTask,
+    ):
+        super().__init__(api, prompt_class, train_data, task)
 
     def predict(self, data, index, hyp_bank):
         assert (
@@ -52,9 +59,7 @@ class UpperboundInference(Inference):
         for hyp in hyp_bank:
             print(f"The {count}th hypothesis")
             for i in range(num_samples):
-                pred, label = self.predict(
-                    data, i, {hyp: hyp_bank[hyp]}
-                )
+                pred, label = self.predict(data, i, {hyp: hyp_bank[hyp]})
                 pred_list[hyp].append(pred)
                 label_list.append(label)
             count += 1

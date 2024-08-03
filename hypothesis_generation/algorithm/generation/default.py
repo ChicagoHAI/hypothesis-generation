@@ -5,20 +5,22 @@ import os
 from .base import Generation
 from ..summary_information import SummaryInformation
 from ..inference import Inference
+from ...tasks import BaseTask
 from ...prompt import BasePrompt
 
 
 class DefaultGeneration(Generation):
-    def __init__(self, api, prompt_class, inference_class):
-        super().__init__(api, prompt_class, inference_class)
+    def __init__(
+        self,
+        api,
+        prompt_class: BasePrompt,
+        inference_class: Inference,
+        task: BaseTask,
+    ):
+        super().__init__(api, prompt_class, inference_class, task)
 
     def initialize_hypotheses(
-        self,
-        num_init,
-        init_batch_size,
-        init_hypotheses_per_batch,
-        alpha,
-        **kwargs
+        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
     ):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 

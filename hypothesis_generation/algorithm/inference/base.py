@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
 import numpy as np
+import pandas as pd
 import pulp
 import random
 import re
@@ -15,7 +16,13 @@ from ...utils import get_num_examples
 class Inference(ABC):
     """Inference abstract class. For each style of inference implement the inference function."""
 
-    def __init__(self, api, prompt_class: BasePrompt, train_data):
+    def __init__(
+        self,
+        api,
+        prompt_class: BasePrompt,
+        train_data: pd.DataFrame,
+        task: BaseTask,
+    ):
         """Initialize the inference class.
 
         Parameters
@@ -29,6 +36,7 @@ class Inference(ABC):
         self.api = api
         self.prompt_class = prompt_class
         self.train_data = train_data
+        self.task = task
 
     @abstractmethod
     def predict(self, data, index, hyp_bank):
