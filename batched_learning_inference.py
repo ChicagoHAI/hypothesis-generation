@@ -48,10 +48,9 @@ def main():
     seed = 49
     task_config_path = "./data/retweet/config.yaml"
     task = "retweet"
-    model = "gpt-4o-mini"
-    message = "no_message"
+    model = "Meta-Llama-3.1-8B-Instruct"
     num_hypothesis = 5
-    model_path = ""
+    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     use_cache = 0
     hypothesis_file = f"./outputs/retweet/batched_gen_{model}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
 
@@ -88,7 +87,7 @@ def main():
 
     # initialization
     prompt_class = BasePrompt(task)
-    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache)
+    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache, use_vllm=True)
 
     # get the training accuracy of each hypothesis
     training_accuracies = []

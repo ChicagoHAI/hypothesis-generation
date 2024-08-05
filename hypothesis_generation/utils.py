@@ -7,6 +7,7 @@ import os
 import numpy as np
 import random
 import openai
+import vllm
 
 from transformers import (
     LlamaForCausalLM,
@@ -45,29 +46,37 @@ class LocalModelAPI:
     def __init__(self, localmodel, **kwargs):
         self.localmodel = localmodel
 
+    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+        if isinstance(self.localmodel, vllm.LLM):
+            return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
+        else:
+            return self._generate(messages, max_tokens, temperature, **kwargs)
+
     def _generate(self, messages, max_tokens=500, temperature=0, **kwargs):
         output = self.localmodel(
             messages,
             max_new_tokens=max_tokens,
-            temperature=0,
-            **kwargs
+            temperature=temperature,
+            **kwargs,
         )
         return output[0]["generated_text"][-1]["content"]
-    
-    def _vllm_generate(self, messages, max_tokens=500, temperature=0, **kwargs):
-        from vllm import SamplingParams
-        sampling_params = SamplingParams(max_tokens=max_tokens, temperature=temperature, **kwargs)
-        tokenizer = self.localmodel.get_tokenizer
-        formatted_prompts = tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True)
 
-        output = self.localmodel.generate(
-            formatted_prompts,
-            sampling_params
+    def _vllm_generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+
+        sampling_params = vllm.SamplingParams(
+            max_tokens=max_tokens,
+            temperature=temperature,
+            **kwargs,
         )
-        return output.outputs[0].text
+        tokenizer = self.localmodel.get_tokenizer()
+        formatted_prompts = [
+            tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
+        ]
+
+        output = self.localmodel.generate(formatted_prompts, sampling_params)
+        return output[0].outputs[0].text
 
 
 class LLMWrapper(ABC):
@@ -83,7 +92,9 @@ class LLMWrapper(ABC):
         elif model in CLAUDE_MODELS.keys():
             return ClaudeWrapper(model, use_cache=use_cache, **kwargs)
         elif model in (LLAMA_MODELS + MISTRAL_MODELS):
-            return LocalModelWrapper(model, use_cache=use_cache, use_vllm=use_vllm, **kwargs)
+            return LocalModelWrapper(
+                model, use_cache=use_cache, use_vllm=use_vllm, **kwargs
+            )
         else:
             raise NotImplementedError
 
@@ -202,14 +213,16 @@ class LocalModelWrapper(LLMWrapper):
                 path_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
             elif model == "Mistral-7B":
                 path_name = "mistralai/Mistral-7B-Instruct-v0.2"
-            elif 'Llama' in model:
+            elif "Llama" in model:
                 path_name = f"meta-llama/{model}-hf"
             else:
                 raise ValueError(f"Model {model} not recognized.")
-            
+
         if self.use_vllm:
-            from vllm import LLM
-            localmodel = LLM(model=path_name, tensor_parallel_size=torch.cuda.device_count())
+
+            localmodel = vllm.LLM(
+                model=path_name, tensor_parallel_size=torch.cuda.device_count()
+            )
         else:
             localmodel = pipeline(
                 "text-generation",
@@ -232,14 +245,14 @@ class LocalModelWrapper(LLMWrapper):
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temperature,
-                **kwargs
+                **kwargs,
             )
         else:
             output = self.api._generate(
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temperature,
-                **kwargs
+                **kwargs,
             )
         return output
 
