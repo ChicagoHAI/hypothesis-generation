@@ -20,15 +20,18 @@ from hypothesis_generation.data_loader import get_data
 from hypothesis_generation.prompt import BasePrompt
 
 
-def get_accuracy(api, hypothesis, data, prompt_class, task):
+def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task):
     """
     Given one hyothesis and a dataset, return the accuracy of the hypothesis on the dataset.
     """
     correct = 0
-    for i in range(len(data["label"])):
-        hypothesis_dict = {hypothesis: None}
-        prompt_input = prompt_class.inference(hypothesis_dict, data, i)
-        response = api.generate(prompt_input)
+    hypothesis_dict = {hypothesis: None}
+    prompt_input = [
+        prompt_class.inference(hypothesis_dict, data, i)
+        for i in range(len(data["label"]))
+    ]
+    responses = api.batched_generate(prompt_input)
+    for i, response in enumerate(responses):
         print("*** get_accuracy ***")
         print(response)
         pred = task.extract_label(response)
@@ -37,6 +40,18 @@ def get_accuracy(api, hypothesis, data, prompt_class, task):
         print("*********************")
         if pred == data["label"][i]:
             correct += 1
+    # for i in range(len(data["label"])):
+    #     hypothesis_dict = {hypothesis: None}
+    #     prompt_input = prompt_class.inference(hypothesis_dict, data, i)
+    #     response = api.generate(prompt_input)
+    #     print("*** get_accuracy ***")
+    #     print(response)
+    #     pred = task.extract_label(response)
+    #     print("pred:", pred)
+    #     print("label:", data["label"][i])
+    #     print("*********************")
+    #     if pred == data["label"][i]:
+    #         correct += 1
     accuracy = correct / len(data["label"])
     return accuracy
 
@@ -87,7 +102,9 @@ def main():
 
     # initialization
     prompt_class = BasePrompt(task)
-    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache, use_vllm=True)
+    api = LLMWrapper.from_model(
+        model, path_name=model_path, use_cache=use_cache, use_vllm=True
+    )
 
     # get the training accuracy of each hypothesis
     training_accuracies = []

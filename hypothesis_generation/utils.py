@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import pickle
 import math
+from typing import Dict, List
 import torch
 import re
 import os
@@ -48,9 +49,19 @@ class LocalModelAPI:
 
     def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
         if isinstance(self.localmodel, vllm.LLM):
-            return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
+            return self._vllm_generate([messages], max_tokens, temperature, **kwargs)[0]
         else:
             return self._generate(messages, max_tokens, temperature, **kwargs)
+
+    def batched_generate(
+        self, messages: List[Dict[str, str]], max_tokens=500, temperature=0, **kwargs
+    ):
+        if isinstance(self.localmodel, vllm.LLM):
+            return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
+        else:
+            raise NotImplementedError(
+                "Batched generation only supports VLLM models for now."
+            )
 
     def _generate(self, messages, max_tokens=500, temperature=0, **kwargs):
         output = self.localmodel(
@@ -61,7 +72,9 @@ class LocalModelAPI:
         )
         return output[0]["generated_text"][-1]["content"]
 
-    def _vllm_generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+    def _vllm_generate(
+        self, messages: List[Dict[str, str]], max_tokens=500, temperature=0, **kwargs
+    ):
 
         sampling_params = vllm.SamplingParams(
             max_tokens=max_tokens,
@@ -70,13 +83,12 @@ class LocalModelAPI:
         )
         tokenizer = self.localmodel.get_tokenizer()
         formatted_prompts = [
-            tokenizer.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True
-            )
+            tokenizer.apply_chat_template(m, tokenize=False, add_generation_prompt=True)
+            for m in messages
         ]
 
         output = self.localmodel.generate(formatted_prompts, sampling_params)
-        return output[0].outputs[0].text
+        return [o.outputs[0].text for o in output]
 
 
 class LLMWrapper(ABC):
@@ -206,8 +218,6 @@ class LocalModelWrapper(LLMWrapper):
         use_vllm=False,
         **kwargs,
     ):
-        self.use_vllm = use_vllm
-
         if path_name is None:
             if model == "Mixtral-8x7B":
                 path_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
@@ -218,8 +228,7 @@ class LocalModelWrapper(LLMWrapper):
             else:
                 raise ValueError(f"Model {model} not recognized.")
 
-        if self.use_vllm:
-
+        if use_vllm:
             localmodel = vllm.LLM(
                 model=path_name, tensor_parallel_size=torch.cuda.device_count()
             )
@@ -240,21 +249,10 @@ class LocalModelWrapper(LLMWrapper):
             return client
 
     def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
-        if self.use_vllm:
-            output = self.api._vllm_generate(
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                **kwargs,
-            )
-        else:
-            output = self.api._generate(
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                **kwargs,
-            )
-        return output
+        return self.api.generate(messages, max_tokens, temperature, **kwargs)
+
+    def batched_generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+        return self.api.batched_generate(messages, max_tokens, temperature, **kwargs)
 
 
 def get_results(task_name, pred_list, label_list):
