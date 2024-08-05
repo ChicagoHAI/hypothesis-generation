@@ -16,6 +16,7 @@ from transformers import (
     AutoTokenizer,
     pipeline,
 )
+
 from pprint import pprint
 
 from anthropic import Anthropic
@@ -44,12 +45,29 @@ class LocalModelAPI:
     def __init__(self, localmodel, **kwargs):
         self.localmodel = localmodel
 
-    def generate(self, messages, max_tokens=500, **kwargs):
+    def _generate(self, messages, max_tokens=500, temperature=0, **kwargs):
         output = self.localmodel(
             messages,
             max_new_tokens=max_tokens,
+            temperature=0,
+            **kwargs
         )
         return output[0]["generated_text"][-1]["content"]
+    
+    def _vllm_generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+        from vllm import SamplingParams
+        sampling_params = SamplingParams(max_tokens=max_tokens, temperature=temperature, **kwargs)
+        tokenizer = self.localmodel.get_tokenizer
+        formatted_prompts = tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True)
+
+        output = self.localmodel.generate(
+            formatted_prompts,
+            sampling_params
+        )
+        return output.outputs[0].text
 
 
 class LLMWrapper(ABC):
@@ -59,20 +77,18 @@ class LLMWrapper(ABC):
         self.api = api
 
     @classmethod
-    def from_model(cls, model, use_cache=1, **kwargs):
+    def from_model(cls, model, use_cache=1, use_vllm=False, **kwargs):
         if model in GPT_MODELS.keys():
             return GPTWrapper(model, use_cache=use_cache, **kwargs)
         elif model in CLAUDE_MODELS.keys():
             return ClaudeWrapper(model, use_cache=use_cache, **kwargs)
-        elif model in LLAMA_MODELS:
-            return LocalModelWrapper(model, use_cache=use_cache, **kwargs)
-        elif model in MISTRAL_MODELS:
-            return LocalModelWrapper(model, use_cache=use_cache, **kwargs)
+        elif model in (LLAMA_MODELS + MISTRAL_MODELS):
+            return LocalModelWrapper(model, use_cache=use_cache, use_vllm=use_vllm, **kwargs)
         else:
             raise NotImplementedError
 
     @abstractmethod
-    def generate(self, prompt, max_tokens=500):
+    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
         pass
 
 
@@ -162,11 +178,11 @@ class ClaudeWrapper(LLMWrapper):
 
 
 class LocalModelWrapper(LLMWrapper):
-    def __init__(self, model, use_cache=1, **kwargs):
+    def __init__(self, model, use_cache=1, use_vllm=False, **kwargs):
         super().__init__(
             model,
             use_cache=use_cache,
-            api=self._setup(model, use_cache=use_cache, **kwargs),
+            api=self._setup(model, use_cache=use_cache, use_vllm=use_vllm, **kwargs),
         )
 
     def _setup(
@@ -176,12 +192,10 @@ class LocalModelWrapper(LLMWrapper):
         path_name=None,
         use_cache=1,
         max_retry=30,
+        use_vllm=False,
         **kwargs,
     ):
-        if torch.cuda.is_available():
-            device = "cuda"
-        else:
-            device = "cpu"
+        self.use_vllm = use_vllm
 
         if path_name is None:
             if model == "Mixtral-8x7B":
@@ -192,13 +206,17 @@ class LocalModelWrapper(LLMWrapper):
                 path_name = f"meta-llama/{model}-hf"
             else:
                 raise ValueError(f"Model {model} not recognized.")
-
-        localmodel = pipeline(
-            "text-generation",
-            device_map="auto",
-            model=path_name,
-            model_kwargs=kwargs,
-        )
+            
+        if self.use_vllm:
+            from vllm import LLM
+            localmodel = LLM(model=path_name, tensor_parallel_size=torch.cuda.device_count())
+        else:
+            localmodel = pipeline(
+                "text-generation",
+                device_map="auto",
+                model=path_name,
+                model_kwargs=kwargs,
+            )
 
         client = LocalModelAPI(localmodel)
         api = LocalModelAPICache(client=client, port=PORT, max_retry=max_retry)
@@ -208,11 +226,21 @@ class LocalModelWrapper(LLMWrapper):
         else:
             return client
 
-    def generate(self, messages, max_tokens=500):
-        output = self.api.generate(
-            messages=messages,
-            max_tokens=max_tokens,
-        )
+    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+        if self.use_vllm:
+            output = self.api._vllm_generate(
+                messages=messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                **kwargs
+            )
+        else:
+            output = self.api._generate(
+                messages=messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                **kwargs
+            )
         return output
 
 
