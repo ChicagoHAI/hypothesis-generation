@@ -39,6 +39,7 @@ POSITIVE_LABELS = {
     "retweet": "first",
 }
 
+
 class LocalModelAPI:
     def __init__(self, localmodel, **kwargs):
         self.localmodel = localmodel
@@ -86,7 +87,7 @@ class GPTWrapper(LLMWrapper):
 
         return api
 
-    def generate(self, messages, max_tokens=500, **kwargs):
+    def generate(self, messages, max_tokens=500, temperature=0.7, n=1, **kwargs):
         # Call OpenAI's GPT-3.5 API to generate inference
 
         # basically adding ### Instructions ### around the instructions prompt
@@ -95,19 +96,21 @@ class GPTWrapper(LLMWrapper):
             resp = self.api.generate(
                 # model="gpt-3.5-turbo-0613",
                 model=GPT_MODELS[self.model],
-                temperature=0.7,
+                temperature=temperature,
                 max_tokens=max_tokens,
-                n=1,
+                n=n,
                 messages=messages,
+                **kwargs,
             )
         else:
             resp = openai.ChatCompletion.create(
                 # model="gpt-3.5-turbo-0613",
                 model=GPT_MODELS[self.model],
-                temperature=0.7,
+                temperature=temperature,
                 max_tokens=max_tokens,
-                n=1,
+                n=n,
                 messages=messages,
+                **kwargs,
             )
 
         return resp["choices"][0]["message"]["content"]
@@ -133,7 +136,7 @@ class ClaudeWrapper(LLMWrapper):
         else:
             return client
 
-    def generate(self, messages, max_tokens=500, **kwargs):
+    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
         # basically adding ### Instructions ### around the instructions prompt
 
         for idx, msg in enumerate(messages):
@@ -144,17 +147,19 @@ class ClaudeWrapper(LLMWrapper):
             response = self.api.generate(
                 model=CLAUDE_MODELS[self.model],
                 max_tokens=max_tokens,
-                temperature=0,
+                temperature=temperature,
                 system=system_prompt,  # <-- system prompt
-                messages=messages,  # <-- user prompt
+                messages=messages,  # <-- user prompt**kwargs
+                **kwargs,
             )
         else:
             response = self.api.messages.create(
                 model=CLAUDE_MODELS[self.model],
                 max_tokens=max_tokens,
-                temperature=0,
+                temperature=temperature,
                 system=system_prompt,  # <-- system prompt
                 messages=messages,  # <-- user prompt
+                **kwargs,
             )
         if response == "Output blocked by content filtering policy":
             return None
