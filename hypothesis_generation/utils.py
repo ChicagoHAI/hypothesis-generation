@@ -95,8 +95,8 @@ class GPTWrapper(LLMWrapper):
             model, use_cache=use_cache, api=self._setup(use_cache=use_cache, **kwargs)
         )
 
-    def _setup(self, use_cache=1, **kwargs):
-        api = OpenAIAPICache(mode="chat", port=PORT)
+    def _setup(self, use_cache=1, max_retry=30, **kwargs):
+        api = OpenAIAPICache(mode="chat", port=PORT, max_retry=max_retry)
 
         return api
 
@@ -133,14 +133,14 @@ class ClaudeWrapper(LLMWrapper):
             model, use_cache=use_cache, api=self._setup(use_cache=use_cache, **kwargs)
         )
 
-    def _setup(self, use_cache=1, **kwargs):
+    def _setup(self, use_cache=1, max_retry=30, **kwargs):
         # TODO: get api key from environment variable
         api_key = open(f"./claude_key.txt", "r").read().strip()
         client = Anthropic(
             api_key=api_key,
         )
 
-        api = ClaudeAPICache(client=client, port=PORT)
+        api = ClaudeAPICache(client=client, port=PORT, max_retry=max_retry)
 
         if use_cache == 1:
             return api
@@ -189,6 +189,7 @@ class LocalModelWrapper(LLMWrapper):
         cache_dir=f"./local_models_cache",
         path_name=None,
         use_cache=1,
+        max_retry=30,
         **kwargs,
     ):
         if torch.cuda.is_available():
@@ -201,7 +202,7 @@ class LocalModelWrapper(LLMWrapper):
                 path_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
             elif model == "Mistral-7B":
                 path_name = "mistralai/Mistral-7B-Instruct-v0.2"
-            
+
             else:
                 raise ValueError(f"Model {model} not recognized.")
 
@@ -220,7 +221,7 @@ class LocalModelWrapper(LLMWrapper):
         )
 
         client = LocalModelAPI(localmodel)
-        api = LocalModelAPICache(client=client, port=PORT)
+        api = LocalModelAPICache(client=client, port=PORT, max_retry=max_retry)
 
         if use_cache == 1:
             return api
