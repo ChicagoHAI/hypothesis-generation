@@ -1,4 +1,5 @@
 """ A redis-based cache wrapper for GPT-3/Jurassic-1 API to avoid duplicate requests """
+
 """ Modified based on Yiming Zhang's implementation for openai api cache"""
 import hashlib
 import collections
@@ -11,6 +12,7 @@ from abc import ABC
 import redis
 
 import anthropic
+
 logger = logging.getLogger(name="LLM_cache")
 
 
@@ -82,12 +84,13 @@ class APICache(ABC):
     service = ""
     exceptions_to_catch = tuple()
 
-    def __init__(self, **redis_kwargs: dict):
+    def __init__(self, max_retry=30, **redis_kwargs: dict):
         self.r = redis.Redis(host="localhost", **redis_kwargs)
 
         # max 60 requests per 60 seconds
         self.rate_limiter = RateLimiter()
         self.costs = []
+        self.max_retry = max_retry
 
     def api_call(self, *args, **kwargs):
         raise NotImplementedError("api_call() is not implemented")
@@ -123,17 +126,18 @@ class APICache(ABC):
         self.rate_limiter.add_event()
         logger.debug(f"Request Completion from {self.service} API...")
 
-        while 1:
+        for _ in range(self.max_retry):
             try:
                 resp = self.api_call(**kwargs)
                 break
             except self.exceptions_to_catch as e:
-                logger.warning(f"Getting an {type(e).__name__} from API, backing off...")
+                logger.warning(
+                    f"Getting an {type(e).__name__} from API, backing off..."
+                )
                 self.rate_limiter.backoff()
             except anthropic.BadRequestError as e:
                 resp = "Output blocked by content filtering policy"
                 break
-                
 
         data = pickle.dumps((query, resp))
         logger.debug(f"Writing query and resp to Redis")
@@ -181,7 +185,7 @@ class ClaudeAPICache(APICache):
 
     service = "Claude"
     exceptions_to_catch = (
-        anthropic.RateLimitError, 
+        anthropic.RateLimitError,
         # TODO: add more exceptions
     )
 
