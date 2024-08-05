@@ -87,13 +87,10 @@ class GPTWrapper(LLMWrapper):
         return api
 
     def generate(self, messages, max_tokens=500, **kwargs):
-        # Call OpenAI's GPT-3.5 API to generate inference
-
-        # basically adding ### Instructions ### around the instructions prompt
+        # Call OpenAI's API to generate inference
 
         if self.use_cache == 1:
             resp = self.api.generate(
-                # model="gpt-3.5-turbo-0613",
                 model=GPT_MODELS[self.model],
                 temperature=0.7,
                 max_tokens=max_tokens,
@@ -102,7 +99,6 @@ class GPTWrapper(LLMWrapper):
             )
         else:
             resp = openai.ChatCompletion.create(
-                # model="gpt-3.5-turbo-0613",
                 model=GPT_MODELS[self.model],
                 temperature=0.7,
                 max_tokens=max_tokens,
@@ -134,7 +130,6 @@ class ClaudeWrapper(LLMWrapper):
             return client
 
     def generate(self, messages, max_tokens=500, **kwargs):
-        # basically adding ### Instructions ### around the instructions prompt
 
         for idx, msg in enumerate(messages):
             if msg["role"] == "system":
@@ -188,16 +183,10 @@ class LocalModelWrapper(LLMWrapper):
                 path_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
             elif model == "Mistral-7B":
                 path_name = "mistralai/Mistral-7B-Instruct-v0.2"
-
+            elif 'Llama' in model:
+                path_name = f"meta-llama/{model}-hf"
             else:
                 raise ValueError(f"Model {model} not recognized.")
-
-        # model = AutoModelForCausalLM.from_pretrained(
-        #     path_name,
-        #     cache_dir=cache_dir,
-        #     device_map="auto",
-        # )
-        # tokenizer = AutoTokenizer.from_pretrained(path_name, cache_dir=cache_dir)
 
         localmodel = pipeline(
             "text-generation",
