@@ -45,7 +45,9 @@ class BasePrompt(ABC):
         ]
         return messages
 
-    def few_shot_baseline(self, train_data, num_few_shot, test_data, test_idx):
+    def few_shot_baseline(
+        self, train_data: pd.DataFrame, num_few_shot, test_data, test_idx
+    ):
         """
         Few shot prompt for baseline
         """

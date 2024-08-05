@@ -271,21 +271,12 @@ def create_directory(directory_path):
         print(f"Directory '{directory_path}' already exists.")
 
 
-def extract_hypotheses(args, text):
-    pattern = re.compile(r"Response:(.+?)response length", re.DOTALL)
-    response_match = pattern.search(text)
-    if response_match:
-        # Extract the text between "Response" and "response length"
-        extracted_text = response_match.group(1).strip()
-        print("Extracted Text:", extracted_text)
-    else:
-        print("No match found.")
-        return []
+def extract_hypotheses(num_hypothesis, text):
     # Get the hypotheses (numbered sentences)
     pattern = re.compile(r"\d+\.\s(.+?)(?=\d+\.\s|\Z)", re.DOTALL)
-    hypotheses = pattern.findall(extracted_text)
-    if len(hypotheses) != args.num_hypothesis:
-        print(f"Expected {args.num_hypothesis} hypotheses, but got {len(hypotheses)}.")
+    hypotheses = pattern.findall(text)
+    if len(hypotheses) != num_hypothesis:
+        print(f"Expected {num_hypothesis} hypotheses, but got {len(hypotheses)}.")
 
     return hypotheses
 

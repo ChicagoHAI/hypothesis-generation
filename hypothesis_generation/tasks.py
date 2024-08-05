@@ -4,7 +4,7 @@ import json
 import os
 import random
 import re
-from typing import Callable
+from typing import Callable, Tuple
 import pandas as pd
 
 # TODO: Generate one single task object for every use
@@ -40,7 +40,7 @@ class BaseTask(ABC):
 
         self.extract_label = extract_label
 
-    def get_data(self, num_train, num_test, num_val, seed=49):
+    def get_data(self, num_train, num_test, num_val, seed=49) -> Tuple[pd.DataFrame]:
         def read_data(file_path, num, is_train=False):
             # Read from json
             with open(file_path, "r") as f:

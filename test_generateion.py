@@ -87,8 +87,8 @@ def main():
         set_seed(seed)
         train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
         prompt_class = BasePrompt(task)
-        inference_class = DefaultInference(api, prompt_class, train_data)
-        generation_class = DefaultGeneration(api, prompt_class, inference_class)
+        inference_class = DefaultInference(api, prompt_class, train_data, task)
+        generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
 
         update_class = SamplingUpdate(
             generation_class=generation_class,
