@@ -18,40 +18,26 @@ from transformers import (
 )
 from pprint import pprint
 
-# from openai_api_cache import OpenAIAPICache
 from anthropic import Anthropic
 
 from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from .consts.model_consts import (
-    INST_WRAPPER,
     GPT_MODELS,
     CLAUDE_MODELS,
     LLAMA_MODELS,
     MISTRAL_MODELS,
+    VALID_MODELS,
 )
 
 from .tasks import BaseTask
 
 PORT = int(os.environ.get("PORT"))
 
-VALID_MODELS = (
-    list(GPT_MODELS.keys()) + list(CLAUDE_MODELS.keys()) + LLAMA_MODELS + MISTRAL_MODELS
-)
-
 POSITIVE_LABELS = {
     "hotel_reviews": "truthful",
     "headline_binary": "headline 1",
     "retweet": "first",
 }
-
-
-def get_device():
-    if torch.cuda.is_available():
-        device = "cuda"
-    else:
-        device = "cpu"
-    return device
-
 
 class LocalModelAPI:
     def __init__(self, localmodel, **kwargs):
