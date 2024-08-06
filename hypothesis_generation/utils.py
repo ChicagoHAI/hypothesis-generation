@@ -9,6 +9,9 @@ import numpy as np
 import random
 import openai
 import vllm
+import asyncio
+import tqdm
+from openai import AsyncOpenAI, OpenAI
 from sklearn.metrics import accuracy_score, f1_score
 
 from transformers import (
@@ -121,9 +124,48 @@ class GPTWrapper(LLMWrapper):
         )
 
     def _setup(self, use_cache=1, max_retry=30, **kwargs):
-        api = OpenAIAPICache(mode="chat", port=PORT, max_retry=max_retry)
+        if use_cache == 1:
+            return OpenAIAPICache(mode="chat", port=PORT, max_retry=max_retry)
+        else:
+            return OpenAI()
 
-        return api
+    def batched_generate(
+        self,
+        messages: List[Dict[str, str]],
+        max_concurrent=3,
+        max_tokens=500,
+        temperature=1e-5,
+        n=1,
+        **kwargs,
+    ):
+        client = AsyncOpenAI()
+        status_bar = tqdm.tqdm(total=len(messages))
+        # TODO: retry on failure
+        async def _async_generate(sem, messages, **kwargs):
+            async with sem:
+                resp = await client.chat.completions.create(
+                    model=GPT_MODELS[self.model],
+                    messages=messages,
+                    **kwargs,
+                )
+                status_bar.update(1)
+                return resp
+
+        sem = asyncio.Semaphore(max_concurrent)
+        tasks = [
+            _async_generate(
+                sem,
+                messages[i],
+                max_tokens=max_tokens,
+                temperature=temperature,
+                n=n,
+                **kwargs,
+            )
+            for i in range(len(messages))
+        ]
+        loop = asyncio.get_event_loop()
+        resp = loop.run_until_complete(asyncio.gather(*tasks))
+        return [r.choices[0].message.content for r in resp]
 
     def generate(self, messages, max_tokens=500, temperature=1e-5, n=1, **kwargs):
         # Call OpenAI's API to generate inference
@@ -138,7 +180,7 @@ class GPTWrapper(LLMWrapper):
                 **kwargs,
             )
         else:
-            resp = openai.ChatCompletion.create(
+            resp = self.api.chat.completions.create(
                 model=GPT_MODELS[self.model],
                 temperature=temperature,
                 max_tokens=max_tokens,
@@ -147,7 +189,7 @@ class GPTWrapper(LLMWrapper):
                 **kwargs,
             )
 
-        return resp["choices"][0]["message"]["content"]
+        return resp.choices[0].message.content
 
 
 class ClaudeWrapper(LLMWrapper):
