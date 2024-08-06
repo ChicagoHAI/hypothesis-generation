@@ -115,24 +115,10 @@ def main():
 
         pred_list, label_list = inference_class.run_inference_final(args, test_data, hyp_bank)
 
-        if args.task == 'shoe':
-            accuracy = sum([1 if pred_list[i] == label_list[i] else 0 for i in range(len(pred_list))]) / len(pred_list)
-            accuracy_all.append(accuracy)
-            print(f"Accuracy for seed {seed}: {accuracy}")
-        else:
-            if args.inference_style == 'upperbound':
-                continue
-            tp, tn, fp, fn = get_results(args, pred_list, label_list)
-            accuracy = (tp + tn) / (tp + tn + fp + fn)
-            precision = tp / (tp + fp)
-            recall = tp / (tp + fn)
-            f1 = 2 * (precision * recall) / (precision + recall)
+        results_dict = get_results(pred_list, label_list)
 
-            accuracy_all.append(accuracy)
-            f1_all.append(f1)
-
-            print(f"Accuracy for seed {seed}: {accuracy}")
-            print(f"F1 for seed {seed}: {f1}")
+        print(f"Accuracy for seed {seed}: {results_dict['accuracy']}")
+        print(f"F1 for seed {seed}: {results_dict['f1']}")
 
         # print the wrong indices
         wrong_indices = [i for i in range(len(pred_list)) if pred_list[i] != label_list[i]]

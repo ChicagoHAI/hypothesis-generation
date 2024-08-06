@@ -9,6 +9,7 @@ import numpy as np
 import random
 import openai
 import vllm
+from sklearn.metrics import accuracy_score, f1_score
 
 from transformers import (
     LlamaForCausalLM,
@@ -252,25 +253,36 @@ class LocalModelWrapper(LLMWrapper):
         return self.api.batched_generate(messages, max_tokens, temperature, **kwargs)
 
 
-def get_results(task_name, pred_list, label_list):
+# def get_results(task_name, pred_list, label_list):
+#     """
+#     Compute tp, tn, fp, fn for binary classification.
+#     Note that if predicted output is 'other', it is considered as negative.
+#     """
+#     tp, tn, fp, fn = 0, 0, 0, 0
+#     positive_label = POSITIVE_LABELS[task_name]
+#     for i in range(len(pred_list)):
+#         pred = pred_list[i]
+#         label = label_list[i]
+#         if pred == positive_label and label == positive_label:
+#             tp += 1
+#         elif pred == positive_label and label != positive_label:
+#             fp += 1
+#         elif pred != positive_label and label == positive_label:
+#             fn += 1
+#         else:
+#             tn += 1
+#     return tp, tn, fp, fn
+
+
+
+def get_results(pred_list, label_list):
     """
-    Compute tp, tn, fp, fn for binary classification.
-    Note that if predicted output is 'other', it is considered as negative.
+    Compute accuracy and F1 score for multi-class classification
     """
-    tp, tn, fp, fn = 0, 0, 0, 0
-    positive_label = POSITIVE_LABELS[task_name]
-    for i in range(len(pred_list)):
-        pred = pred_list[i]
-        label = label_list[i]
-        if pred == positive_label and label == positive_label:
-            tp += 1
-        elif pred == positive_label and label != positive_label:
-            fp += 1
-        elif pred != positive_label and label == positive_label:
-            fn += 1
-        else:
-            tn += 1
-    return tp, tn, fp, fn
+    accuracy = accuracy_score(label_list, pred_list)
+    f1 = f1_score(label_list, pred_list, average='micro')
+    
+    return {"accuracy": accuracy, "f1": f1}
 
 
 def get_num_examples(data):

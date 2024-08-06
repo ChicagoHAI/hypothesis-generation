@@ -110,29 +110,10 @@ def main():
             test_data, hyp_bank, adaptive_num_hypotheses=adaptive_num_hypotheses
         )
 
-        if task.task_name == "shoe":
-            accuracy = sum(
-                [
-                    1 if pred_list[i] == label_list[i] else 0
-                    for i in range(len(pred_list))
-                ]
-            ) / len(pred_list)
-            accuracy_all.append(accuracy)
-            print(f"Accuracy for seed {seed}: {accuracy}")
-        else:
-            if isinstance(inference_class, UpperboundInference):
-                continue
-            tp, tn, fp, fn = get_results(task.task_name, pred_list, label_list)
-            accuracy = (tp + tn) / (tp + tn + fp + fn)
-            precision = tp / (tp + fp)
-            recall = tp / (tp + fn)
-            f1 = 2 * (precision * recall) / (precision + recall)
+        results_dict = get_results(pred_list, label_list)
 
-            accuracy_all.append(accuracy)
-            f1_all.append(f1)
-
-            print(f"Accuracy for seed {seed}: {accuracy}")
-            print(f"F1 for seed {seed}: {f1}")
+        print(f"Accuracy for seed {seed}: {results_dict['accuracy']}")
+        print(f"F1 for seed {seed}: {results_dict['f1']}")
 
         # print the wrong indices
         wrong_indices = [
