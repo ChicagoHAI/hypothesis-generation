@@ -195,7 +195,8 @@ class ClaudeAPICache(APICache):
             port: Port of the Redis backend.
             client: Authenticated Claude client
         """
-        self.api_call = client.messages.create
+        self.claude = client
+        self.api_call = self.claude.messages.create
         super().__init__(**redis_kwargs)
 
 
@@ -208,11 +209,12 @@ class LocalModelAPICache(APICache):
     )
 
     def __init__(self, client, **redis_kwargs: dict):
-        """Initializes an ClaudeAPICache Object.
+        """Initializes an LocalModelAPICache Object.
 
         Args:
             port: Port of the Redis backend.
-            client: Authenticated Claude client
+            client: intiailzed LocalModel
         """
-        self.api_call = client.generate
+        self.localmodel = client
+        self.api_call = self.localmodel.generate
         super().__init__(**redis_kwargs)

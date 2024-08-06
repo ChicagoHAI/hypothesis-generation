@@ -8,6 +8,7 @@ import os
 import numpy as np
 import random
 import openai
+import anthropic
 import vllm
 import asyncio
 import tqdm
@@ -23,7 +24,6 @@ from transformers import (
     pipeline,
 )
 from pprint import pprint
-from anthropic import Anthropic
 
 from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from .consts.model_consts import (
@@ -38,76 +38,20 @@ from .tasks import BaseTask
 
 PORT = int(os.environ.get("PORT"))
 
-POSITIVE_LABELS = {
-    "hotel_reviews": "truthful",
-    "headline_binary": "headline 1",
-    "retweet": "first",
-}
-
-
-class LocalModelAPI:
-    def __init__(self, localmodel, **kwargs):
-        self.localmodel = localmodel
-
-    def generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
-        if isinstance(self.localmodel, vllm.LLM):
-            return self._vllm_generate([messages], max_tokens, temperature, **kwargs)[0]
-        else:
-            output = self._generate(messages, max_tokens, temperature, **kwargs)
-            return output[0]["generated_text"][-1]["content"]
-
-    def batched_generate(
-        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
-    ):
-        if isinstance(self.localmodel, vllm.LLM):
-            return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
-        else:
-            output = self._generate(messages, max_tokens, temperature, **kwargs)
-            return [o[0]["generated_text"][-1]["content"] for o in output]
-
-    def _generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
-        output = self.localmodel(
-            messages,
-            max_new_tokens=max_tokens,
-            temperature=temperature,
-            **kwargs,
-        )
-        return output
-
-    def _vllm_generate(
-        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
-    ):
-
-        sampling_params = vllm.SamplingParams(
-            max_tokens=max_tokens,
-            temperature=temperature,
-            **kwargs,
-        )
-        tokenizer = self.localmodel.get_tokenizer()
-        formatted_prompts = [
-            tokenizer.apply_chat_template(m, tokenize=False, add_generation_prompt=True)
-            for m in messages
-        ]
-
-        output = self.localmodel.generate(formatted_prompts, sampling_params)
-        return [o.outputs[0].text for o in output]
-
 
 class LLMWrapper(ABC):
-    def __init__(self, model, api, use_cache=1):
+    def __init__(self, model):
         self.model = model
-        self.use_cache = use_cache
-        self.api = api
 
     @classmethod
-    def from_model(cls, model, use_cache=1, use_vllm=False, **kwargs):
+    def from_model(cls, model, use_vllm=False, **kwargs):
         if model in GPT_MODELS.keys():
-            return GPTWrapper(model, use_cache=use_cache, **kwargs)
+            return GPTWrapper(model, **kwargs)
         elif model in CLAUDE_MODELS.keys():
-            return ClaudeWrapper(model, use_cache=use_cache, **kwargs)
+            return ClaudeWrapper(model, **kwargs)
         elif model in (LLAMA_MODELS + MISTRAL_MODELS):
             return LocalModelWrapper(
-                model, use_cache=use_cache, use_vllm=use_vllm, **kwargs
+                model, use_vllm=use_vllm, **kwargs
             )
         else:
             raise NotImplementedError
@@ -118,16 +62,15 @@ class LLMWrapper(ABC):
 
 
 class GPTWrapper(LLMWrapper):
-    def __init__(self, model, use_cache=1, **kwargs):
+    def __init__(self, model, **kwargs):
         super().__init__(
-            model, use_cache=use_cache, api=self._setup(use_cache=use_cache, **kwargs)
+            model
         )
+        self._setup(**kwargs)
 
-    def _setup(self, use_cache=1, max_retry=30, **kwargs):
-        if use_cache == 1:
-            return OpenAIAPICache(mode="chat", port=PORT, max_retry=max_retry)
-        else:
-            return OpenAI()
+    def _setup(self, max_retry=30, **kwargs):
+        self.api = OpenAI()
+        self.api_with_cache = OpenAIAPICache(mode="chat", port=PORT, max_retry=max_retry, **kwargs)
 
     def batched_generate(
         self,
@@ -167,11 +110,11 @@ class GPTWrapper(LLMWrapper):
         resp = loop.run_until_complete(asyncio.gather(*tasks))
         return [r.choices[0].message.content for r in resp]
 
-    def generate(self, messages, max_tokens=500, temperature=1e-5, n=1, **kwargs):
+    def generate(self, messages, use_cache=1, max_tokens=500, temperature=1e-5, n=1, **kwargs):
         # Call OpenAI's API to generate inference
 
-        if self.use_cache == 1:
-            resp = self.api.generate(
+        if use_cache == 1:
+            resp = self.api_with_cache.generate(
                 model=GPT_MODELS[self.model],
                 temperature=temperature,
                 max_tokens=max_tokens,
@@ -193,32 +136,30 @@ class GPTWrapper(LLMWrapper):
 
 
 class ClaudeWrapper(LLMWrapper):
-    def __init__(self, model, use_cache=1, **kwargs):
+    def __init__(self, model, **kwargs):
         super().__init__(
-            model, use_cache=use_cache, api=self._setup(use_cache=use_cache, **kwargs)
+            model
         )
+        self._setup(**kwargs)
 
-    def _setup(self, use_cache=1, max_retry=30, **kwargs):
+    def _setup(self, max_retry=30, **kwargs):
         # TODO: get api key from environment variable
         api_key = open(f"./claude_key.txt", "r").read().strip()
-        client = Anthropic(
+
+        self.api = anthropic.Anthropic(
             api_key=api_key,
         )
 
-        api = ClaudeAPICache(client=client, port=PORT, max_retry=max_retry)
+        self.api_with_cache = ClaudeAPICache(client=self.api, port=PORT, max_retry=max_retry, **kwargs)
 
-        if use_cache == 1:
-            return api
-        else:
-            return client
-
-    def generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
+    def generate(self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs):
         for idx, msg in enumerate(messages):
             if msg["role"] == "system":
                 system_prompt = messages.pop(idx)["content"]
+                break
 
-        if self.use_cache == 1:
-            response = self.api.generate(
+        if use_cache == 1:
+            response = self.api_with_cache.generate(
                 model=CLAUDE_MODELS[self.model],
                 max_tokens=max_tokens,
                 temperature=temperature,
@@ -241,19 +182,17 @@ class ClaudeWrapper(LLMWrapper):
 
 
 class LocalModelWrapper(LLMWrapper):
-    def __init__(self, model, use_cache=1, use_vllm=False, **kwargs):
+    def __init__(self, model, use_vllm=False, **kwargs):
         super().__init__(
             model,
-            use_cache=use_cache,
-            api=self._setup(model, use_cache=use_cache, use_vllm=use_vllm, **kwargs),
         )
+        self._setup(model, use_vllm=use_vllm, **kwargs)
 
     def _setup(
         self,
         model,
         cache_dir=f"./local_models_cache",
         path_name=None,
-        use_cache=1,
         max_retry=30,
         use_vllm=False,
         **kwargs,
@@ -269,52 +208,65 @@ class LocalModelWrapper(LLMWrapper):
                 raise ValueError(f"Model {model} not recognized.")
 
         if use_vllm:
-            localmodel = vllm.LLM(
+            local_model = vllm.LLM(
                 model=path_name, tensor_parallel_size=torch.cuda.device_count()
             )
         else:
-            localmodel = pipeline(
+            local_model = pipeline(
                 "text-generation",
                 device_map="auto",
                 model=path_name,
                 model_kwargs=kwargs,
             )
 
-        client = LocalModelAPI(localmodel)
-        api = LocalModelAPICache(client=client, port=PORT, max_retry=max_retry)
-
-        if use_cache == 1:
-            return api
-        else:
-            return client
+        # TODO: Add cache support 
+        
+        api_with_cache = LocalModelAPICache(client=local_model, port=PORT, max_retry=max_retry)
+        self.api = local_model
+        self.api_with_cache = api_with_cache
 
     def generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
-        return self.api.generate(messages, max_tokens, temperature, **kwargs)
+        if isinstance(self.api, vllm.LLM):
+            return self._vllm_generate([messages], max_tokens, temperature, **kwargs)[0]
+        else:
+            output = self._generate(messages, max_tokens, temperature, **kwargs)
+            return output[0]["generated_text"][-1]["content"]
 
-    def batched_generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
-        return self.api.batched_generate(messages, max_tokens, temperature, **kwargs)
+    def batched_generate(
+        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
+    ):
+        if isinstance(self.api, vllm.LLM):
+            return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
+        else:
+            output = self._generate(messages, max_tokens, temperature, **kwargs)
+            return [o[0]["generated_text"][-1]["content"] for o in output]
 
+    def _generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
+        output = self.api(
+            messages,
+            max_new_tokens=max_tokens,
+            temperature=temperature,
+            **kwargs,
+        )
+        return output
 
-# def get_results(task_name, pred_list, label_list):
-#     """
-#     Compute tp, tn, fp, fn for binary classification.
-#     Note that if predicted output is 'other', it is considered as negative.
-#     """
-#     tp, tn, fp, fn = 0, 0, 0, 0
-#     positive_label = POSITIVE_LABELS[task_name]
-#     for i in range(len(pred_list)):
-#         pred = pred_list[i]
-#         label = label_list[i]
-#         if pred == positive_label and label == positive_label:
-#             tp += 1
-#         elif pred == positive_label and label != positive_label:
-#             fp += 1
-#         elif pred != positive_label and label == positive_label:
-#             fn += 1
-#         else:
-#             tn += 1
-#     return tp, tn, fp, fn
+    def _vllm_generate(
+        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
+    ):
 
+        sampling_params = vllm.SamplingParams(
+            max_tokens=max_tokens,
+            temperature=temperature,
+            **kwargs,
+        )
+        tokenizer = self.api.get_tokenizer()
+        formatted_prompts = [
+            tokenizer.apply_chat_template(m, tokenize=False, add_generation_prompt=True)
+            for m in messages
+        ]
+
+        output = self.api.generate(formatted_prompts, sampling_params)
+        return [o.outputs[0].text for o in output]
 
 
 def get_results(pred_list, label_list):
