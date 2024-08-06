@@ -159,10 +159,9 @@ class OpenAIAPICache(APICache):
 
     service = "OpenAI"
     exceptions_to_catch = (
-        openai.error.RateLimitError,
-        openai.error.APIError,
-        openai.error.Timeout,
-        openai.error.ServiceUnavailableError,
+        openai.RateLimitError,
+        openai.APIError,
+        openai.APITimeoutError,
     )
 
     def __init__(self, mode: str = "completion", **redis_kwargs: dict):
