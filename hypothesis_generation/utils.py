@@ -18,9 +18,7 @@ from transformers import (
     AutoTokenizer,
     pipeline,
 )
-
 from pprint import pprint
-
 from anthropic import Anthropic
 
 from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
@@ -47,33 +45,33 @@ class LocalModelAPI:
     def __init__(self, localmodel, **kwargs):
         self.localmodel = localmodel
 
-    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+    def generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         if isinstance(self.localmodel, vllm.LLM):
             return self._vllm_generate([messages], max_tokens, temperature, **kwargs)[0]
         else:
-            return self._generate(messages, max_tokens, temperature, **kwargs)
+            output = self._generate(messages, max_tokens, temperature, **kwargs)
+            return output[0]["generated_text"][-1]["content"]
 
     def batched_generate(
-        self, messages: List[Dict[str, str]], max_tokens=500, temperature=0, **kwargs
+        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
     ):
         if isinstance(self.localmodel, vllm.LLM):
             return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
         else:
-            raise NotImplementedError(
-                "Batched generation only supports VLLM models for now."
-            )
+            output = self._generate(messages, max_tokens, temperature, **kwargs)
+            return [o[0]["generated_text"][-1]["content"] for o in output]
 
-    def _generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+    def _generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         output = self.localmodel(
             messages,
             max_new_tokens=max_tokens,
             temperature=temperature,
             **kwargs,
         )
-        return output[0]["generated_text"][-1]["content"]
+        return output
 
     def _vllm_generate(
-        self, messages: List[Dict[str, str]], max_tokens=500, temperature=0, **kwargs
+        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
     ):
 
         sampling_params = vllm.SamplingParams(
@@ -111,7 +109,7 @@ class LLMWrapper(ABC):
             raise NotImplementedError
 
     @abstractmethod
-    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+    def generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         pass
 
 
@@ -126,7 +124,7 @@ class GPTWrapper(LLMWrapper):
 
         return api
 
-    def generate(self, messages, max_tokens=500, temperature=0, n=1, **kwargs):
+    def generate(self, messages, max_tokens=500, temperature=1e-5, n=1, **kwargs):
         # Call OpenAI's API to generate inference
 
         if self.use_cache == 1:
@@ -171,8 +169,7 @@ class ClaudeWrapper(LLMWrapper):
         else:
             return client
 
-    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
-
+    def generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         for idx, msg in enumerate(messages):
             if msg["role"] == "system":
                 system_prompt = messages.pop(idx)["content"]
@@ -248,10 +245,10 @@ class LocalModelWrapper(LLMWrapper):
         else:
             return client
 
-    def generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+    def generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         return self.api.generate(messages, max_tokens, temperature, **kwargs)
 
-    def batched_generate(self, messages, max_tokens=500, temperature=0, **kwargs):
+    def batched_generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         return self.api.batched_generate(messages, max_tokens, temperature, **kwargs)
 
 
