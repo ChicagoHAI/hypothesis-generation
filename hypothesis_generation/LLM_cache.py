@@ -12,6 +12,8 @@ from abc import ABC
 import redis
 
 import anthropic
+import openai
+from openai import OpenAI
 
 logger = logging.getLogger(name="LLM_cache")
 
@@ -155,8 +157,6 @@ class OpenAIAPICache(APICache):
       resp = api.generate(model="text-davinci-002", prompt="This is a test", temperature=0.0)
     """
 
-    import openai
-
     service = "OpenAI"
     exceptions_to_catch = (
         openai.RateLimitError,
@@ -164,18 +164,15 @@ class OpenAIAPICache(APICache):
         openai.APITimeoutError,
     )
 
-    def __init__(self, mode: str = "completion", **redis_kwargs: dict):
+    def __init__(self, **redis_kwargs: dict):
         """Initializes an OpenAIAPICache Object.
 
         Args:
             port: Port of the Redis backend.
             mode: "completion" or "chat", determines which API to call
         """
-        self.mode = mode
-        if mode == "completion":
-            self.api_call = self.openai.Completion.create
-        elif mode == "chat":
-            self.api_call = self.openai.ChatCompletion.create
+
+        self.api_call = OpenAI().chat.completions.create
         super().__init__(**redis_kwargs)
 
 

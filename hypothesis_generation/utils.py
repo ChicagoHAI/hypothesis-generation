@@ -44,13 +44,13 @@ class LLMWrapper(ABC):
         self.model = model
 
     @classmethod
-    def from_model(cls, model, use_vllm=False, **kwargs):
+    def from_model(cls, model, use_vllm=False, path_name=None, **kwargs):
         if model in GPT_MODELS.keys():
             return GPTWrapper(model, **kwargs)
         elif model in CLAUDE_MODELS.keys():
             return ClaudeWrapper(model, **kwargs)
         elif model in (LLAMA_MODELS + MISTRAL_MODELS):
-            return LocalModelWrapper(model, use_vllm=use_vllm, **kwargs)
+            return LocalModelWrapper(model, use_vllm=use_vllm, path_name=path_name, **kwargs)
         else:
             raise NotImplementedError
 
@@ -67,7 +67,7 @@ class GPTWrapper(LLMWrapper):
     def _setup(self, max_retry=30, **kwargs):
         self.api = OpenAI()
         self.api_with_cache = OpenAIAPICache(
-            mode="chat", port=PORT, max_retry=max_retry, **kwargs
+            port=PORT, max_retry=max_retry, **kwargs
         )
 
     def batched_generate(
