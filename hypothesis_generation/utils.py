@@ -50,9 +50,7 @@ class LLMWrapper(ABC):
         elif model in CLAUDE_MODELS.keys():
             return ClaudeWrapper(model, **kwargs)
         elif model in (LLAMA_MODELS + MISTRAL_MODELS):
-            return LocalModelWrapper(
-                model, use_vllm=use_vllm, **kwargs
-            )
+            return LocalModelWrapper(model, use_vllm=use_vllm, **kwargs)
         else:
             raise NotImplementedError
 
@@ -63,14 +61,14 @@ class LLMWrapper(ABC):
 
 class GPTWrapper(LLMWrapper):
     def __init__(self, model, **kwargs):
-        super().__init__(
-            model
-        )
+        super().__init__(model)
         self._setup(**kwargs)
 
     def _setup(self, max_retry=30, **kwargs):
         self.api = OpenAI()
-        self.api_with_cache = OpenAIAPICache(mode="chat", port=PORT, max_retry=max_retry, **kwargs)
+        self.api_with_cache = OpenAIAPICache(
+            mode="chat", port=PORT, max_retry=max_retry, **kwargs
+        )
 
     def batched_generate(
         self,
@@ -83,6 +81,7 @@ class GPTWrapper(LLMWrapper):
     ):
         client = AsyncOpenAI()
         status_bar = tqdm.tqdm(total=len(messages))
+
         # TODO: retry on failure
         async def _async_generate(sem, messages, **kwargs):
             async with sem:
@@ -110,7 +109,9 @@ class GPTWrapper(LLMWrapper):
         resp = loop.run_until_complete(asyncio.gather(*tasks))
         return [r.choices[0].message.content for r in resp]
 
-    def generate(self, messages, use_cache=1, max_tokens=500, temperature=1e-5, n=1, **kwargs):
+    def generate(
+        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, n=1, **kwargs
+    ):
         # Call OpenAI's API to generate inference
 
         if use_cache == 1:
@@ -137,9 +138,7 @@ class GPTWrapper(LLMWrapper):
 
 class ClaudeWrapper(LLMWrapper):
     def __init__(self, model, **kwargs):
-        super().__init__(
-            model
-        )
+        super().__init__(model)
         self._setup(**kwargs)
 
     def _setup(self, max_retry=30, **kwargs):
@@ -150,9 +149,13 @@ class ClaudeWrapper(LLMWrapper):
             api_key=api_key,
         )
 
-        self.api_with_cache = ClaudeAPICache(client=self.api, port=PORT, max_retry=max_retry, **kwargs)
+        self.api_with_cache = ClaudeAPICache(
+            client=self.api, port=PORT, max_retry=max_retry, **kwargs
+        )
 
-    def generate(self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs):
+    def generate(
+        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
+    ):
         for idx, msg in enumerate(messages):
             if msg["role"] == "system":
                 system_prompt = messages.pop(idx)["content"]
@@ -219,9 +222,11 @@ class LocalModelWrapper(LLMWrapper):
                 model_kwargs=kwargs,
             )
 
-        # TODO: Add cache support 
-        
-        api_with_cache = LocalModelAPICache(client=local_model, port=PORT, max_retry=max_retry)
+        # TODO: Add cache support
+
+        api_with_cache = LocalModelAPICache(
+            client=local_model, port=PORT, max_retry=max_retry
+        )
         self.api = local_model
         self.api_with_cache = api_with_cache
 
@@ -274,8 +279,8 @@ def get_results(pred_list, label_list):
     Compute accuracy and F1 score for multi-class classification
     """
     accuracy = accuracy_score(label_list, pred_list)
-    f1 = f1_score(label_list, pred_list, average='micro')
-    
+    f1 = f1_score(label_list, pred_list, average="micro")
+
     return {"accuracy": accuracy, "f1": f1}
 
 

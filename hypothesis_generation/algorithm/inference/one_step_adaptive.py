@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
+from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 import pulp
@@ -24,6 +25,22 @@ class OneStepAdaptiveInference(Inference):
     ):
         super().__init__(api, prompt_class, train_data, task)
 
+    def batched_predict(
+        self,
+        data,
+        idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+    ):
+        prompt_inputs = [
+            self.prompt_class.one_step_adaptive_inference(
+                hyp_bank, self.train_data, data, index
+            )
+            for index, hyp_bank in idx_hyp_pair
+        ]
+        responses = self.api.batched_generate(prompt_inputs)
+        predictions = [self.task.extract_label(response) for response in responses]
+        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        return predictions, actual_labels
+
     def predict(self, data, index, hyp_bank):
         prompt_input = self.prompt_class.one_step_adaptive_inference(
             hyp_bank, self.train_data, data, index
@@ -45,7 +62,7 @@ class OneStepAdaptiveInference(Inference):
         adaptive_num_hypotheses=0,
         adaptive_num_examples=0,
     ):
-        num_train_data_samples = get_num_examples(self.train_data)
+        num_train_data_samples = len(self.train_data)
         similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(
             hyp_bank, num_train_data_samples
         )
@@ -95,15 +112,10 @@ class OneStepAdaptiveInference(Inference):
                     )
                 )
 
-        num_samples = get_num_examples(data)
-        pred_list = []
-        label_list = []
-        for i in range(num_samples):
-            pred, label = self.predict(data, i, selected_hyp_bank)
-            pred_list.append(pred)
-            label_list.append(label)
-
-        return pred_list, label_list
+        num_samples = len(data)
+        return self.batched_predict(
+            data, [(i, selected_hyp_bank) for i in range(num_samples)]
+        )
 
     def run_inference_final(self, data, hyp_bank, **kwargs):
         return self._run_inference_final(data, hyp_bank, **kwargs)

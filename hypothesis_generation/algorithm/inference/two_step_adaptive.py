@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
+from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 import pulp
@@ -45,15 +46,7 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
 
-    def select_hypotheses(self, data, index, hyp_bank):
-        prompt_input = self.prompt_class.adaptive_selection(
-            hyp_bank, self.train_data, data, index
-        )
-        response = self.api.generate(prompt_input)
-
-        print("Prompt:", prompt_input)
-        print("Response:", response)
-
+    def select_hypotheses(self, hyp_bank, response):
         hyp_idx = re.search(r"Chosen Pattern:\s*Pattern\s*(\d+)", response)
 
         if hyp_idx == None:
@@ -83,11 +76,40 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
 
         return hyp
 
+    def batched_predict(
+        self,
+        data,
+        idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+    ):
+        prompt_inputs = [
+            self.prompt_class.adaptive_selection(hyp_bank, self.train_data, data, index)
+            for index, hyp_bank in idx_hyp_pair
+        ]
+        responses: List[str] = self.api.batched_generate(prompt_inputs)
+        responses = responses[::-1]
+
+        prompt_inputs = []
+        for index, hyp_bank in idx_hyp_pair:
+            hyp = self.select_hypotheses(hyp_bank, responses.pop(-1))
+            prompt_inputs.append(
+                self.prompt_class.inference({hyp: hyp_bank[hyp]}, data, index)
+            )
+        responses = self.api.batched_generate(prompt_inputs)
+        predictions = [self.task.extract_label(response) for response in responses]
+        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        return predictions, actual_labels
+
     def predict(self, data, index, hyp_bank):
+        prompt_input = self.prompt_class.adaptive_selection(
+            hyp_bank, self.train_data, data, index
+        )
+        response = self.api.generate(prompt_input)
+
+        print("Prompt:", prompt_input)
+        print("Response:", response)
+
         # select one hypothesis that is most relevant to the sample
-        hyp = self.select_hypotheses(data, index, hyp_bank)
+        hyp = self.select_hypotheses(hyp_bank, response)
 
         # make prediction using default_predict
-        return self.default_predict(
-            data, index, {hyp: hyp_bank[hyp]}
-        )
+        return self.default_predict(data, index, {hyp: hyp_bank[hyp]})

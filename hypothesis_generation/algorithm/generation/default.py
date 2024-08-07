@@ -56,3 +56,34 @@ class DefaultGeneration(Generation):
             hypotheses_bank.update(new_hypotheses)
 
         return hypotheses_bank
+
+    def batched_initialize_hypotheses(
+        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
+    ):
+        assert (
+            num_init % init_batch_size == 0
+        ), "Number of initial examples must be divisible by the batch size"
+        num_batches = num_init // init_batch_size
+        prompt_inputs = []
+        for i in range(num_batches):
+            example_indices = list(
+                range(i * init_batch_size, (i + 1) * init_batch_size)
+            )
+            # TODO: need copy()?
+            example_bank = (
+                self.train_data.loc[list(example_indices)].copy().reset_index(drop=True)
+            )
+            prompt_inputs.append(
+                self.prompt_class.batched_generation(
+                    example_bank, init_hypotheses_per_batch
+                )
+            )
+        responses = self.api.batched_generate(prompt_inputs)
+
+        return self.batched_batched_hypothesis_generation(
+            list(range(num_init)),
+            num_init,
+            init_hypotheses_per_batch,
+            alpha,
+            responses,
+        )

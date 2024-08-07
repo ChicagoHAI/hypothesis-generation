@@ -93,12 +93,14 @@ class DefaultUpdate(Update):
 
             # check if the hypothesis works for the generated hypotheses
             num_wrong_hypotheses = 0
-            for hypothesis in top_k_hypotheses:
-                pred, label = self.inference_class.predict(
-                    self.train_data,
-                    i,
-                    {hypothesis: hypotheses_bank[hypothesis]},
-                )
+            preds, labels = self.inference_class.batched_predict(
+                self.train_data,
+                [
+                    (i, {hypothesis: hypotheses_bank[hypothesis]})
+                    for hypothesis in top_k_hypotheses
+                ],
+            )
+            for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(

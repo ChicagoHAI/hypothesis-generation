@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
+from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 import pulp
@@ -37,6 +38,20 @@ class Inference(ABC):
         self.prompt_class = prompt_class
         self.train_data = train_data
         self.task = task
+
+    @abstractmethod
+    def batched_predict(
+        self,
+        data,
+        idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+    ):
+        """
+        Generate responses for every pair of data and hypotheses.
+
+        :param data: the data to predict on
+        :param idx_hyp_pair: a list of tuples of indices and hypothesis banks
+        """
+        pass
 
     @abstractmethod
     def predict(self, data, index, hyp_bank):

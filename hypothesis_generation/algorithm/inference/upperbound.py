@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
+from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 import pulp
@@ -38,6 +39,25 @@ class UpperboundInference(Inference):
         print(f"Ground truth: {actual_label}")
         return prediction, actual_label
 
+    def batched_predict(
+        self,
+        data,
+        idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+    ):
+        assert all(
+            [len(hyp_bank.keys()) == 1 for _, hyp_bank in idx_hyp_pair]
+        ), "default inference only supports one hypothesis at a time"
+
+        predictions = []
+        prompt_inputs = [
+            self.prompt_class.inference(hyp_bank, data, index)
+            for index, hyp_bank in idx_hyp_pair
+        ]
+        responses = self.api.batched_generate(prompt_inputs)
+        predictions = [self.task.extract_label(response) for response in responses]
+        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        return predictions, actual_labels
+
     def _run_inference_final(self, data, hyp_bank, k=1):
         arg_k = k
 
@@ -52,16 +72,17 @@ class UpperboundInference(Inference):
         hyp_bank = {k: v for k, v in list(hyp_bank.items())[:arg_k]}
 
         # run inference for each hypothesis
-        num_samples = get_num_examples(data)
+        num_samples = len(data)
         pred_list = {hyp: [] for hyp in hyp_bank}
-        label_list = []
         count = 1
+        preds, label_list = self.batched_predict(
+            data,
+            [(i, {hyp: hyp_bank[hyp]}) for hyp in hyp_bank for i in range(num_samples)],
+        )
+        preds = preds[::-1]
         for hyp in hyp_bank:
-            print(f"The {count}th hypothesis")
             for i in range(num_samples):
-                pred, label = self.predict(data, i, {hyp: hyp_bank[hyp]})
-                pred_list[hyp].append(pred)
-                label_list.append(label)
+                pred_list[hyp].append(preds.pop(-1))
             count += 1
 
         # compute accuracy for each hypothesis

@@ -216,5 +216,6 @@ class LocalModelAPICache(APICache):
             client: intiailzed LocalModel
         """
         self.localmodel = client
+        # TODO: pipeline has no generate method
         self.api_call = self.localmodel.generate
         super().__init__(**redis_kwargs)

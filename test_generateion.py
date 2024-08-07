@@ -52,6 +52,7 @@ def main():
 
     task_config_path = "./data/retweet/config.yaml"
     model_name = "Meta-Llama-3.1-8B-Instruct"
+    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     max_num_hypotheses = 20
     output_folder = f"./outputs/retweet/{model_name}/hyp_{max_num_hypotheses}/"
     old_hypothesis_file = None
@@ -77,8 +78,9 @@ def main():
     os.makedirs(output_folder, exist_ok=True)
     api = LLMWrapper.from_model(
         model_name,
-        path_name="/net/scratch/llama/Meta-Llama-3.1-8B-Instruct",
+        path_name=model_path,
         use_cache=0,
+        use_vllm=True,
     )
 
     task = BaseTask(task_extract_label, task_config_path)
@@ -105,7 +107,7 @@ def main():
 
         hypotheses_bank = {}
         if old_hypothesis_file is None:
-            hypotheses_bank = update_class.initialize_hypotheses(
+            hypotheses_bank = update_class.batched_initialize_hypotheses(
                 num_init,
                 init_batch_size=10,
                 init_hypotheses_per_batch=10,
@@ -122,7 +124,6 @@ def main():
                 hypotheses_bank[hypothesis] = dict_to_summary_information(
                     dict[hypothesis]
                 )
-
         for epoch in range(1):
             hypotheses_bank = update_class.update(
                 current_epoch=epoch,

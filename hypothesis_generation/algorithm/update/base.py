@@ -126,6 +126,16 @@ class Update(ABC):
         ) as f:
             f.write(json_string)
 
+    def batched_initialize_hypotheses(
+        self, num_init=25, init_batch_size=5, init_hypotheses_per_batch=5
+    ) -> Dict[str, SummaryInformation]:
+        return self.generation_class.batched_initialize_hypotheses(
+            num_init,
+            init_batch_size,
+            init_hypotheses_per_batch,
+            self.alpha,
+        )
+
     def initialize_hypotheses(
         self, num_init=25, init_batch_size=5, init_hypotheses_per_batch=5
     ) -> Dict[str, SummaryInformation]:

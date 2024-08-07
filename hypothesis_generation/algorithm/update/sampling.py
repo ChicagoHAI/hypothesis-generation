@@ -88,12 +88,14 @@ class SamplingUpdate(Update):
 
             # check if the hypothesis works for the generated hypotheses
             num_wrong_hypotheses = 0
-            for hypothesis in top_k_hypotheses:
-                pred, label = self.inference_class.predict(
-                    self.train_data,
-                    i,
-                    {hypothesis: hypotheses_bank[hypothesis]},
-                )
+            preds, labels = self.inference_class.batched_predict(
+                self.train_data,
+                [
+                    (i, {hypothesis: hypotheses_bank[hypothesis]})
+                    for hypothesis in top_k_hypotheses
+                ],
+            )
+            for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
@@ -118,7 +120,8 @@ class SamplingUpdate(Update):
                     new_hyp_bank = {}
 
                     # generate new hypotheses
-                    for j in range(self.num_hypotheses_to_update):
+                    for _ in range(self.num_hypotheses_to_update):
+                        # TODO: batched?
                         new_hypotheses = (
                             self.generation_class.batched_hypothesis_generation(
                                 wrong_example_ids,
@@ -182,15 +185,20 @@ class SamplingUpdate(Update):
             val = 10
         else:
             val = 5
+        preds, labels = self.inference_class.batched_predict(
+            self.train_data,
+            [
+                (i, {hypothesis: hypotheses_bank[hypothesis]})
+                for hypothesis in hypotheses_bank
+                for i in range(val)
+            ],
+        )
+        preds, labels = preds[::-1], labels[::-1]
         for hypothesis in hypotheses_bank:
             num_right = 0
             ex = set(hypotheses_bank[hypothesis].correct_examples)
             for i in range(val):
-                pred, label = self.inference_class.predict(
-                    self.train_data,
-                    i,
-                    {hypothesis: hypotheses_bank[hypothesis]},
-                )
+                pred, label = preds.pop(-1), labels.pop(-1)
                 if pred == label:
                     num_right += 1
                     ex.add((i, label))

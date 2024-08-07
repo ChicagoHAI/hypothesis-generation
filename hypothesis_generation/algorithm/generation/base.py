@@ -58,6 +58,71 @@ class Generation(ABC):
         """
         pass
 
+    @abstractmethod
+    def batched_initialize_hypotheses(
+        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
+    ):
+        """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
+
+        Parameters:
+        ____________
+
+        args: the parsed arguments
+
+        ____________
+
+        Returns:
+        ____________
+
+        hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
+        """
+        pass
+
+    def batched_batched_hypothesis_generation(
+        self,
+        example_indices,
+        current_sample,
+        num_hypotheses_generate,
+        alpha,
+        responses,
+    ):
+        idx_hyp_pair = []
+        # create Summary Information for each
+        new_generated_hypotheses = {}
+        extracted_hypotheses_list = []
+        for response in responses:
+            extracted_hypotheses = extract_hypotheses(response, num_hypotheses_generate)
+            extracted_hypotheses_list.append(extracted_hypotheses)
+            for hyp in extracted_hypotheses:
+                new_generated_hypotheses[hyp] = SummaryInformation(
+                    hypothesis=hyp, acc=0, num_visits=0, reward=0, correct_examples=[]
+                )
+                for index in example_indices:
+                    idx_hyp_pair.append((index, {hyp: new_generated_hypotheses[hyp]}))
+        preds, labels = self.inference_class.batched_predict(
+            self.train_data, idx_hyp_pair
+        )
+        preds, labels = preds[::-1], labels[::-1]
+        for extracted_hypotheses in extracted_hypotheses_list:
+            for hyp in extracted_hypotheses:
+                correct = 0
+                ex = []
+                for index in example_indices:
+                    prediction, actual_label = preds.pop(-1), labels.pop(-1)
+                    if prediction == actual_label:
+                        correct += 1
+                        ex.append((index, actual_label))
+                acc = correct / len(example_indices)
+                new_generated_hypotheses[hyp].set_accuracy(acc)
+                new_generated_hypotheses[hyp].set_num_visits(len(example_indices))
+                reward = acc + alpha * math.sqrt(
+                    math.log(current_sample) / len(example_indices)
+                )
+                new_generated_hypotheses[hyp].set_reward(reward)
+                new_generated_hypotheses[hyp].set_example(ex)
+
+        return new_generated_hypotheses
+
     def batched_hypothesis_generation(
         self,
         example_indices,
@@ -100,18 +165,24 @@ class Generation(ABC):
         # create Summary Information for each
         new_generated_hypotheses = {}
 
+        idx_hyp_pair = []
+        for hyp in extracted_hypotheses:
+            new_generated_hypotheses[hyp] = SummaryInformation(
+                hypothesis=hyp, acc=0, num_visits=0, reward=0, correct_examples=[]
+            )
+            for index in example_indices:
+                idx_hyp_pair.append((index, {hyp: new_generated_hypotheses[hyp]}))
+
+        preds, labels = self.inference_class.batched_predict(
+            self.train_data, idx_hyp_pair
+        )
+        preds, labels = preds[::-1], labels[::-1]
+
         for hyp in extracted_hypotheses:
             correct = 0
             ex = []
-            new_generated_hypotheses[hyp] = SummaryInformation(
-                hypothesis=hyp, acc=0, num_visits=0, reward=0, correct_examples=ex
-            )
             for index in example_indices:
-                prediction, actual_label = self.inference_class.predict(
-                    self.train_data,
-                    index,
-                    {hyp: new_generated_hypotheses[hyp]},
-                )
+                prediction, actual_label = preds.pop(-1), labels.pop(-1)
                 if prediction == actual_label:
                     correct += 1
                     ex.append((index, actual_label))

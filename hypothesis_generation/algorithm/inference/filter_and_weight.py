@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 from collections import OrderedDict
+from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 import pulp
@@ -24,6 +25,38 @@ class FilterAndWeightInference(Inference):
     ):
         super().__init__(api, prompt_class, train_data, task)
 
+    def batched_predict(
+        self,
+        data: pd.DataFrame,
+        idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+    ):
+        assert all(
+            [len(hyp_bank.keys()) >= 1 for _, hyp_bank in idx_hyp_pair]
+        ), "Filter and weight inference requires at least one hypothesis"
+
+        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        prompt_inputs = [
+            self.prompt_class.inference({hypothesis: hyp_bank[hypothesis]}, data, index)
+            for index, hyp_bank in idx_hyp_pair
+            for hypothesis in hyp_bank
+        ]
+        responses = self.api.batched_generate(prompt_inputs)
+        responses = responses[::-1]
+        predictions = []
+        for _, hyp_bank in idx_hyp_pair:
+            pred_dict = {}
+            for hypothesis in hyp_bank:
+                response = responses.pop(-1)
+                pred = self.prompt_class.task.extract_label(response)
+                weight = hyp_bank[hypothesis].acc
+                if pred in pred_dict:
+                    pred_dict[pred] += weight
+                else:
+                    pred_dict[pred] = weight
+            predictions.append(max(pred_dict, key=pred_dict.get))
+
+        return predictions, actual_labels
+
     def predict(self, data, index, hyp_bank):
         """
         Make prediction on one sample (index) of the dataset.
@@ -35,13 +68,18 @@ class FilterAndWeightInference(Inference):
         assert (
             len(hyp_bank.keys()) >= 1
         ), "Filter and weight inference requires at least one hypothesis"
+
         actual_label = data["label"][index]
         pred_dict = {}
-        for hypothesis in hyp_bank:
-            hypothesis_dict = {hypothesis: hyp_bank[hypothesis]}
-            prompt_input = self.prompt_class.inference(hypothesis_dict, data, index)
-            response = self.api.generate(prompt_input)
-            pred = self.prompt_class.task.extract_label(response)
+        prompt_inputs = [
+            self.prompt_class.inference({hypothesis: hyp_bank[hypothesis]}, data, index)
+            for hypothesis in hyp_bank
+        ]
+        responses = self.api.batched_generate(prompt_inputs)
+        preds = [
+            self.prompt_class.task.extract_label(response) for response in responses
+        ]
+        for hypothesis, pred in zip(hyp_bank, preds):
             weight = hyp_bank[hypothesis].acc
             if pred in pred_dict:
                 pred_dict[pred] += weight
@@ -49,15 +87,15 @@ class FilterAndWeightInference(Inference):
                 pred_dict[pred] = weight
         prediction = max(pred_dict, key=pred_dict.get)
 
-        print(f"Prompt: {prompt_input}\n")
-        print(f"Response: {response}")
         print(f"Predictions (weights): {pred_dict}")
         print(f"Prediction (final): {prediction}")
         print(f"Ground truth: {actual_label}")
 
         return prediction, actual_label
 
-    def filter_hypotheses(self, data, index, hyp_bank):
+    def filter_hypotheses(
+        self, hyp_bank, responses, indices
+    ) -> Dict[str, SummaryInformation]:
         """
         Filter the hypotheses in hyp_bank to only include relevant hypotheses for the sample at index.
 
@@ -71,22 +109,20 @@ class FilterAndWeightInference(Inference):
         __________
         relevant_hypotheses: a dictionary of relevant hypotheses
         """
-        relevant_hypotheses = {}
-        for hypothesis in hyp_bank:
-            temp_hyp_bank = {hypothesis: hyp_bank[hypothesis]}
-            prompt_input = self.prompt_class.is_relevant(temp_hyp_bank, data, index)
-            response = self.api.generate(prompt_input)
+        relevant_hypotheses_banks = []
+        responses = responses[::-1]
+        for _ in indices:
+            relevant_hypotheses = {}
+            for hypothesis in hyp_bank:
+                response = responses.pop(-1)
 
-            print(f"Prompt: {prompt_input}\n")
-            print(f"Response: {response}")
-
-            # only keep the part after "Final answer:"
-            if "Final answer:" in response:
-                response = response[
-                    response.index("Final answer:") + len("Final answer:") :
-                ]
-                response = response[:5]
-                response = response.lower()
+                # only keep the part after "Final answer:"
+                if "Final answer:" in response:
+                    response = response[
+                        response.index("Final answer:") + len("Final answer:") :
+                    ]
+                    response = response[:5]
+                    response = response.lower()
 
             print(f"Response (truncated): {response}")
 
@@ -102,8 +138,9 @@ class FilterAndWeightInference(Inference):
                 print("Hypothesis is relevant")
             else:
                 print(f"Hypothsis is not relevant")
+            relevant_hypotheses_banks.append(relevant_hypotheses)
 
-        return relevant_hypotheses
+        return relevant_hypotheses_banks
 
     def _run_inference_final(self, data, hyp_bank, k=1):
         # get the top k hypotheses by reward (save as dictionary)
@@ -117,23 +154,26 @@ class FilterAndWeightInference(Inference):
 
         # iterate over the dataset and make predictions
         num_samples = get_num_examples(data)
-        pred_list = []
-        label_list = []
-        for i in range(num_samples):
-            filtered_hypotheses = self.filter_hypotheses(
-                data, i, top_hypotheses
-            )
-            # if no hypothesis is relevant, use the hypothesis with the highest accuracy
-            if len(filtered_hypotheses) == 0:
-                best_hypothesis = max(
-                    top_hypotheses, key=lambda x: top_hypotheses[x].acc
-                )
-                filtered_hypotheses[best_hypothesis] = top_hypotheses[best_hypothesis]
-            pred, label = self.predict(data, i, filtered_hypotheses)
-            pred_list.append(pred)
-            label_list.append(label)
 
-        return pred_list, label_list
+        prompt_inputs = [
+            self.prompt_class.is_relevant({hypothesis: hyp_bank[hypothesis]}, data, i)
+            for i in range(num_samples)
+            for hypothesis in top_hypotheses
+        ]
+        responses = self.api.batched_generate(prompt_inputs)
+        filtered_hypotheses_banks = self.filter_hypotheses(
+            top_hypotheses, responses, list(range(num_samples))
+        )
+
+        return self.batched_predict(
+            data,
+            [
+                (i, filtered_hypotheses)
+                for i, filtered_hypotheses in zip(
+                    range(num_samples), filtered_hypotheses_banks
+                )
+            ],
+        )
 
     def run_inference_final(self, data, hyp_bank, **kwargs):
         """
