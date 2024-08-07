@@ -9,3 +9,4 @@ test.yaml
 test.py
 outputs
 .idea
+redis-stable

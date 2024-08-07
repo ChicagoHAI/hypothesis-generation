@@ -97,6 +97,67 @@ class APICache(ABC):
     def api_call(self, *args, **kwargs):
         raise NotImplementedError("api_call() is not implemented")
 
+    def batched_api_call(self, *args, **kwargs):
+        raise NotImplementedError("batched_api_call() is not implemented")
+
+    def batched_generate(self, messages, overwrite_cache: bool = False, **kwargs):
+        need_to_req_msgs = []
+        responses = ["" for _ in range(len(messages))]
+        hashvals = []
+        queries = []
+        for idx, message in enumerate(messages):
+            query = FrozenDict({**kwargs, "message": message})
+            hashval = hash(query)
+            cache = self.r.hget(hashval, "data")
+
+            queries.append(query)
+            hashvals.append(hashval)
+            if overwrite_cache:
+                logger.debug("Overwriting cache")
+            elif cache is not None:
+                query_cached, resp_cached = pickle.loads(cache)
+                if query_cached == query:
+                    logger.debug(f"Matched cache for query")
+                    responses[idx] = resp_cached
+                    continue
+                logger.debug(
+                    f"Hash matches for query and cache, but contents are not equal. "
+                    + "Overwriting cache."
+                )
+            else:
+                logger.debug(f"Matching hash not found for query")
+            need_to_req_msgs.append(idx)
+
+        self.rate_limiter.add_event()
+        logger.debug(f"Request Completion from {self.service} API...")
+
+        for _ in range(self.max_retry):
+            try:
+                resps = self.batched_api_call(
+                    [messages[i] for i in need_to_req_msgs], **kwargs
+                )
+                break
+            except self.exceptions_to_catch as e:
+                logger.warning(
+                    f"Getting an {type(e).__name__} from API, backing off..."
+                )
+                self.rate_limiter.backoff()
+            except anthropic.BadRequestError as e:
+                # TODO: handle this case
+                resp = "Output blocked by content filtering policy"
+                break
+        
+        for idx, resp in zip(need_to_req_msgs, resps):
+            query = queries[idx]
+            hashval = hashvals[idx]
+            responses[idx] = resp
+
+            data = pickle.dumps((query, resp))
+            logger.debug(f"Writing query and resp to Redis")
+            self.r.hset(hashval, "data", data)
+
+        return responses
+
     def generate(self, overwrite_cache: bool = False, **kwargs):
         """Makes an API request if not found in cache, and returns the response.
 
@@ -214,5 +275,6 @@ class LocalModelAPICache(APICache):
         """
         self.localmodel = client
         # TODO: pipeline has no generate method
+        # TODO: vLLM generate method has no max_tokens
         self.api_call = self.localmodel.generate
         super().__init__(**redis_kwargs)
