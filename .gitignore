@@ -10,3 +10,4 @@ test.py
 outputs
 .idea
 redis-stable
+dump.rdb

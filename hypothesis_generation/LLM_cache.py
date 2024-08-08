@@ -100,7 +100,9 @@ class APICache(ABC):
     def batched_api_call(self, *args, **kwargs):
         raise NotImplementedError("batched_api_call() is not implemented")
 
-    def batched_generate(self, messages, overwrite_cache: bool = False, **kwargs):
+    def batched_generate(
+        self, messages, max_concurrent=3, overwrite_cache: bool = False, **kwargs
+    ):
         need_to_req_msgs = []
         responses = ["" for _ in range(len(messages))]
         hashvals = []
@@ -134,7 +136,9 @@ class APICache(ABC):
         for _ in range(self.max_retry):
             try:
                 resps = self.batched_api_call(
-                    [messages[i] for i in need_to_req_msgs], **kwargs
+                    [messages[i] for i in need_to_req_msgs],
+                    max_concurrent=max_concurrent,
+                    **kwargs,
                 )
                 break
             except self.exceptions_to_catch as e:
@@ -146,7 +150,7 @@ class APICache(ABC):
                 # TODO: handle this case
                 resp = "Output blocked by content filtering policy"
                 break
-        
+
         for idx, resp in zip(need_to_req_msgs, resps):
             query = queries[idx]
             hashval = hashvals[idx]
@@ -233,7 +237,6 @@ class OpenAIAPICache(APICache):
             mode: "completion" or "chat", determines which API to call
         """
 
-        self.api_call = OpenAI().chat.completions.create
         super().__init__(**redis_kwargs)
 
 
@@ -254,7 +257,6 @@ class ClaudeAPICache(APICache):
             client: Authenticated Claude client
         """
         self.claude = client
-        self.api_call = self.claude.messages.create
         super().__init__(**redis_kwargs)
 
 
@@ -274,7 +276,4 @@ class LocalModelAPICache(APICache):
             client: intiailzed LocalModel
         """
         self.localmodel = client
-        # TODO: pipeline has no generate method
-        # TODO: vLLM generate method has no max_tokens
-        self.api_call = self.localmodel
         super().__init__(**redis_kwargs)
