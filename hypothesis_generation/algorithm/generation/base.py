@@ -85,6 +85,7 @@ class Generation(ABC):
         num_hypotheses_generate,
         alpha,
         responses,
+        use_cache=1,
     ):
         idx_hyp_pair = []
         # create Summary Information for each
@@ -100,7 +101,7 @@ class Generation(ABC):
                 for index in example_indices:
                     idx_hyp_pair.append((index, {hyp: new_generated_hypotheses[hyp]}))
         preds, labels = self.inference_class.batched_predict(
-            self.train_data, idx_hyp_pair
+            self.train_data, idx_hyp_pair, use_cache=use_cache
         )
         preds, labels = preds[::-1], labels[::-1]
         for extracted_hypotheses in extracted_hypotheses_list:
@@ -129,6 +130,7 @@ class Generation(ABC):
         current_sample,
         num_hypotheses_generate,
         alpha,
+        use_cache=1,
     ):
         """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
 
@@ -159,7 +161,7 @@ class Generation(ABC):
         prompt_input = self.prompt_class.batched_generation(
             example_bank, num_hypotheses_generate
         )
-        response = self.api.generate(prompt_input)
+        response = self.api.generate(prompt_input, use_cache=use_cache)
         extracted_hypotheses = extract_hypotheses(response, num_hypotheses_generate)
 
         # create Summary Information for each
@@ -174,7 +176,7 @@ class Generation(ABC):
                 idx_hyp_pair.append((index, {hyp: new_generated_hypotheses[hyp]}))
 
         preds, labels = self.inference_class.batched_predict(
-            self.train_data, idx_hyp_pair
+            self.train_data, idx_hyp_pair, use_cache=use_cache
         )
         preds, labels = preds[::-1], labels[::-1]
 

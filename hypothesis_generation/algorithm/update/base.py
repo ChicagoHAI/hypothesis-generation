@@ -11,7 +11,6 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
-from ...utils import get_num_examples
 
 
 class Update(ABC):
@@ -80,6 +79,7 @@ class Update(ABC):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
+        update=1,
     ):
         """Implements how the algorithm runs through the samples. To run through the updated samples, start from args.num_init
         Call self.train_data for the train_data

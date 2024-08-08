@@ -10,7 +10,6 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
-from ...utils import get_num_examples
 
 
 class SamplingUpdate(Update):
@@ -57,6 +56,7 @@ class SamplingUpdate(Update):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
+        use_cache=1,
     ):
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
@@ -94,6 +94,7 @@ class SamplingUpdate(Update):
                     (i, {hypothesis: hypotheses_bank[hypothesis]})
                     for hypothesis in top_k_hypotheses
                 ],
+                use_cache=use_cache,
             )
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
@@ -139,6 +140,7 @@ class SamplingUpdate(Update):
                             hypotheses_bank[max_visited].num_visits,
                             self.num_init,
                             self.alpha,
+                            use_cache=use_cache
                         )
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
@@ -172,12 +174,7 @@ class SamplingUpdate(Update):
         return hypotheses_bank
 
     def balance_by_sample(
-        self,
-        hypotheses_bank,
-        current_sample,
-        max_visits,
-        num_init,
-        alpha,
+        self, hypotheses_bank, current_sample, max_visits, num_init, alpha, use_cache=1
     ):
         if max_visits > 60:
             val = num_init
@@ -192,6 +189,7 @@ class SamplingUpdate(Update):
                 for hypothesis in hypotheses_bank
                 for i in range(val)
             ],
+            use_cache=use_cache,
         )
         preds, labels = preds[::-1], labels[::-1]
         for hypothesis in hypotheses_bank:

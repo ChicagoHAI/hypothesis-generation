@@ -10,7 +10,6 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
-from ...utils import get_num_examples
 
 
 class DefaultUpdate(Update):
@@ -61,6 +60,7 @@ class DefaultUpdate(Update):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
+        use_cache=1,
     ):
         # initialize variables
         num_train_examples = len(self.train_data)
@@ -99,6 +99,7 @@ class DefaultUpdate(Update):
                     (i, {hypothesis: hypotheses_bank[hypothesis]})
                     for hypothesis in top_k_hypotheses
                 ],
+                use_cache=use_cache,
             )
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:

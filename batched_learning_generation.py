@@ -13,14 +13,10 @@ from typing import Union
 
 from hypothesis_generation.tasks import BaseTask
 from hypothesis_generation.utils import (
-    LLMWrapper,
-    get_num_examples,
-    create_directory,
-    VALID_MODELS,
-    GPT_MODELS,
     set_seed,
 )
 from hypothesis_generation.prompt import BasePrompt
+from hypothesis_generation.LLM_wrapper import LocalModelWrapper
 from hypothesis_generation.data_loader import get_data
 
 
@@ -32,11 +28,11 @@ def main():
     num_val = 0
     seed = 49
     task_config_path = "./data/retweet/config.yaml"
-    model = "gpt-4o-mini"
-    model_path = ""
+    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     num_hypothesis = 5
     use_cache = 0
-    hypothesis_file = f"./outputs/retweet/batched_gen_{model}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
+    hypothesis_file = f"./outputs/retweet/batched_gen_{model_name}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
 
     def task_extract_label(text: Union[str, None]) -> str:
         """
@@ -57,7 +53,7 @@ def main():
     task = BaseTask(task_extract_label, task_config_path)
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
     print("Initialize LLM api ...")
-    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache)
+    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
     prompt_class = BasePrompt(task)
     prompt_input = prompt_class.batched_generation(train_data, num_hypothesis)
     print("Prompt: ")

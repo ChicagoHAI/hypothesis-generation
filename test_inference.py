@@ -16,14 +16,10 @@ from hypothesis_generation.tasks import BaseTask
 from hypothesis_generation.prompt import BasePrompt
 from hypothesis_generation.data_loader import get_data
 from hypothesis_generation.utils import (
-    LLMWrapper,
     get_results,
     set_seed,
-    create_directory,
-    get_num_examples,
-    GPT_MODELS,
-    VALID_MODELS,
 )
+from hypothesis_generation.LLM_wrapper import LocalModelWrapper
 from hypothesis_generation.algorithm.summary_information import (
     SummaryInformation,
     dict_to_summary_information,
@@ -43,16 +39,13 @@ def load_dict(file_path):
     return data
 
 
-def setup_LLM(model, model_path, use_cache):
-    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache)
-    return api
-
-
 def main():
     start_time = time.time()
 
     task_config_path = "./data/retweet/config.yaml"
     hypothesis_file = f"./outputs/retweet/gpt-4o-mini/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
+    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     adaptive_num_hypotheses = 5
     num_train = 75
     num_test = 25
@@ -79,8 +72,6 @@ def main():
         else:
             return "other"
 
-    api = setup_LLM("gpt-4o-mini", "", 0)
-
     task = BaseTask(task_extract_label, task_config_path)
 
     for hypothesis in dict:
@@ -90,7 +81,7 @@ def main():
         hyp_bank
     ), f"The number of hypotheses chosen in adaptive inference must be less than the total number of hypotheses"
 
-    api = setup_LLM("gpt-4o-mini", "", use_cache=0)
+    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
 
     for seed in seeds:
         set_seed(seed)
@@ -98,7 +89,7 @@ def main():
             num_train, num_test, num_val, seed
         )
         prompt_class = BasePrompt(task)
-        inference_class = DefaultInference(api, prompt_class, train_data)
+        inference_class = UpperboundInference(api, prompt_class, train_data, task)
 
         if use_valid:
             print("Using validation data")

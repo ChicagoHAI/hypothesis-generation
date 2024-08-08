@@ -9,18 +9,14 @@ import os
 from typing import Union
 
 from hypothesis_generation.tasks import BaseTask
-from hypothesis_generation.utils import (
-    LLMWrapper,
-    VALID_MODELS,
-    extract_label,
-    extract_hypotheses,
-    set_seed,
-)
+from hypothesis_generation.utils import set_seed
+from hypothesis_generation.algorithm.generation.utils import extract_hypotheses
+from hypothesis_generation.LLM_wrapper import LocalModelWrapper, LLMWrapper
 from hypothesis_generation.data_loader import get_data
 from hypothesis_generation.prompt import BasePrompt
 
 
-def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task):
+def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cache=1):
     """
     Given one hyothesis and a dataset, return the accuracy of the hypothesis on the dataset.
     """
@@ -30,7 +26,7 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task):
         prompt_class.inference(hypothesis_dict, data, i)
         for i in range(len(data["label"]))
     ]
-    responses = api.batched_generate(prompt_input)
+    responses = api.batched_generate(prompt_input, use_cache=use_cache)
     for i, response in enumerate(responses):
         print("*** get_accuracy ***")
         print(response)
@@ -63,11 +59,11 @@ def main():
     seed = 49
     task_config_path = "./data/retweet/config.yaml"
     task = "retweet"
-    model = "Meta-Llama-3.1-8B-Instruct"
-    num_hypothesis = 5
+    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
+    num_hypothesis = 5
     use_cache = 0
-    hypothesis_file = f"./outputs/retweet/batched_gen_{model}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
+    hypothesis_file = f"./outputs/retweet/batched_gen_{model_name}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
 
     def task_extract_label(text: Union[str, None]) -> str:
         """
@@ -102,9 +98,7 @@ def main():
 
     # initialization
     prompt_class = BasePrompt(task)
-    api = LLMWrapper.from_model(
-        model, path_name=model_path, use_cache=use_cache, use_vllm=True
-    )
+    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
 
     # get the training accuracy of each hypothesis
     training_accuracies = []

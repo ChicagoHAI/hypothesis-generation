@@ -15,14 +15,8 @@ import numpy as np
 from hypothesis_generation.tasks import BaseTask
 from hypothesis_generation.prompt import BasePrompt
 from hypothesis_generation.data_loader import get_data
-from hypothesis_generation.utils import (
-    LLMWrapper,
-    set_seed,
-    create_directory,
-    get_num_examples,
-    GPT_MODELS,
-    VALID_MODELS,
-)
+from hypothesis_generation.utils import set_seed
+from hypothesis_generation.LLM_wrapper import LocalModelWrapper
 from hypothesis_generation.algorithm.summary_information import (
     SummaryInformation,
     dict_to_summary_information,
@@ -36,7 +30,7 @@ from hypothesis_generation.algorithm.inference import (
     TwoStepAdaptiveInference,
     UpperboundInference,
 )
-from hypothesis_generation.algorithm.replace import DefaultReplace, Replace
+from hypothesis_generation.algorithm.replace import DefaultReplace
 from hypothesis_generation.algorithm.update import SamplingUpdate, DefaultUpdate
 
 
@@ -51,7 +45,7 @@ def main():
     start_time = time.time()
 
     task_config_path = "./data/retweet/config.yaml"
-    model_name = "Meta-Llama-3.1-8B-Instruct"
+    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     max_num_hypotheses = 20
     output_folder = f"./outputs/retweet/{model_name}/hyp_{max_num_hypotheses}/"
@@ -76,12 +70,7 @@ def main():
             return "other"
 
     os.makedirs(output_folder, exist_ok=True)
-    api = LLMWrapper.from_model(
-        model_name,
-        path_name=model_path,
-        use_cache=0,
-        use_vllm=True,
-    )
+    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
 
     task = BaseTask(task_extract_label, task_config_path)
 
@@ -89,10 +78,10 @@ def main():
         set_seed(seed)
         train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
         prompt_class = BasePrompt(task)
-        inference_class = DefaultInference(api, prompt_class, train_data, task)
+        inference_class = UpperboundInference(api, prompt_class, train_data, task)
         generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
 
-        update_class = SamplingUpdate(
+        update_class = DefaultUpdate(
             generation_class=generation_class,
             inference_class=inference_class,
             replace_class=DefaultReplace(max_num_hypotheses),

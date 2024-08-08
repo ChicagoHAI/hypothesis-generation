@@ -58,7 +58,13 @@ class DefaultGeneration(Generation):
         return hypotheses_bank
 
     def batched_initialize_hypotheses(
-        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
+        self,
+        num_init,
+        init_batch_size,
+        init_hypotheses_per_batch,
+        alpha,
+        use_cache=1,
+        **kwargs
     ):
         assert (
             num_init % init_batch_size == 0
@@ -78,7 +84,7 @@ class DefaultGeneration(Generation):
                     example_bank, init_hypotheses_per_batch
                 )
             )
-        responses = self.api.batched_generate(prompt_inputs)
+        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
 
         return self.batched_batched_hypothesis_generation(
             list(range(num_init)),

@@ -11,15 +11,8 @@ from typing import Union
 import pandas as pd
 
 from hypothesis_generation.tasks import BaseTask
-from hypothesis_generation.utils import (
-    LLMWrapper,
-    get_num_examples,
-    extract_label,
-    create_directory,
-    set_seed,
-    VALID_MODELS,
-    GPT_MODELS,
-)
+from hypothesis_generation.utils import set_seed
+from hypothesis_generation.LLM_wrapper import LocalModelWrapper, LLMWrapper
 from hypothesis_generation.data_loader import get_data
 from hypothesis_generation.prompt import BasePrompt
 
@@ -93,8 +86,8 @@ def main():
     seed = 42
     task_config_path = "./data/retweet/config.yaml"
     task = "retweet"
-    model = "gpt-4o-mini"
-    model_path = ""
+    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     num_test = 100
     num_train = 100
     num_val = 100
@@ -120,7 +113,7 @@ def main():
     task = BaseTask(task_extract_label, task_config_path)
 
     prompt_class = BasePrompt(task)
-    api = LLMWrapper.from_model(model, path_name=model_path, use_cache=use_cache)
+    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
 
     train_data, test_data, _ = task.get_data(num_train, num_test, num_val, seed)
 

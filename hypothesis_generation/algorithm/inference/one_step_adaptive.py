@@ -12,7 +12,6 @@ from .base import Inference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
-from ...utils import get_num_examples
 
 
 class OneStepAdaptiveInference(Inference):
@@ -29,6 +28,7 @@ class OneStepAdaptiveInference(Inference):
         self,
         data,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+        use_cache=1,
     ):
         prompt_inputs = [
             self.prompt_class.one_step_adaptive_inference(
@@ -36,16 +36,16 @@ class OneStepAdaptiveInference(Inference):
             )
             for index, hyp_bank in idx_hyp_pair
         ]
-        responses = self.api.batched_generate(prompt_inputs)
+        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
         predictions = [self.task.extract_label(response) for response in responses]
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
         return predictions, actual_labels
 
-    def predict(self, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_cache=1):
         prompt_input = self.prompt_class.one_step_adaptive_inference(
             hyp_bank, self.train_data, data, index
         )
-        response = self.api.generate(prompt_input)
+        response = self.api.generate(prompt_input, use_cache=use_cache)
         prediction = self.prompt_class.task.extract_label(response)
         actual_label = data["label"][index]
         print(f"Prompt: {prompt_input}\n")
@@ -61,6 +61,7 @@ class OneStepAdaptiveInference(Inference):
         adaptive_threshold=0.0,
         adaptive_num_hypotheses=0,
         adaptive_num_examples=0,
+        use_cache=1,
     ):
         num_train_data_samples = len(self.train_data)
         similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(
@@ -114,11 +115,13 @@ class OneStepAdaptiveInference(Inference):
 
         num_samples = len(data)
         return self.batched_predict(
-            data, [(i, selected_hyp_bank) for i in range(num_samples)]
+            data,
+            [(i, selected_hyp_bank) for i in range(num_samples)],
+            use_cache=use_cache,
         )
 
-    def run_inference_final(self, data, hyp_bank, **kwargs):
-        return self._run_inference_final(data, hyp_bank, **kwargs)
+    def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):
+        return self._run_inference_final(data, hyp_bank, use_cache=use_cache, **kwargs)
 
     def compute_similarity_matrix(self, hyp_bank, num_train_data_samples):
         one_hot_encoded_dict = OrderedDict()

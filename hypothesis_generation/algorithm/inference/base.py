@@ -11,7 +11,6 @@ import re
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
-from ...utils import get_num_examples
 
 
 class Inference(ABC):
@@ -44,6 +43,7 @@ class Inference(ABC):
         self,
         data,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+        use_cache=1,
     ):
         """
         Generate responses for every pair of data and hypotheses.
@@ -54,7 +54,7 @@ class Inference(ABC):
         pass
 
     @abstractmethod
-    def predict(self, data, index, hyp_bank):
+    def predict(self, data, index, hyp_bank, use_cache=1):
         """Implements a specific type of prediction
 
         Parameters
