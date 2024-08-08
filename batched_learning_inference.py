@@ -8,12 +8,12 @@ import sys
 import os
 from typing import Union
 
-from hypothesis_generation.tasks import BaseTask
-from hypothesis_generation.utils import set_seed
-from hypothesis_generation.algorithm.generation.utils import extract_hypotheses
-from hypothesis_generation.LLM_wrapper import LocalModelWrapper, LLMWrapper
-from hypothesis_generation.data_loader import get_data
-from hypothesis_generation.prompt import BasePrompt
+from hypogenic.tasks import BaseTask
+from hypogenic.utils import set_seed
+from hypogenic.algorithm.generation.utils import extract_hypotheses
+from hypogenic.LLM_wrapper import LocalModelWrapper, LLMWrapper
+from hypogenic.data_loader import get_data
+from hypogenic.prompt import BasePrompt
 
 
 def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cache=1):

@@ -12,19 +12,19 @@ from typing import Union
 import torch
 import numpy as np
 
-from hypothesis_generation.tasks import BaseTask
-from hypothesis_generation.prompt import BasePrompt
-from hypothesis_generation.data_loader import get_data
-from hypothesis_generation.utils import (
+from hypogenic.tasks import BaseTask
+from hypogenic.prompt import BasePrompt
+from hypogenic.data_loader import get_data
+from hypogenic.utils import (
     get_results,
     set_seed,
 )
-from hypothesis_generation.LLM_wrapper import LocalModelWrapper
-from hypothesis_generation.algorithm.summary_information import (
+from hypogenic.LLM_wrapper import LocalModelWrapper
+from hypogenic.algorithm.summary_information import (
     SummaryInformation,
     dict_to_summary_information,
 )
-from hypothesis_generation.algorithm.inference import (
+from hypogenic.algorithm.inference import (
     DefaultInference,
     OneStepAdaptiveInference,
     FilterAndWeightInference,

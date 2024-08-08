@@ -11,13 +11,13 @@ import os
 import sys
 from typing import Union
 
-from hypothesis_generation.tasks import BaseTask
-from hypothesis_generation.utils import (
+from hypogenic.tasks import BaseTask
+from hypogenic.utils import (
     set_seed,
 )
-from hypothesis_generation.prompt import BasePrompt
-from hypothesis_generation.LLM_wrapper import LocalModelWrapper
-from hypothesis_generation.data_loader import get_data
+from hypogenic.prompt import BasePrompt
+from hypogenic.LLM_wrapper import LocalModelWrapper
+from hypogenic.data_loader import get_data
 
 
 def main():
