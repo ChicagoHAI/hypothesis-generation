@@ -105,8 +105,8 @@ class APICache(ABC):
         responses = ["" for _ in range(len(messages))]
         hashvals = []
         queries = []
-        for idx, message in enumerate(messages):
-            query = FrozenDict({**kwargs, "message": message})
+        for idx, msg in enumerate(messages):
+            query = FrozenDict({**kwargs, "messages": msg})
             hashval = hash(query)
             cache = self.r.hget(hashval, "data")
 

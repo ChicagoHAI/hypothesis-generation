@@ -127,7 +127,12 @@ class GPTWrapper(LLMWrapper):
     ):
         if use_cache == 1:
             return self.api_with_cache.batched_generate(
-                messages, max_tokens=max_tokens, temperature=temperature, n=n, **kwargs
+                messages, 
+                model=GPT_MODELS[self.model],
+                max_tokens=max_tokens, 
+                temperature=temperature, 
+                n=n, 
+                **kwargs
             )
         return self._batched_generate(messages, max_tokens, temperature, n, **kwargs)
 
@@ -220,7 +225,12 @@ class ClaudeWrapper(LLMWrapper):
     ):
         if use_cache == 1:
             return self.api_with_cache.batched_generate(
-                messages, max_tokens=max_tokens, temperature=temperature, n=n, **kwargs
+                messages, 
+                model=CLAUDE_MODELS[self.model],
+                max_tokens=max_tokens, 
+                temperature=temperature, 
+                n=n, 
+                **kwargs
             )
         return self._batched_generate(messages, max_tokens, temperature, n, **kwargs)
 
