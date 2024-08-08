@@ -8,11 +8,13 @@ import os
 import numpy as np
 import random
 import openai
-import anthropic
+
 import vllm
 import asyncio
 import tqdm
 from openai import AsyncOpenAI, OpenAI
+from anthropic import AsyncAnthropic, Anthropic
+
 from sklearn.metrics import accuracy_score, f1_score
 
 from transformers import (
@@ -76,7 +78,9 @@ class GPTWrapper(LLMWrapper):
 
     def _setup(self, max_retry=30, **kwargs):
         self.api = OpenAI()
-        self.api_with_cache = OpenAIAPICache(port=PORT, max_retry=max_retry, **kwargs)
+        self.api_with_cache = OpenAIAPICache(
+            port=PORT, max_retry=max_retry, **kwargs
+        )
         self.api_with_cache.batched_api_call = self._batched_generate
 
     def _batched_generate(
@@ -160,27 +164,65 @@ class ClaudeWrapper(LLMWrapper):
         self._setup(**kwargs)
 
     def _setup(self, max_retry=30, **kwargs):
-        # TODO: get api key from environment variable
-        api_key = open(f"./claude_key.txt", "r").read().strip()
-
-        self.api = anthropic.Anthropic(
-            api_key=api_key,
-        )
-
+        self.api = Anthropic()
         self.api_with_cache = ClaudeAPICache(
             client=self.api, port=PORT, max_retry=max_retry, **kwargs
         )
         self.api_with_cache.batched_api_call = self._batched_generate
 
     def _batched_generate(
-        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
+        self,
+        messages: List[Dict[str, str]],
+        max_concurrent=3,
+        max_tokens=500,
+        temperature=1e-5,
+        n=1,
+        **kwargs,
     ):
-        # TODO: Implement batched generate
-        pass
+        client = AsyncAnthropic()
+        status_bar = tqdm.tqdm(total=len(messages))
 
-    def batched_generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
-        # TODO: Implement batched generate
-        pass
+        # TODO: retry on failure
+        async def _async_generate(sem, messages, **kwargs):
+            for idx, msg in enumerate(messages):
+                if msg["role"] == "system":
+                    system_prompt = messages.pop(idx)["content"]
+                    break
+
+            async with sem:
+                resp = await client.messages.create(
+                    model=CLAUDE_MODELS[self.model],
+                    system=system_prompt,
+                    messages=messages,
+                    **kwargs,
+                )
+                status_bar.update(1)
+                return resp
+
+        sem = asyncio.Semaphore(max_concurrent)
+        tasks = [
+            _async_generate(
+                sem,
+                messages[i],
+                max_tokens=max_tokens,
+                temperature=temperature,
+                n=n,
+                **kwargs,
+            )
+            for i in range(len(messages))
+        ]
+        loop = asyncio.get_event_loop()
+        resp = loop.run_until_complete(asyncio.gather(*tasks))
+        return [r.choices[0].message.content for r in resp]
+
+    def batched_generate(
+        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, n=1, **kwargs
+    ):
+        if use_cache == 1:
+            return self.api_with_cache.batched_generate(
+                messages, max_tokens=max_tokens, temperature=temperature, n=n, **kwargs
+            )
+        return self._batched_generate(messages, max_tokens, temperature, n, **kwargs)
 
     def generate(
         self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
@@ -196,7 +238,7 @@ class ClaudeWrapper(LLMWrapper):
                 max_tokens=max_tokens,
                 temperature=temperature,
                 system=system_prompt,  # <-- system prompt
-                messages=messages,  # <-- user prompt**kwargs
+                messages=messages,  # <-- user prompt
                 **kwargs,
             )
         else:
@@ -282,9 +324,14 @@ class LocalModelWrapper(LLMWrapper):
             return [o[0]["generated_text"][-1]["content"] for o in output]
 
     def batched_generate(
-        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
+        self, messages: List[Dict[str, str]], use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
     ):
+        if use_cache == 1:
+            return self.api_with_cache.batched_generate(
+                messages, max_tokens=max_tokens, temperature=temperature, **kwargs
+            )
         return self._batched_generate(messages, max_tokens, temperature, **kwargs)
+
 
     def _generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         output = self.api(

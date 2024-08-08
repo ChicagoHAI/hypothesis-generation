@@ -276,5 +276,5 @@ class LocalModelAPICache(APICache):
         self.localmodel = client
         # TODO: pipeline has no generate method
         # TODO: vLLM generate method has no max_tokens
-        self.api_call = self.localmodel.generate
+        self.api_call = self.localmodel
         super().__init__(**redis_kwargs)
