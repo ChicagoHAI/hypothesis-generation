@@ -2,10 +2,9 @@ task_name: hotel_reviews
 label_classes:
   - deceptive
   - truthful
-train_data_path: ./data/hotel_reviews/hotel_reviews_train.json
-val_data_path: ./data/hotel_reviews/hotel_reviews_val.json
-test_data_path: ./data/hotel_reviews/hotel_reviews_test.json
-ood_test_data_path: ./data
+train_data_path: ./hotel_reviews_train.json
+val_data_path: ./hotel_reviews_val.json
+test_data_path: ./hotel_reviews_test.json
 prompt_templates:
   observations: |
     A hotel review is the following: "${review_sentence}"

@@ -18,7 +18,6 @@ from hypogenic.data_loader import get_data
 from hypogenic.utils import set_seed
 from hypogenic.LLM_wrapper import LocalModelWrapper
 from hypogenic.algorithm.summary_information import (
-    SummaryInformation,
     dict_to_summary_information,
 )
 
@@ -44,7 +43,7 @@ def main():
     # set up tools
     start_time = time.time()
 
-    task_config_path = "./data/retweet/config.yaml"
+    task_config_path = "../data/retweet/config.yaml"
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     max_num_hypotheses = 20
@@ -100,6 +99,7 @@ def main():
                 num_init,
                 init_batch_size=10,
                 init_hypotheses_per_batch=10,
+                use_cache=0,
             )
             update_class.save_to_json(
                 hypotheses_bank,

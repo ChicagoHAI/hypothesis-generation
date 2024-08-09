@@ -92,4 +92,5 @@ class DefaultGeneration(Generation):
             init_hypotheses_per_batch,
             alpha,
             responses,
+            use_cache=use_cache,
         )

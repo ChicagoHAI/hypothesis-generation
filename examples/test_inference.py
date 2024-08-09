@@ -42,7 +42,7 @@ def load_dict(file_path):
 def main():
     start_time = time.time()
 
-    task_config_path = "./data/retweet/config.yaml"
+    task_config_path = "../data/retweet/config.yaml"
     hypothesis_file = f"./outputs/retweet/gpt-4o-mini/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"

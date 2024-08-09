@@ -6,9 +6,9 @@ label_classes:
   - green
   - blue
   - black
-train_data_path: ./data/shoe/shoe_train.json
-val_data_path: ./data/shoe/shoe_val.json
-test_data_path: ./data/shoe/shoe_test.json
+train_data_path: ./shoe_train.json
+val_data_path: ./shoe_val.json
+test_data_path: ./shoe_test.json
 prompt_templates:
   observations: |
     A customer is ${appearance}. This customer bought a pair of ${label} shoes.

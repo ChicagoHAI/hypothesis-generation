@@ -11,3 +11,4 @@ outputs
 .idea
 redis-stable
 dump.rdb
+hypogenic.egg-info

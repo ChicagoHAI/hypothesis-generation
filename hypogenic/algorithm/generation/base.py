@@ -60,7 +60,13 @@ class Generation(ABC):
 
     @abstractmethod
     def batched_initialize_hypotheses(
-        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
+        self,
+        num_init,
+        init_batch_size,
+        init_hypotheses_per_batch,
+        alpha,
+        use_cache=1,
+        **kwargs
     ):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
