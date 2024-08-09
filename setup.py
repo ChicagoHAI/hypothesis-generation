@@ -16,10 +16,13 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
-    python_requires='>=3.9',
+    python_requires=">=3.9",
+    entry_points={
+        "console_scripts": ["hypogenic_generate=hypogenic_cmd.generation:main"],
+    },
 )

@@ -141,37 +141,3 @@ prompt_templates:
       Chosen pattern: Pattern <number>.
 
       Answer:
-
-parser: |-
-  import re
-  
-  def extract_label(text):
-    if text is None:
-      return 'other'
-
-    # only keep the part after "Final answer:"
-    text = text.lower()
-    '''
-    if "final answer:" in text:
-      text = text[text.index("final answer:") + len("final answer:"):]
-
-
-
-    if "label:" in text:
-      # only keep the part after "label:"
-      text = text[text.index("label:") + len("label:"):]
-    '''
-
-    pattern = r"final answer:\s+(truthful|deceptive|other)"
-
-    match = re.search(pattern, text.lower())
-    if match:
-      answer = match.group(1)
-      if answer == "truthful":
-        return "truthful"
-      elif answer == "deceptive":
-        return "deceptive"
-      else:
-        return "other"
-
-    return 'other'

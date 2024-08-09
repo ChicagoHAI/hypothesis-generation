@@ -148,30 +148,3 @@ prompt_templates:
       Think step by step.
       Step 1: Analyze the difference between "Headline 1" and "Headline 2".
       Step 2: Find the set of examples that is closest to the given pair of headlines, and pick the pattern associated with that set of examples.
-
-parser: |-
-  import re
-  
-  def extract_label(text):
-    if text is None:
-      return 'other'
-    text = text.lower()
-    pattern = r"answer:\s+(headline 1|headline 2|other)"
-    match = re.search(pattern, text.lower())
-    '''
-    if "Answer:" in text:
-      text = text[text.index("Answer:") + len("Answer:"):]
-    for x in self.label_classes:
-      if x.lower() in text.lower():
-        return x
-    '''
-    if match:
-      answer = match.group(1)
-      if answer == "headline 1":
-        return "headline 1"
-      elif answer == "headline 2":
-        return "headline 2"
-      else:
-        return "other"
-
-    return 'other'

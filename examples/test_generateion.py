@@ -12,6 +12,8 @@ from typing import Callable, Tuple, Union
 import torch
 import numpy as np
 
+from hypogenic.examples.extract_label import extract_label_register
+
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
 from hypogenic.data_loader import get_data
@@ -54,30 +56,16 @@ def main():
     num_test = 25
     num_val = 25
 
-    def task_extract_label(text: Union[str, None]) -> str:
-        """
-        `text` follows the format "the <label> tweet got more retweets"
-        """
-        if text is None:
-            return "other"
-        text = text.lower()
-        pattern = r"answer: the (\w+) tweet"
-        match = re.search(pattern, text)
-        if match:
-            return match.group(1)
-        else:
-            return "other"
-
     os.makedirs(output_folder, exist_ok=True)
     api = LocalModelWrapper(model_name, model_path, use_vllm=True)
 
-    task = BaseTask(task_extract_label, task_config_path)
+    task = BaseTask(task_config_path, from_register=extract_label_register)
 
     for seed in [49]:
         set_seed(seed)
         train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
         prompt_class = BasePrompt(task)
-        inference_class = UpperboundInference(api, prompt_class, train_data, task)
+        inference_class = DefaultInference(api, prompt_class, train_data, task)
         generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
 
         update_class = DefaultUpdate(

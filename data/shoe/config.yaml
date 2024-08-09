@@ -121,22 +121,3 @@ prompt_templates:
       Please give your final answer in the following format:
       Reasoning for choosing pattern: reason,
       Chosen pattern: pattern <number>.
-
-parser: |-
-  import re
-  
-  def extract_label(text):
-    if text is None:
-      return 'other'
-
-    pattern = r"final answer:\s+(white|red|orange|green|blue|black)"
-
-    match = re.search(pattern, text.lower())
-    if match:
-      answer = match.group(1)
-      if answer in ['white', 'red', 'orange', 'green', 'blue', 'black']:
-        return answer
-      else:
-        return "other"
-
-    return 'other'

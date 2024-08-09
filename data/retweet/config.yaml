@@ -153,20 +153,3 @@ prompt_templates:
       Think step by step.
       Step 1: Analyze the difference between the first tweet and the second tweet.
       Step 2: Find the set of examples that is closest to the given pair of tweets, and pick the pattern associated with that set of examples.
-
-parser: |-
-  import re
-  
-  def extract_label(text):
-      """
-      `text` follows the format "the <label> tweet got more retweets"
-      """
-      if text is None:
-        return 'other'
-      text = text.lower()
-      pattern = r"answer: the (\w+) tweet"
-      match = re.search(pattern, text)
-      if match:
-        return match.group(1)
-      else:
-        return 'other'

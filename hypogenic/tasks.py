@@ -4,18 +4,21 @@ import json
 import os
 import random
 import re
-from typing import Callable, Tuple
+from typing import Callable, Tuple, Union
 import pandas as pd
-
-# TODO: Generate one single task object for every use
+from .register import Register
 
 
 class BaseTask(ABC):
     def __init__(
         self,
-        extract_label: Callable[[str], str],
         config_path: str,
+        extract_label: Union[Callable[[str], str], None] = None,
+        from_register: Union[Register, None] = None,
     ):
+        if from_register is None and extract_label is None:
+            raise ValueError("Either from_register or extract_label should be provided")
+
         self.config_path = config_path
         with open(config_path, "r") as f:
             data = yaml.safe_load(f)
@@ -39,7 +42,9 @@ class BaseTask(ABC):
             for k, v in data["prompt_templates"].items()
         }
 
-        self.extract_label = extract_label
+        self.extract_label = (
+            extract_label if extract_label else from_register.build(self.task_name)
+        )
 
     def get_data(self, num_train, num_test, num_val, seed=49) -> Tuple[pd.DataFrame]:
         def read_data(file_path, num, is_train=False):
