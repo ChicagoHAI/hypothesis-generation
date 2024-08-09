@@ -10,5 +10,5 @@ anthropic~=0.32.0
 pulp~=2.9.0
 redis~=5.0.1
 torch~=2.4.0
-accelerate~=0.3.0
+accelerate~=0.33.0
 vllm~=0.5.3
