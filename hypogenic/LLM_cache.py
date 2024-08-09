@@ -133,6 +133,7 @@ class APICache(ABC):
         self.rate_limiter.add_event()
         logger.debug(f"Request Completion from {self.service} API...")
 
+        successful_request = False
         for _ in range(self.max_retry):
             try:
                 resps = self.batched_api_call(
@@ -140,6 +141,7 @@ class APICache(ABC):
                     max_concurrent=max_concurrent,
                     **kwargs,
                 )
+                successful_request = True
                 break
             except self.exceptions_to_catch as e:
                 logger.warning(
@@ -150,7 +152,10 @@ class APICache(ABC):
                 # TODO: handle this case
                 resp = "Output blocked by content filtering policy"
                 break
-
+        
+        if not successful_request:
+            raise Exception("Max retry exceeded and failed to get response from API, possibly due to bad API requests.")
+        
         for idx, resp in zip(need_to_req_msgs, resps):
             query = queries[idx]
             hashval = hashvals[idx]
@@ -193,9 +198,11 @@ class APICache(ABC):
         self.rate_limiter.add_event()
         logger.debug(f"Request Completion from {self.service} API...")
 
+        successful_request = False
         for _ in range(self.max_retry):
             try:
                 resp = self.api_call(**kwargs)
+                successful_request = True
                 break
             except self.exceptions_to_catch as e:
                 logger.warning(
@@ -205,7 +212,10 @@ class APICache(ABC):
             except anthropic.BadRequestError as e:
                 resp = "Output blocked by content filtering policy"
                 break
-
+        
+        if not successful_request:
+            raise Exception("Max retry exceeded and failed to get response from API, possibly due to bad API requests.")
+        
         data = pickle.dumps((query, resp))
         logger.debug(f"Writing query and resp to Redis")
         self.r.hset(hashval, "data", data)

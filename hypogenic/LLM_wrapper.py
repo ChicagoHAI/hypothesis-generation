@@ -169,7 +169,6 @@ class ClaudeWrapper(LLMWrapper):
         max_concurrent=3,
         max_tokens=500,
         temperature=1e-5,
-        n=1,
         **kwargs,
     ):
         client = AsyncAnthropic()
@@ -198,14 +197,13 @@ class ClaudeWrapper(LLMWrapper):
                 messages[i],
                 max_tokens=max_tokens,
                 temperature=temperature,
-                n=n,
                 **kwargs,
             )
             for i in range(len(messages))
         ]
         loop = asyncio.get_event_loop()
         resp = loop.run_until_complete(asyncio.gather(*tasks))
-        return [r.choices[0].message.content for r in resp]
+        return [r.content[0].text for r in resp]
 
     def batched_generate(
         self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
