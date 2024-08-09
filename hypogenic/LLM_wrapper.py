@@ -77,7 +77,6 @@ class GPTWrapper(LLMWrapper):
         async def _async_generate(sem, messages, **kwargs):
             async with sem:
                 resp = await client.chat.completions.create(
-                    model=self.model,
                     messages=messages,
                     **kwargs,
                 )
@@ -105,6 +104,7 @@ class GPTWrapper(LLMWrapper):
     ):
         if use_cache == 1:
             return self.api_with_cache.batched_generate(
+                model=self.model,
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temperature,
@@ -115,7 +115,6 @@ class GPTWrapper(LLMWrapper):
 
     def _generate(self, messages, max_tokens=500, temperature=1e-5, n=1, **kwargs):
         resp = self.api.chat.completions.create(
-            model=self.model,
             temperature=temperature,
             max_tokens=max_tokens,
             n=n,
@@ -131,6 +130,7 @@ class GPTWrapper(LLMWrapper):
 
         if use_cache == 1:
             resp = self.api_with_cache.generate(
+                model=self.model,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 n=n,
@@ -139,6 +139,7 @@ class GPTWrapper(LLMWrapper):
             )
         else:
             resp = self._generate(
+                model=self.model,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 n=n,
@@ -183,7 +184,6 @@ class ClaudeWrapper(LLMWrapper):
 
             async with sem:
                 resp = await client.messages.create(
-                    model=self.model,
                     system=system_prompt,
                     messages=messages,
                     **kwargs,
@@ -212,6 +212,7 @@ class ClaudeWrapper(LLMWrapper):
     ):
         if use_cache == 1:
             return self.api_with_cache.batched_generate(
+                model=self.model,
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temperature,
@@ -226,7 +227,6 @@ class ClaudeWrapper(LLMWrapper):
                 break
 
         response = self.api.messages.create(
-            model=self.model,
             max_tokens=max_tokens,
             temperature=temperature,
             system=system_prompt,  # <-- system prompt
@@ -242,6 +242,7 @@ class ClaudeWrapper(LLMWrapper):
     ):
         if use_cache == 1:
             response = self.api_with_cache.generate(
+                model=self.model,
                 max_tokens=max_tokens,
                 temperature=temperature,
                 messages=messages,
@@ -249,6 +250,7 @@ class ClaudeWrapper(LLMWrapper):
             )
         else:
             response = self._generate(
+                model=self.model,
                 max_tokens=max_tokens,
                 temperature=temperature,
                 messages=messages,
