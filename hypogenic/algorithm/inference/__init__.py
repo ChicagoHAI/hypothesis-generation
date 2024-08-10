@@ -1,3 +1,7 @@
+from ...register import Register
+
+inference_register = Register("inference")
+
 from .base import Inference
 from .default import DefaultInference
 from .filter_and_weight import FilterAndWeightInference

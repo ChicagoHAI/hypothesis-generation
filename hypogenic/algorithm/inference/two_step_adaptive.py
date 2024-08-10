@@ -8,12 +8,14 @@ import pulp
 import random
 import re
 
+from . import inference_register
 from .one_step_adaptive import OneStepAdaptiveInference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
 
 
+@inference_register.register("two_step_adaptive")
 class TwoStepAdaptiveInference(OneStepAdaptiveInference):
     """
     This class separate adaptive inference with separate calls for

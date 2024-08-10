@@ -8,12 +8,14 @@ import pulp
 import random
 import re
 
+from . import inference_register
 from .base import Inference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
 
 
+@inference_register.register("default")
 class DefaultInference(Inference):
     def __init__(
         self,

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import math
 import os
 
+from . import generation_register
 from .base import Generation
 from ..summary_information import SummaryInformation
 from ..inference import Inference
@@ -9,6 +10,7 @@ from ...tasks import BaseTask
 from ...prompt import BasePrompt
 
 
+@generation_register.register("default")
 class DefaultGeneration(Generation):
     def __init__(
         self,

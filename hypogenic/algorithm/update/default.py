@@ -5,6 +5,7 @@ import math
 from typing import Dict
 from string import Template
 
+from . import update_register
 from .base import Update
 from ..generation import Generation
 from ..inference import Inference
@@ -12,6 +13,7 @@ from ..replace import Replace
 from ..summary_information import SummaryInformation
 
 
+@update_register.register("default")
 class DefaultUpdate(Update):
     """
     DefaultUpdate uses ONE hypothesis to make a prediction on a new example.

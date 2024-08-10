@@ -23,16 +23,10 @@ from hypogenic.algorithm.summary_information import (
     dict_to_summary_information,
 )
 
-from hypogenic.algorithm.generation import DefaultGeneration
-from hypogenic.algorithm.inference import (
-    DefaultInference,
-    OneStepAdaptiveInference,
-    FilterAndWeightInference,
-    TwoStepAdaptiveInference,
-    UpperboundInference,
-)
+from hypogenic.algorithm.generation import generation_register
+from hypogenic.algorithm.inference import inference_register
 from hypogenic.algorithm.replace import DefaultReplace
-from hypogenic.algorithm.update import SamplingUpdate, DefaultUpdate
+from hypogenic.algorithm.update import update_register
 
 
 def load_dict(file_path):
@@ -85,6 +79,10 @@ def parse_args():
     parser.add_argument("--init_hypotheses_per_batch", type=int, default=10)
     parser.add_argument("--use_cache", type=int, default=1)
 
+    parser.add_argument("--generation_style", type=str, default="default")
+    parser.add_argument("--inference_style", type=str, default="default")
+    parser.add_argument("--update_style", type=str, default="default")
+
     args = parser.parse_args()
 
     if args.output_folder is None:
@@ -110,10 +108,14 @@ def main():
         args.num_train, args.num_test, args.num_val, args.seed
     )
     prompt_class = BasePrompt(task)
-    inference_class = DefaultInference(api, prompt_class, train_data, task)
-    generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
+    inference_class = inference_register.build(args.inference_style)(
+        api, prompt_class, train_data, task
+    )
+    generation_class = generation_register.build(args.generation_style)(
+        api, prompt_class, inference_class, task
+    )
 
-    update_class = DefaultUpdate(
+    update_class = update_register.build(args.update_style)(
         generation_class=generation_class,
         inference_class=inference_class,
         replace_class=DefaultReplace(args.max_num_hypotheses),

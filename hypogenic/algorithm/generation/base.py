@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 import math
 import os
 
-
 from .utils import extract_hypotheses
 from ..summary_information import SummaryInformation
 from ..inference import Inference

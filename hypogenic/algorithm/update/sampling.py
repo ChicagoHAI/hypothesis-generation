@@ -5,6 +5,7 @@ import math
 from typing import Dict
 from string import Template
 
+from . import update_register
 from .base import Update
 from ..generation import Generation
 from ..inference import Inference

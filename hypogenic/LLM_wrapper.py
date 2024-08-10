@@ -70,6 +70,9 @@ class GPTWrapper(LLMWrapper):
         n=1,
         **kwargs,
     ):
+        if len(messages) == 0:
+            return []
+
         client = AsyncOpenAI()
         status_bar = tqdm.tqdm(total=len(messages))
 
@@ -171,6 +174,9 @@ class ClaudeWrapper(LLMWrapper):
         temperature=1e-5,
         **kwargs,
     ):
+        if len(messages) == 0:
+            return []
+
         client = AsyncAnthropic()
         status_bar = tqdm.tqdm(total=len(messages))
 
@@ -318,6 +324,8 @@ class LocalModelWrapper(LLMWrapper):
         max_concurrent=3,
         **kwargs,
     ):
+        if len(messages) == 0:
+            return []
         if isinstance(self.api, vllm.LLM):
             return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
         else:
