@@ -18,7 +18,7 @@ from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
 from hypogenic.data_loader import get_data
 from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import LocalModelWrapper, LocalVllmWrapper
+from hypogenic.LLM_wrapper import llm_wrapper_register
 from hypogenic.algorithm.summary_information import (
     dict_to_summary_information,
 )
@@ -48,6 +48,7 @@ def parse_args():
         type=str,
         default="/net/scratch/llama/Meta-Llama-3.1-8B-Instruct",
     )
+    parser.add_argument("--model_type", type=str, default="vllm")
     parser.add_argument("--max_num_hypotheses", type=int, default=20)
     parser.add_argument("--output_folder", type=str, default=None)
     parser.add_argument("--old_hypothesis_file", type=str, default=None)
@@ -98,7 +99,7 @@ def main():
     args = parse_args()
 
     os.makedirs(args.output_folder, exist_ok=True)
-    api = LocalVllmWrapper(args.model_name, args.model_path)
+    api = llm_wrapper_register.build(args.model_type)(args.model_name, args.model_path)
 
     task = BaseTask(args.task_config_path, from_register=extract_label_register)
 

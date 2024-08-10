@@ -250,7 +250,6 @@ class OpenAIAPICache(APICache):
             port: Port of the Redis backend.
             mode: "completion" or "chat", determines which API to call
         """
-
         super().__init__(**redis_kwargs)
 
 
@@ -263,14 +262,13 @@ class ClaudeAPICache(APICache):
         # TODO: add more exceptions
     )
 
-    def __init__(self, client, **redis_kwargs: dict):
+    def __init__(self, **redis_kwargs: dict):
         """Initializes an ClaudeAPICache Object.
 
         Args:
             port: Port of the Redis backend.
             client: Authenticated Claude client
         """
-        self.claude = client
         super().__init__(**redis_kwargs)
 
 
@@ -282,12 +280,11 @@ class LocalModelAPICache(APICache):
         # TODO: add more exceptions
     )
 
-    def __init__(self, client, **redis_kwargs: dict):
+    def __init__(self, **redis_kwargs: dict):
         """Initializes an LocalModelAPICache Object.
 
         Args:
             port: Port of the Redis backend.
             client: intiailzed LocalModel
         """
-        self.localmodel = client
         super().__init__(**redis_kwargs)
