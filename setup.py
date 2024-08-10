@@ -23,6 +23,9 @@ setuptools.setup(
     install_requires=requirements,
     python_requires=">=3.9",
     entry_points={
-        "console_scripts": ["hypogenic_generation=hypogenic_cmd.generation:main"],
+        "console_scripts": [
+            "hypogenic_generation=hypogenic_cmd.generation:main",
+            "hypogenic_inference=hypogenic_cmd.inference:main",
+        ],
     },
 )

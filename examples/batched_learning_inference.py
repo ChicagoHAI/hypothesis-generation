@@ -12,7 +12,6 @@ from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed
 from hypogenic.algorithm.generation.utils import extract_hypotheses
 from hypogenic.LLM_wrapper import LocalModelWrapper, LLMWrapper
-from hypogenic.data_loader import get_data
 from hypogenic.prompt import BasePrompt
 
 

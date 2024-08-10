@@ -17,7 +17,6 @@ from hypogenic.utils import (
 )
 from hypogenic.prompt import BasePrompt
 from hypogenic.LLM_wrapper import LocalModelWrapper
-from hypogenic.data_loader import get_data
 
 
 def main():

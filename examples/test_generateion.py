@@ -16,7 +16,6 @@ from hypogenic.examples.extract_label import extract_label_register
 
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
-from hypogenic.data_loader import get_data
 from hypogenic.utils import set_seed
 from hypogenic.LLM_wrapper import LocalModelWrapper
 from hypogenic.algorithm.summary_information import (

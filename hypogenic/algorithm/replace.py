@@ -1,5 +1,8 @@
 import os
 from abc import ABC, abstractmethod
+from ..register import Register
+
+replace_register = Register(name="replace")
 
 
 class Replace(ABC):
@@ -11,6 +14,7 @@ class Replace(ABC):
         pass
 
 
+@replace_register.register("default")
 class DefaultReplace(Replace):
     def __init__(self, max_num_hypotheses):
         super().__init__(max_num_hypotheses)
@@ -41,7 +45,9 @@ class DefaultReplace(Replace):
                 merged_hyp_bank.items(), key=lambda item: item[1].reward, reverse=True
             )
         )
-        updated_hyp_bank = dict(list(sorted_hyp_bank.items())[:self.max_num_hypotheses])
+        updated_hyp_bank = dict(
+            list(sorted_hyp_bank.items())[: self.max_num_hypotheses]
+        )
         return updated_hyp_bank
 
 

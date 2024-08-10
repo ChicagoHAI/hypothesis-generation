@@ -14,7 +14,6 @@ import numpy as np
 
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
-from hypogenic.data_loader import get_data
 from hypogenic.utils import (
     get_results,
     set_seed,

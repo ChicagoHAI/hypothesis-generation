@@ -16,7 +16,6 @@ from hypogenic.examples.extract_label import extract_label_register
 
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
-from hypogenic.data_loader import get_data
 from hypogenic.utils import set_seed
 from hypogenic.LLM_wrapper import llm_wrapper_register
 from hypogenic.algorithm.summary_information import (
@@ -25,7 +24,7 @@ from hypogenic.algorithm.summary_information import (
 
 from hypogenic.algorithm.generation import generation_register
 from hypogenic.algorithm.inference import inference_register
-from hypogenic.algorithm.replace import DefaultReplace
+from hypogenic.algorithm.replace import replace_register
 from hypogenic.algorithm.update import update_register
 
 
@@ -81,6 +80,7 @@ def parse_args():
 
     parser.add_argument("--generation_style", type=str, default="default")
     parser.add_argument("--inference_style", type=str, default="default")
+    parser.add_argument("--replace_style", type=str, default="default")
     parser.add_argument("--update_style", type=str, default="default")
 
     args = parser.parse_args()
@@ -114,11 +114,12 @@ def main():
     generation_class = generation_register.build(args.generation_style)(
         api, prompt_class, inference_class, task
     )
+    replace_class = replace_register.build(args.replace_style)(args.max_num_hypotheses)
 
     update_class = update_register.build(args.update_style)(
         generation_class=generation_class,
         inference_class=inference_class,
-        replace_class=DefaultReplace(args.max_num_hypotheses),
+        replace_class=replace_class,
         save_path=args.output_folder,
         file_name_template=args.file_name_template,
         sample_num_to_restart_from=args.sample_num_to_restart_from,
