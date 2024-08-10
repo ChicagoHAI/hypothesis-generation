@@ -152,10 +152,12 @@ class APICache(ABC):
                 # TODO: handle this case
                 resp = "Output blocked by content filtering policy"
                 break
-        
+
         if not successful_request:
-            raise Exception("Max retry exceeded and failed to get response from API, possibly due to bad API requests.")
-        
+            raise Exception(
+                "Max retry exceeded and failed to get response from API, possibly due to bad API requests."
+            )
+
         for idx, resp in zip(need_to_req_msgs, resps):
             query = queries[idx]
             hashval = hashvals[idx]
@@ -212,10 +214,12 @@ class APICache(ABC):
             except anthropic.BadRequestError as e:
                 resp = "Output blocked by content filtering policy"
                 break
-        
+
         if not successful_request:
-            raise Exception("Max retry exceeded and failed to get response from API, possibly due to bad API requests.")
-        
+            raise Exception(
+                "Max retry exceeded and failed to get response from API, possibly due to bad API requests."
+            )
+
         data = pickle.dumps((query, resp))
         logger.debug(f"Writing query and resp to Redis")
         self.r.hset(hashval, "data", data)

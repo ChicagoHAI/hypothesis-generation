@@ -18,7 +18,7 @@ from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
 from hypogenic.data_loader import get_data
 from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import LocalModelWrapper
+from hypogenic.LLM_wrapper import LocalModelWrapper, LocalVllmWrapper
 from hypogenic.algorithm.summary_information import (
     dict_to_summary_information,
 )
@@ -56,7 +56,6 @@ def parse_args():
     parser.add_argument("--num_test", type=int, default=25)
     parser.add_argument("--num_val", type=int, default=25)
 
-    parser.add_argument("--use_vllm", action="store_true", default=False)
     parser.add_argument("--seed", type=int, default=49)
 
     parser.add_argument(
@@ -99,7 +98,7 @@ def main():
     args = parse_args()
 
     os.makedirs(args.output_folder, exist_ok=True)
-    api = LocalModelWrapper(args.model_name, args.model_path, use_vllm=args.use_vllm)
+    api = LocalVllmWrapper(args.model_name, args.model_path)
 
     task = BaseTask(args.task_config_path, from_register=extract_label_register)
 

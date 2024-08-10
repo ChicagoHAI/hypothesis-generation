@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import pickle
 import math
-from typing import Dict, List
+from typing import Callable, Dict, List
 import torch
 import re
 import os
@@ -27,43 +27,70 @@ from transformers import (
 )
 from pprint import pprint
 
+from .register import Register
 from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from .tasks import BaseTask
 
-PORT = int(os.environ.get("PORT"))
+llm_wrapper_register = Register(name="llm_wrapper")
 
 
 class LLMWrapper(ABC):
     def __init__(self, model):
         self.model = model
 
-    @abstractmethod
     def generate(
-        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
+        self,
+        messages: List[Dict[str, str]],
+        use_cache=1,
+        **kwargs,
     ):
-        pass
+        if use_cache == 1:
+            return self.api_with_cache.generate(
+                messages=messages,
+                model=self.model,
+                **kwargs,
+            )
+        return self._generate(
+            messages,
+            model=self.model,
+            **kwargs,
+        )
 
-    @abstractmethod
     def batched_generate(
-        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
+        self,
+        messages: List[List[Dict[str, str]]],
+        max_concurrent=3,
+        use_cache=1,
+        **kwargs,
     ):
-        pass
+        if use_cache == 1:
+            return self.api_with_cache.batched_generate(
+                messages=messages,
+                model=self.model,
+                max_concurrent=max_concurrent,
+                **kwargs,
+            )
+        return self._batched_generate(
+            messages,
+            model=self.model,
+            max_concurrent=max_concurrent,
+            **kwargs,
+        )
 
 
+@llm_wrapper_register.register("gpt")
 class GPTWrapper(LLMWrapper):
-    def __init__(self, model, **kwargs):
+    def __init__(self, model, max_retry=30, port=6832, **kwargs):
         super().__init__(model)
-        self._setup(**kwargs)
-
-    def _setup(self, max_retry=30, **kwargs):
         self.api = OpenAI()
-        self.api_with_cache = OpenAIAPICache(port=PORT, max_retry=max_retry, **kwargs)
+        self.api_with_cache = OpenAIAPICache(port=port, max_retry=max_retry, **kwargs)
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
 
     def _batched_generate(
         self,
-        messages: List[Dict[str, str]],
+        messages: List[List[Dict[str, str]]],
+        model: str,
         max_concurrent=3,
         max_tokens=500,
         temperature=1e-5,
@@ -77,12 +104,9 @@ class GPTWrapper(LLMWrapper):
         status_bar = tqdm.tqdm(total=len(messages))
 
         # TODO: retry on failure
-        async def _async_generate(sem, messages, **kwargs):
+        async def _async_generate(sem, **kwargs):
             async with sem:
-                resp = await client.chat.completions.create(
-                    messages=messages,
-                    **kwargs,
-                )
+                resp = await client.chat.completions.create(**kwargs)
                 status_bar.update(1)
                 return resp
 
@@ -90,7 +114,8 @@ class GPTWrapper(LLMWrapper):
         tasks = [
             _async_generate(
                 sem,
-                messages[i],
+                messages=messages[i],
+                model=model,
                 max_tokens=max_tokens,
                 temperature=temperature,
                 n=n,
@@ -102,66 +127,33 @@ class GPTWrapper(LLMWrapper):
         resp = loop.run_until_complete(asyncio.gather(*tasks))
         return [r.choices[0].message.content for r in resp]
 
-    def batched_generate(
-        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, n=1, **kwargs
+    def _generate(
+        self,
+        messages,
+        model: str,
+        max_tokens=500,
+        temperature=1e-5,
+        n=1,
+        **kwargs,
     ):
-        if use_cache == 1:
-            return self.api_with_cache.batched_generate(
-                model=self.model,
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                n=n,
-                **kwargs,
-            )
-        return self._batched_generate(messages, max_tokens, temperature, n, **kwargs)
-
-    def _generate(self, messages, max_tokens=500, temperature=1e-5, n=1, **kwargs):
         resp = self.api.chat.completions.create(
-            temperature=temperature,
-            max_tokens=max_tokens,
-            n=n,
             messages=messages,
+            model=model,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            n=n,
             **kwargs,
         )
         return resp.choices[0].message.content
 
-    def generate(
-        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, n=1, **kwargs
-    ):
-        # Call OpenAI's API to generate inference
 
-        if use_cache == 1:
-            resp = self.api_with_cache.generate(
-                model=self.model,
-                temperature=temperature,
-                max_tokens=max_tokens,
-                n=n,
-                messages=messages,
-                **kwargs,
-            )
-        else:
-            resp = self._generate(
-                model=self.model,
-                temperature=temperature,
-                max_tokens=max_tokens,
-                n=n,
-                messages=messages,
-                **kwargs,
-            )
-
-        return resp
-
-
+@llm_wrapper_register.register("claude")
 class ClaudeWrapper(LLMWrapper):
-    def __init__(self, model, **kwargs):
+    def __init__(self, model, max_retry=30, port=6832, **kwargs):
         super().__init__(model)
-        self._setup(**kwargs)
-
-    def _setup(self, max_retry=30, **kwargs):
         self.api = Anthropic()
         self.api_with_cache = ClaudeAPICache(
-            client=self.api, port=PORT, max_retry=max_retry, **kwargs
+            client=self.api, port=port, max_retry=max_retry, **kwargs
         )
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
@@ -169,9 +161,10 @@ class ClaudeWrapper(LLMWrapper):
     def _batched_generate(
         self,
         messages: List[Dict[str, str]],
-        max_concurrent=3,
+        model: str,
         max_tokens=500,
         temperature=1e-5,
+        max_concurrent=3,
         **kwargs,
     ):
         if len(messages) == 0:
@@ -200,7 +193,8 @@ class ClaudeWrapper(LLMWrapper):
         tasks = [
             _async_generate(
                 sem,
-                messages[i],
+                messages=messages[i],
+                model=model,
                 max_tokens=max_tokens,
                 temperature=temperature,
                 **kwargs,
@@ -211,163 +205,172 @@ class ClaudeWrapper(LLMWrapper):
         resp = loop.run_until_complete(asyncio.gather(*tasks))
         return [r.content[0].text for r in resp]
 
-    def batched_generate(
-        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
+    def _generate(
+        self,
+        messages,
+        model: str,
+        max_tokens=500,
+        temperature=1e-5,
+        **kwargs,
     ):
-        if use_cache == 1:
-            return self.api_with_cache.batched_generate(
-                model=self.model,
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                **kwargs,
-            )
-        return self._batched_generate(messages, max_tokens, temperature, **kwargs)
-
-    def _generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
         for idx, msg in enumerate(messages):
             if msg["role"] == "system":
                 system_prompt = messages.pop(idx)["content"]
                 break
 
         response = self.api.messages.create(
+            system=system_prompt,
+            messages=messages,
+            model=model,
             max_tokens=max_tokens,
             temperature=temperature,
-            system=system_prompt,  # <-- system prompt
-            messages=messages,  # <-- user prompt
             **kwargs,
         )
         if response == "Output blocked by content filtering policy":
             return None
         return response.content[0].text
 
-    def generate(
-        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
-    ):
-        if use_cache == 1:
-            response = self.api_with_cache.generate(
-                model=self.model,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                messages=messages,
-                **kwargs,
-            )
-        else:
-            response = self._generate(
-                model=self.model,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                messages=messages,
-                **kwargs,
-            )
-        return response
-
 
 class LocalModelWrapper(LLMWrapper):
-    def __init__(self, model, path_name=None, use_vllm=False, **kwargs):
-        super().__init__(
-            model,
-        )
-        self._setup(model, use_vllm=use_vllm, path_name=path_name, **kwargs)
-
-    def _setup(
+    def __init__(
         self,
         model,
+        model_constructor: Callable,
         path_name=None,
         max_retry=30,
-        use_vllm=False,
+        port=6832,
         **kwargs,
     ):
+        super().__init__(model)
         if path_name is None:
             path_name = model
 
-        if use_vllm:
-            local_model = vllm.LLM(
-                model=path_name,
-                tensor_parallel_size=torch.cuda.device_count(),
-                **kwargs,
-            )
-        else:
-            local_model = pipeline(
-                "text-generation",
-                device_map="auto",
-                model=path_name,
-                model_kwargs=kwargs,
-            )
-
-        # TODO: Add cache support
+        local_model = model_constructor(model=path_name, **kwargs)
 
         self.api = local_model
         self.api_with_cache = LocalModelAPICache(
-            client=local_model, port=PORT, max_retry=max_retry
+            client=local_model, port=port, max_retry=max_retry
         )
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
 
-    def generate(
-        self, messages, use_cache=1, max_tokens=500, temperature=1e-5, **kwargs
+    def _batched_generate(
+        self,
+        messages: List[Dict[str, str]],
+        model: str,
+        max_concurrent=3,
+        max_tokens=500,
+        temperature=1e-5,
+        **kwargs,
     ):
-        if use_cache == 1:
-            return self.api_with_cache.generate(
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                **kwargs,
-            )
-        return self._generate(messages, max_tokens, temperature, **kwargs)
+        raise NotImplementedError
+
+    def _generate(
+        self,
+        messages,
+        model: str,
+        max_tokens=500,
+        temperature=1e-5,
+        **kwargs,
+    ):
+        raise NotImplementedError
+
+
+@llm_wrapper_register.register("huggingface")
+class LocalHFWrapper(LocalModelWrapper):
+    def __init__(self, model, path_name=None, max_retry=30, port=6832, **kwargs):
+        super().__init__(
+            model=model,
+            model_constructor=pipeline,
+            path_name=path_name,
+            max_retry=max_retry,
+            port=port,
+            # pipeline kwargs
+            task="text-generation",
+            device_map="auto",
+            model_kwargs=kwargs,
+        )
 
     def _batched_generate(
         self,
         messages: List[Dict[str, str]],
+        model: str,
+        max_concurrent=3,
         max_tokens=500,
         temperature=1e-5,
-        max_concurrent=3,
         **kwargs,
     ):
         if len(messages) == 0:
             return []
-        if isinstance(self.api, vllm.LLM):
-            return self._vllm_generate(messages, max_tokens, temperature, **kwargs)
-        else:
-            output = self.api(
-                messages,
-                max_new_tokens=max_tokens,
-                temperature=temperature,
-                **kwargs,
-            )
-            return [o[0]["generated_text"][-1]["content"] for o in output]
+        output = self.api(
+            messages,
+            max_new_tokens=max_tokens,
+            temperature=temperature,
+            **kwargs,
+        )
+        return [o[0]["generated_text"][-1]["content"] for o in output]
 
-    def batched_generate(
+    def _generate(
         self,
-        messages: List[Dict[str, str]],
-        use_cache=1,
+        messages,
+        model: str,
         max_tokens=500,
         temperature=1e-5,
         **kwargs,
     ):
-        if use_cache == 1:
-            return self.api_with_cache.batched_generate(
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                **kwargs,
-            )
-        return self._batched_generate(messages, max_tokens, temperature, **kwargs)
+        output = self.api(
+            messages,
+            max_new_tokens=max_tokens,
+            temperature=temperature,
+            **kwargs,
+        )
+        return output[0]["generated_text"][-1]["content"]
 
-    def _generate(self, messages, max_tokens=500, temperature=1e-5, **kwargs):
-        if isinstance(self.api, vllm.LLM):
-            return self._vllm_generate([messages], max_tokens, temperature, **kwargs)[0]
-        else:
-            output = self.api(
-                messages,
-                max_new_tokens=max_tokens,
-                temperature=temperature,
-                **kwargs,
-            )
-            return output[0]["generated_text"][-1]["content"]
 
-    def _vllm_generate(
-        self, messages: List[Dict[str, str]], max_tokens=500, temperature=1e-5, **kwargs
+@llm_wrapper_register.register("vllm")
+class LocalVllmWrapper(LocalModelWrapper):
+    def __init__(
+        self,
+        model,
+        path_name=None,
+        max_retry=30,
+        port=6832,
+        **kwargs,
+    ):
+        super(__class__, self).__init__(
+            model=model,
+            model_constructor=vllm.LLM,
+            path_name=path_name,
+            max_retry=max_retry,
+            port=port,
+            # VLLM kwargs
+            tensor_parallel_size=torch.cuda.device_count(),
+            **kwargs,
+        )
+
+    def _generate(
+        self,
+        messages: List[Dict[str, str]],
+        model: str,
+        max_tokens=500,
+        temperature=1e-5,
+        **kwargs,
+    ):
+        return self._batched_generate(
+            [messages],
+            max_tokens,
+            temperature,
+            **kwargs,
+        )[0]
+
+    def _batched_generate(
+        self,
+        messages: List[List[Dict[str, str]]],
+        model: str,
+        max_concurrent=3,
+        max_tokens=500,
+        temperature=1e-5,
+        **kwargs,
     ):
         sampling_params = vllm.SamplingParams(
             max_tokens=max_tokens,

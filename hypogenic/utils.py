@@ -30,8 +30,6 @@ from pprint import pprint
 from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from .tasks import BaseTask
 
-PORT = int(os.environ.get("PORT"))
-
 
 def get_results(pred_list, label_list):
     """
