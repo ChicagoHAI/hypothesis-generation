@@ -47,9 +47,7 @@ class LocalModelWrapper(LLMWrapper):
         if path_name is None:
             path_name = model
 
-        local_model = model_constructor(model=path_name, **kwargs)
-
-        self.api = local_model
+        self.api = model_constructor(model=path_name, **kwargs)
         self.api_with_cache = LocalModelAPICache(port=port, max_retry=max_retry)
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
