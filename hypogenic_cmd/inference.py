@@ -68,9 +68,6 @@ def parse_args():
 
     args = parser.parse_args()
 
-    if args.hypothesis_file is None:
-        args.hypothesis_file = f"./outputs/retweet/{args.model_name}/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
-
     return args
 
 
@@ -78,6 +75,10 @@ def main():
     start_time = time.time()
 
     args = parse_args()
+
+    task = BaseTask(args.task_config_path, from_register=extract_label_register)
+    if args.hypothesis_file is None:
+        args.hypothesis_file = f"./outputs/{task.task_name}/{args.model_name}/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
 
     accuracy_all = []
     f1_all = []
@@ -91,7 +92,6 @@ def main():
         hyp_bank
     ), f"The number of hypotheses chosen in adaptive inference must be less than the total number of hypotheses"
 
-    task = BaseTask(args.task_config_path, from_register=extract_label_register)
     api = llm_wrapper_register.build(args.model_type)(args.model_name, args.model_path)
     prompt_class = BasePrompt(task)
 

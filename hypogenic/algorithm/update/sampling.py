@@ -13,6 +13,7 @@ from ..replace import Replace
 from ..summary_information import SummaryInformation
 
 
+@update_register.register("sampling")
 class SamplingUpdate(Update):
     def __init__(
         self,
@@ -141,7 +142,7 @@ class SamplingUpdate(Update):
                             hypotheses_bank[max_visited].num_visits,
                             self.num_init,
                             self.alpha,
-                            use_cache=use_cache
+                            use_cache=use_cache,
                         )
                         if self.only_best_hypothesis:
                             best_hypothesis = max(

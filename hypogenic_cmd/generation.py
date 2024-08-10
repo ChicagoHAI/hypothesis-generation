@@ -85,11 +85,6 @@ def parse_args():
 
     args = parser.parse_args()
 
-    if args.output_folder is None:
-        args.output_folder = (
-            f"./outputs/retweet/{args.model_name}/hyp_{args.max_num_hypotheses}/"
-        )
-
     return args
 
 
@@ -98,10 +93,13 @@ def main():
     start_time = time.time()
     args = parse_args()
 
+    task = BaseTask(args.task_config_path, from_register=extract_label_register)
+
+    if args.output_folder is None:
+        args.output_folder = f"./outputs/{task.task_name}/{args.model_name}/hyp_{args.max_num_hypotheses}/"
+
     os.makedirs(args.output_folder, exist_ok=True)
     api = llm_wrapper_register.build(args.model_type)(args.model_name, args.model_path)
-
-    task = BaseTask(args.task_config_path, from_register=extract_label_register)
 
     set_seed(args.seed)
     train_data, _, _ = task.get_data(
