@@ -8,7 +8,7 @@ import math
 import json
 
 import random
-from typing import Union
+from typing import Dict, Union
 import torch
 import numpy as np
 
@@ -84,9 +84,15 @@ def main():
     f1_all = []
 
     hyp_dict = load_dict(args.hypothesis_file)
-    hyp_bank = {}
+    hyp_bank: Dict[str, SummaryInformation] = {}
     for hypothesis in hyp_dict:
         hyp_bank[hypothesis] = dict_to_summary_information(hyp_dict[hypothesis])
+
+    if args.inference_style in ["one_step_adaptive", "two_step_adaptive"] and all(
+        [len(hyp_bank[hyp].correct_examples) == 0 for hyp in hyp_bank]
+    ):
+        print("All hypotheses have 0 correct examples, use default inference")
+        args.inference_style = "default"
 
     assert args.adaptive_num_hypotheses <= len(
         hyp_bank

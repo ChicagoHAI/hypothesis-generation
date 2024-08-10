@@ -10,6 +10,7 @@ import re
 
 from . import inference_register
 from .base import Inference
+from .default import DefaultInference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
@@ -64,6 +65,7 @@ class OneStepAdaptiveInference(Inference):
         adaptive_num_hypotheses=0,
         adaptive_num_examples=0,
         use_cache=1,
+        **kwargs,
     ):
         num_train_data_samples = len(self.train_data)
         similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(

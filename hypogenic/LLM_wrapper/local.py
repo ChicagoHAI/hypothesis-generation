@@ -37,7 +37,6 @@ class LocalModelWrapper(LLMWrapper):
     def __init__(
         self,
         model,
-        model_constructor: Callable,
         path_name=None,
         max_retry=30,
         port=6832,
@@ -47,7 +46,8 @@ class LocalModelWrapper(LLMWrapper):
         if path_name is None:
             path_name = model
 
-        self.api = model_constructor(model=path_name, **kwargs)
+        self.api_kwargs = {"model": path_name, **kwargs}
+        self.api = None
         self.api_with_cache = LocalModelAPICache(port=port, max_retry=max_retry)
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
@@ -65,13 +65,18 @@ class LocalModelWrapper(LLMWrapper):
 
     def _generate(
         self,
-        messages,
+        messages: List[Dict[str, str]],
         model: str,
         max_tokens=500,
         temperature=1e-5,
         **kwargs,
     ):
-        raise NotImplementedError
+        return self._batched_generate(
+            [messages],
+            max_tokens=max_tokens,
+            temperature=temperature,
+            **kwargs,
+        )[0]
 
 
 @llm_wrapper_register.register("huggingface")
@@ -79,7 +84,6 @@ class LocalHFWrapper(LocalModelWrapper):
     def __init__(self, model, path_name=None, max_retry=30, port=6832, **kwargs):
         super().__init__(
             model=model,
-            model_constructor=pipeline,
             path_name=path_name,
             max_retry=max_retry,
             port=port,
@@ -100,6 +104,8 @@ class LocalHFWrapper(LocalModelWrapper):
     ):
         if len(messages) == 0:
             return []
+        if self.api is None:
+            self.api = pipeline(**self.api_kwargs)
         output = self.api(
             messages,
             max_new_tokens=max_tokens,
@@ -107,22 +113,6 @@ class LocalHFWrapper(LocalModelWrapper):
             **kwargs,
         )
         return [o[0]["generated_text"][-1]["content"] for o in output]
-
-    def _generate(
-        self,
-        messages,
-        model: str,
-        max_tokens=500,
-        temperature=1e-5,
-        **kwargs,
-    ):
-        output = self.api(
-            messages,
-            max_new_tokens=max_tokens,
-            temperature=temperature,
-            **kwargs,
-        )
-        return output[0]["generated_text"][-1]["content"]
 
 
 @llm_wrapper_register.register("vllm")
@@ -137,7 +127,6 @@ class LocalVllmWrapper(LocalModelWrapper):
     ):
         super(__class__, self).__init__(
             model=model,
-            model_constructor=vllm.LLM,
             path_name=path_name,
             max_retry=max_retry,
             port=port,
@@ -145,21 +134,6 @@ class LocalVllmWrapper(LocalModelWrapper):
             tensor_parallel_size=torch.cuda.device_count(),
             **kwargs,
         )
-
-    def _generate(
-        self,
-        messages: List[Dict[str, str]],
-        model: str,
-        max_tokens=500,
-        temperature=1e-5,
-        **kwargs,
-    ):
-        return self._batched_generate(
-            [messages],
-            max_tokens,
-            temperature,
-            **kwargs,
-        )[0]
 
     def _batched_generate(
         self,
@@ -170,11 +144,15 @@ class LocalVllmWrapper(LocalModelWrapper):
         temperature=1e-5,
         **kwargs,
     ):
+        if len(messages) == 0:
+            return []
         sampling_params = vllm.SamplingParams(
             max_tokens=max_tokens,
             temperature=temperature,
             **kwargs,
         )
+        if self.api is None:
+            self.api = vllm.LLM(**self.api_kwargs)
         tokenizer = self.api.get_tokenizer()
         formatted_prompts = [
             tokenizer.apply_chat_template(m, tokenize=False, add_generation_prompt=True)
