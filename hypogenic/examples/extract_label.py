@@ -11,13 +11,7 @@ def headline_binary_extract_label(text):
     text = text.lower()
     pattern = r"answer:\s+(headline 1|headline 2|other)"
     match = re.search(pattern, text.lower())
-    """
-    if "Answer:" in text:
-        text = text[text.index("Answer:") + len("Answer:"):]
-    for x in self.label_classes:
-        if x.lower() in text.lower():
-        return x
-    """
+
     if match:
         answer = match.group(1)
         if answer == "headline 1":
@@ -36,16 +30,6 @@ def hotel_reviews_extract_label(text):
 
     # only keep the part after "Final answer:"
     text = text.lower()
-    """
-    if "final answer:" in text:
-        text = text[text.index("final answer:") + len("final answer:"):]
-
-
-
-    if "label:" in text:
-        # only keep the part after "label:"
-        text = text[text.index("label:") + len("label:"):]
-    """
 
     pattern = r"final answer:\s+(truthful|deceptive|other)"
 

@@ -1,7 +1,5 @@
 task_name: hotel_reviews
-label_classes:
-  - deceptive
-  - truthful
+
 train_data_path: ./hotel_reviews_train.json
 val_data_path: ./hotel_reviews_val.json
 test_data_path: ./hotel_reviews_test.json
