@@ -73,6 +73,7 @@ class LocalModelWrapper(LLMWrapper):
     ):
         return self._batched_generate(
             [messages],
+            model=model,
             max_tokens=max_tokens,
             temperature=temperature,
             **kwargs,

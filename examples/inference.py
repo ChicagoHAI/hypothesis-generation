@@ -12,13 +12,15 @@ from typing import Union
 import torch
 import numpy as np
 
+from hypogenic.examples.extract_label import retweet_extract_label
+
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
 from hypogenic.utils import (
     get_results,
     set_seed,
 )
-from hypogenic.LLM_wrapper import LocalModelWrapper
+from hypogenic.LLM_wrapper import LocalVllmWrapper
 from hypogenic.algorithm.summary_information import (
     SummaryInformation,
     dict_to_summary_information,
@@ -41,10 +43,10 @@ def load_dict(file_path):
 def main():
     start_time = time.time()
 
-    task_config_path = "../data/retweet/config.yaml"
-    hypothesis_file = f"./outputs/retweet/gpt-4o-mini/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
+    task_config_path = "./data/retweet/config.yaml"
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
+    hypothesis_file = f"./outputs/retweet/{model_name}/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
     adaptive_num_hypotheses = 5
     num_train = 75
     num_test = 25
@@ -57,21 +59,7 @@ def main():
     dict = load_dict(hypothesis_file)
     hyp_bank = {}
 
-    def task_extract_label(text: Union[str, None]) -> str:
-        """
-        `text` follows the format "the <label> tweet got more retweets"
-        """
-        if text is None:
-            return "other"
-        text = text.lower()
-        pattern = r"answer: the (\w+) tweet"
-        match = re.search(pattern, text)
-        if match:
-            return match.group(1)
-        else:
-            return "other"
-
-    task = BaseTask(task_extract_label, task_config_path)
+    task = BaseTask(task_config_path, extract_label=retweet_extract_label)
 
     for hypothesis in dict:
         hyp_bank[hypothesis] = dict_to_summary_information(dict[hypothesis])
@@ -80,7 +68,7 @@ def main():
         hyp_bank
     ), f"The number of hypotheses chosen in adaptive inference must be less than the total number of hypotheses"
 
-    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
+    api = LocalVllmWrapper(model_name, model_path)
 
     for seed in seeds:
         set_seed(seed)

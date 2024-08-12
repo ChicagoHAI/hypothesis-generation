@@ -55,9 +55,9 @@ def retweet_extract_label(text):
         return "other"
     text = text.lower()
     pattern = r"answer: the (\w+) tweet"
-    match = re.search(pattern, text)
-    if match:
-        return match.group(1)
+    match = re.findall(pattern, text)
+    if len(match) > 0:
+        return match[-1]
     else:
         return "other"
 

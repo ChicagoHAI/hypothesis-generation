@@ -17,7 +17,7 @@ from hypogenic.examples.extract_label import extract_label_register
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
 from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import LocalModelWrapper
+from hypogenic.LLM_wrapper import LocalVllmWrapper
 from hypogenic.algorithm.summary_information import (
     dict_to_summary_information,
 )
@@ -44,7 +44,7 @@ def main():
     # set up tools
     start_time = time.time()
 
-    task_config_path = "../data/retweet/config.yaml"
+    task_config_path = "./data/retweet/config.yaml"
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     max_num_hypotheses = 20
@@ -56,7 +56,7 @@ def main():
     num_val = 25
 
     os.makedirs(output_folder, exist_ok=True)
-    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
+    api = LocalVllmWrapper(model_name, model_path)
 
     task = BaseTask(task_config_path, from_register=extract_label_register)
 

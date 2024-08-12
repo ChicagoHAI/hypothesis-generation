@@ -7,17 +7,23 @@ Welcome to the GitHub repository for our paper, ["Hypothesis Generation with Lar
 
 ## Install environment
 You can directly install HypoGeniC using the following commands:
-```
-conda create --name hypogenic
+```bash
+conda create --name hypogenic python=3.10
+conda activate hypogenic
+
 pip install hypogenic
 ```
 OR
-```
-conda create --name hypogenic
-pip install -r requirements.txt
-```
+```bash
+git clone https://github.com/ChicagoHAI/hypothesis-generation.git
+cd hypothesis-generation
 
-## Set up path
+conda create --name hypogenic python=3.10
+conda activate hypogenic
+
+pip install -r requirements.txt
+pip install -e .
+```
 
 ## [Optional]: set up [Redis](https://redis.io) server for caching LLM responses
 To save computation or API cost, we use Redis server to cache prompt & response pairs.
@@ -33,11 +39,14 @@ make
 
 ## Usage
 
+The datasets used in our paper is at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets)
+
 ### 1. [Optional] Start Redis server
+
+The default port used by HypoGeniC is 6832. If you want to use a different port, please specify the port number in the `--port` argument.
 ```bash
-PORT=<port_number>
 cd $PATH_PREFIX/redis-stable/src
-./redis-server --port $PORT
+./redis-server --port 6832
 ```
 
 ### 2. Hypothesis Generation
@@ -49,6 +58,15 @@ hypogenic_generation --args
 ```bash
 hypogenic_inference --args
 ```
+
+## Use HypoGeniC in your code
+
+```bash
+git clone https://github.com/ChicagoHAI/HypoGeniC-datasets.git ./data
+python ./examples/generation.py
+```
+
+More examples can be found in `examples/` directory.
 
 ## Add a new task or dataset
 

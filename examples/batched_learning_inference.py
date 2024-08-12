@@ -8,10 +8,12 @@ import sys
 import os
 from typing import Union
 
+from hypogenic.examples.extract_label import retweet_extract_label
+
 from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed
 from hypogenic.algorithm.generation.utils import extract_hypotheses
-from hypogenic.LLM_wrapper import LocalModelWrapper, LLMWrapper
+from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper
 from hypogenic.prompt import BasePrompt
 
 
@@ -35,18 +37,6 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cach
         print("*********************")
         if pred == data["label"][i]:
             correct += 1
-    # for i in range(len(data["label"])):
-    #     hypothesis_dict = {hypothesis: None}
-    #     prompt_input = prompt_class.inference(hypothesis_dict, data, i)
-    #     response = api.generate(prompt_input)
-    #     print("*** get_accuracy ***")
-    #     print(response)
-    #     pred = task.extract_label(response)
-    #     print("pred:", pred)
-    #     print("label:", data["label"][i])
-    #     print("*********************")
-    #     if pred == data["label"][i]:
-    #         correct += 1
     accuracy = correct / len(data["label"])
     return accuracy
 
@@ -61,22 +51,8 @@ def main():
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     num_hypothesis = 5
-    use_cache = 0
+    use_cache = 1
     hypothesis_file = f"./outputs/retweet/batched_gen_{model_name}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
-
-    def task_extract_label(text: Union[str, None]) -> str:
-        """
-        `text` follows the format "the <label> tweet got more retweets"
-        """
-        if text is None:
-            return "other"
-        text = text.lower()
-        pattern = r"answer: the (\w+) tweet"
-        match = re.search(pattern, text)
-        if match:
-            return match.group(1)
-        else:
-            return "other"
 
     set_seed(seed)
 
@@ -85,30 +61,30 @@ def main():
         text = f.read()
 
     # Use regex to extract the hypotheses
-    hypotheses = extract_hypotheses(num_hypothesis, text)
+    hypotheses = extract_hypotheses(text, num_hypothesis)
     print("Hypotheses: ", hypotheses)
     if len(hypotheses) == 0:
         print("No hypotheses found.")
         return
 
     # load training data
-    task = BaseTask(task_extract_label, task_config_path)
+    task = BaseTask(task_config_path, extract_label=retweet_extract_label)
     train_data, test_data, _ = task.get_data(num_train, num_test, num_val, seed)
 
     # initialization
     prompt_class = BasePrompt(task)
-    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
+    api = LocalVllmWrapper(model_name, model_path)
 
     # get the training accuracy of each hypothesis
     training_accuracies = []
     for hypothesis in hypotheses:
         # get the training accuracy of the hypothesis
-        accuracy = get_accuracy(api, hypothesis, train_data, prompt_class, task)
+        accuracy = get_accuracy(api, hypothesis, train_data, prompt_class, task, use_cache)
         training_accuracies.append(accuracy)
 
     # get the test accuracy of the best hypothesis
     best_hypothesis = hypotheses[training_accuracies.index(max(training_accuracies))]
-    test_accuracy = get_accuracy(api, best_hypothesis, test_data, prompt_class, task)
+    test_accuracy = get_accuracy(api, best_hypothesis, test_data, prompt_class, task, use_cache)
 
     print("Best hypothesis: ", best_hypothesis)
     print("Test accuracy of best hypothesis: ", test_accuracy)

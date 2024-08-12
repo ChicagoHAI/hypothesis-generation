@@ -11,12 +11,14 @@ import os
 import sys
 from typing import Union
 
+from hypogenic.examples.extract_label import retweet_extract_label
+
+from hypogenic.LLM_wrapper import LocalVllmWrapper
 from hypogenic.tasks import BaseTask
 from hypogenic.utils import (
     set_seed,
 )
 from hypogenic.prompt import BasePrompt
-from hypogenic.LLM_wrapper import LocalModelWrapper
 
 
 def main():
@@ -30,37 +32,27 @@ def main():
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     num_hypothesis = 5
-    use_cache = 0
+    use_cache = 1
     hypothesis_file = f"./outputs/retweet/batched_gen_{model_name}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
-
-    def task_extract_label(text: Union[str, None]) -> str:
-        """
-        `text` follows the format "the <label> tweet got more retweets"
-        """
-        if text is None:
-            return "other"
-        text = text.lower()
-        pattern = r"answer: the (\w+) tweet"
-        match = re.search(pattern, text)
-        if match:
-            return match.group(1)
-        else:
-            return "other"
 
     set_seed(seed)
     print("Getting data ...")
-    task = BaseTask(task_extract_label, task_config_path)
+    task = BaseTask(task_config_path, extract_label=retweet_extract_label)
+
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
     print("Initialize LLM api ...")
-    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
+
+    api = LocalVllmWrapper(model_name, model_path)
     prompt_class = BasePrompt(task)
+
     prompt_input = prompt_class.batched_generation(train_data, num_hypothesis)
     print("Prompt: ")
     print(prompt_input)
-    response = api.generate(prompt_input)
+    response = api.generate(prompt_input, use_cache=use_cache)
     print("prompt length: ", len(prompt_input))
     print("Response: ")
     print(response)
+    os.makedirs(os.path.dirname(hypothesis_file), exist_ok=True)
     with open(hypothesis_file, "w") as f:
         f.write(response)
     print("response length: ", len(response))

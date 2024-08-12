@@ -25,7 +25,6 @@ class BaseTask(ABC):
 
         self.task_name = data["task_name"]
 
-        self.label_classes = data["label_classes"]
         self.train_data_path = data["train_data_path"]
         self.test_data_path = data["test_data_path"]
         self.val_data_path = data["val_data_path"]

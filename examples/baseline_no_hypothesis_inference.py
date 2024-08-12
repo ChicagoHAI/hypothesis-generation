@@ -10,9 +10,11 @@ from typing import Union
 
 import pandas as pd
 
+from hypogenic.examples.extract_label import retweet_extract_label
+
 from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import LocalModelWrapper, LLMWrapper
+from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper
 from hypogenic.prompt import BasePrompt
 
 
@@ -35,27 +37,34 @@ def compute_accuracy(results):
 
 
 def few_shot(
-    api: LLMWrapper, train_data, test_data, prompt_class: BasePrompt, task, few_shot_k
+    api: LLMWrapper,
+    train_data,
+    test_data,
+    prompt_class: BasePrompt,
+    task,
+    few_shot_k,
+    use_cache,
 ):
     """
     Given one hyothesis and a dataset, return the accuracy of the hypothesis on the dataset.
     """
     results = []
+    prompt_inputs = [
+        prompt_class.few_shot_baseline(train_data, few_shot_k, test_data, i)
+        for i in range(len(test_data))
+    ]
+    responses = api.batched_generate(prompt_inputs, use_cache=use_cache)
     for i in range(len(test_data)):
-        prompt_input = prompt_class.few_shot_baseline(
-            train_data, few_shot_k, test_data, i
-        )
-        response = api.generate(prompt_input)
         print(f"********** Example {i} **********")
-        pred = task.extract_label(response)
+        pred = task.extract_label(responses[i])
         label = test_data["label"][i]
 
-        # print(f"Prompt: {prompt_input}")
-        print(f"Response: {response}")
+        # print(f"Prompt: {prompt_inputs[i]}")
+        print(f"Response: {responses[i]}")
         print(f"Label: {label}")
         print(f"Prediction: {pred}")
         results.append(
-            {"prompt": prompt_input, "response": response, "label": label, "pred": pred}
+            {"prompt": prompt_inputs[i], "response": responses[i], "label": label, "pred": pred}
         )
         print("**********************************")
 
@@ -91,35 +100,23 @@ def main():
     num_train = 100
     num_val = 100
     few_shot_k = 3
-    use_cache = 0
-
-    def task_extract_label(text: Union[str, None]) -> str:
-        """
-        `text` follows the format "the <label> tweet got more retweets"
-        """
-        if text is None:
-            return "other"
-        text = text.lower()
-        pattern = r"answer: the (\w+) tweet"
-        match = re.search(pattern, text)
-        if match:
-            return match.group(1)
-        else:
-            return "other"
+    use_cache = 1
 
     set_seed(seed)
 
-    task = BaseTask(task_extract_label, task_config_path)
+    task = BaseTask(task_config_path, extract_label=retweet_extract_label)
 
     prompt_class = BasePrompt(task)
-    api = LocalModelWrapper(model_name, model_path, use_vllm=True)
+    api = LocalVllmWrapper(model_name, model_path)
 
     train_data, test_data, _ = task.get_data(num_train, num_test, num_val, seed)
 
     if few_shot_k > 0:
         train_data = preprocess(train_data, few_shot_k)
 
-    results = few_shot(api, train_data, test_data, prompt_class, task, few_shot_k)
+    results = few_shot(
+        api, train_data, test_data, prompt_class, task, few_shot_k, use_cache
+    )
     test_accuracy = compute_accuracy(results)
 
     print("Test accuracy: ", test_accuracy)
