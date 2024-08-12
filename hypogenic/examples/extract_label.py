@@ -21,9 +21,9 @@ def headline_binary_extract_label(text):
     if match:
         answer = match.group(1)
         if answer == "headline 1":
-            return "headline 1"
+            return "Headline 1 has more clicks than Headline 2."
         elif answer == "headline 2":
-            return "headline 2"
+            return "Headline 2 has more clicks than Headline 1."
         else:
             return "other"
     return "other"

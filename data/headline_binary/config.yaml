@@ -6,7 +6,6 @@ train_data_path: ./headline_binary_train.json
 val_data_path: ./headline_binary_test.json
 test_data_path: ./headline_binary_val.json
 
-
 prompt_templates:
   observations: |
     Headline 1: ${headline_1}
