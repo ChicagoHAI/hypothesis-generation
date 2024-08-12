@@ -10,7 +10,7 @@ setuptools.setup(
     name="hypogenic",
     version="0.0.1",
     author="HypoGenic",
-    author_email="",
+    author_email="haokunliu@uchicago.edu",
     description="A package for generating and evaluating hypotheses.",
     long_description=long_description,
     long_description_content_type="text/markdown",
