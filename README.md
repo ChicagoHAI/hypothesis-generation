@@ -110,7 +110,64 @@ prompt_templates:
     role2: <ROLE2_PROMPT_TEMPLATE>
     # ...
 ```
-    
 
+### Examples
 
+`./headline_binary/headline_binary_test.json`
 
+```json
+{
+  "headline_1": [
+    "What Up, Comet? You Just Got *PROBED*",
+    "..."
+  ],
+  "headline_2": [
+    "Scientists Everywhere Were Holding Their Breath Today. Here's Why.",
+    "..."
+  ],
+  "label": [
+    "Headline 2 has more clicks than Headline 1",
+    "..."
+  ]
+}
+```
+
+`./headline_binary/config.yaml`
+
+```yaml
+task_name: headline_binary
+
+train_data_path: ./headline_binary_train.json
+val_data_path: ./headline_binary_test.json
+test_data_path: ./headline_binary_val.json
+
+prompt_templates:
+  observations: |
+    Headline 1: ${headline_1}
+    Headline 2: ${headline_2}
+    Observation: ${label}
+
+  # More EXTRA_KEYs
+
+  batched_generation:
+    system: |-
+      ...
+      Please propose ${num_hypotheses} possible hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+
+    user: |-
+      Here are the Observations:
+      ${observations}
+
+      Please generate hypotheses that can help determine which headlines have more clicks.
+      Please propose ${num_hypotheses} possible hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Proposed hypotheses:
+
+  # few_shot_baseline
+  # inference
+  # is_relevant
+  # adaptive_inference
+  # adaptive_selection
+```
