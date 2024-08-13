@@ -37,15 +37,14 @@ def load_dict(file_path):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--task_config_path", 
-        type=str, 
+        "--task_config_path",
+        type=str,
         default="./data/hotel_reviews/config.yaml",
         help="Path to the task config.yaml file",
-
     )
     parser.add_argument(
-        "--model_name", 
-        type=str, 
+        "--model_name",
+        type=str,
         default="meta-llama/Meta-Llama-3.1-8B-Instruct",
         help="Name of the model to use.",
     )
@@ -56,19 +55,45 @@ def parse_args():
         help="Path to the local model. If None, will use the model from the HuggingFace model hub.",
     )
     parser.add_argument(
-        "--model_type", 
-        type=str, 
+        "--model_type",
+        type=str,
         default="vllm",
-        choices=["gpt","claude","vllm","huggingface"],
+        choices=["gpt", "claude", "vllm", "huggingface"],
         help="Type of model to use.",
     )
-    parser.add_argument("--max_num_hypotheses", type=int, default=20, help="Maximum number of hypotheses to keep in the hypothesis bank.")
-    parser.add_argument("--output_folder", type=str, default=None, help="Path to the output folder for saving hypotheses.")
-    parser.add_argument("--old_hypothesis_file", type=str, default=None, help="Path to the old hypothesis file to restart from.")
-    parser.add_argument("--num_init", type=int, default=10, help="Number of examples to use for initializing hypotheses.")
-    parser.add_argument("--num_train", type=int, default=200, help="Number of training examples.")
-    parser.add_argument("--num_test", type=int, default=100, help="Number of testing examples.")
-    parser.add_argument("--num_val", type=int, default=100, help="Number of validation examples.")
+    parser.add_argument(
+        "--max_num_hypotheses",
+        type=int,
+        default=20,
+        help="Maximum number of hypotheses to keep in the hypothesis bank.",
+    )
+    parser.add_argument(
+        "--output_folder",
+        type=str,
+        default=None,
+        help="Path to the output folder for saving hypotheses.",
+    )
+    parser.add_argument(
+        "--old_hypothesis_file",
+        type=str,
+        default=None,
+        help="Path to the old hypothesis file to restart from.",
+    )
+    parser.add_argument(
+        "--num_init",
+        type=int,
+        default=10,
+        help="Number of examples to use for initializing hypotheses.",
+    )
+    parser.add_argument(
+        "--num_train", type=int, default=200, help="Number of training examples."
+    )
+    parser.add_argument(
+        "--num_test", type=int, default=100, help="Number of testing examples."
+    )
+    parser.add_argument(
+        "--num_val", type=int, default=100, help="Number of validation examples."
+    )
 
     parser.add_argument("--seed", type=int, default=49, help="Random seed.")
 
@@ -78,26 +103,104 @@ def parse_args():
         default="hypotheses_training_sample_${sample}_seed_${seed}_epoch_${epoch}.json",
         help="Template for the file name to save hypotheses.",
     )
-    parser.add_argument("--sample_num_to_restart_from", type=int, default=-1, help="Sample number to restart from.")
-    parser.add_argument("--epoch_to_start_from", type=int, default=0, help="Epoch to start from.")
-    parser.add_argument("--num_wrong_scale", type=float, default=0.8, help="Set the scale for dynamically changing w_\{hyp\}. For more details, please see Appendix B.1 in the paper.")
-    parser.add_argument("--k", type=int, default=5, help="The number of top hypotheses checked per example during training.")
-    parser.add_argument("--alpha", type=float, default=5e-1, help="Exploration parameter.")
-    parser.add_argument("--update_batch_size", type=int, default=10, help="Number of examples to use per hypothesis-generation prompt.")
-    parser.add_argument("--num_hypotheses_to_update", type=int, default=1, help="Number of lowest-ranking hypotheses to update once we reach the maximum number of hypotheses.")
-    parser.add_argument("--update_hypotheses_per_batch", type=int, default=5, help="Number of hypotheses to generate per prompt.")
-    parser.add_argument("--only_best_hypothesis", action="store_true", default=False, help="If only the best hypothesis should be added in the newly generated hypotheses of the batch.")
-    parser.add_argument("--save_every_n_examples", type=int, default=10, help="Save hypotheses every n examples visited.")
+    parser.add_argument(
+        "--sample_num_to_restart_from",
+        type=int,
+        default=-1,
+        help="Sample number to restart from.",
+    )
+    parser.add_argument(
+        "--epoch_to_start_from", type=int, default=0, help="Epoch to start from."
+    )
+    parser.add_argument(
+        "--num_wrong_scale",
+        type=float,
+        default=0.8,
+        help="Set the scale for dynamically changing w_\{hyp\}. For more details, please see Appendix B.1 in the paper.",
+    )
+    parser.add_argument(
+        "--k",
+        type=int,
+        default=5,
+        help="The number of top hypotheses checked per example during training.",
+    )
+    parser.add_argument(
+        "--alpha", type=float, default=5e-1, help="Exploration parameter."
+    )
+    parser.add_argument(
+        "--update_batch_size",
+        type=int,
+        default=10,
+        help="Number of examples to use per hypothesis-generation prompt.",
+    )
+    parser.add_argument(
+        "--num_hypotheses_to_update",
+        type=int,
+        default=1,
+        help="Number of lowest-ranking hypotheses to update once we reach the maximum number of hypotheses.",
+    )
+    parser.add_argument(
+        "--update_hypotheses_per_batch",
+        type=int,
+        default=5,
+        help="Number of hypotheses to generate per prompt.",
+    )
+    parser.add_argument(
+        "--only_best_hypothesis",
+        action="store_true",
+        default=False,
+        help="If only the best hypothesis should be added in the newly generated hypotheses of the batch.",
+    )
+    parser.add_argument(
+        "--save_every_n_examples",
+        type=int,
+        default=10,
+        help="Save hypotheses every n examples visited.",
+    )
 
-    parser.add_argument("--init_batch_size", type=int, default=10, help="Batch size to generate the initial hypotheses.")
-    parser.add_argument("--init_hypotheses_per_batch", type=int, default=10, help="Number of hypotheses to generate per batch during initialization.")
+    parser.add_argument(
+        "--init_batch_size",
+        type=int,
+        default=10,
+        help="Batch size to generate the initial hypotheses.",
+    )
+    parser.add_argument(
+        "--init_hypotheses_per_batch",
+        type=int,
+        default=10,
+        help="Number of hypotheses to generate per batch during initialization.",
+    )
 
-    parser.add_argument("--use_cache", type=int, default=1, help="Whether to use cache for hypothesis generation.")
-    parser.add_argument("--port", type=int, default=6832, help="Port for the redis server for LLM caching.")
-    parser.add_argument("--generation_style", type=str, default="default", help="Type of generation method.")
-    parser.add_argument("--inference_style", type=str, default="default", help="Type of inference method.")
-    parser.add_argument("--replace_style", type=str, default="default", help="Type of replace method.")
-    parser.add_argument("--update_style", type=str, default="default", help="Type of update method.")
+    parser.add_argument(
+        "--use_cache",
+        type=int,
+        default=1,
+        help="Whether to use cache for hypothesis generation.",
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=6832,
+        help="Port for the redis server for LLM caching.",
+    )
+    parser.add_argument(
+        "--generation_style",
+        type=str,
+        default="default",
+        help="Type of generation method.",
+    )
+    parser.add_argument(
+        "--inference_style",
+        type=str,
+        default="default",
+        help="Type of inference method.",
+    )
+    parser.add_argument(
+        "--replace_style", type=str, default="default", help="Type of replace method."
+    )
+    parser.add_argument(
+        "--update_style", type=str, default="default", help="Type of update method."
+    )
 
     args = parser.parse_args()
 
@@ -115,7 +218,9 @@ def main():
         args.output_folder = f"./outputs/{task.task_name}/{args.model_name}/hyp_{args.max_num_hypotheses}/"
 
     os.makedirs(args.output_folder, exist_ok=True)
-    api = llm_wrapper_register.build(args.model_type)(args.model_name, args.model_path, port=args.port)
+    api = llm_wrapper_register.build(args.model_type)(
+        args.model_name, args.model_path, port=args.port
+    )
 
     set_seed(args.seed)
     train_data, _, _ = task.get_data(

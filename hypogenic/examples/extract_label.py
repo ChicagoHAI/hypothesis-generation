@@ -10,10 +10,10 @@ def headline_binary_extract_label(text):
         return "other"
     text = text.lower()
     pattern = r"answer:\s+(headline 1|headline 2|other)"
-    match = re.search(pattern, text.lower())
+    match = re.findall(pattern, text.lower())
 
     if match:
-        answer = match.group(1)
+        answer = match[-1] if len(match) > 0 else None
         if answer == "headline 1":
             return "Headline 1 has more clicks than Headline 2."
         elif answer == "headline 2":
@@ -33,9 +33,9 @@ def hotel_reviews_extract_label(text):
 
     pattern = r"final answer:\s+(truthful|deceptive|other)"
 
-    match = re.search(pattern, text.lower())
+    match = re.findall(pattern, text.lower())
     if match:
-        answer = match.group(1)
+        answer = match[-1] if len(match) > 0 else None
         if answer == "truthful":
             return "truthful"
         elif answer == "deceptive":
@@ -69,9 +69,9 @@ def extract_label(text):
 
     pattern = r"final answer:\s+(white|red|orange|green|blue|black)"
 
-    match = re.search(pattern, text.lower())
+    match = re.findall(pattern, text.lower())
     if match:
-        answer = match.group(1)
+        answer = match[-1] if len(match) > 0 else None
         if answer in ["white", "red", "orange", "green", "blue", "black"]:
             return answer
         else:

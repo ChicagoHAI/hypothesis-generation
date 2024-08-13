@@ -27,13 +27,25 @@ from transformers import (
 )
 from pprint import pprint
 
+from .rate_limiter import RateLimiter
 from ..LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from ..tasks import BaseTask
 
 
 class LLMWrapper(ABC):
-    def __init__(self, model):
+    def __init__(
+        self,
+        model,
+        max_retry=30,
+        min_backoff=1.0,
+        max_backoff=60.0,
+    ):
         self.model = model
+        self.max_retry = max_retry
+        self.rate_limiter = RateLimiter(
+            min_backoff=min_backoff,
+            max_backoff=max_backoff,
+        )
 
     def generate(
         self,

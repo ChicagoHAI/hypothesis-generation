@@ -60,24 +60,6 @@ class FrozenDict:
         return self.data == other.data
 
 
-class RateLimiter:
-    def __init__(self):
-        self.min_backoff = self.backoff_time = 1.0
-        self.max_backoff = 60.0
-        self.lock = threading.Lock()
-
-    def backoff(self):
-        logger.warning(f"Backing off for {self.backoff_time:.1f} seconds")
-        time.sleep(self.backoff_time)
-        with self.lock:
-            self.backoff_time = min(self.backoff_time * 2, self.max_backoff)
-        logger.debug(f"Setting backoff time to {self.backoff_time:.1f} seconds")
-
-    def add_event(self):
-        with self.lock:
-            self.backoff_time = max(self.min_backoff, self.backoff_time * 0.75)
-
-
 class APICache(ABC):
     """Abstract base class for other cache wrappers.
 
@@ -86,13 +68,10 @@ class APICache(ABC):
     service = ""
     exceptions_to_catch = tuple()
 
-    def __init__(self, max_retry=30, **redis_kwargs: dict):
+    def __init__(self, **redis_kwargs: dict):
         self.r = redis.Redis(host="localhost", **redis_kwargs)
 
-        # max 60 requests per 60 seconds
-        self.rate_limiter = RateLimiter()
         self.costs = []
-        self.max_retry = max_retry
 
     def api_call(self, *args, **kwargs):
         raise NotImplementedError("api_call() is not implemented")
@@ -130,33 +109,13 @@ class APICache(ABC):
                 logger.debug(f"Matching hash not found for query")
             need_to_req_msgs.append(idx)
 
-        self.rate_limiter.add_event()
         logger.debug(f"Request Completion from {self.service} API...")
 
-        successful_request = False
-        for _ in range(self.max_retry):
-            try:
-                resps = self.batched_api_call(
-                    [messages[i] for i in need_to_req_msgs],
-                    max_concurrent=max_concurrent,
-                    **kwargs,
-                )
-                successful_request = True
-                break
-            except self.exceptions_to_catch as e:
-                logger.warning(
-                    f"Getting an {type(e).__name__} from API, backing off..."
-                )
-                self.rate_limiter.backoff()
-            except anthropic.BadRequestError as e:
-                # TODO: handle this case
-                resp = "Output blocked by content filtering policy"
-                break
-
-        if not successful_request:
-            raise Exception(
-                "Max retry exceeded and failed to get response from API, possibly due to bad API requests."
-            )
+        resps = self.batched_api_call(
+            [messages[i] for i in need_to_req_msgs],
+            max_concurrent=max_concurrent,
+            **kwargs,
+        )
 
         for idx, resp in zip(need_to_req_msgs, resps):
             query = queries[idx]
@@ -197,28 +156,9 @@ class APICache(ABC):
         else:
             logger.debug(f"Matching hash not found for query")
 
-        self.rate_limiter.add_event()
         logger.debug(f"Request Completion from {self.service} API...")
 
-        successful_request = False
-        for _ in range(self.max_retry):
-            try:
-                resp = self.api_call(**kwargs)
-                successful_request = True
-                break
-            except self.exceptions_to_catch as e:
-                logger.warning(
-                    f"Getting an {type(e).__name__} from API, backing off..."
-                )
-                self.rate_limiter.backoff()
-            except anthropic.BadRequestError as e:
-                resp = "Output blocked by content filtering policy"
-                break
-
-        if not successful_request:
-            raise Exception(
-                "Max retry exceeded and failed to get response from API, possibly due to bad API requests."
-            )
+        resp = self.api_call(**kwargs)
 
         data = pickle.dumps((query, resp))
         logger.debug(f"Writing query and resp to Redis")
@@ -237,11 +177,6 @@ class OpenAIAPICache(APICache):
     """
 
     service = "OpenAI"
-    exceptions_to_catch = (
-        openai.RateLimitError,
-        openai.APIError,
-        openai.APITimeoutError,
-    )
 
     def __init__(self, **redis_kwargs: dict):
         """Initializes an OpenAIAPICache Object.
@@ -257,10 +192,6 @@ class ClaudeAPICache(APICache):
     """A cache wrapper for Anthropic Message API calls."""
 
     service = "Claude"
-    exceptions_to_catch = (
-        anthropic.RateLimitError,
-        # TODO: add more exceptions
-    )
 
     def __init__(self, **redis_kwargs: dict):
         """Initializes an ClaudeAPICache Object.
@@ -276,9 +207,6 @@ class LocalModelAPICache(APICache):
     """A cache wrapper for Anthropic Message API calls."""
 
     service = "LocalModel"
-    exceptions_to_catch = (
-        # TODO: add more exceptions
-    )
 
     def __init__(self, **redis_kwargs: dict):
         """Initializes an LocalModelAPICache Object.

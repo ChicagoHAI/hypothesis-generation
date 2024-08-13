@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
+import inspect
 import pickle
 import math
 from typing import Callable, Dict, List
+import redis
 import torch
 import re
 import os
@@ -34,21 +36,33 @@ from ..tasks import BaseTask
 
 
 class LocalModelWrapper(LLMWrapper):
+    exceptions_to_catch = (
+        # TODO: add more exceptions
+    )
+
     def __init__(
         self,
         model,
         path_name=None,
         max_retry=30,
+        min_backoff=1.0,
+        max_backoff=60.0,
         port=6832,
+        redis_kwargs: Dict = {},
         **kwargs,
     ):
-        super().__init__(model)
+        super().__init__(
+            model,
+            max_retry=max_retry,
+            min_backoff=min_backoff,
+            max_backoff=max_backoff,
+        )
         if path_name is None:
             path_name = model
 
         self.api_kwargs = {"model": path_name, **kwargs}
         self.api = None
-        self.api_with_cache = LocalModelAPICache(port=port, max_retry=max_retry)
+        self.api_with_cache = LocalModelAPICache(port=port, **redis_kwargs)
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
 
@@ -82,12 +96,25 @@ class LocalModelWrapper(LLMWrapper):
 
 @llm_wrapper_register.register("huggingface")
 class LocalHFWrapper(LocalModelWrapper):
-    def __init__(self, model, path_name=None, max_retry=30, port=6832, **kwargs):
+    def __init__(
+        self,
+        model,
+        path_name=None,
+        max_retry=30,
+        min_backoff=1.0,
+        max_backoff=60.0,
+        port=6832,
+        redis_kwargs: Dict = {},
+        **kwargs,
+    ):
         super().__init__(
             model=model,
             path_name=path_name,
             max_retry=max_retry,
+            min_backoff=min_backoff,
+            max_backoff=max_backoff,
             port=port,
+            redis_kwargs=redis_kwargs,
             # pipeline kwargs
             task="text-generation",
             device_map="auto",
@@ -123,14 +150,20 @@ class LocalVllmWrapper(LocalModelWrapper):
         model,
         path_name=None,
         max_retry=30,
+        min_backoff=1.0,
+        max_backoff=60.0,
         port=6832,
+        redis_kwargs: Dict = {},
         **kwargs,
     ):
         super(__class__, self).__init__(
             model=model,
             path_name=path_name,
             max_retry=max_retry,
+            min_backoff=min_backoff,
+            max_backoff=max_backoff,
             port=port,
+            redis_kwargs=redis_kwargs,
             # VLLM kwargs
             tensor_parallel_size=torch.cuda.device_count(),
             **kwargs,
