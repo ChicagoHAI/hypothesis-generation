@@ -135,6 +135,7 @@ class DefaultUpdate(Update):
                                 current_example,
                                 self.update_hypotheses_per_batch,
                                 self.alpha,
+                                use_cache=use_cache,
                             )
                         )
                         if self.only_best_hypothesis:
