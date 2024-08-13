@@ -10,7 +10,7 @@ from typing import Union
 
 import pandas as pd
 
-from hypogenic.examples.extract_label import retweet_extract_label
+from hypogenic.extract_label import retweet_extract_label
 
 from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed

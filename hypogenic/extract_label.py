@@ -1,7 +1,19 @@
 import re
-from ..register import Register
+from .register import Register
 
 extract_label_register = Register("extract_label")
+
+
+@extract_label_register.register("default")
+def default_extract_label(text):
+    if text is None:
+        return "other"
+
+    text = text.lower()
+    pattern = r"final answer:\s+<begin>(.*)<end>"
+
+    match = re.findall(pattern, text)
+    return match[-1] if len(match) > 0 else "other"
 
 
 @extract_label_register.register("headline_binary")

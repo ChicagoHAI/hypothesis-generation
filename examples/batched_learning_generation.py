@@ -11,7 +11,7 @@ import os
 import sys
 from typing import Union
 
-from hypogenic.examples.extract_label import retweet_extract_label
+from hypogenic.extract_label import retweet_extract_label
 
 from hypogenic.LLM_wrapper import LocalVllmWrapper
 from hypogenic.tasks import BaseTask

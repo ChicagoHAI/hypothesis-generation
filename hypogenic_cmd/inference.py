@@ -12,7 +12,7 @@ from typing import Dict, Union
 import torch
 import numpy as np
 
-from hypogenic.examples.extract_label import extract_label_register
+from hypogenic.extract_label import extract_label_register
 
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt

@@ -11,8 +11,8 @@ class Register:
         return decorator
 
     def build(self, type: str):
-        if type not in self.entries:
+        if type not in self.entries and "default" not in self.entries:
             raise ValueError(
                 f"Entry {type} not found in registry {self.name}. Available entries: {', '.join(self.entries.keys())}"
             )
-        return self.entries[type]
+        return self.entries[type] if type in self.entries else self.entries["default"]

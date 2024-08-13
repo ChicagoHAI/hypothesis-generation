@@ -8,7 +8,7 @@ import sys
 import os
 from typing import Union
 
-from hypogenic.examples.extract_label import retweet_extract_label
+from hypogenic.extract_label import retweet_extract_label
 
 from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed
