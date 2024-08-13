@@ -57,8 +57,10 @@ def main():
 
     os.makedirs(output_folder, exist_ok=True)
     api = LocalVllmWrapper(model_name, model_path)
-
-    task = BaseTask(task_config_path, from_register=extract_label_register)
+    
+    # If implementing a new task, you need to create a new extract_label function and pass in the Task constructor.
+    # For existing tasks (shoe, hotel_reviews, retweet, headline_binary), you can use the extract_label_register.
+    task = BaseTask(task_config_path, extract_label=None, from_register=extract_label_register)
 
     for seed in [49]:
         set_seed(seed)

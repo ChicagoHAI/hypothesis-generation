@@ -41,6 +41,7 @@ make
 
 The datasets used in our paper is at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets)
 
+For replicating the results in the paper, you can follow the steps below:
 ### 1. [Optional] Start Redis server
 
 The default port used by HypoGeniC is 6832. If you want to use a different port, please specify the port number in the `--port` argument.
@@ -53,14 +54,22 @@ cd $PATH_PREFIX/redis-stable/src
 ```bash
 hypogenic_generation --args
 ```
-
+For help with the arguments, run:
+```bash
+hypogenic_generation --help
+```
 ### 3. Hypothesis Inference
 ```bash
 hypogenic_inference --args
 ```
+For help with the arguments, run:
+```bash
+hypogenic_inference --help
+```
+**We will support command lines for HypoGeniC on new tasks and datasets in a later release.**
 
 ## Use HypoGeniC in your code
-
+To use HypoGeniC with you own code, tasks, and datasets, you can follow the steps below:
 ```bash
 git clone https://github.com/ChicagoHAI/HypoGeniC-datasets.git ./data
 python ./examples/generation.py
@@ -189,3 +198,5 @@ prompt_templates:
   # adaptive_inference
   # adaptive_selection
 ```
+### 3. Write an extract_label function for your new task
+As we show in `examples/generation.py`, you can create a new task by using our `BaseTask` constructor (line 63). You need to implement the `extract_label` function for your new task. The `extract_label` function should take a string input (LLM generated inference text), and return the label extracted from the input. **Note: you need to make sure the extracted label are in same format with the `'label'` in your dataset, since the extracted label will be compared with the true label to check correctness of each LLM inference.**
