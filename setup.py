@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as f:
 
 setuptools.setup(
     name="hypogenic",
-    version="0.1.0",
+    version="0.1.1",
     author="HypoGenic",
     author_email="haokunliu@uchicago.edu",
     description="A package for generating and evaluating hypotheses.",
@@ -16,7 +16,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
