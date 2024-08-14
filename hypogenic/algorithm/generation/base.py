@@ -77,7 +77,7 @@ class Generation(ABC):
         ____________
 
         Returns:
-        ____________
+        ____________]
 
         hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
         """
