@@ -9,7 +9,7 @@ class SummaryInformation:
     """
 
     def __init__(
-        self, hypothesis="", acc=1.0, reward=-1, num_visits=1, correct_examples=[]
+        self, hypothesis="", acc=0.0, reward=0, num_visits=0, correct_examples=[]
     ):
         """
         Initialize the SummaryInformation object

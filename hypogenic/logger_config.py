@@ -1,4 +1,5 @@
 import logging
+import colorlog
 from logging import Logger
 
 
@@ -14,8 +15,15 @@ class LoggerConfig:
     ):
         LoggerConfig.level = level
 
-        formatter = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        formatter = colorlog.ColoredFormatter(
+            "%(asctime)s %(log_color)s[%(levelname)s] %(purple)s%(name)s: %(blue)s%(message)s",
+            log_colors={
+                "DEBUG": "cyan",
+                "INFO": "green",
+                "WARNING": "yellow",
+                "ERROR": "red",
+                "CRITICAL": "red,bg_white",
+            },
         )
 
         if log_file_path is not None:

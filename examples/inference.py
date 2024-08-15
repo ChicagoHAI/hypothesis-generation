@@ -88,7 +88,8 @@ def main():
             logger.info("Using test data")
 
         pred_list, label_list = inference_class.run_inference_final(
-            test_data, hyp_bank, adaptive_num_hypotheses=adaptive_num_hypotheses
+            test_data, hyp_bank, adaptive_num_hypotheses=adaptive_num_hypotheses,
+            use_cache=1
         )
 
         results_dict = get_results(pred_list, label_list)
