@@ -34,6 +34,15 @@ class OneStepAdaptiveInference(Inference):
         use_cache=1,
         max_concurrent=3,
     ):
+        """
+        Make predictions on a batch of data.
+
+        Parameters:
+            data: the data to predict on
+            idx_hyp_pair: a list of tuples of indices and hypothesis banks
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         prompt_inputs = [
             self.prompt_class.one_step_adaptive_inference(
                 hyp_bank, self.train_data, data, index
@@ -47,19 +56,6 @@ class OneStepAdaptiveInference(Inference):
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
         return predictions, actual_labels
 
-    def predict(self, data, index, hyp_bank, use_cache=1):
-        prompt_input = self.prompt_class.one_step_adaptive_inference(
-            hyp_bank, self.train_data, data, index
-        )
-        response = self.api.generate(prompt_input, use_cache=use_cache)
-        prediction = self.prompt_class.task.extract_label(response)
-        actual_label = data["label"][index]
-        print(f"Prompt: {prompt_input}\n")
-        print(f"Response: {response}")
-        print(f"Prediction: {prediction}")
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label
-
     def _run_inference_final(
         self,
         data,
@@ -71,6 +67,18 @@ class OneStepAdaptiveInference(Inference):
         max_concurrent=3,
         **kwargs,
     ):
+        """
+        Run the final inference step for the one step adaptive inference algorithm.
+
+        Parameters:
+            data: the data to predict on
+            hyp_bank: the hypotheses that we want to predict from
+            adaptive_threshold: the threshold for similarity between hypotheses
+            adaptive_num_hypotheses: the number of hypotheses to select
+            adaptive_num_examples: the number of examples to select
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         num_train_data_samples = len(self.train_data)
         similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(
             hyp_bank, num_train_data_samples
@@ -129,8 +137,24 @@ class OneStepAdaptiveInference(Inference):
             max_concurrent=max_concurrent,
         )
 
-    def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):
-        return self._run_inference_final(data, hyp_bank, use_cache=use_cache, **kwargs)
+    def run_inference_final(
+        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+    ):
+        """
+        Run the final inference step for the one step adaptive inference algorithm.
+
+        Parameters:
+            data: the data to predict on
+            hyp_bank: the hypotheses that we want to predict from
+            adaptive_threshold: the threshold for similarity between hypotheses
+            adaptive_num_hypotheses: the number of hypotheses to select
+            adaptive_num_examples: the number of examples to select
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
+        return self._run_inference_final(
+            data, hyp_bank, use_cache=use_cache, max_concurrent=max_concurrent, **kwargs
+        )
 
     def compute_similarity_matrix(self, hyp_bank, num_train_data_samples):
         one_hot_encoded_dict = OrderedDict()
@@ -159,6 +183,15 @@ class OneStepAdaptiveInference(Inference):
     def select_hypotheses_ilp(
         self, similarity_matrix, accuracies, similarities, threshold
     ):
+        """
+        Select hypotheses using integer linear programming.
+
+        Parameters:
+            similarity_matrix: the similarity matrix between hypotheses
+            accuracies: the training accuracies of the hypotheses
+            similarities: the similarities of the hypotheses
+            threshold: the threshold for similarity between hypotheses
+        """
         num_hypotheses = similarity_matrix.shape[0]
         problem = pulp.LpProblem("Hypothesis_Selection", pulp.LpMaximize)
 

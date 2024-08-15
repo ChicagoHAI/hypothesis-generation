@@ -13,9 +13,10 @@ from ...prompt import BasePrompt
 @generation_register.register("default")
 class DefaultGeneration(Generation):
     """
-    Add on extra functionality to the generation fucntion - we consider this 
+    Add on extra functionality to the generation fucntion - we consider this
     the "default" task.
     """
+
     def __init__(
         self,
         api,
@@ -40,7 +41,13 @@ class DefaultGeneration(Generation):
     #                                                                          #
     # ------------------------------------------------------------------------ #
     def initialize_hypotheses(
-        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
+        self,
+        num_init,
+        init_batch_size,
+        init_hypotheses_per_batch,
+        alpha,
+        max_concurrent=3,
+        **kwargs
     ):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
@@ -49,6 +56,7 @@ class DefaultGeneration(Generation):
             init_batch_size: The amount of samples you want to include in each call to "batched_hypothesis_generation"
             init_hypotheses_per_batch: the amount of hypotheses that you're going to generate per batch
             alpha: the exploration constant in the hypogenic reward function
+            max_concurrent: the maximum amount of concurrent calls to the API
 
         Returns:
             hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
@@ -75,12 +83,13 @@ class DefaultGeneration(Generation):
                 range(i * init_batch_size, (i + 1) * init_batch_size)
             )
 
-            # the new_hypotheses 
+            # the new_hypotheses
             new_hypotheses = self.batched_hypothesis_generation(
                 example_indices,
                 len(example_indices),
                 init_hypotheses_per_batch,
                 alpha,
+                max_concurrent=max_concurrent,
             )
 
             hypotheses_bank.update(new_hypotheses)
@@ -112,6 +121,8 @@ class DefaultGeneration(Generation):
             init_batch size: the number of samples that will be used to generate these hypotheses
             init_hypotheses_per_batch: the amount of hypotheses that you want to generate per btach
             alpha: the exploration constant in the hypogenic reward function
+            use_cache: whether or not you want to use the cache
+            max_concurrent: the maximum amount of concurrent calls to the API
         """
         # ----------------------------------------------------------------------
         # Finding batch size and confirming that it works
@@ -138,7 +149,9 @@ class DefaultGeneration(Generation):
                     example_bank, init_hypotheses_per_batch
                 )
             )
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent)
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
 
         # ----------------------------------------------------------------------
         # Makes all the desired hypotheses
@@ -150,4 +163,5 @@ class DefaultGeneration(Generation):
             alpha,
             responses,
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )

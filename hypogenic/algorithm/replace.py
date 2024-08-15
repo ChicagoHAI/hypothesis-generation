@@ -4,17 +4,25 @@ from ..register import Register
 
 replace_register = Register(name="replace")
 
+
 # ------------------------------------------------------------------------------
 # the abstract base class for replace
 # ------------------------------------------------------------------------------
 class Replace(ABC):
     # We really just need a replace method and the max amount of hypotheses allowed
     def __init__(self, max_num_hypotheses):
+        """
+        Initialize the replace class
+        
+        Parameters:
+            max_num_hypotheses: The maximum number of hypotheses allowed in the hypotheses bank
+        """
         self.max_num_hypotheses = max_num_hypotheses
 
     @abstractmethod
     def replace(self, hypotheses_bank, new_generated_hypotheses):
         pass
+
 
 # ------------------------------------------------------------------------------
 # Default implementation for replace class
@@ -33,7 +41,6 @@ class DefaultReplace(Replace):
         Parameters:
             hypotheses_bank: the original dictionary of hypotheses
             new_generated_hypotheses: the newly generated dictionary of hypotheses
-
 
         Returns:
             updated_hyp_bank: the updated hypothesis bank
@@ -54,6 +61,3 @@ class DefaultReplace(Replace):
             list(sorted_hyp_bank.items())[: self.max_num_hypotheses]
         )
         return updated_hyp_bank
-
-
-REPLACE_CHOICES = ["default"]

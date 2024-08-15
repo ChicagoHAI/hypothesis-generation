@@ -61,6 +61,16 @@ class SamplingUpdate(Update):
         use_cache=1,
         max_concurrent=3,
     ):
+        """
+        Update the hypotheses bank.
+
+        Parameters:
+            hypotheses_bank: The current hypotheses bank
+            current_epoch: The current epoch
+            current_seed: The current seed
+            use_cache: Whether to use the redis cache or not
+            max_concurrent: The maximum number of concurrent requests
+        """
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
 
@@ -187,6 +197,18 @@ class SamplingUpdate(Update):
         use_cache=1,
         max_concurrent=3,
     ):
+        """
+        Balance the number of samples for each hypothesis.
+
+        Parameters:
+            hypotheses_bank: The current hypotheses bank
+            current_sample: The current sample number
+            max_visits: The maximum number of visits
+            num_init: The number of initial samples
+            alpha: The alpha value
+            use_cache: Whether to use the redis cache or not
+            max_concurrent: The maximum number of concurrent requests
+        """
         if max_visits > 60:
             val = num_init
         elif max_visits > 30:

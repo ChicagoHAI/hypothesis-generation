@@ -31,23 +31,14 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
     ):
         super().__init__(api, prompt_class, train_data, task)
 
-    def default_predict(self, data, index, hyp_bank, use_cache=1):
-        assert (
-            len(hyp_bank.keys()) == 1
-        ), "default inference only supports one hypothesis at a time"
-
-        prompt_input = self.prompt_class.inference(hyp_bank, data, index)
-
-        response = self.api.generate(prompt_input, use_cache=use_cache)
-        prediction = self.prompt_class.task.extract_label(response)
-        actual_label = data["label"][index]
-        print(f"Prompt: {prompt_input}\n")
-        print(f"Response: {response}")
-        print(f"Prediction: {prediction}")
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label
-
     def select_hypotheses(self, hyp_bank, response):
+        """
+        Select the hypothesis to use for the next step of inference.
+
+        Parameters:
+            hyp_bank: the hypothesis bank
+            response: the response from the model
+        """
         hyp_idx = re.search(r"Chosen Pattern:\s*Pattern\s*(\d+)", response)
 
         if hyp_idx == None:
@@ -84,6 +75,15 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         use_cache=1,
         max_concurrent=3,
     ):
+        """
+        Make predictions on a batch of data.
+
+        Parameters:
+            data: the data to predict on
+            idx_hyp_pair: a list of tuples of indices and hypothesis banks
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         prompt_inputs = [
             self.prompt_class.adaptive_selection(hyp_bank, self.train_data, data, index)
             for index, hyp_bank in idx_hyp_pair
@@ -105,20 +105,3 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         predictions = [self.task.extract_label(response) for response in responses]
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
         return predictions, actual_labels
-
-    def predict(self, data, index, hyp_bank, use_cache=1):
-        prompt_input = self.prompt_class.adaptive_selection(
-            hyp_bank, self.train_data, data, index
-        )
-        response = self.api.generate(prompt_input, use_cache=use_cache)
-
-        print("Prompt:", prompt_input)
-        print("Response:", response)
-
-        # select one hypothesis that is most relevant to the sample
-        hyp = self.select_hypotheses(hyp_bank, response)
-
-        # make prediction using default_predict
-        return self.default_predict(
-            data, index, {hyp: hyp_bank[hyp]}, use_cache=use_cache
-        )

@@ -40,6 +40,7 @@ class DefaultInference(Inference):
             data: the data to predict on
             idx_hyp_pair: a list of tuples of indices and hypothesis banks
             use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
         """
         assert all(
             [len(hyp_bank.keys()) == 1 for _, hyp_bank in idx_hyp_pair]
@@ -61,37 +62,6 @@ class DefaultInference(Inference):
         # we can return our predictions along with the labels
         return predictions, actual_labels
 
-    def predict(self, data, index, hyp_bank, use_cache=1):
-        """
-        Instead of predicting a batch, this is pointwise prediction
-
-        Parameters:
-            data: the data to predict on
-            hyp_bank: the hypotheses that we want to predict from
-            use_cache: whether to use the redis cache or not
-        """
-        assert (
-            len(hyp_bank.keys()) == 1
-        ), "default inference only supports one hypothesis at a time"
-
-        # creating a prompt
-        prompt_input = self.prompt_class.inference(hyp_bank, data, index)
-        print(f"Prompt: {prompt_input}\n")
-
-        # making a response
-        response = self.api.generate(prompt_input, use_cache=use_cache)
-        print(f"Response: {response}")
-
-        # extracting the prediction
-        prediction = self.task.extract_label(response)
-        print(f"Prediction: {prediction}")
-
-        # getting the actual label
-        actual_label = data["label"][index]
-        print(f"Ground truth: {actual_label}")
-
-        return prediction, actual_label
-
     def run_inference_final(
         self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
     ):
@@ -102,6 +72,7 @@ class DefaultInference(Inference):
             data: the data to predict on
             hyp_bank: the hypotheses that we want to predict from
             use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
         """
 
         # getting the top hypothesis

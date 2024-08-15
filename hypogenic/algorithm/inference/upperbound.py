@@ -26,20 +26,6 @@ class UpperboundInference(Inference):
     ):
         super().__init__(api, prompt_class, train_data, task)
 
-    def predict(self, data, index, hyp_bank, use_cache=1):
-        assert (
-            len(hyp_bank.keys()) == 1
-        ), "default inference only supports one hypothesis at a time"
-        prompt_input = self.prompt_class.inference(hyp_bank, data, index)
-        print(f"Prompt: {prompt_input}\n")
-        response = self.api.generate(prompt_input, use_cache=use_cache)
-        print(f"Response: {response}")
-        prediction = self.prompt_class.task.extract_label(response)
-        print(f"Prediction: {prediction}")
-        actual_label = data["label"][index]
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label
-
     def batched_predict(
         self,
         data,
@@ -47,6 +33,15 @@ class UpperboundInference(Inference):
         use_cache=1,
         max_concurrent=3,
     ):
+        """
+        Make predictions on a batch of data.
+
+        Parameters:
+            data: the data to predict on
+            idx_hyp_pair: a list of tuples of indices and hypothesis banks
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         assert all(
             [len(hyp_bank.keys()) == 1 for _, hyp_bank in idx_hyp_pair]
         ), "default inference only supports one hypothesis at a time"
@@ -66,6 +61,17 @@ class UpperboundInference(Inference):
     def _run_inference_final(
         self, data, hyp_bank, k=1, use_cache=1, max_concurrent=3, **kwargs
     ):
+        """
+        Run inference for each hypothesis in the hypothesis bank and return the predictions.
+        We regard the final prediction as correct if at least one of the hypotheses is correct.
+
+        Parameters:
+            data: the data to predict on
+            hyp_bank: the hypothesis bank
+            k: the number of hypotheses to keep
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         arg_k = k
 
         # sort hyp_bank by training accuracy from high to low
@@ -128,5 +134,20 @@ class UpperboundInference(Inference):
             pred_list[hyp][i] for hyp in hyp_bank for i in range(num_samples)
         ], label_list
 
-    def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):
-        return self._run_inference_final(data, hyp_bank, use_cache=use_cache, **kwargs)
+    def run_inference_final(
+        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+    ):
+        """
+        Run inference for each hypothesis in the hypothesis bank and return the predictions.
+        We regard the final prediction as correct if at least one of the hypotheses is correct.
+
+        Parameters:
+            data: the data to predict on
+            hyp_bank: the hypothesis bank
+            k: the number of hypotheses to keep
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
+        return self._run_inference_final(
+            data, hyp_bank, use_cache=use_cache, max_concurrent=max_concurrent, **kwargs
+        )

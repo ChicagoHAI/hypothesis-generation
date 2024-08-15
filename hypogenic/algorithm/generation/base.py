@@ -42,16 +42,10 @@ class Generation(ABC):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
         Parameters:
-        ____________
-
-        args: the parsed arguments
-
-        ____________
+            args: the parsed arguments
 
         Returns:
-        ____________
-
-        hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
+            hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
         """
         pass
 
@@ -68,16 +62,10 @@ class Generation(ABC):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
         Parameters:
-        ____________
-
-        args: the parsed arguments
-
-        ____________
+            args: the parsed arguments
 
         Returns:
-        ____________
-
-        hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
+            hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
         """
         pass
 
@@ -120,6 +108,7 @@ class Generation(ABC):
             reponses: a batch of llm inferences
             alpha: eploration constant in hypogenic reward funciton
             use_cache: self explanatory - best to use if inferencing a pricey api
+            max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
             new_generated_hypotheses: A dictionary containing all newly generated hypotheses. The keys are the hypotheses and the values are the Summary Information class    
@@ -213,6 +202,7 @@ class Generation(ABC):
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
             alpha: eploration constant in hypogenic reward funciton
             use_cache: self explanatory - best to use if inferencing a pricey api
+            max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
             new_generated_hypotheses: A dictionary containing all newly generated hypotheses. The keys are the hypotheses and the values are the Summary Information class
