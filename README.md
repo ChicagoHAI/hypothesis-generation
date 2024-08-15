@@ -5,7 +5,7 @@
 Welcome to the GitHub repository for our paper, ["Hypothesis Generation with Large Language Models"](https://arxiv.org/abs/2404.04326). This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our work, presented in detail in the accompanying paper, highlights the capability of LLMs not just to assist but to innovate in the hypothesis generation process for scientific inquiry.
 
 
-## Install environment
+### Install environment
 You can directly install HypoGeniC using the following commands:
 ```bash
 conda create --name hypogenic python=3.10
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-## [Optional]: set up [Redis](https://redis.io) server for caching LLM responses
+### [Optional]: set up [Redis](https://redis.io) server for caching LLM responses
 To save computation or API cost, we use Redis server to cache prompt & response pairs.
 
 Install Redis server from source using the following commands:
