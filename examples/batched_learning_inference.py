@@ -15,6 +15,9 @@ from hypogenic.utils import set_seed
 from hypogenic.algorithm.generation.utils import extract_hypotheses
 from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper
 from hypogenic.prompt import BasePrompt
+from hypogenic.logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic")
 
 
 def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cache=1):
@@ -29,12 +32,12 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cach
     ]
     responses = api.batched_generate(prompt_input, use_cache=use_cache)
     for i, response in enumerate(responses):
-        print("*** get_accuracy ***")
-        print(response)
+        logger.info("*** get_accuracy ***")
+        logger.info(response)
         pred = task.extract_label(response)
-        print("pred:", pred)
-        print("label:", data["label"][i])
-        print("*********************")
+        logger.info(f"pred: {pred}")
+        logger.info(f"label: {data['label'][i]}")
+        logger.info("*********************")
         if pred == data["label"][i]:
             correct += 1
     accuracy = correct / len(data["label"])
@@ -62,9 +65,9 @@ def main():
 
     # Use regex to extract the hypotheses
     hypotheses = extract_hypotheses(text, num_hypothesis)
-    print("Hypotheses: ", hypotheses)
+    logger.info(f"Hypotheses: {hypotheses}")
     if len(hypotheses) == 0:
-        print("No hypotheses found.")
+        logger.info("No hypotheses found.")
         return
 
     # load training data
@@ -79,17 +82,21 @@ def main():
     training_accuracies = []
     for hypothesis in hypotheses:
         # get the training accuracy of the hypothesis
-        accuracy = get_accuracy(api, hypothesis, train_data, prompt_class, task, use_cache)
+        accuracy = get_accuracy(
+            api, hypothesis, train_data, prompt_class, task, use_cache
+        )
         training_accuracies.append(accuracy)
 
     # get the test accuracy of the best hypothesis
     best_hypothesis = hypotheses[training_accuracies.index(max(training_accuracies))]
-    test_accuracy = get_accuracy(api, best_hypothesis, test_data, prompt_class, task, use_cache)
+    test_accuracy = get_accuracy(
+        api, best_hypothesis, test_data, prompt_class, task, use_cache
+    )
 
-    print("Best hypothesis: ", best_hypothesis)
-    print("Test accuracy of best hypothesis: ", test_accuracy)
-    print("Training accuracy of best hypothesis: ", max(training_accuracies))
-    print("Training accuracies: ", training_accuracies)
+    logger.info(f"Best hypothesis: {best_hypothesis}")
+    logger.info(f"Test accuracy of best hypothesis: {test_accuracy}")
+    logger.info(f"Training accuracy of best hypothesis: {max(training_accuracies)}")
+    logger.info(f"Training accuracies: {training_accuracies}")
 
 
 if __name__ == "__main__":

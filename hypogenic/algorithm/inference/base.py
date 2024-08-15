@@ -13,8 +13,6 @@ from ...prompt import BasePrompt
 from ...tasks import BaseTask
 
 
-
-
 class Inference(ABC):
     """Inference abstract class. For each style of inference implement the inference function."""
 
@@ -56,31 +54,21 @@ class Inference(ABC):
         pass
 
     @abstractmethod
-    def predict(self, data, index, hyp_bank, use_cache=1):
-        """Implements a specific type of prediction
-
-        Parameters
-            args: the arguments of the algorithm
-            data: the specific dataset
-            index: the specific index to predict for
-            hyp_bank: a dictionary of hypotheses
-
-        Returns
-            prediction: the predicted value
-            actual_label: the actual label of the sample
-        """
-        pass
-
-    @abstractmethod
-    def run_inference_final(self, data, hyp_bank, **kwargs):
+    def run_inference_final(
+        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+    ):
         """Implements a specific type of prediction
 
         Parameters:
+<<<<<<< HEAD
 
             args: the arguments of the algorithm
+=======
+>>>>>>> 48d141f19d9eef4d780adf4c11cffde5c84af785
             data: the specific dataset
             hyp_bank: a dictionary of hypotheses
-            k: the number of hypotheses to use
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
 
         Returns
             accuracy: the accuracy over the dataset

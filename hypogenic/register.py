@@ -1,3 +1,8 @@
+from .logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Register")
+
+
 class Register:
     def __init__(self, name: str):
         self.name = name
@@ -14,5 +19,9 @@ class Register:
         if type not in self.entries and "default" not in self.entries:
             raise ValueError(
                 f"Entry {type} not found in registry {self.name}. Available entries: {', '.join(self.entries.keys())}"
+            )
+        if type not in self.entries:
+            logger.warning(
+                f"Entry {type} not found in registry {self.name}. Using default entry."
             )
         return self.entries[type] if type in self.entries else self.entries["default"]

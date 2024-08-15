@@ -26,6 +26,7 @@ from hypogenic.algorithm.generation import generation_register
 from hypogenic.algorithm.inference import inference_register
 from hypogenic.algorithm.replace import replace_register
 from hypogenic.algorithm.update import update_register
+from hypogenic.logger_config import LoggerConfig
 
 
 def load_dict(file_path):
@@ -201,6 +202,19 @@ def parse_args():
     parser.add_argument(
         "--update_style", type=str, default="default", help="Type of update method."
     )
+    parser.add_argument(
+        "--log_file",
+        type=str,
+        default=None,
+        help="Path to the log file. If None, will only log to stdout.",
+    )
+    parser.add_argument(
+        "--log_level",
+        type=str,
+        default="INFO",
+        help="Logging level.",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+    )
 
     args = parser.parse_args()
 
@@ -211,6 +225,10 @@ def main():
     # set up tools
     start_time = time.time()
     args = parse_args()
+
+    LoggerConfig.setup_logger(args.log_file, args.log_level)
+
+    logger = LoggerConfig.get_logger("HypoGenic")
 
     task = BaseTask(args.task_config_path, from_register=extract_label_register)
 
@@ -287,10 +305,10 @@ def main():
         )
 
     # print experiment info
-    print(f"Total time: {time.time() - start_time} seconds")
+    logger.info(f"Total time: {time.time() - start_time} seconds")
     # TODO: No Implementation for session_total_cost
     # if api.model in GPT_MODELS:
-    #     print(f'Estimated cost: {api.api.session_total_cost()}')
+    #     logger.info(f'Estimated cost: {api.api.session_total_cost()}')
 
 
 if __name__ == "__main__":

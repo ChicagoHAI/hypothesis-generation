@@ -1,8 +1,9 @@
 import threading
 import time
 import logging
+from ..logger_config import LoggerConfig
 
-logger = logging.getLogger(name="RateLimiter")
+logger = LoggerConfig.get_logger(name="HypoGenic - RateLimiter")
 
 
 class RateLimiter:

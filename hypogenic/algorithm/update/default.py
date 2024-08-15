@@ -11,6 +11,9 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Default Update")
 
 
 @update_register.register("default")
@@ -38,25 +41,6 @@ class DefaultUpdate(Update):
         only_best_hypothesis=False,
         save_every_n_examples=100,
     ):
-        """
-        Parameters:
-            generation_class: Handles hypothesis generation
-            inference_class: Handles inference
-            replace_class: Handles hypothesis replacement
-            save_path: Path to save the hypothesis bank
-            file_name_template: Template for the file name.
-            sample_num_to_restart_from: Sample number to resume from. Default is -1
-            num_init: 
-            epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
-            num_wrong_scale: Scale for dynamic num_wrong_to_add_bank. Default is 0.8
-            k: The number of hypotheses checked per sample during training. Default is -1
-            alpha: Exploration parameter. Default is 5e-1
-            update_batch_size: Number of examples to use per prompt. Default is 5
-            num_hypotheses_to_update: Number of lowest-ranking hypotheses to update once we reach the maximum regret. Default is 5
-            update_hypotheses_per_batch: Number of hypotheses to generate per prompt. Default is 5
-            only_best_hypothesis: If only the best hypothesis should be added in the newly generated hypotheses of the batch. Default is False
-            save_every_n_examples: Save hypotheses every n examples. Default is 100
-        """
         super().__init__(
             generation_class,
             inference_class,
@@ -82,9 +66,17 @@ class DefaultUpdate(Update):
         current_epoch,
         current_seed,
         use_cache=1,
+        max_concurrent=3,
     ):
-        """We update the hypothesis bank once we reach a certain amount of regret
-    
+        """
+        We update the hypothesis bank once we reach a certain amount of regret
+
+        Parameters:
+            hypotheses_bank: The hypothesis bank
+            current_epoch: The current epoch
+            current_seed: The current seed
+            use_cache: Whether to use the redis cache or not
+            max_concurrent: The maximum number of concurrent requests
         """
         # initialize variables
         num_train_examples = len(self.train_data)
@@ -121,7 +113,7 @@ class DefaultUpdate(Update):
                 )
 
             current_example = i + 1
-            print(f"Training on example {i}")
+            logger.info(f"Training on example {i}")
 
             # We need to get the best k for testing the strength of our hypothesis bank
             top_k_hypotheses = sorted(
@@ -139,6 +131,7 @@ class DefaultUpdate(Update):
                     for hypothesis in top_k_hypotheses
                 ],
                 use_cache=use_cache,
+                max_concurrent=max_concurrent,
             )
 
             # Comparison of the label and prediction
@@ -147,11 +140,11 @@ class DefaultUpdate(Update):
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
                         current_example, self.alpha
-                    ) # let the bank know it got one wrong
+                    )  # let the bank know it got one wrong
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
                         current_example, self.alpha
-                    ) # let the bank know it got one right
+                    )  # let the bank know it got one right
 
                     # keeping track of good examples as we do in generation
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
@@ -166,7 +159,7 @@ class DefaultUpdate(Update):
                 num_wrong_hypotheses >= num_wrong_to_add_bank
                 or len(top_k_hypotheses) == 0
             ):
-                
+
                 # We note it as a bad sample
                 wrong_example_ids.add(i)
                 if (

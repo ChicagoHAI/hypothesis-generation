@@ -91,7 +91,7 @@ class Update(ABC):
             current_epoch: the current epoch number
             current_seed: the current seed number
 
-        Returns 
+        Returns
             final_hypotheses_bank: a dictionary of the final hypotheses as keys and the values being corresponding SummaryInformation of the hypotheses
         """
         pass
@@ -109,8 +109,7 @@ class Update(ABC):
             hypotheses_bank: the hypotheses which are to be written
             file_name: the name of the file to save the hypotheses
             file_name_template: how to store the file if not specified
-            kwargs:
-                we expect 'sample', 'seed', 'epoch'
+            kwargs: the arguments to be used in the file name template, for the default template we expect 'sample', 'seed', 'epoch'
         """
         # Use the default template if not specified
         if file_name_template is None:
@@ -143,8 +142,7 @@ class Update(ABC):
         use_cache=1,
     ) -> Dict[str, SummaryInformation]:
         """
-        Initalizes the hypothesis bank by invoking the batched_initialize_hypotheses
-        function.
+        Initalizes the hypothesis bank by invoking the batched_initialize_hypotheses function.
 
         see algorithm/generation/default.py or "initialize_hypotheses" for more in depth explanaiton of params and functionality
         """
@@ -167,7 +165,7 @@ class Update(ABC):
             init_batch_size: Batch size to generate hypotheses. Default is 5
             init_hypotheses_per_batch: Number of hypotheses to generate per batch. Default is 5
 
-        Returns: 
+        Returns:
             hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
         """
         return self.generation_class.initialize_hypotheses(

@@ -42,16 +42,10 @@ class Generation(ABC):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
         Parameters:
-        ____________
-
-        args: the parsed arguments
-
-        ____________
+            args: the parsed arguments
 
         Returns:
-        ____________
-
-        hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
+            hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
         """
         pass
 
@@ -68,16 +62,10 @@ class Generation(ABC):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
         Parameters:
-        ____________
-
-        args: the parsed arguments
-
-        ____________
+            args: the parsed arguments
 
         Returns:
-        ____________
-
-        hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
+            hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
         """
         pass
 
@@ -97,6 +85,7 @@ class Generation(ABC):
         alpha,
         responses,
         use_cache=1,
+        max_concurrent=3,
     ):
         """Based on multiple batched responses from the LM, create new hypotheses.
 
@@ -119,6 +108,7 @@ class Generation(ABC):
             reponses: a batch of llm inferences
             alpha: eploration constant in hypogenic reward funciton
             use_cache: self explanatory - best to use if inferencing a pricey api
+            max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
             new_generated_hypotheses: A dictionary containing all newly generated hypotheses. The keys are the hypotheses and the values are the Summary Information class    
@@ -150,7 +140,10 @@ class Generation(ABC):
         # We try to predict the ground truth labels
         # ----------------------------------------------------------------------
         preds, labels = self.inference_class.batched_predict(
-            self.train_data, idx_hyp_pair, use_cache=use_cache
+            self.train_data,
+            idx_hyp_pair,
+            use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
 
@@ -199,6 +192,7 @@ class Generation(ABC):
         num_hypotheses_generate,
         alpha,
         use_cache=1,
+        max_concurrent=3,
     ):
         """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
 
@@ -208,6 +202,7 @@ class Generation(ABC):
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
             alpha: eploration constant in hypogenic reward funciton
             use_cache: self explanatory - best to use if inferencing a pricey api
+            max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
             new_generated_hypotheses: A dictionary containing all newly generated hypotheses. The keys are the hypotheses and the values are the Summary Information class
@@ -254,7 +249,10 @@ class Generation(ABC):
 
         # We ask our prediction model to predict the labels based on the hypotheses
         preds, labels = self.inference_class.batched_predict(
-            self.train_data, idx_hyp_pair, use_cache=use_cache
+            self.train_data,
+            idx_hyp_pair,
+            use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
 

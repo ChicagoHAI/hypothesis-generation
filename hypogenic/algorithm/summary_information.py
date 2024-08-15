@@ -1,14 +1,28 @@
 import math
-"""
-This class is meant to keep track of how well a hypothesis performs
-"""
+
+import pandas as pd
+
 
 class SummaryInformation:
+    """
+    This class is meant to keep track of how well a hypothesis performs
+    """
+
     def __init__(
         self, hypothesis="", acc=1.0, reward=-1, num_visits=1, correct_examples=[]
     ):
+        """
+        Initialize the SummaryInformation object
+
+        Parameters:
+            hypothesis: the hypothesis that the object is tracking
+            acc: the accuracy of the hypothesis
+            reward: the reward of the hypothesis
+            num_visits: the number of times the hypothesis has been visited
+            correct_examples: a list of tuples of the form (sample index, label)
+        """
         self.hypothesis = hypothesis
-        self.acc = acc # accuracy
+        self.acc = acc  # accuracy
         self.num_visits = num_visits
         self.reward = reward
         self.correct_examples = (
@@ -57,21 +71,8 @@ class SummaryInformation:
         return f"SI object: reward: {self.reward}, num_visits: {self.num_visits}, correct_examples: {self.correct_examples}"
 
     # essentially redistributes the dataset
-    def get_examples(self, train_data, task):
-        examples = []
-        for ex in self.correct_examples:
-            index = ex[0]
-            label = ex[1]
-            examples.append((train_data[PROMPT_NAME_DICT[task]][index], label))
-        return examples
-
-
-PROMPT_NAME_DICT = {
-    "shoe": "appearance",
-    "hotel_reviews": "review",
-    "headline_binary": "headline",
-    "retweet": "tweets",
-}
+    def get_examples(self, train_data: pd.DataFrame):
+        return train_data.iloc[[index for index, _ in self.correct_examples]]
 
 
 def dict_to_summary_information(dict):
