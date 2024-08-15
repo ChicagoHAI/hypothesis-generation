@@ -60,17 +60,12 @@ class Inference(ABC):
         """Implements a specific type of prediction
 
         Parameters:
-<<<<<<< HEAD
-
-            args: the arguments of the algorithm
-=======
->>>>>>> 48d141f19d9eef4d780adf4c11cffde5c84af785
             data: the specific dataset
             hyp_bank: a dictionary of hypotheses
             use_cache: whether to use the redis cache or not
             max_concurrent: the maximum number of concurrent requests
 
-        Returns
+        Returns:
             accuracy: the accuracy over the dataset
         """
         pass
