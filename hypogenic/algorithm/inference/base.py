@@ -65,7 +65,7 @@ class Inference(ABC):
             use_cache: whether to use the redis cache or not
             max_concurrent: the maximum number of concurrent requests
 
-        Returns
+        Returns:
             accuracy: the accuracy over the dataset
         """
         pass
