@@ -34,7 +34,7 @@ def compute_accuracy(results):
         else:
             x.append(0)
     acc = sum(x) / len(x)
-    logger.info("non-safety mode record:", len(x) - safety_mode)
+    logger.info(f"non-safety mode record: {len(x) - safety_mode}")
     logger.info(f"Accuracy: {acc}")
     return acc
 
@@ -127,8 +127,8 @@ def main():
     )
     test_accuracy = compute_accuracy(results)
 
-    logger.info("Test accuracy: ", test_accuracy)
-    logger.info("Total time (seconds): ", round(time.time() - start_time, 2))
+    logger.info(f"Test accuracy: {test_accuracy}")
+    logger.info(f"Total time (seconds): {round(time.time() - start_time, 2)}")
 
 
 if __name__ == "__main__":

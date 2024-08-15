@@ -52,13 +52,13 @@ def main():
     logger.info("Prompt: ")
     logger.info(prompt_input)
     response = api.generate(prompt_input, use_cache=use_cache)
-    logger.info("prompt length: ", len(prompt_input))
+    logger.info(f"prompt length: {len(prompt_input)}")
     logger.info("Response: ")
     logger.info(response)
     os.makedirs(os.path.dirname(hypothesis_file), exist_ok=True)
     with open(hypothesis_file, "w") as f:
         f.write(response)
-    logger.info("response length: ", len(response))
+    logger.info(f"response length: {len(response)}")
     logger.info("************************************************")
 
     logger.info(f"Time: {time.time() - start_time} seconds")

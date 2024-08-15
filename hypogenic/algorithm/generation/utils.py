@@ -2,6 +2,7 @@ from ...logger_config import LoggerConfig
 
 logger = LoggerConfig.get_logger("HypoGenic - Generation")
 
+
 def extract_hypotheses(text, num_hypotheses):
     """
     Given a response with hypotheses, we want to take all of them out from the text.
@@ -16,7 +17,7 @@ def extract_hypotheses(text, num_hypotheses):
 
     # The regex to extract the hypotheses - matches to a numbered list
     pattern = re.compile(r"\d+\.\s(.+?)(?=\d+\.\s|\Z)", re.DOTALL)
-    logger.info("Text provided", text)
+    logger.info(f"Text provided {text}")
     hypotheses = pattern.findall(text)
 
     # Here, either there are no hypotheses, or you didn't match them correctly
@@ -24,7 +25,7 @@ def extract_hypotheses(text, num_hypotheses):
         logger.info("No hypotheses are generated.")
         return []
 
-    # this is a bit sketchy 
+    # this is a bit sketchy
     if len(hypotheses) != num_hypotheses:
         logger.info(f"Expected {num_hypotheses} hypotheses, but got {len(hypotheses)}.")
 

@@ -35,8 +35,8 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cach
         logger.info("*** get_accuracy ***")
         logger.info(response)
         pred = task.extract_label(response)
-        logger.info("pred:", pred)
-        logger.info("label:", data["label"][i])
+        logger.info(f"pred: {pred}")
+        logger.info(f"label: {data['label'][i]}")
         logger.info("*********************")
         if pred == data["label"][i]:
             correct += 1
@@ -65,7 +65,7 @@ def main():
 
     # Use regex to extract the hypotheses
     hypotheses = extract_hypotheses(text, num_hypothesis)
-    logger.info("Hypotheses: ", hypotheses)
+    logger.info(f"Hypotheses: {hypotheses}")
     if len(hypotheses) == 0:
         logger.info("No hypotheses found.")
         return
@@ -93,10 +93,10 @@ def main():
         api, best_hypothesis, test_data, prompt_class, task, use_cache
     )
 
-    logger.info("Best hypothesis: ", best_hypothesis)
-    logger.info("Test accuracy of best hypothesis: ", test_accuracy)
-    logger.info("Training accuracy of best hypothesis: ", max(training_accuracies))
-    logger.info("Training accuracies: ", training_accuracies)
+    logger.info(f"Best hypothesis: {best_hypothesis}")
+    logger.info(f"Test accuracy of best hypothesis: {test_accuracy}")
+    logger.info(f"Training accuracy of best hypothesis: {max(training_accuracies)}")
+    logger.info(f"Training accuracies: {training_accuracies}")
 
 
 if __name__ == "__main__":

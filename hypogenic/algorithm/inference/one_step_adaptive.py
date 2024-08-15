@@ -103,7 +103,7 @@ class OneStepAdaptiveInference(Inference):
             logger.info(
                 f"Hypothesis {hyp}, Encoded Examples: {one_hot_encoded_dict[hyp]}"
             )
-        logger.info("Similarity matrix:\n", similarity_matrix, "\n")
+        logger.info(f"Similarity matrix:\n{similarity_matrix}\n")
 
         # choose hypotheses with the least similarities
         selected_indices = self.select_hypotheses_ilp(
@@ -115,7 +115,7 @@ class OneStepAdaptiveInference(Inference):
         key_list = list(one_hot_encoded_dict.keys())
         selected_hypotheses = [key_list[idx] for idx in selected_indices]
         logger.info(
-            "Selected hypotheses based upon non-similarity:", selected_hypotheses
+            f"Selected hypotheses based upon non-similarity: {selected_hypotheses}",
         )
 
         top_k_hypotheses = sorted(
