@@ -28,8 +28,6 @@ from hypogenic.algorithm.summary_information import (
 from hypogenic.algorithm.inference import inference_register
 from hypogenic.logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic")
-
 
 def load_dict(file_path):
     with open(file_path, "r") as file:
@@ -140,6 +138,19 @@ def parse_args():
         default="default",
         help="The inference method to use.",
     )
+    parser.add_argument(
+        "--log_file",
+        type=str,
+        default=None,
+        help="Path to the log file. If None, will only log to stdout.",
+    )
+    parser.add_argument(
+        "--log_level",
+        type=str,
+        default="INFO",
+        help="Logging level.",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+    )
 
     args = parser.parse_args()
 
@@ -150,6 +161,10 @@ def main():
     start_time = time.time()
 
     args = parse_args()
+
+    LoggerConfig.setup_logger(args.log_file, args.log_level)
+
+    logger = LoggerConfig.get_logger("HypoGenic")
 
     task = BaseTask(args.task_config_path, from_register=extract_label_register)
     if args.hypothesis_file is None:
