@@ -1,12 +1,14 @@
 import math
-
+"""
+This class is meant to keep track of how well a hypothesis performs
+"""
 
 class SummaryInformation:
     def __init__(
         self, hypothesis="", acc=1.0, reward=-1, num_visits=1, correct_examples=[]
     ):
         self.hypothesis = hypothesis
-        self.acc = acc
+        self.acc = acc # accuracy
         self.num_visits = num_visits
         self.reward = reward
         self.correct_examples = (
@@ -33,6 +35,7 @@ class SummaryInformation:
             math.log(num_examples) / self.num_visits
         )
 
+    # In the update function, if it got the ith sample correct, ajust accuracy accordingly
     def update_info_if_useful(self, current_example, alpha):
         self.acc = (self.acc * self.num_visits + 1) / (self.num_visits + 1)
         self.num_visits += 1
@@ -41,6 +44,7 @@ class SummaryInformation:
     def update_useful_examples(self, example, label):
         self.correct_examples.append((example, label))
 
+    # In the update function, if it got the ith smample wrong, adjust accuracy accordinly
     def update_info_if_not_useful(self, current_example, alpha):
         self.acc = (self.acc * self.num_visits) / (self.num_visits + 1)
         self.num_visits += 1
@@ -52,6 +56,7 @@ class SummaryInformation:
     def __str__(self):
         return f"SI object: reward: {self.reward}, num_visits: {self.num_visits}, correct_examples: {self.correct_examples}"
 
+    # essentially redistributes the dataset
     def get_examples(self, train_data, task):
         examples = []
         for ex in self.correct_examples:

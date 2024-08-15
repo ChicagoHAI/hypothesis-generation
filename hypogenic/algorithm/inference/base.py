@@ -13,6 +13,8 @@ from ...prompt import BasePrompt
 from ...tasks import BaseTask
 
 
+
+
 class Inference(ABC):
     """Inference abstract class. For each style of inference implement the inference function."""
 
@@ -25,12 +27,11 @@ class Inference(ABC):
     ):
         """Initialize the inference class.
 
-        Parameters
-        _____________
-        api: the LLM api wrapper
-        prompt_class: the prompt class for the specified task
-        _____________
-
+        Parameters:
+            api: the LLM api wrapper
+            prompt_class: the prompt class for the specified task
+            task: the task that the prompt class is based off of
+            train_data: self explanitorily - the training data
         """
         super().__init__()
         self.api = api
@@ -48,8 +49,9 @@ class Inference(ABC):
         """
         Generate responses for every pair of data and hypotheses.
 
-        :param data: the data to predict on
-        :param idx_hyp_pair: a list of tuples of indices and hypothesis banks
+        Parameters:
+            data: the data to predict on
+            idx_hyp_pair: a list of tuples of indices and hypothesis banks
         """
         pass
 
@@ -58,16 +60,14 @@ class Inference(ABC):
         """Implements a specific type of prediction
 
         Parameters
-        __________
-        args: the arguments of the algorithm
-        data: the specific dataset
-        index: the specific index to predict for
-        hyp_bank: a dictionary of hypotheses
+            args: the arguments of the algorithm
+            data: the specific dataset
+            index: the specific index to predict for
+            hyp_bank: a dictionary of hypotheses
 
         Returns
-        __________
-        prediction: the predicted value
-        actual_label: the actual label of the sample
+            prediction: the predicted value
+            actual_label: the actual label of the sample
         """
         pass
 
@@ -75,15 +75,13 @@ class Inference(ABC):
     def run_inference_final(self, data, hyp_bank, **kwargs):
         """Implements a specific type of prediction
 
-        Parameters
-        __________
-        args: the arguments of the algorithm
-        data: the specific dataset
-        hyp_bank: a dictionary of hypotheses
-        k: the number of hypotheses to use
+        Parameters:
+            args: the arguments of the algorithm
+            data: the specific dataset
+            hyp_bank: a dictionary of hypotheses
+            k: the number of hypotheses to use
 
-        Returns
-        __________
-        accuracy: the accuracy over the dataset
+        Returns:
+            accuracy: the accuracy over the dataset
         """
         pass
