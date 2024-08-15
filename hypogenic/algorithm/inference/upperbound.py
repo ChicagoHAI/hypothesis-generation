@@ -13,6 +13,9 @@ from .base import Inference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Upperbound Inference")
 
 
 @inference_register.register("upperbound")
@@ -112,13 +115,13 @@ class UpperboundInference(Inference):
             accuracy_list[hyp] = sum(correct_list[hyp]) / num_samples
 
         # print the correctness of each hypothesis (in matrix form)
-        print("Correctness:")
+        logger.info("Correctness:")
         for hyp in hyp_bank:
-            print(f"{correct_list[hyp]}")
+            logger.info(f"{correct_list[hyp]}")
 
         # print accuracy for each hypothesis
         for hyp in hyp_bank:
-            print(f"Hypothesis: {hyp}, Accuracy: {accuracy_list[hyp]}")
+            logger.info(f"Hypothesis: {hyp}, Accuracy: {accuracy_list[hyp]}")
 
         # count as correct if one of the hypotheses is correct
         correct = 0
@@ -128,7 +131,7 @@ class UpperboundInference(Inference):
                     correct += 1
                     break
         accuracy = correct / num_samples
-        print(f"Upperbound accuracy (if one hyp is correct): {accuracy}")
+        logger.info(f"Upperbound accuracy (if one hyp is correct): {accuracy}")
 
         return [
             pred_list[hyp][i] for hyp in hyp_bank for i in range(num_samples)

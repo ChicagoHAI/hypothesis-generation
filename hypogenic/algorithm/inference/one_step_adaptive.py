@@ -14,6 +14,9 @@ from .default import DefaultInference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - One Step Adaptive Inference")
 
 
 @inference_register.register("one_step_adaptive")
@@ -91,16 +94,16 @@ class OneStepAdaptiveInference(Inference):
             for i, _ in enumerate(one_hot_encoded_dict.keys())
         ]
         accuracy_per_hypothesis = [hyp_bank[hyp].acc for hyp in one_hot_encoded_dict]
-        print("Initial examples per hyp:")
+        logger.info("Initial examples per hyp:")
         for hyp in hyp_bank:
-            print(f"Hypothesis {hyp}, Examples: {hyp_bank[hyp].correct_examples}")
+            logger.info(f"Hypothesis {hyp}, Examples: {hyp_bank[hyp].correct_examples}")
 
-        print()
-        print("One hot encoded dict:")
+        logger.info("One hot encoded dict:")
         for hyp in one_hot_encoded_dict:
-            print(f"Hypothesis {hyp}, Encoded Examples: {one_hot_encoded_dict[hyp]}")
-        print()
-        print("Similarity matrix:\n", similarity_matrix, "\n")
+            logger.info(
+                f"Hypothesis {hyp}, Encoded Examples: {one_hot_encoded_dict[hyp]}"
+            )
+        logger.info("Similarity matrix:\n", similarity_matrix, "\n")
 
         # choose hypotheses with the least similarities
         selected_indices = self.select_hypotheses_ilp(
@@ -111,7 +114,9 @@ class OneStepAdaptiveInference(Inference):
         )
         key_list = list(one_hot_encoded_dict.keys())
         selected_hypotheses = [key_list[idx] for idx in selected_indices]
-        print("Selected hypotheses based upon non-similarity:", selected_hypotheses)
+        logger.info(
+            "Selected hypotheses based upon non-similarity:", selected_hypotheses
+        )
 
         top_k_hypotheses = sorted(
             selected_hypotheses, key=lambda x: hyp_bank[x].acc, reverse=True

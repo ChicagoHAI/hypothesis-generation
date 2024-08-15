@@ -32,6 +32,9 @@ from hypogenic.algorithm.inference import (
 )
 from hypogenic.algorithm.replace import DefaultReplace
 from hypogenic.algorithm.update import SamplingUpdate, DefaultUpdate
+from hypogenic.logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic")
 
 
 def load_dict(file_path):
@@ -57,10 +60,12 @@ def main():
 
     os.makedirs(output_folder, exist_ok=True)
     api = LocalVllmWrapper(model_name, model_path)
-    
+
     # If implementing a new task, you need to create a new extract_label function and pass in the Task constructor.
     # For existing tasks (shoe, hotel_reviews, retweet, headline_binary), you can use the extract_label_register.
-    task = BaseTask(task_config_path, extract_label=None, from_register=extract_label_register)
+    task = BaseTask(
+        task_config_path, extract_label=None, from_register=extract_label_register
+    )
 
     for seed in [49]:
         set_seed(seed)
@@ -116,10 +121,10 @@ def main():
             )
 
     # print experiment info
-    print(f"Total time: {time.time() - start_time} seconds")
+    logger.info(f"Total time: {time.time() - start_time} seconds")
     # TODO: No Implementation for session_total_cost
     # if api.model in GPT_MODELS:
-    #     print(f'Estimated cost: {api.api.session_total_cost()}')
+    #     logger.info(f'Estimated cost: {api.api.session_total_cost()}')
 
 
 if __name__ == "__main__":

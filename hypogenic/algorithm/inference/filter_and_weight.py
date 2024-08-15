@@ -13,6 +13,9 @@ from .base import Inference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Filter and Weight Inference")
 
 
 @inference_register.register("filter_and_weight")
@@ -59,7 +62,7 @@ class FilterAndWeightInference(Inference):
         responses = self.api.batched_generate(
             prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
         )
-        print(f"Responses: {responses}")
+        logger.info(f"Responses: {responses}")
         responses = responses[::-1]
         predictions = []
         for _, hyp_bank in idx_hyp_pair:
@@ -105,20 +108,20 @@ class FilterAndWeightInference(Inference):
                     response = response[:5]
                     response = response.lower()
 
-                print(f"Response (truncated): {response}")
+                logger.info(f"Response (truncated): {response}")
 
                 if "yes" in response and "no" in response:
                     if "yes or no" in response:
-                        print(f"Hypothsis is not relevant")
+                        logger.info(f"Hypothsis is not relevant")
                     else:
                         raise ValueError(
                             f'The response should not contain both "yes" and "no". Response: {response}'
                         )
                 elif "yes" in response:
                     relevant_hypotheses[hypothesis] = hyp_bank[hypothesis]
-                    print("Hypothesis is relevant")
+                    logger.info("Hypothesis is relevant")
                 else:
-                    print(f"Hypothsis is not relevant")
+                    logger.info(f"Hypothsis is not relevant")
             relevant_hypotheses_banks.append(relevant_hypotheses)
 
         return relevant_hypotheses_banks

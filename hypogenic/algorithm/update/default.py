@@ -11,6 +11,9 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Default Update")
 
 
 @update_register.register("default")
@@ -67,7 +70,7 @@ class DefaultUpdate(Update):
     ):
         """
         We update the hypothesis bank once we reach a certain amount of regret
-    
+
         Parameters:
             hypotheses_bank: The hypothesis bank
             current_epoch: The current epoch
@@ -110,7 +113,7 @@ class DefaultUpdate(Update):
                 )
 
             current_example = i + 1
-            print(f"Training on example {i}")
+            logger.info(f"Training on example {i}")
 
             # We need to get the best k for testing the strength of our hypothesis bank
             top_k_hypotheses = sorted(
@@ -137,11 +140,11 @@ class DefaultUpdate(Update):
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
                         current_example, self.alpha
-                    ) # let the bank know it got one wrong
+                    )  # let the bank know it got one wrong
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
                         current_example, self.alpha
-                    ) # let the bank know it got one right
+                    )  # let the bank know it got one right
 
                     # keeping track of good examples as we do in generation
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
@@ -156,7 +159,7 @@ class DefaultUpdate(Update):
                 num_wrong_hypotheses >= num_wrong_to_add_bank
                 or len(top_k_hypotheses) == 0
             ):
-                
+
                 # We note it as a bad sample
                 wrong_example_ids.add(i)
                 if (

@@ -13,6 +13,9 @@ from .one_step_adaptive import OneStepAdaptiveInference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Two Step Adaptive Inference")
 
 
 @inference_register.register("two_step_adaptive")
@@ -42,12 +45,12 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         hyp_idx = re.search(r"Chosen Pattern:\s*Pattern\s*(\d+)", response)
 
         if hyp_idx == None:
-            print(
+            logger.info(
                 f"Could not find chosen hypothesis in response: {response}\n\nHyp_bank: {hyp_bank.keys()}"
             )
             # return hyp with highest acc
             hyp = max(hyp_bank, key=lambda x: hyp_bank[x].acc)
-            print(f"Use Hypothesis: {hyp}")
+            logger.info(f"Use Hypothesis: {hyp}")
             return hyp
 
         hyp_idx = hyp_idx.group(1)
@@ -55,16 +58,16 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         hyp_idx = int(hyp_idx) - 1
 
         if hyp_idx >= len(list(hyp_bank.items())):
-            print(f"No hypothesis chosen, return to default.")
+            logger.info(f"No hypothesis chosen, return to default.")
             # return hyp with highest acc
             hyp = max(hyp_bank, key=lambda x: hyp_bank[x].acc)
-            print(f"Use Hypothesis: {hyp}")
+            logger.info(f"Use Hypothesis: {hyp}")
             return hyp
 
-        print(f"Extracted Hypothesis Index: {hyp_idx}")
+        logger.info(f"Extracted Hypothesis Index: {hyp_idx}")
         items = list(hyp_bank.items())
         hyp = items[hyp_idx][0]
-        print(f"Extracted Hypothesis: {hyp}")
+        logger.info(f"Extracted Hypothesis: {hyp}")
 
         return hyp
 

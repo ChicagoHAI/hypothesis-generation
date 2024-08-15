@@ -11,6 +11,9 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Sampling Update")
 
 
 @update_register.register("sampling")
@@ -93,7 +96,7 @@ class SamplingUpdate(Update):
                 )
 
             current_example = i + 1
-            print(f"Training on example {i}")
+            logger.info(f"Training on example {i}")
 
             top_k_hypotheses = sorted(
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
@@ -165,9 +168,9 @@ class SamplingUpdate(Update):
                             )
                         else:
                             new_hyp_bank = new_hypotheses
-                            print("Here is the new hypothesis bank:")
+                            logger.info("Here is the new hypothesis bank:")
                             for hyp in new_hyp_bank:
-                                print(hyp)
+                                logger.info(hyp)
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
 

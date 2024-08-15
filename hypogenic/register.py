@@ -1,6 +1,6 @@
-import logging
+from .logger_config import LoggerConfig
 
-logger = logging.getLogger(name="Register")
+logger = LoggerConfig.get_logger("HypoGenic - Register")
 
 
 class Register:

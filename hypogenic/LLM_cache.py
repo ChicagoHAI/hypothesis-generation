@@ -5,6 +5,7 @@ import hashlib
 import collections
 import pickle
 import logging
+from .logger_config import LoggerConfig
 import time
 import threading
 from abc import ABC
@@ -15,7 +16,7 @@ import anthropic
 import openai
 from openai import OpenAI
 
-logger = logging.getLogger(name="LLM_cache")
+logger = LoggerConfig.get_logger(name="HypoGenic - LLM_cache")
 
 
 def deterministic_hash(data) -> int:

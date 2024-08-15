@@ -26,6 +26,9 @@ from hypogenic.algorithm.generation import generation_register
 from hypogenic.algorithm.inference import inference_register
 from hypogenic.algorithm.replace import replace_register
 from hypogenic.algorithm.update import update_register
+from hypogenic.logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic")
 
 
 def load_dict(file_path):
@@ -287,10 +290,10 @@ def main():
         )
 
     # print experiment info
-    print(f"Total time: {time.time() - start_time} seconds")
+    logger.info(f"Total time: {time.time() - start_time} seconds")
     # TODO: No Implementation for session_total_cost
     # if api.model in GPT_MODELS:
-    #     print(f'Estimated cost: {api.api.session_total_cost()}')
+    #     logger.info(f'Estimated cost: {api.api.session_total_cost()}')
 
 
 if __name__ == "__main__":
