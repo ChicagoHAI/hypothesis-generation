@@ -90,17 +90,17 @@ class SamplingUpdate(Update):
         if current_epoch > self.epoch_to_start_from:
             start_sample = 0
         for i in range(start_sample, num_train_examples):
-            if self.num_wrong_scale > 0:
-                num_wrong_to_add_bank = (
-                    self.k * i / num_train_examples * self.num_wrong_scale
-                )
-
             current_example = i + 1
             logger.info(f"Training on example {i}")
 
             top_k_hypotheses = sorted(
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
             )[: self.k]
+
+            if self.num_wrong_scale > 0:
+                num_wrong_to_add_bank = (
+                    len(top_k_hypotheses) * i / num_train_examples
+                ) * self.num_wrong_scale
 
             # check if the hypothesis works for the generated hypotheses
             num_wrong_hypotheses = 0

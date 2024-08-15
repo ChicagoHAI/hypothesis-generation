@@ -10,6 +10,9 @@ from .tasks import BaseTask
 
 
 class BasePrompt(ABC):
+    """
+    This class gives us a way to conviniently generate prompts.
+    """
     def __init__(self, task: BaseTask):
         self.task = task
 

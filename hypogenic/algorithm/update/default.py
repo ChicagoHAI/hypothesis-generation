@@ -106,12 +106,6 @@ class DefaultUpdate(Update):
         for i in range(start_sample, num_train_examples):
             # the 'i' here is the sample we are testing each of the top hypotheses
 
-            # We are the regret that we need in order to generate a new hypothesis
-            if self.num_wrong_scale > 0:
-                num_wrong_to_add_bank = (
-                    self.k * i / num_train_examples * self.num_wrong_scale
-                )
-
             current_example = i + 1
             logger.info(f"Training on example {i}")
 
@@ -119,6 +113,12 @@ class DefaultUpdate(Update):
             top_k_hypotheses = sorted(
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
             )[: self.k]
+
+            # We are at the regret that we need in order to generate a new hypothesis
+            if self.num_wrong_scale > 0:
+                num_wrong_to_add_bank = (
+                    len(top_k_hypotheses) * i / num_train_examples
+                ) * self.num_wrong_scale
 
             # ------------------------------------------------------------------
             # We need to see how good our hypothesis is, which we do by way of the inference class
