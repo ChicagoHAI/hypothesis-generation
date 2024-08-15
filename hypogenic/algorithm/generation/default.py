@@ -66,11 +66,11 @@ class DefaultGeneration(Generation):
         # Finding batch size and confirming that it works
         # ----------------------------------------------------------------------
         assert (
-            num_init % init_hypotheses_per_batch == 0
+            num_init % init_batch_size == 0
         ), "Number of initial examples must be divisible by the batch size"
 
         # To know how many batches we need to get to our desiered number of hypotheses
-        num_batches = num_init // init_hypotheses_per_batch
+        num_batches = num_init // init_batch_size
         hypotheses_bank = {}
 
         # ----------------------------------------------------------------------
@@ -128,9 +128,9 @@ class DefaultGeneration(Generation):
         # Finding batch size and confirming that it works
         # ----------------------------------------------------------------------
         assert (
-            num_init % init_hypotheses_per_batch == 0
+            num_init % init_batch_size == 0
         ), "Number of initial examples must be divisible by the batch size"
-        num_batches = num_init // init_hypotheses_per_batch
+        num_batches = num_init // init_batch_size
         prompt_inputs = []
 
         # ----------------------------------------------------------------------
