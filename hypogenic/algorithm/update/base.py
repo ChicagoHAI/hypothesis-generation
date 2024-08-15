@@ -38,22 +38,23 @@ class Update(ABC):
         """
         Initialize the update class
 
-        :param generation_class: The generation class that needs to be called in update for generating new hypotheses
-        :param inference_class: The inference class that is called for inference in update for making predictions
-        :param replace_class: The replace class that is called for replacing the old hypotheses with the new hypotheses
-        :param save_path: Path to save the hypotheses.
-        :param file_name_template: Template for the file name. Default is "hypotheses_training_sample\_${sample}\_seed\_${seed}\_epoch\_${epoch}.json"
-        :param sample_num_to_restart_from: Sample number to resume from. Default is -1
-        :param num_init: Number of examples to use for initializing hypotheses. Default is 25
-        :param epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
-        :param num_wrong_scale: Scale for dynamic num_wrong_to_add_bank. Default is 0.8
-        :param k: The number of hypotheses checked per sample during training. Default is -1
-        :param alpha: Exploration parameter. Default is 5e-1
-        :param update_batch_size: Number of examples to use per prompt. Default is 5
-        :param num_hypotheses_to_update: Number of lowest-ranking hypotheses to update once we reach the maximum number of hypotheses. Default is 5
-        :param update_hypotheses_per_batch: Number of hypotheses to generate per prompt. Default is 5
-        :param only_best_hypothesis: If only the best hypothesis should be added in the newly generated hypotheses of the batch. Default is False
-        :param save_every_n_examples: Save hypotheses every n examples. Default is 100
+        Parameters:
+            generation_class: The generation class that needs to be called in update for generating new hypotheses
+            inference_class: The inference class that is called for inference in update for making predictions
+            replace_class: The replace class that is called for replacing the old hypotheses with the new hypotheses
+            save_path: Path to save the hypotheses.
+            file_name_template: Template for the file name. Default is "hypotheses_training_sample\_${sample}\_seed\_${seed}\_epoch\_${epoch}.json"
+            sample_num_to_restart_from: Sample number to resume from. Default is -1
+            num_init: Number of examples to use for initializing hypotheses. Default is 25
+            epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
+            num_wrong_scale: Scale for dynamic num_wrong_to_add_bank. Default is 0.8
+            k: The number of hypotheses checked per sample during training. Default is -1
+            alpha: Exploration parameter. Default is 5e-1
+            update_batch_size: Number of examples to use per prompt. Default is 5
+            num_hypotheses_to_update: Number of lowest-ranking hypotheses to update once we reach the maximum number of hypotheses. Default is 5
+            update_hypotheses_per_batch: Number of hypotheses to generate per prompt. Default is 5
+            only_best_hypothesis: If only the best hypothesis should be added in the newly generated hypotheses of the batch. Default is False
+            save_every_n_examples: Save hypotheses every n examples. Default is 100
         """
         self.generation_class = generation_class
         self.inference_class = inference_class
@@ -84,13 +85,14 @@ class Update(ABC):
         """Implements how the algorithm runs through the samples. To run through the updated samples, start from args.num_init
         Call self.train_data for the train_data
 
-        :param args: the parsed arguments
-        :param hypotheses_bank: a dictionary of hypotheses that is generated with the initial training data
-        :param current_epoch: the current epoch number
-        :param current_seed: the current seed number
+        Parameters:
+            args: the parsed arguments
+            hypotheses_bank: a dictionary of hypotheses that is generated with the initial training data
+            current_epoch: the current epoch number
+            current_seed: the current seed number
 
-        :returns final_hypotheses_bank: a dictionary of the final hypotheses as keys and the values being corresponding SummaryInformation of the hypotheses
-
+        Returns 
+            final_hypotheses_bank: a dictionary of the final hypotheses as keys and the values being corresponding SummaryInformation of the hypotheses
         """
         pass
 
@@ -103,19 +105,26 @@ class Update(ABC):
         """
         Saves hypotheses bank to a json file
 
-        :param hypotheses_bank: the hypotheses which are to be written
-        :param file_name: the name of the file to save the hypotheses
-
+        Prameters:
+            hypotheses_bank: the hypotheses which are to be written
+            file_name: the name of the file to save the hypotheses
+            file_name_template: how to store the file if not specified
+            kwargs:
+                we expect 'sample', 'seed', 'epoch'
         """
+        # Use the default template if not specified
         if file_name_template is None:
             file_name_template = self.file_name_template
 
+        # Write what we want to store
         temp_dict = {}
         for hypothesis in hypotheses_bank.keys():
             serialized_dict = hypotheses_bank[hypothesis].__dict__
             temp_dict[hypothesis] = serialized_dict
 
         json_string = json.dumps(temp_dict)
+
+        # we expect 'sample', 'seed', 'epoch'
         kwargs = {k: str(v) for k, v in kwargs.items()}
         with open(
             os.path.join(
@@ -133,6 +142,12 @@ class Update(ABC):
         init_hypotheses_per_batch=5,
         use_cache=1,
     ) -> Dict[str, SummaryInformation]:
+        """
+        Initalizes the hypothesis bank by invoking the batched_initialize_hypotheses
+        function.
+
+        see algorithm/generation/default.py or "initialize_hypotheses" for more in depth explanaiton of params and functionality
+        """
         return self.generation_class.batched_initialize_hypotheses(
             num_init,
             init_batch_size,
@@ -147,11 +162,13 @@ class Update(ABC):
         """
         Generates the initial hypotheses
 
-        :param num_init: Number of examples to use for initializing hypotheses. Default is 25
-        :param init_batch_size: Batch size to generate hypotheses. Default is 5
-        :param init_hypotheses_per_batch: Number of hypotheses to generate per batch. Default is 5
+        Parameters:
+            num_init: Number of examples to use for initializing hypotheses. Default is 25
+            init_batch_size: Batch size to generate hypotheses. Default is 5
+            init_hypotheses_per_batch: Number of hypotheses to generate per batch. Default is 5
 
-        :returns hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
+        Returns: 
+            hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
         """
         return self.generation_class.initialize_hypotheses(
             num_init,

@@ -38,6 +38,25 @@ class DefaultUpdate(Update):
         only_best_hypothesis=False,
         save_every_n_examples=100,
     ):
+        """
+        Parameters:
+            generation_class: Handles hypothesis generation
+            inference_class: Handles inference
+            replace_class: Handles hypothesis replacement
+            save_path: Path to save the hypothesis bank
+            file_name_template: Template for the file name.
+            sample_num_to_restart_from: Sample number to resume from. Default is -1
+            num_init: 
+            epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
+            num_wrong_scale: Scale for dynamic num_wrong_to_add_bank. Default is 0.8
+            k: The number of hypotheses checked per sample during training. Default is -1
+            alpha: Exploration parameter. Default is 5e-1
+            update_batch_size: Number of examples to use per prompt. Default is 5
+            num_hypotheses_to_update: Number of lowest-ranking hypotheses to update once we reach the maximum regret. Default is 5
+            update_hypotheses_per_batch: Number of hypotheses to generate per prompt. Default is 5
+            only_best_hypothesis: If only the best hypothesis should be added in the newly generated hypotheses of the batch. Default is False
+            save_every_n_examples: Save hypotheses every n examples. Default is 100
+        """
         super().__init__(
             generation_class,
             inference_class,
@@ -64,10 +83,16 @@ class DefaultUpdate(Update):
         current_seed,
         use_cache=1,
     ):
+        """We update the hypothesis bank once we reach a certain amount of regret
+    
+        """
         # initialize variables
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
 
+        # ----------------------------------------------------------------------
+        # Figuring out starting samples
+        # ----------------------------------------------------------------------
         # go through training examples
         # When restarting from epoch > 0, no need to start at num_init
         # When not restarting, then default sample_num_to_restart_from = -1. start with num_init.
@@ -78,9 +103,18 @@ class DefaultUpdate(Update):
             start_sample = self.num_init
 
         # This is to check if we are running more epochs than the starting epoch, if so, start at sample 0
+        # basically, if we've completed the starting epoch, we want to start the next one
         if current_epoch > self.epoch_to_start_from:
             start_sample = 0
+
+        # ----------------------------------------------------------------------
+        # Creating the new hypotheses
+        # ----------------------------------------------------------------------
+        # from the start to the end
         for i in range(start_sample, num_train_examples):
+            # the 'i' here is the sample we are testing each of the top hypotheses
+
+            # We are the regret that we need in order to generate a new hypothesis
             if self.num_wrong_scale > 0:
                 num_wrong_to_add_bank = (
                     self.k * i / num_train_examples * self.num_wrong_scale
@@ -89,11 +123,14 @@ class DefaultUpdate(Update):
             current_example = i + 1
             print(f"Training on example {i}")
 
+            # We need to get the best k for testing the strength of our hypothesis bank
             top_k_hypotheses = sorted(
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
             )[: self.k]
 
-            # check if the hypothesis works for the generated hypotheses
+            # ------------------------------------------------------------------
+            # We need to see how good our hypothesis is, which we do by way of the inference class
+            # ------------------------------------------------------------------
             num_wrong_hypotheses = 0
             preds, labels = self.inference_class.batched_predict(
                 self.train_data,
@@ -103,23 +140,34 @@ class DefaultUpdate(Update):
                 ],
                 use_cache=use_cache,
             )
+
+            # Comparison of the label and prediction
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
                         current_example, self.alpha
-                    )
+                    ) # let the bank know it got one wrong
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
                         current_example, self.alpha
-                    )
+                    ) # let the bank know it got one right
+
+                    # keeping track of good examples as we do in generation
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
 
-            # if we get enough wrong examples
+            # ------------------------------------------------------------------
+            # Generating a new hypothesis
+            # ------------------------------------------------------------------
+
+            # if we get enough wrong examples as determined by num_wrong_to_add_bank,
+            # we need to generate new hypotheses
             if (
                 num_wrong_hypotheses >= num_wrong_to_add_bank
                 or len(top_k_hypotheses) == 0
             ):
+                
+                # We note it as a bad sample
                 wrong_example_ids.add(i)
                 if (
                     len(wrong_example_ids)
@@ -129,6 +177,8 @@ class DefaultUpdate(Update):
 
                     # generate new hypotheses
                     for j in range(self.num_hypotheses_to_update):
+
+                        # Go through poorly performing exmaples and generate hypotheses for them
                         new_hypotheses = (
                             self.generation_class.batched_hypothesis_generation(
                                 wrong_example_ids,
@@ -138,6 +188,8 @@ class DefaultUpdate(Update):
                                 use_cache=use_cache,
                             )
                         )
+
+                        # If we onlt take the best performing hypothesis from the batch
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
                                 new_hypotheses, key=lambda x: new_hypotheses[x].reward
@@ -150,7 +202,7 @@ class DefaultUpdate(Update):
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
 
-                    # call replace class
+                    # call replace class to update the bank
                     hypotheses_bank = self.replace_class.replace(
                         hypotheses_bank, new_hyp_bank
                     )
@@ -164,4 +216,5 @@ class DefaultUpdate(Update):
                     epoch=current_epoch,
                 )
 
+        # Our new bank
         return hypotheses_bank
