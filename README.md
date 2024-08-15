@@ -62,8 +62,10 @@ hypogenic_generation --help
 
 For help with the arguments, run:
 ```bash
-hypogenic_inference --help
+hypogenic_inference --<relevant args>
 ```
+The section below will show you how to make a "hypogenic_inference" file.
+
 **We will support command lines for HypoGeniC on new tasks and datasets in a later release.**
 
 ## Use HypoGeniC in your code
@@ -85,11 +87,11 @@ To use hypogenic on your own dataset, you should implement the following 3 compo
 We will now go over the nuances of each step.
 
 ### 1. Data preprocessing
-To use HypoGeniC, we require users to provide a dataset in the HuggingFace datasets format:
-    - `<TASK>_train.json`: A json file containing the training data. 
-    - `<TASK>_test.json`: A json file containing the test data. 
-    - `<TASK>_val.json`: A json file containing the validation data. 
-    - The json file should have keys: `'text_features_1'`, ... `'text_features_n'`, `'label'`. The values corresponding to each key should be a list of strings.
+To use HypoGeniC, we require users to provide a dataset in the HuggingFace datasets format:\
+* `<TASK>_train.json`: A json file containing the training data. \
+* `<TASK>_test.json`: A json file containing the test data. \
+* `<TASK>_val.json`: A json file containing the validation data. \
+* The json file should have keys: `'text_features_1'`, ... `'text_features_n'`, `'label'`. The values corresponding to each key should be a list of strings.
 
 For example:
 `./headline_binary/headline_binary_test.json`
@@ -216,13 +218,13 @@ prompt_templates:
 
 In this script is where you'll actually be running hypogenic from.
 
-You're going to need to create:
-**A local llm wrapper** - hypogenic supports vllm, huggingface (see LLM_wrapper/local), the gpt api (LLM_wrapper/gpt), and the claude api (LLM_wrapper/claude).  
-**A Task class** - reads from your yaml file to get the relevant details needed for your run.  See Section 2 to get more details about the yaml file.
-**A Prompt class** - This class helps generate promtps at scale by fitting variables to our template.
-**An Inference class** - Inference measures hypotheses' predictive power on the given task
-**A Generation class** - We create hypotheses with this class.
-**An Update class** - Update contains the main algorithm loop and will prune hypotheses as the steps progress
+You're going to need to create:\
+**A local llm wrapper** - hypogenic supports vllm, huggingface (see LLM_wrapper/local), the gpt api (LLM_wrapper/gpt), and the claude api (LLM_wrapper/claude).\
+**A Task class** - reads from your yaml file to get the relevant details needed for your run.  See Section 2 to get more details about the yaml file.\
+**A Prompt class** - This class helps generate promtps at scale by fitting variables to our template.\
+**An Inference class** - Inference measures hypotheses' predictive power on the given task.\
+**A Generation class** - We create hypotheses with this class.\
+**An Update class** - Update contains the main algorithm loop and will prune hypotheses as the steps progress/\
 
 From there, your can either initialize the hypothesis bank or load an existing one.
 
