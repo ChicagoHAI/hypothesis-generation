@@ -77,15 +77,56 @@ More examples can be found in `examples/` directory.
 
 ## Add a new task or dataset
 
+To use hypogenic on your own dataset, you should implement the following 3 components: **(UPDATE: WHAT'S THE PROTOCOL WITH THE PIP VS LOCAL INSTALLATION)**
+1. The dataset that you want to use
+2. A config.yaml file
+3. The file to actually run the algorithm from
+
+We will now go over the nuances of each step.
+
 ### 1. Data preprocessing
-- To use HypoGeniC, we require users to provide a dataset in the HuggingFace datasets format:
+To use HypoGeniC, we require users to provide a dataset in the HuggingFace datasets format:
     - `<TASK>_train.json`: A json file containing the training data. 
     - `<TASK>_test.json`: A json file containing the test data. 
     - `<TASK>_val.json`: A json file containing the validation data. 
     - The json file should have keys: `'text_features_1'`, ... `'text_features_n'`, `'label'`. The values corresponding to each key should be a list of strings.
 
+For example:
+`./headline_binary/headline_binary_test.json`
+could look like
+
+```json
+{
+  "headline_1": [
+    "What Up, Comet? You Just Got *PROBED*",
+    "..."
+  ],
+  "headline_2": [
+    "Scientists Everywhere Were Holding Their Breath Today. Here's Why.",
+    "..."
+  ],
+  "label": [
+    "Headline 2 has more clicks than Headline 1",
+    "..."
+  ]
+}
+```
+
+This format helps us standardize data loading.
+
+It's also important to realize that you need some kind of a label, as hypogenic is a supervised training algorithm.
+
 ### 2. Write config.yaml
-Create the `config.yaml` file in the same directory as the dataset. In the `config.yaml` file, please specify the following fields:
+Create the `config.yaml` file in the same directory as the dataset. 
+
+This file provides configuration for the entire run, namely:
+* task name
+* dataset paths
+* prompt templates
+In hypogenic/task.py, you'll read the contents of the file in.  Please refer to the examples for how to format them.
+
+
+The `config.yaml` file should have a skeleton similar like so:
 ```yaml
 task_name: <TASK>
 
@@ -136,27 +177,7 @@ prompt_templates:
     # ...
 ```
 
-### Examples
-
-`./headline_binary/headline_binary_test.json`
-
-```json
-{
-  "headline_1": [
-    "What Up, Comet? You Just Got *PROBED*",
-    "..."
-  ],
-  "headline_2": [
-    "Scientists Everywhere Were Holding Their Breath Today. Here's Why.",
-    "..."
-  ],
-  "label": [
-    "Headline 2 has more clicks than Headline 1",
-    "..."
-  ]
-}
-```
-
+And an example is 
 `./headline_binary/config.yaml`
 
 ```yaml
@@ -189,16 +210,87 @@ prompt_templates:
       Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
 
       Proposed hypotheses:
-
-  # few_shot_baseline
-  # inference
-  # is_relevant
-  # adaptive_inference
-  # adaptive_selection
 ```
-### 3. Write an extract_label function for your new task
+
+### 3. Write the algorithm's file
+
+In this script is where you'll actually be running hypogenic from.
+
+You're going to need to create:
+**A local llm wrapper** - hypogenic supports vllm, huggingface (see LLM_wrapper/local), the gpt api (LLM_wrapper/gpt), and the claude api (LLM_wrapper/claude).  
+**A Task class** - reads from your yaml file to get the relevant details needed for your run.  See Section 2 to get more details about the yaml file.
+**A Prompt class** - This class helps generate promtps at scale by fitting variables to our template.
+**An Inference class** - Inference measures hypotheses' predictive power on the given task
+**A Generation class** - We create hypotheses with this class.
+**An Update class** - Update contains the main algorithm loop and will prune hypotheses as the steps progress
+
+From there, your can either initialize the hypothesis bank or load an existing one.
+
+For example:
+```python
+hypotheses_bank = {}
+if old_hypothesis_file is None:
+    # Initalize the hypothesis bank using the update class and save them
+    hypotheses_bank = update_class.batched_initialize_hypotheses(
+        num_init,
+        init_batch_size=3,
+        init_hypotheses_per_batch=10,
+        use_cache=0,
+    )
+    update_class.save_to_json(
+        hypotheses_bank,
+        sample=num_init,
+        seed=seed,
+        epoch=0,
+    )
+else:
+    # we can load another hypothesis bank
+    dict = load_dict(old_hypothesis_file)
+    for hypothesis in dict:
+        hypotheses_bank[hypothesis] = dict_to_summary_information(
+            dict[hypothesis]
+        )
+```
+
+Finally, you can control how many epochs you want and use the update class to run the hypogenic algorithm
+It's also recommended that you save to json after each iteration.
+
+Here's how it might look:
+
+```python
+for epoch in range(1):
+  hypotheses_bank = update_class.update(
+      current_epoch=epoch,
+      hypotheses_bank=hypotheses_bank,
+      current_seed=seed,
+      use_cache=0,
+  )
+  update_class.save_to_json(
+      hypotheses_bank,
+      sample="final",
+      seed=seed,
+      epoch=epoch,
+  )
+```
+
+**Extract labels method:**
 As we show in `examples/generation.py`, you can create a new task by using our `BaseTask` constructor (line 63). You need to implement the `extract_label` function for your new task. The `extract_label` function should take a string input (LLM generated inference text), and return the label extracted from the input. 
 
 **If no `extract_label` function is provided, the default version will be used, which looks for `final answer:\s+<begin>(.*)<end>` in the LLM generated text.**
 
 **Note: you need to make sure the extracted label are in same format with the `'label'` in your dataset, since the extracted label will be compared with the true label to check correctness of each LLM inference.**
+
+### 4. Further modification of hypogenic
+
+Perhaps your task might have a different way of updating hypotheses, or you want to measure hypotheses' quality slightly differently.
+
+The modularization of the the main classes - generation, update, inference - allows you to inheret from the base class to modify hypogenic's as much as you wish. 
+
+Here are some reasons why you'd modify each class:
+**Generation:**  if you want to change the way that hypotheses are initialized, this class, as well as prompt some engineering, would get you there.  Usually, using the default implementation and playing the prompt will suffice.
+
+**Inference:** since predictions based on hypotheses are done in this class, any modification of how predictions are done might require modifying this class.
+
+**Update:**  this class might be the most modifiable, since it contains the entire training loop and certierion for generating new hypotheses.  Here, you can modify the general structure of how and when hypotheses are created.  As a bonus, you can change the **Replace** class in hypogenic/algorithm to modify the behavior of your hypothesis bank.
+
+### 

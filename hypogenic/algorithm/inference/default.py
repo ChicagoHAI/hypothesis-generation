@@ -62,9 +62,7 @@ class DefaultInference(Inference):
         # we can return our predictions along with the labels
         return predictions, actual_labels
 
-    def run_inference_final(
-        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
-    ):
+    def run_inference_final(self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs):
         """
         Function for testing the best hypothesis
 
@@ -76,9 +74,7 @@ class DefaultInference(Inference):
         """
 
         # getting the top hypothesis
-        top_hypothesis = sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[
-            0
-        ]
+        top_hypothesis = sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[0]
         num_samples = len(data)
 
         # running the batched predict with the top hypothesis

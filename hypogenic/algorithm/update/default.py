@@ -182,7 +182,7 @@ class DefaultUpdate(Update):
                             )
                         )
 
-                        # If we onlt take the best performing hypothesis from the batch
+                        # If we only take the best performing hypothesis from the batch
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
                                 new_hypotheses, key=lambda x: new_hypotheses[x].reward
