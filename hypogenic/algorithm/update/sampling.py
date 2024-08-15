@@ -29,7 +29,7 @@ class SamplingUpdate(Update):
         num_init=25,
         epoch_to_start_from=0,
         num_wrong_scale=0.8,
-        k=-1,
+        k=1,
         alpha=5e-1,
         update_batch_size=5,
         num_hypotheses_to_update=5,
