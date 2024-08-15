@@ -31,41 +31,57 @@ class DefaultInference(Inference):
         data: pd.DataFrame,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         use_cache=1,
+        max_concurrent=3,
     ):
+        """
+        Makes a batch of preductions on a hypothesis.
+
+        Parameters:
+            data: the data to predict on
+            idx_hyp_pair: a list of tuples of indices and hypothesis banks
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         assert all(
             [len(hyp_bank.keys()) == 1 for _, hyp_bank in idx_hyp_pair]
         ), "default inference only supports one hypothesis at a time"
 
+        # we use the prompt class in order to create the batch of prompts
         prompt_inputs = [
             self.prompt_class.inference(hyp_bank, data, index)
             for index, hyp_bank in idx_hyp_pair
         ]
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
         predictions = [self.task.extract_label(response) for response in responses]
+
+        # and once we get the actual labels
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+
+        # we can return our predictions along with the labels
         return predictions, actual_labels
 
-    def predict(self, data, index, hyp_bank, use_cache=1):
-        assert (
-            len(hyp_bank.keys()) == 1
-        ), "default inference only supports one hypothesis at a time"
+    def run_inference_final(
+        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+    ):
+        """
+        Function for testing the best hypothesis
 
-        prompt_input = self.prompt_class.inference(hyp_bank, data, index)
-        print(f"Prompt: {prompt_input}\n")
-        response = self.api.generate(prompt_input, use_cache=use_cache)
-        print(f"Response: {response}")
-        prediction = self.task.extract_label(response)
-        print(f"Prediction: {prediction}")
-        actual_label = data["label"][index]
-        print(f"Ground truth: {actual_label}")
-        return prediction, actual_label
+        Prameters:
+            data: the data to predict on
+            hyp_bank: the hypotheses that we want to predict from
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
 
-    def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):
+        # getting the top hypothesis
         top_hypothesis = sorted(hyp_bank, key=lambda x: hyp_bank[x].acc, reverse=True)[
             0
         ]
         num_samples = len(data)
 
+        # running the batched predict with the top hypothesis
         return self.batched_predict(
             data,
             [
@@ -73,4 +89,5 @@ class DefaultInference(Inference):
                 for i in range(num_samples)
             ],
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )

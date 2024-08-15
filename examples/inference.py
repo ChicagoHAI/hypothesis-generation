@@ -32,6 +32,9 @@ from hypogenic.algorithm.inference import (
     TwoStepAdaptiveInference,
     UpperboundInference,
 )
+from hypogenic.logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic")
 
 
 def load_dict(file_path):
@@ -79,10 +82,10 @@ def main():
         inference_class = UpperboundInference(api, prompt_class, train_data, task)
 
         if use_valid:
-            print("Using validation data")
+            logger.info("Using validation data")
             test_data = val_data
         else:
-            print("Using test data")
+            logger.info("Using test data")
 
         pred_list, label_list = inference_class.run_inference_final(
             test_data, hyp_bank, adaptive_num_hypotheses=adaptive_num_hypotheses
@@ -90,22 +93,22 @@ def main():
 
         results_dict = get_results(pred_list, label_list)
 
-        print(f"Accuracy for seed {seed}: {results_dict['accuracy']}")
-        print(f"F1 for seed {seed}: {results_dict['f1']}")
+        logger.info(f"Accuracy for seed {seed}: {results_dict['accuracy']}")
+        logger.info(f"F1 for seed {seed}: {results_dict['f1']}")
 
         # print the wrong indices
         wrong_indices = [
             i for i in range(len(pred_list)) if pred_list[i] != label_list[i]
         ]
-        print(f"Wrong indices: {wrong_indices}")
+        logger.info(f"Wrong indices: {wrong_indices}")
 
-    print(f"Averaged accuracy: {sum(accuracy_all)/len(seeds)}")
-    print(f"Averaged F1: {sum(f1_all)/len(seeds)}")
+    logger.info(f"Averaged accuracy: {sum(accuracy_all)/len(seeds)}")
+    logger.info(f"Averaged F1: {sum(f1_all)/len(seeds)}")
 
     # print experiment info
-    print(f"Total time: {time.time() - start_time} seconds")
+    logger.info(f"Total time: {time.time() - start_time} seconds")
     # if api.model in GPT_MODELS:
-    #     print(f'Estimated cost: {api.api.session_total_cost()}')
+    #     logger.info(f'Estimated cost: {api.api.session_total_cost()}')
 
 
 if __name__ == "__main__":

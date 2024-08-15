@@ -16,6 +16,9 @@ from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed
 from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper
 from hypogenic.prompt import BasePrompt
+from hypogenic.logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic")
 
 
 def compute_accuracy(results):
@@ -31,8 +34,8 @@ def compute_accuracy(results):
         else:
             x.append(0)
     acc = sum(x) / len(x)
-    print("non-safety mode record:", len(x) - safety_mode)
-    print(f"Accuracy: {acc}")
+    logger.info(f"non-safety mode record: {len(x) - safety_mode}")
+    logger.info(f"Accuracy: {acc}")
     return acc
 
 
@@ -55,18 +58,23 @@ def few_shot(
     ]
     responses = api.batched_generate(prompt_inputs, use_cache=use_cache)
     for i in range(len(test_data)):
-        print(f"********** Example {i} **********")
+        logger.info(f"********** Example {i} **********")
         pred = task.extract_label(responses[i])
         label = test_data["label"][i]
 
-        # print(f"Prompt: {prompt_inputs[i]}")
-        print(f"Response: {responses[i]}")
-        print(f"Label: {label}")
-        print(f"Prediction: {pred}")
+        # logger.info(f"Prompt: {prompt_inputs[i]}")
+        logger.info(f"Response: {responses[i]}")
+        logger.info(f"Label: {label}")
+        logger.info(f"Prediction: {pred}")
         results.append(
-            {"prompt": prompt_inputs[i], "response": responses[i], "label": label, "pred": pred}
+            {
+                "prompt": prompt_inputs[i],
+                "response": responses[i],
+                "label": label,
+                "pred": pred,
+            }
         )
-        print("**********************************")
+        logger.info("**********************************")
 
     return results
 
@@ -119,8 +127,8 @@ def main():
     )
     test_accuracy = compute_accuracy(results)
 
-    print("Test accuracy: ", test_accuracy)
-    print("Total time (seconds): ", round(time.time() - start_time, 2))
+    logger.info(f"Test accuracy: {test_accuracy}")
+    logger.info(f"Total time (seconds): {round(time.time() - start_time, 2)}")
 
 
 if __name__ == "__main__":

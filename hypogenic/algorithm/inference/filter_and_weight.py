@@ -13,6 +13,9 @@ from .base import Inference
 from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Filter and Weight Inference")
 
 
 @inference_register.register("filter_and_weight")
@@ -31,7 +34,21 @@ class FilterAndWeightInference(Inference):
         data: pd.DataFrame,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         use_cache=1,
+        max_concurrent=3,
     ):
+        """
+        Make predictions on a batch of data.
+        Use the hypotheses in hyp_bank to make a weighted-vote prediction.
+
+        Note this function may be called in generation as well.
+        Therefore, I only implement it to perform weighted-vote prediction (but not filtering).
+
+        Parameters:
+            data: the data to predict on
+            idx_hyp_pair: a list of tuples of indices and hypothesis banks
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         assert all(
             [len(hyp_bank.keys()) >= 1 for _, hyp_bank in idx_hyp_pair]
         ), "Filter and weight inference requires at least one hypothesis"
@@ -42,8 +59,10 @@ class FilterAndWeightInference(Inference):
             for index, hyp_bank in idx_hyp_pair
             for hypothesis in hyp_bank
         ]
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
-        print(f"Responses: {responses}")
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
+        logger.info(f"Responses: {responses}")
         responses = responses[::-1]
         predictions = []
         for _, hyp_bank in idx_hyp_pair:
@@ -60,42 +79,6 @@ class FilterAndWeightInference(Inference):
 
         return predictions, actual_labels
 
-    def predict(self, data, index, hyp_bank, use_cache=1):
-        """
-        Make prediction on one sample (index) of the dataset.
-        Use the hypotheses in hyp_bank to make a weighted-vote prediction.
-
-        Note this function may be called in generation as well.
-        Therefore, I only implement it to perform weighted-vote prediction (but not filtering).
-        """
-        assert (
-            len(hyp_bank.keys()) >= 1
-        ), "Filter and weight inference requires at least one hypothesis"
-
-        actual_label = data["label"][index]
-        pred_dict = {}
-        prompt_inputs = [
-            self.prompt_class.inference({hypothesis: hyp_bank[hypothesis]}, data, index)
-            for hypothesis in hyp_bank
-        ]
-        responses = self.api.batched_generate(prompt_inputsuse_cache=use_cache)
-        preds = [
-            self.prompt_class.task.extract_label(response) for response in responses
-        ]
-        for hypothesis, pred in zip(hyp_bank, preds):
-            weight = hyp_bank[hypothesis].acc
-            if pred in pred_dict:
-                pred_dict[pred] += weight
-            else:
-                pred_dict[pred] = weight
-        prediction = max(pred_dict, key=pred_dict.get)
-
-        print(f"Predictions (weights): {pred_dict}")
-        print(f"Prediction (final): {prediction}")
-        print(f"Ground truth: {actual_label}")
-
-        return prediction, actual_label
-
     def filter_hypotheses(
         self, hyp_bank, responses, indices
     ) -> Dict[str, SummaryInformation]:
@@ -103,14 +86,12 @@ class FilterAndWeightInference(Inference):
         Filter the hypotheses in hyp_bank to only include relevant hypotheses for the sample at index.
 
         Parameters
-        __________
-        data: the specific dataset
-        index: the specific index to filter for
-        hyp_bank: a dictionary of hypotheses
+            data: the specific dataset
+            index: the specific index to filter for
+            hyp_bank: a dictionary of hypotheses
 
         Returns
-        __________
-        relevant_hypotheses: a dictionary of relevant hypotheses
+            relevant_hypotheses: a dictionary of relevant hypotheses
         """
         relevant_hypotheses_banks = []
         responses = responses[::-1]
@@ -127,25 +108,39 @@ class FilterAndWeightInference(Inference):
                     response = response[:5]
                     response = response.lower()
 
-                print(f"Response (truncated): {response}")
+                logger.info(f"Response (truncated): {response}")
 
                 if "yes" in response and "no" in response:
                     if "yes or no" in response:
-                        print(f"Hypothsis is not relevant")
+                        logger.info(f"Hypothsis is not relevant")
                     else:
                         raise ValueError(
                             f'The response should not contain both "yes" and "no". Response: {response}'
                         )
                 elif "yes" in response:
                     relevant_hypotheses[hypothesis] = hyp_bank[hypothesis]
-                    print("Hypothesis is relevant")
+                    logger.info("Hypothesis is relevant")
                 else:
-                    print(f"Hypothsis is not relevant")
+                    logger.info(f"Hypothsis is not relevant")
             relevant_hypotheses_banks.append(relevant_hypotheses)
 
         return relevant_hypotheses_banks
 
-    def _run_inference_final(self, data, hyp_bank, k=1, use_cache=1, **kwargs):
+    def _run_inference_final(
+        self, data, hyp_bank, k=1, use_cache=1, max_concurrent=3, **kwargs
+    ):
+        """
+        Run over the entire dataset and make predictions.
+        For each sample, prompt LLM to determine whether a hypothesis is relevant.
+        Use the relevant hypotheses to make a weighted-vote prediction.
+
+        Parameters:
+            data: the data to predict on
+            hyp_bank: the hypotheses that we want to predict from
+            k: the number of hypotheses to keep
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
+        """
         # get the top k hypotheses by reward (save as dictionary)
         if k > len(hyp_bank):
             k = len(hyp_bank)
@@ -163,7 +158,9 @@ class FilterAndWeightInference(Inference):
             for i in range(num_samples)
             for hypothesis in top_hypotheses
         ]
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
         filtered_hypotheses_banks = self.filter_hypotheses(
             top_hypotheses, responses, list(range(num_samples))
         )
@@ -186,12 +183,24 @@ class FilterAndWeightInference(Inference):
                 )
             ],
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
 
-    def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):
+    def run_inference_final(
+        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+    ):
         """
         Run over the entire dataset and make predictions.
         For each sample, prompt LLM to determine whether a hypothesis is relevant.
         Use the relevant hypotheses to make a weighted-vote prediction.
+
+        Prameters:
+            data: the data to predict on
+            hyp_bank: the hypotheses that we want to predict from
+            k: the number of hypotheses to keep
+            use_cache: whether to use the redis cache or not
+            max_concurrent: the maximum number of concurrent requests
         """
-        return self._run_inference_final(data, hyp_bank, use_cache=use_cache, **kwargs)
+        return self._run_inference_final(
+            data, hyp_bank, use_cache=use_cache, max_concurrent=max_concurrent, **kwargs
+        )

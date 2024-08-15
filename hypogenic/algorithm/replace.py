@@ -5,8 +5,18 @@ from ..register import Register
 replace_register = Register(name="replace")
 
 
+# ------------------------------------------------------------------------------
+# the abstract base class for replace
+# ------------------------------------------------------------------------------
 class Replace(ABC):
+    # We really just need a replace method and the max amount of hypotheses allowed
     def __init__(self, max_num_hypotheses):
+        """
+        Initialize the replace class
+        
+        Parameters:
+            max_num_hypotheses: The maximum number of hypotheses allowed in the hypotheses bank
+        """
         self.max_num_hypotheses = max_num_hypotheses
 
     @abstractmethod
@@ -14,6 +24,9 @@ class Replace(ABC):
         pass
 
 
+# ------------------------------------------------------------------------------
+# Default implementation for replace class
+# ------------------------------------------------------------------------------
 @replace_register.register("default")
 class DefaultReplace(Replace):
     def __init__(self, max_num_hypotheses):
@@ -26,29 +39,25 @@ class DefaultReplace(Replace):
         exceeds the maximum number of hypotheses.
 
         Parameters:
-        ____________
-        :param hypotheses_bank: the original dictionary of hypotheses
-        :param new_generated_hypotheses: the newly generated dictionary of hypotheses
-
-        ____________
+            hypotheses_bank: the original dictionary of hypotheses
+            new_generated_hypotheses: the newly generated dictionary of hypotheses
 
         Returns:
-        ____________
-
-        updated_hyp_bank: the updated hypothesis bank
+            updated_hyp_bank: the updated hypothesis bank
 
         """
         merged_hyp_bank = new_generated_hypotheses.copy()
         merged_hyp_bank.update(hypotheses_bank)
+
+        # Ranks the bank by reward
         sorted_hyp_bank = dict(
             sorted(
                 merged_hyp_bank.items(), key=lambda item: item[1].reward, reverse=True
             )
         )
+
+        # regulates the reward to be of length max_num_hypotheses
         updated_hyp_bank = dict(
             list(sorted_hyp_bank.items())[: self.max_num_hypotheses]
         )
         return updated_hyp_bank
-
-
-REPLACE_CHOICES = ["default"]

@@ -78,7 +78,6 @@ class ClaudeWrapper(LLMWrapper):
         client = AsyncAnthropic()
         status_bar = tqdm.tqdm(total=len(messages))
 
-        # TODO: retry on failure
         async def _async_generate(sem, messages, **kwargs):
             for idx, msg in enumerate(messages):
                 if msg["role"] == "system":

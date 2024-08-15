@@ -11,6 +11,9 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
+from ...logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("HypoGenic - Sampling Update")
 
 
 @update_register.register("sampling")
@@ -59,7 +62,18 @@ class SamplingUpdate(Update):
         current_epoch,
         current_seed,
         use_cache=1,
+        max_concurrent=3,
     ):
+        """
+        Update the hypotheses bank.
+
+        Parameters:
+            hypotheses_bank: The current hypotheses bank
+            current_epoch: The current epoch
+            current_seed: The current seed
+            use_cache: Whether to use the redis cache or not
+            max_concurrent: The maximum number of concurrent requests
+        """
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
 
@@ -82,7 +96,7 @@ class SamplingUpdate(Update):
                 )
 
             current_example = i + 1
-            print(f"Training on example {i}")
+            logger.info(f"Training on example {i}")
 
             top_k_hypotheses = sorted(
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
@@ -97,6 +111,7 @@ class SamplingUpdate(Update):
                     for hypothesis in top_k_hypotheses
                 ],
                 use_cache=use_cache,
+                max_concurrent=max_concurrent,
             )
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
@@ -153,9 +168,9 @@ class SamplingUpdate(Update):
                             )
                         else:
                             new_hyp_bank = new_hypotheses
-                            print("Here is the new hypothesis bank:")
+                            logger.info("Here is the new hypothesis bank:")
                             for hyp in new_hyp_bank:
-                                print(hyp)
+                                logger.info(hyp)
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
 
@@ -176,8 +191,27 @@ class SamplingUpdate(Update):
         return hypotheses_bank
 
     def balance_by_sample(
-        self, hypotheses_bank, current_sample, max_visits, num_init, alpha, use_cache=1
+        self,
+        hypotheses_bank,
+        current_sample,
+        max_visits,
+        num_init,
+        alpha,
+        use_cache=1,
+        max_concurrent=3,
     ):
+        """
+        Balance the number of samples for each hypothesis.
+
+        Parameters:
+            hypotheses_bank: The current hypotheses bank
+            current_sample: The current sample number
+            max_visits: The maximum number of visits
+            num_init: The number of initial samples
+            alpha: The alpha value
+            use_cache: Whether to use the redis cache or not
+            max_concurrent: The maximum number of concurrent requests
+        """
         if max_visits > 60:
             val = num_init
         elif max_visits > 30:
@@ -192,6 +226,7 @@ class SamplingUpdate(Update):
                 for i in range(val)
             ],
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
         for hypothesis in hypotheses_bank:
