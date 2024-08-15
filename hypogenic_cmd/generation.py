@@ -1,41 +1,14 @@
-import argparse
-import re
-import time
-import pickle
-import sys
-import os
-import math
-import json
-
-import random
-from typing import Callable, Tuple, Union
-import torch
-import numpy as np
-
-from hypogenic.extract_label import extract_label_register
-
-from hypogenic.tasks import BaseTask
-from hypogenic.prompt import BasePrompt
-from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import llm_wrapper_register
-from hypogenic.algorithm.summary_information import (
-    dict_to_summary_information,
-)
-
-from hypogenic.algorithm.generation import generation_register
-from hypogenic.algorithm.inference import inference_register
-from hypogenic.algorithm.replace import replace_register
-from hypogenic.algorithm.update import update_register
-from hypogenic.logger_config import LoggerConfig
-
-
 def load_dict(file_path):
+    import json
+
     with open(file_path, "r") as file:
         data = json.load(file)
     return data
 
 
 def parse_args():
+    import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--task_config_path",
@@ -222,9 +195,30 @@ def parse_args():
 
 
 def main():
+    import time
+
     # set up tools
     start_time = time.time()
+
     args = parse_args()
+
+    import os
+
+    from hypogenic.extract_label import extract_label_register
+
+    from hypogenic.tasks import BaseTask
+    from hypogenic.prompt import BasePrompt
+    from hypogenic.utils import set_seed
+    from hypogenic.LLM_wrapper import llm_wrapper_register
+    from hypogenic.algorithm.summary_information import (
+        dict_to_summary_information,
+    )
+
+    from hypogenic.algorithm.generation import generation_register
+    from hypogenic.algorithm.inference import inference_register
+    from hypogenic.algorithm.replace import replace_register
+    from hypogenic.algorithm.update import update_register
+    from hypogenic.logger_config import LoggerConfig
 
     LoggerConfig.setup_logger(args.log_file, args.log_level)
 
