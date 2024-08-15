@@ -59,6 +59,7 @@ class SamplingUpdate(Update):
         current_epoch,
         current_seed,
         use_cache=1,
+        max_concurrent=3,
     ):
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
@@ -97,6 +98,7 @@ class SamplingUpdate(Update):
                     for hypothesis in top_k_hypotheses
                 ],
                 use_cache=use_cache,
+                max_concurrent=max_concurrent,
             )
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
@@ -176,7 +178,14 @@ class SamplingUpdate(Update):
         return hypotheses_bank
 
     def balance_by_sample(
-        self, hypotheses_bank, current_sample, max_visits, num_init, alpha, use_cache=1
+        self,
+        hypotheses_bank,
+        current_sample,
+        max_visits,
+        num_init,
+        alpha,
+        use_cache=1,
+        max_concurrent=3,
     ):
         if max_visits > 60:
             val = num_init
@@ -192,6 +201,7 @@ class SamplingUpdate(Update):
                 for i in range(val)
             ],
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
         for hypothesis in hypotheses_bank:

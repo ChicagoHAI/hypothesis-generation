@@ -101,6 +101,7 @@ class DefaultGeneration(Generation):
         init_hypotheses_per_batch,
         alpha,
         use_cache=1,
+        max_concurrent=3,
         **kwargs
     ):
         """
@@ -137,7 +138,7 @@ class DefaultGeneration(Generation):
                     example_bank, init_hypotheses_per_batch
                 )
             )
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
+        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent)
 
         # ----------------------------------------------------------------------
         # Makes all the desired hypotheses

@@ -32,6 +32,7 @@ class OneStepAdaptiveInference(Inference):
         data,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         use_cache=1,
+        max_concurrent=3,
     ):
         prompt_inputs = [
             self.prompt_class.one_step_adaptive_inference(
@@ -39,7 +40,9 @@ class OneStepAdaptiveInference(Inference):
             )
             for index, hyp_bank in idx_hyp_pair
         ]
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
         predictions = [self.task.extract_label(response) for response in responses]
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
         return predictions, actual_labels
@@ -65,6 +68,7 @@ class OneStepAdaptiveInference(Inference):
         adaptive_num_hypotheses=0,
         adaptive_num_examples=0,
         use_cache=1,
+        max_concurrent=3,
         **kwargs,
     ):
         num_train_data_samples = len(self.train_data)
@@ -122,6 +126,7 @@ class OneStepAdaptiveInference(Inference):
             data,
             [(i, selected_hyp_bank) for i in range(num_samples)],
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
 
     def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):

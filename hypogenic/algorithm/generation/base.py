@@ -97,6 +97,7 @@ class Generation(ABC):
         alpha,
         responses,
         use_cache=1,
+        max_concurrent=3,
     ):
         """Based on multiple batched responses from the LM, create new hypotheses.
 
@@ -150,7 +151,10 @@ class Generation(ABC):
         # We try to predict the ground truth labels
         # ----------------------------------------------------------------------
         preds, labels = self.inference_class.batched_predict(
-            self.train_data, idx_hyp_pair, use_cache=use_cache
+            self.train_data,
+            idx_hyp_pair,
+            use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
 
@@ -199,6 +203,7 @@ class Generation(ABC):
         num_hypotheses_generate,
         alpha,
         use_cache=1,
+        max_concurrent=3,
     ):
         """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
 
@@ -254,7 +259,10 @@ class Generation(ABC):
 
         # We ask our prediction model to predict the labels based on the hypotheses
         preds, labels = self.inference_class.batched_predict(
-            self.train_data, idx_hyp_pair, use_cache=use_cache
+            self.train_data,
+            idx_hyp_pair,
+            use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
 

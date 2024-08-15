@@ -31,6 +31,7 @@ class FilterAndWeightInference(Inference):
         data: pd.DataFrame,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         use_cache=1,
+        max_concurrent=3,
     ):
         assert all(
             [len(hyp_bank.keys()) >= 1 for _, hyp_bank in idx_hyp_pair]
@@ -42,7 +43,9 @@ class FilterAndWeightInference(Inference):
             for index, hyp_bank in idx_hyp_pair
             for hypothesis in hyp_bank
         ]
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
         print(f"Responses: {responses}")
         responses = responses[::-1]
         predictions = []
@@ -60,7 +63,7 @@ class FilterAndWeightInference(Inference):
 
         return predictions, actual_labels
 
-    def predict(self, data, index, hyp_bank, use_cache=1):
+    def predict(self, data, index, hyp_bank, use_cache=1, max_concurrent=3):
         """
         Make prediction on one sample (index) of the dataset.
         Use the hypotheses in hyp_bank to make a weighted-vote prediction.
@@ -78,7 +81,9 @@ class FilterAndWeightInference(Inference):
             self.prompt_class.inference({hypothesis: hyp_bank[hypothesis]}, data, index)
             for hypothesis in hyp_bank
         ]
-        responses = self.api.batched_generate(prompt_inputsuse_cache=use_cache)
+        responses = self.api.batched_generate(
+            prompt_inputsuse_cache=use_cache, max_concurrent=max_concurrent
+        )
         preds = [
             self.prompt_class.task.extract_label(response) for response in responses
         ]
@@ -145,7 +150,9 @@ class FilterAndWeightInference(Inference):
 
         return relevant_hypotheses_banks
 
-    def _run_inference_final(self, data, hyp_bank, k=1, use_cache=1, **kwargs):
+    def _run_inference_final(
+        self, data, hyp_bank, k=1, use_cache=1, max_concurrent=3, **kwargs
+    ):
         # get the top k hypotheses by reward (save as dictionary)
         if k > len(hyp_bank):
             k = len(hyp_bank)
@@ -163,7 +170,9 @@ class FilterAndWeightInference(Inference):
             for i in range(num_samples)
             for hypothesis in top_hypotheses
         ]
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
         filtered_hypotheses_banks = self.filter_hypotheses(
             top_hypotheses, responses, list(range(num_samples))
         )
@@ -186,6 +195,7 @@ class FilterAndWeightInference(Inference):
                 )
             ],
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )
 
     def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):

@@ -31,6 +31,7 @@ class DefaultInference(Inference):
         data: pd.DataFrame,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         use_cache=1,
+        max_concurrent=3,
     ):
         """
         Makes a batch of preductions on a hypothesis.
@@ -49,11 +50,9 @@ class DefaultInference(Inference):
             self.prompt_class.inference(hyp_bank, data, index)
             for index, hyp_bank in idx_hyp_pair
         ]
-
-        # batch create all the responses
-        responses = self.api.batched_generate(prompt_inputs, use_cache=use_cache)
-
-        # which we then need to extract labels from
+        responses = self.api.batched_generate(
+            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+        )
         predictions = [self.task.extract_label(response) for response in responses]
 
         # and once we get the actual labels
@@ -93,7 +92,9 @@ class DefaultInference(Inference):
 
         return prediction, actual_label
 
-    def run_inference_final(self, data, hyp_bank, use_cache=1, **kwargs):
+    def run_inference_final(
+        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+    ):
         """
         Function for testing the best hypothesis
 
@@ -117,4 +118,5 @@ class DefaultInference(Inference):
                 for i in range(num_samples)
             ],
             use_cache=use_cache,
+            max_concurrent=max_concurrent,
         )

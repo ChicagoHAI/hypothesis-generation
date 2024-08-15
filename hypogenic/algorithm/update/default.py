@@ -82,6 +82,7 @@ class DefaultUpdate(Update):
         current_epoch,
         current_seed,
         use_cache=1,
+        max_concurrent=3,
     ):
         """We update the hypothesis bank once we reach a certain amount of regret
     
@@ -139,6 +140,7 @@ class DefaultUpdate(Update):
                     for hypothesis in top_k_hypotheses
                 ],
                 use_cache=use_cache,
+                max_concurrent=max_concurrent,
             )
 
             # Comparison of the label and prediction
