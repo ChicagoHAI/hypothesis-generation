@@ -76,12 +76,13 @@ class Inference(ABC):
         """Implements a specific type of prediction
 
         Parameters:
+
             args: the arguments of the algorithm
             data: the specific dataset
             hyp_bank: a dictionary of hypotheses
             k: the number of hypotheses to use
 
-        Returns:
+        Returns
             accuracy: the accuracy over the dataset
         """
         pass
