@@ -41,7 +41,7 @@ class BaseTask(ABC):
         if "ood_test_data_path" in data:
             self.ood_test_data_path = data["ood_test_data_path"]
 
-        # getting omrpt templates from yaml file
+        # getting promt templates from yaml file
         self.prompt_template = {
             k: (
                 [{"role": kk, "content": vv} for kk, vv in v.items()]
