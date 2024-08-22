@@ -1,9 +1,10 @@
+from typing import List
 from ...logger_config import LoggerConfig
 
 logger_name = "HypoGenic - Generation"
 
 
-def extract_hypotheses(text: str, num_hypotheses):
+def extract_hypotheses(text: str, num_hypotheses) -> List[str]:
     """
     Given a response with hypotheses, we want to take all of them out from the text.
     This function might need to be adjusted depending on the prompt and the
@@ -29,7 +30,7 @@ def extract_hypotheses(text: str, num_hypotheses):
 
     # this is a bit sketchy
     if len(hypotheses) != num_hypotheses:
-        logger.info(f"Expected {num_hypotheses} hypotheses, but got {len(hypotheses)}.")
+        logger.warn(f"Expected {num_hypotheses} hypotheses, but got {len(hypotheses)}.")
 
     for i in range(len(hypotheses)):
         hypotheses[i] = hypotheses[i].strip()
