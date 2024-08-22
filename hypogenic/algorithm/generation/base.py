@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import math
 import os
+from typing import List
 
 from .utils import extract_hypotheses
 from ..summary_information import SummaryInformation
@@ -70,7 +71,7 @@ class Generation(ABC):
         current_sample,
         num_hypotheses_generate,
         alpha,
-        responses,
+        responses: List[str],
         cache_seed=None,
         max_concurrent=3,
     ):
@@ -215,57 +216,12 @@ class Generation(ABC):
         # Batch generate responses based on the prompts that we just generated
         response = self.api.generate(prompt_input, cache_seed=cache_seed)
 
-        # Since our ouputs are not standardized across different tasks, we must implement and
-        # use this function which finds the answer among each of the outputs
-        extracted_hypotheses = extract_hypotheses(response, num_hypotheses_generate)
-
-        # ----------------------------------------------------------------------
-        # Create Summary Information for each
-        # ----------------------------------------------------------------------
-        new_generated_hypotheses = {}
-        idx_hyp_pair = []
-
-        # Initlize hypothesis scores - we create a SummaryInformation object which
-        # will house stats on how well that hypothesis is performing
-        for hyp in extracted_hypotheses:
-            new_generated_hypotheses[hyp] = SummaryInformation(
-                hypothesis=hyp, acc=0, num_visits=0, reward=0, correct_examples=[]
-            )
-            for index in example_indices:
-                idx_hyp_pair.append((index, {hyp: new_generated_hypotheses[hyp]}))
-
-        # We ask our prediction model to predict the labels based on the hypotheses
-        preds, labels = self.inference_class.batched_predict(
-            self.train_data,
-            idx_hyp_pair,
+        return self.batched_batched_hypothesis_generation(
+            example_indices,
+            current_sample,
+            num_hypotheses_generate,
+            alpha,
+            [response],
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )
-        preds, labels = preds[::-1], labels[::-1]
-
-        # Calculate how well each hypothesis is performing based on the predictions we just made
-        for hyp in extracted_hypotheses:
-            correct = 0
-            ex = []
-
-            # Determine accuracy
-            for index in example_indices:
-                prediction, actual_label = preds.pop(-1), labels.pop(-1)
-                if prediction == actual_label:
-                    correct += 1
-                    ex.append((index, actual_label))
-
-            # Setting inital accuracy scores
-            acc = correct / len(example_indices)
-            new_generated_hypotheses[hyp].set_accuracy(acc)
-            new_generated_hypotheses[hyp].set_num_visits(len(example_indices))
-
-            # Hypogenic reward score
-            reward = acc + alpha * math.sqrt(
-                math.log(current_sample) / len(example_indices)
-            )
-            new_generated_hypotheses[hyp].set_reward(reward)
-
-            new_generated_hypotheses[hyp].set_example(ex)
-
-        return new_generated_hypotheses

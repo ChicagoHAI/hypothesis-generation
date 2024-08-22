@@ -3,7 +3,7 @@ from ...logger_config import LoggerConfig
 logger_name = "HypoGenic - Generation"
 
 
-def extract_hypotheses(text, num_hypotheses):
+def extract_hypotheses(text: str, num_hypotheses):
     """
     Given a response with hypotheses, we want to take all of them out from the text.
     This function might need to be adjusted depending on the prompt and the
