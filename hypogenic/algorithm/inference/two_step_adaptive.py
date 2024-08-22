@@ -77,7 +77,7 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         self,
         data,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """
@@ -86,7 +86,7 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
         Parameters:
             data: the data to predict on
             idx_hyp_pair: a list of tuples of indices and hypothesis banks
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
         """
         prompt_inputs = [
@@ -94,7 +94,7 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
             for index, hyp_bank in idx_hyp_pair
         ]
         responses: List[str] = self.api.batched_generate(
-            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
         )
         responses = responses[::-1]
 
@@ -105,7 +105,7 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
                 self.prompt_class.inference({hyp: hyp_bank[hyp]}, data, index)
             )
         responses = self.api.batched_generate(
-            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
         )
         predictions = [self.task.extract_label(response) for response in responses]
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]

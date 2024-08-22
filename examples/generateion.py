@@ -96,7 +96,7 @@ def main():
                 num_init,
                 init_batch_size=10,
                 init_hypotheses_per_batch=10,
-                use_cache=1,
+                cache_seed=None,
             )
             update_class.save_to_json(
                 hypotheses_bank,

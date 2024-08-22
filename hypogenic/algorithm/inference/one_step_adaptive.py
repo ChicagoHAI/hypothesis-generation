@@ -34,7 +34,7 @@ class OneStepAdaptiveInference(Inference):
         self,
         data,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """
@@ -43,7 +43,7 @@ class OneStepAdaptiveInference(Inference):
         Parameters:
             data: the data to predict on
             idx_hyp_pair: a list of tuples of indices and hypothesis banks
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
         """
         prompt_inputs = [
@@ -53,7 +53,7 @@ class OneStepAdaptiveInference(Inference):
             for index, hyp_bank in idx_hyp_pair
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
         )
         predictions = [self.task.extract_label(response) for response in responses]
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
@@ -66,7 +66,7 @@ class OneStepAdaptiveInference(Inference):
         adaptive_threshold=0.0,
         adaptive_num_hypotheses=0,
         adaptive_num_examples=0,
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
         **kwargs,
     ):
@@ -79,7 +79,7 @@ class OneStepAdaptiveInference(Inference):
             adaptive_threshold: the threshold for similarity between hypotheses
             adaptive_num_hypotheses: the number of hypotheses to select
             adaptive_num_examples: the number of examples to select
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
         """
         logger = LoggerConfig.get_logger(logger_name)
@@ -140,12 +140,12 @@ class OneStepAdaptiveInference(Inference):
         return self.batched_predict(
             data,
             [(i, selected_hyp_bank) for i in range(num_samples)],
-            use_cache=use_cache,
+            cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )
 
     def run_inference_final(
-        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
     ):
         """
         Run the final inference step for the one step adaptive inference algorithm.
@@ -156,11 +156,11 @@ class OneStepAdaptiveInference(Inference):
             adaptive_threshold: the threshold for similarity between hypotheses
             adaptive_num_hypotheses: the number of hypotheses to select
             adaptive_num_examples: the number of examples to select
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
         """
         return self._run_inference_final(
-            data, hyp_bank, use_cache=use_cache, max_concurrent=max_concurrent, **kwargs
+            data, hyp_bank, cache_seed=cache_seed, max_concurrent=max_concurrent, **kwargs
         )
 
     def compute_similarity_matrix(self, hyp_bank, num_train_data_samples):

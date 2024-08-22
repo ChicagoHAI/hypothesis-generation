@@ -33,7 +33,7 @@ class FilterAndWeightInference(Inference):
         self,
         data: pd.DataFrame,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """
@@ -46,7 +46,7 @@ class FilterAndWeightInference(Inference):
         Parameters:
             data: the data to predict on
             idx_hyp_pair: a list of tuples of indices and hypothesis banks
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
         """
         logger = LoggerConfig.get_logger(logger_name)
@@ -61,7 +61,7 @@ class FilterAndWeightInference(Inference):
             for hypothesis in hyp_bank
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
         )
         logger.info(f"Responses: {responses}")
         responses = responses[::-1]
@@ -129,7 +129,7 @@ class FilterAndWeightInference(Inference):
         return relevant_hypotheses_banks
 
     def _run_inference_final(
-        self, data, hyp_bank, k=1, use_cache=1, max_concurrent=3, **kwargs
+        self, data, hyp_bank, k=1, cache_seed=None, max_concurrent=3, **kwargs
     ):
         """
         Run over the entire dataset and make predictions.
@@ -140,7 +140,7 @@ class FilterAndWeightInference(Inference):
             data: the data to predict on
             hyp_bank: the hypotheses that we want to predict from
             k: the number of hypotheses to keep
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
         """
         # get the top k hypotheses by reward (save as dictionary)
@@ -161,7 +161,7 @@ class FilterAndWeightInference(Inference):
             for hypothesis in top_hypotheses
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
         )
         filtered_hypotheses_banks = self.filter_hypotheses(
             top_hypotheses, responses, list(range(num_samples))
@@ -184,12 +184,12 @@ class FilterAndWeightInference(Inference):
                     range(num_samples), filtered_hypotheses_banks
                 )
             ],
-            use_cache=use_cache,
+            cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )
 
     def run_inference_final(
-        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
     ):
         """
         Run over the entire dataset and make predictions.
@@ -200,9 +200,9 @@ class FilterAndWeightInference(Inference):
             data: the data to predict on
             hyp_bank: the hypotheses that we want to predict from
             k: the number of hypotheses to keep
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
         """
         return self._run_inference_final(
-            data, hyp_bank, use_cache=use_cache, max_concurrent=max_concurrent, **kwargs
+            data, hyp_bank, cache_seed=cache_seed, max_concurrent=max_concurrent, **kwargs
         )

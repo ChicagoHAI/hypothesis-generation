@@ -61,7 +61,7 @@ class SamplingUpdate(Update):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """
@@ -71,7 +71,7 @@ class SamplingUpdate(Update):
             hypotheses_bank: The current hypotheses bank
             current_epoch: The current epoch
             current_seed: The current seed
-            use_cache: Whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: The maximum number of concurrent requests
         """
         logger = LoggerConfig.get_logger(logger_name)
@@ -112,7 +112,7 @@ class SamplingUpdate(Update):
                     (i, {hypothesis: hypotheses_bank[hypothesis]})
                     for hypothesis in top_k_hypotheses
                 ],
-                use_cache=use_cache,
+                cache_seed=cache_seed,
                 max_concurrent=max_concurrent,
             )
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
@@ -159,7 +159,7 @@ class SamplingUpdate(Update):
                             hypotheses_bank[max_visited].num_visits,
                             self.num_init,
                             self.alpha,
-                            use_cache=use_cache,
+                            cache_seed=cache_seed,
                         )
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
@@ -199,7 +199,7 @@ class SamplingUpdate(Update):
         max_visits,
         num_init,
         alpha,
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """
@@ -211,7 +211,7 @@ class SamplingUpdate(Update):
             max_visits: The maximum number of visits
             num_init: The number of initial samples
             alpha: The alpha value
-            use_cache: Whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: The maximum number of concurrent requests
         """
         if max_visits > 60:
@@ -227,7 +227,7 @@ class SamplingUpdate(Update):
                 for hypothesis in hypotheses_bank
                 for i in range(val)
             ],
-            use_cache=use_cache,
+            cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]

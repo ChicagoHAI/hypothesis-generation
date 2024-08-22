@@ -50,13 +50,14 @@ class LLMWrapper(ABC):
     def generate(
         self,
         messages: List[Dict[str, str]],
-        use_cache=1,
+        cache_seed=None,
         **kwargs,
     ):
-        if use_cache == 1:
+        if cache_seed is not None:
             return self.api_with_cache.generate(
                 messages=messages,
                 model=self.model,
+                cache_seed=cache_seed,
                 **kwargs,
             )
         return self._generate(
@@ -69,14 +70,15 @@ class LLMWrapper(ABC):
         self,
         messages: List[List[Dict[str, str]]],
         max_concurrent=3,
-        use_cache=1,
+        cache_seed=None,
         **kwargs,
     ):
-        if use_cache == 1:
+        if cache_seed is not None:
             return self.api_with_cache.batched_generate(
                 messages=messages,
                 model=self.model,
                 max_concurrent=max_concurrent,
+                cache_seed=cache_seed,
                 **kwargs,
             )
         return self._batched_generate(

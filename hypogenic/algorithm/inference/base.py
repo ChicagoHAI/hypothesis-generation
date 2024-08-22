@@ -42,7 +42,7 @@ class Inference(ABC):
         self,
         data,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
-        use_cache=1,
+        cache_seed=None,
     ):
         """
         Generate responses for every pair of data and hypotheses.
@@ -55,14 +55,14 @@ class Inference(ABC):
 
     @abstractmethod
     def run_inference_final(
-        self, data, hyp_bank, use_cache=1, max_concurrent=3, **kwargs
+        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
     ):
         """Implements a specific type of prediction
 
         Parameters:
             data: the specific dataset
             hyp_bank: a dictionary of hypotheses
-            use_cache: whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests
 
         Returns:

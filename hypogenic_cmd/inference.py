@@ -93,7 +93,7 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--use_cache",
+        "--cache_seed",
         type=int,
         default=1,
         help="Whether to use cache for hypothesis generation.",
@@ -205,7 +205,7 @@ def main():
         pred_list, label_list = inference_class.run_inference_final(
             test_data,
             hyp_bank,
-            use_cache=args.use_cache,
+            cache_seed=args.cache_seed,
             k=args.k,
             adaptive_threshold=args.adaptive_threshold,
             adaptive_num_hypotheses=args.adaptive_num_hypotheses,

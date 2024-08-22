@@ -56,7 +56,7 @@ class Generation(ABC):
         init_batch_size,
         init_hypotheses_per_batch,
         alpha,
-        use_cache=1,
+        cache_seed=None,
         **kwargs
     ):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
@@ -84,7 +84,7 @@ class Generation(ABC):
         num_hypotheses_generate,
         alpha,
         responses,
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """Based on multiple batched responses from the LM, create new hypotheses.
@@ -92,7 +92,7 @@ class Generation(ABC):
         You can thing of "responses" to be a list of such "response" objects:
 
             prompt_input = self.prompt_class.batched_generation( example_bank, num_hypotheses_generate)
-            response = self.api.generate(prompt_input, use_cache=use_cache)
+            response = self.api.generate(prompt_input, cache_seed=cache_seed)
         
         See the beginning of function "batched_hypothesis_generation" below to understand how
         the reponses are created.
@@ -107,7 +107,7 @@ class Generation(ABC):
             num_hypotheses_generate: the number of hypotheses that we expect our repsonse to generate
             reponses: a batch of llm inferences
             alpha: eploration constant in hypogenic reward funciton
-            use_cache: self explanatory - best to use if inferencing a pricey api
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
@@ -142,7 +142,7 @@ class Generation(ABC):
         preds, labels = self.inference_class.batched_predict(
             self.train_data,
             idx_hyp_pair,
-            use_cache=use_cache,
+            cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
@@ -191,7 +191,7 @@ class Generation(ABC):
         current_sample,
         num_hypotheses_generate,
         alpha,
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
@@ -201,7 +201,7 @@ class Generation(ABC):
             current_sample: the current sample in data which the algorithm is on
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
             alpha: eploration constant in hypogenic reward funciton
-            use_cache: self explanatory - best to use if inferencing a pricey api
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
@@ -226,7 +226,7 @@ class Generation(ABC):
         )
 
         # Batch generate responses based on the prompts that we just generated
-        response = self.api.generate(prompt_input, use_cache=use_cache)
+        response = self.api.generate(prompt_input, cache_seed=cache_seed)
 
         # Since our ouputs are not standardized across different tasks, we must implement and 
         # use this function which finds the answer among each of the outputs
@@ -251,7 +251,7 @@ class Generation(ABC):
         preds, labels = self.inference_class.batched_predict(
             self.train_data,
             idx_hyp_pair,
-            use_cache=use_cache,
+            cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]

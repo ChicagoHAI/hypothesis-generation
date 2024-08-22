@@ -139,7 +139,7 @@ class Update(ABC):
         num_init=25,
         init_batch_size=5,
         init_hypotheses_per_batch=5,
-        use_cache=1,
+        cache_seed=None,
     ) -> Dict[str, SummaryInformation]:
         """
         Initalizes the hypothesis bank by invoking the batched_initialize_hypotheses function.
@@ -151,7 +151,7 @@ class Update(ABC):
             init_batch_size,
             init_hypotheses_per_batch,
             self.alpha,
-            use_cache=use_cache,
+            cache_seed=cache_seed,
         )
 
     def initialize_hypotheses(

@@ -35,7 +35,7 @@ def main():
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     num_hypothesis = 5
-    use_cache = 1
+    cache_seed = None
     hypothesis_file = f"./outputs/retweet/batched_gen_{model_name}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
 
     set_seed(seed)
@@ -51,7 +51,7 @@ def main():
     prompt_input = prompt_class.batched_generation(train_data, num_hypothesis)
     logger.info("Prompt: ")
     logger.info(prompt_input)
-    response = api.generate(prompt_input, use_cache=use_cache)
+    response = api.generate(prompt_input, cache_seed=cache_seed)
     logger.info(f"prompt length: {len(prompt_input)}")
     logger.info("Response: ")
     logger.info(response)

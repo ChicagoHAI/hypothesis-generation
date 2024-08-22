@@ -46,7 +46,7 @@ def few_shot(
     prompt_class: BasePrompt,
     task,
     few_shot_k,
-    use_cache,
+    cache_seed,
 ):
     """
     Given one hyothesis and a dataset, return the accuracy of the hypothesis on the dataset.
@@ -56,7 +56,7 @@ def few_shot(
         prompt_class.few_shot_baseline(train_data, few_shot_k, test_data, i)
         for i in range(len(test_data))
     ]
-    responses = api.batched_generate(prompt_inputs, use_cache=use_cache)
+    responses = api.batched_generate(prompt_inputs, cache_seed=cache_seed)
     for i in range(len(test_data)):
         logger.info(f"********** Example {i} **********")
         pred = task.extract_label(responses[i])
@@ -108,7 +108,7 @@ def main():
     num_train = 100
     num_val = 100
     few_shot_k = 3
-    use_cache = 1
+    cache_seed = 42
 
     set_seed(seed)
 
@@ -123,7 +123,7 @@ def main():
         train_data = preprocess(train_data, few_shot_k)
 
     results = few_shot(
-        api, train_data, test_data, prompt_class, task, few_shot_k, use_cache
+        api, train_data, test_data, prompt_class, task, few_shot_k, cache_seed
     )
     test_accuracy = compute_accuracy(results)
 

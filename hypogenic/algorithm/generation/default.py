@@ -109,7 +109,7 @@ class DefaultGeneration(Generation):
         init_batch_size,
         init_hypotheses_per_batch,
         alpha,
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
         **kwargs
     ):
@@ -121,7 +121,7 @@ class DefaultGeneration(Generation):
             init_batch size: the number of examples that will be used to generate these hypotheses
             init_hypotheses_per_batch: the amount of hypotheses that you want to generate per btach
             alpha: the exploration constant in the hypogenic reward function
-            use_cache: whether or not you want to use the cache
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum amount of concurrent calls to the API
         """
         # ----------------------------------------------------------------------
@@ -150,7 +150,7 @@ class DefaultGeneration(Generation):
                 )
             )
         responses = self.api.batched_generate(
-            prompt_inputs, use_cache=use_cache, max_concurrent=max_concurrent
+            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
         )
 
         # ----------------------------------------------------------------------
@@ -162,6 +162,6 @@ class DefaultGeneration(Generation):
             init_hypotheses_per_batch,
             alpha,
             responses,
-            use_cache=use_cache,
+            cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )

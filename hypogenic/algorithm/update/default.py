@@ -65,7 +65,7 @@ class DefaultUpdate(Update):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
-        use_cache=1,
+        cache_seed=None,
         max_concurrent=3,
     ):
         """
@@ -75,7 +75,7 @@ class DefaultUpdate(Update):
             hypotheses_bank: The hypothesis bank
             current_epoch: The current epoch
             current_seed: The current seed
-            use_cache: Whether to use the redis cache or not
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: The maximum number of concurrent requests
         """
         logger = LoggerConfig.get_logger(logger_name)
@@ -132,7 +132,7 @@ class DefaultUpdate(Update):
                     (i, {hypothesis: hypotheses_bank[hypothesis]})
                     for hypothesis in top_k_hypotheses
                 ],
-                use_cache=use_cache,
+                cache_seed=cache_seed,
                 max_concurrent=max_concurrent,
             )
 
@@ -180,7 +180,7 @@ class DefaultUpdate(Update):
                                 current_example,
                                 self.update_hypotheses_per_batch,
                                 self.alpha,
-                                use_cache=use_cache,
+                                cache_seed=cache_seed,
                             )
                         )
 

@@ -20,7 +20,7 @@ from hypogenic.logger_config import LoggerConfig
 logger = LoggerConfig.get_logger("HypoGenic")
 
 
-def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cache=1):
+def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, cache_seed=None):
     """
     Given one hyothesis and a dataset, return the accuracy of the hypothesis on the dataset.
     """
@@ -30,7 +30,7 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, use_cach
         prompt_class.inference(hypothesis_dict, data, i)
         for i in range(len(data["label"]))
     ]
-    responses = api.batched_generate(prompt_input, use_cache=use_cache)
+    responses = api.batched_generate(prompt_input, cache_seed=cache_seed)
     for i, response in enumerate(responses):
         logger.info("*** get_accuracy ***")
         logger.info(response)
@@ -54,7 +54,7 @@ def main():
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     num_hypothesis = 5
-    use_cache = 1
+    cache_seed = None
     hypothesis_file = f"./outputs/retweet/batched_gen_{model_name}_train_{num_train}_seed_{seed}_hypothesis_{num_hypothesis}.txt"
 
     set_seed(seed)
@@ -83,14 +83,14 @@ def main():
     for hypothesis in hypotheses:
         # get the training accuracy of the hypothesis
         accuracy = get_accuracy(
-            api, hypothesis, train_data, prompt_class, task, use_cache
+            api, hypothesis, train_data, prompt_class, task, cache_seed
         )
         training_accuracies.append(accuracy)
 
     # get the test accuracy of the best hypothesis
     best_hypothesis = hypotheses[training_accuracies.index(max(training_accuracies))]
     test_accuracy = get_accuracy(
-        api, best_hypothesis, test_data, prompt_class, task, use_cache
+        api, best_hypothesis, test_data, prompt_class, task, cache_seed
     )
 
     logger.info(f"Best hypothesis: {best_hypothesis}")

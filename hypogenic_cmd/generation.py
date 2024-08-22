@@ -146,7 +146,7 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--use_cache",
+        "--cache_seed",
         type=int,
         default=1,
         help="Whether to use cache for hypothesis generation.",
@@ -272,7 +272,7 @@ def main():
             num_init=args.num_init,
             init_batch_size=args.init_batch_size,
             init_hypotheses_per_batch=args.init_hypotheses_per_batch,
-            use_cache=args.use_cache,
+            cache_seed=args.cache_seed,
         )
         update_class.save_to_json(
             hypotheses_bank,
@@ -289,7 +289,7 @@ def main():
             current_epoch=epoch,
             hypotheses_bank=hypotheses_bank,
             current_seed=args.seed,
-            use_cache=args.use_cache,
+            cache_seed=args.cache_seed,
         )
         update_class.save_to_json(
             hypotheses_bank,
