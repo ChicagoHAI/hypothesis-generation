@@ -4,6 +4,19 @@
 
 Welcome to the GitHub repository for our paper, ["Hypothesis Generation with Large Language Models"](https://arxiv.org/abs/2404.04326). This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our work, presented in detail in the accompanying paper, highlights the capability of LLMs not just to assist but to innovate in the hypothesis generation process for scientific inquiry.
 
+## Table of Contents
+- [Install environment](#install-environment)
+- [Optional: set up Redis server for caching LLM responses](#optional-set-up-redis-server-for-caching-llm-responses)
+- [Usage](#usage)
+  - [Optional: Start Redis server](#optional-start-redis-server)
+  - [Hypothesis Generation](#hypothesis-generation)
+  - [Hypothesis Inference](#hypothesis-inference)
+- [Use HypoGeniC in your code](#use-hypogenic-in-your-code)
+- [Add a new task or dataset](#add-a-new-task-or-dataset)
+  - [Data preprocessing](#data-preprocessing)
+  - [Write config.yaml](#write-configyaml)
+  - [Examples](#examples)
+  - [Write an extract_label function for your new task](#write-an-extract_label-function-for-your-new-task)
 
 ## Install environment
 You can directly install HypoGeniC using the following commands:
