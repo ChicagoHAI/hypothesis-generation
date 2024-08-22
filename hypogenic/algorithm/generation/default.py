@@ -36,71 +36,6 @@ class DefaultGeneration(Generation):
     # ------------------------------------------------------------------------ #
     #                                                                          #
     # ------------------------------------------------------------------------ #
-    # INITLALIZE HYPOTHESES                                                    #
-    # ------------------------------------------------------------------------ #
-    #                                                                          #
-    # ------------------------------------------------------------------------ #
-    def initialize_hypotheses(
-        self,
-        num_init,
-        init_batch_size,
-        init_hypotheses_per_batch,
-        alpha,
-        cache_seed=None,
-        max_concurrent=3,
-        **kwargs
-    ):
-        """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
-
-        Parameters:
-            num_init: the total amount of examples you want to use for initialize hypotheses
-            init_batch_size: The amount of examples you want to include in each call to "batched_hypothesis_generation"
-            init_hypotheses_per_batch: the amount of hypotheses that you're going to generate per batch
-            alpha: the exploration constant in the hypogenic reward function
-            max_concurrent: the maximum amount of concurrent calls to the API
-
-        Returns:
-            hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
-        """
-
-        # ----------------------------------------------------------------------
-        # Finding batch size and confirming that it works
-        # ----------------------------------------------------------------------
-        assert (
-            num_init % init_batch_size == 0
-        ), "Number of initial examples must be divisible by the batch size"
-
-        # To know how many batches we need to get to our desiered number of hypotheses
-        num_batches = num_init // init_batch_size
-        hypotheses_bank = {}
-
-        # ----------------------------------------------------------------------
-        # The hypothesis creation process
-        # ----------------------------------------------------------------------
-        for i in range(num_batches):
-
-            # get the examples that you're going to use to generate the hypotheses
-            example_indices = list(
-                range(i * init_batch_size, (i + 1) * init_batch_size)
-            )
-
-            # the new_hypotheses
-            new_hypotheses = self.batched_hypothesis_generation(
-                example_indices,
-                len(example_indices),
-                init_hypotheses_per_batch,
-                alpha,
-                cache_seed=cache_seed,
-                max_concurrent=max_concurrent,
-            )
-
-            hypotheses_bank.update(new_hypotheses)
-
-        return hypotheses_bank
-
-    # ------------------------------------------------------------------------ #
-    #                                                                          #
-    # ------------------------------------------------------------------------ #
     # BATCH INITLALIZE HYPOTHESES                                              #
     # ------------------------------------------------------------------------ #
     #                                                                          #
@@ -125,6 +60,9 @@ class DefaultGeneration(Generation):
             alpha: the exploration constant in the hypogenic reward function
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum amount of concurrent calls to the API
+
+        Returns:
+            hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
         """
         # ----------------------------------------------------------------------
         # Finding batch size and confirming that it works

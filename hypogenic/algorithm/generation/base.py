@@ -36,27 +36,6 @@ class Generation(ABC):
         self.train_data = self.inference_class.train_data
 
     @abstractmethod
-    def initialize_hypotheses(
-        self,
-        num_init,
-        init_batch_size,
-        init_hypotheses_per_batch,
-        alpha,
-        cache_seed=None,
-        max_concurrent=3,
-        **kwargs
-    ):
-        """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
-
-        Parameters:
-            args: the parsed arguments
-
-        Returns:
-            hypotheses_bank: A  dictionary with keys as hypotheses and the values as the Summary Information class
-        """
-        pass
-
-    @abstractmethod
     def batched_initialize_hypotheses(
         self,
         num_init,

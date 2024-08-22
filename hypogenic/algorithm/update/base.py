@@ -144,28 +144,6 @@ class Update(ABC):
         max_concurrent=3,
     ) -> Dict[str, SummaryInformation]:
         """
-        Initalizes the hypothesis bank by invoking the batched_initialize_hypotheses function.
-
-        see algorithm/generation/default.py or "initialize_hypotheses" for more in depth explanaiton of params and functionality
-        """
-        return self.generation_class.batched_initialize_hypotheses(
-            num_init,
-            init_batch_size,
-            init_hypotheses_per_batch,
-            self.alpha,
-            cache_seed=cache_seed,
-            max_concurrent=max_concurrent,
-        )
-
-    def initialize_hypotheses(
-        self,
-        num_init=25,
-        init_batch_size=5,
-        init_hypotheses_per_batch=5,
-        cache_seed=None,
-        max_concurrent=3,
-    ) -> Dict[str, SummaryInformation]:
-        """
         Generates the initial hypotheses
 
         Parameters:
@@ -176,7 +154,7 @@ class Update(ABC):
         Returns:
             hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
         """
-        return self.generation_class.initialize_hypotheses(
+        return self.generation_class.batched_initialize_hypotheses(
             num_init,
             init_batch_size,
             init_hypotheses_per_batch,
