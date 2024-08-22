@@ -13,6 +13,7 @@ class BasePrompt(ABC):
     """
     This class gives us a way to conviniently generate prompts.
     """
+
     def __init__(self, task: BaseTask):
         self.task = task
 
@@ -23,10 +24,9 @@ class BasePrompt(ABC):
         return substitute_dict
 
     def _information_prompt(
-        self, data_dict: pd.DataFrame, example_idx, info_key: str
+        self, substitute_dict: Dict[str, str], info_key: str
     ) -> Dict[str, str]:
-        example = data_dict.loc[example_idx].to_dict()
-        return Template(self.task.prompt_template[info_key]).substitute(example)
+        return Template(self.task.prompt_template[info_key]).substitute(substitute_dict)
 
     def _get_prompt_template(self, key: str) -> Union[str, List[Dict[str, str]]]:
         return deepcopy(self.task.prompt_template[key])
@@ -53,7 +53,9 @@ class BasePrompt(ABC):
         if num_few_shot > 0:
             few_shot_prefix = self._get_prompt_template("few_shot_prefix")
             for j in range(num_few_shot):
-                observations += self._information_prompt(train_data, j, "observations")
+                observations += self._information_prompt(
+                    self._get_substitute_dict(train_data, j), "observations"
+                )
 
         substitute_dict["observations"] = observations
         substitute_dict["few_shot_prefix"] = few_shot_prefix
@@ -73,7 +75,7 @@ class BasePrompt(ABC):
         observations = ""
         for example_idx in range(len(train_data)):
             observations += self._information_prompt(
-                train_data, example_idx, "observations"
+                self._get_substitute_dict(train_data, example_idx), "observations"
             )
 
         substitute_dict = {
@@ -119,7 +121,8 @@ class BasePrompt(ABC):
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
                 adaptive_info_prompt += f"Example {ex_idx + 1}:\n"
                 adaptive_info_prompt += self._information_prompt(
-                    train_data, example_info[0], "adaptive_info_prompt"
+                    self._get_substitute_dict(train_data, example_info[0]),
+                    "adaptive_info_prompt",
                 )
 
         prompt = self._get_prompt_template("adaptive_inference")
@@ -146,7 +149,8 @@ class BasePrompt(ABC):
             for ex_idx, example_info in enumerate(hypothesis_related_examples):
                 adaptive_info_prompt += f"Example {ex_idx + 1}:\n"
                 adaptive_info_prompt += self._information_prompt(
-                    train_data, example_info[0], "adaptive_info_prompt"
+                    self._get_substitute_dict(train_data, example_info[0]),
+                    "adaptive_info_prompt",
                 )
 
         prompt = self._get_prompt_template("adaptive_selection")
