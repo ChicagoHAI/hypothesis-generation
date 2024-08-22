@@ -154,11 +154,18 @@ class Update(ABC):
         Returns:
             hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
         """
-        return self.generation_class.batched_initialize_hypotheses(
+        hypotheses_list = self.generation_class.batched_initialize_hypotheses(
             num_init,
             init_batch_size,
             init_hypotheses_per_batch,
-            self.alpha,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+        )
+        return self.generation_class.make_hypotheses_bank(
+            example_indices=list(range(num_init)),
+            current_sample=num_init,
+            alpha=self.alpha,
+            hypotheses_list=hypotheses_list,
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
         )

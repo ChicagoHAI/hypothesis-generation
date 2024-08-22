@@ -42,7 +42,6 @@ class Generation(ABC):
         num_init,
         init_batch_size,
         init_hypotheses_per_batch,
-        alpha,
         cache_seed=None,
         max_concurrent=3,
         **kwargs

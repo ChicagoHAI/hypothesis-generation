@@ -28,11 +28,10 @@ def extract_hypotheses(text: str, num_hypotheses) -> List[str]:
         logger.info("No hypotheses are generated.")
         return []
 
+    hypotheses = list(set([hypothesis.strip() for hypothesis in hypotheses]))
+
     # this is a bit sketchy
     if len(hypotheses) != num_hypotheses:
         logger.warn(f"Expected {num_hypotheses} hypotheses, but got {len(hypotheses)}.")
-
-    for i in range(len(hypotheses)):
-        hypotheses[i] = hypotheses[i].strip()
 
     return hypotheses[:num_hypotheses]

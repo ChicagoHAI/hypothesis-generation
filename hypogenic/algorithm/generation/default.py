@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import math
 import os
+from typing import List
 
 from . import generation_register
 from .utils import extract_hypotheses
@@ -46,7 +47,6 @@ class DefaultGeneration(Generation):
         num_init,
         init_batch_size,
         init_hypotheses_per_batch,
-        alpha,
         cache_seed=None,
         max_concurrent=3,
         **kwargs
@@ -58,7 +58,6 @@ class DefaultGeneration(Generation):
             num_init: the total amount of examples you want to use for initialize hypotheses
             init_batch size: the number of examples that will be used to generate these hypotheses
             init_hypotheses_per_batch: the amount of hypotheses that you want to generate per btach
-            alpha: the exploration constant in the hypogenic reward function
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum amount of concurrent calls to the API
 
@@ -94,22 +93,11 @@ class DefaultGeneration(Generation):
             prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
         )
 
-        hypotheses_list = [
-            hyp for response in responses for hyp in extract_hypotheses(response)
-        ]
-
-        # ----------------------------------------------------------------------
-        # Makes all the desired hypotheses
-        # ----------------------------------------------------------------------
-        return self.make_hypotheses_bank(
-            list(range(num_init)),
-            num_init,
-            init_hypotheses_per_batch,
-            alpha,
-            hypotheses_list,
-            cache_seed=cache_seed,
-            max_concurrent=max_concurrent,
+        hypotheses_list = list(
+            set([hyp for response in responses for hyp in extract_hypotheses(response)])
         )
+
+        return hypotheses_list
 
     # ------------------------------------------------------------------------ #
     #                                                                          #
@@ -121,24 +109,18 @@ class DefaultGeneration(Generation):
     def batched_hypothesis_generation(
         self,
         example_indices,
-        current_sample,
         num_hypotheses_generate,
-        alpha,
         cache_seed=None,
-        max_concurrent=3,
-    ):
+    ) -> List[str]:
         """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
 
         Parameters:
             example_indices: the indices of examples being used to generate hypotheses
-            current_sample: the current sample in data which the algorithm is on
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
-            alpha: eploration constant in hypogenic reward funciton
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
-            max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
-            new_generated_hypotheses: A dictionary containing all newly generated hypotheses. The keys are the hypotheses and the values are the Summary Information class
+            hypotheses_list: A list containing all newly generated hypotheses.
         """
 
         # ----------------------------------------------------------------------
@@ -161,12 +143,4 @@ class DefaultGeneration(Generation):
         # Batch generate responses based on the prompts that we just generated
         response = self.api.generate(prompt_input, cache_seed=cache_seed)
 
-        return self.make_hypotheses_bank(
-            example_indices,
-            current_sample,
-            num_hypotheses_generate,
-            alpha,
-            extract_hypotheses(response, num_hypotheses_generate),
-            cache_seed=cache_seed,
-            max_concurrent=max_concurrent,
-        )
+        return extract_hypotheses(response, num_hypotheses_generate)
