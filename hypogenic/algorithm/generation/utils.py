@@ -1,6 +1,6 @@
 from ...logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - Generation")
+logger_name = "HypoGenic - Generation"
 
 
 def extract_hypotheses(text, num_hypotheses):
@@ -14,6 +14,8 @@ def extract_hypotheses(text, num_hypotheses):
         num_hypotheses: the number of hypotheses that you want
     """
     import re
+
+    logger = LoggerConfig.get_logger(logger_name)
 
     # The regex to extract the hypotheses - matches to a numbered list
     pattern = re.compile(r"\d+\.\s(.+?)(?=\d+\.\s|\Z)", re.DOTALL)

@@ -15,7 +15,7 @@ from ...prompt import BasePrompt
 from ...tasks import BaseTask
 from ...logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - Upperbound Inference")
+logger_name = "HypoGenic - Upperbound Inference"
 
 
 @inference_register.register("upperbound")
@@ -75,6 +75,8 @@ class UpperboundInference(Inference):
             use_cache: whether to use the redis cache or not
             max_concurrent: the maximum number of concurrent requests
         """
+        logger = LoggerConfig.get_logger(logger_name)
+
         arg_k = k
 
         # sort hyp_bank by training accuracy from high to low

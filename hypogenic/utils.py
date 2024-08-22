@@ -31,7 +31,8 @@ from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from .tasks import BaseTask
 from .logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - utils")
+logger_name = "HypoGenic - utils"
+
 
 def get_results(pred_list, label_list):
     """
@@ -44,6 +45,7 @@ def get_results(pred_list, label_list):
 
 
 def set_seed(seed):
+    logger = LoggerConfig.get_logger(logger_name)
     logger.info(f"Setting seed to {seed}")
     random.seed(seed)
     torch.manual_seed(seed)

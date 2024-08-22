@@ -1,4 +1,5 @@
 import argparse
+import logging
 import re
 import time
 import pickle
@@ -33,6 +34,8 @@ from hypogenic.algorithm.inference import (
 from hypogenic.algorithm.replace import DefaultReplace
 from hypogenic.algorithm.update import SamplingUpdate, DefaultUpdate
 from hypogenic.logger_config import LoggerConfig
+
+LoggerConfig.setup_logger(level=logging.INFO)
 
 logger = LoggerConfig.get_logger("HypoGenic")
 
@@ -93,7 +96,7 @@ def main():
                 num_init,
                 init_batch_size=10,
                 init_hypotheses_per_batch=10,
-                use_cache=0,
+                use_cache=1,
             )
             update_class.save_to_json(
                 hypotheses_bank,

@@ -1,6 +1,6 @@
 from .logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - Register")
+logger_name = "HypoGenic - Register"
 
 
 class Register:
@@ -16,6 +16,7 @@ class Register:
         return decorator
 
     def build(self, type: str):
+        logger = LoggerConfig.get_logger(logger_name)
         if type not in self.entries and "default" not in self.entries:
             raise ValueError(
                 f"Entry {type} not found in registry {self.name}. Available entries: {', '.join(self.entries.keys())}"

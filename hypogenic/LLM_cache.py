@@ -16,7 +16,7 @@ import anthropic
 import openai
 from openai import OpenAI
 
-logger = LoggerConfig.get_logger(name="HypoGenic - LLM_cache")
+logger_name = "HypoGenic - LLM_cache"
 
 
 def deterministic_hash(data) -> int:
@@ -83,6 +83,7 @@ class APICache(ABC):
     def batched_generate(
         self, messages, max_concurrent=3, overwrite_cache: bool = False, **kwargs
     ):
+        logger = LoggerConfig.get_logger(name=logger_name)
         need_to_req_msgs = []
         responses = ["" for _ in range(len(messages))]
         hashvals = []
@@ -112,6 +113,10 @@ class APICache(ABC):
 
         logger.debug(f"Request Completion from {self.service} API...")
 
+        logger.info(
+            f"Need to request {len(need_to_req_msgs)} / {len(messages)} messages"
+        )
+
         resps = self.batched_api_call(
             [messages[i] for i in need_to_req_msgs],
             max_concurrent=max_concurrent,
@@ -140,6 +145,7 @@ class APICache(ABC):
         Returns:
             A JSON-like API response.
         """
+        logger = LoggerConfig.get_logger(name=logger_name)
         query = FrozenDict(kwargs)
         hashval = hash(query)
         cache = self.r.hget(hashval, "data")

@@ -16,7 +16,7 @@ from ...prompt import BasePrompt
 from ...tasks import BaseTask
 from ...logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - One Step Adaptive Inference")
+logger_name = "HypoGenic - One Step Adaptive Inference"
 
 
 @inference_register.register("one_step_adaptive")
@@ -82,6 +82,8 @@ class OneStepAdaptiveInference(Inference):
             use_cache: whether to use the redis cache or not
             max_concurrent: the maximum number of concurrent requests
         """
+        logger = LoggerConfig.get_logger(logger_name)
+
         num_train_data_samples = len(self.train_data)
         similarity_matrix, one_hot_encoded_dict = self.compute_similarity_matrix(
             hyp_bank, num_train_data_samples

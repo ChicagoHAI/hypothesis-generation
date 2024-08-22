@@ -15,7 +15,7 @@ from ...prompt import BasePrompt
 from ...tasks import BaseTask
 from ...logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - Filter and Weight Inference")
+logger_name = "HypoGenic - Filter and Weight Inference"
 
 
 @inference_register.register("filter_and_weight")
@@ -49,6 +49,7 @@ class FilterAndWeightInference(Inference):
             use_cache: whether to use the redis cache or not
             max_concurrent: the maximum number of concurrent requests
         """
+        logger = LoggerConfig.get_logger(logger_name)
         assert all(
             [len(hyp_bank.keys()) >= 1 for _, hyp_bank in idx_hyp_pair]
         ), "Filter and weight inference requires at least one hypothesis"
@@ -93,6 +94,7 @@ class FilterAndWeightInference(Inference):
         Returns
             relevant_hypotheses: a dictionary of relevant hypotheses
         """
+        logger = LoggerConfig.get_logger(logger_name)
         relevant_hypotheses_banks = []
         responses = responses[::-1]
         for _ in indices:

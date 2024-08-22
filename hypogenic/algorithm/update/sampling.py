@@ -13,7 +13,7 @@ from ..replace import Replace
 from ..summary_information import SummaryInformation
 from ...logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - Sampling Update")
+logger_name = "HypoGenic - Sampling Update"
 
 
 @update_register.register("sampling")
@@ -74,6 +74,8 @@ class SamplingUpdate(Update):
             use_cache: Whether to use the redis cache or not
             max_concurrent: The maximum number of concurrent requests
         """
+        logger = LoggerConfig.get_logger(logger_name)
+
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
 

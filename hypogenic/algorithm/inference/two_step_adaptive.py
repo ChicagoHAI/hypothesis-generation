@@ -15,7 +15,7 @@ from ...prompt import BasePrompt
 from ...tasks import BaseTask
 from ...logger_config import LoggerConfig
 
-logger = LoggerConfig.get_logger("HypoGenic - Two Step Adaptive Inference")
+logger_name = "HypoGenic - Two Step Adaptive Inference"
 
 
 @inference_register.register("two_step_adaptive")
@@ -42,6 +42,8 @@ class TwoStepAdaptiveInference(OneStepAdaptiveInference):
             hyp_bank: the hypothesis bank
             response: the response from the model
         """
+        logger = LoggerConfig.get_logger(logger_name)
+
         hyp_idx = re.search(r"Chosen Pattern:\s*Pattern\s*(\d+)", response)
 
         if hyp_idx == None:
