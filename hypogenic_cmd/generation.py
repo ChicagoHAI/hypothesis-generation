@@ -176,6 +176,12 @@ def parse_args():
         "--update_style", type=str, default="default", help="Type of update method."
     )
     parser.add_argument(
+        "--max_concurrent",
+        type=int,
+        default=3,
+        help="The maximum number of concurrent calls to the API.",
+    )
+    parser.add_argument(
         "--log_file",
         type=str,
         default=None,
@@ -217,7 +223,7 @@ def main():
     from hypogenic.algorithm.generation import generation_register
     from hypogenic.algorithm.inference import inference_register
     from hypogenic.algorithm.replace import replace_register
-    from hypogenic.algorithm.update import update_register
+    from hypogenic.algorithm.update import update_register, Update
     from hypogenic.logger_config import LoggerConfig
 
     LoggerConfig.setup_logger(args.log_file, args.log_level)
@@ -273,6 +279,7 @@ def main():
             init_batch_size=args.init_batch_size,
             init_hypotheses_per_batch=args.init_hypotheses_per_batch,
             cache_seed=args.cache_seed,
+            max_concurrent=args.max_concurrent,
         )
         update_class.save_to_json(
             hypotheses_bank,
@@ -290,6 +297,7 @@ def main():
             hypotheses_bank=hypotheses_bank,
             current_seed=args.seed,
             cache_seed=args.cache_seed,
+            max_concurrent=args.max_concurrent,
         )
         update_class.save_to_json(
             hypotheses_bank,

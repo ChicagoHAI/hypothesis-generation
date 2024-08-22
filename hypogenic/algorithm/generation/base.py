@@ -37,7 +37,14 @@ class Generation(ABC):
 
     @abstractmethod
     def initialize_hypotheses(
-        self, num_init, init_batch_size, init_hypotheses_per_batch, alpha, **kwargs
+        self,
+        num_init,
+        init_batch_size,
+        init_hypotheses_per_batch,
+        alpha,
+        cache_seed=None,
+        max_concurrent=3,
+        **kwargs
     ):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
 
@@ -57,6 +64,7 @@ class Generation(ABC):
         init_hypotheses_per_batch,
         alpha,
         cache_seed=None,
+        max_concurrent=3,
         **kwargs
     ):
         """Initialization method for generating hypotheses. Make sure to only loop till args.num_init
@@ -93,14 +101,14 @@ class Generation(ABC):
 
             prompt_input = self.prompt_class.batched_generation( example_bank, num_hypotheses_generate)
             response = self.api.generate(prompt_input, cache_seed=cache_seed)
-        
+
         See the beginning of function "batched_hypothesis_generation" below to understand how
         the reponses are created.
 
         From there, the behavior is similar to "batched_hypothesis_generation",
         expect that we're now dealing with a batch of the "response" variable rather
         than a single one.
-        
+
         Parameters:
             example_indices: the indices of examples being used to generate hypotheses
             current_sample: the current sample in data which the algorithm is on
@@ -111,7 +119,7 @@ class Generation(ABC):
             max_concurrent: the maximum number of concurrent requests to make to the API
 
         Returns:
-            new_generated_hypotheses: A dictionary containing all newly generated hypotheses. The keys are the hypotheses and the values are the Summary Information class    
+            new_generated_hypotheses: A dictionary containing all newly generated hypotheses. The keys are the hypotheses and the values are the Summary Information class
         """
         idx_hyp_pair = []
         new_generated_hypotheses = {}
@@ -121,7 +129,7 @@ class Generation(ABC):
         # We now go through each of the responses and get the hypotheses
         # ----------------------------------------------------------------------
         for response in responses:
-            
+
             # for each reponse, we extract the hypotheses
             extracted_hypotheses = extract_hypotheses(response, num_hypotheses_generate)
             extracted_hypotheses_list.append(extracted_hypotheses)
@@ -177,7 +185,7 @@ class Generation(ABC):
                 new_generated_hypotheses[hyp].set_example(ex)
 
         return new_generated_hypotheses
-    
+
     # ------------------------------------------------------------------------ #
     #                                                                          #
     # ------------------------------------------------------------------------ #
@@ -228,7 +236,7 @@ class Generation(ABC):
         # Batch generate responses based on the prompts that we just generated
         response = self.api.generate(prompt_input, cache_seed=cache_seed)
 
-        # Since our ouputs are not standardized across different tasks, we must implement and 
+        # Since our ouputs are not standardized across different tasks, we must implement and
         # use this function which finds the answer among each of the outputs
         extracted_hypotheses = extract_hypotheses(response, num_hypotheses_generate)
 
@@ -255,7 +263,6 @@ class Generation(ABC):
             max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
-
 
         # Calculate how well each hypothesis is performing based on the predictions we just made
         for hyp in extracted_hypotheses:

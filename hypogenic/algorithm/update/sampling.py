@@ -148,6 +148,8 @@ class SamplingUpdate(Update):
                                 current_example,
                                 self.update_hypotheses_per_batch,
                                 self.alpha,
+                                cache_seed=cache_seed,
+                                max_concurrent=max_concurrent,
                             )
                         )
                         max_visited = max(

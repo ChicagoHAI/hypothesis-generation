@@ -80,7 +80,8 @@ class Update(ABC):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
-        update=1,
+        cache_seed=None,
+        max_concurrent=3,
     ):
         """Implements how the algorithm runs through the samples. To run through the updated samples, start from args.num_init
         Call self.train_data for the train_data
@@ -140,6 +141,7 @@ class Update(ABC):
         init_batch_size=5,
         init_hypotheses_per_batch=5,
         cache_seed=None,
+        max_concurrent=3,
     ) -> Dict[str, SummaryInformation]:
         """
         Initalizes the hypothesis bank by invoking the batched_initialize_hypotheses function.
@@ -152,10 +154,16 @@ class Update(ABC):
             init_hypotheses_per_batch,
             self.alpha,
             cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
         )
 
     def initialize_hypotheses(
-        self, num_init=25, init_batch_size=5, init_hypotheses_per_batch=5
+        self,
+        num_init=25,
+        init_batch_size=5,
+        init_hypotheses_per_batch=5,
+        cache_seed=None,
+        max_concurrent=3,
     ) -> Dict[str, SummaryInformation]:
         """
         Generates the initial hypotheses
@@ -173,4 +181,6 @@ class Update(ABC):
             init_batch_size,
             init_hypotheses_per_batch,
             self.alpha,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
         )

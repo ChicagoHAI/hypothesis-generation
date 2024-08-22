@@ -112,6 +112,12 @@ def parse_args():
         help="The inference method to use.",
     )
     parser.add_argument(
+        "--max_concurrent",
+        type=int,
+        default=3,
+        help="The maximum number of concurrent calls to the API.",
+    )
+    parser.add_argument(
         "--log_file",
         type=str,
         default=None,
@@ -210,6 +216,7 @@ def main():
             adaptive_threshold=args.adaptive_threshold,
             adaptive_num_hypotheses=args.adaptive_num_hypotheses,
             adaptive_num_examples=args.adaptive_num_examples,
+            max_concurrent=args.max_concurrent,
         )
 
         results_dict = get_results(pred_list, label_list)

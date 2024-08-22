@@ -46,6 +46,7 @@ class DefaultGeneration(Generation):
         init_batch_size,
         init_hypotheses_per_batch,
         alpha,
+        cache_seed=None,
         max_concurrent=3,
         **kwargs
     ):
@@ -89,6 +90,7 @@ class DefaultGeneration(Generation):
                 len(example_indices),
                 init_hypotheses_per_batch,
                 alpha,
+                cache_seed=cache_seed,
                 max_concurrent=max_concurrent,
             )
 
