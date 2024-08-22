@@ -19,17 +19,7 @@ class BasePrompt(ABC):
     def _get_substitute_dict(
         self, data_dict: pd.DataFrame, example_idx
     ) -> Dict[str, str]:
-        example = data_dict.loc[example_idx].to_dict()
-        substitute_dict = {}
-
-        for key, value in self.task.prompt_template.items():
-            if not isinstance(value, str):
-                continue
-            # TODO: safe_substitute or substitute?
-            substitute_dict[key] = Template(value).substitute(example)
-
-        substitute_dict.update(example)
-
+        substitute_dict = data_dict.loc[example_idx].to_dict()
         return substitute_dict
 
     def _information_prompt(
@@ -38,7 +28,7 @@ class BasePrompt(ABC):
         example = data_dict.loc[example_idx].to_dict()
         return Template(self.task.prompt_template[info_key]).substitute(example)
 
-    def _get_prompt_template(self, key: str) -> List[Dict[str, str]]:
+    def _get_prompt_template(self, key: str) -> Union[str, List[Dict[str, str]]]:
         return deepcopy(self.task.prompt_template[key])
 
     def _convert_to_messages(self, system_prompt: str, user_prompt: str) -> List[Dict]:
@@ -61,7 +51,7 @@ class BasePrompt(ABC):
         observations = ""
         few_shot_prefix = ""
         if num_few_shot > 0:
-            few_shot_prefix = substitute_dict["few_shot_prefix"]
+            few_shot_prefix = self._get_prompt_template("few_shot_prefix")
             for j in range(num_few_shot):
                 observations += self._information_prompt(train_data, j, "observations")
 
