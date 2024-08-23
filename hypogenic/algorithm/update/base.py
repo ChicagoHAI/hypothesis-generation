@@ -97,6 +97,28 @@ class Update(ABC):
         """
         pass
 
+    def batched_hypothesis_generation(
+        self,
+        wrong_example_ids,
+        current_example,
+        cache_seed=None,
+        max_concurrent=3,
+    ):
+        new_hypotheses = self.generation_class.batched_hypothesis_generation(
+            wrong_example_ids,
+            self.update_hypotheses_per_batch,
+            cache_seed=cache_seed,
+        )
+
+        return self.generation_class.make_hypotheses_bank(
+            wrong_example_ids,
+            current_example,
+            self.alpha,
+            new_hypotheses,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+        )
+
     def save_to_json(
         self,
         hypotheses_bank: Dict[str, SummaryInformation],
