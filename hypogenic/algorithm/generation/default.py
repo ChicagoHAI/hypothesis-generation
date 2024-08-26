@@ -49,7 +49,7 @@ class DefaultGeneration(Generation):
         init_hypotheses_per_batch,
         cache_seed=None,
         max_concurrent=3,
-        **kwargs
+        **generate_kwargs
     ):
         """
         Batches the process of making new hypotheses
@@ -90,7 +90,10 @@ class DefaultGeneration(Generation):
                 )
             )
         responses = self.api.batched_generate(
-            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs
         )
 
         hypotheses_list = list(

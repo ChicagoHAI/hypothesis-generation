@@ -32,6 +32,7 @@ class DefaultInference(Inference):
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         Makes a batch of preductions on a hypothesis.
@@ -52,7 +53,10 @@ class DefaultInference(Inference):
             for index, hyp_bank in idx_hyp_pair
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         predictions = [self.task.extract_label(response) for response in responses]
 
@@ -63,7 +67,13 @@ class DefaultInference(Inference):
         return predictions, actual_labels
 
     def run_inference_final(
-        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
+        self,
+        data,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
     ):
         """
         Function for testing the best hypothesis
@@ -90,4 +100,5 @@ class DefaultInference(Inference):
             ],
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )

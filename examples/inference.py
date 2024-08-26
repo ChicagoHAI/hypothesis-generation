@@ -88,8 +88,15 @@ def main():
             logger.info("Using test data")
 
         pred_list, label_list = inference_class.run_inference_final(
-            test_data, hyp_bank, adaptive_num_hypotheses=adaptive_num_hypotheses,
-            cache_seed=None
+            test_data,
+            hyp_bank,
+            adaptive_num_hypotheses=adaptive_num_hypotheses,
+            cache_seed=None,
+            max_concurrent=3,
+            generate_kwargs={
+                "max_tokens": 1000,
+                "temperature": 1e-5,
+            },
         )
 
         results_dict = get_results(pred_list, label_list)

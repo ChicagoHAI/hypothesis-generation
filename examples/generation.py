@@ -97,6 +97,8 @@ def main():
                 init_batch_size=10,
                 init_hypotheses_per_batch=10,
                 cache_seed=1,
+                temperature=1e-5,
+                max_tokens=1000,
             )
             update_class.save_to_json(
                 hypotheses_bank,

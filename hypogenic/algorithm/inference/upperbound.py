@@ -35,6 +35,7 @@ class UpperboundInference(Inference):
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         Make predictions on a batch of data.
@@ -55,14 +56,24 @@ class UpperboundInference(Inference):
             for index, hyp_bank in idx_hyp_pair
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         predictions = [self.task.extract_label(response) for response in responses]
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
         return predictions, actual_labels
 
     def _run_inference_final(
-        self, data, hyp_bank, k=1, cache_seed=None, max_concurrent=3, **kwargs
+        self,
+        data,
+        hyp_bank,
+        k=1,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
     ):
         """
         Run inference for each hypothesis in the hypothesis bank and return the predictions.
@@ -98,6 +109,7 @@ class UpperboundInference(Inference):
             [(i, {hyp: hyp_bank[hyp]}) for hyp in hyp_bank for i in range(num_samples)],
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         preds = preds[::-1]
         for hyp in hyp_bank:
@@ -140,7 +152,13 @@ class UpperboundInference(Inference):
         ], label_list
 
     def run_inference_final(
-        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
+        self,
+        data,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
     ):
         """
         Run inference for each hypothesis in the hypothesis bank and return the predictions.
@@ -154,5 +172,10 @@ class UpperboundInference(Inference):
             max_concurrent: the maximum number of concurrent requests
         """
         return self._run_inference_final(
-            data, hyp_bank, cache_seed=cache_seed, max_concurrent=max_concurrent, **kwargs
+            data,
+            hyp_bank,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            generate_kwargs=generate_kwargs,
+            **kwargs,
         )

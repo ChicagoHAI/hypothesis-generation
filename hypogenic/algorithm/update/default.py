@@ -67,6 +67,7 @@ class DefaultUpdate(Update):
         current_seed,
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         We update the hypothesis bank once we reach a certain amount of regret
@@ -134,6 +135,7 @@ class DefaultUpdate(Update):
                 ],
                 cache_seed=cache_seed,
                 max_concurrent=max_concurrent,
+                **generate_kwargs,
             )
 
             # Comparison of the label and prediction

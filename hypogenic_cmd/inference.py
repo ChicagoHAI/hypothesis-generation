@@ -98,7 +98,7 @@ def parse_args():
         default=None,
         help="If `None`, will not use cache, otherwise will use cache with corresponding seed number",
     )
-    
+
     parser.add_argument(
         "--port",
         type=int,
@@ -130,6 +130,18 @@ def parse_args():
         default="INFO",
         help="Logging level.",
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+    )
+    parser.add_argument(
+        "--max_tokens",
+        type=int,
+        default=4096,
+        help="The maximum number of tokens to generate.",
+    )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=1e-5,
+        help="The temperature for the generation.",
     )
 
     args = parser.parse_args()
@@ -218,6 +230,10 @@ def main():
             adaptive_num_hypotheses=args.adaptive_num_hypotheses,
             adaptive_num_examples=args.adaptive_num_examples,
             max_concurrent=args.max_concurrent,
+            generate_kwargs={
+                "max_tokens": args.max_tokens,
+                "temperature": args.temperature,
+            },
         )
 
         results_dict = get_results(pred_list, label_list)

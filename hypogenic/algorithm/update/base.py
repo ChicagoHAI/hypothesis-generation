@@ -82,6 +82,7 @@ class Update(ABC):
         current_seed,
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """Implements how the algorithm runs through the samples. To run through the updated samples, start from args.num_init
         Call self.train_data for the train_data
@@ -142,6 +143,7 @@ class Update(ABC):
         init_hypotheses_per_batch=5,
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ) -> Dict[str, SummaryInformation]:
         """
         Generates the initial hypotheses
@@ -160,6 +162,7 @@ class Update(ABC):
             init_hypotheses_per_batch,
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         return self.generation_class.make_hypotheses_bank(
             example_indices=list(range(num_init)),
@@ -168,4 +171,5 @@ class Update(ABC):
             hypotheses_list=hypotheses_list,
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )

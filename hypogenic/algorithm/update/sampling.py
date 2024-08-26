@@ -63,6 +63,7 @@ class SamplingUpdate(Update):
         current_seed,
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         Update the hypotheses bank.
@@ -114,6 +115,7 @@ class SamplingUpdate(Update):
                 ],
                 cache_seed=cache_seed,
                 max_concurrent=max_concurrent,
+                **generate_kwargs,
             )
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
@@ -163,6 +165,7 @@ class SamplingUpdate(Update):
                             self.num_init,
                             self.alpha,
                             cache_seed=cache_seed,
+                            **generate_kwargs,
                         )
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
@@ -204,6 +207,7 @@ class SamplingUpdate(Update):
         alpha,
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         Balance the number of samples for each hypothesis.
@@ -232,6 +236,7 @@ class SamplingUpdate(Update):
             ],
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         preds, labels = preds[::-1], labels[::-1]
         for hypothesis in hypotheses_bank:

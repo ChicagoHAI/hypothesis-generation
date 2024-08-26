@@ -43,6 +43,7 @@ class Inference(ABC):
         data,
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         cache_seed=None,
+        **generate_kwargs,
     ):
         """
         Generate responses for every pair of data and hypotheses.
@@ -55,7 +56,13 @@ class Inference(ABC):
 
     @abstractmethod
     def run_inference_final(
-        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
+        self,
+        data,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
     ):
         """Implements a specific type of prediction
 

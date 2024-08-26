@@ -36,6 +36,7 @@ class OneStepAdaptiveInference(Inference):
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         Make predictions on a batch of data.
@@ -53,7 +54,10 @@ class OneStepAdaptiveInference(Inference):
             for index, hyp_bank in idx_hyp_pair
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         predictions = [self.task.extract_label(response) for response in responses]
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
@@ -68,6 +72,7 @@ class OneStepAdaptiveInference(Inference):
         adaptive_num_examples=0,
         cache_seed=None,
         max_concurrent=3,
+        generate_kwargs={},
         **kwargs,
     ):
         """
@@ -142,10 +147,17 @@ class OneStepAdaptiveInference(Inference):
             [(i, selected_hyp_bank) for i in range(num_samples)],
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
 
     def run_inference_final(
-        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
+        self,
+        data,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
     ):
         """
         Run the final inference step for the one step adaptive inference algorithm.
@@ -160,7 +172,12 @@ class OneStepAdaptiveInference(Inference):
             max_concurrent: the maximum number of concurrent requests
         """
         return self._run_inference_final(
-            data, hyp_bank, cache_seed=cache_seed, max_concurrent=max_concurrent, **kwargs
+            data,
+            hyp_bank,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            generate_kwargs=generate_kwargs,
+            **kwargs,
         )
 
     def compute_similarity_matrix(self, hyp_bank, num_train_data_samples):

@@ -35,6 +35,7 @@ class FilterAndWeightInference(Inference):
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         Make predictions on a batch of data.
@@ -61,7 +62,10 @@ class FilterAndWeightInference(Inference):
             for hypothesis in hyp_bank
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         logger.info(f"Responses: {responses}")
         responses = responses[::-1]
@@ -129,7 +133,14 @@ class FilterAndWeightInference(Inference):
         return relevant_hypotheses_banks
 
     def _run_inference_final(
-        self, data, hyp_bank, k=1, cache_seed=None, max_concurrent=3, **kwargs
+        self,
+        data,
+        hyp_bank,
+        k=1,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
     ):
         """
         Run over the entire dataset and make predictions.
@@ -161,7 +172,10 @@ class FilterAndWeightInference(Inference):
             for hypothesis in top_hypotheses
         ]
         responses = self.api.batched_generate(
-            prompt_inputs, cache_seed=cache_seed, max_concurrent=max_concurrent
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         filtered_hypotheses_banks = self.filter_hypotheses(
             top_hypotheses, responses, list(range(num_samples))
@@ -186,10 +200,17 @@ class FilterAndWeightInference(Inference):
             ],
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
 
     def run_inference_final(
-        self, data, hyp_bank, cache_seed=None, max_concurrent=3, **kwargs
+        self,
+        data,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
     ):
         """
         Run over the entire dataset and make predictions.
@@ -204,5 +225,10 @@ class FilterAndWeightInference(Inference):
             max_concurrent: the maximum number of concurrent requests
         """
         return self._run_inference_final(
-            data, hyp_bank, cache_seed=cache_seed, max_concurrent=max_concurrent, **kwargs
+            data,
+            hyp_bank,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            generate_kwargs=generate_kwargs,
+            **kwargs,
         )
