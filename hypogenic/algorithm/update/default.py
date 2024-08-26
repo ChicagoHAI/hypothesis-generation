@@ -172,16 +172,13 @@ class DefaultUpdate(Update):
 
                     # generate new hypotheses
                     for j in range(self.num_hypotheses_to_update):
-
                         # Go through poorly performing exmaples and generate hypotheses for them
-                        new_hypotheses = (
-                            self.generation_class.batched_hypothesis_generation(
-                                wrong_example_ids,
-                                current_example,
-                                self.update_hypotheses_per_batch,
-                                self.alpha,
-                                cache_seed=cache_seed,
-                            )
+                        # TODO: batched?
+                        new_hypotheses = self.batched_hypothesis_generation(
+                            wrong_example_ids,
+                            current_example,
+                            cache_seed=cache_seed,
+                            max_concurrent=max_concurrent,
                         )
 
                         # If we onlt take the best performing hypothesis from the batch

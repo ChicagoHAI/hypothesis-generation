@@ -142,14 +142,13 @@ class SamplingUpdate(Update):
                     # generate new hypotheses
                     for _ in range(self.num_hypotheses_to_update):
                         # TODO: batched?
-                        new_hypotheses = (
-                            self.generation_class.batched_hypothesis_generation(
-                                wrong_example_ids,
-                                current_example,
-                                self.update_hypotheses_per_batch,
-                                self.alpha,
-                            )
+                        new_hypotheses = self.batched_hypothesis_generation(
+                            wrong_example_ids,
+                            current_example,
+                            cache_seed=cache_seed,
+                            max_concurrent=max_concurrent,
                         )
+
                         max_visited = max(
                             hypotheses_bank, key=lambda x: hypotheses_bank[x].num_visits
                         )
