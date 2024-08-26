@@ -148,8 +148,8 @@ def parse_args():
     parser.add_argument(
         "--cache_seed",
         type=int,
-        default=1,
-        help="Whether to use cache for hypothesis generation.",
+        default=None,
+        help="If `None`, will not use cache, otherwise will use cache with corresponding seed number",
     )
     parser.add_argument(
         "--port",
