@@ -108,7 +108,7 @@ class DefaultUpdate(Update):
         for i in range(start_sample, num_train_examples):
             # the 'i' here is the sample we are testing each of the top hypotheses
 
-            current_example = i + 1
+            current_sample = i + 1
             logger.info(f"Training on example {i}")
 
             # We need to get the best k for testing the strength of our hypothesis bank
@@ -141,11 +141,11 @@ class DefaultUpdate(Update):
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
-                        current_example, self.alpha
+                        current_sample, self.alpha
                     )  # let the bank know it got one wrong
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
-                        current_example, self.alpha
+                        current_sample, self.alpha
                     )  # let the bank know it got one right
 
                     # keeping track of good examples as we do in generation
@@ -174,11 +174,15 @@ class DefaultUpdate(Update):
                     for j in range(self.num_hypotheses_to_update):
                         # Go through poorly performing exmaples and generate hypotheses for them
                         # TODO: batched?
-                        new_hypotheses = self.batched_hypothesis_generation(
-                            wrong_example_ids,
-                            current_example,
-                            cache_seed=cache_seed,
-                            max_concurrent=max_concurrent,
+                        new_hypotheses = (
+                            self.generation_class.batched_hypothesis_generation(
+                                wrong_example_ids,
+                                current_sample,
+                                self.update_hypotheses_per_batch,
+                                self.alpha,
+                                cache_seed=cache_seed,
+                                max_concurrent=max_concurrent,
+                            )
                         )
 
                         # If we onlt take the best performing hypothesis from the batch

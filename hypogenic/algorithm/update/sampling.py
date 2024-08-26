@@ -92,7 +92,7 @@ class SamplingUpdate(Update):
         if current_epoch > self.epoch_to_start_from:
             start_sample = 0
         for i in range(start_sample, num_train_examples):
-            current_example = i + 1
+            current_sample = i + 1
             logger.info(f"Training on example {i}")
 
             top_k_hypotheses = sorted(
@@ -119,11 +119,11 @@ class SamplingUpdate(Update):
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
-                        current_example, self.alpha
+                        current_sample, self.alpha
                     )
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
-                        current_example, self.alpha
+                        current_sample, self.alpha
                     )
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
 
@@ -142,11 +142,15 @@ class SamplingUpdate(Update):
                     # generate new hypotheses
                     for _ in range(self.num_hypotheses_to_update):
                         # TODO: batched?
-                        new_hypotheses = self.batched_hypothesis_generation(
-                            wrong_example_ids,
-                            current_example,
-                            cache_seed=cache_seed,
-                            max_concurrent=max_concurrent,
+                        new_hypotheses = (
+                            self.generation_class.batched_hypothesis_generation(
+                                wrong_example_ids,
+                                current_sample,
+                                self.update_hypotheses_per_batch,
+                                self.alpha,
+                                cache_seed=cache_seed,
+                                max_concurrent=max_concurrent,
+                            )
                         )
 
                         max_visited = max(
@@ -154,7 +158,7 @@ class SamplingUpdate(Update):
                         )
                         new_hypotheses = self.balance_by_sample(
                             new_hypotheses,
-                            current_example,
+                            current_sample,
                             hypotheses_bank[max_visited].num_visits,
                             self.num_init,
                             self.alpha,

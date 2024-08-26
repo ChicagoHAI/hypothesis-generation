@@ -96,7 +96,7 @@ def main():
                 num_init,
                 init_batch_size=10,
                 init_hypotheses_per_batch=10,
-                cache_seed=None,
+                cache_seed=1,
             )
             update_class.save_to_json(
                 hypotheses_bank,
@@ -115,6 +115,7 @@ def main():
                 current_epoch=epoch,
                 hypotheses_bank=hypotheses_bank,
                 current_seed=seed,
+                cache_seed=1,
             )
             update_class.save_to_json(
                 hypotheses_bank,

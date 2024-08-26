@@ -23,10 +23,21 @@ class BasePrompt(ABC):
         substitute_dict = data_dict.loc[example_idx].to_dict()
         return substitute_dict
 
+    def _substitute_obj(
+        self, substitute_dict: Dict[str, str], obj: Union[str, List, Dict]
+    ):
+        if isinstance(obj, str):
+            return Template(obj).substitute(substitute_dict)
+        elif isinstance(obj, list):
+            return [self._substitute_obj(substitute_dict, o) for o in obj]
+        elif isinstance(obj, dict):
+            return {k: self._substitute_obj(substitute_dict, v) for k, v in obj.items()}
+
     def _information_prompt(
         self, substitute_dict: Dict[str, str], info_key: str
     ) -> Dict[str, str]:
-        return Template(self.task.prompt_template[info_key]).substitute(substitute_dict)
+        prompt = deepcopy(self.task.prompt_template[info_key])
+        return self._substitute_obj(substitute_dict, prompt)
 
     def _get_prompt_template(self, key: str) -> Union[str, List[Dict[str, str]]]:
         return deepcopy(self.task.prompt_template[key])
@@ -45,13 +56,12 @@ class BasePrompt(ABC):
         Few shot prompt for baseline
         """
 
-        prompt = self._get_prompt_template("few_shot_baseline")
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
 
         observations = ""
         few_shot_prefix = ""
         if num_few_shot > 0:
-            few_shot_prefix = self._get_prompt_template("few_shot_prefix")
+            few_shot_prefix = self._information_prompt({}, "few_shot_prefix")
             for j in range(num_few_shot):
                 observations += self._information_prompt(
                     self._get_substitute_dict(train_data, j), "observations"
@@ -60,8 +70,7 @@ class BasePrompt(ABC):
         substitute_dict["observations"] = observations
         substitute_dict["few_shot_prefix"] = few_shot_prefix
 
-        for idx, p in enumerate(prompt):
-            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
+        prompt = self._information_prompt(substitute_dict, "few_shot_baseline")
 
         return prompt
 
@@ -69,8 +78,6 @@ class BasePrompt(ABC):
         """
         Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
         """
-
-        prompt = self._get_prompt_template("batched_generation")
 
         observations = ""
         for example_idx in range(len(train_data)):
@@ -83,8 +90,7 @@ class BasePrompt(ABC):
             "observations": observations,
         }
 
-        for idx, p in enumerate(prompt):
-            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
+        prompt = self._information_prompt(substitute_dict, "batched_generation")
 
         return prompt
 
@@ -95,13 +101,10 @@ class BasePrompt(ABC):
 
         hypothesis = list(hypotheses_dict.keys())[0]
 
-        prompt = self._get_prompt_template("inference")
-
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict["hypothesis"] = hypothesis
 
-        for idx, p in enumerate(prompt):
-            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
+        prompt = self._information_prompt(substitute_dict, "inference")
 
         return prompt
 
@@ -125,13 +128,10 @@ class BasePrompt(ABC):
                     "adaptive_info_prompt",
                 )
 
-        prompt = self._get_prompt_template("adaptive_inference")
-
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict["adaptive_info_prompt"] = adaptive_info_prompt
 
-        for idx, p in enumerate(prompt):
-            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
+        prompt = self._information_prompt(substitute_dict, "adaptive_inference")
 
         return prompt
 
@@ -153,13 +153,10 @@ class BasePrompt(ABC):
                     "adaptive_info_prompt",
                 )
 
-        prompt = self._get_prompt_template("adaptive_selection")
-
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict["adaptive_info_prompt"] = adaptive_info_prompt
 
-        for idx, p in enumerate(prompt):
-            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
+        prompt = self._information_prompt(substitute_dict, "adaptive_selection")
 
         return prompt
 
@@ -170,12 +167,9 @@ class BasePrompt(ABC):
 
         hypothesis = list(hypotheses_dict.keys())[0]
 
-        prompt = self._get_prompt_template("is_relevant")
-
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict["hypothesis"] = hypothesis
 
-        for idx, p in enumerate(prompt):
-            prompt[idx]["content"] = Template(p["content"]).substitute(substitute_dict)
+        prompt = self._information_prompt(substitute_dict, "is_relevant")
 
         return prompt

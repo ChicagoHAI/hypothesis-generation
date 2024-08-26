@@ -94,7 +94,13 @@ class DefaultGeneration(Generation):
         )
 
         hypotheses_list = list(
-            set([hyp for response in responses for hyp in extract_hypotheses(response)])
+            set(
+                [
+                    hyp
+                    for response in responses
+                    for hyp in extract_hypotheses(response, init_hypotheses_per_batch)
+                ]
+            )
         )
 
         return hypotheses_list
@@ -108,39 +114,38 @@ class DefaultGeneration(Generation):
     # ------------------------------------------------------------------------ #
     def batched_hypothesis_generation(
         self,
-        example_indices,
-        num_hypotheses_generate,
+        example_ids,
+        current_sample,
+        num_hypotheses_generate: int,
+        alpha: float,
         cache_seed=None,
-    ) -> List[str]:
-        """Batched hypothesis generation method. Takes multiple examples and creates a hypothesis with them.
+        max_concurrent=3,
+    ):
+        """
+        Generates new hypotheses for the given examples
 
         Parameters:
-            example_indices: the indices of examples being used to generate hypotheses
+            example_ids: The ids of the examples for which hypotheses need to be generated
+            current_sample: the current sample in data which the algorithm is on
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
+            alpha: eploration constant in hypogenic reward funciton
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
+            max_concurrent: The maximum number of concurrent requests
 
         Returns:
-            hypotheses_list: A list containing all newly generated hypotheses.
+            hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
         """
-
-        # ----------------------------------------------------------------------
-        # Gather the examples to use for generation
-        # ----------------------------------------------------------------------
-        # Gather examples based on example_indices
-        # TODO: need copy()?
-        example_bank = (
-            self.train_data.loc[list(example_indices)].copy().reset_index(drop=True)
+        new_hypotheses = self.batched_hyp_list_generation(
+            example_ids,
+            num_hypotheses_generate,
+            cache_seed=cache_seed,
         )
 
-        # ----------------------------------------------------------------------
-        # Prompt LLM to generate hypotheses
-        # ----------------------------------------------------------------------
-        # Batch generate a bunch of prompts based on yaml file
-        prompt_input = self.prompt_class.batched_generation(
-            example_bank, num_hypotheses_generate
+        return self.make_hypotheses_bank(
+            example_ids,
+            current_sample,
+            alpha,
+            new_hypotheses,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
         )
-
-        # Batch generate responses based on the prompts that we just generated
-        response = self.api.generate(prompt_input, cache_seed=cache_seed)
-
-        return extract_hypotheses(response, num_hypotheses_generate)
