@@ -108,7 +108,7 @@ def main():
     num_train = 100
     num_val = 100
     few_shot_k = 3
-    cache_seed = 42
+    cache_seed = None
 
     set_seed(seed)
 

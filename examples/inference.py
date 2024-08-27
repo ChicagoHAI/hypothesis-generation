@@ -46,6 +46,7 @@ def load_dict(file_path):
 def main():
     start_time = time.time()
 
+    # For detailed argument descriptions, please run `hypogenic_inference --help` or see `hypogenic_cmd/inference.py`
     task_config_path = "./data/retweet/config.yaml"
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
@@ -55,8 +56,12 @@ def main():
     num_test = 25
     num_val = 10
     use_valid = False
-
     seeds = [49]
+    cache_seed = None
+    max_concurrent = 3
+    temperature = 1e-5
+    max_tokens = 1000
+
     accuracy_all = []
     f1_all = []
     dict = load_dict(hypothesis_file)
@@ -79,7 +84,7 @@ def main():
             num_train, num_test, num_val, seed
         )
         prompt_class = BasePrompt(task)
-        inference_class = UpperboundInference(api, prompt_class, train_data, task)
+        inference_class = DefaultInference(api, prompt_class, train_data, task)
 
         if use_valid:
             logger.info("Using validation data")
@@ -91,11 +96,11 @@ def main():
             test_data,
             hyp_bank,
             adaptive_num_hypotheses=adaptive_num_hypotheses,
-            cache_seed=None,
-            max_concurrent=3,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
             generate_kwargs={
-                "max_tokens": 1000,
-                "temperature": 1e-5,
+                "max_tokens": max_tokens,
+                "temperature": temperature,
             },
         )
 
@@ -109,9 +114,11 @@ def main():
             i for i in range(len(pred_list)) if pred_list[i] != label_list[i]
         ]
         logger.info(f"Wrong indices: {wrong_indices}")
+        accuracy_all.append(results_dict["accuracy"])
+        f1_all.append(results_dict["f1"])
 
-    logger.info(f"Averaged accuracy: {sum(accuracy_all)/len(seeds)}")
-    logger.info(f"Averaged F1: {sum(f1_all)/len(seeds)}")
+    logger.info(f"Averaged accuracy: {sum(accuracy_all)/len(accuracy_all)}")
+    logger.info(f"Averaged F1: {sum(f1_all)/len(f1_all)}")
 
     # print experiment info
     logger.info(f"Total time: {time.time() - start_time} seconds")
