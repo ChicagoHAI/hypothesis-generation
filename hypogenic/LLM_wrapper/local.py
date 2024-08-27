@@ -71,7 +71,7 @@ class LocalModelWrapper(LLMWrapper):
         messages: List[Dict[str, str]],
         model: str,
         max_concurrent=3,
-        max_tokens=500,
+        max_tokens=2048,
         temperature=1e-5,
         **kwargs,
     ):
@@ -81,7 +81,7 @@ class LocalModelWrapper(LLMWrapper):
         self,
         messages: List[Dict[str, str]],
         model: str,
-        max_tokens=500,
+        max_tokens=2048,
         temperature=1e-5,
         **kwargs,
     ):
@@ -126,7 +126,7 @@ class LocalHFWrapper(LocalModelWrapper):
         messages: List[Dict[str, str]],
         model: str,
         max_concurrent=3,
-        max_tokens=500,
+        max_tokens=2048,
         temperature=1e-5,
         **kwargs,
     ):
@@ -174,7 +174,7 @@ class LocalVllmWrapper(LocalModelWrapper):
         messages: List[List[Dict[str, str]]],
         model: str,
         max_concurrent=3,
-        max_tokens=500,
+        max_tokens=2048,
         temperature=1e-5,
         **kwargs,
     ):
