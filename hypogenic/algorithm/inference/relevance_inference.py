@@ -63,11 +63,11 @@ class RelevanceInference(DefaultInference):
         # TODO: Filter the relevant hypotheses using the helper functions
         # ----------------------------------------------------------------------
         # this really sucks rn
-        for (index, d) in idx_hyp_pair:
-            print(index, d)
+        for (idx, hypothesis_dict) in idx_hyp_pair:
+            print(idx, hypothesis_dict)
             prompt_inputs_relevance = []
             for i in range(len(data)):
-                prompt_inputs_relevance.append(self.prompt_class.is_relevant(d, data, i))
+                prompt_inputs_relevance.append(self.prompt_class.is_relevant(hypothesis_dict, data, i))
         
 
         pdb.set_trace(header="IN INFERENCE CLASS BATCHED PREDICT")

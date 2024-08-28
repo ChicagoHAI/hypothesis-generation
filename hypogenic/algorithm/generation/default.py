@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import math
 import os
+import pdb
 
 from . import generation_register
 from .base import Generation
@@ -141,9 +142,11 @@ class DefaultGeneration(Generation):
                 range(i * init_batch_size, (i + 1) * init_batch_size)
             )
             # TODO: need copy()?
+
             example_bank = (
                 self.train_data.loc[list(example_indices)].copy().reset_index(drop=True)
             )
+
             prompt_inputs.append(
                 self.prompt_class.batched_generation(
                     example_bank, init_hypotheses_per_batch
