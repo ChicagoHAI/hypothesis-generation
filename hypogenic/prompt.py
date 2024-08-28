@@ -8,6 +8,8 @@ import pandas as pd
 
 from .tasks import BaseTask
 
+import pdb
+
 
 class BasePrompt(ABC):
     """
@@ -22,11 +24,15 @@ class BasePrompt(ABC):
         example = data_dict.loc[example_idx].to_dict()
         substitute_dict = {}
 
+        pdb.set_trace(header="PLEASE")
+
         for key, value in self.task.prompt_template.items():
             if not isinstance(value, str):
                 continue
             # TODO: safe_substitute or substitute?
             substitute_dict[key] = Template(value).substitute(example)
+
+            pdb.set_trace(header=key)
 
         substitute_dict.update(example)
 
@@ -176,7 +182,7 @@ class BasePrompt(ABC):
 
         hypothesis = list(hypotheses_dict.keys())[0]
 
-        prompt = self._get_prompt_template("is_relevant")
+        prompt = self._get_prompt_template("relevancy")
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
         substitute_dict["hypothesis"] = hypothesis

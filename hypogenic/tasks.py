@@ -68,6 +68,7 @@ class BaseTask(ABC):
             file_path = os.path.join(os.path.dirname(self.config_path), file_path)
             with open(file_path, "r") as f:
                 data = json.load(f)
+
             # shuffle and subsample from data
             if not is_train:
                 random.seed(seed)
@@ -89,4 +90,4 @@ class BaseTask(ABC):
         test_data = read_data(self.test_data_path, num_test)
         val_data = read_data(self.val_data_path, num_val)
 
-        return train_data, test_data, val_data
+        return train_data, val_data, test_data

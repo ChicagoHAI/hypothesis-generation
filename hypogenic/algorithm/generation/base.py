@@ -8,6 +8,8 @@ from ..inference import Inference
 from ...tasks import BaseTask
 from ...prompt import BasePrompt
 
+import pdb 
+
 
 class Generation(ABC):
     """Generation class"""
@@ -136,6 +138,8 @@ class Generation(ABC):
                 for index in example_indices:
                     idx_hyp_pair.append((index, {hyp: new_generated_hypotheses[hyp]}))
 
+        # pdb.set_trace(header="after responses")
+
         # ----------------------------------------------------------------------
         # We try to predict the ground truth labels
         # ----------------------------------------------------------------------
@@ -146,6 +150,8 @@ class Generation(ABC):
             max_concurrent=max_concurrent,
         )
         preds, labels = preds[::-1], labels[::-1]
+
+        # pdb.set_trace(header="after predicitons and labels")
 
         # ----------------------------------------------------------------------
         # Finding the accuracy and the correct examples for each hypothesis batch
