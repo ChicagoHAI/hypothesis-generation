@@ -1,8 +1,9 @@
 import threading
 import time
 import logging
+from ..logger_config import LoggerConfig
 
-logger = logging.getLogger(name="RateLimiter")
+logger_name = "HypoGenic - RateLimiter"
 
 
 class RateLimiter:
@@ -16,6 +17,8 @@ class RateLimiter:
             self.backoff_time = self.min_backoff
 
     def backoff(self):
+        logger = LoggerConfig.get_logger(logger_name)
+
         logger.warning(f"Backing off for {self.backoff_time:.1f} seconds")
         time.sleep(self.backoff_time)
         with self.lock:

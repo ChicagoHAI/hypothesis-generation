@@ -4,6 +4,19 @@
 
 Welcome to the GitHub repository for our paper, ["Hypothesis Generation with Large Language Models"](https://arxiv.org/abs/2404.04326). This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our work, presented in detail in the accompanying paper, highlights the capability of LLMs not just to assist but to innovate in the hypothesis generation process for scientific inquiry.
 
+## Table of Contents
+- [Install environment](#install-environment)
+- [Optional: set up Redis server for caching LLM responses](#optional-set-up-redis-server-for-caching-llm-responses)
+- [Usage](#usage)
+  - [Optional: Start Redis server](#optional-start-redis-server)
+  - [Hypothesis Generation](#hypothesis-generation)
+  - [Hypothesis Inference](#hypothesis-inference)
+- [Use HypoGeniC in your code](#use-hypogenic-in-your-code)
+- [Add a new task or dataset](#add-a-new-task-or-dataset)
+  - [Data preprocessing](#data-preprocessing)
+  - [Write config.yaml](#write-configyaml)
+  - [Examples](#examples)
+  - [Write an extract_label function for your new task](#write-an-extract_label-function-for-your-new-task)
 
 ## Install environment
 You can directly install HypoGeniC using the following commands:
@@ -14,6 +27,8 @@ conda activate hypogenic
 pip install hypogenic
 ```
 OR
+
+**We recommend using the following installation procedure for easy update and customizability**
 ```bash
 git clone https://github.com/ChicagoHAI/hypothesis-generation.git
 cd hypothesis-generation
@@ -51,17 +66,13 @@ cd $PATH_PREFIX/redis-stable/src
 ```
 
 ### 2. Hypothesis Generation
-```bash
-hypogenic_generation --args
-```
+
 For help with the arguments, run:
 ```bash
 hypogenic_generation --help
 ```
 ### 3. Hypothesis Inference
-```bash
-hypogenic_inference --args
-```
+
 For help with the arguments, run:
 ```bash
 hypogenic_inference --help
@@ -199,4 +210,8 @@ prompt_templates:
   # adaptive_selection
 ```
 ### 3. Write an extract_label function for your new task
-As we show in `examples/generation.py`, you can create a new task by using our `BaseTask` constructor (line 63). You need to implement the `extract_label` function for your new task. The `extract_label` function should take a string input (LLM generated inference text), and return the label extracted from the input. **Note: you need to make sure the extracted label are in same format with the `'label'` in your dataset, since the extracted label will be compared with the true label to check correctness of each LLM inference.**
+As we show in `examples/generation.py`, you can create a new task by using our `BaseTask` constructor (line 63). You need to implement the `extract_label` function for your new task. The `extract_label` function should take a string input (LLM generated inference text), and return the label extracted from the input. 
+
+**If no `extract_label` function is provided, the default version will be used, which looks for `final answer:\s+<begin>(.*)<end>` in the LLM generated text.**
+
+**Note: you need to make sure the extracted label are in same format with the `'label'` in your dataset, since the extracted label will be compared with the true label to check correctness of each LLM inference.**

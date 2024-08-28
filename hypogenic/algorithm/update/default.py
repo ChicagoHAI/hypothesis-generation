@@ -11,6 +11,9 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
+from ...logger_config import LoggerConfig
+
+logger_name = "HypoGenic - Default Update"
 
 
 @update_register.register("default")
@@ -62,12 +65,29 @@ class DefaultUpdate(Update):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
-        use_cache=1,
+        cache_seed=None,
+        max_concurrent=3,
+        **generate_kwargs,
     ):
+        """
+        We update the hypothesis bank once we reach a certain amount of regret
+
+        Parameters:
+            hypotheses_bank: The hypothesis bank
+            current_epoch: The current epoch
+            current_seed: The current seed
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
+            max_concurrent: The maximum number of concurrent requests
+        """
+        logger = LoggerConfig.get_logger(logger_name)
+
         # initialize variables
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
 
+        # ----------------------------------------------------------------------
+        # Figuring out starting samples
+        # ----------------------------------------------------------------------
         # go through training examples
         # When restarting from epoch > 0, no need to start at num_init
         # When not restarting, then default sample_num_to_restart_from = -1. start with num_init.
@@ -78,22 +98,34 @@ class DefaultUpdate(Update):
             start_sample = self.num_init
 
         # This is to check if we are running more epochs than the starting epoch, if so, start at sample 0
+        # basically, if we've completed the starting epoch, we want to start the next one
         if current_epoch > self.epoch_to_start_from:
             start_sample = 0
+
+        # ----------------------------------------------------------------------
+        # Creating the new hypotheses
+        # ----------------------------------------------------------------------
+        # from the start to the end
         for i in range(start_sample, num_train_examples):
-            if self.num_wrong_scale > 0:
-                num_wrong_to_add_bank = (
-                    self.k * i / num_train_examples * self.num_wrong_scale
-                )
+            # the 'i' here is the sample we are testing each of the top hypotheses
 
-            current_example = i + 1
-            print(f"Training on example {i}")
+            current_sample = i + 1
+            logger.info(f"Training on example {i}")
 
+            # We need to get the best k for testing the strength of our hypothesis bank
             top_k_hypotheses = sorted(
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
             )[: self.k]
 
-            # check if the hypothesis works for the generated hypotheses
+            # We are at the regret that we need in order to generate a new hypothesis
+            if self.num_wrong_scale > 0:
+                num_wrong_to_add_bank = (
+                    len(top_k_hypotheses) * i / num_train_examples
+                ) * self.num_wrong_scale
+
+            # ------------------------------------------------------------------
+            # We need to see how good our hypothesis is, which we do by way of the inference class
+            # ------------------------------------------------------------------
             num_wrong_hypotheses = 0
             preds, labels = self.inference_class.batched_predict(
                 self.train_data,
@@ -101,25 +133,38 @@ class DefaultUpdate(Update):
                     (i, {hypothesis: hypotheses_bank[hypothesis]})
                     for hypothesis in top_k_hypotheses
                 ],
-                use_cache=use_cache,
+                cache_seed=cache_seed,
+                max_concurrent=max_concurrent,
+                **generate_kwargs,
             )
+
+            # Comparison of the label and prediction
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
-                        current_example, self.alpha
-                    )
+                        current_sample, self.alpha
+                    )  # let the bank know it got one wrong
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
-                        current_example, self.alpha
-                    )
+                        current_sample, self.alpha
+                    )  # let the bank know it got one right
+
+                    # keeping track of good examples as we do in generation
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
 
-            # if we get enough wrong examples
+            # ------------------------------------------------------------------
+            # Generating a new hypothesis
+            # ------------------------------------------------------------------
+
+            # if we get enough wrong examples as determined by num_wrong_to_add_bank,
+            # we need to generate new hypotheses
             if (
                 num_wrong_hypotheses >= num_wrong_to_add_bank
                 or len(top_k_hypotheses) == 0
             ):
+
+                # We note it as a bad sample
                 wrong_example_ids.add(i)
                 if (
                     len(wrong_example_ids)
@@ -129,15 +174,20 @@ class DefaultUpdate(Update):
 
                     # generate new hypotheses
                     for j in range(self.num_hypotheses_to_update):
+                        # Go through poorly performing exmaples and generate hypotheses for them
+                        # TODO: batched?
                         new_hypotheses = (
                             self.generation_class.batched_hypothesis_generation(
                                 wrong_example_ids,
-                                current_example,
+                                current_sample,
                                 self.update_hypotheses_per_batch,
                                 self.alpha,
-                                use_cache=use_cache,
+                                cache_seed=cache_seed,
+                                max_concurrent=max_concurrent,
                             )
                         )
+
+                        # If we onlt take the best performing hypothesis from the batch
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
                                 new_hypotheses, key=lambda x: new_hypotheses[x].reward
@@ -150,7 +200,7 @@ class DefaultUpdate(Update):
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
 
-                    # call replace class
+                    # call replace class to update the bank
                     hypotheses_bank = self.replace_class.replace(
                         hypotheses_bank, new_hyp_bank
                     )
@@ -164,4 +214,5 @@ class DefaultUpdate(Update):
                     epoch=current_epoch,
                 )
 
+        # Our new bank
         return hypotheses_bank

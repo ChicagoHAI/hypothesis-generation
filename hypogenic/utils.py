@@ -29,6 +29,9 @@ from pprint import pprint
 
 from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from .tasks import BaseTask
+from .logger_config import LoggerConfig
+
+logger_name = "HypoGenic - utils"
 
 
 def get_results(pred_list, label_list):
@@ -42,7 +45,8 @@ def get_results(pred_list, label_list):
 
 
 def set_seed(seed):
-    print(f"Setting seed to {seed}")
+    logger = LoggerConfig.get_logger(logger_name)
+    logger.info(f"Setting seed to {seed}")
     random.seed(seed)
     torch.manual_seed(seed)
     np.random.seed(seed)

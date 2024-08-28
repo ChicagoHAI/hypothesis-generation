@@ -10,6 +10,11 @@ from .register import Register
 
 
 class BaseTask(ABC):
+    """
+    In this class, we set up and define the task along with prepping training data.
+
+    All our information if from a yaml file that the user must set up.
+    """
     def __init__(
         self,
         config_path: str,
@@ -19,12 +24,16 @@ class BaseTask(ABC):
         if from_register is None and extract_label is None:
             raise ValueError("Either from_register or extract_label should be provided")
 
+        # ----------------------------------------------------------------------
+        # get information from the yaml file
+        # ----------------------------------------------------------------------
         self.config_path = config_path
         with open(config_path, "r") as f:
             data = yaml.safe_load(f)
 
         self.task_name = data["task_name"]
 
+        # data paths
         self.train_data_path = data["train_data_path"]
         self.test_data_path = data["test_data_path"]
         self.val_data_path = data["val_data_path"]
@@ -32,6 +41,7 @@ class BaseTask(ABC):
         if "ood_test_data_path" in data:
             self.ood_test_data_path = data["ood_test_data_path"]
 
+        # getting omrpt templates from yaml file
         self.prompt_template = {
             k: (
                 [{"role": kk, "content": vv} for kk, vv in v.items()]
@@ -41,11 +51,18 @@ class BaseTask(ABC):
             for k, v in data["prompt_templates"].items()
         }
 
+        # task label
         self.extract_label = (
             extract_label if extract_label is not None else from_register.build(self.task_name)
         )
 
     def get_data(self, num_train, num_test, num_val, seed=49) -> Tuple[pd.DataFrame]:
+        """
+        Loading the data from the paths we collected in the yaml file
+        """
+        # ----------------------------------------------------------------------
+        # define our function to read data
+        # ----------------------------------------------------------------------
         def read_data(file_path, num, is_train=False):
             # Read from json
             file_path = os.path.join(os.path.dirname(self.config_path), file_path)
@@ -63,6 +80,10 @@ class BaseTask(ABC):
                 key: value for key, value in zip(data.keys(), sampled_data)
             }
             return pd.DataFrame.from_dict(processed_data)
+        
+        # ----------------------------------------------------------------------
+        # use that function ot create our test sets
+        # ----------------------------------------------------------------------
 
         train_data = read_data(self.train_data_path, num_train, is_train=True)
         test_data = read_data(self.test_data_path, num_test)

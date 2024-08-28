@@ -5,6 +5,7 @@ import hashlib
 import collections
 import pickle
 import logging
+from .logger_config import LoggerConfig
 import time
 import threading
 from abc import ABC
@@ -15,7 +16,7 @@ import anthropic
 import openai
 from openai import OpenAI
 
-logger = logging.getLogger(name="LLM_cache")
+logger_name = "HypoGenic - LLM_cache"
 
 
 def deterministic_hash(data) -> int:
@@ -80,14 +81,15 @@ class APICache(ABC):
         raise NotImplementedError("batched_api_call() is not implemented")
 
     def batched_generate(
-        self, messages, max_concurrent=3, overwrite_cache: bool = False, **kwargs
+        self, messages, max_concurrent=3, overwrite_cache: bool = False, cache_seed=None, **kwargs
     ):
+        logger = LoggerConfig.get_logger(name=logger_name)
         need_to_req_msgs = []
         responses = ["" for _ in range(len(messages))]
         hashvals = []
         queries = []
         for idx, msg in enumerate(messages):
-            query = FrozenDict({**kwargs, "messages": msg})
+            query = FrozenDict({**kwargs, "messages": msg, "cache_seed": cache_seed})
             hashval = hash(query)
             cache = self.r.hget(hashval, "data")
 
@@ -98,7 +100,7 @@ class APICache(ABC):
             elif cache is not None:
                 query_cached, resp_cached = pickle.loads(cache)
                 if query_cached == query:
-                    logger.debug(f"Matched cache for query")
+                    logger.debug(f"Matched cache for query with cache seed {cache_seed}")
                     responses[idx] = resp_cached
                     continue
                 logger.debug(
@@ -110,6 +112,10 @@ class APICache(ABC):
             need_to_req_msgs.append(idx)
 
         logger.debug(f"Request Completion from {self.service} API...")
+
+        logger.info(
+            f"Need to request {len(need_to_req_msgs)} / {len(messages)} messages"
+        )
 
         resps = self.batched_api_call(
             [messages[i] for i in need_to_req_msgs],
@@ -128,7 +134,7 @@ class APICache(ABC):
 
         return responses
 
-    def generate(self, overwrite_cache: bool = False, **kwargs):
+    def generate(self, overwrite_cache: bool=False, cache_seed=None, **kwargs):
         """Makes an API request if not found in cache, and returns the response.
 
         Args:
@@ -139,7 +145,8 @@ class APICache(ABC):
         Returns:
             A JSON-like API response.
         """
-        query = FrozenDict(kwargs)
+        logger = LoggerConfig.get_logger(name=logger_name)
+        query = FrozenDict({**kwargs, "cache_seed": cache_seed})
         hashval = hash(query)
         cache = self.r.hget(hashval, "data")
         if overwrite_cache:
@@ -147,7 +154,7 @@ class APICache(ABC):
         elif cache is not None:
             query_cached, resp_cached = pickle.loads(cache)
             if query_cached == query:
-                logger.debug(f"Matched cache for query")
+                logger.debug(f"Matched cache for query with cache seed {cache_seed}")
                 return resp_cached
             logger.debug(
                 f"Hash matches for query and cache, but contents are not equal. "
@@ -204,7 +211,7 @@ class ClaudeAPICache(APICache):
 
 
 class LocalModelAPICache(APICache):
-    """A cache wrapper for Anthropic Message API calls."""
+    """A cache wrapper for Local model API calls."""
 
     service = "LocalModel"
 

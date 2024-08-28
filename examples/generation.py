@@ -1,4 +1,5 @@
 import argparse
+import logging
 import re
 import time
 import pickle
@@ -32,6 +33,11 @@ from hypogenic.algorithm.inference import (
 )
 from hypogenic.algorithm.replace import DefaultReplace
 from hypogenic.algorithm.update import SamplingUpdate, DefaultUpdate
+from hypogenic.logger_config import LoggerConfig
+
+LoggerConfig.setup_logger(level=logging.INFO)
+
+logger = LoggerConfig.get_logger("HypoGenic")
 
 
 def load_dict(file_path):
@@ -44,6 +50,7 @@ def main():
     # set up tools
     start_time = time.time()
 
+    # For detailed argument descriptions, please run `hypogenic_generation --help` or see `hypogenic_cmd/generation.py`
     task_config_path = "./data/retweet/config.yaml"
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
@@ -54,15 +61,28 @@ def main():
     num_train = 75
     num_test = 25
     num_val = 25
+    k = 10
+    alpha = 5e-1
+    update_batch_size = 10
+    num_hypotheses_to_update = 1
+    save_every_10_examples = 10
+    init_batch_size = 10
+    init_hypotheses_per_batch = 10
+    cache_seed = None
+    temperature = 1e-5
+    max_tokens = 1000
+    seeds = [42]
 
     os.makedirs(output_folder, exist_ok=True)
     api = LocalVllmWrapper(model_name, model_path)
-    
+
     # If implementing a new task, you need to create a new extract_label function and pass in the Task constructor.
     # For existing tasks (shoe, hotel_reviews, retweet, headline_binary), you can use the extract_label_register.
-    task = BaseTask(task_config_path, extract_label=None, from_register=extract_label_register)
+    task = BaseTask(
+        task_config_path, extract_label=None, from_register=extract_label_register
+    )
 
-    for seed in [49]:
+    for seed in seeds:
         set_seed(seed)
         train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
         prompt_class = BasePrompt(task)
@@ -75,20 +95,22 @@ def main():
             replace_class=DefaultReplace(max_num_hypotheses),
             save_path=output_folder,
             num_init=num_init,
-            k=10,
-            alpha=5e-1,
-            update_batch_size=10,
-            num_hypotheses_to_update=1,
-            save_every_n_examples=10,
+            k=k,
+            alpha=alpha,
+            update_batch_size=update_batch_size,
+            num_hypotheses_to_update=num_hypotheses_to_update,
+            save_every_n_examples=save_every_10_examples,
         )
 
         hypotheses_bank = {}
         if old_hypothesis_file is None:
             hypotheses_bank = update_class.batched_initialize_hypotheses(
                 num_init,
-                init_batch_size=10,
-                init_hypotheses_per_batch=10,
-                use_cache=0,
+                init_batch_size=init_batch_size,
+                init_hypotheses_per_batch=init_hypotheses_per_batch,
+                cache_seed=cache_seed,
+                temperature=temperature,
+                max_tokens=max_tokens,
             )
             update_class.save_to_json(
                 hypotheses_bank,
@@ -107,6 +129,7 @@ def main():
                 current_epoch=epoch,
                 hypotheses_bank=hypotheses_bank,
                 current_seed=seed,
+                cache_seed=cache_seed,
             )
             update_class.save_to_json(
                 hypotheses_bank,
@@ -116,10 +139,10 @@ def main():
             )
 
     # print experiment info
-    print(f"Total time: {time.time() - start_time} seconds")
+    logger.info(f"Total time: {time.time() - start_time} seconds")
     # TODO: No Implementation for session_total_cost
     # if api.model in GPT_MODELS:
-    #     print(f'Estimated cost: {api.api.session_total_cost()}')
+    #     logger.info(f'Estimated cost: {api.api.session_total_cost()}')
 
 
 if __name__ == "__main__":

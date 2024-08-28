@@ -1,40 +1,14 @@
-import argparse
-import re
-import time
-import pickle
-import sys
-import os
-import math
-import json
-
-import random
-from typing import Dict, Union
-import torch
-import numpy as np
-
-from hypogenic.extract_label import extract_label_register
-
-from hypogenic.tasks import BaseTask
-from hypogenic.prompt import BasePrompt
-from hypogenic.utils import (
-    get_results,
-    set_seed,
-)
-from hypogenic.LLM_wrapper import llm_wrapper_register
-from hypogenic.algorithm.summary_information import (
-    SummaryInformation,
-    dict_to_summary_information,
-)
-from hypogenic.algorithm.inference import inference_register
-
-
 def load_dict(file_path):
+    import json
+
     with open(file_path, "r") as file:
         data = json.load(file)
     return data
 
 
 def parse_args():
+    import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--task_config_path",
@@ -119,11 +93,12 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--use_cache",
+        "--cache_seed",
         type=int,
-        default=1,
-        help="Whether to use cache for hypothesis generation.",
+        default=None,
+        help="If `None`, will not use cache, otherwise will use cache with corresponding seed number",
     )
+
     parser.add_argument(
         "--port",
         type=int,
@@ -137,6 +112,37 @@ def parse_args():
         default="default",
         help="The inference method to use.",
     )
+    parser.add_argument(
+        "--max_concurrent",
+        type=int,
+        default=3,
+        help="The maximum number of concurrent calls to the API.",
+    )
+    parser.add_argument(
+        "--log_file",
+        type=str,
+        default=None,
+        help="Path to the log file. If None, will only log to stdout.",
+    )
+    parser.add_argument(
+        "--log_level",
+        type=str,
+        default="INFO",
+        help="Logging level.",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+    )
+    parser.add_argument(
+        "--max_tokens",
+        type=int,
+        default=4096,
+        help="The maximum number of tokens to generate.",
+    )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=1e-5,
+        help="The temperature for the generation.",
+    )
 
     args = parser.parse_args()
 
@@ -144,9 +150,33 @@ def parse_args():
 
 
 def main():
+    import time
+
     start_time = time.time()
 
     args = parse_args()
+
+    from typing import Dict, Union
+
+    from hypogenic.extract_label import extract_label_register
+
+    from hypogenic.tasks import BaseTask
+    from hypogenic.prompt import BasePrompt
+    from hypogenic.utils import (
+        get_results,
+        set_seed,
+    )
+    from hypogenic.LLM_wrapper import llm_wrapper_register
+    from hypogenic.algorithm.summary_information import (
+        SummaryInformation,
+        dict_to_summary_information,
+    )
+    from hypogenic.algorithm.inference import inference_register
+    from hypogenic.logger_config import LoggerConfig
+
+    LoggerConfig.setup_logger(args.log_file, args.log_level)
+
+    logger = LoggerConfig.get_logger("HypoGenic")
 
     task = BaseTask(args.task_config_path, from_register=extract_label_register)
     if args.hypothesis_file is None:
@@ -163,7 +193,7 @@ def main():
     if args.inference_style in ["one_step_adaptive", "two_step_adaptive"] and all(
         [len(hyp_bank[hyp].correct_examples) == 0 for hyp in hyp_bank]
     ):
-        print("All hypotheses have 0 correct examples, use default inference")
+        logger.info("All hypotheses have 0 correct examples, use default inference")
         args.inference_style = "default"
 
     assert args.adaptive_num_hypotheses <= len(
@@ -186,39 +216,44 @@ def main():
         )
 
         if args.use_valid:
-            print("Using validation data")
+            logger.info("Using validation data")
             test_data = val_data
         else:
-            print("Using test data")
+            logger.info("Using test data")
 
         pred_list, label_list = inference_class.run_inference_final(
             test_data,
             hyp_bank,
-            use_cache=args.use_cache,
+            cache_seed=args.cache_seed,
             k=args.k,
             adaptive_threshold=args.adaptive_threshold,
             adaptive_num_hypotheses=args.adaptive_num_hypotheses,
             adaptive_num_examples=args.adaptive_num_examples,
+            max_concurrent=args.max_concurrent,
+            generate_kwargs={
+                "max_tokens": args.max_tokens,
+                "temperature": args.temperature,
+            },
         )
 
         results_dict = get_results(pred_list, label_list)
 
-        print(f"Accuracy for seed {seed}: {results_dict['accuracy']}")
-        print(f"F1 for seed {seed}: {results_dict['f1']}")
+        logger.info(f"Accuracy for seed {seed}: {results_dict['accuracy']}")
+        logger.info(f"F1 for seed {seed}: {results_dict['f1']}")
 
         # print the wrong indices
         wrong_indices = [
             i for i in range(len(pred_list)) if pred_list[i] != label_list[i]
         ]
-        print(f"Wrong indices: {wrong_indices}")
+        logger.info(f"Wrong indices: {wrong_indices}")
 
-    print(f"Averaged accuracy: {sum(accuracy_all)/len(args.seeds)}")
-    print(f"Averaged F1: {sum(f1_all)/len(args.seeds)}")
+    logger.info(f"Averaged accuracy: {sum(accuracy_all)/len(args.seeds)}")
+    logger.info(f"Averaged F1: {sum(f1_all)/len(args.seeds)}")
 
     # print experiment info
-    print(f"Total time: {time.time() - start_time} seconds")
+    logger.info(f"Total time: {time.time() - start_time} seconds")
     # if api.model in GPT_MODELS:
-    #     print(f'Estimated cost: {api.api.session_total_cost()}')
+    #     logger.info(f'Estimated cost: {api.api.session_total_cost()}')
 
 
 if __name__ == "__main__":

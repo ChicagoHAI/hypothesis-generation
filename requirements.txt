@@ -9,6 +9,7 @@ openai~=1.40.3
 anthropic~=0.32.0
 pulp~=2.9.0
 redis~=5.0.1
-torch~=2.4.0
+torch~=2.3.1
 accelerate~=0.33.0
-vllm~=0.5.3
+vllm==0.5.3.post1
+colorlog~=6.8.2

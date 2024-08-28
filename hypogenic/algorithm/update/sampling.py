@@ -11,6 +11,9 @@ from ..generation import Generation
 from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
+from ...logger_config import LoggerConfig
+
+logger_name = "HypoGenic - Sampling Update"
 
 
 @update_register.register("sampling")
@@ -58,8 +61,22 @@ class SamplingUpdate(Update):
         hypotheses_bank: Dict[str, SummaryInformation],
         current_epoch,
         current_seed,
-        use_cache=1,
+        cache_seed=None,
+        max_concurrent=3,
+        **generate_kwargs,
     ):
+        """
+        Update the hypotheses bank.
+
+        Parameters:
+            hypotheses_bank: The current hypotheses bank
+            current_epoch: The current epoch
+            current_seed: The current seed
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
+            max_concurrent: The maximum number of concurrent requests
+        """
+        logger = LoggerConfig.get_logger(logger_name)
+
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
 
@@ -76,17 +93,17 @@ class SamplingUpdate(Update):
         if current_epoch > self.epoch_to_start_from:
             start_sample = 0
         for i in range(start_sample, num_train_examples):
-            if self.num_wrong_scale > 0:
-                num_wrong_to_add_bank = (
-                    self.k * i / num_train_examples * self.num_wrong_scale
-                )
-
-            current_example = i + 1
-            print(f"Training on example {i}")
+            current_sample = i + 1
+            logger.info(f"Training on example {i}")
 
             top_k_hypotheses = sorted(
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
             )[: self.k]
+
+            if self.num_wrong_scale > 0:
+                num_wrong_to_add_bank = (
+                    len(top_k_hypotheses) * i / num_train_examples
+                ) * self.num_wrong_scale
 
             # check if the hypothesis works for the generated hypotheses
             num_wrong_hypotheses = 0
@@ -96,17 +113,19 @@ class SamplingUpdate(Update):
                     (i, {hypothesis: hypotheses_bank[hypothesis]})
                     for hypothesis in top_k_hypotheses
                 ],
-                use_cache=use_cache,
+                cache_seed=cache_seed,
+                max_concurrent=max_concurrent,
+                **generate_kwargs,
             )
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
-                        current_example, self.alpha
+                        current_sample, self.alpha
                     )
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
-                        current_example, self.alpha
+                        current_sample, self.alpha
                     )
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
 
@@ -128,21 +147,25 @@ class SamplingUpdate(Update):
                         new_hypotheses = (
                             self.generation_class.batched_hypothesis_generation(
                                 wrong_example_ids,
-                                current_example,
+                                current_sample,
                                 self.update_hypotheses_per_batch,
                                 self.alpha,
+                                cache_seed=cache_seed,
+                                max_concurrent=max_concurrent,
                             )
                         )
+
                         max_visited = max(
                             hypotheses_bank, key=lambda x: hypotheses_bank[x].num_visits
                         )
                         new_hypotheses = self.balance_by_sample(
                             new_hypotheses,
-                            current_example,
+                            current_sample,
                             hypotheses_bank[max_visited].num_visits,
                             self.num_init,
                             self.alpha,
-                            use_cache=use_cache,
+                            cache_seed=cache_seed,
+                            **generate_kwargs,
                         )
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
@@ -153,9 +176,9 @@ class SamplingUpdate(Update):
                             )
                         else:
                             new_hyp_bank = new_hypotheses
-                            print("Here is the new hypothesis bank:")
+                            logger.info("Here is the new hypothesis bank:")
                             for hyp in new_hyp_bank:
-                                print(hyp)
+                                logger.info(hyp)
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
 
@@ -176,8 +199,28 @@ class SamplingUpdate(Update):
         return hypotheses_bank
 
     def balance_by_sample(
-        self, hypotheses_bank, current_sample, max_visits, num_init, alpha, use_cache=1
+        self,
+        hypotheses_bank,
+        current_sample,
+        max_visits,
+        num_init,
+        alpha,
+        cache_seed=None,
+        max_concurrent=3,
+        **generate_kwargs,
     ):
+        """
+        Balance the number of samples for each hypothesis.
+
+        Parameters:
+            hypotheses_bank: The current hypotheses bank
+            current_sample: The current sample number
+            max_visits: The maximum number of visits
+            num_init: The number of initial samples
+            alpha: The alpha value
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
+            max_concurrent: The maximum number of concurrent requests
+        """
         if max_visits > 60:
             val = num_init
         elif max_visits > 30:
@@ -191,7 +234,9 @@ class SamplingUpdate(Update):
                 for hypothesis in hypotheses_bank
                 for i in range(val)
             ],
-            use_cache=use_cache,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
         preds, labels = preds[::-1], labels[::-1]
         for hypothesis in hypotheses_bank:
