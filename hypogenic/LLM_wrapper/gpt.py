@@ -88,6 +88,7 @@ class GPTWrapper(LLMWrapper):
                         self.rate_limiter.add_event()
                         return resp
                     except self.exceptions_to_catch as e:
+                        print(e)
                         self.rate_limiter.backoff()
                         continue
                 raise Exception(

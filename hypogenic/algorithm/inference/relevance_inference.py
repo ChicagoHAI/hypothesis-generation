@@ -16,8 +16,19 @@ from ..summary_information import SummaryInformation
 from ...prompt import BasePrompt
 from ...tasks import BaseTask
 from ...logger_config import LoggerConfig
+import re
 
 logger_name = "HypoGenic - Relevance Inference"
+
+def extract_label_persuasion(text):
+    # Extract the final answer from the data
+    try:
+        find = re.findall(r"\[ANS\](.+)\[ANS\]", text)[0]
+        find = find.replace("\[ANS\]", "").strip()
+    except:
+        find = ""
+
+    return find
 
 
 @inference_register.register("relevance")
@@ -57,34 +68,42 @@ class RelevanceInference(DefaultInference):
             [len(hyp_bank.keys()) >= 1 for _, hyp_bank in idx_hyp_pair]
         ), "Filter and weight inference requires at least one hypothesis"
 
+        prompt_inputs_inference = []
+        prompt_inputs_relevance = []
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
 
         # ----------------------------------------------------------------------
         # TODO: Filter the relevant hypotheses using the helper functions
         # ----------------------------------------------------------------------
-        # this really sucks rn
         for (idx, hypothesis_dict) in idx_hyp_pair:
-            print(idx, hypothesis_dict)
-            prompt_inputs_relevance = []
-            for i in range(len(data)):
-                prompt_inputs_relevance.append(self.prompt_class.is_relevant(hypothesis_dict, data, i))
-        
+            prompt_inputs_relevance.append((idx, self.prompt_class.is_relevant(hypothesis_dict, data, idx)))
+            prompt_inputs_inference.append((idx, self.prompt_class.inference(hypothesis_dict, data, idx)))
 
-        pdb.set_trace(header="IN INFERENCE CLASS BATCHED PREDICT")
+        print(len(prompt_inputs_relevance))
 
-        # we use the prompt class in order to create the batch of prompts
-        # TODO: craft prompt inputs for inference
-        prompt_inputs = []
-
-        responses = self.api.batched_generate(
-            prompt_inputs,
+        relevance_responses = self.api.batched_generate(
+            [prompt for _, prompt in prompt_inputs_relevance],
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
             **generate_kwargs,
         )
 
-        # TODO: make the predictions list, should be `None` for irrelevant hypotheses
         predictions = []
+
+        # TODO: make the predictions list, should be `None` for irrelevant hypotheses
+        # maybe don't make it linear
+        for idx2, rel_response in enumerate(relevance_responses):
+            ans = self.extract_relevance(rel_response)
+
+            if ans:
+                inf = self.api.generate(
+                    prompt_inputs_inference[idx2][1],
+                    max_tokens = 1000)
+                extracted_ans_from_inf = extract_label_persuasion(inf)
+
+                predictions.append(extracted_ans_from_inf)
+            else:
+                predictions.append(None)
 
         # and once we get the actual labels
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
@@ -92,7 +111,7 @@ class RelevanceInference(DefaultInference):
         # we can return our predictions along with the labels
         return predictions, actual_labels
 
-    def extract_relevance(response):
+    def extract_relevance(self, response):
         logger = LoggerConfig.get_logger(logger_name)
 
         if "Final answer:" in response:
@@ -154,6 +173,7 @@ class RelevanceInference(DefaultInference):
             max_concurrent=max_concurrent,
             **generate_kwargs,
         )
+
 
         # Returns a list of hypothesis banks, each containing only the relevant hypotheses
         relevant_hypotheses_banks = []
