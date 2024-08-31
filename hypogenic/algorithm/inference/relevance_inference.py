@@ -79,8 +79,6 @@ class RelevanceInference(DefaultInference):
             prompt_inputs_relevance.append((idx, self.prompt_class.is_relevant(hypothesis_dict, data, idx)))
             prompt_inputs_inference.append((idx, self.prompt_class.inference(hypothesis_dict, data, idx)))
 
-        print(len(prompt_inputs_relevance))
-
         relevance_responses = self.api.batched_generate(
             [prompt for _, prompt in prompt_inputs_relevance],
             cache_seed=cache_seed,
@@ -89,6 +87,9 @@ class RelevanceInference(DefaultInference):
         )
 
         predictions = []
+
+        accept_den = 0
+        accept_num = 0
 
         # TODO: make the predictions list, should be `None` for irrelevant hypotheses
         # maybe don't make it linear
@@ -102,14 +103,19 @@ class RelevanceInference(DefaultInference):
                 extracted_ans_from_inf = extract_label_persuasion(inf)
 
                 predictions.append(extracted_ans_from_inf)
+
+                accept_num += 1
+
             else:
                 predictions.append(None)
+        
+        accept_den += 1
 
         # and once we get the actual labels
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
 
         # we can return our predictions along with the labels
-        return predictions, actual_labels
+        return predictions, actual_labels, accept_num/max(accept_den, 1)
 
     def extract_relevance(self, response):
         logger = LoggerConfig.get_logger(logger_name)

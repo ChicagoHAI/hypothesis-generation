@@ -38,10 +38,18 @@ def get_results(pred_list, label_list):
     """
     Compute accuracy and F1 score for multi-class classification
     """
-    accuracy = accuracy_score(label_list, pred_list)
-    f1 = f1_score(label_list, pred_list, average="micro")
+    new_pl = []
+    new_ll = []
 
-    return {"accuracy": accuracy, "f1": f1}
+    for pred, label in zip(pred_list, label_list):
+        if pred is not None:
+            new_pl.append(pred)
+            new_ll.append(label)
+
+    accuracy = accuracy_score(new_pl, new_ll)
+    f1 = f1_score(new_pl, new_ll, average="micro")
+
+    return {"accuracy": accuracy, "f1": f1, "acceptance_rate": len(new_pl)/max(len(pred_list), 1)}
 
 
 def set_seed(seed):

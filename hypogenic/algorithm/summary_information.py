@@ -28,6 +28,7 @@ class SummaryInformation:
         self.correct_examples = (
             correct_examples  # a list of tuples of the form (sample index, label)
         )
+        self.acceptance = -1.0
 
     def set_accuracy(self, new_accuracy):
         self.acc = new_accuracy
@@ -43,6 +44,9 @@ class SummaryInformation:
 
     def set_hypothesis(self, hypothesis):
         self.hypothesis = hypothesis
+    
+    def set_acceptance(self, acceptance):
+        self.acceptance = acceptance
 
     def update_reward(self, alpha, num_examples):
         self.reward = self.acc + alpha * math.sqrt(

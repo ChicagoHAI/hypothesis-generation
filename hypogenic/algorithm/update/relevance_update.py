@@ -42,6 +42,27 @@ class RelevanceUpdate(Update):
         only_best_hypothesis=False,
         save_every_n_examples=100,
     ):
+        """
+        Initialize the update class
+
+        Parameters:
+            generation_class: The generation class that needs to be called in update for generating new hypotheses
+            inference_class: The inference class that is called for inference in update for making predictions
+            replace_class: The replace class that is called for replacing the old hypotheses with the new hypotheses
+            save_path: Path to save the hypotheses.
+            file_name_template: Template for the file name. Default is "hypotheses_training_sample\_${sample}\_seed\_${seed}\_epoch\_${epoch}.json"
+            sample_num_to_restart_from: Sample number to resume from. Default is -1
+            num_init: Number of examples to use for initializing hypotheses. Default is 25
+            epoch_to_start_from: Epoch number to start from. When restarting, this should be > 1. Default is 0
+            num_wrong_scale: Scale for dynamic num_wrong_to_add_bank. Default is 0.8
+            k: The number of hypotheses checked per sample during training. Default is -1
+            alpha: Exploration parameter. Default is 5e-1
+            update_batch_size: Number of examples to use per prompt. Default is 5
+            num_hypotheses_to_update: Number of lowest-ranking hypotheses to update once we reach the maximum number of hypotheses. Default is 5
+            update_hypotheses_per_batch: Number of hypotheses to generate per prompt. Default is 5
+            only_best_hypothesis: If only the best hypothesis should be added in the newly generated hypotheses of the batch. Default is False
+            save_every_n_examples: Save hypotheses every n examples. Default is 100
+        """
         super().__init__(
             generation_class,
             inference_class,
@@ -85,6 +106,7 @@ class RelevanceUpdate(Update):
         # initialize variables
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
+        coverage_dictionary = { i: 0 for i in range(num_train_examples) }
 
         # ----------------------------------------------------------------------
         # Figuring out starting sample index
@@ -102,9 +124,9 @@ class RelevanceUpdate(Update):
         # ----------------------------------------------------------------------
         # Creating the new hypotheses
         # ----------------------------------------------------------------------
-        # from the start to the end
+        culumative_acceptance = 0
+        acceptance_den = 0
         for i in range(start_sample, num_train_examples):
-            # the 'i' here is the sample we are testing each of the top hypotheses
 
             current_sample = i + 1
             logger.info(f"Training on example {i}")
@@ -124,7 +146,7 @@ class RelevanceUpdate(Update):
             # We need to see how good our hypothesis is, which we do by way of the inference class
             # ------------------------------------------------------------------
             num_wrong_hypotheses = 0
-            preds, labels = self.inference_class.batched_predict(
+            preds, labels, acceptance_rate = self.inference_class.batched_predict(
                 self.train_data,
                 [
                     (i, {hypothesis: hypotheses_bank[hypothesis]})
@@ -134,6 +156,9 @@ class RelevanceUpdate(Update):
                 max_concurrent=max_concurrent,
                 **generate_kwargs,
             )
+
+            culumative_acceptance += acceptance_rate
+            acceptance_den += 1
 
             # Comparison of the label and prediction
             # For the relevance update, if the hypothesis is irrelevant, the predicted output would be `None`
@@ -215,5 +240,11 @@ class RelevanceUpdate(Update):
                     epoch=current_epoch,
                 )
 
+        for _, summary in hypotheses_bank.items():
+            cov = summary.correct_examples
+
+            for ex in cov:
+                coverage_dictionary[ex[0]] += 1
+
         # Our new bank
-        return hypotheses_bank
+        return hypotheses_bank, coverage_dictionary, culumative_acceptance/max(acceptance_den, 1)

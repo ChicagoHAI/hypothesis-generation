@@ -151,7 +151,7 @@ class Generation(ABC):
         # ----------------------------------------------------------------------
         # We try to predict the ground truth labels
         # ----------------------------------------------------------------------
-        preds, labels = self.inference_class.batched_predict(
+        preds, labels, acceptance = self.inference_class.batched_predict(
             self.train_data,
             idx_hyp_pair,
             cache_seed=cache_seed,
@@ -178,6 +178,7 @@ class Generation(ABC):
             acc = correct / len(example_indices)
             new_generated_hypotheses[hyp].set_accuracy(acc)
             new_generated_hypotheses[hyp].set_num_visits(len(example_indices))
+            new_generated_hypotheses[hyp].set_acceptance(acceptance)
 
             # hypogenic reward
             reward = acc + alpha * math.sqrt(
