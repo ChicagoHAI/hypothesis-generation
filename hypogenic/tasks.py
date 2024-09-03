@@ -15,6 +15,7 @@ class BaseTask(ABC):
 
     All our information if from a yaml file that the user must set up.
     """
+
     def __init__(
         self,
         config_path: str,
@@ -42,24 +43,20 @@ class BaseTask(ABC):
             self.ood_test_data_path = data["ood_test_data_path"]
 
         # getting omrpt templates from yaml file
-        self.prompt_template = {
-            k: (
-                [{"role": kk, "content": vv} for kk, vv in v.items()]
-                if isinstance(v, dict)
-                else v
-            )
-            for k, v in data["prompt_templates"].items()
-        }
+        self.prompt_template = data["prompt_templates"]
 
         # task label
         self.extract_label = (
-            extract_label if extract_label is not None else from_register.build(self.task_name)
+            extract_label
+            if extract_label is not None
+            else from_register.build(self.task_name)
         )
 
     def get_data(self, num_train, num_test, num_val, seed=49) -> Tuple[pd.DataFrame]:
         """
         Loading the data from the paths we collected in the yaml file
         """
+
         # ----------------------------------------------------------------------
         # define our function to read data
         # ----------------------------------------------------------------------
@@ -80,7 +77,7 @@ class BaseTask(ABC):
                 key: value for key, value in zip(data.keys(), sampled_data)
             }
             return pd.DataFrame.from_dict(processed_data)
-        
+
         # ----------------------------------------------------------------------
         # use that function ot create our test sets
         # ----------------------------------------------------------------------
