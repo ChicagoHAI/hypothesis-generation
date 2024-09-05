@@ -28,7 +28,7 @@ class SummaryInformation:
         self.correct_examples = (
             correct_examples  # a list of tuples of the form (sample index, label)
         )
-        self.acceptance = -1.0
+        self.acceptance = 0.0
 
     def set_accuracy(self, new_accuracy):
         self.acc = new_accuracy

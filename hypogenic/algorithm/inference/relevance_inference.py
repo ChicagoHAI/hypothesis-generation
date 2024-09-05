@@ -48,6 +48,7 @@ class RelevanceInference(DefaultInference):
         idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
         cache_seed=None,
         max_concurrent=3,
+        target_idx = -1,
         **generate_kwargs,
     ):
         """
@@ -75,9 +76,14 @@ class RelevanceInference(DefaultInference):
         # ----------------------------------------------------------------------
         # TODO: Filter the relevant hypotheses using the helper functions
         # ----------------------------------------------------------------------
-        for (idx, hypothesis_dict) in idx_hyp_pair:
-            prompt_inputs_relevance.append((idx, self.prompt_class.is_relevant(hypothesis_dict, data, idx)))
-            prompt_inputs_inference.append((idx, self.prompt_class.inference(hypothesis_dict, data, idx)))
+
+        if target_idx == -1:
+            for (idx, hypothesis_dict) in idx_hyp_pair:
+                prompt_inputs_relevance.append((idx, self.prompt_class.is_relevant(hypothesis_dict, data, idx)))
+                prompt_inputs_inference.append((idx, self.prompt_class.inference(hypothesis_dict, data, idx)))
+        else:
+            for (idx, hypothesis_dict) in idx_hyp_pair:
+                prompt_inputs_relevance.append((idx, self.prompt_class.is_relevant_rankings(hypothesis_dict, data, target_idx)))
 
         relevance_responses = self.api.batched_generate(
             [prompt for _, prompt in prompt_inputs_relevance],
@@ -94,22 +100,27 @@ class RelevanceInference(DefaultInference):
         # TODO: make the predictions list, should be `None` for irrelevant hypotheses
         # maybe don't make it linear
         for idx2, rel_response in enumerate(relevance_responses):
+            rel_rank_hyp = self.extract_relevance_ranking(relevance_responses[0])
             ans = self.extract_relevance(rel_response)
 
-            if ans:
-                inf = self.api.generate(
+            if target_idx == -1 and ans:
+                infer = self.api.generate(
                     prompt_inputs_inference[idx2][1],
                     max_tokens = 1000)
-                extracted_ans_from_inf = extract_label_persuasion(inf)
+                extracted_ans_from_infer = extract_label_persuasion(infer)
 
-                predictions.append(extracted_ans_from_inf)
+                predictions.append(extracted_ans_from_infer)
 
                 accept_num += 1
+            elif rel_rank_hyp is not None:
+                prompt = self.prompt_class.inference({rel_rank_hyp: 0}, data, target_idx)
+                infer = self.api._generate(messages = prompt, model = "gpt-4o-mini")
 
+                predictions.append(infer)
             else:
                 predictions.append(None)
         
-        accept_den += 1
+            accept_den += 1
 
         # and once we get the actual labels
         actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
@@ -140,8 +151,15 @@ class RelevanceInference(DefaultInference):
             logger.info("Hypothesis is relevant")
             return True
         else:
-            logger.info(f"Hypothsis is not relevant")
+            logger.info(f"Hypothesis is not relevant")
             return False
+
+    def extract_relevance_ranking(self, text):
+        pattern = r'1\.\s*(.*?)(?=\n2\.|\Z)'
+        match = re.search(pattern, text, re.DOTALL)
+        if match:
+            return match.group(1).strip()
+        return None
 
     def filter_hypothesis(
         self,
@@ -179,7 +197,6 @@ class RelevanceInference(DefaultInference):
             max_concurrent=max_concurrent,
             **generate_kwargs,
         )
-
 
         # Returns a list of hypothesis banks, each containing only the relevant hypotheses
         relevant_hypotheses_banks = []

@@ -14,6 +14,8 @@ from ..replace import Replace
 from ..summary_information import SummaryInformation
 from ...logger_config import LoggerConfig
 
+import pdb
+
 logger_name = "HypoGenic - Relevance Update"
 
 
@@ -136,6 +138,8 @@ class RelevanceUpdate(Update):
                 hypotheses_bank, key=lambda x: hypotheses_bank[x].reward, reverse=True
             )[: self.k]
 
+            print(hypotheses_bank)
+
             # We are at the regret that we need in order to generate a new hypothesis
             if self.num_wrong_scale > 0:
                 num_wrong_to_add_bank = (
@@ -146,6 +150,7 @@ class RelevanceUpdate(Update):
             # We need to see how good our hypothesis is, which we do by way of the inference class
             # ------------------------------------------------------------------
             num_wrong_hypotheses = 0
+            acceptance_rate = 0
             preds, labels, acceptance_rate = self.inference_class.batched_predict(
                 self.train_data,
                 [
@@ -154,6 +159,7 @@ class RelevanceUpdate(Update):
                 ],
                 cache_seed=cache_seed,
                 max_concurrent=max_concurrent,
+                target_idx = i,
                 **generate_kwargs,
             )
 

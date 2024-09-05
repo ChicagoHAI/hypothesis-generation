@@ -1,6 +1,7 @@
 import logging
 import colorlog
 from logging import Logger
+import os
 
 
 class LoggerConfig:
@@ -27,6 +28,11 @@ class LoggerConfig:
         )
 
         if log_file_path is not None:
+            # Ensure the directory exists
+            log_dir = os.path.dirname(log_file_path)
+            if not os.path.exists(log_dir):
+                os.makedirs(log_dir)
+                
             LoggerConfig.file_handler = logging.FileHandler(log_file_path)
             LoggerConfig.file_handler.setLevel(logging.ERROR)
             LoggerConfig.file_handler.setFormatter(formatter)

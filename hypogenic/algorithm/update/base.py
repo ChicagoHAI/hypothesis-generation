@@ -12,6 +12,7 @@ from ..inference import Inference
 from ..replace import Replace
 from ..summary_information import SummaryInformation
 
+import pdb
 
 class Update(ABC):
     """Update class. To use it implement the update function"""
@@ -156,6 +157,7 @@ class Update(ABC):
         Returns:
             hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
         """
+
         hypotheses_list = self.generation_class.batched_initialize_hypotheses(
             num_init,
             init_batch_size,

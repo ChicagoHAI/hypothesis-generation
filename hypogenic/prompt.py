@@ -164,7 +164,6 @@ class BasePrompt(ABC):
         """
         Check if a hypothesis is relevant to a specific example
         """
-
         hypothesis = list(hypotheses_dict.keys())[0]
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
@@ -173,3 +172,22 @@ class BasePrompt(ABC):
         prompt = self._information_prompt(substitute_dict, "is_relevant")
 
         return prompt
+    
+    def is_relevant_rankings(self, idx_hyp_pair, test_data, test_idx):
+        """
+        Check if a hypothesis is relevant to a specific example based on rank
+        """
+        hypotheses = []
+
+        for (hyp, hyp_dict) in idx_hyp_pair.items():
+            hypotheses.append(hyp)
+        
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+
+        substitute_dict["hypotheses"] = hypotheses
+
+        prompt = self._information_prompt(substitute_dict, "ranking_relevance")
+
+        return prompt
+        
+
