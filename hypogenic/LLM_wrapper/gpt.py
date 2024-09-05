@@ -88,7 +88,7 @@ class GPTWrapper(LLMWrapper):
                         self.rate_limiter.add_event()
                         return resp
                     except self.exceptions_to_catch as e:
-                        self.rate_limiter.backoff()
+                        self.rate_limiter.backoff(error_msg=str(e))
                         continue
                 raise Exception(
                     "Max retry exceeded and failed to get response from API, possibly due to bad API requests."
@@ -134,7 +134,7 @@ class GPTWrapper(LLMWrapper):
                 )
                 return resp.choices[0].message.content
             except self.exceptions_to_catch as e:
-                self.rate_limiter.backoff()
+                self.rate_limiter.backoff(error_msg=str(e))
                 continue
         raise Exception(
             "Max retry exceeded and failed to get response from API, possibly due to bad API requests."

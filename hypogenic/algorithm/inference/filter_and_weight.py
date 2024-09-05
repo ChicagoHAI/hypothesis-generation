@@ -92,7 +92,7 @@ class FilterAndWeightInference(Inference):
 
         Parameters
             data: the specific dataset
-            index: the specific index to filter for
+            indices: the specific indices to filter for
             hyp_bank: a dictionary of hypotheses
 
         Returns
@@ -132,6 +132,27 @@ class FilterAndWeightInference(Inference):
 
         return relevant_hypotheses_banks
 
+    def check_relevance(
+        self,
+        data,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        generate_kwargs={},
+        **kwargs,
+    ):
+        """
+        Run over the entire dataset and check if the hypotheses are relevant.
+        For each sample-hypothesis pair, prompt LLM to determine whether a hypothesis is relevant.
+        Returns
+
+        Parameters:
+            data: the data to predict on
+            hyp_bank: the hypotheses that we want to predict from
+            k: the number of hypotheses to keep
+            cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
+            max_concurrent: the maximum number of concurrent requests
+        """
     def _run_inference_final(
         self,
         data,

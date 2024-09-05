@@ -99,6 +99,8 @@ More examples can be found in `examples/` directory.
 
 ### 2. Write config.yaml
 Create the `config.yaml` file in the same directory as the dataset. In the `config.yaml` file, please specify the following fields:
+
+**Note: For running a basic generation, you will need to write prompt templates for `observations`, `batched_generation`, and `inference`.**
 ```yaml
 task_name: <TASK>
 
@@ -204,7 +206,13 @@ prompt_templates:
       Proposed hypotheses:
 
   # few_shot_baseline
-  # inference
+  inference:
+    system: |-
+      ...
+    
+    user: |-
+      ...
+      
   # is_relevant
   # adaptive_inference
   # adaptive_selection

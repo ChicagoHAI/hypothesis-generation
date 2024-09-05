@@ -13,3 +13,4 @@ redis-stable
 dump.rdb
 hypogenic.egg-info
 ./data
+playgrounds/*

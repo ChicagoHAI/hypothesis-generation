@@ -16,9 +16,12 @@ class RateLimiter:
         with self.lock:
             self.backoff_time = self.min_backoff
 
-    def backoff(self):
+    def backoff(self, error_msg=None):
         logger = LoggerConfig.get_logger(logger_name)
 
+        if error_msg is not None:
+            logger.warning(f"Backing off due to error: {error_msg}")
+            
         logger.warning(f"Backing off for {self.backoff_time:.1f} seconds")
         time.sleep(self.backoff_time)
         with self.lock:

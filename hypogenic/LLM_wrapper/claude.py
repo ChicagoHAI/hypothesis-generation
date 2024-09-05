@@ -96,7 +96,7 @@ class ClaudeWrapper(LLMWrapper):
                         self.rate_limiter.add_event()
                         return resp
                     except self.exceptions_to_catch as e:
-                        self.rate_limiter.backoff()
+                        self.rate_limiter.backoff(error_msg=str(e))
                         continue
                     except anthropic.BadRequestError as e:
                         resp = "Output blocked by content filtering policy"
@@ -147,7 +147,7 @@ class ClaudeWrapper(LLMWrapper):
                 )
                 return response.content[0].text
             except self.exceptions_to_catch as e:
-                self.rate_limiter.backoff()
+                self.rate_limiter.backoff(error_msg=str(e))
                 continue
             except anthropic.BadRequestError as e:
                 resp = "Output blocked by content filtering policy"
