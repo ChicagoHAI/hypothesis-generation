@@ -28,7 +28,7 @@ class LoggerConfig:
 
         if log_file_path is not None:
             LoggerConfig.file_handler = logging.FileHandler(log_file_path)
-            LoggerConfig.file_handler.setLevel(logging.ERROR)
+            LoggerConfig.file_handler.setLevel(logging.DEBUG)
             LoggerConfig.file_handler.setFormatter(formatter)
 
         LoggerConfig.console_handler = logging.StreamHandler()
