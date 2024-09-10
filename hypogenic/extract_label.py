@@ -1,24 +1,33 @@
 import re
 from .register import Register
+from .logger_config import LoggerConfig
 
 extract_label_register = Register("extract_label")
 
 
 @extract_label_register.register("default")
 def default_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
     if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
         return "other"
 
     text = text.lower()
     pattern = r"final answer:\s+<begin>(.*)<end>"
 
     match = re.findall(pattern, text)
-    return match[-1] if len(match) > 0 else "other"
+    if len(match) > 0:
+        return match[-1]
+    else:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
 
 
 @extract_label_register.register("headline_binary")
 def headline_binary_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
     if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
         return "other"
     text = text.lower()
     pattern = r"answer:\s+(headline 1|headline 2|other)"
@@ -30,14 +39,15 @@ def headline_binary_extract_label(text):
             return "Headline 1 has more clicks than Headline 2."
         elif answer == "headline 2":
             return "Headline 2 has more clicks than Headline 1."
-        else:
-            return "other"
+    logger.warning(f"Could not extract label from text: {text}")
     return "other"
 
 
 @extract_label_register.register("hotel_reviews")
 def hotel_reviews_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
     if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
         return "other"
 
     # only keep the part after "Final answer:"
@@ -52,18 +62,18 @@ def hotel_reviews_extract_label(text):
             return "truthful"
         elif answer == "deceptive":
             return "deceptive"
-        else:
-            return "other"
-
+    logger.warning(f"Could not extract label from text: {text}")
     return "other"
 
 
 @extract_label_register.register("retweet")
 def retweet_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
     """
     `text` follows the format "the <label> tweet got more retweets"
     """
     if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
         return "other"
     text = text.lower()
     pattern = r"answer: the (\w+) tweet"
@@ -71,12 +81,15 @@ def retweet_extract_label(text):
     if len(match) > 0:
         return match[-1]
     else:
+        logger.warning(f"Could not extract label from text: {text}")
         return "other"
 
 
 @extract_label_register.register("shoe")
 def extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
     if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
         return "other"
 
     pattern = r"final answer:\s+(white|red|orange|green|blue|black)"
@@ -86,7 +99,5 @@ def extract_label(text):
         answer = match[-1] if len(match) > 0 else None
         if answer in ["white", "red", "orange", "green", "blue", "black"]:
             return answer
-        else:
-            return "other"
-
+    logger.warning(f"Could not extract label from text: {text}")
     return "other"
