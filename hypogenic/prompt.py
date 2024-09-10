@@ -122,6 +122,27 @@ class BasePrompt(ABC):
         ]
         return messages
 
+    def _fill_multi_in_sub_dict(
+        self,
+        init_dict: Dict[str, str],
+        multi_sub_dicts: Dict[str, List[Dict[str, str]]],
+        prompt_key: str,
+    ):
+        substitute_dict = init_dict
+        keys = self._get_substitute_key(self._get_prompt_template(prompt_key))
+        keys = [key for key in keys if key not in substitute_dict]
+
+        for key in keys:
+            if self._is_multi_content(self._get_prompt_template(key)):
+                substitute_dict[key] = self._fill_multi_content(
+                    ({}, multi_sub_dicts[key]),
+                    self._get_prompt_template(key),
+                )
+            else:
+                substitute_dict[key] = self._get_prompt_template(key)
+
+        return substitute_dict
+
     def few_shot_baseline(
         self, train_data: pd.DataFrame, num_few_shot, test_data, test_idx
     ):
@@ -130,24 +151,14 @@ class BasePrompt(ABC):
         """
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        keys = self._get_substitute_key(self._get_prompt_template("few_shot_baseline"))
-        keys = [key for key in keys if key not in substitute_dict]
-
-        for key in keys:
-            substitute_dict[key] = ""
-        if num_few_shot > 0:
-            multi_sub_dicts = []
-            for j in range(num_few_shot):
-                multi_sub_dicts.append(self._get_substitute_dict(train_data, j))
-
-            for key in keys:
-                if self._is_multi_content(self._get_prompt_template(key)):
-                    substitute_dict[key] = self._fill_multi_content(
-                        ({}, multi_sub_dicts),
-                        self._get_prompt_template(key),
-                    )
-                else:
-                    substitute_dict[key] = self._get_prompt_template(key)
+        multi_sub_dicts = {"observations": []}
+        for j in range(num_few_shot):
+            multi_sub_dicts["observations"].append(
+                self._get_substitute_dict(train_data, j)
+            )
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "few_shot_baseline"
+        )
 
         prompt = self._information_prompt(substitute_dict, "few_shot_baseline")
 
@@ -159,20 +170,15 @@ class BasePrompt(ABC):
         """
 
         substitute_dict = {"num_hypotheses": num_hypotheses}
-        keys = self._get_substitute_key(self._get_prompt_template("batched_generation"))
-        keys = [key for key in keys if key not in substitute_dict]
 
-        multi_sub_dicts = []
+        multi_sub_dicts = {"observations": []}
         for example_idx in range(len(train_data)):
-            multi_sub_dicts.append(self._get_substitute_dict(train_data, example_idx))
-        for key in keys:
-            if self._is_multi_content(self._get_prompt_template(key)):
-                substitute_dict[key] = self._fill_multi_content(
-                    ({}, multi_sub_dicts),
-                    self._get_prompt_template(key),
-                )
-            else:
-                substitute_dict[key] = self._get_prompt_template(key)
+            multi_sub_dicts["observations"].append(
+                self._get_substitute_dict(train_data, example_idx)
+            )
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "batched_generation"
+        )
 
         prompt = self._information_prompt(substitute_dict, "batched_generation")
 
@@ -200,10 +206,8 @@ class BasePrompt(ABC):
         """
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        keys = self._get_substitute_key(self._get_prompt_template("adaptive_inference"))
-        keys = [key for key in keys if key not in substitute_dict]
 
-        multi_sub_dicts = []
+        multi_sub_dicts = {"adaptive_info_prompt": []}
         for _, hypothesis_class in hypotheses_dict.items():
             hypothesis_related_examples = hypothesis_class.correct_examples
             prefix_dict = {"hypothesis_text": hypothesis_class.hypothesis}
@@ -213,14 +217,10 @@ class BasePrompt(ABC):
                 content_dicts.append(
                     self._get_substitute_dict(train_data, example_info[0])
                 )
-            multi_sub_dicts.append((prefix_dict, content_dicts))
-
-        for key in keys:
-            if self._is_multi_content(self._get_prompt_template(key)):
-                substitute_dict[key] = self._fill_multi_content(
-                    ({}, multi_sub_dicts),
-                    self._get_prompt_template(key),
-                )
+            multi_sub_dicts["adaptive_info_prompt"].append((prefix_dict, content_dicts))
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "adaptive_inference"
+        )
 
         prompt = self._information_prompt(substitute_dict, "adaptive_inference")
 
@@ -232,10 +232,8 @@ class BasePrompt(ABC):
         """
 
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
-        keys = self._get_substitute_key(self._get_prompt_template("adaptive_selection"))
-        keys = [key for key in keys if key not in substitute_dict]
 
-        multi_sub_dicts = []
+        multi_sub_dicts = {"adaptive_info_prompt": []}
         for _, hypothesis_class in hypotheses_dict.items():
             hypothesis_related_examples = hypothesis_class.correct_examples
             prefix_dict = {"hypothesis_text": hypothesis_class.hypothesis}
@@ -245,14 +243,10 @@ class BasePrompt(ABC):
                 content_dicts.append(
                     self._get_substitute_dict(train_data, example_info[0])
                 )
-            multi_sub_dicts.append((prefix_dict, content_dicts))
-
-        for key in keys:
-            if self._is_multi_content(self._get_prompt_template(key)):
-                substitute_dict[key] = self._fill_multi_content(
-                    ({}, multi_sub_dicts),
-                    self._get_prompt_template(key),
-                )
+            multi_sub_dicts["adaptive_info_prompt"].append((prefix_dict, content_dicts))
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "adaptive_selection"
+        )
 
         prompt = self._information_prompt(substitute_dict, "adaptive_selection")
 

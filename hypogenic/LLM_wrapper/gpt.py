@@ -49,6 +49,7 @@ class GPTWrapper(LLMWrapper):
         min_backoff=1.0,
         max_backoff=60.0,
         port=6832,
+        timeout=20,
         redis_kwargs: Dict = {},
         **kwargs,
     ):
@@ -58,6 +59,7 @@ class GPTWrapper(LLMWrapper):
             min_backoff=min_backoff,
             max_backoff=max_backoff,
         )
+        self.timeout = timeout
         self.api = OpenAI()
         self.api_with_cache = OpenAIAPICache(port=port, **redis_kwargs)
         self.api_with_cache.api_call = self._generate
@@ -83,7 +85,7 @@ class GPTWrapper(LLMWrapper):
             async with sem:
                 for _ in range(self.max_retry):
                     try:
-                        resp = await client.chat.completions.create(**kwargs)
+                        resp = await client.chat.completions.create(timeout=self.timeout, **kwargs)
                         status_bar.update(1)
                         self.rate_limiter.add_event()
                         return resp
@@ -130,6 +132,7 @@ class GPTWrapper(LLMWrapper):
                     max_tokens=max_tokens,
                     temperature=temperature,
                     n=n,
+                    timeout=self.timeout,
                     **kwargs,
                 )
                 return resp.choices[0].message.content
