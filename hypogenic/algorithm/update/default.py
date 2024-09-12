@@ -184,6 +184,7 @@ class DefaultUpdate(Update):
                                 self.alpha,
                                 cache_seed=cache_seed,
                                 max_concurrent=max_concurrent,
+                                **generate_kwargs,
                             )
                         )
 

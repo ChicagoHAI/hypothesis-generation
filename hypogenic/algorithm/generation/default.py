@@ -49,7 +49,7 @@ class DefaultGeneration(Generation):
         init_hypotheses_per_batch,
         cache_seed=None,
         max_concurrent=3,
-        **generate_kwargs
+        **generate_kwargs,
     ):
         """
         Batches the process of making new hypotheses
@@ -93,7 +93,7 @@ class DefaultGeneration(Generation):
             prompt_inputs,
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
-            **generate_kwargs
+            **generate_kwargs,
         )
 
         hypotheses_list = list(
@@ -123,6 +123,7 @@ class DefaultGeneration(Generation):
         alpha: float,
         cache_seed=None,
         max_concurrent=3,
+        **generate_kwargs,
     ):
         """
         Generates new hypotheses for the given examples
@@ -142,6 +143,7 @@ class DefaultGeneration(Generation):
             example_ids,
             num_hypotheses_generate,
             cache_seed=cache_seed,
+            **generate_kwargs,
         )
 
         return self.make_hypotheses_bank(
@@ -151,4 +153,5 @@ class DefaultGeneration(Generation):
             new_hypotheses,
             cache_seed=cache_seed,
             max_concurrent=max_concurrent,
+            **generate_kwargs,
         )
