@@ -39,7 +39,7 @@ def get_results(pred_list, label_list):
     Compute accuracy and F1 score for multi-class classification
     """
     accuracy = accuracy_score(label_list, pred_list)
-    f1 = f1_score(label_list, pred_list, average="micro")
+    f1 = f1_score(label_list, pred_list, average="macro")
 
     return {"accuracy": accuracy, "f1": f1}
 
