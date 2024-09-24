@@ -21,10 +21,7 @@ from hypogenic.utils import (
     set_seed,
 )
 from hypogenic.LLM_wrapper import LocalVllmWrapper
-from hypogenic.algorithm.summary_information import (
-    SummaryInformation,
-    dict_to_summary_information,
-)
+from hypogenic.algorithm.summary_information import SummaryInformation
 from hypogenic.algorithm.inference import (
     DefaultInference,
     OneStepAdaptiveInference,
@@ -70,7 +67,7 @@ def main():
     task = BaseTask(task_config_path, extract_label=retweet_extract_label)
 
     for hypothesis in dict:
-        hyp_bank[hypothesis] = dict_to_summary_information(dict[hypothesis])
+        hyp_bank[hypothesis] = SummaryInformation.from_dict(dict[hypothesis])
 
     assert adaptive_num_hypotheses <= len(
         hyp_bank
