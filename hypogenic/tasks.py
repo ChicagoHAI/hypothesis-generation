@@ -52,7 +52,9 @@ class BaseTask(ABC):
             else from_register.build(self.task_name)
         )
 
-    def get_data(self, num_train, num_test, num_val, seed=49) -> Tuple[pd.DataFrame]:
+    def get_data(
+        self, num_train, num_test, num_val, seed=49
+    ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         """
         Loading the data from the paths we collected in the yaml file
         """
@@ -69,7 +71,11 @@ class BaseTask(ABC):
             if not is_train:
                 random.seed(seed)
 
-            num_samples = min(num, len(data["label"]))
+            if num is None:
+                num_samples = len(data["label"])
+            else:
+                num_samples = min(num, len(data["label"]))
+
             sampled_data = zip(
                 *random.sample(list(zip(*list(data.values()))), num_samples)
             )
