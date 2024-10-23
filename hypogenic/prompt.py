@@ -8,6 +8,9 @@ import pandas as pd
 
 from .tasks import BaseTask
 
+from hypogenic.logger_config import LoggerConfig
+
+logger = LoggerConfig.get_logger("Prompt")
 
 class BasePrompt(ABC):
     """
@@ -208,21 +211,34 @@ class BasePrompt(ABC):
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
 
         multi_sub_dicts = {"adaptive_info_prompt": []}
+        hyp_idx = 0
         for _, hypothesis_class in hypotheses_dict.items():
             hypothesis_related_examples = hypothesis_class.correct_examples
-            prefix_dict = {"hypothesis_text": hypothesis_class.hypothesis}
-
-            content_dicts = []
+            hyp_substitute_dict = {
+                "hypothesis_text": hypothesis_class.hypothesis,
+                "idx": hyp_idx + 1,
+            }
+            observations_dict = {"observations": []}
             for example_info in hypothesis_related_examples:
-                content_dicts.append(
+                observations_dict["observations"].append(
                     self._get_substitute_dict(train_data, example_info[0])
                 )
-            multi_sub_dicts["adaptive_info_prompt"].append((prefix_dict, content_dicts))
+            
+            hyp_substitute_dict = self._fill_multi_in_sub_dict(
+                hyp_substitute_dict, observations_dict, "adaptive_info_prompt"
+            )
+            multi_sub_dicts["adaptive_info_prompt"].append(
+                hyp_substitute_dict
+            )
+            hyp_idx += 1
+
         substitute_dict = self._fill_multi_in_sub_dict(
             substitute_dict, multi_sub_dicts, "adaptive_inference"
         )
 
         prompt = self._information_prompt(substitute_dict, "adaptive_inference")
+        logger.debug(f"System prompt: {prompt[0]['content']}")
+        logger.debug(f"User prompt: {prompt[1]['content']}")
 
         return prompt
 
@@ -234,22 +250,34 @@ class BasePrompt(ABC):
         substitute_dict = self._get_substitute_dict(test_data, test_idx)
 
         multi_sub_dicts = {"adaptive_info_prompt": []}
+        hyp_idx = 0
         for _, hypothesis_class in hypotheses_dict.items():
             hypothesis_related_examples = hypothesis_class.correct_examples
-            prefix_dict = {"hypothesis_text": hypothesis_class.hypothesis}
-
-            content_dicts = []
+            hyp_substitute_dict = {
+                "hypothesis_text": hypothesis_class.hypothesis,
+                "idx": hyp_idx + 1,
+            }
+            observations_dict = {"observations": []}
             for example_info in hypothesis_related_examples:
-                content_dicts.append(
+                observations_dict["observations"].append(
                     self._get_substitute_dict(train_data, example_info[0])
                 )
-            multi_sub_dicts["adaptive_info_prompt"].append((prefix_dict, content_dicts))
+            
+            hyp_substitute_dict = self._fill_multi_in_sub_dict(
+                hyp_substitute_dict, observations_dict, "adaptive_info_prompt"
+            )
+            multi_sub_dicts["adaptive_info_prompt"].append(
+                hyp_substitute_dict
+            )
+            hyp_idx += 1
+
         substitute_dict = self._fill_multi_in_sub_dict(
             substitute_dict, multi_sub_dicts, "adaptive_selection"
         )
 
         prompt = self._information_prompt(substitute_dict, "adaptive_selection")
-
+        logger.debug(f"System prompt: {prompt[0]['content']}")
+        logger.debug(f"User prompt: {prompt[1]['content']}")
         return prompt
 
     def is_relevant(self, hypotheses_dict, test_data, test_idx):

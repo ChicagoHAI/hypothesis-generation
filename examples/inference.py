@@ -6,6 +6,7 @@ import sys
 import os
 import math
 import json
+import logging
 
 import random
 from typing import Union
@@ -20,7 +21,12 @@ from hypogenic.utils import (
     get_results,
     set_seed,
 )
-from hypogenic.LLM_wrapper import LocalVllmWrapper
+from hypogenic.LLM_wrapper import (
+    GPTWrapper,
+    LLMWrapper,
+    LocalVllmWrapper,
+    llm_wrapper_register,
+)
 from hypogenic.algorithm.summary_information import (
     SummaryInformation,
     dict_to_summary_information,
@@ -31,11 +37,14 @@ from hypogenic.algorithm.inference import (
     FilterAndWeightInference,
     TwoStepAdaptiveInference,
     UpperboundInference,
+    inference_register
 )
 from hypogenic.logger_config import LoggerConfig
 
 logger = LoggerConfig.get_logger("HypoGenic")
-
+LoggerConfig.setup_logger(
+        logging.DEBUG,
+)
 
 def load_dict(file_path):
     with open(file_path, "r") as file:
@@ -48,9 +57,16 @@ def main():
 
     # For detailed argument descriptions, please run `hypogenic_inference --help` or see `hypogenic_cmd/inference.py`
     task_config_path = "./data/retweet/config.yaml"
-    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
-    hypothesis_file = f"./outputs/retweet/{model_name}/hyp_20/hypotheses_training_sample_final_seed_49_epoch_0.json"
+    # model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    # model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
+    # model_type = "vllm"
+
+    model_name = "gpt-4o-mini"
+    model_path = None
+    model_type = "gpt"
+    inference_type = "two_step_adaptive"
+
+    hypothesis_file = f"./outputs/retweet/{model_name}/hyp_20/hypotheses_training_sample_final_seed_42_epoch_0.json"
     adaptive_num_hypotheses = 5
     num_train = 75
     num_test = 25
@@ -76,7 +92,7 @@ def main():
         hyp_bank
     ), f"The number of hypotheses chosen in adaptive inference must be less than the total number of hypotheses"
 
-    api = LocalVllmWrapper(model_name, model_path)
+    api = llm_wrapper_register.build(model_type)(model=model_name, path_name=model_path)
 
     for seed in seeds:
         set_seed(seed)
@@ -84,7 +100,7 @@ def main():
             num_train, num_test, num_val, seed
         )
         prompt_class = BasePrompt(task)
-        inference_class = DefaultInference(api, prompt_class, train_data, task)
+        inference_class = inference_register.build(inference_type)(api, prompt_class, train_data, task)
 
         if use_valid:
             logger.info("Using validation data")
