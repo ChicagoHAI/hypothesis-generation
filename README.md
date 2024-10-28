@@ -1,15 +1,24 @@
 # Hypothesis Generation with Large Language Models
 
+**[Oct'24]** [Literature Meets Data: A Synergistic Approach to Hypothesis Generation](https://arxiv.org/abs/2410.17309)  
+**[Apr'24]** [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326)
+
 ![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg)
 
-Welcome to the GitHub repository for our paper, ["Hypothesis Generation with Large Language Models"](https://arxiv.org/abs/2404.04326). This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our work, presented in detail in the accompanying paper, highlights the capability of LLMs not just to assist but to innovate in the hypothesis generation process for scientific inquiry.
+This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our works introduce frameworks for generating hypotheses with LLMs, specifically **HypoGeniC** (**Hypo**thesis **Gen**eration **i**n **C**ontext) is a data-driven framework that generates hypotheses solely based on given datasets, while **HypoRefine** is a synergistic approach 
+that incorporates both existing literature and given datasets in an agentic framework to generate hypotheses. Additionally, modules of two Union methods **Literature∪HypoGeniC** and **Literature∪HypoRefine** are provided that mechanistically combine hypotheses from literature only with hypotheses from our frameworks. 
+Our work highlights the capability of LLMs to assist and innovate in the hypothesis generation process for scientific inquiry.
+
+<!-- Welcome to the GitHub repository for our paper, ["Hypothesis Generation with Large Language Models"](https://arxiv.org/abs/2404.04326). This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our work, presented in detail in the accompanying paper, highlights the capability of LLMs not just to assist but to innovate in the hypothesis generation process for scientific inquiry. -->
 
 ## Table of Contents
 - [Install environment](#install-environment)
 - [Optional: set up Redis server for caching LLM responses](#optional-set-up-redis-server-for-caching-llm-responses)
 - [Usage](#usage)
   - [Optional: Start Redis server](#optional-start-redis-server)
-  - [Hypothesis Generation](#hypothesis-generation)
+  - [**HypoGeniC** Hypothesis Generation](#hypogenic-generation)
+  - [**HypoRefine** Hypothesis Generation](#hyporefine-generation)
+  - [Union Methods Hypothesis Generation](#union-generation)
   - [Hypothesis Inference](#hypothesis-inference)
 - [Use HypoGeniC in your code](#use-hypogenic-in-your-code)
 - [Add a new task or dataset](#add-a-new-task-or-dataset)
@@ -54,7 +63,8 @@ make
 
 ## Usage
 
-The datasets used in our paper is at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets)
+The datasets used in the paper [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326) for **HypoGeniC** is at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).  
+The datasets used in the paper [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326) for **HypoRefine** and Union methods is at [Hypothesis-agent-datasets]()
 
 For replicating the results in the paper, you can follow the steps below:
 ### 1. [Optional] Start Redis server
@@ -65,7 +75,7 @@ cd $PATH_PREFIX/redis-stable/src
 ./redis-server --port 6832
 ```
 
-### 2. Hypothesis Generation
+### 2. **HypoGeniC** Hypothesis Generation
 
 For help with the arguments, run:
 ```bash
