@@ -16,9 +16,9 @@ Our work highlights the capability of LLMs to assist and innovate in the hypothe
 - [Optional: set up Redis server for caching LLM responses](#optional-set-up-redis-server-for-caching-llm-responses)
 - [Usage](#usage)
   - [Optional: Start Redis server](#optional-start-redis-server)
-  - [**HypoGeniC** Hypothesis Generation](#hypogenic-generation)
-  - [**HypoRefine** Hypothesis Generation](#hyporefine-generation)
-  - [Union Methods Hypothesis Generation](#union-generation)
+  - [Hypothesis Generation](#hypogenic-generation)
+  <!-- - [**HypoRefine** Hypothesis Generation](#hyporefine-generation)
+  - [Union Methods Hypothesis Generation](#union-generation) -->
   - [Hypothesis Inference](#hypothesis-inference)
 - [Use HypoGeniC in your code](#use-hypogenic-in-your-code)
 - [Add a new task or dataset](#add-a-new-task-or-dataset)
@@ -75,12 +75,13 @@ cd $PATH_PREFIX/redis-stable/src
 ./redis-server --port 6832
 ```
 
-### 2. **HypoGeniC** Hypothesis Generation
+### 2. Hypothesis Generation
 
 For help with the arguments, run:
 ```bash
 hypogenic_generation --help
 ```
+
 ### 3. Hypothesis Inference
 
 For help with the arguments, run:
@@ -90,10 +91,26 @@ hypogenic_inference --help
 **We will support command lines for HypoGeniC on new tasks and datasets in a later release.**
 
 ## Use HypoGeniC in your code
-To use HypoGeniC with you own code, tasks, and datasets, you can follow the steps below:
+To use **HypoGeniC** with you own code, tasks, and datasets, you can follow the steps below:
 ```bash
 git clone https://github.com/ChicagoHAI/HypoGeniC-datasets.git ./data
 python ./examples/generation.py
+```
+
+To use **HypoRefine** or Union methods, follow the steps below:
+```bash
+git clone https://github.com/ChicagoHAI/Hypothesis-agent-datasets-datasets.git ./data
+python ./examples/union_generation.py
+```
+
+To run default (best hypothesis) inference on generated hypotheses:
+```bash
+python ./examples/default_inference.py
+```
+
+To run multiple-hypothesis inference on generated hypotheses:
+```bash
+python ./examples/multi_hyp_inference.py
 ```
 
 More examples can be found in `examples/` directory.
