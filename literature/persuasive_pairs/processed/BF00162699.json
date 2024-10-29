@@ -1,0 +1,1921 @@
+{
+    "paper_id": "BF00162699",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-06T17:58:33.802705Z"
+    },
+    "title": "",
+    "authors": [],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "This paper presents Persuasive Argumentation as a means of guiding the negotiation process to a settlement. Decision theoretic approaches construct prescriptive models of the negotiation process that make various assumptions about the behavior of the negotiation participants but do not model changes in behavior. On the other hand, models for decision support leave the actual decisions to human negotiators, again not modeling or automating the negotiating process. In contrast to both approaches, our work deals with automating the negotiation process. This paper focuses on modeling the process by which the beliefs and behavior of negotiators are changed via persuasive argumentation. We claim that persuasive argumentation lies at the heart of negotiation and embodies the dynamics of negotiation. We present a model of persuasive argumentation that integrates Artificial Intelligence and decision theoretic methods. The model has been implemented as part of the PERSUADER, a multi-agent computer program that operates in the domain of labor negotiations.",
+    "pdf_parse": {
+        "paper_id": "BF00162699",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "This paper presents Persuasive Argumentation as a means of guiding the negotiation process to a settlement. Decision theoretic approaches construct prescriptive models of the negotiation process that make various assumptions about the behavior of the negotiation participants but do not model changes in behavior. On the other hand, models for decision support leave the actual decisions to human negotiators, again not modeling or automating the negotiating process. In contrast to both approaches, our work deals with automating the negotiation process. This paper focuses on modeling the process by which the beliefs and behavior of negotiators are changed via persuasive argumentation. We claim that persuasive argumentation lies at the heart of negotiation and embodies the dynamics of negotiation. We present a model of persuasive argumentation that integrates Artificial Intelligence and decision theoretic methods. The model has been implemented as part of the PERSUADER, a multi-agent computer program that operates in the domain of labor negotiations.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Negotiation is an ill-structured and complex process, that to-date has defied all attempts at analysis. The process incorporates intangibles such as the negotiators' skills and experience, the parties' values, beliefs, perceptions and behaviors. What makes the problem even more complex is the dynamic nature of negotiations. The interaction of the participants during negotiations engenders changes in their goals, the ways they perceive the issues, their utilities associated with various outcomes and their reservation prices. These changes are necessary for achievement of an agreed upon settlement. In our work, the process by which these changes are brought about is persuasive argumentation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "During negotiations, participants need to shift their positions (e.g., make concessions). Decision theoretic approaches (e.g., Rao and Shakun, 1974; Fogelman et al., 1983) formulate concession making as a sequential decision process where the next decision of a party depends on the current state, the magnitude of concession already made, and anticipated responses of the other party(ies). The solution process involves a search for change in the goals and constraints as well as a search for solutions satisfying a changing joint solution space (which initially may be empty). These models use the concept of subjective probability estimates supplied by the parties. Subjective probability estimates are supposed to incorporate informal information that becomes available during negotiations and was not taken into consideration in the model, and the 'feeling' that the parties have about the interactions. Researchers in decision sciences (e.g., Shakun, 1988; Rao and Shakun, 1974; Kersten, 1985) have recognized the need for behavioral mechanisms that underlie the process of changing perceptions, goals and constraints which in turn underlie the process of concession making. Our work presents a model of the process, persuasive argumentation, and mechanisms that are used by the parties to effect these changes. Our model represents the belief structure of the parties in a symbolic form that is capable of being dynamically updated as a result of arguments.",
+                "cite_spans": [
+                    {
+                        "start": 127,
+                        "end": 148,
+                        "text": "Rao and Shakun, 1974;",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 149,
+                        "end": 171,
+                        "text": "Fogelman et al., 1983)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 949,
+                        "end": 962,
+                        "text": "Shakun, 1988;",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 963,
+                        "end": 984,
+                        "text": "Rao and Shakun, 1974;",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 985,
+                        "end": 999,
+                        "text": "Kersten, 1985)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "Persuasive argumentation lies at the heart of negotiation. It is the process used to cohere the behavior of the parties and guide the process toward solution convergence. We claim that in order to negotiate effectively, agents need the ability to (a) represent and maintain belief models, (b) reason about other agents ' beliefs, and (c) influence other agents' beliefs and behavior. The information communicated is intended to 'convince' the recipient agent to shift his negotiating position so as to narrow the parties' differences to achieve final agreement. In a nutshell, the argumentation process can be described as follows: an agent reasons about another agent using his own model of that other agent, finds as many ways as the model will allow to affect the other agent's outcomes (behavior), and uses them selectively to influence the other agent.",
+                "cite_spans": [
+                    {
+                        "start": 319,
+                        "end": 337,
+                        "text": "' beliefs, and (c)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "Persuasive arguments are used by an agent, the persuader as a means to dynamically change the utilities associated with various plans and outcomes of another agent, the persuadee, so as to increase the willingness of the persuadee to cooperate. This, in turn, improves the efficiency of convergence to a global solution. By observing reactions to the arguments, the persuader can update and correct its model of the persuadee, thus refining its planning and argumentation knowl-edge. In our work, persuasive argument generation is based on integration of goal graph search, use of multi-attribute utilities, and availability of a case memory of experiences with similar negotiations (Sycara, 1987) .",
+                "cite_spans": [
+                    {
+                        "start": 683,
+                        "end": 697,
+                        "text": "(Sycara, 1987)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "We present a domain independent model of persuasive argumentation that we illustrate in the domain of labor mediation. In this domain, the mediator is the persuader and the union or company the persuadee. Our model has been implemented in a computer program, the PERSUADER which resolves labor management disputes (Sycara, 1987) . The PERSUADER, emulating the behavior of human mediators, negotiates with each of the disputants to arrive at a mutually satisfying settlement. The PERSUADER system consists of three agents: the union, the company and the mediator. The reasoning is done from the mediator's point of view. In negotiating with each of the two parties, the mediator is the persuader and the union or company the persuadee. Although the architecture of the PER-SUADER casts the mediator as persuader, the theory of argumentation and mechanisms for argument generation that we present apply independently of what agent is the persuader or the persuadee.",
+                "cite_spans": [
+                    {
+                        "start": 314,
+                        "end": 328,
+                        "text": "(Sycara, 1987)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "Although the negotiation process is automated, the interface also allows humans to participate in the process. Users can register their reaction (acceptance or rejection) to proposals, express their objections to particular pieces of a proposed settlement, give the reason for a particular objection, and input their utilities with respect to various issues. For a more detailed explanation of the system, see Sycara (1987) .",
+                "cite_spans": [
+                    {
+                        "start": 410,
+                        "end": 423,
+                        "text": "Sycara (1987)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "Our model provides a tool for understanding negotiation. The negotiation and argumentation process carried out by people is opaque, in the sense that it is impossible to see their internal mechanisms. The PERSUADER makes explicit what knowledge is needed in negotiation and argumentation, how it is represented and organized, and how it is used to make decisions. The PERSUADER provides a normative reference with which to compare and evaluate actual negotiations and arguments. By making the knowledge and mechanisms explicit, the PERSUADER makes possible testable hypotheses that might help in understanding these processes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "Belief and belief modification in the PERSUADER is based on the conjunctive goals of the agents and their interactions. A belief in the PERSUADER involves the correspondence between a state (a possible settlement) and the other agents' actions. Group knowledge (Genesereth and Nilsson, 1987) in the PERSUADER focuses on the facts of the case: proposals, counterproposals, negotiation context etc. If agreement on a compromise were obtainable by inference from these facts, negotiation would be unnecessary. Such is not the case, however, since the goals, plans and utilities of the agents are largely unknown and the evaluation function is distributed. The negotiation process itself is a search of a dynamic problem space where an agent's beliefs about other agents' beliefs and hence feasible solutions continuously changes the space being searched. What was not an acceptable solution at one point becomes a solution at a later point) This occurs as a consequence of the agents' realization of the inevitability of partial goal satisfaction through acceptance of a compromise. The PER-SUADER attempts to influence the process toward solution convergence by constructing arguments to being about belief states of the agents that are necessary in achieving states of agreed upon settlements (global system solutions).",
+                "cite_spans": [
+                    {
+                        "start": 261,
+                        "end": 291,
+                        "text": "(Genesereth and Nilsson, 1987)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "We present two general methods to generate arguments:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "1. Construct arguments from scratch 2. Use case-based reasoning to recall previously used arguments and adapt an appropriate one Regardless of which method a problem solver uses for argument generation, his reasoning is guided by argumentation goals and argumentation strategies. Argumentation goals (e.g., \"change the importance that a persuadee attaches to a goal\") are associated with the ways that a persuadee's beliefs can be affected by an argument. Argumentation strategies (e.g., \"indicate a change in the contribution of the present goal to a higher level goal of a persuadee\") are used to achieve the argumentation goals. The application of an argumentation strategy may generate more than one argument. To be effective, a persuader has to select the most convincing argument for the situation at hand. The strength of an argument's justification is used as the selection criterion.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "Section 2 gives an overview of the PERSUADER system and presents the requirements that the task of generating arguments imposes on a reasoner; Section 3 defines a persuadee's belief and preference structure and its symbolic representation; Section 4 presents characterizations of argument justifications according to their convincing power; Section 5 presents how beliefs and behavior get changed through arguments; Section 6 presents an overview of the argumentation process; Section 7 presents algorithms for constructing arguments from scratch; Section 8 presents how known arguments are organized, retrieved and used in the current situation. Concluding remarks are presented in Section 9.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INTRODUCTION",
+                "sec_num": "1."
+            },
+            {
+                "text": "Our argumentation model is part of a general multi-agent, multi-issue negotiation model (Sycara, 1987 (Sycara, , 1988a (Sycara, , 1989)) , that has been implemented in a computer program, the PERSUADER. In contrast to knowledge-based work on negotiations that has concentrated on providing support for the negotiators (Matwin et al., 1987; Goeltner, 1987) , our work concentrates on automating the process itself and coming up with a settlement that the parties agree on. Our work attempts to model the dynamics of negotiation, i.e. the gradual modification of negotiating positions, the gradual shift in the negotiators perceptions, and the incorporation of new and/or changing information. Moreover, our work proposes concrete techniques and mechanisms that can be incorporated in a computer system which can be an actively participating third party that proposes settlements, produces evaluations and justification of the proposed settlements and modifies proposals to increase their acceptability.",
+                "cite_spans": [
+                    {
+                        "start": 88,
+                        "end": 101,
+                        "text": "(Sycara, 1987",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 102,
+                        "end": 118,
+                        "text": "(Sycara, , 1988a",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 119,
+                        "end": 136,
+                        "text": "(Sycara, , 1989))",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 318,
+                        "end": 339,
+                        "text": "(Matwin et al., 1987;",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 340,
+                        "end": 355,
+                        "text": "Goeltner, 1987)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "OVERVIEW OF THE PERSUADER",
+                "sec_num": "2."
+            },
+            {
+                "text": "The PERSUADER system involves three agents: a company, its union and the mediator whose task is to help the other two agents reach an acceptable compromise. The mediator is engaged in parallel negotiations with the union and company agents. The PERSUADER's input is the set of conflicting goals of a company and union and the dispute context. The final output is either a single plan in the form of an agreed upon settlement (contract) or an indication of failure if the parties to the dispute did not reach agreement within a particular number of proposals (to simulate the inability of parties in the real world to reach agreement before a strike deadline). A contract that is proposed by one agent to another is a plan that the proposing agent will follow, contingent on the second agent's agreement. Proposed contracts in the PERSUADER are subject to negotiation and possible modification. The negotiation process consists of iteration and interleaving of three main tasks: generation of a proposal, generation of a counterproposal based on feedback from a dissenting party, and persuasive argumentation. The mediator generates an initial compromise proposal and presents it to both the union and company who evaluate the proposal from their perspectives and give the mediator their reaction. If both accept the proposal, then it is the final compromise. If one of the agents rejects it, the mediator enters a negotiation with that party and makes a decision whether to change the proposal or attempt to change the disagreeing party's position by persuasive arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "OVERVIEW OF THE PERSUADER",
+                "sec_num": "2."
+            },
+            {
+                "text": "The values that enter the search for a suitable negotiated settlement are so many that negotiators and mediators themselves have not been able to elucidate a well-defined procedure that can be followed. There is no typical or model negotiation behavior that can be codified and emulated. In our work, we have tried to capture the non-typicality of behavior by using a combination of reasoning methods: 9 (a) Case-Based Reasoning (CBR), which consists of retrieving from memory and adapting previous compromises of similar disputants (Kolodner et al., 1985; Sycara, 1987) , 9 (b) Preference Analysis, which uses the utilities that the disputants associate with the issues under negotiation to rank possible compromises (Sycara, 1988b) , 9 (c) Situation Assessment, which recognizes exceptional situations in terms of their abstract causal structure and accesses knowledge structures, called SAPs, that embody the causal knowledge and provide domain independent compromise strategies (Sycara-Cyranski, 1985) and 9 (d) Use of Rules/heuristics to come up with appropriate corn-promise modifications, when previous cases are not available (Sycara, 1988c) .",
+                "cite_spans": [
+                    {
+                        "start": 533,
+                        "end": 556,
+                        "text": "(Kolodner et al., 1985;",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 557,
+                        "end": 570,
+                        "text": "Sycara, 1987)",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 718,
+                        "end": 733,
+                        "text": "(Sycara, 1988b)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 982,
+                        "end": 1005,
+                        "text": "(Sycara-Cyranski, 1985)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 1134,
+                        "end": 1149,
+                        "text": "(Sycara, 1988c)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "OVERVIEW OF THE PERSUADER",
+                "sec_num": "2."
+            },
+            {
+                "text": "Unlike rule-based expert systems that solve each problem from scratch (thus expending the same effort to solve the same problem a second time), the PERSUADER updates its memory with each new experience. Memory update provides automatic knowledge acquisition/learning. Having an experiential memory provides the PER-SUADER with the ability to improve its efficiency and quality of solutions. Moreover, using previous cases for explanation and justification of a proposed solution is more acceptable to a user than invocation of a rule. The PERSUADER's ability to produce persuasive arguments is a capability unique to our model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "OVERVIEW OF THE PERSUADER",
+                "sec_num": "2."
+            },
+            {
+                "text": "The PERSUADER plans iteratively by interacting with the agents, using their feedback in refining and repairing compromises, and in generating persuasive arguments. The PERSUADER plans for labor mediation, a domain full of uncertain knowledge and changing circumstances. Such characteristics typify most real world domains, such as international relations, law, labor relations, management, and manufacturing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "OVERVIEW OF THE PERSUADER",
+                "sec_num": "2."
+            },
+            {
+                "text": "The integration of case-based and analytic methods makes the PERSUADER robust and flexible. It does not break down when cases and rules are not applicable. Moreover, it has the flexibility to use whichever method is more natural to the particular problem solving stage it is engaged in.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "OVERVIEW OF THE PERSUADER",
+                "sec_num": "2."
+            },
+            {
+                "text": "A persuasive argument is an utterance that causes changes in either (a) the persuadee's behavior, or (b) his set of beliefs, causing him to abandon or modify some belief in that set. Generating persuasive arguments is a very complex task. We have identified some of the characteristics of persuasive argumentation that give rise to a set of requirements for automating argument generation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "9 The number of variables that could enter the argumentation process is very large and not easy to identify in general. Although each agent lives in a solipsistic universe, it must produce some utterance that can influence the beliefs and behavior of another. A central requirement for performing this task is that each agent be able to represent and maintain belief models of the agents it is interacting with.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "To make a persuasive argument to change a persuadee's beliefs, a reasoner must be able to determine which of the persuadee's beliefs need to be abandoned or changed and in what way. Thus, a persuader needs criteria for selection of beliefs to change.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "To produce an argument to change a persuadee's behavior requires that a reasoner be able to make a connection between the persuadee's current behavior and his beliefs. It requires, in addition that the reasoner be able to predict the change in behavior that will result from a belief change.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "The persuasive power of arguments changes depending on the context of discourse. Moreover, even when an agent knows several arguments that are persuasive in a particular situation, which one should he choose as the most persuasive? Thus, a persuader needs criteria for evaluating the persuasive power of arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "9 After each argument a persuadee gives feedback to a persuader about whether he/she agrees or disagrees with the argument and perhaps the reason for the agreement/disagreement. Hence, a persuader needs to be able to receive feedback about the quality of its argument, evaluate it, and use it to modify the argument or construct a counterargument. In addition, based on the feedback the persuader needs to be able to update the persuadee's model that it maintains.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "Argumentation takes place in a dynamically changing world.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "During the course of argumentation, conditions in the world that affect the parties' behavior and goals might change. Besides expectation violations that arise from a changing world, and because the agent models that it maintains are by necessity incomplete, a persuader might have his expectations about the beliefs and behavior of the agents violated. Therefore, a persuader needs to be able to take into consideration the changed planning context. In other words, it needs to have a reactive component.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "The PERSUADER incorporates all the above requirements.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Requirements for Generating Persuasive Arguments",
+                "sec_num": "2.1."
+            },
+            {
+                "text": "The main factor determining the effectiveness of arguments of persuasion is the attitudes and beliefs of the persuadee (Abelson, 1959) . A persuadee's beliefs involve his goals, the importance that he attaches to them, and the relations between them. This collection of goals, importance and relations between goals constitutes a persuadee's belief structure. As we will see in later sections, different arguments change different parts of the belief structure. So a persuader needs to target the argument towards changing a particular part of a persuadee's belief structure. To enable a reasoner to do this, an explicit representation of a persuadee's belief structure is clearly needed.",
+                "cite_spans": [
+                    {
+                        "start": 119,
+                        "end": 134,
+                        "text": "(Abelson, 1959)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "We represent an agent's (a company) belief structure as a directed acyclic graph, as shown in Figure 1 . 2 Each node in a belief structure graph represents one of the agent's goals. Arcs in the graph linking two goals represent the relationship between goals in terms of how one affects positively or negatively the achievement of the other. Associated with each node is: 9 a sign (+ or -) that denotes the desirability of an increase or decrease in that goal.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 101,
+                        "end": 102,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "For example, PROFITS(+) represents the company's goal of increasing its profits. 9 the amount by which the goal should be increased or decreased.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "The amount's units can be either a percentage, an absolute dollar figure, a range of values, or a symbol, such as \"a lot\". The units chosen depends on the requirements of the domain. We use percentages and dollar units and the associated meaning of \"at least\", or \"at most\" the denoted amount. The value 0% is used to represent preservation of a goal. For example, FRINGES(-, A = 5%) indicates that the company desires to decrease the cost of fringe benefits by at least 5%. 9 the importance that the persuadee attaches to this goal. For example, increasing profits PROFITS(+, A = 8%, I ---10) means that the company's goal of increasing its profits by at least 8% has an importance of 10. The importance variable assumes values from 0 (least importance) to 10 (greatest importance). 9 the feasibility, as perceived by the persuadee, of achieving this goal. For example, achieving an increase in sales SALES(+, A = 6%, I = 9, F = 0.7) has a feasibility of 0.7. Feasibility is a probability measure and takes values from 0 to 1.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "The nodes at the top of a graph denote the persuadee's highest level goals. For example, PROFITS(+, A = 8%, I = 10%, F = 0.6), representing the company's desire to increase its profits by 8%, is the highest level goal of the company. The nodes at successively lower levels denote the subgoals through which the higher level goals are achieved. Values associated with each of the edges connecting subgoals to goals denote the person's assessment about the percent contribution of the subgoal to the accomplishment of the corresponding goal. The direction of the edges is from subgoals to the goals to whose achievement they contribute. Referring back to the highest node in the figure, we see that profits can be raised, (PROFITS(+, A = 8%, I = 10, F = 0.6)) by decreasing production costs (PRODUCTION-COST(-)) or by increasing sales (SALES(+)). The contribution of a sales increase to raising profits is 40% and of reducing production costs 60%. The graph is obviously acyclic since it would be absurd to say that a goal contributes to its own achievement through a series of subgoals.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "Contribution ranges from -100% to 100%. A negative contribution value has the interpretation that the subgoal not only does not contribute to the higher level goal but it is detrimental to it. For example, a negative public image would have a detrimental effect on the company's sales. A positive value means that the subgoal supports the achievement of the higher level goal. A contribution value of zero means that the subgoal is irrelevant to the achievement of the higher level goal. In terms of the graph, this is equivalent to breaking the link between the subgoal and the goal.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "A path X to Y in a goal graph constitutes a causal chain that provides an explanation of the change in Y in terms of the change in X, assuming no other change has occurred in the rest of the graph. The path WAGES(-) to PRODUCTION-COST(-) in the company's goal graph can be interpreted as follows: \"Other things being equal, diminishing the cost of wages results in decreasing the cost of the economic concessions, which causes decrease in labor costs, leading to a decrease in production costs and an increase in profits\".",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "In addition to an agent's beliefs, the representation includes an estimation of his utilities. The concept of utility is the basis for selecting among future alternatives and for evaluating past actions. Each alternative is evaluated in terms of a number of attributes that a decision maker considers important. Utilities express the preference structure of an agent. The utilities of the individual attributes are combined to give the overall utility (payoff) of an alternative. Being able to compare different alternatives enables a decision maker to choose the alternative that affords him maximal payoff. In labor negotiations, the pertinent attributes are the issues under discussion and different contract proposals are the alternative decisions. Utilities express the tradeoffs that a decision maker is willing to make among various attribute values. The payoff is expressed as a linear combination of the utilities (in general, nonlinear) associated with the issues.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "In Order to construct effective arguments, a persuader needs to know both the belief structure of a persuadee as well as the influence that the environment would have on the belief structure. By environment we mean both external events as well as utterances. In the labor domain, the economic context of a dispute is one of a variety of environmental factors that influence a company's (union's) belief structure. For example, in recession, a union's job security goal has higher importance than in boom. When competition is stiff in the industry, a company's automation goal assumes greater importance, and also has a greater contribution towards the goal of reducing production costs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "During argumentation and negotiation an agent's belief structure is updated based on his reactions to arguments and proposals. In this way, an agent's model is refined and corrected dynamically. This functionality is important since (a) it is not possible for an agent to have a correct and detailed belief model of another, and (b) beliefs are not static but change with external circumstances and an agent's experiences.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "When a persuader is faced with an unknown persuadee, he needs a way to infer the goals of that party. One way he can infer the persuadee's goals is by transferring characteristics from the goal graph of a previously encountered and 'similar' persuadee. Criteria of similarity are domain dependent. For example, similarity of industry is one of the criteria used in the labor domain.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "REPRESENTING BELIEFS",
+                "sec_num": "3."
+            },
+            {
+                "text": "For persuasion to be effective, the appropriate type of argument has to be presented in each situation. An argument's convincing power derives from the strength of its justification. A justification does not always have to be explicit for the argument to be effective. A justification does not even have to make sense for an argument to be potentially persuasive. It suffices that the justification sounds plausible.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "THE CONVINCING POWER OF ARGUMENTS",
+                "sec_num": "4."
+            },
+            {
+                "text": "Whether or not a justification is plausible depends at least partly on the conventional sources of persuasive arguments for the domain.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "THE CONVINCING POWER OF ARGUMENTS",
+                "sec_num": "4."
+            },
+            {
+                "text": "Argument 1: To increase AT&T's ability to compete in the information movement and management business, a new three-level job structure will be established for the technical-support forces at AT&T Information Systems. This structure will be more like that of competitors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "Argument 2: To increase your ability to compete in the classroom, you should read science fiction. The best student in the class loves science fiction.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "Argument 1 is from the labor domain. It is a directly quoted excerpt from a full-page communique by AT&T entitled \"A message from AT&T to our people represented by the Communications Workers of America\" that appeared in the Atlanta Constitution, Saturday, June 7, 1986. At that time, CWA was on strike against AT&T. This communique presented many arguments that are characteristic of various argument categories. We will make extensive use of these AT&T arguments in the rest of this paper.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "Arguments 1 asserts that the three-level job structure makes the company more' competitive and justifies the assertion by stating that competitors have such a structure. This type of justification is called an \"appeal to prevailing practice\". It does not actually make a causal argument. A causal justification would have to be an assertion that the three-level job structure would save the company money, or that it would make the workers more productive, or would make the company produce a higher quality product, i.e. the kinds of factors that make a company more competitive. \"Appeal to prevailing practice\" works fine, however, because it is a source of strongly persuasive arguments in the labor domain. The reason for this is roughly that similar companies (unions) operate under similar economic constraints that determine the appropriate rational economic behavior. Great deviation from this behavior is detrimental to the company (union).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "By contrast, Argument 2, which also appeals to prevailing practice sounds much less plausible. This happens because the quality of being a very good student is not traceable to concrete factors, such as reading science fiction, and is not well understood.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "Each domain has its own set of persuasive arguments that are not necessarily causally based. While prevailing practice is often used successfully in labor relations, a source of very strong justifications in the political domain, on the other hand, is appeal to thematic argu-ments. Politicians' speeches abound in appeals to patriotism and brotherhood.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "We have examined a great number of arguments and have identified nine justification categories. While the persuasive power of these justifications depends on the particular domain, we have found that types of justification cross domains. To use these classes, an effective persuader will, of course, need to know the relative strength of justifications in the domain he is arguing about. To illustrate some of the justification categories, we make use of real arguments, presented below, that are quoted excerpts from the AT&T communique addressed to the CWA. This communique appeared in the Atlanta Constitution on June 7, 1986. At the time the CWA was on strike against AT&T.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "The greatest strength of AT&T has always been its people.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "We value our people. We seek no concessions from you. Our offer is a reasonable way to work together, with fair rewards for the job only you can do. These are the major points in that offer.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "Wages will increase 8 percent over a three-year period. However, no Cost of Living Adjustment (COLA) is included in the contract agreement. As you may know, the rate of inflation is currently running at less than one percent per year. Obviously, guaranteed increases are more meaningful.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "To increase AT&T's ability to compete in the information movement and management business, a new three-level job structure will be established for the technicalsupport forces at AT&T Information Systems. This structure will be more like that of competitors .... No systems technicians are being downgraded, and none will lose money as a result of dividing the job into three levels.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "Manufacturing-production jobs, currently separated into nine grades, will be consolidated into two or three grades. Wage progression will be longer, but maximum wages will be higher.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "As you can see, the offer is fair. It demands no concessions. It is intended to make us more competitive and more secure. It is intended to help all of us in AT&T to work together to build the future. Let's get on with it!",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "The following ordering of persuasive power (from weakest to strongest) holds true for the labor mediation domain. We present the justifications from weakest to strongest because we predict in cases where more than one argument is applicable, this is the order of presentation of arguments. This happens because a persuader does not want to waste his strongest argument immediately, but wants to wear down the persuadee with the cumulative effect of arguments that escalate in convincing power.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "1. Appeal to universal principle. A universal principle is a socially sanctioned belief. In using a universal principle, the persuader appeals to some core belief of the persuadee as support for an argument. When AT&T says \"Our offer is a reasonable way to work together, with fair rewards for the job only you can do\", it is appealing to the belief that each person is entitled to a fair standard of living. When it says, \"Our offer is fair. It demands no concessions\", it appeals to the principle of fair reward for one's work. Appeals to universal principle are generally weak, since they appeal to moral principles rather than to the economic realities. However, if \"public image\" is an important company goal, arguments of this type take on added power.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Consider, for example, the following two arguments:",
+                "sec_num": null
+            },
+            {
+                "text": "A theme is a \"package of goals\" (Schank and Abelson, 1.977) that contains information upon which a reasoner can make predictions about the kind of goals an agent will have. When a persuader appeals to a thematic relationship between himself and the persuadee, he intends to prove that the persuader has the persuadee's interests at heart. When AT&T says, \"The offer is intended to help all of us in AT&T to work together to build the future. Let's get on with it!\", the AT&T management is telling the workers that they are all partners (a theme) and should cooperate (follows from partners' theme). The implication is also that the offer does not apply only to the workers but through the theme of partnership, it somehow also applies to the management. If the workers don't accept it they will be the ones responsible for hurting the partnership. Thematic justifications can be very strong because they appeal to affect rather than logic or reality. In the domains of religion, politics and advertisement thematic appeals constitute the majority of justifications.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "3. Appeal to authority. Appeals to authority could be left implicit.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "In labor mediation, the authority of the mediator lends convincing power to his arguments, even if the mediator is not explicit about his authority. Appeals to authority can also be made explicit when the situation warrants it, as in \"Noted economist X predicts that inflation will increase, so COLA makes more sense than guaranteed wage increases\", an argument that the CWA could present to counteract AT&T's COLA argument.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "4. Appeal to \"status quo\". The strength of this justification comes from the fact that unless there exists strong evidence to the contrary, people tend to extrapolate the present. This form of justification is common when one argues about future events. An example of the use of this justification can be seen in AT&T's COLA argument: \"A COLA is not meaningful because inflation is going to be low in the next three years. Inflation is going to be low in the future, since it is low in the present\". Because inflation is low now, the argument is that it will be low in the future.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "5. Appeal to \"minor standard\". \"Minor standards\" provide exceptions as a basis for refutation of arguments based on prevailing practice. In mediation, \"minor standards\" are used as justifications to propose settlements to the employees of one company that differ from settlements with the industry in general. Examples of minor standards include steadiness of employment and hazardous work (Elkouri and Elkouri, 1973 ). An example appealing to a \"minor standard\" that a mediator can use to convince management to grant higher increases than warranted by prevailing practice is: \"The working conditions of this fire department leave something to be desired because the department is undermanned causing a potential safety hazard. This is not the situation in other communities. So, higher wage increases are justified\". This is a paraphrase of the argument used by arbitrator Roumell in the City of Southgate arbitration case, reported in Elkouri and Elkouri (1973) .",
+                "cite_spans": [
+                    {
+                        "start": 390,
+                        "end": 416,
+                        "text": "(Elkouri and Elkouri, 1973",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 938,
+                        "end": 964,
+                        "text": "Elkouri and Elkouri (1973)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "6. Appeal to \"prevailing practice\". People's attitudes and goals are strongly influenced by the groups to which they belong. They use the achievements of their peers as a standard with which to compare their situation and expectations. Little Billy's argument to his father \"I want a bicycle. Johnny next door has one\" makes an appeal to prevailing practice. In negotiations, it is common to appeal to the prevailing practice standard. Prevailing practice is the most frequently used argument in labor negotiations. Its credibility derives from economic reality. A company cannot underpay its employees for fear of loosing them to competitors; a union cannot insist on concessions much above what is given in the industry, for fear of lay-offs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "7. Appeal to precedents as counterexamples. Use of precedents as counterexamples provides a strategy to convince a persuadee that his claim is not as tenable as he would like to think. The power of counterexamples lies in their ability to point out contradictions between the claimed and the actual behavior of the persuadee. For example, a local union might insist that the company accept a particular seniority clause claiming that it is the standard clause demanded by the international union. If the company can produce a contract signed by another local of the same international that has a different seniority clause, the company can argue that the union's claim is untenable. Psychological consistency theories (Heider, 1958 , Festinger, 1957 , Osgood and Tannenbaum, 1955) give evidence for the persuasive power of counterexamples.",
+                "cite_spans": [
+                    {
+                        "start": 718,
+                        "end": 731,
+                        "text": "(Heider, 1958",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 732,
+                        "end": 749,
+                        "text": ", Festinger, 1957",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 750,
+                        "end": 780,
+                        "text": ", Osgood and Tannenbaum, 1955)",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "While prevailing practice is used as an argument in favor of something standard, appeal to counterexample is used to convince a party to agree to something that might violate a standard.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "8. Appeal to self-interest. The persuasive power of these arguments depends on the importance of the goal that is claimed to be promoted by the adoption of the persuader's proposal. People will substitute the satisfaction of a lesser goal for a more important one. An example of such an argument is the acceptance by a company of seniority, because it reduces labor turnover, despite the resulting curtailment in management rights. The rank and file agree to unsatisfactory wages, presumably, because they do not want to be laid off.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "9. Threats and promises. Threats and promises are two faces of the same coin in that the same argument can be cast either in the form of a threat or of a promise. Threats and promises affect the behavior rather than the belief structure of a persuadee. They are used, in general as a last resort, when reason (i.e., to change an arguer's beliefs) fails. The effectiveness of a threat (promise) hinges on the power of the persuader to control the contingencies mentioned in the threat (promise). A threat (promise) is selfjustified and does not need any extra justification. Because people want to satisfy their goals, threatening an important goal of a persuadee is the most effective of arguments. In labormanagement disputes, the threat of a strike is the most frequently used and clearly the most powerful argument. However, there are other threats that can be very persuasive, as when a foodprocessing company's employees threaten to \"leak\" news of health violations at the plant. The mediator's role here is to convince the company that the employees will carry out their threat and that similar tactics have damaged recalcitrant companies in the past.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appeal to a theme.",
+                "sec_num": "2."
+            },
+            {
+                "text": "In order to be persuasive, a persuader needs to decide what kind of argument will be most effective in a given situation. To do this, he needs to first decide whether he wants to change only the behavior of a persuadee or change his beliefs as well. Threats and promises are arguments that change only the behavior of a persuadee. Using threats/promises has two advantages: (a) threats/promises have the greatest convincing power (cf. previous section), and (b) they are simple to generate. The effect of threats and promises is the abandonment of some goal on the part of the persuadee leaving his belief structure intact. When the threat of a mugger makes John relinquish his wallet (abandoning the less important goal of preserving his money to safeguard the more important goal of preserving his life), John's beliefs about the importance of money, life and other related goals does not change, although the threat has affected his behavior. When the promise of being taken to a muppet show convinces little Billy to change his behavior and eat his spinach (abandoning the less important goal of annoying his parents by not eating in order to fulfill the more important goal of seeing the muppets), his behavior changes but his beliefs about spinach, annoying his parents and muppets do not.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "To generate a threat or promise, a persuader needs to be able to threaten/promise a goal of the persuadee that is more important than the goal that he wants abandoned. In a later section, we present an algorithm that enables a persuader to do this.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "There is a special set of threats that has as a result change in the reservation price of a party, namely the threshold of acceptability of a particular contract proposal. This set of threats pertains to breaking off the negotiations. In the labor domain, the threat of a strike is an argument of this type. For such an argument to be effective, a persuader must have a means of calculating the cost of not reaching agreement and comparing it to the payoff of the rejected proposal.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "If a persuader decides to change a persuadee's belief structure, he needs to decide how the change will be effected. A persuadee's belief structure can be changed in various ways corresponding to the parameters (e.g., importance, feasibility, contribution) associated with the goals and their relations. This complicates the decision process since a persuader has to decide which one of these parameters he wants to change.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "Although threats and promises are more advantageous, there are situations where they cannot be used. These are situations where either (a) it is undesirable to use threats, or (b) the persuader does not control the contingencies at hand. It is undesirable to use threats when a persuader by using a threat would jeopardize one of his own goals that is more important than the one he is hoping to achieve. Striking employees who have been fired have found this to be true.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "To illustrate the second situation, consider the AT&T argument which attempted to convince the union to accept a straight percent raise in wages rather than have a COLA clause. Argument 3 .3 Wages will increase 8 percent over a three-year period. Three percent the first year, three percent the second year and two percent the third year. However, no Cost of Living Adjustment (COLA) is included in the contract agreement. As you may know, the rate of inflation is currently running at less than one percent per year. Obviously, guaranteed increases are more meaningful.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "This argument is about future events that are not under the control of the company. Hence, the company is using an argument to change the beliefs of the union concerning the usefulness of a COLA, with the hope that this belief change will lead to the acceptance of the straight wage raise by the union.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "If a reasoner decides to use arguments that change a persuadee's beliefs, he needs guidance as to (a) what kinds of belief changes he wants to effect, and (b) how to do it. In addition, he needs to be able to make predictions regarding how changes in beliefs will affect behavior.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "We claim that a party's satisfaction with a proposition expresses his willingness to accept the proposition. Hence, if a persuader could manipulate a party's utilities (resulting in manipulation of the party's payoff), he would be able to affect predictably the behavior (outcomes) of the persuadee. Convincing a persuadee to change his evaluation and increase his cooperativeness regarding a proposition is modeled as producing an argument to increase the payoff of the proposition. The issues that appear in a proposition are a subset of the goals that appear in the agent's belief structure. Hence, the task of a persuader can be viewed as finding the most effective argument that will increase a persuadee's payoff. Since a persuadee's payoff can be approximated by a linear combination of his utilities, the payoff can be increased by either changing the importance (coefficient) the persuadee attaches to an issue, or changing the utility value of an issue.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "The argumentation goals of a persuader express what in the beliefs and behavior of a persuadee he wants to influence. To accomplish the argumentation goals, argumentation strategies are used. There are three argumentation goals that the PERSUADER uses:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "1. Change the importance of a persuadee's goal/issue 2. Change the persuadee's perception of an issue's value 3. Pursue goal abandonment on the part of the persuadee via threats/promises",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "Changing the importance that a party attaches to an issue reflects the intuitive notion that satisfaction with a thing is a function not only of the intrinsic value of the thing, but also of the importance that one attaches to it. Changing the importance of an issue translates into changing the corresponding goal's importance in the belief structure.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "For example, one argument that can be addressed to a company to decrease its weight for seniority is that the company's workers are mostly new, so that even if maximum seniority is granted to the union, this will not impede the company's efficient operation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "The change in value of a point on an individual utility curve for an issue can be interpreted as a change of the party's assessment of the value of that issue. This corresponds to changing the \"amount\" parameter A in a persuadee's belief structure. In the utility theory model, changing a party's assessment of the value of an issue is equivalent to changing the party's satisfaction curve at that value. Consider, for instance the situation where a company assesses an increase of 20 cents an hour in wages as \"too high\". In the utility theory formulation, this can be translated as \"payoff(20)= LOW\" (i.e., the satisfaction that the company would derive if it were to give a wage increase of 20 cents per hour would be some low value). In the company's belief structure, this assessment of the company is represented as WAGES(+, A < 20 cents) 4 (i.e. the company's goal is to give a wage increase of at most some amount less than 20 cents). Convincing the company that this increase is not so high changes its wage goal to WAGES(+, A = 20 cents). Correspondingly, this goal change results in raising the company's satisfaction (payoff(20)> LOW).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "The argumentation strategies used to accomplish the argumentation goals determine how the argument plan selection is done. Two argumentation strategies can be used to accomplish the first goal (change the importance of an issue): The AT&T COLA argument, Argument 3, illustrates the first strategy. The union's higher level goal is WAGES(+). Subgoals to this goal are \"COLA clause\" and \"straight percent increase\". AT&T's argument is intended to show that the contribution of the \"COLA clause\" subgoal is less than the union had thought. Moreover, the contribution of the \"straight percent increase\" goal is more than the union had thought. As a consequence of the argument, the importance to the union of a COLA clause diminishes, whereas a straight wage increase becomes more important. The argument \"A new three-level job structure will be established for the technical support forces at AT&T Information Systems. The structure will be more like that of competitors\" is intended to increase the feasibility of establishing the new job structure by pointing out that such an arrangement has worked for competitors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "The second argumentation goal that a persuader might select is to change the persuadee's assessment of the proposed value of an issue. This second goal can be effected using the following strategies:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "(c) recall a 'counterexample' fiom the persuadee's past behavior (d) recall examples of similar peers that have accepted the same value for the issue To illustrate strategy (c), suppose an international union maintains during contract negotiations with company A that it never signs a managements rights clause. The mediator reminds the union of its contract with company B where such a clause was indeed present. To illustrate the last strategy, consider a union's rejection of an increase of 10 cents per worker per hour in health benefits as unacceptably low. The mediator presents contracts signed by the same or similar local unions that incorporate an equal or lower increase. This argument is effective because perception of \"low\" or \"high\" values is determined by prevailing practice, namely what settlements peers of the persuadee have agreed to.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "There are two argumentation strategies that can result in goal abandonment on the part of the persuadee:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "(e) promise the persuadee the fulfillment of a more important goal if he abandons the current goal (f) point out that insistence on the current goal threatens a more important goal of the persuadee For example, the promise of higher wages can make a union abandon its concern for modification of management's rights clauses (strategy (e)). The threat of losing employment can make a union abandon its insistence on higher wages (strategy (f)).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "BEHAVIOR CHANGE VS BELIEF CHANGE THROUGH ARGUMENTATION",
+                "sec_num": "5."
+            },
+            {
+                "text": "We present the overall process model for persuasive argumentation in .@ The rectangles with the rounded corners denote the methods used (Case-Based Reasoning (CBR) or generation of arguments from scratch). The ellipses denote conceptual inputs to a stage and the diamonds denote decision points. The \"Generate Argument\" rectangle is shaded to denote the start of the process.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "THE OVERALL ARGUMENTATION MODEL",
+                "sec_num": "6."
+            },
+            {
+                "text": "The input to the argumentation process is the persuadee's position on an issue, the persuadee's model (his belief and preference structures) and the persuader's argumentation goal and strategy. Based on an evaluation of the situation, a persuader decides whether, for instance, to change the behavior of a persuadee directly (using promises or threats) or to, change the importance that a persuadee attaches to an issue. The policy that the PERSUADER uses is to generate the \"weakest\" (less convincing) argument first, reserving 'strong' arguments for situations where the weak ones have been rejected. The hierarchy of convincing power of arguments (Section 4) ranks the strength of an argument for the labor domain. The policy of presenting the weakest argument first is effective because (a) the PERSUADER has recourse to other stronger arguments if the weaker ones fail, and (b) the cumulative effect of a series of arguments may have the desired effect where a single (even the strongest) argument might have failed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Update L Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "The first stage in persuasive argumentation is to generate potentially applicable arguments addressing the persuadee's position. As mentioned previously the PERSUADER uses two ways to generate persuasive arguments: constructing arguments from scratch, and using case-based reasoning to adapt arguments used in previous similar situations to the new case. Next, the generated argument 5 is evaluated for potential appropriateness to the situation at hand. The evaluation is done taking into consideration the negotiation context and any experiences (successes or failures) with arguments of this type that the persuader has available. If the argument is judged as potentially appropriate, then it is presented to the persuadee, else another argument is generated.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Update L Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "After the argument is presented, if the persuadee agrees, the appropriate update of the persuadee's position on the issue and his payoff is made. It often happens, that a persuadee may accept an argument with regard to a proposition but still insist on not accepting the proposition.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Update L Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "For example, a company may agree with the argument that \"seniority decreases labor turnover\" but still hesitate to accept a strict seniority clause. In our model, such a situation is modeled as an insufficient increase in the persuadee's payoff. In other words, agreement with the argument increased the willingness of a persuadee to accept a proposition but more arguments are needed to increase the payoff above an acceptability threshold.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Update L Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "If the persuadee disagrees with the argument, the reasons for the disagreement are analyzed for new information that could alter subsequent argumentation, such as new information about the persuadee's concerns (e.g., the company's concern about key employees), new information about economic factors (e.g., the strength of foreign competition). If the analysis reveals that the persuader had some incorrect notions regarding the beliefs and preferences of the persuadee, the appropriate updates are made to the persuadee's model. In addition, updates to the persuader's argumentation goal and strategies may be needed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Update L Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "Before the argumentation process is iterated, a check is made to ensure that subsequent argumentation makes sense. Subsequent argumentation proceeds if there is still enough time left (if a strike deadline has been reached it is useless to argue) and if all potential arguments have not been exhausted.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Update L Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "In the next two sections we present the methods that the PER-SUADER uses to generate arguments. First, in Section 7, the methods to construct arguments from scratch are presented, following by Section 8 that describes how Case-Based Reasoning can be used in argument generation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Update L Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "In this section, we present general algorithms to construct persuasive arguments. Different subsections deal with the three argumentation goals that were identified in Section 5, namely (a) generating arguments to change the importance a persuadee attaches to an issue, (b) generating arguments to change the persuadee's perception of an issue's value, and (c) pursuing goal abandonment on the part of a persuadee.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CONSTRUCTING PERSUASIVE ARGUMENTS",
+                "sec_num": "7."
+            },
+            {
+                "text": "We first consider algorithms for generating arguments, if the persuader's goal is to change the importance of an issue. Let us consider the following examples which we have already seen in other sections of this work:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "Paraphrase of AT&T's COLA argument: COLA is not meaningful since inflation is currently low.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "MARTA pension argument: Pensions are not important since the workers of your union are young.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "The above arguments illustrate the situation where the persuader's argumentation goal is to decrease the importance of an issue by showing decreased contribution of this issue towards a higher level goal. To generate the COLA argument, a persuader needs to know what a COLA is useful for, namely that it is there to safeguard workers' income during future periods of high inflation. To generate the pension argument, a persuader needs to know what a pension is useful for, namely to give income to a worker when he is too old to work. Acquisition of a pension is a future event. The more distant in the future a reward is, the less its present value.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "After examining a great number of arguments in the labor domain, we observed that very often the reasons for the existence of a goal, denoted by g, could be cast in the following general form: A contingency C threatens a high level goal G; then a subgoal g is created to protect G from C. In the COLA example C is high inflation and G is a worker's income; in the pension example C is termination of employment and G is a worker's income. A persuader can infer the high level goal toward which a goal g contributes from knowing what g is useful for, the reasons for its existence. To decrease the contribution that g makes toward the achievement of the higher level goal G, a persuader simply denies the contingency C. Hence the strategy is as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "To decrease the contribution of a goal to a higher level goal, assert the negation (in a qualified or unqualified manner) of the contingency C.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "If the negation is unqualified, then the contribution value goes to zero. The above is a very simple (and simplistic) technique and it will produce crude arguments. Surprisingly enough, a lot of arguments in the real world, as illustrated by the AT&T message, are crude and simplistic too. The negation of the contingency C acts as a justification for asserting the decreased contribution of g towards G. It is, however, a very weak justification. A persuader can strengthen the convincing power of his argument by justifying his justification.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "In Section 4 we have seen sources of justification (e.g., universal principle, status quo, authority) and their convincing power. A persuader must be aware of these sources. Which justification a persuader will choose for each situation is governed in our work by a set of heuristics that are linked to the semantics of the issues/goals at hand. An example of such a heuristic is: IF the negated contingency C deals with a possible change of a state to a future state Sf, THEN (a) IF the state's present value is NOT(Sf), then use \"appeal to status quo\" as justification (b) IF the state's present value is already Sf, then use \"appeal to authority\" as justification",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "The above heuristic has been used by AT&T in the COLA argument. It justifies its assertion that high inflation will not happen because the current inflation is low. If, on the other hand, current inflation were high, AT&T could have appealed to authority and said \"Noted economists are forecasting that, though the inflation is high at present, it will be drastically reduced for the next three years\". (Not such an uncommon argument, either).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "Persuasive arguments that increase the importance of the issue under discussion can be generated in the same framework as the ones to decrease the issue's importance. In this case, the persuader asserts rather than negates the contingency C. As an example, consider an argument to increase the importance of a COLA clause by the CWA union. \"A COLA clause is important because inflation will increase in the next three years\". The union can further justify its argument by appealing to authority. To increase the importance of the pension goal, a mediator can tell the union that \"Pensions are important since sooner or later your employment will be terminated and you will have to retire\". A mediator can make a stronger argument if the union members are old. Instead of \"sooner or later\", he can say \"pretty soon\" or \"within the three year duration of this contract\". Arguments about the future are strengthened if the persuader can make an assertion about the contingency C that will fall within a relevant time horizon. Such a relevant horizon in labor mediation is usually three years since this is the normal duration for most contracts.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. Generating Arguments to Change the Importance of an Issue",
+                "sec_num": "7."
+            },
+            {
+                "text": "When the argumentation goal of the persuader is to change the persuadee's perception of an issue's value, two argumentation strategies can be used (cf. Section 5). One is to find a counterexample from the persuadee's past behavior. The second is to find evidence from the behavior of the persuadee's peers regarding the value of the issue. For both strategies, the argument generation algorithm involves search of past experiences that the persuader might have had with the persuadee or his peers. For example, if a company rejects a proposed increase in wages as \"too high\", then the mediator persuader can produce evidence showing that the company's competitors have given even higher wage increases. The justification for this type of argument is \"appeal to prevailing practice\". The mediator, in the above example, could use the first argumentation strategy, if he finds evidence that in the past the company has always given big wage increases. As a matter of fact, this type of argument is used very frequently by unions seeking higher wages both during negotiations and also during arbitration. The justification is \"appeal to counterexample\".",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Generating Arguments to Change a Persuadee's Perception of an Issue' s Value",
+                "sec_num": "7.2."
+            },
+            {
+                "text": "The heuristic that is used to generate a persuasive argument if the persuader uses the first strategy is as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Generating Arguments to Change a Persuadee's Perception of an Issue' s Value",
+                "sec_num": "7.2."
+            },
+            {
+                "text": "Retrieve past experiences of the behavior of the persuadee with respect to the present issue. IF a past experience is found where the persuadee's behavior was contrary to his present claim of the issue's value, THEN point out to him this discrepancy ELSE use the second argumentation strategy",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Generating Arguments to Change a Persuadee's Perception of an Issue' s Value",
+                "sec_num": "7.2."
+            },
+            {
+                "text": "The heuristic that is used to generate a persuasive argument if the persuader uses the second strategy is as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Generating Arguments to Change a Persuadee's Perception of an Issue' s Value",
+                "sec_num": "7.2."
+            },
+            {
+                "text": "1. Retrieve past experiences of similar persuadees with respect to the same issue. 2. Collect the ones whose value for the issue is appropriate 3. Present them to the persuadee The second step needs some clarification. By \"appropriate\" we mean having a greater (lesser) or same value in case the objection was \"too much\" (\"too little\"). The second argumentation strategy is general. The issue under discussion does not necessarily need to be quantifiable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Generating Arguments to Change a Persuadee's Perception of an Issue' s Value",
+                "sec_num": "7.2."
+            },
+            {
+                "text": "To convince a persuadee to abandon a goal, threats and promises can be used. Events A and B below illustrate how threats are used in the labor domain.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Event A: The company refuses to accept a particular wage settlement. The mediator argues that inefficient plant operation will occur from the resulting employee dissatisfaction.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Event B: The union refuses to accept a wage settlement. The mediator argues that if the company is forced to grant higher wages, it will become noncompetitive and therefore will be forced to lay off workers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "In order for the mediator to generate a threatening argument, he has to have models of both the union and the company. Figure 1 has shown a partial belief graph of a company. Figure 3 depicts a partial belief graPh of a union.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 126,
+                        "end": 127,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    },
+                    {
+                        "start": 182,
+                        "end": 183,
+                        "text": "3",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Argument generation is guided by the goals of the parties. In addition, the processing depends on which party must be convinced. To convince the union, the strategy is to discover a company action which threatens one of the union's important goals. To convince the company, the strategy is to discover whether the company's refusal will result in a violation of an important company goal. A goal is violated by an action when the action opposes its sign. For example, if the company lays off employees, a reduction in employment, EMPLOYMENT(-), occurs, violating the union's goal EMPLOYMENT(+). Since the company controls the hirings, firings and concessions, both of these strategies require a goal directed search of the company's goal graph. This search produces a set of potentially appropriate arguments whereas search of the union's goal graph is used for selection out of the produced set of arguments that are convincing by indicating the threatened union goals and their importance. In general, if one party controls the contingencies, then its own goal graph needs to be searched to generate threatening arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Creating an argument to convince disputant-1 regarding issue X and change of quantity (*), (where (*) is either (+) or (-)), is as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": ". Find out which of disputant-2's goals are violated by disputant-l's refusal. This is done by following the contribution links starting with X(NOT*) in the company's goal graph i.e., tracing the consequences for disputant-2 of the negation of its goal. The effects of negating X are propagated by changing the signs of X's ancestor goes along the path.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": ". Find out what compensating actions the disputant-2 might carry out to offset the effects of negating its goal X. This is done by considering the subgoals Z1,..., Zn of each goal Y found in step 1. To qualify as a threatening argument, a potential compensating action Zi has to satisfy three conditions: (1) it must be controllable by the disputant-2, (2) it must violate a goal of disputant-1 and (3) the importance for disputant-1 of this violated goal must be greater than the importance of the demand under discussion. If the third condition is not satisfied by Zi, its subgoals are checked to see whether they satisfy conditions (1) to (3); otherwise, the subgraph consisting of Zi and all of its contributing subgoals is pruned, and the sibling goals of Zi are considered in the same way. If some Zk proves suitable, a potential argument is saved. Whether or not an argument has been generated, steps 1 and 2 are repeated starting from Y. Thus, the whole set of arguments is generated.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Generating an argument to convince the company about issue X is similar: the X(NOT*) path is followed in the company's goal tree. The mediator points out to the company the deleterious results that X(NOT*) has on one of its higher level goals.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "When the argument-generating process described above produces more than one potential argument, the best order of presentation must be chosen. One strategy is to try the 'weakest' argument first, presenting 'strong' arguments only if the weaker ones fail. This requires a means of ranking arguments according to their 'convincing' power (as described in Section 4). The ranking follows the order of importance of the goals that the arguments threaten. In particular, the importance of the goals of a company (union) depends on the financial situation of the company, the state of the industry, the labor supply and the general economic climate. For example, the goal of reducing labor cost is more important for a company in an industry with high labor cost; if there is abundant labor supply in an area, the goal of employment is stronger for a union in that area. In this case, a threat to the union of layoffs has the greatest convincing power.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Consider a negotiation between a company and its union, where the PERSUADER has suggested a compromise. The company has agreed saying that the increase in fringe benefits (fringes) is the highest it can afford. The union wants a higher increase. The PERSUADER's argumentation goal becomes to convince the union to accept the proposed increase thus abandoning the goal of higher increases. The goals are organized as in the example goal graphs for the union and company depicted in Figures 1 and 3 . Importance of goals is expressed on a 0 to 10 scale. By examining the company's goal graph, depicted in Figure 4 one observes that since an increase in fringes contributes to an increase in economic concessions, labor costs and production costs, and a decrease in company profits, one of the company's goals is to decrease fringes. The subgoal of decreasing employment contributes to a decrease in economic concessions, labor costs and production costs. Decreasing employment violates the goal of a union of increased employment. This can be checked by examining the union's belief structure. The argument, addressed to a union that has refused a proposed increase in fringes, \"If the company is forced to grant higher increases in fringes, then it will decrease employment\" is meant to make the union abandon the goal of further increases in fringes by pointing out unpleasant consequences for the union of forcing the company to give an increase it cannot afford.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 489,
+                        "end": 490,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    },
+                    {
+                        "start": 495,
+                        "end": 496,
+                        "text": "3",
+                        "ref_id": "FIGREF4"
+                    },
+                    {
+                        "start": 610,
+                        "end": 611,
+                        "text": "4",
+                        "ref_id": "FIGREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "To generate the above argument, the process starts by following FRINGES(+), a negation of company's goal FRINGES(-) up the The search corresponds to a human mediator's reasoning: \"Suppose the company increased the fringe benefits. Does this lead to violation of any union goal?\" FRINGES(+) leads to ECONOMIC-CONCESSIONS(+ ). WAGES(-) is considered as a possible action of the company to offset the increase in economic concessions. Thus, a possible argument might be: \"If the company is forced to grant higher fringes, it will reduce the granted wages\". Generating this argument depends on whether the company can reduce the wages. Assuming that the wages were not under negotiation in this case, the argument is rejected and the search continues from ECONOMIC-CONCESSIONS(+). LABOR-COST(+) is reached, whose child, EMPLOYMENT(-) is controllable by the company and conflicts with the union goal EMPLOYMENT(+). Assuming EMPLOYMENT(+) is more important for the union than an increase in fringe benefits, the argument \"If the company is forced to grant higher fringe benefits, then it will lay off workers\" is generated.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Importance of fringes-goall is 5 for unionl Searching companyl goal-graph... An increase in fringes-goall by companyl will result in a increase in economic-concessions1, labor-costl, production-cost1 An increase in fringes-goal1 by company1 will result in a decrease in profitst To compensate, company1 can decrease wage-goal1, decrease employment1, increase plant-efficiency1, increase sales1",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "Only decrease wage-goal1, decrease employmentl, violate goals of union1 Wage-goal1 not under discussion in negotiation Importance of employmentt is 7 for uniont Since importance of employment1 > importance of fringes-goal1 threat to decrease employment1 can be used to abandon fringes-goal1 One possible argument found If all other arguments and proposed modifications have failed to move a party towards agreement, arguments aimed at changing the reservation price of the party are presented. These arguments take the form of threats to break off negotiations if the party does not accept the current proposal. Breakoff arguments assert that the cost of breaking off negotiations is greater than the loss in payoff associated with the current (unacceptable to the persuadee) proposed settlement. The effectiveness of these arguments reflects actual labor negotiations (e.g., Herman and Kuhn, 1981) where it is observed that as the strike deadline approaches, and as the parties calculate the costs of a strike against the possible worth of a settlement, their willingness to compromise increases, or equivalently, the payoff required for agreement decreases.",
+                "cite_spans": [
+                    {
+                        "start": 876,
+                        "end": 898,
+                        "text": "Herman and Kuhn, 1981)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "To calculate the loss in payoff of the current unacceptable proposal, the PERSUADER uses a heuristic acceptability threshold of 70% payoff for each of the parties. In other words, it is assumed that a party will accept a proposed settlement if it gives payoff (equal and/or) higher than 70%. The loss in payoff is the difference between 70% and the payoff of the current (rejected by the persuadee) proposal. The loss in payoff also represents the amount by which the reservation price of the rejecting party needs to be changed so that the party will agree to the proposed settlement. In the current implementation, it is assumed that loss of payoff is proportional to the party's breakoff costs. In other words, the greater the negotiation breakoff cost, the greater the payoff loss the party can tolerate (the less the needed payoff of an acceptable proposal). To calculate strike costs for the union and the company, the factors taken into consideration include: the inventory situation of the company, the economic conditions in the industry, outstanding orders, the condition of the union's treasury, unemployment in the job classifications of the bargain unit and the strike history of the union. For a target reservation price change, the PERSUADER calculates breakoff cost and checks to see whether the cost is greater than the targeted change. If it is, this calculation forms the basis for a negotiation breakoff argument. If not, the PER-SUADER seeks to see what assumptions would increase the breakoff cost and the breakoff arguments include these assumptions. For a detailed discussion of brr arguments, see (Sycara, 1987) .",
+                "cite_spans": [
+                    {
+                        "start": 1622,
+                        "end": 1636,
+                        "text": "(Sycara, 1987)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "In certain situations, such as labor negotiations, the breakoff cost is a function of time. In such domains a persuader has to convince the rejecting party that negotiations will not be resumed for as long a time as is needed for the negotiation breakoff cost to yield the appropriate satisfaction drop. In the PERSUADER this length of time is looked up from the curve of strike cost vs time for the rejecting party. This curve is approximated by accessing experiences with similar parties. The shape of a company's curve depends on the kind of product the company produces. For example, if the grape pickers go on strike at the time the grapes are ripe, there is an initial period of a few days where the strike cost rises linearly with time (assuming the strike started just before the optimal picking time). After the grapes are overripe, the strike cost drops to zero. For the union, the curve of strike cost vs time depends on the shape the union's strike fund is in, the level of unemployment for the skills of the union members, and the level of unemployment benefits. To strengthen a negotiation breakoff argument, a persuader mediator can use retrieved cases where a breakoff had an adverse effect for a similar persuadee.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purusing Goal Abandonment on the Part of the Persuadee",
+                "sec_num": "7.3."
+            },
+            {
+                "text": "In many cases, especially if a persuader is an expert in a particular domain, there are known arguments that the persuader is familiar with. For example, in the labor mediation domain, a mediator has experience with using persuasive arguments in various contract negotiations. These arguments and the appropriate ways to use them are identified in books on collective bargaining (Herman and Kuhn, 1981; Randle, 1951) . In politics, a candidate (or his campaign manager) is familiar with various arguments pertaining to issues at hand. In such cases, the persuader can retrieve an argument appropriate to a situation instead of having to construct one from scratch. One question that has to be addressed is how the retrieval process can be guided so that the persuader will retrieve the most appropriate argument from a potentially large number of arguments pertaining to an issue. The persuader's goals and strategies that were identified in Section 5 as well as the convincing power of arguments, gives us a handle on addressing this question.",
+                "cite_spans": [
+                    {
+                        "start": 379,
+                        "end": 402,
+                        "text": "(Herman and Kuhn, 1981;",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 403,
+                        "end": 416,
+                        "text": "Randle, 1951)",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED ARGUMENT GENERATION",
+                "sec_num": "8."
+            },
+            {
+                "text": "In the PERSUADER's memory an argument is stored according to the contract issue to which it pertains, whether it is meant to convince the union or the company, and which argumentation goal and strategy it fulfills. Additional information associated with the argument is a list of goals to which the issue contributes. Moreover, information about the effectiveness of the argument depending on various external economic conditions is included, as well as the type of justification the argument embodies. For example, the argument \"Seniority improves worker morale, resulting in more efficient plant operation\" is stored under the issue of seniority, it is meant to convince the company, it is meant to increase seniority's importance. The supergoals to which the seniority goal contributes are worker morale, plant efficiency and decrease in production cost. The argument appeals to the company's self-interest. The argument is more effective during recession and for companies in labor intensive industries.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED ARGUMENT GENERATION",
+                "sec_num": "8."
+            },
+            {
+                "text": "The PERSUADER starts the memory search for the selection of an appropriate argument with knowledge of (a) the issue/goal under discussion, (b) the persuadee (union or company), (c) the persuadee's belief structure (or a belief structure of a similar persuadee), and (d) the persuader's argumentation goal and strategy. The PERSUADER also has knowledge of company characteristics, such as whether the company is in a labor intensive industry, as well as economic conditions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED ARGUMENT GENERATION",
+                "sec_num": "8."
+            },
+            {
+                "text": "The following scheme depicts a heuristic algorithm for selecting an appropriate argument from an experiential base of known arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED ARGUMENT GENERATION",
+                "sec_num": "8."
+            },
+            {
+                "text": "1. Using the issue under discussion as an index, retrieve known arguments for this issue 2. Out of the arguments retrieved in step 1, select the subset that convinces the appropriate persuadee 3. Out of the argument set of step 2, select those that match the persuader's argumentation goal and strategy 4. Out of the argument set of step 3, select those which match the preconditions for the particular strategy 5. Out of the argument set of step 4, select those whose preconditions concerning external events match the current situation 6. Out of the argument set of step 5, select for presentation the one with the weakest justification. The reason for this is explained in the section on convincing power.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "HEURISTICS FOR SELECTION OF APPROPRIATE ARGUMENT",
+                "sec_num": null
+            },
+            {
+                "text": "Step 4 of the above heuristic requires some clarification. Different argumentation strategies require different verification actions. For example, if the argumentation goal is to increase the importance of the issue by showing a big contribution of that issue to important goals of the persuadee, the verification action is to check that the persuadee indeed has a subset of the goals that appear in the goal list associated with the issue, and that these goals are important. If, on the other hand, the argumentation goal is to change the persuadee's perception of the value of the issue by finding how peers have behaved, then a search for peer actions is initiated. In the mediation domain, for example, if a union rejects the proposed value of an issue as \"too low\", then the mediator can initiate a search at step 4 of the above heuristic to find contracts that unions in the same industry have signed with the same or even lower value for that issue.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "HEURISTICS FOR SELECTION OF APPROPRIATE ARGUMENT",
+                "sec_num": null
+            },
+            {
+                "text": "Once an argument has been identified and selected, it needs to be adapted to fit the current case. Heuristics associated with the issue are used to do that. For example, associated with seniority is knowledge that seniority reduces grievances, seniority reduces labor turnover, seniority reduces production costs. If a previously used argument involves use of seniority to reduce labor turnover but the disputant company is not worried about turnover, then grievances is checked for applicability to the current situation. If it is applicable, the previous argument is modified by substituting grievances for turnover.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "HEURISTICS FOR SELECTION OF APPROPRIATE ARGUMENT",
+                "sec_num": null
+            },
+            {
+                "text": "To illustrate case-based argument generation, consider the situation where the PERSUADER has suggested a settlement to two parties. The union agrees but the company raises an objection to the seniority provision without giving the reason for the objection. The PERSUAD-ER's argumentation goal becomes to change the perception of the company regarding the seniority provision. By examining the company's payoff structure, the PERSUADER concludes that to increase the company's payoff, it needs to increase the importance the company attaches to seniority. 6 The company's belief structure is checked to see whether seniority contributes substantially to important company goals. Memory is searched for appropriate seniority arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "HEURISTICS FOR SELECTION OF APPROPRIATE ARGUMENT",
+                "sec_num": null
+            },
+            {
+                "text": "Searching memory with index SENIORITY, COMPANY, INCREASE-IMPORTANCE 1 argument found \"Seniority decreases labor turnover\" Check argument for applicability Seniority contributes to decrease labor turnover (high) increase worker morale (moderate), decrease grievances (moderate) Argument potentially applicable Adapt argument to present situation Importance of decrease labor turnover for company is 4 Importance of increase worker morale for company is 5 Importance of decrease grievances for company is 6",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "HEURISTICS FOR SELECTION OF APPROPRIATE ARGUMENT",
+                "sec_num": null
+            },
+            {
+                "text": "Since importance for the decrease labor turnover < importance of decrease grievances for company substitute grievance for labor turnover Resulting argument \"Seniority decreases grievances\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "HEURISTICS FOR SELECTION OF APPROPRIATE ARGUMENT",
+                "sec_num": null
+            },
+            {
+                "text": "In non fully cooperative multi-agent problem solving situations, such as negotiation, the parties have to be induced to change their positions so an agreement can be reached. We have advocated persuasive argumentation as a general mechanism for planning how to influence agents' intentions in order to increase their cooperativeness and guide the process to solution convergence. The most important knowledge source for argument generation is a model of the persuadee's belief and preference structure. We have shown how this model can be used to produce persuasive arguments to change a persuadee's beliefs and behavior. We have presented a model of persuasive argumentation and strategies for argument generation. Construction of arguments is performed using integration of Case-Based Reasoning, graph search and approximate estimation of agents' utilities. The argumentation model is part of a negotiation model, implemented in the PERSUADER program, that resolves multi-agent conflicts in the labor domain.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CONCLUDING REMARKS",
+                "sec_num": "9."
+            },
+            {
+                "text": "Theory and Decision 28: 203-242, 1990. 9 1990 Kluwer Academic Publishers. Printed in the Netherlands.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [],
+        "bib_entries": {
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "How Arbitration Works",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Elkouri",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Elkouri",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1973,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Elkouri, F. and Elkouri, E.: 1973, How Arbitration Works, Washington, D.C.: The Bureau of National Affairs, Inc.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "A Theory of Cognitive Dissonance",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Festinger",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1957,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Festinger, L.: 1957, A Theory of Cognitive Dissonance, Stanford, CA.: Stanford University Press.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Bivariate Negotiations as a Problem of Stochastic Terminal Control",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Fogelman-Soulie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Munier",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Shakun",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "Management Science",
+                "volume": "29",
+                "issue": "",
+                "pages": "840--855",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fogelman-Soulie, F., Munier, D., and Shakun, M. F.: 1983, 'Bivariate Negotiations as a Problem of Stochastic Terminal Control', Management Science 29,840-855.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "The Computer as a Third Party",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Goeltner",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Goeltner, C.: 1987, The Computer as a Third Party (Tech. Rep.), Cambridge, Mass.: Sloan School of Management, M.I.T., Working paper.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "The Psychology of Interpersonal Relations",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Heider",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1958,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Heider, F.: 1958, The Psychology of Interpersonal Relations, New York, N.Y.: John Wiley.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Collective Bargaining and Labor Relations",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Herman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kuhn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Herman, E. and Kuhn, A.: 1981, Collective Bargaining and Labor Relations, Englewood Cliffs, NJ.: Prentice-Hall, Inc.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "NEGO-Group Decision Support System",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Kersten",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Information and Management",
+                "volume": "8",
+                "issue": "",
+                "pages": "237--246",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kersten, G. E.: 1985, 'NEGO-Group Decision Support System', Information and Management 8, 237-246.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "A Process Model of Case-Based Reasoning in Problem Solving",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Kolodner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Simpson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sycara-Cyranski",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Proceedings\" of IJCA",
+                "volume": "1",
+                "issue": "85",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kolodner, J. L., Simpson, R. L., and Sycara-Cyranski, K.: 1985, 'A Process Model of Case-Based Reasoning in Problem Solving', Proceedings\" of IJCA1-85, Los Angeles, CA.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Logic-based Tools for Negotiation Support",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Matwin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Szpakowicz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Kersten",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Michalowski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Koperczak",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "",
+                "volume": "87",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Matwin, S., Szpakowicz, S., Kersten, G., Michalowski, W., and Koperczak, Z.: 1987, Logic-based Tools for Negotiation Support (Tech. Rep. 87-10), University of Ottawa.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "The Principle of Congruity in the Prediction of Attitude Change",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Osgood",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Tannenbaum",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1955,
+                "venue": "Psychological Review",
+                "volume": "62",
+                "issue": "",
+                "pages": "42--55",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Osgood, C. and Tannenbaum, P.: 1955, 'The Principle of Congruity in the Prediction of Attitude Change', Psychological Review 62, 42-55.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Collective Bargaining: Principles and Practices",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Randle",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1951,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Randle, W.: 1951, Collective Bargaining: Principles and Practices, Cambridge, Mass.: The Riverside Press.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "A Normative Model for Negotiations",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Rao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Shakun",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1974,
+                "venue": "Management Science",
+                "volume": "20",
+                "issue": "",
+                "pages": "1364--1375",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rao, A. G. and Shakun, M. F.: 1974, 'A Normative Model for Negotiations', Manage- ment Science 20, 1364-1375.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Scripts, Plans, Goals, and Understanding",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Schank",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Abelson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1977,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Schank, R and Abelson, R.: 1977, Scripts, Plans, Goals, and Understanding, Hilsdale, N.J.: Lawrence Erlbaum Associates.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Evolutionary Systems Design: Policy Making Under Complexity and Group Decision Support Systems",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Shakun",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shakun, M. F.: 1988, Evolutionary Systems Design: Policy Making Under Complexity and Group Decision Support Systems, Oakland, CA.: Holden-Day.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Persuasive argumentation in resolution of collective bargaining impasses",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sycara-Cyranski",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Proceedings of the Seventh Annual Conference of the Cognitive Science Society",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sycara-Cyranski, K.: 1985, 'Persuasive argumentation in resolution of collective bargain- ing impasses', Proceedings of the Seventh Annual Conference of the Cognitive Science Society, Irvine, CA.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Resolving Adversarial Conflicts: An Approach Integrating Case-Based and Analytic Methods, Doctoral dissertation",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sycara",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sycara, K.: 1987, Resolving Adversarial Conflicts: An Approach Integrating Case-Based and Analytic Methods, Doctoral dissertation, School of Information and Computer Science, Georgia Institute of Technology.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Resolving Goal Conflicts via Negotiation",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sycara",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Proceedings of AAAI-88",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sycara, K.: 1988a, 'Resolving Goal Conflicts via Negotiation', Proceedings of AAAI-88, St. Paul, MN.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Utility Theory in Conflict Resolution",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sycara",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Annals of Operations Research",
+                "volume": "12",
+                "issue": "",
+                "pages": "65--84",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sycara, K.: 1988b, 'Utility Theory in Conflict Resolution', Annals of Operations Research 12, 65-84.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Patching Up Old Plans",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sycara",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Proceedings of the Tenth Annual Conference of the Cognitive Science Society",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sycara, K.: 1988c, 'Patching Up Old Plans', Proceedings of the Tenth Annual Conference of the Cognitive Science Society, Montreal, Canada.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Negotiation Planning: An AI Approach",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sycara",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1989,
+                "venue": "European Journal of Operational Research",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sycara, K.: 1989, 'Negotiation Planning: An AI Approach', European Journal of Operational Research (forthcoming).",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": "1",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Fig. 1. A company's partial belief structure."
+            },
+            "FIGREF1": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "(a) Indicate a change (increase or decrease) in the contribution of the present goal to a higher level goal of the persuadee (b) indicate a change in the feasibility of the proposed goal"
+            },
+            "FIGREF2": {
+                "fig_num": "2",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "In the figure, the square rectangles represent the argumenta-"
+            },
+            "FIGREF3": {
+                "fig_num": "2",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Fig. 2. Process model of persuasive argumentation,"
+            },
+            "FIGREF4": {
+                "fig_num": "3",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Fig. 3. Partial belief structure of a union."
+            },
+            "FIGREF5": {
+                "fig_num": "4",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Fig. 4. Company graph search."
+            }
+        }
+    }
+}

@@ -1,0 +1,3564 @@
+{
+    "paper_id": "publichealth-2017-2-e35",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-09T12:23:18.433844Z"
+    },
+    "title": "How Do You #relax When You're #stressed? A Content Analysis and Infodemiology Study of Stress-Related Tweets",
+    "authors": [
+        {
+            "first": "Son",
+            "middle": [],
+            "last": "Doan",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of California",
+                "location": {
+                    "addrLine": "San Diego, La Jolla",
+                    "region": "CA",
+                    "country": "United States"
+                }
+            },
+            "email": "sondoan@gmail.com"
+        },
+        {
+            "first": "Amanda",
+            "middle": [],
+            "last": "Ritchart",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of California",
+                "location": {
+                    "addrLine": "San Diego, La Jolla",
+                    "region": "CA",
+                    "country": "United States"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Nicholas",
+            "middle": [],
+            "last": "Perry",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Utah",
+                "location": {
+                    "settlement": "Salt Lake City",
+                    "region": "UT",
+                    "country": "United States"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Juan",
+            "middle": [
+                "D"
+            ],
+            "last": "Chaparro",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of California",
+                "location": {
+                    "addrLine": "San Diego, La Jolla",
+                    "region": "CA",
+                    "country": "United States"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Mike",
+            "middle": [],
+            "last": "Conway",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Utah",
+                "location": {
+                    "settlement": "Salt Lake City",
+                    "region": "UT",
+                    "country": "United States"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Xsl",
+            "middle": [
+                "\u2022"
+            ],
+            "last": "Fo",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "\u00a9son",
+            "middle": [],
+            "last": "Doan",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Mike",
+            "middle": [
+                "Conway"
+            ],
+            "last": "Originally",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Background: Stress is a contributing factor to many major health problems in the United States, such as heart disease, depression, and autoimmune diseases. Relaxation is often recommended in mental health treatment as a frontline strategy to reduce stress, thereby improving health conditions. Twitter is a microblog platform that allows users to post their own personal messages (tweets), including their expressions about feelings and actions related to stress and stress management (eg, relaxing). While Twitter is increasingly used as a source of data for understanding mental health from a population perspective, the specific issue of stress-as manifested on Twitter-has not yet been the focus of any systematic study.\nThe objective of our study was to understand how people express their feelings of stress and relaxation through Twitter messages. In addition, we aimed at investigating automated natural language processing methods to (1) classify stress versus nonstress and relaxation versus nonrelaxation tweets, and (2) identify first-hand experience-that is, who is the experiencer-in stress and relaxation tweets.\nWe first performed a qualitative content analysis of 1326 and 781 tweets containing the keywords \"stress\" and \"relax,\" respectively. We then investigated the use of machine learning algorithms-in particular naive Bayes and support vector machines-to automatically classify tweets as stress versus nonstress and relaxation versus nonrelaxation. Finally, we applied these classifiers to sample datasets drawn from 4 cities in the United States (Los Angeles, New York, San Diego, and San Francisco) obtained from Twitter's streaming application programming interface, with the goal of evaluating the extent of any correlation between our automatic classification of tweets and results from public stress surveys.\nResults: Content analysis showed that the most frequent topic of stress tweets was education, followed by work and social relationships. The most frequent topic of relaxation tweets was rest & vacation, followed by nature and water. When we applied the classifiers to the cities dataset, the proportion of stress tweets in New York and San Diego was substantially higher than that in Los Angeles and San Francisco. In addition, we found that characteristic expressions of stress and relaxation varied for each city based on its geolocation.\nThis content analysis and infodemiology study revealed that Twitter, when used in conjunction with natural language processing techniques, is a useful data source for understanding stress and stress management strategies, and can potentially supplement infrequently collected survey-based stress data.",
+    "pdf_parse": {
+        "paper_id": "publichealth-2017-2-e35",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Background: Stress is a contributing factor to many major health problems in the United States, such as heart disease, depression, and autoimmune diseases. Relaxation is often recommended in mental health treatment as a frontline strategy to reduce stress, thereby improving health conditions. Twitter is a microblog platform that allows users to post their own personal messages (tweets), including their expressions about feelings and actions related to stress and stress management (eg, relaxing). While Twitter is increasingly used as a source of data for understanding mental health from a population perspective, the specific issue of stress-as manifested on Twitter-has not yet been the focus of any systematic study.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "The objective of our study was to understand how people express their feelings of stress and relaxation through Twitter messages. In addition, we aimed at investigating automated natural language processing methods to (1) classify stress versus nonstress and relaxation versus nonrelaxation tweets, and (2) identify first-hand experience-that is, who is the experiencer-in stress and relaxation tweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "We first performed a qualitative content analysis of 1326 and 781 tweets containing the keywords \"stress\" and \"relax,\" respectively. We then investigated the use of machine learning algorithms-in particular naive Bayes and support vector machines-to automatically classify tweets as stress versus nonstress and relaxation versus nonrelaxation. Finally, we applied these classifiers to sample datasets drawn from 4 cities in the United States (Los Angeles, New York, San Diego, and San Francisco) obtained from Twitter's streaming application programming interface, with the goal of evaluating the extent of any correlation between our automatic classification of tweets and results from public stress surveys.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "Results: Content analysis showed that the most frequent topic of stress tweets was education, followed by work and social relationships. The most frequent topic of relaxation tweets was rest & vacation, followed by nature and water. When we applied the classifiers to the cities dataset, the proportion of stress tweets in New York and San Diego was substantially higher than that in Los Angeles and San Francisco. In addition, we found that characteristic expressions of stress and relaxation varied for each city based on its geolocation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "This content analysis and infodemiology study revealed that Twitter, when used in conjunction with natural language processing techniques, is a useful data source for understanding stress and stress management strategies, and can potentially supplement infrequently collected survey-based stress data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Psychological stress has been linked to multiple health conditions, including depression [1] , heart disease [2] , autoimmune disease [3] , and general all-cause mortality [4] . Stress has also been associated with worse health outcomes among those living with chronic illness [5] , suggesting that stress may exacerbate preexisting health conditions, as well as contribute to the development of new health problems. Stress not only contributes to physical and mental health problems, such as heart disease, depression, and autoimmune diseases [6] , but also has negative impacts on family life and work, significantly impairing quality of life [7, 8] . Accordingly, stress is an important concern for public health prevention initiatives [7, 8] .",
+                "cite_spans": [
+                    {
+                        "start": 89,
+                        "end": 92,
+                        "text": "[1]",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 109,
+                        "end": 112,
+                        "text": "[2]",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 134,
+                        "end": 137,
+                        "text": "[3]",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 172,
+                        "end": 175,
+                        "text": "[4]",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 277,
+                        "end": 280,
+                        "text": "[5]",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 544,
+                        "end": 547,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 645,
+                        "end": 648,
+                        "text": "[7,",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 649,
+                        "end": 651,
+                        "text": "8]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 739,
+                        "end": 742,
+                        "text": "[7,",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 743,
+                        "end": 745,
+                        "text": "8]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Health surveys have demonstrated that stress negatively affects a large proportion of the US population [9] . Underscoring the magnitude of the problem, a study conducted by the Harvard School of Public Health found that 49% of the American public reported being stressed within the last year, and also found that 60% of those who reported being in poor health also reported experiencing a substantial amount of stress within the last month [7] . Further, levels of stress appear to be unequally distributed throughout the population [10] . National surveys have documented that higher levels of stress are reported among those who have lower income, are less educated, and are younger [11] . Theorists have suggested that geographic clustering of psychological characteristics may be driven by selective migration (in this case, people more vulnerable to stress seek out others like themselves), social influence (ie, people with attitudes and beliefs that lead to greater stress cluster together geographically), or environmental influence (ie, features of the physical environment, such as neighborhoods, increase stress among those who live close to one another) [12] . In short, large-scale studies have documented both the high prevalence of stress within the United States and geographic clustering of psychological distress, suggesting that symptoms of stress should ideally be tracked at both the national and local levels.",
+                "cite_spans": [
+                    {
+                        "start": 104,
+                        "end": 107,
+                        "text": "[9]",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 441,
+                        "end": 444,
+                        "text": "[7]",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 534,
+                        "end": 538,
+                        "text": "[10]",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 686,
+                        "end": 690,
+                        "text": "[11]",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 1167,
+                        "end": 1171,
+                        "text": "[12]",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Relaxation is considered a key component of frontline stress management techniques, such as cognitive-behavioral stress management [13] . General stress management can include adaptive coping (eg, distraction), physical relaxation strategies (eg, diaphragmatic breathing), cognitive reappraisal (eg, reconsidering the stressor from a different perspective), and mindfulness (ie, increasing awareness of the present moment). These stress management strategies are intended to reduce psychological and physiological arousal related to stress, promote healthier coping alternatives, and, in turn, reduce some of the negative health impacts of stress. Indeed, these strategies have been found to be effective for improving health outcomes among those living with chronic illness [14] [15] [16] , as well as for improving general mental health and quality of life [17, 18] .",
+                "cite_spans": [
+                    {
+                        "start": 131,
+                        "end": 135,
+                        "text": "[13]",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 775,
+                        "end": 779,
+                        "text": "[14]",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 780,
+                        "end": 784,
+                        "text": "[15]",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 785,
+                        "end": 789,
+                        "text": "[16]",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 859,
+                        "end": 863,
+                        "text": "[17,",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 864,
+                        "end": 867,
+                        "text": "18]",
+                        "ref_id": "BIBREF16"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Understanding what the major causes of stress are and how people negatively or positively manage their stress (eg, through stress management techniques such as cultivating relaxation) is important [7, 19] . Population health surveys often use telephone interviews or questionnaires from samples of the population, such as the US Centers for Disease Control and Prevention's (CDC) Behavioral Risk Factor Surveillance System [20] . These methods, although reliable, are conducted relatively infrequently due to cost and may be less effective at reaching certain populations, such as those without a dedicated landline telephone. With the rapid growth of online social networks today, social media data can serve as a useful additional resource to understand aspects of stress that are difficult to assess in general surveys or clinical care. For example, social media provide a means to rapidly and dynamically address new and evolving research questions with a degree of flexibility not possible with surveys. Social media may also provide insights into populations that may be underrepresented in surveys (depending on the demographics of the particular social media platform used). Thus, social media can potentially serve as a beneficial supplement to detailed surveys when trying to understand public health concerns.",
+                "cite_spans": [
+                    {
+                        "start": 197,
+                        "end": 200,
+                        "text": "[7,",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 201,
+                        "end": 204,
+                        "text": "19]",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 423,
+                        "end": 427,
+                        "text": "[20]",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Twitter-one of the most popular social media platforms-is a microblog service that allows users to post their own personal messages (a \"tweet\" with a 140-character limit). As of May 2016, it had 310 million active users with 1 billion unique visits monthly to sites with embedded tweets [21] . The utility of Twitter as a data source has been investigated in numerous applications such as election prediction [22] , stock market prediction [23] , oil price changes [22] , and earthquake and disasters [24] .",
+                "cite_spans": [
+                    {
+                        "start": 287,
+                        "end": 291,
+                        "text": "[21]",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 409,
+                        "end": 413,
+                        "text": "[22]",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 440,
+                        "end": 444,
+                        "text": "[23]",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 465,
+                        "end": 469,
+                        "text": "[22]",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 501,
+                        "end": 505,
+                        "text": "[24]",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Twitter has also been used in public health for tracking influenza [25] [26] [27] , and for studying breast cancer prevention [28] , childhood obesity [29] , issues related to general health [30] , tobacco and e-cigarette use [31] , dental pain [32, 33] , general pain [34] , sexually transmitted diseases [35] , and weight loss [36] . There has also been research regarding the general well-being of people in different geographical locations using Twitter messages [37] , and correlation studies of Twitter messages with depression [38] and with heart disease mortality [39] . However, to our knowledge, no studies specifically focused on stress and stress management have been conducted until now.",
+                "cite_spans": [
+                    {
+                        "start": 67,
+                        "end": 71,
+                        "text": "[25]",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 72,
+                        "end": 76,
+                        "text": "[26]",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 77,
+                        "end": 81,
+                        "text": "[27]",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 126,
+                        "end": 130,
+                        "text": "[28]",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 151,
+                        "end": 155,
+                        "text": "[29]",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 191,
+                        "end": 195,
+                        "text": "[30]",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 226,
+                        "end": 230,
+                        "text": "[31]",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 245,
+                        "end": 249,
+                        "text": "[32,",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 250,
+                        "end": 253,
+                        "text": "33]",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 269,
+                        "end": 273,
+                        "text": "[34]",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 306,
+                        "end": 310,
+                        "text": "[35]",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 329,
+                        "end": 333,
+                        "text": "[36]",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 467,
+                        "end": 471,
+                        "text": "[37]",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 534,
+                        "end": 538,
+                        "text": "[38]",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 572,
+                        "end": 576,
+                        "text": "[39]",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "In this study, we investigated how people express their own stress and relaxation through an in-depth content analysis of Twitter messages. In addition, we investigated automated methods to classify stress and relaxation tweets using machine learning techniques. Furthermore, we ranked stress and relaxation levels based on the relative proportions of stress-and relaxation-related tweets (as identified by our natural language processing classifiers) originating in 4 US cities: New York, Los Angeles, San Diego, and San Francisco. We then compared these results with public surveys reported by Forbes and CNN [40, 41] . Using easily acquired, naturalistic Twitter data, and complementing existing survey-based epidemiological methods, this study provides another perspective on how people think about and cope with stress.",
+                "cite_spans": [
+                    {
+                        "start": 611,
+                        "end": 615,
+                        "text": "[40,",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 616,
+                        "end": 619,
+                        "text": "41]",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "To begin our investigation of stress and relaxation (stress management) tweets, we first collected tweets with user-defined stress and relaxation topics using the Twitter REST application programming interface (API) [42] . The user-defined topics included the hashtagged topics #stress and #relax, as well as variations of these words. Textbox 1 lists the full search list we used. We collected tweets between July 9 and July 14, 2014. We supplemented this seed dataset with tweets from the random sample stream Twitter streaming API [43] (1% sample rate) in order to have better representation of \"everyday\" tweets that did not necessarily contain stress-and relaxation-related hashtags, but that still contained the keywords \"stress\" or \"relax.\" This dataset consisted of 1326 stress-related and 781 relaxation-related tweets. We referred to this dataset as dataset 1.",
+                "cite_spans": [
+                    {
+                        "start": 216,
+                        "end": 220,
+                        "text": "[42]",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 534,
+                        "end": 538,
+                        "text": "[43]",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset 1",
+                "sec_num": null
+            },
+            {
+                "text": "Textbox 1. List of hashtags related to stress and relaxation to create dataset 1. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset 1",
+                "sec_num": null
+            },
+            {
+                "text": "We further investigated the characteristics of stress and stress management by geographical location (4 US cities) and compared the locations against each other using dataset 2. This dataset-much larger than dataset 1-consisted of geotagged tweets obtained from the Twitter streaming API [43] in 1 of 4 possible cities: Los Angeles, New York, San Diego, and San Francisco. We chose these cities because they are densely populated and major metropolitan areas on the east and west coasts of the United States. Tweets were collected between September 30, 2013 and February 10, 2014. The number of tweets for each city for this time period was 8.2 million for New York, 6.6 million for Los Angeles, 3 million for San Diego, and 4.4 million for San Francisco. Note that the most populous cities-that is, New York and Los Angeles-generated the greatest number of tweets during the study period. We referred to this dataset as dataset 2.",
+                "cite_spans": [
+                    {
+                        "start": 288,
+                        "end": 292,
+                        "text": "[43]",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset 2",
+                "sec_num": null
+            },
+            {
+                "text": "Since our primary goal in this study was to understand how people express stress and relaxation through Twitter, we developed annotation guidelines for both stress and relaxation tweets based on reports from the American Psychological Association [7] , CDC [8,44], and medical websites [6, 45, 46] . Following these guidelines, we classified tweets by both genre and theme. Genre reflects the format of the tweet (eg, personal experience), and theme reflects the domain of the actual content conveyed (including such categories as stress symptoms and stress topics). Details for each genre and theme for stress and relaxation tweets were as follows.",
+                "cite_spans": [
+                    {
+                        "start": 247,
+                        "end": 250,
+                        "text": "[7]",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 286,
+                        "end": 289,
+                        "text": "[6,",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 290,
+                        "end": 293,
+                        "text": "45,",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 294,
+                        "end": 297,
+                        "text": "46]",
+                        "ref_id": "BIBREF43"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Criterion Standard and Manual Analysis of Tweets",
+                "sec_num": null
+            },
+            {
+                "text": "We categorized tweets as being first-hand experience versus other genres. We defined first-hand experience as a direct personal experience, or an experience directly related to the user writing the tweet. Other genres were second-hand experience, advertisements, news articles, etc. This genre classification was based on previous work on classifying health-related tweets [31] . After classifying a tweet as first-hand experience, we assigned its content into 2 themes: stress and relaxation.",
+                "cite_spans": [
+                    {
+                        "start": 373,
+                        "end": 377,
+                        "text": "[31]",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Genre",
+                "sec_num": null
+            },
+            {
+                "text": "Content analysis focused on 3 main questions: (1) What kind of stress was being experienced? ( 2 Symptoms fell into 3 classes: (1) psychological and emotional, (2) physical, and (3) behavioral. These categories were based on guidelines for stress symptoms [47] [48] [49] .",
+                "cite_spans": [
+                    {
+                        "start": 256,
+                        "end": 260,
+                        "text": "[47]",
+                        "ref_id": "BIBREF44"
+                    },
+                    {
+                        "start": 261,
+                        "end": 265,
+                        "text": "[48]",
+                        "ref_id": "BIBREF45"
+                    },
+                    {
+                        "start": 266,
+                        "end": 270,
+                        "text": "[49]",
+                        "ref_id": "BIBREF46"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stress Themes",
+                "sec_num": null
+            },
+            {
+                "text": "Topics referred to the general topic of a tweet: (1) work, (2) education, (3) finances, (4) social relationships, (5) travel, (6) temporal, and (7) other. These topics were identified based on an analysis of data from dataset 1.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stress Themes",
+                "sec_num": null
+            },
+            {
+                "text": "The action taken theme indicated the action that people reported taking when they were stressed. The action could be either negative or positive. An example of a negative action is \"I need a drink tonight. #sostressed.\" An example of a positive action is \"I need a nap, and a hug. #stressingout #tired.\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stress Themes",
+                "sec_num": null
+            },
+            {
+                "text": "The nonspecific theme was for users who simply tweeted without any symptom, topic, or action; for example, \"#stressed!!!,\" \"Bad Night :,(\" and \"#SoStressed.\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stress Themes",
+                "sec_num": null
+            },
+            {
+                "text": "We categorized first-hand experience relaxation tweets by the following topics (themes), which referred to the action reported being taken by the user to relax, such as exercising or listening to music. We created 11 topics based on data from dataset 1: One author (AR) annotated stress and relaxation tweets from dataset 1 and another (SD) annotated and verified the dataset to ensure that all tweets were annotated correctly. Any disagreements were resolved by meetings or exchanging emails. Dataset 1 contained a total of 664 stress and 662 nonstress tweets among the 1326 stress-related tweets, and a total of 391 relaxation and 390 nonrelaxation tweets among the 781 relaxation-related tweets. For each stress or relaxation tweet, 2 authors (AR, SD) discussed and manually annotated tweets based on the guidelines as described above. After annotation, there were a total of 479 stress tweets and 335 relaxation tweets related to first-hand experience in dataset 1. Figure 3 depicts the details of dataset 1.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 977,
+                        "end": 978,
+                        "text": "3",
+                        "ref_id": "FIGREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Relaxation Themes",
+                "sec_num": null
+            },
+            {
+                "text": "Since the prevalences of some of the stress themes (eg, finances, work) and relaxation themes (eg, food & drink, social) in dataset 1 were very low (ie, too infrequent to train a machine learning classifier), we developed an automatic keyword-based theme classifier using a manually crafted lexicon of stress and relaxation keywords associated with each category. We first generated unigrams and bigrams from dataset 1, and one author (AR) manually reviewed and selected the highest-frequency unigram and bigram keywords. We then manually added corresponding synonyms into each theme to increase the coverage of the classifier. For example, the topic \"education\" in the stress schema contained the unigrams \"school,\" \"college,\" and \"classes\" and the bigram \"high school\" in dataset 1. We manually added synonyms of those terms, such as \"exams\" and \"studying\" as unigram keywords and \"college life,\" \"my tuition,\" and \"on finals\" into bigram keywords. The list was iteratively reviewed and confirmed by another author (SD). There was an average of 20 unigram and 20 bigram terms for each theme. We created only unigram and bigram keywords, since tweet messages are short in nature. Bigram keywords were necessary to include idiomatic expressions like \"vicious cycle\" and \"hate feeling,\" and they also added more specificity, such as \"my heart\" and \"my sanity,\" which helped to increase the accuracy of the classifiers. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Relaxation Themes",
+                "sec_num": null
+            },
+            {
+                "text": "Leveraging the annotated data derived from our content analysis of dataset 1, we applied and evaluated machine learning algorithms for classification of stress versus nonstress tweets and relaxation versus nonrelaxation tweets (on dataset 1). To apply the classifier trained on dataset 1 to the unseen, much larger dataset 2 (cities dataset), we first filtered tweets by keeping only the tweets that contained stress-or relaxation-related hashtags in Textbox 1 or the keywords \"stress\" or \"relax\" for each city in dataset 2. After this step, dataset 2 contained only tweets with stress-or relaxation-related keywords or hashtags. To calculate the proportion of stress or relaxation tweets at the city level, we used the stress or relaxation classifier trained on dataset 1 to filter stress or relaxation tweets, and then applied the classifier for first-hand experiencer to tweets from each city in dataset 2. Figure 4 shows a flowchart describing our machine learning design. Our study focused on 2 machine learning-based classification tasks. First, tweets were classified into the appropriate stress and relaxation category (ie, is it stress or relaxation related?). Second, first-hand experience tweets versus nonfirst-hand experience tweets were classified. We used 2 machine learning algorithms: naive Bayes and support vector machines (SVMs), which were implemented on dataset 1 using 10-fold cross-validation. We used both the naive Bayes and SVM algorithms, as both these algorithms have been used extensively for text classification tasks [50] [51] [52] . We used the Rainbow package [51] for implementing both naive Bayes and SVMs (linear kernel). We used \"bag-of-words\" as feature sets for both algorithms. The reason we used the bag-of-word representation is that this feature representation is considered as a baseline and the most common text representation in text classification in general [50] [51] [52] . To the best of our knowledge, this is the first study on classifying tweets on stress and relaxation tweets. ",
+                "cite_spans": [
+                    {
+                        "start": 1549,
+                        "end": 1553,
+                        "text": "[50]",
+                        "ref_id": "BIBREF47"
+                    },
+                    {
+                        "start": 1554,
+                        "end": 1558,
+                        "text": "[51]",
+                        "ref_id": "BIBREF48"
+                    },
+                    {
+                        "start": 1559,
+                        "end": 1563,
+                        "text": "[52]",
+                        "ref_id": "BIBREF49"
+                    },
+                    {
+                        "start": 1594,
+                        "end": 1598,
+                        "text": "[51]",
+                        "ref_id": "BIBREF48"
+                    },
+                    {
+                        "start": 1907,
+                        "end": 1911,
+                        "text": "[50]",
+                        "ref_id": "BIBREF47"
+                    },
+                    {
+                        "start": 1912,
+                        "end": 1916,
+                        "text": "[51]",
+                        "ref_id": "BIBREF48"
+                    },
+                    {
+                        "start": 1917,
+                        "end": 1921,
+                        "text": "[52]",
+                        "ref_id": "BIBREF49"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 917,
+                        "end": 918,
+                        "text": "4",
+                        "ref_id": "FIGREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "We applied the 2-step classification to each city in dataset 2 to automatically identify stress and relaxation tweets. We calculated the proportions of stress and relaxation tweets to the total number of tweets in each city.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Calculating the Proportion of Stress and Relaxation Tweets at the City Level",
+                "sec_num": null
+            },
+            {
+                "text": "For both stress or relaxation and first-hand experience classifications, we used accuracy, sensitivity, specificity, and positive predictive values (PPVs) as metrics [53] [54] [55] . They were defined as follows: sensitivity = TP/(TP + FN); PPV = TP/(TP + FP); specificity = TN/(FP + TN); and accuracy = (TP + TN)/(TP +TN + FP + FN), where TP is the number of tweets that are correctly classified as true, FP is the number of tweets that are incorrectly classified as true, FN is the number of tweets that are true but incorrectly classified as false, and TN is the number of tweets that are correctly classified as false.",
+                "cite_spans": [
+                    {
+                        "start": 166,
+                        "end": 170,
+                        "text": "[53]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 171,
+                        "end": 175,
+                        "text": "[54]",
+                        "ref_id": "BIBREF51"
+                    },
+                    {
+                        "start": 176,
+                        "end": 180,
+                        "text": "[55]",
+                        "ref_id": "BIBREF52"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements and Statistical Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "To compare data among cities, we used Pearson chi-square test and reported significance if the P value was less than .05 [56] . Statistical analyses were performed using the publicly available R package software version 3.2.3 (R Foundation). Note that, to preserve the anonymity of Twitter users, all example tweets reported in this paper are paraphrases of original tweets.",
+                "cite_spans": [
+                    {
+                        "start": 121,
+                        "end": 125,
+                        "text": "[56]",
+                        "ref_id": "BIBREF53"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements and Statistical Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "Figure 5 shows the distribution of themes in first-hand experience stress tweets. The highest-frequency theme in stress tweets was topic, followed by nonspecific (eg, \"#stressed!!!\"), action taken (eg, \"I need a drink #sostressed\"), and symptoms (eg, \"Not sure what to do...#stressed #worried #lost\"). This suggests that Twitter users who posted about stress usually posted more about the cause or topic of their stress and less about actions and symptoms associated with stress.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "5",
+                        "ref_id": "FIGREF8"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Content Analysis in Stress and Relaxation Tweets (Dataset 1)",
+                "sec_num": null
+            },
+            {
+                "text": "Among the total number of stress-related tweets, as Figure 5 shows, the most frequent topic was education, followed by other topic, work, and social relationships. This is interesting because many of Twitter's users are young people who attend school [57, 58] . It seems that education and issues related to education, such as exams and finals, were of the utmost concern for Twitter users. Examples of the education topic are \"Never doing a session B math course ever again #sostressful\" and \"my exam in less than a month?! #stressing.\" Figure 6 shows the topic distribution of first-hand experience stress tweets.",
+                "cite_spans": [
+                    {
+                        "start": 251,
+                        "end": 255,
+                        "text": "[57,",
+                        "ref_id": "BIBREF54"
+                    },
+                    {
+                        "start": 256,
+                        "end": 259,
+                        "text": "58]",
+                        "ref_id": "BIBREF55"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 59,
+                        "end": 60,
+                        "text": "5",
+                        "ref_id": "FIGREF8"
+                    },
+                    {
+                        "start": 545,
+                        "end": 546,
+                        "text": "6",
+                        "ref_id": "FIGREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Content Analysis in Stress and Relaxation Tweets (Dataset 1)",
+                "sec_num": null
+            },
+            {
+                "text": "Relaxation-related tweets encompassed a wider range of topics than stress-related tweets. The most frequent topic of relaxation tweets was rest & vacation, followed by nature and water. Figure 7 shows topic distribution of first-hand experience of relaxation tweets.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 193,
+                        "end": 194,
+                        "text": "7",
+                        "ref_id": "FIGREF10"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Content Analysis in Stress and Relaxation Tweets (Dataset 1)",
+                "sec_num": null
+            },
+            {
+                "text": "Table 1 shows cross-validated classification results. Our results indicated that both algorithms achieved high accuracy (range 78.08%-85.64%), sensitivity (range 90.26%-99.09%), and PPV (range 70.68%-89.32%). Specificity was rather lower, especially with first-hand relaxation classification (naive Bayes: 11.67%, SVM: 18.33%). Table 2 shows the terms that had the highest information gain for stress and relaxation classification. Interestingly, we found that most terms characteristic of the stress class were related to the term \"stress,\" such as \"stressed\" or \"stressin,\" In contrast, the terms most characteristic of the relaxation class were \"vacation,\" \"water,\" or \"beach,\" which are related to the topics as categorized in our relaxation schema. ",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    },
+                    {
+                        "start": 334,
+                        "end": 335,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Automatic Classification of Stress and Relaxation Tweets (Dataset 1)",
+                "sec_num": null
+            },
+            {
+                "text": "Using an SVM algorithm trained on our annotated data (dataset 1), we automatically classified the much larger dataset 2 (cities dataset). We used a 3-step classification process. First, we filtered by the keywords \"stress\" and \"relax.\" Second, we applied the stress or relaxation classifier to these filtered data. Third, we used the first-hand classifier to identify first-hand stress and relaxation tweets. In both steps, we used SVM (linear kernel) trained on dataset 1 as the classifier. We used SVM because it had advantages in stress and relaxation classification in comparison with naive Bayes in dataset 1. Table 3 shows the number of tweets after each step. [40] and 2014 CNN studies [41] . Statistical tests between cities showed there are differences between cities (P<.001), except San Diego and New York (stress: P=.18, relaxation: P=.02). P values of relaxation and stress tweets between San Diego and Los Angeles are .41 and <.001, respectively. Ranks based on stress tweets are New York=San Diego, Los Angeles, and San Francisco.",
+                "cite_spans": [
+                    {
+                        "start": 667,
+                        "end": 671,
+                        "text": "[40]",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 693,
+                        "end": 697,
+                        "text": "[41]",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 621,
+                        "end": 622,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Automatic Classification of Stress and Relaxation Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "To evaluate the performance of stress and relaxation classification in dataset 2, we randomly sampled 2 sets of 100 tweets, with each set consisting of 100 tweets containing either the keyword \"stress\" (set 1) or \"relax\" (set 2) from a city in dataset 2. We chose New York for evaluation, since New York had the greatest number of tweets. Then 100 tweets from set 1 were manually annotated (conducted by author SD) as stress or nonstress and first-hand experience stress or nonfirst-hand experience stress class. Similarly, 100 tweets from set 2 were also manually annotated as relaxation or nonrelaxation and first-hand relaxation experience or nonfirst-hand experience relaxation class.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Automatic Classification of Stress and Relaxation Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "Table 4 shows the results of classification of set 1 and set 2 using the SVM algorithm. It indicated fair accuracy (66.0%-92.0%) and high PPV (84.6%-100.0%); however, it had lower sensitivity in first-hand stress classification (44.0%) and specificity in relaxation classification (57.1%). The results of the SVM algorithm in dataset 2 were different from those in dataset 1, perhaps due to different data distribution. Figure 8 shows the descriptions of manual annotation of 100 random tweets of set 1 and set 2. Figure 9 shows the proportion of stress and relaxation tweets out of all tweets by city in dataset 2. The number of stress tweets was twice that of the number of relaxation tweets, indicating that Twitter users were more likely to tweet about stress than relaxation.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 427,
+                        "end": 428,
+                        "text": "8",
+                        "ref_id": "FIGREF12"
+                    },
+                    {
+                        "start": 521,
+                        "end": 522,
+                        "text": "9",
+                        "ref_id": "FIGREF13"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Automatic Classification of Stress and Relaxation Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "To evaluate theme classification by keyword matching, we randomly sampled 50 classified tweets for each theme from New York. Manual review showed that keyword classification achieved a PPV from 60% to 90% for relaxation tweets and 40% to 80% for stress tweets. Themes that had high PPV in relaxation tweets were alcohol & drugs (94%), entertainment & hobbies (94%), and water (92%). Themes having lower PPV were nature (60%) and food & drink (78%). For stress tweets, themes having high PPV are finances (84%), education (82%), and behavioral (82%), while travel (50%) and temporal (62%) had lower PPV. Multimedia Appendix 3 shows the numbers of classified first-hand stress and relaxation tweets by theme for each city.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Automatic Classification of Stress and Relaxation Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "First-hand classification results from dataset 2 showed that cities manifested a uniform pattern of stress and relaxation tweets. We found that the singular first-person pronoun \"I\" was consistently used the most across all cities when expressing stress, found in approximately 4% of all stress tweets, while in relaxation tweets \"I\" was used less often (ranked 7), at around 2.4%. Multimedia Appendix 4 shows details of the 30 highest-frequency keywords in first-hand experience stress and relaxation tweets for Los Angeles, New York, San Diego, and San Francisco.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Automatic Classification of Stress and Relaxation Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "We also found that linguistic expressions of negation such as \"not,\" \"but,\" and \"don't\" or quantifying words such as \"much\" were among the 30 unigrams most characteristic of stress-related tweets. In addition, users often used emotionally laden swearwords when expressing stress. It is important to note, however, that the affective polarity of certain swearwords can be highly context dependent (\"it's shit\" vs \"it's the shit\") [59] . Relaxation tweets, on the other hand, tended to contain words indicating relaxation and time, such as \"relax,\" \"home,\" \"time,\" \"day,\" and \"now.\" We found that \"home\" was among the highest-frequency terms in relaxation tweets, as was \"weekend.\" Multimedia Appendix 5 depicts tag clouds of stress and relaxation tweets for each city. ",
+                "cite_spans": [
+                    {
+                        "start": 429,
+                        "end": 433,
+                        "text": "[59]",
+                        "ref_id": "BIBREF56"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Automatic Classification of Stress and Relaxation Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "Figure 10 shows the theme distributions of stress tweets among the 4 cities. Education was the highest-frequency topic (12%-14%), followed by work (4%-5%) and travel (4%) (data presented in Multimedia Appendix 3). Interestingly, we found that tweets describing action taken and psychological and emotional symptoms also had relatively high frequencies (8%-10%). This indicates that, besides topic, people often posted about their emotional state and reaction to stress.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 9,
+                        "text": "10",
+                        "ref_id": "FIGREF14"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Theme Distributions of Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "The topic distributions of relaxation tweets were also consistent across cities. Figure 11 shows that rest & vacation was the highest-frequency topic (27%-31%), followed by entertainment & hobbies (13%-14%), food & drink (9%-10%), and nature (9%-10%). Multimedia Appendix 3 shows detailed numbers of stress and relaxation tweets for each city.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 88,
+                        "end": 90,
+                        "text": "11",
+                        "ref_id": "FIGREF15"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Theme Distributions of Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "Although we did not find statistically significant differences in theme distributions among cities for stress tweets, there were significant differences between New York and the other cities in the topics of nature and water in relaxation tweets. This may indicate the different activities taken for relaxation between the east coast (New York) and the west coast (Los Angeles, San Diego, and San Francisco). We found that high-frequency terms for relaxation tweets in New York included \"watching,\" while in San Diego \"beach\" was more common. This intuitively suggests that San Diegans more often relaxed by going to the beach, while New Yorkers relaxed by enjoying indoor (or spectator) entertainment (\"watching,\" \"listening\"). ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theme Distributions of Tweets at the City Level (Dataset 2)",
+                "sec_num": null
+            },
+            {
+                "text": "Compared with 2 public surveys on the most stressful cities in the United States by Forbes [40] in 2011 and CNN [41] in 2014, the proportion of stress tweets found here were different. Both surveys ranked New York and Los Angeles among the most stressful cities in the country, while San Diego and San Francisco were categorized as less stressful. Our city ranking based on the proportion of first-hand experience stress tweets was New York followed by San Diego, Los Angeles, and San Francisco (Table 5 and Figure 9 ). While we found no significant difference between New York and San Diego, we did find significant differences (P<.001) in pairwise comparisons between San Diego, Los Angeles, and San Francisco (Table 5 ). Differences between results found in public stress surveys and our automatic classification of Twitter messages could be due to differences in methodology and population when collecting data. Public surveys collect data using telephones and paper-based reports, while Twitter messages are user generated, are naturalistic, and reflect personal thoughts.",
+                "cite_spans": [
+                    {
+                        "start": 91,
+                        "end": 95,
+                        "text": "[40]",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 112,
+                        "end": 116,
+                        "text": "[41]",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 502,
+                        "end": 503,
+                        "text": "5",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 515,
+                        "end": 516,
+                        "text": "9",
+                        "ref_id": "FIGREF13"
+                    },
+                    {
+                        "start": 719,
+                        "end": 720,
+                        "text": "5",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Correlations Between Tweets Data Analysis and Public Surveys",
+                "sec_num": null
+            },
+            {
+                "text": "The distribution of stress topics across cities shows an interesting finding: peoples' reactions to stress were more positive than negative. Figure 10 shows that, for all cities, 8%-10% of tweets reported positive action taken in response to stress, while only 1%-2% reported negative action (see Multimedia Appendix 3 for details). This suggests that people may react to stress positively, or that people are more likely to publicly report positive rather than negative actions. Examples of positive reaction in stress tweets are rest (\"Rest is best when you are stressed\") and exercising (\"I'm so stressed, thank god I'm heading to yoga now\").",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 148,
+                        "end": 150,
+                        "text": "10",
+                        "ref_id": "FIGREF14"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Stress Relief by Relaxation in Tweets",
+                "sec_num": null
+            },
+            {
+                "text": "Relaxation can be considered a stress management activity. Figure 9 shows that the numbers of relaxation tweets were consistently proportional across all cities to those of stress tweets, indicating that Twitter users were consistently more inclined to post about stressful life events or experiences than about relaxing experiences. Examples of stress relief from relaxation tweets are personal contact (\"I don't need anything but a hug...\"), exercising (\"Went for a run, feel awesome, now time to relax\"), shopping (\"Last day in #SanDiego Just relaxing, shopping and say bye to friends\"), and entertainment (\"Relaxing watching a movie:-) :-)\"). Figure 7 and Figure 10 also indicate that rest & vacation was the highest-frequency topic within relaxation tweets, followed by entertainment & hobbies, nature, and water. These topics can be considered common activities for stress relief.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 66,
+                        "end": 67,
+                        "text": "9",
+                        "ref_id": "FIGREF13"
+                    },
+                    {
+                        "start": 654,
+                        "end": 655,
+                        "text": "7",
+                        "ref_id": "FIGREF10"
+                    },
+                    {
+                        "start": 667,
+                        "end": 669,
+                        "text": "10",
+                        "ref_id": "FIGREF14"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Stress Relief by Relaxation in Tweets",
+                "sec_num": null
+            },
+            {
+                "text": "Our research addressed several aspects of the use of Twitter as a medium of expression of stress and relaxation by users. First, we created schema for categorizing stress-and relaxation-related tweets based on previously published psychological guidelines.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Principal Results",
+                "sec_num": null
+            },
+            {
+                "text": "By categorizing first-hand experience tweets into the primary themes of content topics, symptoms, and actions taken, we gained further insight into the common patterns of expressions of stress.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Principal Results",
+                "sec_num": null
+            },
+            {
+                "text": "Second, we analyzed in detail the contents of tweets based on our annotation scheme and found both similarities and differences in the prevalence and characteristics of stress and relaxation tweets across cities on the east and west coasts of the United States. The most frequent topic of stress tweets in our datasets was education, which likely reflects the younger demographic of Twitter users [57, 58] , but work and travel were also common topics. It is notable that, despite poverty rates, unemployment rates, and cost of living being significant factors in the methodology of CNN's and Forbes's stress ranking systems of the most stressful cities, finances were not a major content topic of the stress tweets in any city in our studies. Although this result could be partially attributable to the need for either computer or mobile phone access in order to use Twitter and may cause underrepresentation in lower-income groups, it may also indicate that certain topics, such as personal finances, still remain relatively taboo in social media settings. Regarding positive and negative actions regarding stress, positive actions far outnumbered more destructive behavior. The use of Twitter in itself to discuss feelings of stress and stress management can be seen as a constructive manner of dealing with stress by expressing these feelings and using the support of \"followers\" and friends. Social media platforms are increasingly being used as support networks in the management of chronic health conditions as varied as cancer, depression, and obesity. A recent systematic review by Patel et al found that the impact of social media use on those experiencing chronic disease was positive in 48% of studies reviewed, neutral in 45%, and harmful in only 7% [60] .",
+                "cite_spans": [
+                    {
+                        "start": 397,
+                        "end": 401,
+                        "text": "[57,",
+                        "ref_id": "BIBREF54"
+                    },
+                    {
+                        "start": 402,
+                        "end": 405,
+                        "text": "58]",
+                        "ref_id": "BIBREF55"
+                    },
+                    {
+                        "start": 1763,
+                        "end": 1767,
+                        "text": "[60]",
+                        "ref_id": "BIBREF57"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Principal Results",
+                "sec_num": null
+            },
+            {
+                "text": "Third, our study indicated that words most associated with relaxation strategies (see Table 2 ) fell into 3 main groups: (1) bathing and personal care (eg, \"bath,\" \"shower\"), (2) vacationing (\"vacation,\" \"pool,\" \"beach\"), and (3) watching sports or television (\"videos,\" \"sitting,\" \"watching\"), indicating that relaxation strategies involved purposefully taking time away from work-based activities and daily responsibilities. A further key theme that emerged from a qualitative analysis of the data was the idea of nature-in this case, particularly water (eg, \"pool,\" \"beach,\" \"rain\")-as being of key importance for relaxation. This result is consistent with recent research demonstrating the link between stress reduction and exposure to the natural environment (eg, [61] ).",
+                "cite_spans": [
+                    {
+                        "start": 769,
+                        "end": 773,
+                        "text": "[61]",
+                        "ref_id": "BIBREF58"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 92,
+                        "end": 93,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Principal Results",
+                "sec_num": null
+            },
+            {
+                "text": "Finally, we showed that machine learning algorithms could be employed to achieve good accuracy for the automatic classification of stress and relaxation tweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Principal Results",
+                "sec_num": null
+            },
+            {
+                "text": "This study has several limitations. First, we obtained dataset 2 from the Twitter API's 1% sample. Second, the annotation scheme we developed, although well suited for our purpose, could benefit from further refinement. For example, we found that many tweets were categorized as topic \"other.\" Third, it is likely that classification results could be improved given the availability of additional training data, in particular for first-hand experience classification of stress and relaxation tweets. Furthermore, using additional feature sets, such as ngrams, emotions, and negations, could help improve accuracy. Fourth, Twitter reports of stress and relaxation may be influenced by self-presentation issues (eg, stress related to excessive workload can be used as a status indicator in some contexts). Finally, as with all social media-based research, the population studied is unlikely to be a representative sample of the general population.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations",
+                "sec_num": null
+            },
+            {
+                "text": "This research showed that Twitter can be a useful tool for the analysis of stress and relaxation levels in the community, and has the potential to provide a valuable supplement to social and psychological studies of stress and stress management.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 2 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 4 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 5 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "(page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "RenderX",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 7 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 8 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 10 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 11 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 12 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 13 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 14 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 15 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 16 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 17 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 18 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 19 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 20 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "SD and AR were partially supported by NIH grant U54HL108460. NP and MC were partially supported by NIH grant R00LM011393. JDC were partially supported by the NLM Medical Informatics Training Grant 5T15LM011271-04. We would like to thank Mr Gregory Stoddard, MPH, MBA at the University of Utah's Division of Epidemiology for his valuable comments on an earlier version of this manuscript.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgments",
+                "sec_num": null
+            },
+            {
+                "text": "None declared.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conflicts of Interest",
+                "sec_num": null
+            },
+            {
+                "text": "Examples of each category of first-hand experience stress tweets with its themes.[PDF File (Adobe PDF File), 34KB-Multimedia Appendix 1]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimedia Appendix 1",
+                "sec_num": null
+            },
+            {
+                "text": "Examples of each category of first-hand experience relaxation tweets with its themes.[PDF File (Adobe PDF File), 32KB-Multimedia Appendix 2]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimedia Appendix 2",
+                "sec_num": null
+            },
+            {
+                "text": "Number of classified first-hand stress tweets by theme and first-hand relaxation tweets in each city.[PDF File (Adobe PDF File), 29KB-Multimedia Appendix 3]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimedia Appendix 3",
+                "sec_num": null
+            },
+            {
+                "text": "Top 30 highest-frequency keywords in first-hand experience stress and relaxation tweets for Los Angeles, New York, San Diego, and San Francisco.[PDF File (Adobe PDF File), 30KB-Multimedia Appendix 4]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimedia Appendix 4",
+                "sec_num": null
+            },
+            {
+                "text": "Tag clouds of stress and relaxation tweets in New York, Los Angeles, San Diego, and San Francisco.[PDF File (Adobe PDF File), 4MB-Multimedia Appendix ",
+                "cite_spans": [
+                    {
+                        "start": 141,
+                        "end": 149,
+                        "text": "Appendix",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimedia Appendix 5",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Stress and depression",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Hammen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Annu Rev Clin Psychol",
+                "volume": "1",
+                "issue": "",
+                "pages": "293--319",
+                "other_ids": {
+                    "DOI": [
+                        "10.1146/annurev.clinpsy.1.102803.143938"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Hammen C. Stress and depression. Annu Rev Clin Psychol 2005;1:293-319. [doi: 10.1146/annurev.clinpsy.1.102803.143938] [Medline: 17716090]",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Stress and the Heart: Psychosocial Pathways to Coronary Heart Disease",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Stansfeld",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Marmot",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Stansfeld S, Marmot M. Stress and the Heart: Psychosocial Pathways to Coronary Heart Disease. London, UK: BMJ Books; 2002.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Stress and the individual. Mechanisms leading to disease",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Mcewen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Stellar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Arch Intern Med",
+                "volume": "153",
+                "issue": "18",
+                "pages": "2093--2101",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McEwen BS, Stellar E. Stress and the individual. Mechanisms leading to disease. Arch Intern Med 1993 Sep 27;153(18):2093-2101. [Medline: 8379800]",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Perceived stress and cause-specific mortality among men and women: results from a prospective cohort study",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Nielsen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Kristensen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Schnohr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Gr\u00f8nbaek",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Am J Epidemiol",
+                "volume": "168",
+                "issue": "5",
+                "pages": "481--491",
+                "other_ids": {
+                    "DOI": [
+                        "10.1093/aje/kwn157"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Nielsen NR, Kristensen TS, Schnohr P, Gr\u00f8nbaek M. Perceived stress and cause-specific mortality among men and women: results from a prospective cohort study. Am J Epidemiol 2008 Sep 01;168(5):481-491. [doi: 10.1093/aje/kwn157] [Medline: 18611955]",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "A biobehavioral model of cancer stress and disease course",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Andersen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Kiecolt-Glaser",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Glaser",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Am Psychol",
+                "volume": "49",
+                "issue": "5",
+                "pages": "389--404",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Andersen BL, Kiecolt-Glaser JK, Glaser R. A biobehavioral model of cancer stress and disease course. Am Psychol 1994 May;49(5):389-404 [FREE Full text] [Medline: 8024167]",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Stress symptoms, signs, and causes",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Segal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Smith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Segal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Robinson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Segal J, Smith M, Segal R, Robinson L. Stress symptoms, signs, and causes.: HelpGuideorg International; 2016 Apr. URL: http://www.helpguide.org/articles/stress/stress-symptoms-causes-and-effects.htm [accessed 2016-05-03] [WebCite Cache ID 6hDuhAkA8]",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Harvard School of Health. The burden of stress in America",
+                "authors": [
+                    {
+                        "first": "Robert",
+                        "middle": [],
+                        "last": "Npr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Johnson",
+                        "middle": [],
+                        "last": "Wood",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Foundation",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "NPR, Robert Wood Johnson Foundation, Harvard School of Health. The burden of stress in America. 2014. URL: http:/ /www.rwjf.org/content/dam/farm/reports/surveys_and_polls/2014/rwjf414295 [accessed 2016-05-03] [WebCite Cache ID 6hDur5MgJ]",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Stress in America: paying with our health",
+                "authors": [],
+                "year": 2015,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "American Psychological Association. Stress in America: paying with our health. 2015 Feb 4. URL: http://www.apa.org/ news/press/releases/stress/2014/stress-report.pdf [accessed 2016-05-03] [WebCite Cache ID 6hDv3vfHK]",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Geographic patterns of frequent mental distress: U.S. adults, 1993-2001 and 2003-2006",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Moriarty",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Zack",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Holt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Chapman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Safran",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Am J Prev Med",
+                "volume": "36",
+                "issue": "6",
+                "pages": "497--505",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.amepre.2009.01.038"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Moriarty DG, Zack MM, Holt JB, Chapman DP, Safran MA. Geographic patterns of frequent mental distress: U.S. adults, 1993-2001 and 2003-2006. Am J Prev Med 2009 Jun;36(6):497-505. [doi: 10.1016/j.amepre.2009.01.038] [Medline: 19460657]",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Who's stressed? Distributions of psychological stress in the United States in probability samples from",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Cohen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Janicki-Deverts",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "J Appl Soc Psychol",
+                "volume": "42",
+                "issue": "6",
+                "pages": "1320--1334",
+                "other_ids": {
+                    "DOI": [
+                        "10.1111/j.1559-1816.2012.00900.x"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Cohen S, Janicki-Deverts D. Who's stressed? Distributions of psychological stress in the United States in probability samples from 1983, 2006, and 2009. J Appl Soc Psychol 2012 Jun;42(6):1320-1334. [doi: 10.1111/j.1559-1816.2012.00900.x]",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Divided we stand: three psychological regions of the United States and their political, economic, social, and health correlates",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Rentfrow",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Gosling",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Jokela",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Stillwell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Kosinski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Potter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "J Pers Soc Psychol",
+                "volume": "105",
+                "issue": "6",
+                "pages": "996--1012",
+                "other_ids": {
+                    "DOI": [
+                        "10.1037/a0034434"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Rentfrow PJ, Gosling SD, Jokela M, Stillwell DJ, Kosinski M, Potter J. Divided we stand: three psychological regions of the United States and their political, economic, social, and health correlates. J Pers Soc Psychol 2013 Dec;105(6):996-1012. [doi: 10.1037/a0034434] [Medline: 24128185]",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Stress Management for HIV: Clinical Validation and Intervention Manual",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Antoni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Schneiderman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Ironson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Antoni M, Schneiderman N, Ironson G. Stress Management for HIV: Clinical Validation and Intervention Manual. Mahwah, NJ: Lawrence Erlbaum Associates; 2007.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Cognitive-behavioral stress management intervention buffers distress responses and immunologic changes following notification of HIV-1 seropositivity",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Antoni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Baggett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Ironson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Laperriere",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "August",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Klimas",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "J Consult Clin Psychol",
+                "volume": "59",
+                "issue": "6",
+                "pages": "906--915",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Antoni MH, Baggett L, Ironson G, LaPerriere A, August S, Klimas N, et al. Cognitive-behavioral stress management intervention buffers distress responses and immunologic changes following notification of HIV-1 seropositivity. J Consult Clin Psychol 1991 Dec;59(6):906-915. [Medline: 1774375]",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Cognitive-behavioral stress management interventions for persons living with HIV: a review and critique of the literature",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Brown",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Vanable",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Ann Behav Med",
+                "volume": "35",
+                "issue": "1",
+                "pages": "26--40",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/s12160-007-9010-y"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Brown JL, Vanable PA. Cognitive-behavioral stress management interventions for persons living with HIV: a review and critique of the literature. Ann Behav Med 2008 Feb;35(1):26-40 [FREE Full text] [doi: 10.1007/s12160-007-9010-y] [Medline: 18347902]",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Cognitive-behavioral stress management reduces serum cortisol by enhancing benefit finding among women being treated for early stage breast cancer",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Cruess",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Antoni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Mcgregor",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Kilbourn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Boyers",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Alferi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2000,
+                "venue": "Psychosom Med",
+                "volume": "62",
+                "issue": "3",
+                "pages": "304--308",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cruess DG, Antoni MH, McGregor BA, Kilbourn KM, Boyers AE, Alferi SM, et al. Cognitive-behavioral stress management reduces serum cortisol by enhancing benefit finding among women being treated for early stage breast cancer. Psychosom Med 2000;62(3):304-308. [Medline: 10845343]",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Mindfulness-based stress reduction in relation to quality of life, mood, symptoms of stress and levels of cortisol, dehydroepiandrosterone sulfate (DHEAS) and melatonin in breast and prostate cancer outpatients",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Carlson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Speca",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Patel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Goodey",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Psychoneuroendocrinology",
+                "volume": "29",
+                "issue": "4",
+                "pages": "448--474",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Carlson LE, Speca M, Patel KD, Goodey E. Mindfulness-based stress reduction in relation to quality of life, mood, symptoms of stress and levels of cortisol, dehydroepiandrosterone sulfate (DHEAS) and melatonin in breast and prostate cancer outpatients. Psychoneuroendocrinology 2004 May;29(4):448-474. [Medline: 14749092]",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Mindfulness-based stress reduction for stress management in healthy people: a review and meta-analysis",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Chiesa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Serretti",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "J Altern Complement Med",
+                "volume": "15",
+                "issue": "5",
+                "pages": "593--600",
+                "other_ids": {
+                    "DOI": [
+                        "10.1089/acm.2008.0495"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Chiesa A, Serretti A. Mindfulness-based stress reduction for stress management in healthy people: a review and meta-analysis. J Altern Complement Med 2009 May;15(5):593-600. [doi: 10.1089/acm.2008.0495] [Medline: 19432513]",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "The Handbook of Stress Science: Biology, Psychology, and Health",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Contrada",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Baum",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Contrada R, Baum A. The Handbook of Stress Science: Biology, Psychology, and Health. New York, NY: Springer Publishing Inc; 2010.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Behavioral Risk Factor Surveillance System",
+                "authors": [],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Centers for Disease Control and Prevention. Behavioral Risk Factor Surveillance System. Atlanta, GA: CDC; 2016 Feb 01. URL: http://www.cdc.gov/brfss/ [accessed 2016-05-03] [WebCite Cache ID 6hDv7Dtg9]",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Twitter usage: company facts",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Twitter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Twitter. Twitter usage: company facts. San Francisco, CA: Twitter, Inc; 2016. URL: https://about.twitter.com/company [accessed 2016-05-03] [WebCite Cache ID 6hDvCMq5e]",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "From tweets to polls: linking text sentiment to public opinion time series",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "O'connor",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Balasubramanyan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Routledge",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Smith",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "The 4th International AAAI Conference on Weblogs and Social Media",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "O'Connor B, Balasubramanyan R, Routledge B, Smith N. From tweets to polls: linking text sentiment to public opinion time series. Palo Alto, CA: AAAI Press; 2010 Presented at: The 4th International AAAI Conference on Weblogs and Social Media; May 23-26, 2010; Washington, DC.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Twitter mood predicts the stock market",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Bollen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Mao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Zeng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "J Comput Sci",
+                "volume": "2",
+                "issue": "1",
+                "pages": "1--8",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bollen J, Mao H, Zeng X. Twitter mood predicts the stock market. J Comput Sci 2011 Mar;2(1):1-8.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "An analysis of Twitter messages in the 2011 Tohoku Earthquake",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Doan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Vo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Collier",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "th ICST International Conference on eHealth",
+                "volume": "",
+                "issue": "",
+                "pages": "58--66",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Doan S, Vo B, Collier N. An analysis of Twitter messages in the 2011 Tohoku Earthquake. Berlin, Germany: Springer; 2011 Presented at: 4th ICST International Conference on eHealth; Nov 21-23, 2011; Malaga, Spain p. 58-66.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Enhancing Twitter data analysis with simple semantic filtering: example in tracking influenza-like illnesses",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Doan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ohno-Machado",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Collier",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "IEEE Second International Conference on Healthcare Informatics, Imaging, and Systems Biology",
+                "volume": "",
+                "issue": "",
+                "pages": "62--71",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Doan S, Ohno-Machado L, Collier N. Enhancing Twitter data analysis with simple semantic filtering: example in tracking influenza-like illnesses. 2012 Presented at: IEEE Second International Conference on Healthcare Informatics, Imaging, and Systems Biology; Sept 27-28, 2012; La Jolla, CA, USA p. 62-71.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Pandemics in the age of Twitter: content analysis of Tweets during the 2009 H1N1 outbreak",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Chew",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Eysenbach",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "PLoS One",
+                "volume": "5",
+                "issue": "11",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1371/journal.pone.0014118"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Chew C, Eysenbach G. Pandemics in the age of Twitter: content analysis of Tweets during the 2009 H1N1 outbreak. PLoS One 2010 Nov 29;5(11):e14118 [FREE Full text] [doi: 10.1371/journal.pone.0014118] [Medline: 21124761]",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "The use of Twitter to track levels of disease activity and public concern in the U.S. during the influenza A H1N1 pandemic",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Signorini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Segre",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Polgreen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "PLoS One",
+                "volume": "6",
+                "issue": "5",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1371/journal.pone.0019467"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Signorini A, Segre AM, Polgreen PM. The use of Twitter to track levels of disease activity and public concern in the U.S. during the influenza A H1N1 pandemic. PLoS One 2011;6(5):e19467 [FREE Full text] [doi: 10.1371/journal.pone.0019467] [Medline: 21573238]",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Using Twitter for breast cancer prevention: an analysis of breast cancer awareness month",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Thackeray",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Burton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Giraud",
+                        "middle": [
+                            "-"
+                        ],
+                        "last": "Carrier",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Rollins",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Draper",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "BMC Cancer",
+                "volume": "13",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1186/1471-2407-13-508"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Thackeray R, Burton SH, Giraud-Carrier C, Rollins S, Draper CR. Using Twitter for breast cancer prevention: an analysis of breast cancer awareness month. BMC Cancer 2013;13(1):508 [FREE Full text] [doi: 10.1186/1471-2407-13-508] [Medline: 24168075]",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Communication about childhood obesity on Twitter",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Harris",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Moreland-Russell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Tabak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Ruhr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Maier",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Am J Public Health",
+                "volume": "104",
+                "issue": "7",
+                "pages": "62--e69",
+                "other_ids": {
+                    "DOI": [
+                        "10.2105/AJPH.2013.301860"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Harris JK, Moreland-Russell S, Tabak RG, Ruhr LR, Maier RC. Communication about childhood obesity on Twitter. Am J Public Health 2014 Jul;104(7):e62-e69 [FREE Full text] [doi: 10.2105/AJPH.2013.301860] [Medline: 24832138]",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "What are health-related users tweeting? A qualitative content analysis of health-related users and their messages on twitter",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Decamp",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Dredze",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Chisolm",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Berger",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "J Med Internet Res",
+                "volume": "16",
+                "issue": "10",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.2196/jmir.3765"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Lee JL, DeCamp M, Dredze M, Chisolm MS, Berger ZD. What are health-related users tweeting? A qualitative content analysis of health-related users and their messages on twitter. J Med Internet Res 2014;16(10):e237 [FREE Full text] [doi: 10.2196/jmir.3765] [Medline: 25591063]",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Using Twitter to examine smoking behavior and perceptions of emerging tobacco products",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Mysl\u00edn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Zhu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Chapman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Conway",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "J Med Internet Res",
+                "volume": "15",
+                "issue": "8",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.2196/jmir.2534"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Mysl\u00edn M, Zhu S, Chapman W, Conway M. Using Twitter to examine smoking behavior and perceptions of emerging tobacco products. J Med Internet Res 2013;15(8):e174 [FREE Full text] [doi: 10.2196/jmir.2534] [Medline: 23989137]",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Public health surveillance of dental pain via Twitter",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Heaivilin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Gerbert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Page",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Gibbs",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "J Dent Res",
+                "volume": "90",
+                "issue": "9",
+                "pages": "1047--1051",
+                "other_ids": {
+                    "DOI": [
+                        "10.1177/0022034511415273"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Heaivilin N, Gerbert B, Page JE, Gibbs JL. Public health surveillance of dental pain via Twitter. J Dent Res 2011 Sep;90(9):1047-1051 [FREE Full text] [doi: 10.1177/0022034511415273] [Medline: 21768306]",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Tweeting about pain: comparing self-reported toothache experiences with those of backaches, earaches and headaches",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Ahlwardt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Heaivilin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Gibbs",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Page",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Gerbert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Tsoh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "J Am Dent Assoc",
+                "volume": "145",
+                "issue": "7",
+                "pages": "737--743",
+                "other_ids": {
+                    "DOI": [
+                        "10.14219/jada.2014.30"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Ahlwardt K, Heaivilin N, Gibbs J, Page J, Gerbert B, Tsoh J. Tweeting about pain: comparing self-reported toothache experiences with those of backaches, earaches and headaches. J Am Dent Assoc 2014;145(7):737-743. [doi: 10.14219/jada.2014.30] [Medline: 24982280]",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "The painful tweet: text, sentiment, and community structure analyses of tweets pertaining to pain",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Tighe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Goldsmith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Gravenstein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Bernard",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Fillingim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "J Med Internet Res",
+                "volume": "17",
+                "issue": "4",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.2196/jmir.3769"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Tighe PJ, Goldsmith RC, Gravenstein M, Bernard HR, Fillingim RB. The painful tweet: text, sentiment, and community structure analyses of tweets pertaining to pain. J Med Internet Res 2015;17(4):e84 [FREE Full text] [doi: 10.2196/jmir.3769] [Medline: 25843553]",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Tweet content related to sexually transmitted diseases: no joking matter",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Gabarron",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Serrano",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Wynn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Lau",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "J Med Internet Res",
+                "volume": "16",
+                "issue": "10",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.2196/jmir.3259"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Gabarron E, Serrano JA, Wynn R, Lau AY. Tweet content related to sexually transmitted diseases: no joking matter. J Med Internet Res 2014 Oct 06;16(10):e228 [FREE Full text] [doi: 10.2196/jmir.3259] [Medline: 25289463]",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Tweet for health: using an online social network to examine temporal trends in weight loss-related posts",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Turner-Mcgrievy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Beets",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Transl Behav Med",
+                "volume": "5",
+                "issue": "2",
+                "pages": "160--166",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/s13142-015-0308-1"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Turner-McGrievy GM, Beets MW. Tweet for health: using an online social network to examine temporal trends in weight loss-related posts. Transl Behav Med 2015 Jun;5(2):160-166 [FREE Full text] [doi: 10.1007/s13142-015-0308-1] [Medline: 26029278]",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Characterizing geographic variation in well-being using tweets",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "The 7th International AAAI Conference on Weblogs and Social Media",
+                "volume": "",
+                "issue": "",
+                "pages": "583--591",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Schwartz H, Eichstaedt J. Characterizing geographic variation in well-being using tweets. 2013 Presented at: The 7th International AAAI Conference on Weblogs and Social Media; Jul 8-11, 2013; Cambridge, MA, USA p. 583-591.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Social media as a measurement tool of depression in populations",
+                "authors": [
+                    {
+                        "first": "De",
+                        "middle": [],
+                        "last": "Choudhury",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Counts",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Horvitz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "The 5th Annual ACM Web Science Conference",
+                "volume": "",
+                "issue": "",
+                "pages": "47--56",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "De Choudhury M, Counts S, Horvitz E. Social media as a measurement tool of depression in populations. New York, NY: ACM Press; 2013 Presented at: The 5th Annual ACM Web Science Conference; May 2-4, 2013; Paris, France p. 47-56.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Psychological language on Twitter predicts county-level heart disease mortality",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Kern",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Labarthe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Merchant",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Psychol Sci",
+                "volume": "26",
+                "issue": "2",
+                "pages": "159--169",
+                "other_ids": {
+                    "DOI": [
+                        "10.1177/0956797614557867"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Eichstaedt JC, Schwartz HA, Kern ML, Park G, Labarthe DR, Merchant RM, et al. Psychological language on Twitter predicts county-level heart disease mortality. Psychol Sci 2015 Feb;26(2):159-169 [FREE Full text] [doi: 10.1177/0956797614557867] [Medline: 25605707]",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "America's most stressful cities",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Greenfield",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Greenfield B. America's most stressful cities. New York, NY: Forbes Media LLC; 2011 Sep 23. URL: http://www.forbes.com/ sites/bethgreenfield/2011/09/23/americas-most-stressful-cities/ [accessed 2016-05-03] [WebCite Cache ID 6hDvdoSqu]",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Stressed out cities",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Money",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "CNN Money. Stressed out cities. Atlanta, GA: Cable News Network; 2014. URL: http://money.cnn.com/pf/stressed-cities/ 2014/full_list/ [accessed 2016-05-03] [WebCite Cache ID 6hDvhNv6y]",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "REST APIs",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Twitter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Twitter. REST APIs. 2016. URL: https://dev.twitter.com/rest/public [accessed 2016-05-03] [WebCite Cache ID 6hDvl5qNA]",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Streaming APIs",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Twitter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Twitter. Streaming APIs. 2016. URL: https://dev.twitter.com/streaming/public [accessed 2016-05-03] [WebCite Cache ID 6hDvniaqI]",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "Healthline Media",
+                "authors": [],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Healthline Editorial Team. Stress and anxiety.: Healthline Media; 2016. URL: http://www.healthline.com/health/ stress-and-anxiety [accessed 2016-05-03] [WebCite Cache ID 6hDvttDbj]",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "Statistic Brain Research Institute",
+                "authors": [],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Statistic Brain. Stress statistics. Los Angeles, CA: Statistic Brain Research Institute; 2016. URL: http://www. statisticbrain.com/stress-statistics/ [accessed 2016-05-03] [WebCite Cache ID 6hDvxRINg]",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "AHA URL",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "American Heart Association. Stress management. Dallas, TX: AHA URL: http://www.heart.org/HEARTORG/HealthyLiving/ StressManagement/Stress-Management_UCM_001082_SubHomePage.jsp [accessed 2016-05-03] [WebCite Cache ID 6hDw3RBhc]",
+                "links": null
+            },
+            "BIBREF45": {
+                "ref_id": "b45",
+                "title": "Bethesda, MD: NIMH URL",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "National Institute of Mental Health. Fact sheet on stress. Bethesda, MD: NIMH URL: http://www.nimh.nih.gov/health/ publications/stress/index.shtml [accessed 2016-05-03] [WebCite Cache ID 6hDwJfLZT]",
+                "links": null
+            },
+            "BIBREF46": {
+                "ref_id": "b46",
+                "title": "Coping with stress",
+                "authors": [],
+                "year": 2015,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Centers for Disease Control and Prevention. Coping with stress. Atlanta, GA: CDC; 2015. URL: http://www.cdc.gov/ violenceprevention/pub/coping_with_stress_tips.html [accessed 2016-05-03] [WebCite Cache ID 6hDwNuDD5]",
+                "links": null
+            },
+            "BIBREF47": {
+                "ref_id": "b47",
+                "title": "Text categorization with support vector machines: learning with many relevant features",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Joachims",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "10th European Conference on Machine Learning",
+                "volume": "",
+                "issue": "",
+                "pages": "137--142",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Joachims T. Text categorization with support vector machines: learning with many relevant features. 1998 Presented at: 10th European Conference on Machine Learning; Apr 21-24, 1998; Chemnitz, Germany p. 137-142.",
+                "links": null
+            },
+            "BIBREF48": {
+                "ref_id": "b48",
+                "title": "Bow: a toolkit for statistical language modeling, text retrieval, classification and clustering",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mccallum",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McCallum A. Bow: a toolkit for statistical language modeling, text retrieval, classification and clustering. 1998 Sep 12. URL: http://www.cs.cmu.edu/~mccallum/bow [accessed 2016-05-03] [WebCite Cache ID 6hDwRJvFM]",
+                "links": null
+            },
+            "BIBREF49": {
+                "ref_id": "b49",
+                "title": "Making large-scale SVM learning practical",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Joachims",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Advances in Kernel Methods: Support Vector Learning",
+                "volume": "",
+                "issue": "",
+                "pages": "169--184",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Joachims T. Making large-scale SVM learning practical. In: Sch\u00f6lkopf B, Burges CJC, Smola AJ, editors. Advances in Kernel Methods: Support Vector Learning. Cambridge, MA: MIT Press; 1999:169-184.",
+                "links": null
+            },
+            "BIBREF51": {
+                "ref_id": "b51",
+                "title": "An evaluation of statistical approaches to text categorization",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Inf Retrieval J",
+                "volume": "1",
+                "issue": "",
+                "pages": "69--90",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yang Y. An evaluation of statistical approaches to text categorization. Inf Retrieval J 1999;1:69-90.",
+                "links": null
+            },
+            "BIBREF52": {
+                "ref_id": "b52",
+                "title": "Foundations of Statistical Natural Language Processing",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Manning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Sch\u00fctze",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Manning C, Sch\u00fctze H. Foundations of Statistical Natural Language Processing. Cambridge, MA: MIT Press; 1999.",
+                "links": null
+            },
+            "BIBREF53": {
+                "ref_id": "b53",
+                "title": "An Introduction to Categorical Data Analysis",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Agresti",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Agresti A. An Introduction to Categorical Data Analysis. Hoboken, NJ: John Wiley & Sons; 2007.",
+                "links": null
+            },
+            "BIBREF54": {
+                "ref_id": "b54",
+                "title": "Pew Internet & American Life Project",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Smith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Brenner",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Smith A, Brenner J. Twitter use 2012. Washington, DC: Pew Internet & American Life Project; 2012 May 31. URL: http:/ /www.pewinternet.org/files/old-media//Files/Reports/2012/PIP_Twitter_Use_2012.pdf [accessed 2017-05-22] [WebCite Cache ID 6qefUNewr]",
+                "links": null
+            },
+            "BIBREF55": {
+                "ref_id": "b55",
+                "title": "Social media update",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Duggan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Ellison",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Lampe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Lenhart",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Madden",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Duggan J, Ellison N, Lampe C, Lenhart A, Madden M. Social media update 2014. Washington, DC: Pew Research Center; 2015 Jan 09. URL: http://www.pewinternet.org/2015/01/09/social-media-update-2014/ [accessed 2016-05-03] [WebCite Cache ID 6hDy9qpB3]",
+                "links": null
+            },
+            "BIBREF56": {
+                "ref_id": "b56",
+                "title": "Swearing in English: Bad Language, Purity and Power From 1586 to the Present",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Mcenery",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McEnery T. Swearing in English: Bad Language, Purity and Power From 1586 to the Present. London, UK: Routledge; 2004.",
+                "links": null
+            },
+            "BIBREF57": {
+                "ref_id": "b57",
+                "title": "Social media use in chronic disease: a systematic review and novel taxonomy",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Patel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Chang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Greysen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Chopra",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Am J Med",
+                "volume": "128",
+                "issue": "12",
+                "pages": "1335--1350",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.amjmed.2015.06.015"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Patel R, Chang T, Greysen SR, Chopra V. Social media use in chronic disease: a systematic review and novel taxonomy. Am J Med 2015 Dec;128(12):1335-1350. [doi: 10.1016/j.amjmed.2015.06.015] [Medline: 26159633]",
+                "links": null
+            },
+            "BIBREF58": {
+                "ref_id": "b58",
+                "title": "Exposure to public natural space as a protective factor for emotional well-being among young people in Canada",
+                "authors": [
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Huynh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Craig",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Janssen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Pickett",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "BMC Public Health",
+                "volume": "13",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1186/1471-2458-13-407"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Huynh Q, Craig W, Janssen I, Pickett W. Exposure to public natural space as a protective factor for emotional well-being among young people in Canada. BMC Public Health 2013 Apr 29;13:407 [FREE Full text] [doi: 10.1186/1471-2458-13-407] [Medline: 23627738]",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF1": {
+                "uris": null,
+                "text": ") What was the cause of the stress? and (3) What kind of actions, if any, were being taken regarding the stress? Based on these questions, we categorized JMIR Public Health Surveill 2017 | vol. 3 | iss. 2 | e35 | p. 3 http://publichealth.jmir.org/2017/2/e35/ (page number not for citation purposes) Doan et al JMIR PUBLIC HEALTH AND SURVEILLANCE XSL \u2022 FO RenderX the theme into 3 categories: stress symptoms, topics, and action(s) taken.",
+                "fig_num": null,
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF2": {
+                "uris": null,
+                "text": "physical, (2) water, (3) self-care, (4) alcohol & drugs, (5) entertainment & hobbies, (6) food & drink, (7) nature, (8) rest & vacation, (9) social relationships, (10) other, and (11) nonspecific.",
+                "fig_num": "1",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF3": {
+                "uris": null,
+                "text": "Figure 1 depicts the schema for stress tweets and Figure 2 depicts the schema for relaxation tweets. Definitions and examples of each category of first-hand experience tweets and its themes for stress and relaxation tweets are listed in Multimedia Appendix 1 and Multimedia Appendix 2, respectively.",
+                "fig_num": "1",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF4": {
+                "uris": null,
+                "text": "Figure 1. Schema used to classify stress tweets.",
+                "fig_num": "1",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF5": {
+                "uris": null,
+                "text": "Figure 2. Schema used to classify relaxation tweets.",
+                "fig_num": "2",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF6": {
+                "uris": null,
+                "text": "Figure 3. Description of dataset 1.",
+                "fig_num": "3",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF7": {
+                "uris": null,
+                "text": "Figure 4. Datasets and tasks used for machine learning.",
+                "fig_num": "4",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF8": {
+                "uris": null,
+                "text": "Figure 5. Distribution by theme of first-hand experience stress tweets in dataset 1.",
+                "fig_num": "5",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF9": {
+                "uris": null,
+                "text": "Figure 6. Distribution by topic of first-hand experience stress tweets in dataset 1.",
+                "fig_num": "6",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF10": {
+                "uris": null,
+                "text": "Figure 7. Distribution by topic of first-hand experience relaxation tweets in dataset 1.",
+                "fig_num": "7",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF11": {
+                "uris": null,
+                "text": "Classification evaluation using a random sample of 200 tweets (100 containing the keyword \"stress\" and 100 containing the keyword \"relax\") from New York in dataset 2. vs nonfirst-hand experience relaxation a Acc: accuracy.b Sen: sensitivity. c Spec: specificity. d PPV: positive predictive value.",
+                "fig_num": "4",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF12": {
+                "uris": null,
+                "text": "Figure 8. Description of manual annotation of 100 random tweets containing the keywords \"stress\" and \"relax\" from dataset 2.",
+                "fig_num": "8",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF13": {
+                "uris": null,
+                "text": "Figure 9. Proportion of relaxation and stress tweets by city in dataset 2.",
+                "fig_num": "9",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF14": {
+                "uris": null,
+                "text": "Figure 10. Stress theme distribution by each of the 4 cities in dataset 2. There are no significant differences between cities (P>.05). Neg: negative; Pos: positive; S: symptoms; T: topics.",
+                "fig_num": "10",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF15": {
+                "uris": null,
+                "text": "Figure 11. Relaxation theme distribution by each of the 4 cities in dataset 2. There are significant differences between New York and the other cities in the topics of nature and water.",
+                "fig_num": "11",
+                "num": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "text": "Classification evaluation using 10-fold cross-validation on dataset 1. PPV: positive predictive value.",
+                "html": null,
+                "content": "<table><tr><td>Classification</td><td colspan=\"3\">Machine learning algorithm</td><td/><td/><td/><td/><td/></tr><tr><td/><td>Naive Bayes</td><td/><td/><td/><td colspan=\"4\">Support vector machine (linear kernel)</td></tr><tr><td/><td>Acc a (%)</td><td>Sen b (%)</td><td>(%) Spec c</td><td>PPV d (%)</td><td>Acc (%)</td><td>Sen (%)</td><td>Spec (%)</td><td>PPV (%)</td></tr><tr><td>Stress vs nonstress</td><td>78.64</td><td>91.97</td><td>65.30</td><td>72.69</td><td>81.66</td><td>92.73</td><td>70.61</td><td>76.07</td></tr><tr><td>Relaxation vs nonrelaxation</td><td>78.08</td><td>96.15</td><td>60.00</td><td>70.68</td><td>83.72</td><td>90.26</td><td>77.18</td><td>79.86</td></tr><tr><td>First-hand vs nonfirst-hand experience stress</td><td>87.58</td><td>95.53</td><td>67.89</td><td>88.14</td><td>85.61</td><td>90.64</td><td>73.16</td><td>89.32</td></tr><tr><td>First-hand vs nonfirst-hand experience relaxation</td><td>85.64</td><td>99.09</td><td>11.67</td><td>86.07</td><td>83.85</td><td>95.76</td><td>18.33</td><td>86.56</td></tr><tr><td>a Acc: accuracy.</td><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"3\">Of the 2 machine learning algorithms used, SVM (with linear</td><td colspan=\"6\">95.53% versus 90.64% (sensitivity) for stress; 85.64% versus</td></tr><tr><td colspan=\"3\">kernel) performed better than naive Bayes in classifying stress</td><td colspan=\"6\">83.85% (accuracy) and 99.09% versus 95.76% (sensitivity) for</td></tr><tr><td colspan=\"3\">versus nonstress tweets (81.66% vs 78.64% accuracy, 92.73%</td><td colspan=\"6\">relaxation tweets. In contrast, SVM performed better in</td></tr><tr><td colspan=\"3\">vs 91.97% sensitivity, 70.61% vs 65.30% specificity, 76.07%</td><td colspan=\"6\">specificity and PPV in classifying first-hand experience stress</td></tr><tr><td colspan=\"3\">vs 72.69% PPV). SVM was also better than naive Bayes in</td><td colspan=\"2\">and relaxation tweets.</td><td/><td/><td/><td/></tr><tr><td colspan=\"3\">classifying relaxation versus nonrelaxation tweets in accuracy</td><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"3\">(83.72% vs 78.08%), specificity (77.18% vs 60.00%), and PPV</td><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"3\">(79.86% vs 70.68%) but slightly lower in sensitivity (90.26%</td><td/><td/><td/><td/><td/><td/></tr><tr><td>vs 96.15%).</td><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"3\">Table 1 also indicates that naive Bayes had better accuracy and</td><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"3\">sensitivity than SVM in identifying first-hand experience stress</td><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"3\">and relaxation tweets: 87.58% versus 85.61% (accuracy) and</td><td/><td/><td/><td/><td/><td/></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "text": "Top 30  keywords ranked by information gain in stress and relaxation classification in dataset 1.",
+                "html": null,
+                "content": "<table><tr><td>Stress vs nonstress</td><td>First-hand stress vs nonstress</td><td>First-hand relaxation vs nonrelaxation</td><td>Relaxation vs nonrelaxation</td></tr><tr><td>stressed</td><td>http</td><td>rt</td><td>rt</td></tr><tr><td>stress</td><td>rt</td><td>relaxing</td><td>relaxing</td></tr><tr><td>rt</td><td>stressed</td><td>relaxin</td><td>relaxin</td></tr><tr><td>mistress</td><td>stressing</td><td>sorelaxing</td><td>sorelaxing</td></tr><tr><td>stressful</td><td>stressful</td><td>relaxed</td><td>relaxed</td></tr><tr><td>stressing</td><td>mistress</td><td>work</td><td>time</td></tr><tr><td>http</td><td>stressingout</td><td>night</td><td>work</td></tr><tr><td>stressingout</td><td>sostressed</td><td>time</td><td>night</td></tr><tr><td>cashnewvideo</td><td>stressin</td><td>day</td><td>day</td></tr><tr><td>camerondallas</td><td>cashnewvideo</td><td>shower</td><td>cashnewvideo</td></tr><tr><td>burdenofstress</td><td>school</td><td>cashnewvideo</td><td>relax</td></tr><tr><td>tiger</td><td>ly</td><td>camerondallas</td><td>shower</td></tr><tr><td>stressin</td><td>stress</td><td>finally</td><td>camerondallas</td></tr><tr><td>sostressed</td><td>camerondallas</td><td>bath</td><td>relaxa</td></tr><tr><td>day</td><td>day</td><td>relax</td><td>video</td></tr><tr><td>nashgrier</td><td>love</td><td>listening</td><td>finally</td></tr><tr><td>distressed</td><td>sostressful</td><td>beach</td><td>bath</td></tr><tr><td>school</td><td>college</td><td>relaxa</td><td>home</td></tr><tr><td>anxiety</td><td>packing</td><td>video</td><td>vacation</td></tr><tr><td>life</td><td>life</td><td>home</td><td>listening</td></tr><tr><td>busy</td><td>twitter</td><td>vacation</td><td>beach</td></tr><tr><td>learn</td><td>tiger</td><td>pool</td><td>nashgrier</td></tr><tr><td>woods</td><td>hours</td><td>sitting</td><td>relaxar</td></tr><tr><td>bitch</td><td>big</td><td>enjoying</td><td>pool</td></tr><tr><td>hours</td><td>nashgrier</td><td>watching</td><td>enjoying</td></tr><tr><td>packing</td><td>distressed</td><td>rain</td><td>rain</td></tr><tr><td>twitter</td><td>hate</td><td>give</td><td>long</td></tr><tr><td>haha</td><td>long</td><td>nashgrier</td><td>sitting</td></tr><tr><td>college</td><td>weeks</td><td>long</td><td>watching</td></tr><tr><td>love</td><td>figure</td><td>bed</td><td>nice</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "text": "Number of tweets remaining after automatic classification.",
+                "html": null,
+                "content": "<table><tr><td>Cities</td><td>Stress rank</td><td>No. of tweets</td><td>No. of</td><td>No. of tweets</td><td>No. of relax-</td><td>No. of stress</td><td>No. of relax-</td><td>No. of stress</td></tr><tr><td/><td>2011 (2014) a</td><td/><td>tweets con-taining \"re-</td><td>containing \"stress\"</td><td>ation tweets</td><td>tweets</td><td>ation tweets (first-hand)</td><td>tweets (first-hand)</td></tr><tr><td/><td/><td/><td>lax\"</td><td/><td/><td/><td/><td/></tr><tr><td>Los Angeles</td><td>1 (3)</td><td>6,627,969</td><td>5061</td><td>7925</td><td>3216</td><td>5914</td><td>2788</td><td>2386</td></tr><tr><td>New York</td><td>2 (1)</td><td>8,229,442</td><td>6992</td><td>11,789</td><td>4412</td><td>8245</td><td>3766</td><td>3278</td></tr><tr><td>San Diego</td><td>5 (38)</td><td>2,908,774</td><td>2178</td><td>3769</td><td>1449</td><td>2830</td><td>1275</td><td>1193</td></tr><tr><td>San Francisco</td><td>7 (39)</td><td>4,372,966</td><td>2554</td><td>4558</td><td>1682</td><td>3384</td><td>1471</td><td>1389</td></tr><tr><td colspan=\"3\">a Stress ranking is based on 2011 Forbes</td><td/><td/><td/><td/><td/><td/></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "text": "P values of pairwise comparisons of the proportion of stress and relaxation tweets between the 4 studied cities.",
+                "html": null,
+                "content": "<table><tr><td>Cities</td><td>Los Angeles</td><td>New York</td><td>San Francisco</td></tr><tr><td>San Diego</td><td/><td/><td/></tr><tr><td>Stress</td><td>&lt;.001</td><td>.18</td><td>&lt;.001</td></tr><tr><td>Relaxation</td><td>.41</td><td>.02</td><td>&lt;.001</td></tr><tr><td>San Francisco</td><td/><td/><td/></tr><tr><td>Stress</td><td>&lt;.001</td><td>&lt;.001</td><td>N/A a</td></tr><tr><td>Relaxation</td><td>&lt;.001</td><td>&lt;.001</td><td>N/A</td></tr><tr><td>New York</td><td/><td/><td/></tr><tr><td>Stress</td><td>&lt;.001</td><td>N/A</td><td>&lt;.001</td></tr><tr><td>Relaxation</td><td>&lt;.001</td><td>N/A</td><td>&lt;.001</td></tr><tr><td>a N/A: not applicable.</td><td/><td/><td/></tr></table>",
+                "num": null,
+                "type_str": "table"
+            }
+        }
+    }
+}

@@ -64,7 +64,7 @@ make
 ## Usage
 
 The datasets used in the paper [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326) for **HypoGeniC** is at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).  
-The datasets used in the paper [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326) for **HypoRefine** and Union methods is at [Hypothesis-agent-datasets]()
+The datasets used in the paper [Literature Meets Data: A Synergistic Approach to Hypothesis Generation](https://arxiv.org/abs/2410.17309) for **HypoRefine** and Union methods is at [Hypothesis-agent-datasets](https://github.com/ChicagoHAI/Hypothesis-agent-datasets)
 
 For replicating the results in the paper, you can follow the steps below:
 ### 1. [Optional] Start Redis server
@@ -97,15 +97,16 @@ git clone https://github.com/ChicagoHAI/HypoGeniC-datasets.git ./data
 python ./examples/generation.py
 ```
 
-To use **HypoRefine** or Union methods, follow the steps below:
+To use **HypoRefine** or Union methods, follow the steps below:  
+(there will be 3 hypothesis banks generated: **HypoRefine**, Hypotheses solely from literature, and **Literature∪HypoRefine**)
 ```bash
-git clone https://github.com/ChicagoHAI/Hypothesis-agent-datasets-datasets.git ./data
+git clone https://github.com/ChicagoHAI/Hypothesis-agent-datasets.git ./data
 python ./examples/union_generation.py
 ```
 
 To run default (best hypothesis) inference on generated hypotheses:
 ```bash
-python ./examples/default_inference.py
+python ./examples/inference.py
 ```
 
 To run multiple-hypothesis inference on generated hypotheses:
@@ -123,6 +124,14 @@ More examples can be found in `examples/` directory.
     - `<TASK>_test.json`: A json file containing the test data. 
     - `<TASK>_val.json`: A json file containing the validation data. 
     - The json file should have keys: `'text_features_1'`, ... `'text_features_n'`, `'label'`. The values corresponding to each key should be a list of strings.
+
+### 2. (optional) Literature PDF preprocessing
+For **HypoRefine** or Union methods, it is required for users to provide relevant literature PDFs and preprocess them following the steps below:
+1. Add PDF files to the directory: 
+2. Run the following line:
+```bash
+python ?.py
+```
 
 ### 2. Write config.yaml
 Create the `config.yaml` file in the same directory as the dataset. In the `config.yaml` file, please specify the following fields:
