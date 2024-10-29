@@ -3,7 +3,9 @@
 **[Oct'24]** [Literature Meets Data: A Synergistic Approach to Hypothesis Generation](https://arxiv.org/abs/2410.17309)  
 **[Apr'24]** [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326)
 
-![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg)
+<!-- ![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg) -->
+
+**Do we keep the figure1 for hypogenic here or what?**
 
 This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our works introduce frameworks for generating hypotheses with LLMs, specifically **HypoGeniC** (**Hypo**thesis **Gen**eration **i**n **C**ontext) is a data-driven framework that generates hypotheses solely based on given datasets, while **HypoRefine** is a synergistic approach 
 that incorporates both existing literature and given datasets in an agentic framework to generate hypotheses. Additionally, modules of two Union methods **Literature∪HypoGeniC** and **Literature∪HypoRefine** are provided that mechanistically combine hypotheses from literature only with hypotheses from our frameworks. 
@@ -98,7 +100,7 @@ python ./examples/generation.py
 ```
 
 To use **HypoRefine** or Union methods, follow the steps below:  
-(there will be 3 hypothesis banks generated: **HypoRefine**, Hypotheses solely from literature, and **Literature∪HypoRefine**)
+(There will be 3 hypothesis banks generated: **HypoRefine**, Hypotheses solely from literature, and **Literature∪HypoRefine**.)
 ```bash
 git clone https://github.com/ChicagoHAI/Hypothesis-agent-datasets.git ./data
 python ./examples/union_generation.py
@@ -125,13 +127,14 @@ More examples can be found in `examples/` directory.
     - `<TASK>_val.json`: A json file containing the validation data. 
     - The json file should have keys: `'text_features_1'`, ... `'text_features_n'`, `'label'`. The values corresponding to each key should be a list of strings.
 
-### 2. (optional) Literature PDF preprocessing
+### 2. (optional) Literature PDF preprocessing (TODO)
 For **HypoRefine** or Union methods, it is required for users to provide relevant literature PDFs and preprocess them following the steps below:
 1. Add PDF files to the directory: 
 2. Run the following line:
 ```bash
 python ?.py
 ```
+(We will support automated literature search in a later release.)
 
 ### 2. Write config.yaml
 Create the `config.yaml` file in the same directory as the dataset. In the `config.yaml` file, please specify the following fields:
@@ -207,6 +210,8 @@ prompt_templates:
 ```
 
 `./headline_binary/config.yaml`
+
+**TODO: Instructions for customizing prompt to be updated**
 
 ```yaml
 task_name: headline_binary
