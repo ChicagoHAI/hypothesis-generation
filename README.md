@@ -131,8 +131,16 @@ More examples can be found in `examples/` directory.
 
 ### 2. (optional) Literature PDF preprocessing (TODO)
 For **HypoRefine** or Union methods, it is required for users to provide relevant literature PDFs and preprocess them following the steps below:
-1. Add PDF files to the directory: literature/YOUR_TASK_NAME/
-2. Run the following line:
+1. Add PDF files to the directory: literature/YOUR_TASK_NAME/raw/
+2. Run the following lines:
+```bash
+bash ./modules/run_grobid.sh
+```
+   If you haven't set up grobid before:
+```bash
+bash ./modules/setup_grobid.sh
+```
+   Then:
 ```bash
 python ./examples/pdf_preprocess.py --task_name YOUR_TASK_NAME
 ```
