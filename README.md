@@ -5,9 +5,9 @@
 
 <!-- ![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg) -->
 
-![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypothesis-agent_figure1_large_font.jpg)
+![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/mingxuanl-dev/hypothesis-agent_figure1_large_font.jpg)
 
-**Do we keep the figure1 for hypogenic here or what?**
+<!-- **Do we keep the figure1 for hypogenic here or what?** -->
 
 This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our works introduce frameworks for generating hypotheses with LLMs, specifically **HypoGeniC** (**Hypo**thesis **Gen**eration **i**n **C**ontext) is a data-driven framework that generates hypotheses solely based on given datasets, while **HypoRefine** is a synergistic approach 
 that incorporates both existing literature and given datasets in an agentic framework to generate hypotheses. Additionally, modules of two Union methods **Literature∪HypoGeniC** and **Literature∪HypoRefine** are provided that mechanistically combine hypotheses from literature only with hypotheses from our frameworks. 
