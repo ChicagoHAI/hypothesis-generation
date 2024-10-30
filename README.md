@@ -5,6 +5,8 @@
 
 <!-- ![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg) -->
 
+![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypothesis-agent_figure1_large_font.jpg)
+
 **Do we keep the figure1 for hypogenic here or what?**
 
 This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our works introduce frameworks for generating hypotheses with LLMs, specifically **HypoGeniC** (**Hypo**thesis **Gen**eration **i**n **C**ontext) is a data-driven framework that generates hypotheses solely based on given datasets, while **HypoRefine** is a synergistic approach 
@@ -129,10 +131,10 @@ More examples can be found in `examples/` directory.
 
 ### 2. (optional) Literature PDF preprocessing (TODO)
 For **HypoRefine** or Union methods, it is required for users to provide relevant literature PDFs and preprocess them following the steps below:
-1. Add PDF files to the directory: 
+1. Add PDF files to the directory: literature/YOUR_TASK_NAME/
 2. Run the following line:
 ```bash
-python ?.py
+python ./examples/pdf_preprocess.py --task_name YOUR_TASK_NAME
 ```
 (We will support automated literature search in a later release.)
 
