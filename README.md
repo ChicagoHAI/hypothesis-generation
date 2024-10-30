@@ -129,7 +129,7 @@ More examples can be found in `examples/` directory.
     - `<TASK>_val.json`: A json file containing the validation data. 
     - The json file should have keys: `'text_features_1'`, ... `'text_features_n'`, `'label'`. The values corresponding to each key should be a list of strings.
 
-### 2. (optional) Literature PDF preprocessing (TODO)
+### 2. (optional) Literature PDF preprocessing
 For **HypoRefine** or Union methods, it is required for users to provide relevant literature PDFs and preprocess them following the steps below:
 1. Add PDF files to the directory: literature/YOUR_TASK_NAME/raw/
 2. Run the following lines:
