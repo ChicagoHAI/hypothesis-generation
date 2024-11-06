@@ -93,7 +93,7 @@ def preprocess(train_data, k):
             ]
         )
 
-    return pd.DataFrame(data)
+    return pd.DataFrame(data).reset_index(drop=True)
 
 
 def main():
