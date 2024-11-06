@@ -167,10 +167,7 @@ def main():
         set_seed,
     )
     from hypogenic.LLM_wrapper import llm_wrapper_register
-    from hypogenic.algorithm.summary_information import (
-        SummaryInformation,
-        dict_to_summary_information,
-    )
+    from hypogenic.algorithm.summary_information import SummaryInformation
     from hypogenic.algorithm.inference import inference_register
     from hypogenic.logger_config import LoggerConfig
 
@@ -188,7 +185,7 @@ def main():
     hyp_dict = load_dict(args.hypothesis_file)
     hyp_bank: Dict[str, SummaryInformation] = {}
     for hypothesis in hyp_dict:
-        hyp_bank[hypothesis] = dict_to_summary_information(hyp_dict[hypothesis])
+        hyp_bank[hypothesis] = SummaryInformation.from_dict(hyp_dict[hypothesis])
 
     if args.inference_style in ["one_step_adaptive", "two_step_adaptive"] and all(
         [len(hyp_bank[hyp].correct_examples) == 0 for hyp in hyp_bank]
