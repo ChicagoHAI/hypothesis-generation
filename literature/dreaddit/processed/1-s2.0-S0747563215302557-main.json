@@ -1,0 +1,3363 @@
+{
+    "paper_id": "1-s2",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-09T12:23:06.586796Z"
+    },
+    "title": "Beyond positive or negative: Qualitative sentiment analysis of social media reactions to unexpected stressful events",
+    "authors": [
+        {
+            "first": "Rui",
+            "middle": [],
+            "last": "Gaspar",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Rua Jardim do Tabaco",
+                "location": {
+                    "addrLine": "n 34",
+                    "postCode": "1149-041",
+                    "settlement": "Lisboa",
+                    "country": "Portugal"
+                }
+            },
+            "email": "rgaspar@ispa.pt"
+        },
+        {
+            "first": "Cl",
+            "middle": [],
+            "last": "Audia Pedro",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Universidade de Evora",
+                "location": {
+                    "addrLine": "Rua da Barba Rala, 1",
+                    "postCode": "7005-345",
+                    "settlement": "Evora",
+                    "country": "Portugal"
+                }
+            },
+            "email": "c.claudiapedro@hotmail.com"
+        },
+        {
+            "first": "Panos",
+            "middle": [],
+            "last": "Panagiotopoulos",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Queen Mary University of London",
+                "location": {
+                    "addrLine": "Francis Bancroft Building, Mile End Road",
+                    "postCode": "E1 4NS",
+                    "settlement": "London",
+                    "country": "United Kingdom"
+                }
+            },
+            "email": "p.panagiotopoulos@qmul.ac.uk"
+        },
+        {
+            "first": "Beate",
+            "middle": [],
+            "last": "Seibt",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Instituto Universit ario de Lisboa (ISCTE-IUL)",
+                "location": {
+                    "addrLine": "Cis-IUL, Edif\u00edcio ISCTE, Av. das For\u00e7as Armadas",
+                    "postCode": "1649-026",
+                    "settlement": "Lisbon",
+                    "country": "Portugal"
+                }
+            },
+            "email": "beateseibt@gmail.com"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Sentiment analysis techniques are increasingly used to grasp reactions from social media users to unexpected and potentially stressful social events. This paper argues that, alongside assessments of the affective valence of social media content as negative or positive, there is a need for a deeper understanding of the context in which reactions are expressed and the specific functions that users' emotional states may reflect. To demonstrate this, we present a qualitative analysis of affective expressions on Twitter collected in Germany during the 2011 EHEC food contamination incident based on a coding scheme developed from Skinner et al.'s (2003) coping classification framework. Affective expressions of coping were found to be diverse not only in terms of valence but also in the adaptive functions they served: beyond the positive or negative tone, some people perceived the outbreak as a threat while others as a challenge to cope with. We discuss how this qualitative sentiment analysis can allow a better understanding of the way the overall situation is perceived e threat or challenge e and the resources that individuals experience having to cope with emerging demands.",
+    "pdf_parse": {
+        "paper_id": "1-s2",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Sentiment analysis techniques are increasingly used to grasp reactions from social media users to unexpected and potentially stressful social events. This paper argues that, alongside assessments of the affective valence of social media content as negative or positive, there is a need for a deeper understanding of the context in which reactions are expressed and the specific functions that users' emotional states may reflect. To demonstrate this, we present a qualitative analysis of affective expressions on Twitter collected in Germany during the 2011 EHEC food contamination incident based on a coding scheme developed from Skinner et al.'s (2003) coping classification framework. Affective expressions of coping were found to be diverse not only in terms of valence but also in the adaptive functions they served: beyond the positive or negative tone, some people perceived the outbreak as a threat while others as a challenge to cope with. We discuss how this qualitative sentiment analysis can allow a better understanding of the way the overall situation is perceived e threat or challenge e and the resources that individuals experience having to cope with emerging demands.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Social media applications host a large volume of opinions that reflect people's reaction to events. Even as brief as Twitter's 140 characters, social media reactions function as user-driven data that can be for example automatically classified in terms of their sentiment using opinion mining or machine learning techniques (e.g. Ghiassi, Skinner, & Zimbra, 2013; Thelwall, Buckley, Paltoglou, Cai, & Kappas, 2010) . Analysis of social media data seems particularly useful when unexpected and potentially stressful events occur and there is need of understanding how Internet users are making sense of them. Sentiment analysis over a large volume of usergenerated data have been used for example in rapid reputation assessments (e.g. brand management, political marketing) or as an indication of how digital publics respond to events, associated with television shows, football games, significant news or other meaningful events (see e.g. Brooker, Barnett, Cribbin, Lang, & Martin, 2013; Highfield, Harrington, & Bruns, 2013; Thelwall, Buckley, & Paltoglou, 2011) .",
+                "cite_spans": [
+                    {
+                        "start": 330,
+                        "end": 363,
+                        "text": "Ghiassi, Skinner, & Zimbra, 2013;",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 364,
+                        "end": 414,
+                        "text": "Thelwall, Buckley, Paltoglou, Cai, & Kappas, 2010)",
+                        "ref_id": "BIBREF47"
+                    },
+                    {
+                        "start": 939,
+                        "end": 987,
+                        "text": "Brooker, Barnett, Cribbin, Lang, & Martin, 2013;",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 988,
+                        "end": 1025,
+                        "text": "Highfield, Harrington, & Bruns, 2013;",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 1026,
+                        "end": 1063,
+                        "text": "Thelwall, Buckley, & Paltoglou, 2011)",
+                        "ref_id": "BIBREF46"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Reactions collected from social media have also become central in situations of high uncertainty and high demands on individuals and communities (see e.g. Heverin & Zach, 2012; Palen, Vieweg, & Anderson, 2010) . These situations involve a deviation from the \"normal\" state that existed before their occurrence and may evidence the presence of a stressful experience, given that people have to draw on resources to cope with demands, which they would not \"normally\" have to (Gaspar, Barnett, & Seibt, 2015) . This is the case with unexpected and potentially stressful events associated with the emergence of health threats (e.g. epidemics, biological and chemical contamination of food), terrorist attacks, natural disasters (e.g. hurricanes, floods), industrial accidents (e.g. nuclear) or even sudden events related with macroeconomic changes, that may come to be perceived as crisis. Reactions during these events can evidence collective sense-making (Gilles et al., 2013) , supportive actions (Murthy, 2013; Panagiotopoulos, Bigdeli, & Sams, 2014) , social sharing of emotions and empatic concerns for affected individuals (Neubaum, R\u20ac osner, Rosenthal-von der P\u00fctten, & Kr\u20ac amer, 2014) and individual strategies of approach/avoidance (Jonas et al., 2014) , that would be less prevalent in non stressful situations with lower demands to cope with. In this context, opinion mining and sentiment analysis techniques can be deployed to support response coordination (Purohit et al., 2013) or provide information about which audiences might be affected by emerging risk events (Lachlan, Spence, & Lin, 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 155,
+                        "end": 176,
+                        "text": "Heverin & Zach, 2012;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 177,
+                        "end": 209,
+                        "text": "Palen, Vieweg, & Anderson, 2010)",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 473,
+                        "end": 505,
+                        "text": "(Gaspar, Barnett, & Seibt, 2015)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 953,
+                        "end": 974,
+                        "text": "(Gilles et al., 2013)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 996,
+                        "end": 1010,
+                        "text": "(Murthy, 2013;",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 1011,
+                        "end": 1050,
+                        "text": "Panagiotopoulos, Bigdeli, & Sams, 2014)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 1126,
+                        "end": 1189,
+                        "text": "(Neubaum, R\u20ac osner, Rosenthal-von der P\u00fctten, & Kr\u20ac amer, 2014)",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 1238,
+                        "end": 1258,
+                        "text": "(Jonas et al., 2014)",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 1466,
+                        "end": 1488,
+                        "text": "(Purohit et al., 2013)",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 1576,
+                        "end": 1606,
+                        "text": "(Lachlan, Spence, & Lin, 2014)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "There are however valid reasons to believe that computer-based sentiment analysis techniques may not be adequate to assess social media reactions on their own; and that another complementary layer of human-based assessment should be put forward. More than triggering positive or negative affective reactions, potentially stressful events can be perceived both at the individual and social levels as posing threats or challenges to cope with, depending on the resources available and the demands posed by them (e.g. Blascovich & Mendes, 2001) . Moreover, these perceptions may change over time, along the chain of events that might occur -the hazard sequence (Barnett & Breakwell, 2003) . This type of assessment requires a deeper understanding of people's affective expressions on social media and the context in which people express sentiment and other cognitive and behavioural manifestations while events unfold.",
+                "cite_spans": [
+                    {
+                        "start": 515,
+                        "end": 541,
+                        "text": "Blascovich & Mendes, 2001)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 658,
+                        "end": 685,
+                        "text": "(Barnett & Breakwell, 2003)",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Specifically, this paper makes the case that alongside assessments of affective or sentiment valence (positive, negative, neutral, ambivalent), a qualitative analysis of expressions while unexpected events unfold can serve a deeper understanding of the specific functions that users' emotional states may reflect. Looking into these functions can allow for an assessment of: 1) how the overall situation is perceived e as a threat or challenge e and 2) the individual and social resources that individuals experience to have, to cope with demands. To identify these two aspects, we adopted the classification scheme by Skinner, Edge, Altman, and Sherwood (2003) , which lists 12 higher-order categories or families of coping and three higher-order adaptive function categories. The framework was applied on a Twitter dataset collected in Germany during the 2011 EHEC outbreak in Europe (Escherichia coli contamination of food incident). Food-related crises like contamination incidents tend to generate substantial reactions from the concerned public, which can escalate in unusual ways on social media (Mou & Lin, 2014; Rutsaert et al., 2013) . The first cases of EHEC contamination in the food chain were identified in Germany in May 2011, but it was not until July 2011 that the original source was identified and eliminated. Uncertainty over the source and extent of the contamination amplified public reaction and had severe economic and political impact, due to an incorrect attribution of blame to Spanish cucumbers as the original contaminated product (Gaspar et al., 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 619,
+                        "end": 661,
+                        "text": "Skinner, Edge, Altman, and Sherwood (2003)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 1103,
+                        "end": 1120,
+                        "text": "(Mou & Lin, 2014;",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 1121,
+                        "end": 1143,
+                        "text": "Rutsaert et al., 2013)",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 1560,
+                        "end": 1581,
+                        "text": "(Gaspar et al., 2014)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "After elaborating on the importance of qualitative sentiment analysis as the basis for a human-based assessment of reactions to stressful events, we present the study methodology and findings. Based on the latter, we discuss the value of qualitative sentiment analysis particularly in terms of how it can guide efforts to provide the means and resources so that the public can reinterpret an unexpected stressful event(s) as a challenge rather than as a threat.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Quantitative sentiment analysis methods can be relevant for all types of analyses that focus on what Sheth, Purohit, Jadhav, Kapanipathi and Chen (2010, p.1) refer to as \"event-centric user generated content on social networks\". Popular sentiment analysis techniques like SentiStrength classify messages as having a positive or negative \"tone\" based on whether they contain at least one positive or negative keyword (e.g. Kramer, Guillory & Hancock, 2014; Thelwall et al. 2011) . Strength of the identified sentiment depends on keyword frequencies, co-occurrences or a predefined assignment on specific words. Identification of affective valence and monitoring of the volume of relevant messages is important to overview public reactions and track changing sentiment during unexpected events e even at near real time. This can allow for example to determine whether negative sentiment is predominant over positive and infer that a problem to deal with may exist.",
+                "cite_spans": [
+                    {
+                        "start": 101,
+                        "end": 157,
+                        "text": "Sheth, Purohit, Jadhav, Kapanipathi and Chen (2010, p.1)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 422,
+                        "end": 455,
+                        "text": "Kramer, Guillory & Hancock, 2014;",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 456,
+                        "end": 477,
+                        "text": "Thelwall et al. 2011)",
+                        "ref_id": "BIBREF46"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Why analyse affective expressions on social media beyond positive or negative?",
+                "sec_num": "2."
+            },
+            {
+                "text": "There are however limitations to this type of sentiment analysis over large volumes of data due to the a priori assumptions behind this approach, namely that: 1) sentiment is a one-dimensional concept characterised by valence (positive, negative, neutral, ambivalent), 2) circumscribed to a small set of emotions (e.g. fear, anger, surprise) and 3) expressed with no visible/explicit goal or function, or even \"irrationally\". This is often the case with the type of unexpected and potentially stressful events commonly categorised as social crises which are usually portrayed as an aggregation of negative sentiment that needs to be \"neutralised\".",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Why analyse affective expressions on social media beyond positive or negative?",
+                "sec_num": "2."
+            },
+            {
+                "text": "This predominantly negative view is present in various definitions in the literature, such as for example that \"crisis suggest an unusual event of overwhelmingly negative significance, that carries a high level of risk, harm, and opportunity for further loss\" (Seeger, Sellnow, & Ulmer, 2003, p.4 ). Nevertheless, even different emotions within the same valence category e in this case the negative e can result from markedly different assessments of the situation and be predictive of divergent reactions during the event (Lerner & Keltner, 2000) . For example, expressions based on anger or fear might be classified as equally negative although they reflect fundamentally different emotional states and potential actions. More importantly, people's associated responses can have both desired (protective behaviour, emotion regulation, etc.) or undesired consequences (risk perception amplification, rumour spreading, etc.) (Neubaum et al., 2014; Oh, Agrawal, & Rao, 2013) .",
+                "cite_spans": [
+                    {
+                        "start": 260,
+                        "end": 296,
+                        "text": "(Seeger, Sellnow, & Ulmer, 2003, p.4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 523,
+                        "end": 547,
+                        "text": "(Lerner & Keltner, 2000)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 925,
+                        "end": 947,
+                        "text": "(Neubaum et al., 2014;",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 948,
+                        "end": 973,
+                        "text": "Oh, Agrawal, & Rao, 2013)",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Why analyse affective expressions on social media beyond positive or negative?",
+                "sec_num": "2."
+            },
+            {
+                "text": "In fact, research has shown that studying perception and reactions to unexpected and potentially stressful events is a quite complex matter. As events unfold, changes in affect, cognitions and behaviour patterns can be observed (Chew & Eysenbach, 2010) , as for example: rise in citizens' negative sentiment (Wong & Sam, 2010) , in a threat(s) perceived severity and risk perception (Terpstra, de Vries, Stronkman, & Paradies, 2012) and in the behaviours implemented to minimize/mitigate the threat(s) (e.g. Wong & Sam, 2010) . Also, positive or negative expressions do not necessarily translate as \"good\" or \"bad\" (Lerner & Keltner, 2000) . For example, there might be evidence of increases in positive sentiment (e.g. humour, irony), depending on the nature of the events and on how serious the issues are perceived (e.g. Chew & Eysenbach, 2010) . Positive in this context might not necessarily be good. For example, using humour may imply a positive accommodation of the stressful event(s), based on a cognitive restructuring of the situation, so that it is perceived as more positive. However, it may also imply a denial of the perceived threat, which may become a barrier to adopting the necessary protective behaviours (Skinner et al., 2003) . Similarly, negative affect may also serve a specific function that is not inherently \"negative\" and in need of being \"eliminated\". For example, moderate levels of anxiety and fear might motivate individuals to implement the necessary protective behaviours to minimise or eliminate the risks associated with a certain threat(s) (see e.g. Smith & McCloskey, 1998; Weinstein, 1988) . In addition, negative and positive sentiment are not mutually exclusive, as expressions of both can co-occur (Frydenberg, 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 228,
+                        "end": 252,
+                        "text": "(Chew & Eysenbach, 2010)",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 308,
+                        "end": 326,
+                        "text": "(Wong & Sam, 2010)",
+                        "ref_id": "BIBREF49"
+                    },
+                    {
+                        "start": 383,
+                        "end": 432,
+                        "text": "(Terpstra, de Vries, Stronkman, & Paradies, 2012)",
+                        "ref_id": "BIBREF45"
+                    },
+                    {
+                        "start": 508,
+                        "end": 525,
+                        "text": "Wong & Sam, 2010)",
+                        "ref_id": "BIBREF49"
+                    },
+                    {
+                        "start": 615,
+                        "end": 639,
+                        "text": "(Lerner & Keltner, 2000)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 824,
+                        "end": 847,
+                        "text": "Chew & Eysenbach, 2010)",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 1225,
+                        "end": 1247,
+                        "text": "(Skinner et al., 2003)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 1587,
+                        "end": 1611,
+                        "text": "Smith & McCloskey, 1998;",
+                        "ref_id": "BIBREF41"
+                    },
+                    {
+                        "start": 1612,
+                        "end": 1628,
+                        "text": "Weinstein, 1988)",
+                        "ref_id": "BIBREF48"
+                    },
+                    {
+                        "start": 1740,
+                        "end": 1758,
+                        "text": "(Frydenberg, 2014)",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Why analyse affective expressions on social media beyond positive or negative?",
+                "sec_num": "2."
+            },
+            {
+                "text": "Therefore, the valence of people's expressions during unexpected and potentially stressful events may only be the visible part of the \"iceberg\". Individuals cope with threats and challenges to themselves and to their social context, both actively and flexibly, by drawing on a heterogeneous set of strategies, which can be more or less effective depending on the adaptive function they serve (e.g. active search for information vs. denial) (Skinner et al., 2003) . In other words, people do not simply panic in response to an emergency but cope in diverse collective and individual ways (Drury et al., 2009) .",
+                "cite_spans": [
+                    {
+                        "start": 440,
+                        "end": 462,
+                        "text": "(Skinner et al., 2003)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 587,
+                        "end": 607,
+                        "text": "(Drury et al., 2009)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Why analyse affective expressions on social media beyond positive or negative?",
+                "sec_num": "2."
+            },
+            {
+                "text": "It is therefore important to consider the richness of social media expressions through qualitative analysis that takes into account all dimensions of valence (positive, negative, neutral, ambivalent) with respect to the underlying functions or goals that affective expressions may serve. Apart from seeking to contribute to the understanding of communications during unexpected events, such theory-driven explorations of users' expressions are scarce in social media research in general (for exceptions, see e.g. Heverin & Zach, 2012; Oh et al., 2013) . To address this gap, we situate our consideration of emotional valence and categorise affective expressions in terms of how individuals cope with specific events by adopting the coping classification scheme by Skinner et al. (2003) , which is introduced next.",
+                "cite_spans": [
+                    {
+                        "start": 513,
+                        "end": 534,
+                        "text": "Heverin & Zach, 2012;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 535,
+                        "end": 551,
+                        "text": "Oh et al., 2013)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 764,
+                        "end": 785,
+                        "text": "Skinner et al. (2003)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Why analyse affective expressions on social media beyond positive or negative?",
+                "sec_num": "2."
+            },
+            {
+                "text": "The coping concept commonly found in the health psychology literature, may be defined as the \"process of attempting to manage the demands created by stressful events that are appraised as taxing or exceeding a person's resources\" (Taylor & Stanton, 2007, p.378) . These stressful events demand the implementation of affective, cognitive and behavioural coping strategies that would not be implemented under \"normal\" conditions (Gaspar et al., 2015) . Such strategies are determined by two types of appraisal (Blascovich & Mendes, 2001; Skinner et al. 2003 ): 1) demand evaluation e assessment of the danger, uncertainty and effort required to cope; and 2) resource evaluation e assessment of the knowledge and skills to cope with the situation, along with other individual or social resources.",
+                "cite_spans": [
+                    {
+                        "start": 230,
+                        "end": 261,
+                        "text": "(Taylor & Stanton, 2007, p.378)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 427,
+                        "end": 448,
+                        "text": "(Gaspar et al., 2015)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 508,
+                        "end": 535,
+                        "text": "(Blascovich & Mendes, 2001;",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 536,
+                        "end": 555,
+                        "text": "Skinner et al. 2003",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Sentiment expression as a goal-based way of coping: a guiding framework",
+                "sec_num": "3."
+            },
+            {
+                "text": "Following this twofold appraisal, individuals may evaluate and experience having sufficient resources to cope and adapt to the unfolding events e thus perceiving the \"new state of things\" as a challenge e or experience having insufficient resources for this e thus appraising it as a threat (Blascovich & Mendes, 2001) . Consequently, individuals can implement coping strategies with the function of adapting to the stressful situation, expressed in recognisable manifestations or \"ways of coping\" (Skinner et al., 2003) ; these are mostly purposeful, conscious and goal directed expressions, although there can be automatic and unconscious components as well (Compas, Connor-Smith, Saltzman, Thomsen, & Wadsworth, 2001) .",
+                "cite_spans": [
+                    {
+                        "start": 291,
+                        "end": 318,
+                        "text": "(Blascovich & Mendes, 2001)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 498,
+                        "end": 520,
+                        "text": "(Skinner et al., 2003)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 660,
+                        "end": 720,
+                        "text": "(Compas, Connor-Smith, Saltzman, Thomsen, & Wadsworth, 2001)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Sentiment expression as a goal-based way of coping: a guiding framework",
+                "sec_num": "3."
+            },
+            {
+                "text": "In this regard, an extensive study by Skinner et al. (2003) identified more than 400 lower order ways of coping that belong to 12 higher order categories or coping families; each family includes strategies divided in affective, behavioural and orientation or cognitive dimensions. In turn, the 12 families were considered to serve a smaller set of higher order categories, implying three main adaptive functions: (a) adaptive processes that coordinate an individual's actions with the contingencies in the environment, (b) adaptive processes that coordinate the individual's reliance on others with the social resources in the environment, and (c) adaptive processes that coordinate an individual's preferences with the options available in the environment. Examples of ways of coping in an affective dimension, associated with each of the three function categories, can be found in Fig. 1 .",
+                "cite_spans": [
+                    {
+                        "start": 38,
+                        "end": 59,
+                        "text": "Skinner et al. (2003)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 888,
+                        "end": 889,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Sentiment expression as a goal-based way of coping: a guiding framework",
+                "sec_num": "3."
+            },
+            {
+                "text": "The underlying assumption to the three main adaptive functions as represented in the first layer of Fig. 1 , is that individuals have the potential of activating a flexible set of responses (layer 4) to meet the threats or challenges they perceive (appraise) to exist (layer 5). Each of these responses can be classified in one of 12 coping families (layer 3) that serve one specific function (layer 2) as part of a more general adaptation process (layer 1). For example, when an individual experiences loss of control due to potentially stressful events and perceives the demands as being higher than the resources available to cope, the individual appraises that a threat/to self and/ or others exists (layer 1). This may lead to experiencing Helplessness (layer 3) that may be manifested in feelings of self-doubt, discouragement and/or guilt (layer 4) due to the individual perceiving that there are limits to the actions (layer 2) that can be implemented to cope with the threat. However, upon the same experienced loss of control, the individual may perceive having the necessary (individual and/or social) resources to cope, thus appraising the situation as a challenge to cope with. This may imply responding through Accommodation (layer 3) manifested in feelings of acceptance (layer 4) of the \"new state of things\", in order to adjust her/his preferences to the available options (layer 2). Although both types of affective expressions may be determined by the same control loss appraisal, they imply fundamentally different adaptive functions. Helplessness implies a focus on the individual's resource limits to cope with the situation (first adaptive function category e layer 1). Accommodation implies a focus on adjusting the individual's preferences, needs, etc. to the situation and available options, rather than changing the situation itself (third adaptive function category e layer 1). Moreover, both imply different appraisals of the same situation/events: threat vs. challenge respectively.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 105,
+                        "end": 106,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Sentiment expression as a goal-based way of coping: a guiding framework",
+                "sec_num": "3."
+            },
+            {
+                "text": "This framework's explanatory potential results from the fact that it allows classifying different ways of coping based on how the situation is appraised and the adaptive function served. Hence, we believe it is useful for monitoring reactions to unexpected and potentially stressful social events, as in the case of emergent social crisis. By assessing affective expressions following this framework, we can infer: 1) how the overall situation is perceived e as a threat or challenge (Blascovich & Mendes, 2001) e and 2) if people draw on individual and/or social resources to cope. More specifically, it is our contention that this framework can be applied to determining when, upon the same event(s), both a person and a larger group (society; nation; ...) experience stress and perceive a threat or challenge to cope with. Social media channels present themselves as a rich source of expressions of coping with demands. Twitter in particular can be considered a good source of affective expressions due to the quick, spontaneous and affective reactions found there, thus allowing access to the \"time course of emotional responses to crises\" (Spence, Nelson, & Lachlan, 2010, p.13) . Moreover, individuals can both influence and be influenced by the perceptions of other individuals (i.e. by their social context) and share resources of various forms (e.g. links, photos, videos, and experience from the grounds) (Murthy, 2013) . As a result, the framework can serve as a basis for theory-driven analysis of reactions to unexpected and potentially stressful social event(s) as perceived by individuals, by analysing individual's affective expressions of coping. Details of our application of the framework to the 2011 EHEC outbreak in Europe are presented next.",
+                "cite_spans": [
+                    {
+                        "start": 484,
+                        "end": 511,
+                        "text": "(Blascovich & Mendes, 2001)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 1144,
+                        "end": 1183,
+                        "text": "(Spence, Nelson, & Lachlan, 2010, p.13)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1415,
+                        "end": 1429,
+                        "text": "(Murthy, 2013)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Sentiment expression as a goal-based way of coping: a guiding framework",
+                "sec_num": "3."
+            },
+            {
+                "text": "Food crises can provide an illustrating case of emerging affective expressions from unexpected events, since food-related incidents are not seen as inevitable, for example, compared to natural disasters. There are incontestable expectations such as for example that \"food should be safe to eat and free of harmful E. coli contamination\" (Sellnow & Seeger, 2013, p. 5 ) and that eating food should not have health consequences as severe as death. The 2011 EHEC outbreak from contaminated food products, with its first human contamination cases in Germany and subsequent dissemination to other countries, was generally recognized as a social crisis (see e.g. Robert Koch Institute, 2011), provides a clear example of it. This provided a rich source of expressions, due to the sequence of events and communications while the crisis unfolded between May and August 2011. Taking into consideration this outbreak as a case study of food crisis perception and communication, our qualitative sentiment analysis aimed to:",
+                "cite_spans": [
+                    {
+                        "start": 337,
+                        "end": 366,
+                        "text": "(Sellnow & Seeger, 2013, p. 5",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Context and aims",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "1) Demonstrate the variety/diversity of affective expressions on Twitter that occurred following the emergence of a food-related incident that was widely recognised as a crisis; 2) Present evidence of the different functions that 2.1) coping expressions in general and 2.2) affective expressions in particular, may have served (e.g. what was the function of an expression of anger towards the authorities?), with the goal of adapting to the biological hazard that emerged. 3) To provide a methodological contribution to the social media literature by making the case for complementing computerbased sentiment analysis approaches, with a second layer of human-based qualitative analyses.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Context and aims",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Social media data was extracted in Germany, the country where the first official human contamination cases of that crisis were identified, between May 11 e the day of the first reported cases of human contamination from EHEC -and July 26 when the end of the outbreak was declared (Robert Koch Institute, 2011). The initial sample was comprised of 14 231 EHEC (Enterohaemorrhagic E. coli) or EHEC references. This represented a sample of the messages produced during that time interval, based on the extraction criteria used, with at least one reference to EHEC/E. coli per message and within the geographical area of Germany. No daily limits for extraction were imposed, other than the extraction parameters. Only data from publicly available Twitter profiles were captured.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data extraction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Data collection was based on a set of keywords, determined as the most frequently associated with the events. These included the German words for scientific terms as for example: VTEC; Verocytotoxin E. coli; Verotoxin; STEC; Shiga toxin; EHEC; Enterohaemorrhagic E. coli. Moreover, lay term uses associated with these were also considered, such as health symptoms (e.g. bloody diarrhoea; acute kidney failure), general categories of biological contamination (e.g. Zoonoses) and the lay term used for EHEC: \"E. coli\". Only messages that included at least one of these keywords were extracted either with or without hashtags. Tracking and data extraction was performed by Radian6 -a social media monitoring and analysis platform.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data extraction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Social media messages produced during the time period of extraction, went through a filtering process to reduce the set to include only specific types. This was based on the Burgess and Bruns (2012) classification of types of tweets as: 1) original tweets -tweets which are neither @reply nor retweet; 2) retweetstweets which contain RT @user\u2026 (or similar); 3) unedited retweets -retweets which start with RT @user\u2026; 4) edited retweetsretweets do not start with RT @user\u2026; 5) genuine @replies e tweets which contain @user, but are not retweets; 6) URL sharingtweets which contain URLs. Based on this, we chose to analyse only original tweets, edited retweets and genuine @replies as the ones in which users provided sufficient information to evaluate the content and context of their coping expressions, i.e. information produced by individual users, sometimes in co-occurrence with information produced by other users or information sources. Hence, from the 14 231 social media posts produced during this time, we excluded: messages from social media channels other than Twitter; tweet duplications (the same tweet published more than twice per day), retweets and unedited retweets and tweets that were not from individuals (e.g. news agencies). This allowed a focus on messages produced by individuals during the crisis. Based on this \"data cleaning\" process, we reduced the initial data set to 2099 tweets, which were the ones subsequently coded with regard to the qualitative analysis.",
+                "cite_spans": [
+                    {
+                        "start": 174,
+                        "end": 198,
+                        "text": "Burgess and Bruns (2012)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data coding and analysis",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "Given the existence of tweets in the German language, a German native speaker and professional translator fluent in English, performed the translation of tweets in German to English, assuring maintenance of the cultural/symbolic meanings as expressed. Another German native speaker who is also fluent in English from the team of authors, independently rechecked the tweets to reassure the maintenance of cultural and symbolic meanings. Both English and German versions were used in the subsequent coding by two judges/coders fluent in the English language. The coders provided further validation of the translation by: randomly selecting messages in German, translating them to English in an automated translation software and matching them with the original versions prior to applying the coding.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data coding and analysis",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "The subsequent qualitative analysis was not carried out at the level of words but rather considered the whole tweet content, within its 140-characters limit, as the unit of analysis. This allowed assessing the context in which specific keywords were produced, thus allowing access to references to coping resources and indicators of the social grounding of individual perceptions. Tweets were coded in a number of categories following a theory-driven (top down) approach and closed coding. This included the 12 coping families and the three adaptive function categories proposed by Skinner et al. (2003) but only considering the affective dimension, as presented in Fig. 1 . 1 First, we coded the data based on the lower order categories or ways of coping associated with the 12 higher order coping families; and secondly based on the three higher order adaptive function categories. The complete list of tweets was manually coded according to the lower order classification by two independent coders (for similar approaches, see e.g. Spence, Lachlan, Lin, & del Greco, 2015) . In a first stage of this process, both coders individually familiarised themselves with the dataset. A joint training stage then followed in which 100 tweets were coded together in order to assure a common understanding of the classification system. In the subsequent stage, both raters coded the complete data set and the level of inter-rater agreement (Cohen's Kappa) between the two data sets was checked. Results showed a high level (k \u00bc .75; SE \u00bc .017) of inter-rater agreement after this training stage. Subsequently, situations in which there was disagreement were discussed and resolved, allowing constructing a single integrated database, in a process that took, in total, no longer than a week.",
+                "cite_spans": [
+                    {
+                        "start": 582,
+                        "end": 603,
+                        "text": "Skinner et al. (2003)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 1035,
+                        "end": 1075,
+                        "text": "Spence, Lachlan, Lin, & del Greco, 2015)",
+                        "ref_id": "BIBREF42"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 671,
+                        "end": 672,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Data coding and analysis",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "From the sample of 2099 tweets extracted, tweets that both coders rated as the 13 th category (unable to be classified in the 12 categories) were excluded from the analysis. These cases were related to multiple coding (e.g. more than one way of coping expressed), unclear coping expressions or edited retweets with insufficient information to allow for coding. 2 Concerning the latter, most of the tweets included only brief comments and therefore, insufficient information to be coded. 3 Following this last stage of filtering as part of the coding processes, a total of 885 tweets were analysed with the results presented in the next section.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data coding and analysis",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "In order to provide evidence with regard to the first study aim and demonstrate the variety/diversity of affective expressions on Twitter as the crisis unfolded, this section will first present examples of coping expressions in the affective dimension, associated with the 12 coping families. This will be followed by the presentation of examples of functions that coping may have served as the crisis unfolded and by examples of affective expressions within each of the three categories, thus fulfilling the second research aim.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": "5."
+            },
+            {
+                "text": "The following examples of expressions of affect are presented together with an ID number attributed in the project's database. 4 Two categories in which a diversity of affective expressions were found, were Self-confidence and Support seeking, either in the form of self-soothing or seeking reassurance from others to become more confident, respectively. Affective expressions of self-soothing could be found for example in tweets:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "\"135. This week, I'll try not to die at the hands of ecoli outbreak\".",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "These expressions seemingly implied people's positive attempt to self-calm and raise confidence about their coping with the threat. Also associated with this was accepting responsibility for choices and being confident in them, such as: \"337. First meal in Germany...a nice refreshing salad. This E Coli strain's got nothing on my African immune system. Bring it!!\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "In addition, examples were found in which people aimed at increasing their confidence in dealing with the threat: \"People ask me why I never get sick of the #stomach. Because I have a stomach of steel, no bacteria makes me tickles. #E. coli\" [163] \"so. E. coli warning in Germany for salads, tomatoes and cucumbers. ...guess i'm safe then\" [62] This expression seemingly implied the person convincing her or himself that she/he was safe because something made this person different and less vulnerable, namely \"to have a stomach of steel\", self-excluding her or himself from the \"people at risk\" group.",
+                "cite_spans": [
+                    {
+                        "start": 340,
+                        "end": 344,
+                        "text": "[62]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "The Self-confidence category also included concerns for other people, found in expressions such as: 1 For further examples of the coding script and categories of coping not only referring to the affective dimension but also to behavioural and cognitive dimensions see (D'iuso, Blake, Fitzpatrick, & Drapeau, 2009) .",
+                "cite_spans": [
+                    {
+                        "start": 277,
+                        "end": 313,
+                        "text": "Blake, Fitzpatrick, & Drapeau, 2009)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "2 For example: Experts stumped: E.coli wave takes over Germany. Patients in a coma. F\u00fcr alle: http://www.springermedizin.de/437130 #E. coli #Virus #Keim [8] . In this message, the only information available was \"#E. coli #Virus #Keim\" which was not enough to allow its attribution to any coding category.",
+                "cite_spans": [
+                    {
+                        "start": 153,
+                        "end": 156,
+                        "text": "[8]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "3 It could be argued that these messages are still informative given that their sharing might represent various associated goals: may evidence information seeking (e.g. manifested in an affective expression of \"interest\" or a behavioural expression of \"observation\" and \"studying\" the issue), may evidence support seeking (if someone is aiming to get a reply from someone, that provides comfort or some sort of help), may evidence concern for the self and also for others (e.g. if the goal is to inform other people about what is going on and protect them from harm) or other ways of coping. However, in order to perform a more objective coding process, our decision was to code messages that only provided enough information to assess the context in which the message was shared with other users, i.e. that could be clearly codable in one of the 12 coping families, thus evidencing the goal underlying the message sharing. 4 The examples found next are in the translated form. The original tweets in \"To traveling friends: be aware. Big outbreak of dangerous foodborne E. coli bacteria already affects 1534 people in DE http:// bit.ly/jeCoDH\" [257] This implied concern that these people could find themselves in the affected geographical area and thus, be at risk. This concern also included people who were not informed about the situation, i.e. people who were abroad and who would visit the country in the near future. Differently, other expressions implied raising confidence in people, through messages conveying confidence and trying to have a minimizing effect associated with the events unfolding. This confidence was mainly produced in humorous messages, which attempted to \"play\" with the situation and thus experience the situation in a more positive way:",
+                "cite_spans": [
+                    {
+                        "start": 1144,
+                        "end": 1149,
+                        "text": "[257]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "\"i think a pint of Ben&Jerry's will cure my e. coli poisoning?!?!?!?! * delivery * \". [108] Another category where various tweets with an affective component could be found was Accommodation, one of the most frequent in the sample of tweets extracted. People who used this strategy expressed an adjustment to the current situation and/or the new conditions that emerged, trying to adapt to them in the best way. This implied for example expressing acceptance of the restrictions on food products buying implemented by authorities. Another form implied making a positive mental restructuring of the situation through the use of humour, in order to minimize the associated stress. This way of coping was expressed for example in tweets such as: The affective dimension also implied negative expressions of affect such as fear, anxiety anger, explosion, and others. Associated with the coping category Delegation, people complained about the undergoing situation, including negative expressions of sentiment such as whining and other forms:",
+                "cite_spans": [
+                    {
+                        "start": 86,
+                        "end": 91,
+                        "text": "[108]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "\"so, we cannot eat salad leaves, tomatoes or cucumber...and now maybe eggs and pork?? anything else that can give us the ecoli? #Germany\" [61] \"Germany, why are you making salads bad for you? #germany #deutschland #ecoli #ehec #vegetables\" [549] Other examples of negative sentiment included the expression of anger associated with the coping category Opposition. This anger was directed mainly to the \"hype\" around the outbreak and the social amplification of it: \"I don't give a shit. 100x more people die in car accidents RT @ Breaking News: German-grown beansprouts likely cause of deadly E. coli outbreak\" [412] Within this category, attributions of blame to Spain as the origin of the outbreak while trying to safeguard Germany's image in this regard, were also commonly found:",
+                "cite_spans": [
+                    {
+                        "start": 240,
+                        "end": 245,
+                        "text": "[549]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 611,
+                        "end": 616,
+                        "text": "[412]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "\"Dont use Spanish Cucumbers. They have caused anoutbreak of E-Coli in germany.\" [70] \"its not only we who point fingers at our neighbors same here too, Germany had blamed Spain for E.Coli but..\" [483] In addition to this, opposition to the \"status quo\" could also be observed in the form of sarcasm and irony:",
+                "cite_spans": [
+                    {
+                        "start": 80,
+                        "end": 84,
+                        "text": "[70]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 195,
+                        "end": 200,
+                        "text": "[483]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "\"#Germany has around 350 deaths on its roads per month. #Ecoli has killed 17. That's 4% compared to cars. Beware of crossing the road.\" [212] Other people adopted a coping strategy associated with Negotiation, where they saw the situation in other people's \"eyes\" and considered the impact of events beyond their individual perspective. Several tweets included people adopting the perspective of those directly affected by the outbreak: \"German farmers have been hit hard by the outbreak of E. coli and believe they are being demonized\" [77] \"Friend of ours with traditional restaurant says sales down 50% since E.coli.\" [709] Being aware of other people's losses and exemplifying the impact on individuals was common in this category.",
+                "cite_spans": [
+                    {
+                        "start": 136,
+                        "end": 141,
+                        "text": "[212]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 621,
+                        "end": 626,
+                        "text": "[709]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "Furthermore, the feeling of shame associated with the coping category Delegation, was also visible in some messages produced. Shame was mainly felt by those who thought that authorities were failing or underperforming their public protection duty: \" #dresden: very worrying that the authorities have #noidea what the source of the #ecoli outbreak is. too hot for soup dot com\". [176] Finally, it is worth nothing that positive expressions of trust associated with the Support Seeking category were not found apart from a potentially sarcastic expression:",
+                "cite_spans": [
+                    {
+                        "start": 378,
+                        "end": 383,
+                        "text": "[176]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "My government is staying on top of things and informing me the latest on the E. coli outbreak here in Germany. #thanks [307] Differently, negative expressions of \"distrust\" were more common, potentially manifesting Isolation or withdrawal from the social context, such as for example:",
+                "cite_spans": [
+                    {
+                        "start": 119,
+                        "end": 124,
+                        "text": "[307]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "How reliable is the information that instead of cucumber, soya was the actual source of e.coli? [717] So (bean) sprouts are most likely suspects for spreading E. coli? So we can eat cucumbers, tomatoes and lettuce again? [500] Hey, @XXX Germany isn't \"inefficient\". We ATM very efficiently destroy any positive notion one might have of us. #ECOLI #Libya [553]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions of sentiment",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "With regard to the adaptive function of coping expressions based on Skinner et al. (2003) three categories, in the corpus of 885 tweets there was a predominant expression of the adaptive function \"Coordinate actions and contingencies in the environment\" (n \u00bc 402, 45.4%). The distribution for the two other adaptive processes was lower and very similar: \"Coordinating confidence and social resources available (n \u00bc 240, 27.1%),\" Coordinating preferences and available options \"(n \u00bc 228, 25.8%). 1.7% of the tweets were not classifiable in these three categories. Some examples of each category can be found in the table below.",
+                "cite_spans": [
+                    {
+                        "start": 68,
+                        "end": 89,
+                        "text": "Skinner et al. (2003)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "We also analysed the distribution of the tweets along the crisis hazard sequence in relation to relevant events as the crisis unfolded (see Table 1 ). This can be seen in the figure below 5 which considers the period between the first official consumer advice to reduce vegetables consumption, namely tomatoes, lettuce and cucumbers (25 May) and the subsequent revision of the advice, identifying a different food product as the contaminated product (10 June).",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 146,
+                        "end": 147,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "The analysis of Fig. 2 shows that the preponderance of tweets implying the first adaptive function category e Coordinate actions and contingencies in the environment e identified in the overall sample, is also found for the majority of days within the period considered. Only for May 29 and June 9 was this proportion lower than for the other categories or close to them, respectively. May 29 implied a moment in which there was high uncertainty with regard to which was the contaminated product.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 21,
+                        "end": 22,
+                        "text": "2",
+                        "ref_id": "FIGREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "This was immediately followed by news on the next day (May 30) of a massive ban of Spanish and German vegetables when a whole category of products was to be avoided. This implied the lowest percentage of expressions in the first category (25% on May 29) followed by an increase on the following day (68.20% on May 30). This occurred simultaneously, co-occurred with the highest percentage (41.70% on May 29) found for the third category e Coordinate preferences and available options e followed by a massive drop of this percentage on the next day (to 4.50% on May 30). This may have implied a reduction in coping expressions focused on addressing the threat/problem indirectly and an increase in ways of coping expressing a more direct focus on it, drawing on individual resources, based on having information of which was the category of affected products.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "On May 29 this could have taken the form of changing (positively or negatively) their own beliefs about the issue (e.g. acceptance vs. disgust) or motivating in a positive or negative way the social context, to promote changes in the situation (e.g. empathizing with affected people vs. blaming or directing anger towards authorities). The next day e May 30 e implied an increase in coping expressions focused on addressing the threat/problem directly, given that the identification of a possible category of contaminated products enabled more self-focused strategies. This could have taken a negative or positive form, either by: (1) allowing individuals to act and address the problem they were facing (e.g. with determination and self-confidence); (2) perceiving that they did not have the resources to cope with it (e.g. self-doubt).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "In addition, expressions associated with the second adaptive coping function were also found on this day, implying either: (3) directly intervening in their own social contexts by seeking information (e.g. expressing optimism in the resolution of the problem) or (4) \"escaping\"/avoiding the problem (e.g. expressing fear with Going to fry some of bacon-wrapped sausages, sending a big 'F ** K YOU 0 to both, any ambitious E. coli strains and my cholesterol level. #ehec\". [193] Note: Profile names and personal webpages and blog posts were anonymize. Grammatical errors and typos were maintained as in the original version. regard to the contaminated products). Also worth noting is that expressions implying the use and reliance upon the social resources available e associated with the second adaptive function category e were more stable across the whole period e May 25 to June 10 e and apparently less susceptible to changes while events unfolded, comparing to the other two adaptive function categories. A different pattern was found in which the use and reliance upon individual resources available associated with the first category of adaptive functions, varied more with these events. Accordingly, the highest frequency of expressions occurred mostly around days in which a contaminated product or category was explicitly identified (May 26; May 30; June 5).",
+                "cite_spans": [
+                    {
+                        "start": 472,
+                        "end": 477,
+                        "text": "[193]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "In order to further understand the goals underlying user's expressions of certain sentiments in reaction to the stressful event(s), as evidenced in Fig. 1 , the corpus of tweets was further screened for adaptive function categories focused on the affect expressed while the events unfolded. Various examples can be found in Table 2 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 153,
+                        "end": 154,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    },
+                    {
+                        "start": 330,
+                        "end": 331,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "It is worth noting that certain affective expressions in some coping families were not found. This was the case for example with \"guilt\" in the Helplessness family of coping, \"shame\" in the Delegation family of coping, \"loneliness\" and \"yearning\" in the Isolation family of coping, \"self-blame\" in the Submission family of coping, \"trust\" in the Support Seeking family of coping, \"projection\" in the Opposition family of coping and \"accept responsibility\" in the Self Reliance family of coping.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Adaptive functions",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "Human-based qualitative sentiment analysis can be complex, time-consuming as well as not as scalable or easily comprehensible as a quantitative report of sentiment. Nevertheless, it can provide additional depth and diversity about how people are coping with an unexpected and potentially stressful social events and the context in which they express themselves. Accordingly, affective expressions in our Twitter dataset varied not only in terms of positive or negative valence but also in terms of: (1) the form in which it was expressed (e.g. worrying for other people) and (2) the function it may have served (e.g. anger towards the authorities). We now draw on specific examples of how people might use negative and positive expressions of affect with qualitatively different goals. We then elaborate on the importance of qualitative sentiment analysis in the context of social crises and emergency communication more broadly.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "6."
+            },
+            {
+                "text": "During a food crisis, it may be expected that negative expressions of anger against authorities will be dominating (Mou & Lin, 2014; Rutsaert et al., 2013) . The tweets did contain relevant examples, that are important to consider with respect to their underlying functions. For example, expressions of anger, which may be seen as simply irrational, could have actually been an attempt to improve the situation. Often, these expressions were not unspecific \"bursts\" of anger but rather targeted at institutions perceived as responsible for eliminating or mitigating the threat (e.g. health authorities or Germany, respectively). This could involve for example expressing anger towards authorities for not finding the source of the outbreak and/or the contaminated products which, if provided, could be relevant information for people to know what products to avoid or wash. Other forms of expressing anger could have included for example the goal of stimulating the online community, the scientific community, the authorities or anyone with interest in the issue, to deliberate and rethink basic questions that could help managing the ongoing crisis or even prevent such crises in the future. An evidence of this was found in the following tweet: \"You should instead discuss why there are resistant e. coli in the first place, you morons!\".",
+                "cite_spans": [
+                    {
+                        "start": 115,
+                        "end": 132,
+                        "text": "(Mou & Lin, 2014;",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 133,
+                        "end": 155,
+                        "text": "Rutsaert et al., 2013)",
+                        "ref_id": "BIBREF35"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Interpreting negative beyond \"bad\"",
+                "sec_num": "6.1."
+            },
+            {
+                "text": "Another example of negative affect expressions was evident in the form of fear, a frequently expressed emotion in social crises (Reynolds, 2011) . Although these may be seen as irrational and unspecific expressions, they have the function of allowing the person to \"escape\" the situation that is perceived by her/him as a threat (Skinner et al., 2003) . This implies that the person experiences not having the necessary resources to cope and thus chooses to withdraw from the situation than acting on it. This can be accompanied by other ways of coping in a behavioural dimension, for example, the person avoiding buying the products that she/he thinks are contaminated (e.g. cucumbers). Expressions of fear in association with avoidance behaviours can help contain a crisis, but can also lead to unintended and unnecessary social and economic consequences such as economic hardship for food producers and retailers when the avoidance behaviour generalizes too much.",
+                "cite_spans": [
+                    {
+                        "start": 128,
+                        "end": 144,
+                        "text": "(Reynolds, 2011)",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 329,
+                        "end": 351,
+                        "text": "(Skinner et al., 2003)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Interpreting negative beyond \"bad\"",
+                "sec_num": "6.1."
+            },
+            {
+                "text": "An additional example of negative affect expressions refers to \"whining\" or \"self-pity\". These expressions may be seen as mere complaints without an explicit underlying goal. However they indicate that the person is experiencing limits to her/his personal resources to cope. As a consequence, the person seeking to fill this gap may demand resources within the social context (e.g. in the form of demands to health authorities to find the outbreak origin), hence delegating coping efforts to someone else, to devise protective actions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Interpreting negative beyond \"bad\"",
+                "sec_num": "6.1."
+            },
+            {
+                "text": "In accordance with Skinner et al. (2003) , these examples of negative affect imply that individuals were perceiving the situation and associated events as a threat to cope with. However, as shown above, negative expressions do not necessarily indicate a negative outcome. Rather, they are a part of the adaptive process of (often successfully) coping with the threat. Hence, identifying the presence of negative affect can be a starting point to diagnose people's resources and adaptive success, in order to provide the necessary means to reinterpret the situation as a challenge rather than a threat (Blascovich & Mendes, 2001) .",
+                "cite_spans": [
+                    {
+                        "start": 19,
+                        "end": 40,
+                        "text": "Skinner et al. (2003)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 601,
+                        "end": 628,
+                        "text": "(Blascovich & Mendes, 2001)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Interpreting negative beyond \"bad\"",
+                "sec_num": "6.1."
+            },
+            {
+                "text": "Similarly, it is important to consider the functions behind positive affect expressions in our dataset. One common expression was \"optimism\" as part of the Information Seeking family of coping. This positive affect often co-occurs with information seeking as another way of coping to find new emerging solutions to the problem. These can include for example being optimistic about new recommendations for protective actions based on scientific research or new diagnostic tools and treatments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Interpreting positive beyond \"good\"",
+                "sec_num": "6.2."
+            },
+            {
+                "text": "Another example of positive affect was the expression of \"concern for others\". Widespread concerns and worries are often seen as something negative. However, although concern for the self may imply negativity, concern for others is a rather positive action. It helps to protect and increase available social resources such that one can draw on them to implement other ways of coping. This point is also true for tweeting in general: the act of sharing ones concerns and coping efforts with others helps to form, strengthen and maintain social relationships (see Neubaum et al., 2014) , which in turn can have various functions for one's coping efforts: having others as audience, encouragement, informational and practical resources, and finding comfort, agreement, confirmation and emotional support (see also Rim e, 2007) .",
+                "cite_spans": [
+                    {
+                        "start": 562,
+                        "end": 583,
+                        "text": "Neubaum et al., 2014)",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 811,
+                        "end": 823,
+                        "text": "Rim e, 2007)",
+                        "ref_id": "BIBREF34"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Interpreting positive beyond \"good\"",
+                "sec_num": "6.2."
+            },
+            {
+                "text": "A final example of positive affect refers to the expression of acceptance of the new \"state of things\", which implies reinterpretation of the situation with the goal of flexibly adjusting the individual's preferences, needs, etc. to the available options. This took, for example, the form of making jokes with either the hazard or people/entities somewhat associated with it (in this case, cucumbers or other vegetables). These examples of positive affect imply that individuals were perceiving the situation and associated events as a challenge to cope with (Skinner et al., 2003) . Nevertheless, the ways of coping implemented by people may not necessarily be the most effective and adaptive for the situation as it unfolds. These expressions might be indicative of an undesired de-escalation of reactions, which implies that the situation is not perceived as seriously as it should be. Therefore, seemingly positive expressions like joking can indicate a lack of resources for more active forms of coping. Monitoring these reactions can help authorities recognize this lack and intervene in an early stage of crisis development.",
+                "cite_spans": [
+                    {
+                        "start": 559,
+                        "end": 581,
+                        "text": "(Skinner et al., 2003)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Interpreting positive beyond \"good\"",
+                "sec_num": "6.2."
+            },
+            {
+                "text": "From the analysis shown, limitations to qualitative sentiment analysis can be identified in contrast with quantitative analysis (Lund, 2005) . One particular concern that may be raised is about the validity of interpretations made. According to Lund (2005) : \"Validity refers to the approximate certainty of the truth of an inference or knowledge claim, where inference is taken in a broad sense so as to encompass interpretations and generalisations.\" Validity concerns apply not only to qualitative analysis but also to quantitative analysis of sentiment and therefore, can be found across the social media analysis field. In our approach, this validity was assured on one side by following a theory-driven/top-down approach to data coding, analysis and interpretation, based on a well-established framework in the coping literature (Skinner et al., 2003) . On another side, this was assured by following validity procedures for qualitative data analysis, namely the independent coding by different judges and the coding validation; and the language/cultural meaning maintenance assurance by German native speakers. These validity concerns should however be a concern to any approach taken e either computer based or human based e and be implemented irrespectively of it. As Boyd and Crawford (2012; p. 667) referred: \"(\u2026) working with Big Data is still subjective, and what it quantifies does not necessarily have a closer claim on objective truth e particularly when considering messages from social media sites. But there remains a mistaken belief that qualitative researchers are in the business of interpreting stories and quantitative researchers are in the business of producing facts. In this way, Big Data risks re-inscribing established divisions in the long running debates about scientific method and the legitimacy of social science and humanistic inquiry\".",
+                "cite_spans": [
+                    {
+                        "start": 128,
+                        "end": 140,
+                        "text": "(Lund, 2005)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 245,
+                        "end": 256,
+                        "text": "Lund (2005)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 835,
+                        "end": 857,
+                        "text": "(Skinner et al., 2003)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The value and limitations of qualitative sentiment analysis",
+                "sec_num": "6.3."
+            },
+            {
+                "text": "Particularly, the use of sarcasm is one of the main limitations to interpreting the content and context of coping expressions, either through a computer based or human based approach. This can be exemplified in the following tweet: My government is staying on top of things and informing me the latest on the E. coli outbreak here in Germany. #thanks [307] . In this, it is unclear whether the person is reporting trust in authorities or rather showing distrust in a sarcastic way. Nevertheless, it is our contention that this is a stronger limitation for computer based assessments. Indeed, while this may be identified as possible sarcasm trough a human based assessment, it would not be identified as such through a computer analysis. Still, both approaches are limited in this regard, thus making salient the need to implement new methods to increase coding validity, for example increasing the number of independent coders and including a human validation step in computer based analysis. Moreover, attempts should be made at implementing mixed methods approaches and mixed computer-human based approaches, which may overcome limitations that each face separately.",
+                "cite_spans": [
+                    {
+                        "start": 351,
+                        "end": 356,
+                        "text": "[307]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The value and limitations of qualitative sentiment analysis",
+                "sec_num": "6.3."
+            },
+            {
+                "text": "In addition to limitations, there is also value to qualitative sentiment analysis approaches. Arguably, sentiment analysis and monitoring of stressful and unexpected events, can support effective communication strategies and interventions. As shown in the qualitative sentiment analysis presented in this paper, individuals perceived the EHEC contamination incident as either a challenge or a threat and their corresponding ways of coping were identified (e.g. concern for others; optimism in its resolution; acceptance of the \"new state of things\"). Information such as this can be useful for crisis communicators and managers to understand reactions and adapt their strategies to increase individuals' resources for the implementation of pre-emptive actions. This can allow framing the potentially stressful situation/events as a challenge and potentiate their adaptive coping strategies (Skinner et al., 2003) , thus reducing their distress level. It is therefore important to consider the lessons to be learnt from this analysis across the different stages of a social crisis (see Sellnow & Seeger, 2013 for different models that determine crisis stages).",
+                "cite_spans": [
+                    {
+                        "start": 890,
+                        "end": 912,
+                        "text": "(Skinner et al., 2003)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 1085,
+                        "end": 1107,
+                        "text": "Sellnow & Seeger, 2013",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The value and limitations of qualitative sentiment analysis",
+                "sec_num": "6.3."
+            },
+            {
+                "text": "First, at the initial stages of an unexpected social event, sentiment expressions enable a preliminary assessment of how and to what extent the event(s) may be escalating into a crisis. In the EHEC outbreak chain of events, people's initial reactions showed on the one hand a determination to act (e.g. washing the products identified as being potentially contaminated) and on the other hand an avoidance reaction in co-occurence with fear (not buying any potentially contaminated products). Based on a classical coping framework, approach or avoidance as a first categorisation of people's reactions can be indicative of which reactions might escalate or not (Folkman & Moskowitz, 2004) and then be further amplified (see e.g. Barnett & Breakwell, 2003; Pidgeon & Barnett, 2013; Shan et al., 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 660,
+                        "end": 687,
+                        "text": "(Folkman & Moskowitz, 2004)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 728,
+                        "end": 754,
+                        "text": "Barnett & Breakwell, 2003;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 755,
+                        "end": 779,
+                        "text": "Pidgeon & Barnett, 2013;",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 780,
+                        "end": 798,
+                        "text": "Shan et al., 2014)",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The value and limitations of qualitative sentiment analysis",
+                "sec_num": "6.3."
+            },
+            {
+                "text": "For example, as shown during the EHEC crisis, the avoidance of products initially thought to be contaminated e cucumbers e escalated into widespread economic losses and negative impacts for farmers, due to sales drops (Gaspar et al., 2014) . This could have been due to individuals communicating to other individuals to avoid the supposedly contaminated product (for example, through the expression of concern towards others, as evidenced in the results section) or due to the media communicating this to the public. Under this scenario, we move from biological contamination to \"psychological contamination\", within and between all components of the social system (individuals, groups, organizations, societies).",
+                "cite_spans": [
+                    {
+                        "start": 218,
+                        "end": 239,
+                        "text": "(Gaspar et al., 2014)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The value and limitations of qualitative sentiment analysis",
+                "sec_num": "6.3."
+            },
+            {
+                "text": "Second, following initial reactions, the analysis shows that people did not simply panic in response to escalating uncertainty about the E. coli incidents but perceived the unresolved situation associated with the hazard in diverse ways. In the tweets we analysed, we found not only many different expressions of negative valence but also positive expressions that we could also identify as ways of coping. The latter was particularly the case at later stages of the EHEC crisis when it was perceived more as an ongoing challenge rather than as an immediate threat.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The value and limitations of qualitative sentiment analysis",
+                "sec_num": "6.3."
+            },
+            {
+                "text": "Finally, as the crisis was moving towards a resolution stage, there were further expressions of coping that drew on individual and social resources but focussing less directly on the threat. For example, individuals adjusted their own feelings towards the situation by coming to accept it; or negating/opposing it at a social level by expressing anger towards the authorities. At this stage, communication strategies focused on allowing people to perceive a challenge rather than a threat could allow for anger management and potentially its reduction. Given the high level of uncertainty during the initial stage of the EHEC crisis, such changes were more evident towards the last days of the events (see Fig. 2 ). Further to understanding and potentially managing transitions between people's emotional state, the added value of this approach can be also be evident in the future planning of similar events. Evaluations of the handling of the crisis and lessons for the future might even become part of individuals' expressions, hence fostering openness and learning that might not be possible using automated sentiment classification methods.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 711,
+                        "end": 712,
+                        "text": "2",
+                        "ref_id": "FIGREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "The value and limitations of qualitative sentiment analysis",
+                "sec_num": "6.3."
+            },
+            {
+                "text": "This study sought to examine the importance of qualitative sentiment analysis of social media reactions to unexpected and potentially stressful social events based on the case of the EHEC crisis in Germany in 2011. Drawing on the framework by Skinner et al. (2003) which allowed analysing a dataset of Twitter expressions, we aimed to show that positive and negative sentiment is not necessarily good or bad but rather potentially informative of people's state and goals to adapt to an emerging threatening or challenging event. It is important to acknowledge that the specific ways of coping that were identified in this study were dependent on the events that took place at the time, the hazard that emerged and other contextual aspects (e.g. country of origin).",
+                "cite_spans": [
+                    {
+                        "start": 243,
+                        "end": 264,
+                        "text": "Skinner et al. (2003)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "7."
+            },
+            {
+                "text": "Furthermore, we need to note that: (1) Twitter cannot be expected to be representative of the general population's sentiment, nor is it the only important digital space where users post reactions, (2) it is possible that some specific cultural meanings such as puns and sarcasm got lost in translation from German to English and (3) tweets cannot always fully reflect an individual's goals even if the text of the message can be indicative. Despite these event-specific and ecological aspects that determine the expression within the 12 families of coping and associated coping instances, expressions associated with the three general adaptive function categories may be found across various types of hazards and hazard templates (Barnett & Breakwell, 2001) , across different typologies of crisis (see Sellnow & Seeger, 2013) and across crisis stages (see e.g. CERC model by Reynolds & Seeger, 2005) .",
+                "cite_spans": [
+                    {
+                        "start": 730,
+                        "end": 757,
+                        "text": "(Barnett & Breakwell, 2001)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 803,
+                        "end": 826,
+                        "text": "Sellnow & Seeger, 2013)",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 876,
+                        "end": 900,
+                        "text": "Reynolds & Seeger, 2005)",
+                        "ref_id": "BIBREF33"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "7."
+            },
+            {
+                "text": "What may be expected to vary are the ways of coping within each of the three categories, depending on the appraisal and coping processes and available resources. For example, during a natural disaster, Twitter reactions may tend to be more informational than affectively diverse; while during economic crises, reactions might be clearly directed towards a single coping family like \"blame\". Accordingly, further studies are needed with different case studies. This can provide knowledge about which ways of coping are specific and which are used across situations/events. Future work can also examine the effectiveness of intervention strategies in more detail, particularly in social crises when guiding attention to specific actions can have a direct effect (e.g. weather emergencies or public unrest). It should be noted however that social media analysis may only provide a partial view and thus, complementary data collection methods and additional \"layers\" of data should be used (for an example, see Neubaum et al., 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 1007,
+                        "end": 1028,
+                        "text": "Neubaum et al., 2014)",
+                        "ref_id": "BIBREF26"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "7."
+            },
+            {
+                "text": "Moreover, it is important to assess how people are coping in all dimensions e affective, cognitive and behavioural e and if their reactions reflect adequate supportive resources. Depending on the types of sentiment, cognitions and behaviours expressed and how events unfold, there may be different scopes for communication and intervention strategies. The immediacy of social media applications, particularly Twitter, allows for this rapid assessment of people's expressions through strategies based on information filtering, to identify important developments or through audienceawareness techniques described in previous studies (Lachlan et al., 2014; Purohit et al., 2013) . Nevertheless, this immediacy needs to be complemented by content analysis to assess the goals underlying those reactions. From this, we can determine how people perceive the situation and the existent (social and individual) resources; and the ways of coping they are expressing and more importantly, their effectiveness.",
+                "cite_spans": [
+                    {
+                        "start": 631,
+                        "end": 653,
+                        "text": "(Lachlan et al., 2014;",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 654,
+                        "end": 675,
+                        "text": "Purohit et al., 2013)",
+                        "ref_id": "BIBREF31"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "7."
+            },
+            {
+                "text": "In our view, this contribution makes clearer the importance of future work in human-based qualitative analysis of social media content and of psychos social media analysis approaches such as this, in general. This type of research allows assessing how individuals cope with unexpected events by drawing on existent resources. This was evident for example in tweets implying that individuals were drawing on social resources, for example expressing concern for others or finding limitations in the social resources available, expressing self-pity or whining for example, as a way of potentially increasing those resources (making their needs \"visible\"). While the former way of coping implies that people appraise the hazard more as a challenge than a threat, the opposite is true for the latter. This information that people are appraising as a threat and do not perceive having resources to cope, should determine authorities to provide social resources (e.g. product recalls; specific information for risk avoidance; identify the outbreak origin, affected products and/or the people/entities responsible for it) and allow them to be perceived as a trusted source/provider of these resources. Through this, people could potentially reframe the situation as a challenge rather than a threat. Indeed, trust in authorities and other stakeholders is a key aspect of risk and crisis communication (Lofstedt, 2013) . However, it is worrisome that no examples of expressions of trust were found in our qualitative analysis but rather expressions of distrust. This may indicate that people expressing it, perceived the situation/events as a threat to cope with and that the authorities were not perceived as a social resource that they could draw upon to cope, in this particular EHEC crisis. This is a challenging aspect for crisis communications that requires further work to understand how trust may evolve throughout the different crisis stages as events unfold.",
+                "cite_spans": [
+                    {
+                        "start": 1393,
+                        "end": 1409,
+                        "text": "(Lofstedt, 2013)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "7."
+            },
+            {
+                "text": "By considering this type of information and analysis, crisis communication can aim to potentiate the most effective and adaptive coping strategies to allow people to face the emergent risks that characterize today's world, as a challenge to cope with rather than a threat. This can take the form of an increased selfefficacy in coping with demands (Bandura, 2001) and an experience of having sufficient individual and social resources to adapt to the \"new state of things\".",
+                "cite_spans": [
+                    {
+                        "start": 348,
+                        "end": 363,
+                        "text": "(Bandura, 2001)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "7."
+            },
+            {
+                "text": "R.Gaspar et al. / Computers in Human Behavior 56 (2016) 179e191",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Days in which the frequency of tweets was equal to or below five, were omitted from the graph. R.Gaspar et al. / Computers in Human Behavior 56 (2016) 179e191",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This manuscript was developed as part of FoodRisC project -Food Risk Communication -Perceptions and communication of food risks/benefits across Europe: development of effective communication strategies, funded by the European Commission under the 7th Framework Programme -Grant Agreement n. 245124. The authors would like to acknowledge all project partners for the work done during the project, which allowed for the development of this paper and specifically to Josephine Wills (EUFIC) and Adrian Moss (Focus Biz, Lda.) to what concerns the data extraction procedures and for providing the data.William James Center for Research, ISPA-Instituto Universit ario is supported by the FCT Grant No. UID/PSI/04810/2013.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgements",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Social cognitive theory of mass communication",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Bandura",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Media Psychology",
+                "volume": "3",
+                "issue": "",
+                "pages": "265--e299",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bandura, A. (2001). Social cognitive theory of mass communication. Media Psy- chology, 3, 265e299.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Risk perception and experience: hazard personality profiles and individual differences",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Barnett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Breakwell",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Risk Analysis",
+                "volume": "21",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1111/0272-4332.211099"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Barnett, J., & Breakwell, G. M. (2001). Risk perception and experience: hazard personality profiles and individual differences. Risk Analysis, 21(1), 171e178. http://dx.doi.org/10.1111/0272-4332.211099.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "The social amplification of risk and the hazard sequence: the October 1995 oral contraceptive pill scare",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Barnett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Breakwell",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Health, Risk & Society",
+                "volume": "5",
+                "issue": "3",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1080/13698570310001606996"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Barnett, J., & Breakwell, G. M. (2003). The social amplification of risk and the hazard sequence: the October 1995 oral contraceptive pill scare. Health, Risk & Society, 5(3), 301e313. http://dx.doi.org/10.1080/13698570310001606996.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Challenge and threat appraisals: the role of affective cues",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Blascovich",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Mendes",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Feeling and Thinking: The Role of Affect in Social Cognition. Studies in Emotion and Social Interaction",
+                "volume": "",
+                "issue": "",
+                "pages": "59--e82",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Blascovich, J., & Mendes, W. B. (2001). Challenge and threat appraisals: the role of affective cues. In J. P. Forgas (Ed.), Feeling and Thinking: The Role of Affect in Social Cognition. Studies in Emotion and Social Interaction (pp. 59e82). New York: Cambridge Univ. Press.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "User-driven data capture: locating and analysing twitter conversation about cystic fibrosis without keywords",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Brooker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Barnett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Cribbin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Lang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Martin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "SAGE research methods cases",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.4135/978144627305014526813"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Brooker, P., Barnett, J., Cribbin, T., Lang, A., & Martin, J. (2013). User-driven data capture: locating and analysing twitter conversation about cystic fibrosis without keywords. In SAGE research methods cases. London: SAGE Publications. http://dx.doi.org/10.4135/978144627305014526813.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Twitter archives and the challenges of \"Big Social Data\" for media and communication research",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Burgess",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Bruns",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Burgess, J., & Bruns, A. (2012). Twitter archives and the challenges of \"Big Social Data\" for media and communication research. M/C Journal, 15(5). Retrieved from http://www.journal.media-culture.org.au/index.php/mcjournal/article/ view/561.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Pandemics in the age of Twitter: content analysis of Tweets during the 2009 H1N1 outbreak",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Chew",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Eysenbach",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Plos One",
+                "volume": "5",
+                "issue": "11",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1371/journal.pone.0014118"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Chew, C., & Eysenbach, G. (2010). Pandemics in the age of Twitter: content analysis of Tweets during the 2009 H1N1 outbreak. Plos One, 5(11), e14118. http:// dx.doi.org/10.1371/journal.pone.0014118.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Coping with stress during childhood and adolescence: problems, progress, and potential in theory and research",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Compas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Connor-Smith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Saltzman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Thomsen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Wadsworth",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Psychological Bulletin",
+                "volume": "127",
+                "issue": "1",
+                "pages": "87--e127",
+                "other_ids": {
+                    "DOI": [
+                        "10.1037//0033-2909.127.1.87"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Compas, B. E., Connor-Smith, J. K., Saltzman, H., Thomsen, A. H., & Wadsworth, M. E. (2001). Coping with stress during childhood and adolescence: problems, progress, and potential in theory and research. Psychological Bulletin, 127(1), 87e127. http://dx.doi.org/10.1037//0033-2909.127.1.87.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Cooperation versus competition in a mass emergency evacuation: a new laboratory simulation and a new theoretical model",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Drury",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Cocking",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Reicher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Burton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Schofield",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Hardwick",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Behavior Research Methods",
+                "volume": "41",
+                "issue": "3",
+                "pages": "957--e970",
+                "other_ids": {
+                    "DOI": [
+                        "10.3758/BRM.41.3.957"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Drury, J., Cocking, C., Reicher, S., Burton, A., Schofield, D., Hardwick, A., et al. (2009). Cooperation versus competition in a mass emergency evacuation: a new lab- oratory simulation and a new theoretical model. Behavior Research Methods, 41(3), 957e970. https://dx.doi.org/10.3758/BRM.41.3.957.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Cognitive errors, coping patterns, and the therapeutic alliance: a pilot study of in-session process",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Blake",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Fitzpatrick",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Drapeau",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Counselling and Psychotherapy Research",
+                "volume": "9",
+                "issue": "2",
+                "pages": "108--e114",
+                "other_ids": {
+                    "DOI": [
+                        "10.1080/14733140902804276"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "D'iuso, D., Blake, E., Fitzpatrick, M., & Drapeau, M. (2009). Cognitive errors, coping patterns, and the therapeutic alliance: a pilot study of in-session process. Counselling and Psychotherapy Research, 9(2), 108e114. http://dx.doi.org/10. 1080/14733140902804276.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Coping: pitfalls and promise",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Folkman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Moskowitz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Annual Review of Psychology",
+                "volume": "55",
+                "issue": "",
+                "pages": "4--5",
+                "other_ids": {
+                    "DOI": [
+                        "10.1146/annurev.psych.55.090902.141456"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Folkman, S., & Moskowitz, J. T. (2004). Coping: pitfalls and promise. Annual Review of Psychology, 55, 7 4 5 e774. http://dx.doi.org/10.1146/ annurev.psych.55.090902.141456.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Coping research: Historical background, links with emotion, and new research directions on adaptive processes",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Frydenberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Australian Journal of Psychology",
+                "volume": "66",
+                "issue": "2",
+                "pages": "82--e92",
+                "other_ids": {
+                    "DOI": [
+                        "10.1111/ajpy.12051"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Frydenberg, E. (2014). Coping research: Historical background, links with emotion, and new research directions on adaptive processes. Australian Journal of Psy- chology, 66(2), 82e92. http://dx.doi.org/10.1111/ajpy.12051.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Crisis as seen by the individual: the Norm Deviation Approach/La crisis vista por el individuo: el Enfoque de la Desviaci on de la Norma",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Gaspar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Barnett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Seibt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Psyecology",
+                "volume": "6",
+                "issue": "",
+                "pages": "103--e135",
+                "other_ids": {
+                    "DOI": [
+                        "10.1080/21711976.2014.1002205"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Gaspar, R., Barnett, J., & Seibt, B. (2015). Crisis as seen by the individual: the Norm Deviation Approach/La crisis vista por el individuo: el Enfoque de la Desviaci on de la Norma. Psyecology, 6, 103e135. http://dx.doi.org/10.1080/ 21711976.2014.1002205.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Tweeting during food crises: a psychosocial analysis of threat coping expressions in Spain, during the 2011 European EHEC outbreak",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Gaspar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Gorj\u00e3o",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Seibt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Lima",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Barnett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Moss",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wills",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "International Journal of Human-Computer Studies",
+                "volume": "72",
+                "issue": "2",
+                "pages": "239--e254",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.ijhcs.2013.10.001"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Gaspar, R., Gorj\u00e3o, S., Seibt, F., Lima, L., Barnett, J., Moss, A., & Wills, J. (2014). Tweeting during food crises: a psychosocial analysis of threat coping expres- sions in Spain, during the 2011 European EHEC outbreak. International Journal of Human-Computer Studies, 72(2), 239e254. http://dx.doi.org/10.1016/ j.ijhcs.2013.10.001.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Twitter brand sentiment analysis: a hybrid system using n-gram analysis and dynamic artificial neural network",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Ghiassi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Skinner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Zimbra",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Expert Systems with Applications",
+                "volume": "40",
+                "issue": "16",
+                "pages": "6266--e6282",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.eswa.2013.05.057"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Ghiassi, M., Skinner, J., & Zimbra, D. (2013). Twitter brand sentiment analysis: a hybrid system using n-gram analysis and dynamic artificial neural network. Expert Systems with Applications, 40(16), 6266e6282. http://dx.doi.org/10.1016/ j.eswa.2013.05.057.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Collective symbolic coping with disease threat and othering: a case study of avian influenza",
+                "authors": [
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Gilles",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Bangerter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Cl Emence",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "G T"
+                        ],
+                        "last": "Green",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Krings",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mouton",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "The British Journal of Social Psychology/the British Psychological Society",
+                "volume": "52",
+                "issue": "1",
+                "pages": "83--e102",
+                "other_ids": {
+                    "DOI": [
+                        "10.1111/j.2044-8309.2011.02048.x"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Gilles, I., Bangerter, A., Cl emence, A., Green, E. G. T., Krings, F., Mouton, A., et al. (2013). Collective symbolic coping with disease threat and othering: a case study of avian influenza. The British Journal of Social Psychology/the British Psychological Society, 52(1), 83e102. http://dx.doi.org/10.1111/j.2044- 8309.2011.02048.x.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Use of microblogging for collective sense-making during violent crises: a study of three campus shootings",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Heverin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zach",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Journal of the American Society for Information Science and Technology",
+                "volume": "63",
+                "issue": "1",
+                "pages": "34--e47",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Heverin, T., & Zach, L. (2012). Use of microblogging for collective sense-making during violent crises: a study of three campus shootings. Journal of the Amer- ican Society for Information Science and Technology, 63(1), 34e47.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Twitter as a Technology for audiencing and fandom",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Highfield",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Harrington",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Bruns",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Information, Communication & Society",
+                "volume": "16",
+                "issue": "",
+                "pages": "315--e339",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Highfield, T., Harrington, S., & Bruns, A. (2013). Twitter as a Technology for audi- encing and fandom. Information, Communication & Society, 16, 315e339.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Threat and defense: From anxiety to approach",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Jonas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Mcgregor",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Klackl",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Agroskin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Fritsche",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Holbrook",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Advances in experimental social psychology",
+                "volume": "49",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/B978-0-12-800052-6.00004-4"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Jonas, F. E., Mcgregor, I., Klackl, J., Agroskin, D., Fritsche, I., Holbrook, C., et al. (2014). Threat and defense: From anxiety to approach. Advances in experimental social psychology (1st ed., Vol. 49)). Elsevier Inc. http://dx.doi.org/10.1016/B978-0-12- 800052-6.00004-4.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Experimental evidence of massive-scale emotional contagion through social networks",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Kramer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Guillory",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Hancock",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Proceedings of the National Academy of Sciences",
+                "volume": "111",
+                "issue": "24",
+                "pages": "8788--e8790",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kramer, A. D., Guillory, J. E., & Hancock, J. T. (2014). Experimental evidence of massive-scale emotional contagion through social networks. Proceedings of the National Academy of Sciences, 111(24), 8788e8790.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Expressions of risk awareness and concern through Twitter: on the utility of using the medium as an indication of audience needs",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Lachlan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Spence",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Computers in Human Behavior",
+                "volume": "35",
+                "issue": "",
+                "pages": "554--e559",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.chb.2014.02.029"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Lachlan, K. A., Spence, P. R., & Lin, X. (2014). Expressions of risk awareness and concern through Twitter: on the utility of using the medium as an indication of audience needs. Computers in Human Behavior, 35, 554e559. http://dx.doi.org/ 10.1016/j.chb.2014.02.029.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Beyond valence: toward a model of emotionspecific influences on judgement and choice",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Lerner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Keltner",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2000,
+                "venue": "Cognition & Emotion",
+                "volume": "14",
+                "issue": "4",
+                "pages": "473--e493",
+                "other_ids": {
+                    "DOI": [
+                        "10.1080/026999300402763"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Lerner, J. S., & Keltner, D. (2000). Beyond valence: toward a model of emotion- specific influences on judgement and choice. Cognition & Emotion, 14(4), 473e493. http://dx.doi.org/10.1080/026999300402763.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Communicating food risks in an era of growing public distrust: three case studies",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Lofstedt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Risk Analysis: An Official Publication of the Society for Risk Analysis",
+                "volume": "33",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1111/j.1539-6924.2011.01722.x"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Lofstedt, R. (2013). Communicating food risks in an era of growing public distrust: three case studies. Risk Analysis: An Official Publication of the Society for Risk Analysis, 33(2), 192e202. http://dx.doi.org/10.1111/j.1539-6924.2011.01722.x.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "The qualitativeequantitative distinction: some comments",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Lund",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Scandinavian Journal of Educational Research",
+                "volume": "49",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1080/00313830500048790"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Lund, T. (2005). The qualitativeequantitative distinction: some comments. Scan- dinavian Journal of Educational Research, 49(2), 115e132. http://dx.doi.org/ 10.1080/00313830500048790.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Communicating food safety via the social media: the role of knowledge and emotions on risk perception and prevention",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Mou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Lin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Science Communication",
+                "volume": "36",
+                "issue": "5",
+                "pages": "593--e616",
+                "other_ids": {
+                    "DOI": [
+                        "10.1177/1075547014549480"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Mou, Y., & Lin, C. A. (2014). Communicating food safety via the social media: the role of knowledge and emotions on risk perception and prevention. Science Communication, 36(5), 593e616. http://dx.doi.org/10.1177/1075547014549480.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Twitter: Digital media and society series",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Murthy",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Murthy, D. (2013). Twitter: Digital media and society series. Cambridge: Polity Press.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Psychosocial functions of social media usage in a disaster situation: a multimethodological approach",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Neubaum",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "R\u20ac Osner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Rosenthal-Von Der P\u00fctten",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Kr\u20ac Amer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Computers in Human Behavior",
+                "volume": "34",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.chb.2014.01.021"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Neubaum, G., R\u20ac osner, L., Rosenthal-von der P\u00fctten, A. M., & Kr\u20ac amer, N. C. (2014). Psychosocial functions of social media usage in a disaster situation: a multi- methodological approach. Computers in Human Behavior, 34, 28e38. http:// dx.doi.org/10.1016/j.chb.2014.01.021.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Community intelligence and social media services: a rumour theoretic analysis of tweets during social crises",
+                "authors": [
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Oh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Agrawal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Rao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "MIS Quartely",
+                "volume": "37",
+                "issue": "2",
+                "pages": "407--e426",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Oh, O., Agrawal, M., & Rao, H. R. (2013). Community intelligence and social media services: a rumour theoretic analysis of tweets during social crises. MIS Quartely, 37(2), 407e426.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Supporting \"Everyday Analysts\" in safety-and time-critical situations",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Palen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Vieweg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Anderson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "The Information Society",
+                "volume": "27",
+                "issue": "1",
+                "pages": "52--e62",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Palen, L., Vieweg, S., & Anderson, K. M. (2010). Supporting \"Everyday Analysts\" in safety-and time-critical situations. The Information Society, 27(1), 52e62.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Citizenegovernment collaboration on social media: the case of Twitter in the 2011 riots in England",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Panagiotopoulos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "Z"
+                        ],
+                        "last": "Bigdeli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Sams",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Government Information Quarterly",
+                "volume": "31",
+                "issue": "3",
+                "pages": "349--e357",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.giq.2013.10.014"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Panagiotopoulos, P., Bigdeli, A. Z., & Sams, S. (2014). Citizenegovernment collabo- ration on social media: the case of Twitter in the 2011 riots in England. Gov- ernment Information Quarterly, 31(3), 349e357. http://dx.doi.org/10.1016/ j.giq.2013.10.014.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Chalara and the social amplification of risk",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Pidgeon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Barnett",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pidgeon, N., & Barnett, J. (2013). Chalara and the social amplification of risk. London: Department for Environment, Food and Rural Affairs.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "What kind of #conversation is Twitter? Mining #psycholinguistic cues for emergency coordination",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Purohit",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Hampton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Shalin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Sheth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Flach",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bhatt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Computers in Human Behavior",
+                "volume": "29",
+                "issue": "6",
+                "pages": "2438--e2447",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.chb.2013.05.007"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Purohit, H., Hampton, A., Shalin, V. L., Sheth, A. P., Flach, J., & Bhatt, S. (2013). What kind of #conversation is Twitter? Mining #psycholinguistic cues for emergency coordination. Computers in Human Behavior, 29(6), 2438e2447. http:// dx.doi.org/10.1016/j.chb.2013.05.007.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "When the facts are just not enough: credibly communicating about risk is riskier when emotions run high and time is short",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Reynolds",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Toxicology and Applied Pharmacology",
+                "volume": "254",
+                "issue": "2",
+                "pages": "206--e214",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.taap.2010.10.023"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Reynolds, B. J. (2011). When the facts are just not enough: credibly communicating about risk is riskier when emotions run high and time is short. Toxicology and Applied Pharmacology, 254(2), 206e214. http://dx.doi.org/10.1016/ j.taap.2010.10.023.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Crisis and emergency risk communication as an Integrative model",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Reynolds",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Seeger",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Journal of Health Communication",
+                "volume": "10",
+                "issue": "1",
+                "pages": "43--e55",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Reynolds, B., & Seeger, M. W. (2005). Crisis and emergency risk communication as an Integrative model. Journal of Health Communication, 10(1), 43e55.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Final presentation and evaluation of the epidemiological findings in the EHEC",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Rim E",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Handbook of emotion regulation",
+                "volume": "104",
+                "issue": "",
+                "pages": "466--e485",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rim e, B. (2007). Interpersonal emotion regulation. In J. J. Gross (Ed.), Handbook of emotion regulation (pp. 466e485). New York: Guilford Publications. RKI e Robert Koch Institute. (2011). Final presentation and evaluation of the epide- miological findings in the EHEC O104:H4 outbreak, Germany 2011. Berlin, Ger- many: Robert Koch Institute.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "The use of social media in food risk and benefit communication",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Rutsaert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Regan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Pieniak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mcconnon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Moss",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Wall",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Trends in Food Science & Technology",
+                "volume": "30",
+                "issue": "1",
+                "pages": "84--e91",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.tifs.2012.10.006"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Rutsaert, P., Regan, A., Pieniak, Z., McConnon, A., Moss, A., Wall, P., et al. (2013). The use of social media in food risk and benefit communication. Trends in Food Science & Technology, 30(1), 84e91. http://dx.doi.org/10.1016/j.tifs.2012.10.006.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Communication and Organizational crisis",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Seeger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Sellnow",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Ulmer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Seeger, M. W., Sellnow, T. L., & Ulmer, R. R. (2003). Communication and Organiza- tional crisis. In C. T. Westport (Ed.). Greenwood Publishing Group.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Theorizing crisis communication",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Sellnow",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Seeger",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sellnow, T. L., & Seeger, M. W. (2013). Theorizing crisis communication (1st ed.). Wiley-Blackwell.",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Food crisis coverage by social and traditional media: a case study of the 2008 Irish dioxin crisis",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Shan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Regan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "De Br\u00fan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Barnett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Van Der Sanden",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Wall",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Public Understanding of Science",
+                "volume": "23",
+                "issue": "8",
+                "pages": "911--e928",
+                "other_ids": {
+                    "DOI": [
+                        "10.1177/0963662512472315"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Shan, L., Regan, A., De Br\u00fan, A., Barnett, J., van der Sanden, M. C. a, Wall, P., et al. (2014). Food crisis coverage by social and traditional media: a case study of the 2008 Irish dioxin crisis. Public Understanding of Science, 23(8), 911e928. https:// dx.doi.org/10.1177/0963662512472315.",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Understanding events through analysis of social media",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Sheth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Purohit",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Jadhav",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Kapanipathi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sheth, A. P., Purohit, H., Jadhav, A. S., Kapanipathi, P., & Chen, L. (2010). Under- standing events through analysis of social media. Retrieved from http:// corescholar.libraries.wright.edu/knoesis/788.",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "Searching for the structure of coping: a review and critique of category systems for classifying ways of coping",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Skinner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Edge",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Altman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Sherwood",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Psychological Bulletin",
+                "volume": "129",
+                "issue": "2",
+                "pages": "216--e269",
+                "other_ids": {
+                    "DOI": [
+                        "10.1037/0033-2909.129.2.216"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Skinner, E. A., Edge, K., Altman, J., & Sherwood, H. (2003). Searching for the struc- ture of coping: a review and critique of category systems for classifying ways of coping. Psychological Bulletin, 129(2), 216e269. http://dx.doi.org/10.1037/0033- 2909.129.2.216.",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Risk and crisis management in the public sector: risk communication and the social amplification of public sector risk",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Smith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Mccloskey",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "Public Money & Management",
+                "volume": "18",
+                "issue": "4",
+                "pages": "41--e50",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Smith, D., & McCloskey, J. (1998). Risk and crisis management in the public sector: risk communication and the social amplification of public sector risk. Public Money & Management, 18(4), 41e50.",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "Variability in twitter content across the stages of a natural disaster: implications for crisis communication",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Spence",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Lachlan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Del Greco",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Communication Quarterly",
+                "volume": "63",
+                "issue": "2",
+                "pages": "171--e186",
+                "other_ids": {
+                    "DOI": [
+                        "10.1080/01463373.2015.1012219"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Spence, P. R., Lachlan, K. A., Lin, X., & del Greco, M. (2015). Variability in twitter content across the stages of a natural disaster: implications for crisis commu- nication. Communication Quarterly, 63(2), 171e186. http://dx.doi.org/10.1080/ 01463373.2015.1012219.",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "Psychological responses and coping strategies after an urban bridge collapse",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Spence",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Nelson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Lachlan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Traumatology",
+                "volume": "16",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1177/1534765609347544"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Spence, P. R., Nelson, L. D., & Lachlan, K. a (2010). Psychological responses and coping strategies after an urban bridge collapse. Traumatology, 16(1), 7e15. http://dx.doi.org/10.1177/1534765609347544.",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "Coping resources, coping processes, and mental health",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Taylor",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Stanton",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Annual Review of Clinical Psychology",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1146/annurev.clinpsy.3.022806.091520"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Taylor, S. E., & Stanton, A. L. (2007). Coping resources, coping processes, and mental health. Annual Review of Clinical Psychology, 3, 377e401. http://dx.doi.org/ 10.1146/annurev.clinpsy.3.022806.091520.",
+                "links": null
+            },
+            "BIBREF45": {
+                "ref_id": "b45",
+                "title": "Towards a realtime Twitter analysis during crises for operational crisis management",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Terpstra",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "De Vries",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Stronkman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Paradies",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 9th international ISCRAM conference",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Terpstra, T., de Vries, A., Stronkman, R., & Paradies, G. L. (2012, April). Towards a realtime Twitter analysis during crises for operational crisis management. In Proceedings of the 9th international ISCRAM conference. Vancouver, Canada.",
+                "links": null
+            },
+            "BIBREF46": {
+                "ref_id": "b46",
+                "title": "Sentiment in twitter events",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Thelwall",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Buckley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Paltoglou",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Journal of the American Society for Information Science and Technology",
+                "volume": "62",
+                "issue": "2",
+                "pages": "406--e418",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Thelwall, M., Buckley, K., & Paltoglou, G. (2011). Sentiment in twitter events. Journal of the American Society for Information Science and Technology, 62(2), 406e418.",
+                "links": null
+            },
+            "BIBREF47": {
+                "ref_id": "b47",
+                "title": "Sentiment strength detection in short informal text",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Thelwall",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Buckley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Paltoglou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Cai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kappas",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Journal of the American Society for Information Science and Technology",
+                "volume": "61",
+                "issue": "12",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1002/asi.21416"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Thelwall, M., Buckley, K., Paltoglou, G., Cai, D., & Kappas, A. (2010). Sentiment strength detection in short informal text. Journal of the American Society for Information Science and Technology, 61(12), 2544e2558. http://dx.doi.org/ 10.1002/asi.21416.",
+                "links": null
+            },
+            "BIBREF48": {
+                "ref_id": "b48",
+                "title": "The precaution adoption process",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Weinstein",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Health Psychology",
+                "volume": "7",
+                "issue": "4",
+                "pages": "355--e386",
+                "other_ids": {
+                    "DOI": [
+                        "10.1037//0278-6133.7.4.355"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Weinstein, N. D. (1988). The precaution adoption process. Health Psychology, 7(4), 355e386. http://dx.doi.org/10.1037//0278-6133.7.4.355.",
+                "links": null
+            },
+            "BIBREF49": {
+                "ref_id": "b49",
+                "title": "Temporal changes in psychobehavioral responses during the 2009 H1N1 influenza pandemic",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Wong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Sam",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Preventive medicine",
+                "volume": "51",
+                "issue": "1",
+                "pages": "92--e93",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wong, L. P., & Sam, I. C. (2010). Temporal changes in psychobehavioral responses during the 2009 H1N1 influenza pandemic. Preventive medicine, 51(1), 92e93.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "uris": null,
+                "text": "Fig.1. Adaptive functions and corresponding affective expressions of coping (adapted fromSkinner et al., 2003).",
+                "fig_num": "1",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "uris": null,
+                "text": "Now i don't have to make excuses to not eat salads. I have valid reasons. #ecoli\" [201] \"trip to northern Germany, class reunion on Sat. Not sure what's more frightening: E. coli or meeting former class mates...\" [701]",
+                "fig_num": null,
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF2": {
+                "uris": null,
+                "text": "Fig. 2. Distribution of tweets for each of the three adaptive function categories, as the crisis unfolded.",
+                "fig_num": "2",
+                "num": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "text": "Examples of adaptive function of coping categories.Ok, no fresh salad or vegetables in my kitchen for the foreseeable future. RT@BBCWorld: E. coli outbreak alarms Germany http://bbc.in/iI1APe [37] Whee... nobody knows where the E. coli that's killing Germans is coming from. Just means I have to keep cooking my",
+                "html": null,
+                "content": "<table><tr><td>Adaptive function</td><td>Tweet (English)</td></tr><tr><td>1. Coordinate actions and contingencies</td><td/></tr><tr><td>in the environment</td><td/></tr><tr><td/><td>vegetables thoroughly. [260]</td></tr><tr><td>2. Coordinate reliance and social</td><td>Since #ehec e. coli are bacteria, they are only \"dangerous\" uncooked. Are the cucumbers at McDonald's and co raw or not? [106]</td></tr><tr><td>resources available</td><td>#dresden: very worrying that the authorities have #noidea what the source of the #ecoli outbreak is. too hot for</td></tr><tr><td/><td>soup dot com [176]</td></tr><tr><td>3. Coordinate preferences and</td><td>German doctors issue warning about eating lettuce/tomatoes. Eating salad might kill you. E. coli. My kindergarten-self</td></tr><tr><td>available options</td><td>would have been so happy [35]</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "text": "Examples of affective expressions in each adaptive function category.",
+                "html": null,
+                "content": "<table><tr><td>Family of coping</td><td>Examples</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "text": "(continued )",
+                "html": null,
+                "content": "<table><tr><td>Family of coping</td><td>Examples</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            }
+        }
+    }
+}

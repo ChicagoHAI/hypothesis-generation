@@ -1,0 +1,3075 @@
+{
+    "paper_id": "Paper_110-Detecting_and_Unmasking_AI_Generated_Texts",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-09-19T13:39:20.163229Z"
+    },
+    "title": "Detecting and Unmasking AI-Generated Texts through Explainable Artificial Intelligence using Stylistic Features",
+    "authors": [
+        {
+            "first": "Aditya",
+            "middle": [],
+            "last": "Shah",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Prateek",
+            "middle": [],
+            "last": "Ranka",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Urmi",
+            "middle": [],
+            "last": "Dedhia",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Shruti",
+            "middle": [],
+            "last": "Prasad",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Siddhi",
+            "middle": [],
+            "last": "Muni",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Kiran",
+            "middle": [],
+            "last": "Bhowmick",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "In recent years, Artificial Intelligence (AI) has significantly transformed various aspects of human activities, including text composition. The advancements in AI technology have enabled computers to generate text that closely mimics human writing which is raising concerns about misinformation, identity theft, and security vulnerabilities. To address these challenges, understanding the underlying patterns of AI-generated text is essential. This research focuses on uncovering these patterns to establish ethical guidelines for distinguishing between AIgenerated and human-generated text. This research contributes to the ongoing discourse on AI-generated content by elucidating methodologies for distinguishing between human and machinegenerated text. The research delves into parameters such as syllable count, word length, sentence structure, functional word usage, and punctuation ratios to detect AI-generated text. Furthermore, the research integrates Explainable AI (xAI) techniques-LIME and SHAP-to enhance the interpretability of machine learning model predictions. The model demonstrated excellent efficacy, showing an accuracy of 93%.Leveraging xAI techniques, further uncovering that pivotal attributes such as Herdan's C, MaaS, and Simpson's Index played a dominant role in the classification process.",
+    "pdf_parse": {
+        "paper_id": "Paper_110-Detecting_and_Unmasking_AI_Generated_Texts",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "In recent years, Artificial Intelligence (AI) has significantly transformed various aspects of human activities, including text composition. The advancements in AI technology have enabled computers to generate text that closely mimics human writing which is raising concerns about misinformation, identity theft, and security vulnerabilities. To address these challenges, understanding the underlying patterns of AI-generated text is essential. This research focuses on uncovering these patterns to establish ethical guidelines for distinguishing between AIgenerated and human-generated text. This research contributes to the ongoing discourse on AI-generated content by elucidating methodologies for distinguishing between human and machinegenerated text. The research delves into parameters such as syllable count, word length, sentence structure, functional word usage, and punctuation ratios to detect AI-generated text. Furthermore, the research integrates Explainable AI (xAI) techniques-LIME and SHAP-to enhance the interpretability of machine learning model predictions. The model demonstrated excellent efficacy, showing an accuracy of 93%.Leveraging xAI techniques, further uncovering that pivotal attributes such as Herdan's C, MaaS, and Simpson's Index played a dominant role in the classification process.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Artificial Intelligence (AI) has had a significant impact on how humans perform daily tasks [1] , such as composing text, in recent years. The technology behind it has improved to the point that computers are now capable of generating text that closely resembles human writing. This has resulted in issues such as circulating false information and stealing identities. It's also made things less apparent, which could be dangerous for security. Given the importance of these dangers and issues [2] , it is critical that the underlying patterns used by various text generation techniques are uncovered. The research paper sets ethical guidelines for emulating human styles or perspectives by distinguishing AI-generated writing from human-generated language or examining the patterns formed by AI.",
+                "cite_spans": [
+                    {
+                        "start": 92,
+                        "end": 95,
+                        "text": "[1]",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 494,
+                        "end": 497,
+                        "text": "[2]",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Researchers have tried several methods to understand how AI generates material. Curvature-based hypothesis and perturbation discrepancy detection of machine-generated text. The hypothesis argues that machine-generated text will be at the negative curvature and human-generated text will be at the positive curvature.If the perturbation discrepancy is more than 0, the text is machine-generated; if it goes to 0, it is humangenerated [3] .",
+                "cite_spans": [
+                    {
+                        "start": 433,
+                        "end": 436,
+                        "text": "[3]",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "As input, many textual properties such as length, punctuation, and word choice are utilized. On five models, an ensemble technique with Logistic Regression is used for binary classification (text is either human or machine-generated). Three models are utilized directly without cross-validation for multiclass classification (to determine which deep neural model was used for text synthesis) [4] .",
+                "cite_spans": [
+                    {
+                        "start": 392,
+                        "end": 395,
+                        "text": "[4]",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "The primary focus for detecting AI-generated text is linguistic analysis [5] , which breaks out syntactic patterns, word choices, and sentence structures. When a person uses too many words, repeats the same thing, or breaks the rules, this is a red signal. Investigating AI prompts and replies that don't match is crucial. If the AI model doesn't make sense or changes style, a machine may be implicated. Metadata is another option. AI creation may be indicated by unusual timestamps or IP addresses. Anomaly detection methods point out when language patterns are broken. Machine learning models trained to spot anomalies can distinguish AI writing from humanwritten language. Determining if writing was created by AI is complicated and ever-changing. Linguistic signals, inconsistency analysis, information inspection, stylometric quirks, bias identification, outliers, and purpose-built models are crucial.",
+                "cite_spans": [
+                    {
+                        "start": 73,
+                        "end": 76,
+                        "text": "[5]",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Detecting AI-generated text remains an evolving effort, with several uncharted areas that demand attention for more robust and accurate identification. Firstly, there's a need to collect a diverse and thorough corpus of training data, spanning various AI models, linguistic styles, and genres, to ensure the detection system's adaptability. Fine-tuning detection models for specific AI language generators could improve precision by honing in on the unique attributes of each model. Contextual understanding remains a problem, as AI-generated text often lacks coherence. Developing methods that examine contextual disparities and irregularities could support the detection of AIgenerated text. The rise of multimodal AI-generated content demands the development of detection models that can study and correlate text, images, and videos, expanding the scope of accurate identification. To counter evolving AI models, adversarial approaches must be adaptive, having a constant back-and-forth development between detection and generation. Ensuring real-time detection capabilities is crucial, especially for online platforms, necessitating the creation of lightweight, quick-response systems that analyze text as it's created. This research paper aims to explore various methods for identifying AI-generated text. The paper discusses various factors that need to be considered while detecting AI-generated text. These include parameters such as average syllable count, average word length, average sentence length by word, count of functional words, punctuation count ratio, and many more. Further, it implements xAI techniques which are LIME and SHAP to assist in interpreting and comprehending the predictions provided by the machine learning models.It contributes to the continuing discussion concerning AI-generated material by throwing light on the methodologies and approaches used to distinguish between human and machine-generated text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Section II covers a wide range of techniques for detecting and understanding AI-generated text. The section provides insights into various approaches used to differentiate between machine and human-generated content, underscoring the evolving nature of this research. Section III provides a comprehensive overview of the technologies employed in this research and Section IV discusses the proposed model. In Section V, experimentation done using fine-tuning of hyperparameters is discussed and Section VI discusses the results with the conclusion in Section VII followed by future scope in Section VIII.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Various features extracted from the text, such as length, punctuation, and word choice, are used as input. For binary classification (text is whether human or machine generated), an ensemble technique with Logistic Regression is applied to five models().For multiclass classification (to determine which deep neural model was used for text generation), three models are used directly without cross-validation [4] .",
+                "cite_spans": [
+                    {
+                        "start": 409,
+                        "end": 412,
+                        "text": "[4]",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The paper explores various detection methods, including classifiers trained from scratch, zero-shot classifiers utilizing pre-trained TGMs, and fine-tuning pre-trained languages models like RoBERTa and GROVER. While the RoBERTa detector shows promising results, it requires a substantial number of training examples, making it less practical (). The paper highlights the difficulties faced by the state-of-the-art RoBERTa detector, including identifying short and fluent MGT instances, factual errors, spurious entities, contradictions, and violations of common sense reasoning [6] .",
+                "cite_spans": [
+                    {
+                        "start": 578,
+                        "end": 581,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "In the context of text recognition using the GLTR model, the underlying assumption of their methods is to generate natural-looking text. Most systems sample from the head of the distribution through max sampling, k-max sampling, beam search,temperature-modulated sampling, or even implicitly with rule-based templated approaches. [7] .",
+                "cite_spans": [
+                    {
+                        "start": 330,
+                        "end": 333,
+                        "text": "[7]",
+                        "ref_id": "BIBREF6"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "A curvature-based criterion that makes use of hypothesis and perturbation discrepancy to detect machine-generated text. The hypothesis states that if the text is machine-generated, then it will lie at the negative curvature and if it is humangenerated, then it will occupy the positive curvature. If the perturbation discrepancy is greater than 0, it implies that the text is machine-generated and if the perturbation discrepancy tends to 0, it implies that the text is human-generated [3] .",
+                "cite_spans": [
+                    {
+                        "start": 486,
+                        "end": 489,
+                        "text": "[3]",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The author in [8] explores various approaches such as Multimodal Explanation, Deep Visual Explanation, and Deep Tensor Networks to create models that can provide explanations for their decisions using visual and textual modalities. In the context of understanding and interpreting AI models and their decisions, the paper emphasizes the crucial role of xAI. It emphasizes the need for AI systems to provide explanations for their decisions in sensitive areas like healthcare. It also presents different approaches for the explainability of AI models. The paper concludes by discussing the importance of xAI.",
+                "cite_spans": [
+                    {
+                        "start": 14,
+                        "end": 17,
+                        "text": "[8]",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "Researchers collected a dataset of 500 data points by gathering responses from computer science students for essay and programming assignments [9] . Each response was labeled as either Human-written or machine-generated. To analyze the text, they used a technique called Term Frequency-Inverse Document Frequency (TF-IDF) for feature extraction, which converts the text into numerical representations that machine learning models can understand.",
+                "cite_spans": [
+                    {
+                        "start": 143,
+                        "end": 146,
+                        "text": "[9]",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The researchers created an open dataset for the Russian language consisting of long texts generated by different models with varying parameters and sampling methods, balanced with human-written text, and experiments with data mixing which shows that blending samples from different generative models improved the generalization ability of the detector models particularly helping RoBERTa-based models in detecting machine-generated text [10] . They further increased the input length sequence which then improved the model's understanding of the context and led to better detection performance and Multi-Task learning where the model simultaneously trains on multiple tasks, proved beneficial for improving the quality of the discriminator. This research work focused on improving the stability of the LIME algorithm in xAI. LIME (Local Interpretable Model-Agnostic Explanations) is used to explain AI algorithms [11] . The researchers identified two main stability issues with LIME which are Segment Ordering and Region Flipping and to improve LIME's stability, they proposed two strategies: High Sample size and Average Segment Weights.",
+                "cite_spans": [
+                    {
+                        "start": 437,
+                        "end": 441,
+                        "text": "[10]",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 913,
+                        "end": 917,
+                        "text": "[11]",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The paper [12] provides a guided tutorial of the xAI implementation in the field of Software Engineering. It provides an introduction to xAI. Further, it provides fundamental knowledge of defect prediction models. It addresses three successful case studies where xAI is used in defect prediction models.",
+                "cite_spans": [
+                    {
+                        "start": 10,
+                        "end": 14,
+                        "text": "[12]",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The authors explore challenges in distinguishing Large Language Models (LLMs) and human-generated text. They derive complexity bound for detecting AI-generated text, indicating a number of samples needed for detection [13] . The researchers also discuss different existing approaches for detecting AI-generated text, highlighting the ethical concerns related to the misuse of LLMs.",
+                "cite_spans": [
+                    {
+                        "start": 218,
+                        "end": 222,
+                        "text": "[13]",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "In the study [14] , various methods for detecting AIgenerated text are explored. There are several techniques that include analyzing word pair frequency, linguistic characteristics, lexicographical features, and many more. The paper provides details on the methodology and results of each method. Further, it concludes that there is no single best method, and further evaluation of standardized datasets is necessary.",
+                "cite_spans": [
+                    {
+                        "start": 13,
+                        "end": 17,
+                        "text": "[14]",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "In the research, three decoding strategies are examined. They show that the improvement in these methods is for fooling humans, rather than difficult detectable text. These decoding strategies include top-k and untruncated random sampling [15] . The authors emphasize the importance of using both human and automatic detection methods to assess the humanness of text generation systems. They call for further research in improving language models, building better automatic detectors, and developing tools to improve human detection of machine-generated text.",
+                "cite_spans": [
+                    {
+                        "start": 239,
+                        "end": 243,
+                        "text": "[15]",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The research proposes a classification model for detecting essays generated by ChatGPT [16] . The model is based on XGBoost. It is trained and further evaluated on a dataset generated by ChatGPT and written by humans. It also explores feature engineering for better results. It specifically explores TF-IDF and other hand-crafted features.",
+                "cite_spans": [
+                    {
+                        "start": 87,
+                        "end": 91,
+                        "text": "[16]",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The research examines various Machine Translation methods and assesses the linguistic complexity of their translations in terms of both vocabulary and grammar [17] . The study uses different metrics to measure diversity, such as lexical richness and morphological variety and applies these metrics to translations produced by MT models.",
+                "cite_spans": [
+                    {
+                        "start": 159,
+                        "end": 163,
+                        "text": "[17]",
+                        "ref_id": "BIBREF16"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "This study evaluates 13 lexical diversity metrics for tracking the progression of French learners' written productions. [18] They used a semi-longitudinal corpus of learners' essays and applied random forests to predict the production wave. The metrics show varying correlations and the ability to detect differences between productions achieving 69% accuracy in predicting production waves",
+                "cite_spans": [
+                    {
+                        "start": 120,
+                        "end": 124,
+                        "text": "[18]",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The study presents a variety of techniques, including linguistic analysis, frequency counting, perplexity-based filtering, and more. [14] These methods leverage different aspects of the text, such as syntactic patterns, linguistic features, and statistical properties, to differentiate between human-written and machine-generated content.",
+                "cite_spans": [
+                    {
+                        "start": 133,
+                        "end": 137,
+                        "text": "[14]",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "In order to analyze complex machine learning models, the study introduces a unifying framework termed SHAP. The framework determines the significance of each feature in a model for a certain prediction [19] . The framework introduces new ways and unites six current methods to enhance computational efficiency and compatibility with human intuition. To illustrate how well SHAP works at understanding model predictions, the paper includes theoretical findings, computational experiments, and user studies.",
+                "cite_spans": [
+                    {
+                        "start": 202,
+                        "end": 206,
+                        "text": "[19]",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The authors of this scientific study suggest a categorization method for categorising research paper abstracts using several machine-learning approaches. The goal is to automatically classify the papers into three categories: business, social science, and science [20] . Four machine learning techniques are tested by the authors: Support Vector Machines (SVM), Naive Bayes, K-Nearest Neighbour (KNN), and Decision Tree. Tokenization, stemming, and stop word removal are used in the pre-processing of the abstracts. For feature extraction, Bag of Words and TF-IDF vectorization techniques are applied. The authors contend that the algorithm could function even better with more data. Overall, the study shows that machine learning approaches may successfully categorize research articles based on their abstracts.",
+                "cite_spans": [
+                    {
+                        "start": 264,
+                        "end": 268,
+                        "text": "[20]",
+                        "ref_id": "BIBREF19"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "The article proposes a GPT language model and investigates its Python code-writing capabilities [21] . In contrast to GPT-3's performance of 0% and GPT-J's performance of 11.4%, the researchers are able to provide better results. Furthermore, they find that frequent sampling from the model is an extremely effective technique for coming up with workable solutions to difficult problems. The model has a number of faults, including problems with binding operations to variables and docstrings that provide detailed information. Finally, the paper goes over the wider effects that utilizing strong code generation methods might have on safety, security, and economics.",
+                "cite_spans": [
+                    {
+                        "start": 96,
+                        "end": 100,
+                        "text": "[21]",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "In summary, the literature survey illuminates the complexities and multifaceted nature of AI-generated text analysis, revealing that advancements in the field are often accompanied by intricate challenges and unexplored areas. This research paper endeavors to offer a comprehensive solution to the intricate challenge of detecting text that originates from artificial intelligence (AI) systems.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. REVIEW OF LITERATURE",
+                "sec_num": null
+            },
+            {
+                "text": "Technologies used in this research can be broadly classified into three groups:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "III. OVERVIEW OF TECHNOLOGIES USED",
+                "sec_num": null
+            },
+            {
+                "text": "For AI-generated text detection, various machine learning models were chosen such as Decision Tree, Random Forest, Logistic Regression, and Support Vector Machine (SVM), Gradient Boosting. These models were chosen with the specific intention of utilizing xAI.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "The selection of these models for xAI was driven by several key considerations such as: 1) Interpretability: For eg, Decision Trees provide a clear and intuitive decision-making structure represented by treelike diagrams making it easier to understand. Interpretable coefficients provided by models like Logistic Regression and SVM indicate the impact of each feature on the outcome. 2) Balancing complexity: These models strike a balance between performance and complexity. While more complex models like neural networks may help in achieving higher accuracy, they are difficult to interpret. The chosen models provide a reasonable trade-off between predictive power and interpretability. (A) Logistic Regression [22] : It is a statistical method used for binary classification tasks by making use of the logistic function also known as sigmoid function, which transforms a linear combination of predictor variables into a value between 0 and 1. The logistic regression is expressed by:",
+                "cite_spans": [
+                    {
+                        "start": 714,
+                        "end": 718,
+                        "text": "[22]",
+                        "ref_id": "BIBREF21"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "P (Y = 1|X) = 1 1 + e -(\u03b20+\u03b21X1+\u03b22X2+...+\u03b2pXp)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "(1) (B) Decision Tree [23] : It employees the Gini index to make informed decisions during the process of creating a tree like structure for classification tasks. It uses a recursive process to partition the feature space into regions to minimise impurity and improve classification accuracy. The Gini index is a measure of impurity and its formula is given by:",
+                "cite_spans": [
+                    {
+                        "start": 22,
+                        "end": 26,
+                        "text": "[23]",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "Gini(t) = 1 - C i=1 (p(i|t)) 2",
+                        "eq_num": "(2)"
+                    }
+                ],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "(C) Gradient Boosting [24] : It is an advanced machine learning method that builds a strong predictive model by combining multiple weak learners. It makes use of Gradient Descent optimization to minimise the predictive errors.",
+                "cite_spans": [
+                    {
+                        "start": 22,
+                        "end": 26,
+                        "text": "[24]",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "F (x) = M m=1 \u03b3 \u00d7 f m (x i )",
+                        "eq_num": "(3)"
+                    }
+                ],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "(D) Support Vector Machines (SVM) [25] : It is a powerful classification technique that aims to find a hyperplane in a high-dimensional feature space that best separates different classes of data points. The main idea behind SVM is to maximise the margin between the classes, which is the distance between the hyperplane and the nearest data points of each class.",
+                "cite_spans": [
+                    {
+                        "start": 34,
+                        "end": 38,
+                        "text": "[25]",
+                        "ref_id": "BIBREF24"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "h(x) = sign( n SV i=1 a i y i \u00d7 K(x 1 x i ) + b)",
+                        "eq_num": "(4)"
+                    }
+                ],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "(E) Random Forest [26] : It is an ensemble learning method that combines multiple decision trees to improve the classification accuracy. It uses random subsets of data and features to build diverse trees , thus making independent predictions.",
+                "cite_spans": [
+                    {
+                        "start": 18,
+                        "end": 22,
+                        "text": "[26]",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "\u0177 = 1 N N i=1 f i (x)",
+                        "eq_num": "(5)"
+                    }
+                ],
+                "section": "A. Machine Learning Algorithms",
+                "sec_num": null
+            },
+            {
+                "text": "xAI for classification refers to the application of techniques that provide transparent and interpretable explanations for the predictions made by classification models. It also refers to the concepts and techniques used to make artificial intelligence models more transparent and interpretable to humans. In classification tasks, where the model assigns input data to specific categories or classes, xAI techniques focus on revealing the contributing factors that led to a particular classification outcome. Commonly used techniques and models include LIME, feature importance, PDP(Partial Dependency Plots), and SHAP. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. xAI Libraries",
+                "sec_num": null
+            },
+            {
+                "text": "Average Word Length [27] This gives us the average word length of the concerned text in terms of the number of characters used. Average Sentence Length By Word [28] This gives us the average number of syllables used per word in the concerned text.",
+                "cite_spans": [
+                    {
+                        "start": 20,
+                        "end": 24,
+                        "text": "[27]",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 160,
+                        "end": 164,
+                        "text": "[28]",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Scores Description",
+                "sec_num": null
+            },
+            {
+                "text": "Functional Words Count [29] Functional words are grammatical connectors or mood-defining words within phrases, lacking significant linguistic value on their own. Punctuation Count This gives us the ratio of the number of punctuations used to the number of characters used in the concerned text.",
+                "cite_spans": [
+                    {
+                        "start": 23,
+                        "end": 27,
+                        "text": "[29]",
+                        "ref_id": "BIBREF28"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Lexical Features",
+                "sec_num": null
+            },
+            {
+                "text": "Reading Ease [30] This metric assesses a text's readability by analyzing its ease of comprehension.",
+                "cite_spans": [
+                    {
+                        "start": 13,
+                        "end": 17,
+                        "text": "[30]",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Flesch",
+                "sec_num": null
+            },
+            {
+                "text": "Score Range: The scores range from 0 to 100. Text with a higher score is more likely to be easier to read. ty Score Flesch-Kincaid Grade Level [31] This metric estimates the U.S. school grade level required to grasp the material.",
+                "cite_spans": [
+                    {
+                        "start": 143,
+                        "end": 147,
+                        "text": "[31]",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Flesch",
+                "sec_num": null
+            },
+            {
+                "text": "Score Range: Scores can be any value greater than zero.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Flesch",
+                "sec_num": null
+            },
+            {
+                "text": "Lower scores suggest that comprehension is possible at lower grade levels. Gunning Fog Index [32] The Gunning Fog Index determines how many years of official schooling are required for a person to fully understand a text. Score Range: The scores range from 0 to 20. Lower scores indicate simpler text. Dale-Chall Readability Formula [33] Dale-Chall The readability formula considers a set of well-known words and uses their presence to determine the readability of the text. Score Range: Approximately similar to US grade levels. Lower scores imply that the text is easier to read.",
+                "cite_spans": [
+                    {
+                        "start": 93,
+                        "end": 97,
+                        "text": "[32]",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 333,
+                        "end": 337,
+                        "text": "[33]",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Flesch",
+                "sec_num": null
+            },
+            {
+                "text": "The research uses various stylistic features which are calculated for every text in the data set. These features include lexical features, readability, and diversity and richness of vocabulary. These features are important and used further in the research for model training and to discover patterns and information regarding the text that are not visible and perceptible to the human eye. Table I and Table II explain the various features that are noted and calculated for the texts present in the data set.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 396,
+                        "end": 397,
+                        "text": "I",
+                        "ref_id": "TABREF1"
+                    },
+                    {
+                        "start": 408,
+                        "end": 410,
+                        "text": "II",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Flesch",
+                "sec_num": null
+            },
+            {
+                "text": "The proposed methodology for this research consists of two major pipelines: Yule's Characteristic K measures text \"disorderliness\" by analyzing word frequency distribution, calculating the ratio of total words to the square root of its inverse. A lower value indicates greater vocabulary diversity, while a higher value suggests more word repetition and lower vocabulary richness. Herdan's C [35] Herdan's C quantifies word frequency distribution in a text by subtracting the logarithm of total words from the logarithm of unique words. It offers insights into the text's vocabulary distribution. Diversity and Richness of Vocabulary Maas [36] Maas is a measure derived using a formula by Mueller involving variables like \"logeV0,\" representing vocabulary expansion, where natural logarithm is employed, and incorporating variables a, logV0, and V to indicate proportional vocabulary expansion across the text. Mean segmental TTR(Type Token Ratio) (MSTTR) [37] Mean Segmental TTR (MSTTR) calculates the average Type-Token Ratio (TTR) over consecutive text segments, where TTR is the ratio of unique words to total words in a segment. It detects shifts in vocabulary diversity within the text. Simpson's Index [38] Measure that quantifies the likelihood of two words randomly selected from a text being identical. The scale spans from 0, representing a state of high diversity, to 1, indicating a state of low diversity.",
+                "cite_spans": [
+                    {
+                        "start": 392,
+                        "end": 396,
+                        "text": "[35]",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 639,
+                        "end": 643,
+                        "text": "[36]",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 956,
+                        "end": 960,
+                        "text": "[37]",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 1209,
+                        "end": 1213,
+                        "text": "[38]",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. PROPOSED METHODOLOGY",
+                "sec_num": null
+            },
+            {
+                "text": "The creation process involves employing a prompt in the format \"200-word Wikipedia-style introduction on 'title' starter text.\" Here, 'title' represents the Wikipedia page title, and 'starter text' comprises the first seven words from the introduction paragraph of the respective article.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "2) LLMs used to generate text: Two large language models, namely \"ggml-gpt4all-j-v1.3-groovy\" [39] and \"orcamini-3b.ggmlv3.q4 0.bin\" [39] , are utilized to generate a set of 10,000 data points for each model. These data points are then combined with the human-generated text, resulting in two separate datasets, each containing 20,000 data points. The final datasets are created by shuffling the data points independently for each of the models along with the human-generated text. 3) AI text generation: Both LLMs then produce 10000 AIgenerated texts each for a better variety and spread of data. 4) Combining the data: All the AI-generated texts from both LLMs are then combined with 10,000 human-generated texts individually from the two LLMs. 5) Shuffling data: All of these data points are then shuffled so that the machine learning models used ahead do not learn any unintended patterns from the data, thereby impeding the performance of the model. This step denotes the creation of an intermediate datasets for this research. 6) Calculating Scores & Final Datasets: Every data point in the intermediate datasets, undergoes a series of calculations that help determine various style characteristics and linguistic features of the text such as readability, richness and correctness of vocabulary, and semantic spread of the text, and lexical features that are not lucid and discernible to the human eye. Each of these characteristics has been attributed to various scores that help determine such features in the text. These scores are then appended to the intermediate dataset thus completing the dataset generation process and thereby creating two datasets for the LLMs used. Following is the brief of all the scores used to extract the stylistic features later on in this research.",
+                "cite_spans": [
+                    {
+                        "start": 94,
+                        "end": 98,
+                        "text": "[39]",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 133,
+                        "end": 137,
+                        "text": "[39]",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "(A) Lexical Features: One of the ways in which AI generated text and human text can be distinctly identified is by its lexical structure. Usually, human text is erroneous in terms of appropriate punctuation -punctuation marks are fairly missed or used improperly. Similarly, there are disparities in other areas of lexical architectures such as the differences in word lengths and thus the number of syllables (AI tends to use heavier words), differences in typical sentence lengths, the varied usage of functional words such as she, these, or, and, etc. and so on. Hence, these factors are calculated for both classes of texts and used in this research paper to identify the trends for the same. (B) Readability Scores: Readability scores seek to identify the reading level of a particular text, usually in terms of the minimum education level required to read the text with ease. Since human texts and AI texts are bound to differ in terms of readability ease, this paper made use of the following readability metric formulae to quantitatively identify the reading ease of human and AI generated text both:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "a) Flesch Reading Ease: 206.835- ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "K = 10 4 N 2 V i=1 (n i -c) 2 (9)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "Where, N is the total number of words in the text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "V is the vocabulary size (the number of distinct terms/words). n i is the frequency of the ith word. c is the mean frequency of all words. b) Herdan's C:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "C = log(V ) log(N )",
+                        "eq_num": "(10)"
+                    }
+                ],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "Where:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "V is the vocabulary size (the number of distinct terms/words). N is the total number of words in the text. c) Maas:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "a 2 = log(N ) -log(V ) log(N 2 ) (",
+                        "eq_num": "11"
+                    }
+                ],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "log V 0 = log V 1 -log V 2 log N",
+                        "eq_num": "(12)"
+                    }
+                ],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "The term \"logeV0\" is equivalent to 'logV0\", but it should be noted that the natural logarithm (with base e) is employed for the logarithmic computations. Furthermore, the computations incorporate the variables a, log(V 0 ) (which exhibit dissimilarity from their prior values), and V \u2032 , which function as indicators of the proportional expansion of vocabulary across the text. The formula remains the same as for MSTTR, however MATTR computes the average Type-Token Ratio (TTR) by considering a sliding window of words instead of mutually exclusive segments as in MSTTR. f) Simpson's Index:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "D = 1 - V i=1 ( n i N ) 2",
+                        "eq_num": "(13)"
+                    }
+                ],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "Where:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "V is the vocabulary size (the number of distinct terms/words). n i is the frequency of the ith word. N is the total number of words in the text",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Fig. 1. Dataset creation pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "Fig. 2 demonstrates the classification and xAI pipeline as a whole which includes training of the datasets on various machine learning models and then using xAI libraries like LIME and SHAP to get various insights regarding the data points.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 6,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "B. Model Training and xAI Pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "1) Machine Learning and Classification: Both generated datasets are trained on classification models such as Logistic Regression, Decision Tree Classifier, Random Forest, Support Vector Machines, and Gradient Boosting. This is done to see which model will perform better on these data sets. The classification task is whether a given text is AI-generated or human-generated. 2) Top Model Selection: The best two of the five models trained before are chosen for xAI analysis using LIME and SHAP as these models will provide better insights than the others. The top two models are selected on the basis of classification metrics such as accuracy,f1-score, precision, and recall. 3) xAI Analysis: Arbitrary data points of AI-generated are chosen and LIME and SHAP analysis is implemented. Model weights of the two best machine learning algorithms are used. The same is done for human-generated text as well. How LIME and SHAP were used in this research is discussed later. 4) Identifying Common Patterns: Upon conducting these xAI techniques, the ensuing analysis reports offer a wealth of insights. These insights are subsequently juxtaposed, whereupon commonalities amongst the patterns identified by various models are isolated. This convergence of identified features in both AI and human-generated text serves as a critical juncture, underpinning the suggestion of a preferred technique for discerning between AI-generated and human-generated text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Model Training and xAI Pipeline",
+                "sec_num": null
+            },
+            {
+                "text": "Model-agnostic Explanations): LIME is effectively implemented to interpret models used to classify between AI-generated and human-generated text in a dataset. In this scenario, the goal is to understand how the model distinguishes between texts created by artificial intelligence systems and those written by humans. LIME can provide insights into which features or patterns the model relies on for making such distinctions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "C. xAI 1) LIME(Local Interpretable",
+                "sec_num": null
+            },
+            {
+                "text": "In this research, LIME is implemented on various test data points to check which features were chosen by a particular model for classification. To implement LIME, a subset of data points is chosen randomly, comprising both AI-generated and human-generated text samples. Then LIME is used to identify the prevailing scores and metrics, and subsequently patterns congruous to AI as well as human-generated texts are studied and determined. These patterns are discussed later in this research.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "C. xAI 1) LIME(Local Interpretable",
+                "sec_num": null
+            },
+            {
+                "text": "2) SHAP (SHapley Additive exPlanations): SHAP is a powerful method that, like LIME, is used to interpret classification models for human-generated and AI-generated text. It helps in figuring out which parts of the text or words are most important to model's prediction of whether a piece of text was written by a person or an AI system i.e. it can be used to reveal the important factors influencing the model's conclusions when classifying AI-generated and human-generated text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "C. xAI 1) LIME(Local Interpretable",
+                "sec_num": null
+            },
+            {
+                "text": "To use SHAP, a similar method of choosing a subset of data points is used that includes both types of text examples. SHAP then generates perturbed versions of these data points, similar to what LIME does. But instead of fitting a separate model that can be understood, SHAP uses an idea from cooperative game theory called Shapley values. These numbers tell how much each feature contributes to the prediction for a certain instance. The following are some SHAP visualization techniques that are V. EXPERIMENTATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "C. xAI 1) LIME(Local Interpretable",
+                "sec_num": null
+            },
+            {
+                "text": "All the models were subjected to hyperparameter tuning to optimize the performance of various machine-learning models for AI-generated text detection. The process involved systematically searching and evaluating different combinations of hyperparameters to give the best set of hyperparameters that maximized the model's accuracy. For each model, a range of hyperparameter values was specified and Random-izedSearchCV was used which effectively sampled and crossvalidated these values. This meticulous process enabled the models to better capture the patterns, resulting in improved accuracy and predictive capabilities. Table III shows the various hyperparameters used and their respective \"best\" values for model training to boost the accuracy of the models. From the above models, an ensemble model was created combining the predictions of various models using a weighted average based on their accuracy scores. The weights were determined by normalizing the accuracy scores, ensuring their sum equals 1.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 627,
+                        "end": 630,
+                        "text": "III",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A. Parameter tuning",
+                "sec_num": null
+            },
+            {
+                "text": "Both the datasets, the ones generated by GPT-J and Orca were trained on the various classification models mentioned above -Logistic Regression, Decision Tree, Random Forest, Support Vector Classifier, and Gradient Boosting. Both datasets had varied accuracies for the models trained. The various classification metrics such as accuracy, F1-Score, precision, and recall [40] for both datasets are illustrated in Table IV and Table V.",
+                "cite_spans": [
+                    {
+                        "start": 369,
+                        "end": 373,
+                        "text": "[40]",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 417,
+                        "end": 419,
+                        "text": "IV",
+                        "ref_id": "TABREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A. Classification Results",
+                "sec_num": null
+            },
+            {
+                "text": "xAI was then implemented to determine which features are dominating and have a higher impact in determining the class label of a particular data point. The Fig. 3 has two LIME graphs for two separate AIgenerated text data points. In the first image-on the left-LIME has Herdan's C [35] , MaaS [36] , and Simpson's index [38] have an abundant positive effect on the classification of this data point as an AI-generated text whereas MATTR and the average word length feature has a negative impact on the classification. From looking at various LIME graphs for data points being classified as AI generated the most dominant features were Herdans C, MaaS, and the Simpson's Index.",
+                "cite_spans": [
+                    {
+                        "start": 281,
+                        "end": 285,
+                        "text": "[35]",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 293,
+                        "end": 297,
+                        "text": "[36]",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 320,
+                        "end": 324,
+                        "text": "[38]",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 161,
+                        "end": 162,
+                        "text": "3",
+                        "ref_id": "FIGREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "B. xAI Results and Inferences",
+                "sec_num": null
+            },
+            {
+                "text": "Herdan's C was one of the features which highly impacted the classification. Herdan's C metric is used to determine a text's vocabulary richness and diversity. It computes the proportion of unique words relative to the total number of words in the text. A higher Herdan's C value indicates a more diverse vocabulary, whereas a lower value indicates a repetitious or restricted vocabulary. It was observed from a sample of AIgenerated data points that most of AI-generated text has a high value of this metric, meaning having a rich diversity of vocabulary was present. This is because the language used to generate the data was pre-trained on massive datasets containing a wide range of text sources(3 billion parameters for Orca). But, there might be cases where the richness is abated because the dataset on which that language model was trained must not be up to standards. The Simpson's Index can be used to measure the diversity of words in a given text within the context of text analysis. A higher Simpson's Index value would indicate less word diversity, indicating that a small number of words are repeated frequently. A lesser Simpson's Index value indicates greater word diversity or the use of a greater variety of words. Furthermore, for Simpson's Index, the values were high i.e. they were between 0.65 to almost reaching 1. This indicates that the phrases or words in the text are repeated often. Consequently, the diversity decreases. This is because AI models, particularly language models, can occasionally generate text that tends to reuse certain phrases or patterns, resulting in a relatively smaller vocabulary. These models may generate coherent text, but they may lack the inherent variability and creativity of human-generated text [41] . However, it's important to note that this can vary based on the specific AI model, the input data it was trained on, and the prompt given for text generation [42] .",
+                "cite_spans": [
+                    {
+                        "start": 1757,
+                        "end": 1761,
+                        "text": "[41]",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 1922,
+                        "end": 1926,
+                        "text": "[42]",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. xAI Results and Inferences",
+                "sec_num": null
+            },
+            {
+                "text": "Fig. 4 illustrates a set of examples of LIME interpretability graphs for human-generated text. Many data points were interpreted and the results were mostly opposite to the ones inferred by the AI-generated ones. For instance, the Herdans C constant was relatively low for various human-generated text data points. It was either relatively low or it negatively influenced the classification. Fig. 5 , Fig. 6 , and Fig. 7 illustrate the summary, waterfall, and force plots respectively generated by SHAP for the ORCA dataset. Table VI shows some feature values characteristic to AI and Human-generated texts. In conclusion, this research delves into the intricate realm of AI-generated text analysis and its differentiation from human-generated text. As Artificial Intelligence continues to revolutionize various facets of human activities, including text composition, the challenges of identifying AI-generated content have become increasingly pertinent due to concerns about misinformation, security vulnerabilities, and identity theft. The research methodology is multifaceted, combining linguistic Moreover, the integration of xAI techniques, such as LIME and SHAP, provides invaluable insights into the features and patterns that influence the model's classification decisions. These insights reveal that certain attributes, such as Herdan's C, MaaS, and Simpson's Index, play pivotal roles in distinguishing AI-generated text from human-written content. These features highlight the richness of vocabulary, repetition of certain phrases, and syntactic patterns that are characteristic of AI-generated text. The paper's limitation lies in its reliance on non-state-ofthe-art models due to computational constraints, which may not fully represent the latest advancements in the field. These constraints, including limitations in computational resources and data availability, result in a performance gap compared to more advanced models. However, this limitation serves as a catalyst for future research that can harness the power of deep learning architectures and explainable AI (xAI) to delve into AI-generated text with greater sophistication. Additionally, it highlights the need to address ethical concerns and practical applicability as AI models evolve, making this paper a foundational stepping stone for deeper explorations in the future.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 6,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 397,
+                        "end": 398,
+                        "text": "5",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 406,
+                        "end": 407,
+                        "text": "6",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 419,
+                        "end": 420,
+                        "text": "7",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 531,
+                        "end": 533,
+                        "text": "VI",
+                        "ref_id": "TABREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "B. xAI Results and Inferences",
+                "sec_num": null
+            },
+            {
+                "text": "The research's future directions revolve around advancing AI-generated text analysis comprehensively. This entails harnessing larger and more diverse datasets spanning various domains, crucial for enhancing the detection system's real-world applicability. Alongside this, optimizing processing power to expedite analysis processes tied to xAI techniques like SHAP is essential. Incorporating additional style criteria such as linguistic tendencies and sentiment analysis aims to refine the methodology, deepening the grasp of distinguishing AI text styles from human language. This extends to evaluating a wider range of AI models beyond GPT-J and ORCA. Diversification of Machine Learning algorithms like K-Nearest Neighbors, Naive Bayes, and Neural Networks, as well as integration of Deep Learning algorithms like Transformerbased models, enhances AI text recognition. To fathom model decision-making, XAI methods like Grad-CAM and Integrated Gradients will be employed. Rigorous validation of authentic AI text data will test the proposed approach, collectively advancing differentiation between AI-generated and humancomposed texts and propelling the field forward.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "VIII. FUTURE SCOPE",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Artificial intelligence and life in 2030: the one hundred year study on artificial intelligence",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Stone",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Brooks",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Brynjolfsson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Calo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Etzioni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Hager",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Hirschberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Kalyanakrishnan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Kamar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Kraus",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:2211.06318"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "P. Stone, R. Brooks, E. Brynjolfsson, R. Calo, O. Etzioni, G. Hager, J. Hirschberg, S. Kalyanakrishnan, E. Kamar, S. Kraus et al., \"Artificial intelligence and life in 2030: the one hundred year study on artificial intelligence,\" arXiv preprint arXiv:2211.06318, 2022.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Ai deception: A survey of examples, risks, and potential solutions",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Goldstein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "O'gara",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Hendrycks",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:2308.14752"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "P. S. Park, S. Goldstein, A. O'Gara, M. Chen, and D. Hendrycks, \"Ai deception: A survey of examples, risks, and potential solutions,\" arXiv preprint arXiv:2308.14752, 2023.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Detectgpt: Zero-shot machine-generated text detection using probability curvature",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Mitchell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Khazatsky",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Manning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Finn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "E. Mitchell, Y. Lee, A. Khazatsky, C. D. Manning, and C. Finn, \"De- tectgpt: Zero-shot machine-generated text detection using probability curvature,\" 2023.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "DIALOG-22 RuATD generated text detection",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Maloyan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Nutfullin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Ilyshin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Computational Linguistics and Intellectual Technologies",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "N. Maloyan, , B. Nutfullin, E. Ilyshin, and and, \"DIALOG-22 RuATD generated text detection,\" in Computational Linguistics and Intellectual Technologies. RSUH, jun 2022. [Online]. Available: https://doi.org/10.28995%2F2075-7182-2022-21-394-401",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Discourse and text: Linguistic and intertextual analysis within discourse analysis",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Fairclough",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1992,
+                "venue": "Discourse & society",
+                "volume": "3",
+                "issue": "2",
+                "pages": "193--217",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "N. Fairclough, \"Discourse and text: Linguistic and intertextual analysis within discourse analysis,\" Discourse & society, vol. 3, no. 2, pp. 193- 217, 1992.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Automatic detection of machine generated text: A critical survey",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Jawahar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Abdul-Mageed",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "V S"
+                        ],
+                        "last": "Lakshmanan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "G. Jawahar, M. Abdul-Mageed, and L. V. S. Lakshmanan, \"Automatic detection of machine generated text: A critical survey,\" 2020.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Gltr: Statistical detection and visualization of generated text",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Gehrmann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Strobelt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Rush",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Gehrmann, H. Strobelt, and A. M. Rush, \"Gltr: Statistical detection and visualization of generated text,\" 2019.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Explainable ai: The new 42",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Goebel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Chander",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Holzinger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Lecue",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Akata",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Stumpf",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Kieseberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Holzinger",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Machine Learning and Knowledge Extraction",
+                "volume": "",
+                "issue": "",
+                "pages": "295--303",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Goebel, A. Chander, K. Holzinger, F. Lecue, Z. Akata, S. Stumpf, P. Kieseberg, and A. Holzinger, \"Explainable ai: The new 42?\" in Machine Learning and Knowledge Extraction, A. Holzinger, P. Kiese- berg, A. M. Tjoa, and E. Weippl, Eds. Cham: Springer International Publishing, 2018, pp. 295-303.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Distinguishing humanwritten and chatgpt-generated text using machine learning",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Alamleh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "A S"
+                        ],
+                        "last": "Alqahtani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Elsaid",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "2023 Systems and Information Engineering Design Symposium (SIEDS)",
+                "volume": "",
+                "issue": "",
+                "pages": "154--158",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "H. Alamleh, A. A. S. AlQahtani, and A. ElSaid, \"Distinguishing human- written and chatgpt-generated text using machine learning,\" in 2023 Systems and Information Engineering Design Symposium (SIEDS), 2023, pp. 154-158.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Automatic detection of machine generated texts: Need more tokens",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Gritsay",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Grabovoy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Chekhovich",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "2022 Ivannikov Memorial Workshop (IVMEM)",
+                "volume": "",
+                "issue": "",
+                "pages": "20--26",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "G. Gritsay, A. Grabovoy, and Y. Chekhovich, \"Automatic detection of machine generated texts: Need more tokens,\" in 2022 Ivannikov Memorial Workshop (IVMEM), 2022, pp. 20-26.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Towards more stable lime for explainable ai",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Abuwala",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Lim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "2022 International Symposium on Intelligent Signal Processing and Communication Systems (ISPACS)",
+                "volume": "",
+                "issue": "",
+                "pages": "1--4",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. H. Ng, H. S. Abuwala, and C. H. Lim, \"Towards more stable lime for explainable ai,\" in 2022 International Symposium on Intelligent Signal Processing and Communication Systems (ISPACS), 2022, pp. 1-4.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Explainable ai for software engineering",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Tantithamthavorn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Jiarpakdee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Grundy",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Tantithamthavorn, J. Jiarpakdee, and J. Grundy, \"Explainable ai for software engineering,\" 2020.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "On the possibilities of ai-generated text detection",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Chakraborty",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Bedi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Zhu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "An",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Manocha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Huang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Chakraborty, A. S. Bedi, S. Zhu, B. An, D. Manocha, and F. Huang, \"On the possibilities of ai-generated text detection,\" 2023.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Computer-generated text detection using machine learning: A systematic review",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Beresneva",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "9612",
+                "issue": "",
+                "pages": "421--426",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D. Beresneva, \"Computer-generated text detection using machine learn- ing: A systematic review,\" vol. 9612, 06 2016, pp. 421-426.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Automatic detection of generated text is easiest when humans are fooled",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Ippolito",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Duckworth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Callison-Burch",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Eck",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D. Ippolito, D. Duckworth, C. Callison-Burch, and D. Eck, \"Automatic detection of generated text is easiest when humans are fooled,\" 2020.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Chatgpt generated text detection",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Shijaku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Canhasi",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "",
+                "volume": "01",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Shijaku and E. Canhasi, \"Chatgpt generated text detection,\" 01 2023.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Machine translationese: Effects of algorithmic bias on linguistic complexity in machine translation",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Vanmassenhove",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Shterionov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Gwilliam",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "E. Vanmassenhove, D. Shterionov, and M. Gwilliam, \"Machine transla- tionese: Effects of algorithmic bias on linguistic complexity in machine translation,\" 2021.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "A unified approach to interpreting model predictionsinvestigating lexical progression through lexical diversity metrics in a corpus of french l3",
+                "authors": [
+                    {
+                        "first": "O",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Kisselev",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "Aleksandr"
+                        ],
+                        "last": "Kopotev",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "O. K. Kisselev and M. Aleksandr Kopotev, \"A unified approach to interpreting model predictionsinvestigating lexical progression through lexical diversity metrics in a corpus of french l3,\" 2022.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "A unified approach to interpreting model predictions",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Lundberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S.-I",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "",
+                "volume": "12",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Lundberg and S.-I. Lee, \"A unified approach to interpreting model predictions,\" 12 2017.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Research paper classification using supervised machine learning techniques",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Chowdhury",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Schoen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "1--6",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Chowdhury and M. Schoen, \"Research paper classification using supervised machine learning techniques,\" 10 2020, pp. 1-6.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Evaluating large language models trained on code",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Tworek",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Jun",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Yuan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "De Oliveira Pinto",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kaplan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Edwards",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Burda",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Joseph",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Brockman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Ray",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Puri",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Krueger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Petrov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Khlaaf",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Sastry",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Mishkin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Chan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Gray",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Ryder",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Pavlov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Power",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Kaiser",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Bavarian",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Winter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Tillet",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Such",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Cummings",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Plappert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Chantzis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Barnes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Herbert-Voss",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Guss",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Nichol",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paino",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Tezak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Tang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Babuschkin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Balaji",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Jain",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Saunders",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Hesse",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Carr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Leike",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Achiam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Misra",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Morikawa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Radford",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Knight",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Brundage",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Murati",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Mayer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Welinder",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Mcgrew",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Amodei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Mccandlish",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Sutskever",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Zaremba",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M. Chen, J. Tworek, H. Jun, Q. Yuan, H. P. de Oliveira Pinto, J. Kaplan, H. Edwards, Y. Burda, N. Joseph, G. Brockman, A. Ray, R. Puri, G. Krueger, M. Petrov, H. Khlaaf, G. Sastry, P. Mishkin, B. Chan, S. Gray, N. Ryder, M. Pavlov, A. Power, L. Kaiser, M. Bavarian, C. Winter, P. Tillet, F. P. Such, D. Cummings, M. Plappert, F. Chantzis, E. Barnes, A. Herbert-Voss, W. H. Guss, A. Nichol, A. Paino, N. Tezak, J. Tang, I. Babuschkin, S. Balaji, S. Jain, W. Saunders, C. Hesse, A. N. Carr, J. Leike, J. Achiam, V. Misra, E. Morikawa, A. Rad- ford, M. Knight, M. Brundage, M. Murati, K. Mayer, P. Welinder, B. McGrew, D. Amodei, S. McCandlish, I. Sutskever, and W. Zaremba, \"Evaluating large language models trained on code,\" 2021.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Logistic regression",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Wright",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. E. Wright, \"Logistic regression,\" 1995.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "An introduction to decision tree modeling",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Myles",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Feudale",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Woody",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Brown",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Journal of Chemometrics: A Journal of the Chemometrics Society",
+                "volume": "18",
+                "issue": "6",
+                "pages": "275--285",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. J. Myles, R. N. Feudale, Y. Liu, N. A. Woody, and S. D. Brown, \"An introduction to decision tree modeling,\" Journal of Chemometrics: A Journal of the Chemometrics Society, vol. 18, no. 6, pp. 275-285, 2004.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Gradient boosting machines, a tutorial",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Natekin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Knoll",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Frontiers in neurorobotics",
+                "volume": "7",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Natekin and A. Knoll, \"Gradient boosting machines, a tutorial,\" Frontiers in neurorobotics, vol. 7, p. 21, 2013.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Machine learning models and algorithms for big data classification: thinking with examples for effective learning",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Suthaharan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Suthaharan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "207--235",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Suthaharan and S. Suthaharan, \"Support vector machine,\" Machine learning models and algorithms for big data classification: thinking with examples for effective learning, pp. 207-235, 2016.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Random forest",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Rigatti",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Journal of Insurance Medicine",
+                "volume": "47",
+                "issue": "1",
+                "pages": "31--39",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. J. Rigatti, \"Random forest,\" Journal of Insurance Medicine, vol. 47, no. 1, pp. 31-39, 2017.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Lexical characteristics of words used in emotional stroop experiments",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Larsen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Mercer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Balota",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Emotion",
+                "volume": "6",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. J. Larsen, K. A. Mercer, and D. A. Balota, \"Lexical characteristics of words used in emotional stroop experiments.\" Emotion, vol. 6, no. 1, p. 62, 2006.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Exploring lexical and syntactic features for language variety identification",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Van Der Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Van Den",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Bosch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the Fourth Workshop on NLP for Similar Languages, Varieties and Dialects",
+                "volume": "",
+                "issue": "",
+                "pages": "190--199",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. van der Lee and A. van den Bosch, \"Exploring lexical and syntactic features for language variety identification,\" in Proceedings of the Fourth Workshop on NLP for Similar Languages, Varieties and Dialects (VarDial), 2017, pp. 190-199.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "The interpretation of functional heads: Using comparatives to explore the mass/count distinction",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Bale",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Barner",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Journal of Semantics",
+                "volume": "26",
+                "issue": "3",
+                "pages": "217--252",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. C. Bale and D. Barner, \"The interpretation of functional heads: Using comparatives to explore the mass/count distinction,\" Journal of Semantics, vol. 26, no. 3, pp. 217-252, 2009.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Derivation of new readability formulas (automated readability index, fog count and flesch reading ease formula) for navy enlisted personnel",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Kincaid",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Fishburne",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Rogers",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Chissom",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1975,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. P. Kincaid, R. P. Fishburne Jr, R. L. Rogers, and B. S. Chissom, \"Derivation of new readability formulas (automated readability index, fog count and flesch reading ease formula) for navy enlisted personnel,\" 1975.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "How consistent are the best-known readability equations in estimating the readability of design standards?",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Jeong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Green",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "IEEE Transactions on Professional Communication",
+                "volume": "60",
+                "issue": "1",
+                "pages": "97--111",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Zhou, H. Jeong, and P. A. Green, \"How consistent are the best-known readability equations in estimating the readability of design standards?\" IEEE Transactions on Professional Communication, vol. 60, no. 1, pp. 97-111, 2017.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "The use of the gunning fog index to evaluate the readability of polish and english drug leaflets in the context of health literacy challenges in medical linguistics: An exploratory study",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "\u015awieczkowski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Ku\u0142acz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "Cardiology Journal",
+                "volume": "28",
+                "issue": "4",
+                "pages": "627--631",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D. \u015awieczkowski and S. Ku\u0142acz, \"The use of the gunning fog index to evaluate the readability of polish and english drug leaflets in the context of health literacy challenges in medical linguistics: An exploratory study,\" Cardiology Journal, vol. 28, no. 4, pp. 627-631, 2021.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Increasing the precision of the dale-chall readability formula",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Stocker",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1971,
+                "venue": "Reading Improvement",
+                "volume": "8",
+                "issue": "3",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L. P. Stocker, \"Increasing the precision of the dale-chall readability formula,\" Reading Improvement, vol. 8, no. 3, p. 87, 1971.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Stylistic constancy and change across literary corpora: Using measures of lexical richness to date works",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Smith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Kelly",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "Computers and the Humanities",
+                "volume": "36",
+                "issue": "",
+                "pages": "411--430",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. A. Smith and C. Kelly, \"Stylistic constancy and change across literary corpora: Using measures of lexical richness to date works,\" Computers and the Humanities, vol. 36, pp. 411-430, 2002.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Definite and nondefinite superlatives and npi licensing",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Herdan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Sharvit",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Syntax",
+                "volume": "9",
+                "issue": "1",
+                "pages": "1--31",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Herdan and Y. Sharvit, \"Definite and nondefinite superlatives and npi licensing,\" Syntax, vol. 9, no. 1, pp. 1-31, 2006.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Measuring lexical diversity among l2 learners of french",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Treffers-Daller",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Vocabulary knowledge: Human ratings and automated measures",
+                "volume": "47",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Treffers-Daller, \"Measuring lexical diversity among l2 learners of french,\" Vocabulary knowledge: Human ratings and automated mea- sures, vol. 47, 2013.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Using a corpus of school children's writing to investigate the development of vocabulary diversity",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Chipere",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Malvern",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Richards",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Duran",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Special Issue. Proceedings of the Corpus Linguistics 2001 Conference",
+                "volume": "13",
+                "issue": "",
+                "pages": "126--133",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "N. Chipere, D. Malvern, B. Richards, and P. Duran, \"Using a corpus of school children's writing to investigate the development of vocabulary diversity,\" in Technical Papers. Volume 13. Special Issue. Proceedings of the Corpus Linguistics 2001 Conference. Citeseer, 2001, pp. 126-133.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Capturing the diversity in lexical diversity",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Jarvis",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Language Learning",
+                "volume": "63",
+                "issue": "",
+                "pages": "87--106",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Jarvis, \"Capturing the diversity in lexical diversity,\" Language Learning, vol. 63, pp. 87-106, 2013.",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Gpt4all: Training an assistant-style chatbot with large scale data distillation from gpt-3.5-turbo",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Anand",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Nussbaum",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Duderstadt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Schmidt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mulyar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Y. Anand, Z. Nussbaum, B. Duderstadt, B. Schmidt, and A. Mulyar, \"Gpt4all: Training an assistant-style chatbot with large scale data dis- tillation from gpt-3.5-turbo,\" https://github.com/nomic-ai/gpt4all, 2023.",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "A probabilistic interpretation of precision, recall and f-score, with implication for evaluation",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Goutte",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Gaussier",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "European conference on information retrieval",
+                "volume": "",
+                "issue": "",
+                "pages": "345--359",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Goutte and E. Gaussier, \"A probabilistic interpretation of precision, recall and f-score, with implication for evaluation,\" in European con- ference on information retrieval. Springer, 2005, pp. 345-359.",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "what is human?\" a turing test for artistic creativity",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Daniele",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "Di"
+                        ],
+                        "last": "Bernardi Luft",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Bryan-Kinns",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "Artificial Intelligence in Music, Sound, Art and Design: 10th International Conference, EvoMUSART 2021, Held as Part of EvoStar 2021, Virtual Event",
+                "volume": "10",
+                "issue": "",
+                "pages": "396--411",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Daniele, C. Di Bernardi Luft, and N. Bryan-Kinns, \"\"what is human?\" a turing test for artistic creativity,\" in Artificial Intelligence in Music, Sound, Art and Design: 10th International Conference, EvoMUSART 2021, Held as Part of EvoStar 2021, Virtual Event, April 7-9, 2021, Proceedings 10. Springer, 2021, pp. 396-411.",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Human in the loop for machine creativity",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Chung",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:2110.03569"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "N. C. Chung, \"Human in the loop for machine creativity,\" arXiv preprint arXiv:2110.03569, 2021.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "uris": null,
+                "fig_num": "1",
+                "text": "Fig. 1 represents the flow for the creation of the two datasets used in this research. 1) Prompt generation for every data point: The proposed model's datasets are constructed using introductions from Wikipedia articles, specifically human-generated texts.",
+                "type_str": "figure",
+                "num": null
+            },
+            "FIGREF1": {
+                "uris": null,
+                "fig_num": "2",
+                "text": "Fig. 2. Model Training and xAI pipeline",
+                "type_str": "figure",
+                "num": null
+            },
+            "FIGREF2": {
+                "uris": null,
+                "fig_num": null,
+                "text": "Mean segmental TTR(Type Token Ratio) (MSTTR): Mean Segmental TTR = Total TTR in all segments Number of segments e) Moving Average TTR(Type Token Ratio) (MATTR):",
+                "type_str": "figure",
+                "num": null
+            },
+            "FIGREF3": {
+                "uris": null,
+                "fig_num": "3",
+                "text": "Fig. 3. LIME Interpretability Graphs for arbitrary AI-generated texts",
+                "type_str": "figure",
+                "num": null
+            },
+            "FIGREF4": {
+                "uris": null,
+                "fig_num": "45",
+                "text": "Fig. 4. LIME Interpretability Graphs for arbitrary human-generated texts",
+                "type_str": "figure",
+                "num": null
+            },
+            "FIGREF5": {
+                "uris": null,
+                "fig_num": "67",
+                "text": "Fig. 6. Waterfall plot for SHAP values for Logistic Regression model trained on ORCA dataset",
+                "type_str": "figure",
+                "num": null
+            },
+            "TABREF1": {
+                "text": "STYLISTIC FEATURES AND VARIOUS SCORES CALCULATED FOR",
+                "content": "<table><tr><td>THE DATA POINTS</td></tr><tr><td>Linguistic</td></tr><tr><td>Features</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF2": {
+                "text": "STYLISTIC FEATURES AND VARIOUS SCORES CALCULATED FOR THE DATA POINTS (DIVERSITY AND RICHNESS OF VOCABULARY)",
+                "content": "<table><tr><td>Linguistic</td><td>Scores</td><td>Description</td></tr><tr><td>Features</td><td/><td/></tr><tr><td/><td>Yule's Charac-</td><td/></tr><tr><td/><td>teristic K [34]</td><td/></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF3": {
+                "text": "Diversity and richness of the vocabulary: The vocabulary used by AI to generate texts and that used by human writers is vastly different. Human text considers several other factors apart from the meaning and semantics while selecting a word, such as cultural relevance, formal/informal style, text's context and usage, etc. AI on the other hand tends to focus more on the textbook definition rather than these factors, thus causing a disparity with human text even between sentences meant to convey the same meaning. The following vocabulary richness and diversity metric formulae were used in determining the vocabulary levels for both the classes of texts:",
+                "content": "<table><tr><td/><td/><td>1.015(</td><td colspan=\"3\">totalwords totalsentences</td><td>)-84.6(</td><td>totalsyllables totalwords (6)</td><td>)</td></tr><tr><td colspan=\"6\">b) Flesch-Kincaid Grade Level:</td></tr><tr><td>0.39(</td><td colspan=\"3\">totalwords totalsentences</td><td colspan=\"2\">) + 11.8(</td><td>totalsyllables totalwords</td><td>) -15.59 (7)</td></tr><tr><td colspan=\"4\">c) Gunning Fog Index:</td><td/></tr><tr><td colspan=\"2\">0.4 \u2022 [(</td><td colspan=\"3\">totalwords totalsentences</td><td>) + 100(</td><td>complexwords totalwords</td><td>)] (8)</td></tr><tr><td colspan=\"6\">d) Dale-Chall Readability Formula: The Dale-Chall For-</td></tr><tr><td colspan=\"6\">mula compares its wordlist to the provided text and</td></tr><tr><td colspan=\"6\">then determines the U.S. grade level based on the</td></tr><tr><td colspan=\"6\">number of difficult words and average sentence length.</td></tr><tr><td>(C)</td><td/><td/><td/><td/></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF4": {
+                "text": "HYPERPARAMETERS TUNED FOR ORCA AND GPT-J DATASET Waterfall plots show how the Shapley value of each feature adds to the final prediction for a single instance. It makes it easier to see how the contributions add up.3) Force Plots: Force plots are made to show how predictions can be made for specific cases. They show how the value of each attribute and its Shapley value interact to affect the final prediction.",
+                "content": "<table><tr><td>Models</td><td colspan=\"2\">Hyperparameters</td><td/><td>tuned</td><td>Hyperparameters tuned and</td></tr><tr><td/><td colspan=\"4\">and tuned values for Orca</td><td>tuned values for GPT-J</td></tr><tr><td/><td>dataset</td><td/><td/><td/><td>dataset</td></tr><tr><td>Logistic</td><td>'C'</td><td colspan=\"3\">(Regularisation</td><td>'C' (Regularisation Strength):</td></tr><tr><td>Regression</td><td colspan=\"2\">Strength):90.68</td><td/><td/><td>33.27</td></tr><tr><td>Random</td><td>n estimators':</td><td/><td/><td/><td>n estimators':</td><td>761,</td></tr><tr><td>Forest</td><td>212,</td><td colspan=\"3\">'max depth':</td><td>'max depth':</td><td>35,</td></tr><tr><td/><td colspan=\"3\">30,'min samples leaf':</td><td>2,</td><td>'min samples leaf':</td><td>8,</td></tr><tr><td/><td colspan=\"2\">'min samples split':</td><td/><td>4,</td><td>'min samples split':</td><td>4,</td></tr><tr><td/><td colspan=\"2\">'bootstrap': False</td><td/><td/><td>'bootstrap': False</td></tr><tr><td>Gradient</td><td colspan=\"2\">'n estimators':</td><td/><td>351,</td><td>'n estimators':</td><td>486,</td></tr><tr><td>Boosting</td><td colspan=\"2\">'learning rate':</td><td colspan=\"2\">0.18896,</td><td>'learning rate':</td><td>0.20436,</td></tr><tr><td/><td>'max depth':</td><td/><td/><td>5,</td><td>'max depth':</td><td>9,</td></tr><tr><td/><td colspan=\"3\">'min samples leaf':8,</td><td/><td>'min samples leaf':</td><td>7,</td></tr><tr><td/><td colspan=\"3\">'min samples split': 8</td><td/><td>'min samples split': 3</td></tr><tr><td>SVM</td><td colspan=\"4\">'C' (Regularization Parame-</td><td>'C'(Regularization</td><td>Param-</td></tr><tr><td/><td colspan=\"4\">ter): 9.05764, 'kernel': 'lin-</td><td>eter):</td><td>5.185706911647028,</td></tr><tr><td/><td colspan=\"4\">ear', 'degree': 2, 'gamma':</td><td>'kernel': 'rbf', 'degree': 3,</td></tr><tr><td/><td>0.01</td><td/><td/><td/><td>'gamma': 0.1</td></tr><tr><td colspan=\"6\">used in this research to analyze the importance of individual</td></tr><tr><td colspan=\"6\">features in the model's decision process:</td></tr><tr><td colspan=\"6\">1) Summary Plots: These graphs show how important each</td></tr><tr><td colspan=\"6\">trait is across the whole dataset. They show the Shapley</td></tr><tr><td colspan=\"6\">values for each feature, which show how they make the</td></tr><tr><td colspan=\"6\">model's prediction move away from the average (base)</td></tr><tr><td>estimate.</td><td/><td/><td/><td/></tr><tr><td colspan=\"2\">2) Waterfall Plots:</td><td/><td/><td/></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF5": {
+                "text": "CLASSIFICATION METRICS FOR ORCA GENERATED DATASET",
+                "content": "<table><tr><td colspan=\"2\">Model Name</td><td>Accuracy</td><td>F1-Score</td><td>Precision</td><td>Recall</td></tr><tr><td>Logistic</td><td/><td>0.92</td><td>0.92</td><td>0.93</td><td>0.93</td></tr><tr><td>Regression</td><td/><td/><td/><td/><td/></tr><tr><td colspan=\"2\">Decision Tree</td><td>0.80</td><td>0.79</td><td>0.80</td><td>0.77</td></tr><tr><td>Support</td><td>Vector</td><td>0.91</td><td>0.92</td><td>0.93</td><td>0.92</td></tr><tr><td>Classifier</td><td/><td/><td/><td/><td/></tr><tr><td colspan=\"2\">Random Forest</td><td>0.86</td><td>0.86</td><td>0.84</td><td>0.89</td></tr><tr><td colspan=\"2\">Gradient Boosting</td><td>0.89</td><td>0.89</td><td>0.88</td><td>0.90</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF6": {
+                "text": "CLASSIFICATION METRICS FOR GPT-J GENERATED DATASET",
+                "content": "<table><tr><td colspan=\"2\">Model Name</td><td>Accuracy</td><td>F1-Score</td><td>Precision</td><td>Recall</td></tr><tr><td colspan=\"2\">Logistic Regression</td><td>0.67</td><td>0.68</td><td>0.65</td><td>0.66</td></tr><tr><td colspan=\"2\">Decision Tree</td><td>0.78</td><td>0.76</td><td>0.75</td><td>0.76</td></tr><tr><td>Support</td><td>Vector</td><td>0.71</td><td>0.71</td><td>0.69</td><td>0.70</td></tr><tr><td>Classifier</td><td/><td/><td/><td/><td/></tr><tr><td colspan=\"2\">Random Forest</td><td>0.70</td><td>0.69</td><td>0.70</td><td>0.71</td></tr><tr><td colspan=\"2\">Gradient Boosting</td><td>0.65</td><td>0.65</td><td>0.64</td><td>0.61</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF7": {
+                "text": "SOME FEATURE VALUES CHARACTERISTIC TO AI AND HUMAN-GENERATED TEXTS",
+                "content": "<table><tr><td>Feature</td><td>AI-Generated</td><td>Human Generated</td></tr><tr><td>Herdan's C</td><td>0.9214</td><td>0.8901</td></tr><tr><td>Simpson's Index</td><td>0.016</td><td>0.013</td></tr><tr><td>MATTR</td><td>0.9548</td><td>0.9203</td></tr><tr><td>Maas</td><td>0.0180</td><td>0.0196</td></tr><tr><td>Flesch-Kincaid</td><td>37.07</td><td>52.96</td></tr><tr><td>grade level</td><td/><td/></tr><tr><td>Gunning Fog Index</td><td>41.32</td><td>56.99</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            }
+        }
+    }
+}

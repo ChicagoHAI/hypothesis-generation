@@ -3,7 +3,11 @@
 **[Oct'24]** [Literature Meets Data: A Synergistic Approach to Hypothesis Generation](https://arxiv.org/abs/2410.17309)  
 **[Apr'24]** [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326)
 
-![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg)
+<!-- ![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg) -->
+
+![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/mingxuanl-dev/hypothesis-agent_figure1_large_font.jpg)
+
+<!-- **Do we keep the figure1 for hypogenic here or what?** -->
 
 This repository is dedicated to the exploration and development of novel methodologies using large language models (LLMs) to generate hypotheses, a foundational element of scientific progress. Our works introduce frameworks for generating hypotheses with LLMs, specifically **HypoGeniC** (**Hypo**thesis **Gen**eration **i**n **C**ontext) is a data-driven framework that generates hypotheses solely based on given datasets, while **HypoRefine** is a synergistic approach 
 that incorporates both existing literature and given datasets in an agentic framework to generate hypotheses. Additionally, modules of two Union methods **Literature∪HypoGeniC** and **Literature∪HypoRefine** are provided that mechanistically combine hypotheses from literature only with hypotheses from our frameworks. 
@@ -64,7 +68,7 @@ make
 ## Usage
 
 The datasets used in the paper [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326) for **HypoGeniC** is at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).  
-The datasets used in the paper [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326) for **HypoRefine** and Union methods is at [Hypothesis-agent-datasets]()
+The datasets used in the paper [Literature Meets Data: A Synergistic Approach to Hypothesis Generation](https://arxiv.org/abs/2410.17309) for **HypoRefine** and Union methods is at [Hypothesis-agent-datasets](https://github.com/ChicagoHAI/Hypothesis-agent-datasets)
 
 For replicating the results in the paper, you can follow the steps below:
 ### 1. [Optional] Start Redis server
@@ -97,15 +101,16 @@ git clone https://github.com/ChicagoHAI/HypoGeniC-datasets.git ./data
 python ./examples/generation.py
 ```
 
-To use **HypoRefine** or Union methods, follow the steps below:
+To use **HypoRefine** or Union methods, follow the steps below:  
+(There will be 3 hypothesis banks generated: **HypoRefine**, Hypotheses solely from literature, and **Literature∪HypoRefine**.)
 ```bash
-git clone https://github.com/ChicagoHAI/Hypothesis-agent-datasets-datasets.git ./data
+git clone https://github.com/ChicagoHAI/Hypothesis-agent-datasets.git ./data
 python ./examples/union_generation.py
 ```
 
 To run default (best hypothesis) inference on generated hypotheses:
 ```bash
-python ./examples/default_inference.py
+python ./examples/inference.py
 ```
 
 To run multiple-hypothesis inference on generated hypotheses:
@@ -123,6 +128,23 @@ More examples can be found in `examples/` directory.
     - `<TASK>_test.json`: A json file containing the test data. 
     - `<TASK>_val.json`: A json file containing the validation data. 
     - The json file should have keys: `'text_features_1'`, ... `'text_features_n'`, `'label'`. The values corresponding to each key should be a list of strings.
+
+### 2. (optional) Literature PDF preprocessing
+For **HypoRefine** or Union methods, it is required for users to provide relevant literature PDFs and preprocess them following the steps below:
+1. Add PDF files to the directory: literature/YOUR_TASK_NAME/raw/
+2. Run the following lines:
+```bash
+bash ./modules/run_grobid.sh
+```
+   If you haven't set up grobid before:
+```bash
+bash ./modules/setup_grobid.sh
+```
+   Then:
+```bash
+python ./examples/pdf_preprocess.py --task_name YOUR_TASK_NAME
+```
+(We will support automated literature search in a later release.)
 
 ### 2. Write config.yaml
 Create the `config.yaml` file in the same directory as the dataset. In the `config.yaml` file, please specify the following fields:
@@ -198,6 +220,8 @@ prompt_templates:
 ```
 
 `./headline_binary/config.yaml`
+
+**TODO: Instructions for customizing prompt to be updated**
 
 ```yaml
 task_name: headline_binary

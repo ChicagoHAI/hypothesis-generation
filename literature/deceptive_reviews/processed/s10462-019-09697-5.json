@@ -1,0 +1,3699 @@
+{
+    "paper_id": "s10462-019-09697-5",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-07-18T17:41:26.326550Z"
+    },
+    "title": "Deceptive consumer review detection: a survey",
+    "authors": [
+        {
+            "first": "Dushyanthi",
+            "middle": [
+                "U"
+            ],
+            "last": "Vidanagama",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Moratuwa",
+                "location": {
+                    "settlement": "Katubedda",
+                    "country": "Sri Lanka"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Thushari",
+            "middle": [
+                "P"
+            ],
+            "last": "Silva",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Moratuwa",
+                "location": {
+                    "settlement": "Katubedda",
+                    "country": "Sri Lanka"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Asoka",
+            "middle": [
+                "S"
+            ],
+            "last": "Karunananda",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Moratuwa",
+                "location": {
+                    "settlement": "Katubedda",
+                    "country": "Sri Lanka"
+                }
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Consumer reviews are considered to be of utmost significance in the field of e-commerce, for they have a stronghold in deciding the revenue of a business. When arriving at a purchasing decision, a majority of online consumers rely on reviews since they offer credible means of mining opinions of other consumers regarding a particular product. The trustworthiness of online reviews directly affects a company's reputation and profitability, which is why certain business owners pay fraudsters to generate deceptive reviews. Such generation of deceptive reviews which manipulate the purchasing decision of consumers is a persistent and harmful issue. Hence, developing methods to assist businesses and consumers by distinguishing between credible reviews and deceptive reviews remains to be a crucial, yet challenging task. In view of that, this paper unravels prominent techniques that have been proposed to solve the issue of deceptive review detection. Accordingly, the primary goal of this paper is to provide an in-depth analysis of current research on detecting deceptive reviews and to identify the characteristics, strengths, and bottlenecks of those methodologies which may need further improvements.",
+    "pdf_parse": {
+        "paper_id": "s10462-019-09697-5",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Consumer reviews are considered to be of utmost significance in the field of e-commerce, for they have a stronghold in deciding the revenue of a business. When arriving at a purchasing decision, a majority of online consumers rely on reviews since they offer credible means of mining opinions of other consumers regarding a particular product. The trustworthiness of online reviews directly affects a company's reputation and profitability, which is why certain business owners pay fraudsters to generate deceptive reviews. Such generation of deceptive reviews which manipulate the purchasing decision of consumers is a persistent and harmful issue. Hence, developing methods to assist businesses and consumers by distinguishing between credible reviews and deceptive reviews remains to be a crucial, yet challenging task. In view of that, this paper unravels prominent techniques that have been proposed to solve the issue of deceptive review detection. Accordingly, the primary goal of this paper is to provide an in-depth analysis of current research on detecting deceptive reviews and to identify the characteristics, strengths, and bottlenecks of those methodologies which may need further improvements.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "The advancement of Web 2.0 has augmented the trend of online purchasing via e-commerce websites. Online reviews, generated through e-commerce websites and social media denote consumer perception and these reviews play a significant role in e-business, for they could indirectly affect future purchasing decisions. Product manufacturers use reviews to identify product problems as well as to find market intelligence information about their competitors. Leveraging the judging ability of the quality of products/services through online reviews, fraudsters generate fabricated reviews called 'deceptive reviews' to reshape business. Higher numbers of positive reviews induce a customer to purchase a product and fortify financial gains of manufacturers while negative reviews prompt consumers to look for alternatives, thereby causing financial losses. Consequently, a large number of reviews are added through different tools on social media, bringing more challenges in mining opinions and deriving truthful conclusions effectively. Further, there is no control over the quality and content of the web which facilitates the generation of many low-quality consumer reviews out of which deceptive reviews are considered the worst. Thus, the availability of deceptive reviews makes the situation graver as they could influence the potential to reverse a purchase decision. Also worth noting is the ability vendors possess to generate deceptive reviews as the means of either promoting their products or unfairly tarnishing the image of their competitors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Deceptive review detection has a great impact on customer satisfaction. In a scenario where a customer is cheated or deceived by a review, he/she is most unlikely to use that e-commerce site again for purchases. This brings into focus the requirement of identifying and filtering deceptive reviews from e-commerce sites and social media in order to alleviate problems related to the credibility of online opinion mining. This paper, therefore attempts to review the state-of-the-art methods in deceptive review detection and to present an in-depth analysis of the effectiveness of these methods in order to improve future research in deceptive review detection.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "By means of reviewing scholarly studies (Christopher and Rahulnath 2016; Jindal and Liu 2007) , review spam is divided into two main categories as to deceptive reviews-the main focus of the paper and destructive reviews. Destructive reviews are non-reviews, comprising mainly of advertisements and other irrelevant reviews containing no opinion (Ren et al. 2014 ). However, deceptive reviews cause more damage, for they deliberately mislead readers by giving undeserving positive reviews to certain target objects in order to promote the objects, or by giving negative reviews to some target objects in order to damage their reputation (Ren et al. 2014) . Deceptive reviews can negatively impact on business due to the loss in consumer trust as well (Crawford et al. 2015) . While positive reviews increase the revenue, the negative reviews may decrease the conversions by as far as 67% (Campbell 2014) . According to Campbell (2014) , 66% of customers place more trust in e-commerce websites that have both positive and negative reviews.",
+                "cite_spans": [
+                    {
+                        "start": 40,
+                        "end": 72,
+                        "text": "(Christopher and Rahulnath 2016;",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 73,
+                        "end": 93,
+                        "text": "Jindal and Liu 2007)",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 345,
+                        "end": 361,
+                        "text": "(Ren et al. 2014",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 636,
+                        "end": 653,
+                        "text": "(Ren et al. 2014)",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 750,
+                        "end": 772,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 887,
+                        "end": 902,
+                        "text": "(Campbell 2014)",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 918,
+                        "end": 933,
+                        "text": "Campbell (2014)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Due to the importance of reviews in profit making, certain business owners offer incentives to those who write favourable reviews about their merchandise, and they even pay fraudsters to write adverse reviews about their competitor products or services (Crawford et al. 2015) . Deceptive reviews of that nature have created adverse effects, so much so that researchers strive to develop methods to assist both producers and consumers to distinguish between credible reviews and deceiving reviews (Christopher and Rahulnath 2016) . It is expected that effective deceptive review detection methods will ultimately boost consumer trust on products or services which are sold via e-commerce websites.",
+                "cite_spans": [
+                    {
+                        "start": 253,
+                        "end": 275,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 496,
+                        "end": 528,
+                        "text": "(Christopher and Rahulnath 2016)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In terms of the characteristics of a review, it may contain any number of sentences, comment on different aspects of an object, and embody negative, positive or neutral sentiments. Further, online reviews can be considered as big data which exhibits main 4Vs; Volume-the amount of data, Velocity-the arrival of real-time or near real-time review data at a high rate in social media tools, Variety-different structures of review data and Veracity-different quality levels of data. The data volume is regarding the amount and size of reviews. The data velocity is about how frequently reviews are generated by the consumers in real-time or in near real-time. The data variety includes different types of data that are structured, semi-structured and unstructured which are generated through different sources.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "There is a great variety across industry sectors in terms of reviews (such as hotels, restaurants, e-commerce, and home services), along with the multiplicity of languages that reviews are written in Crawford et al. (2015) . Moreover, reviews in social media are quite 1 3 unstructured as they consist of emoticons and emoji in addition to the text. A closer observation on e-commerce sites, Twitter and customer rating sites, such as Yelp and Amazon shed light on the volume and velocity of online reviews (Crawford et al. 2015) . Veracity, the quality level of data, is a substantive factor in assessing online reviews since the vast majority of reviews are not categorized as trustworthy or not (Crawford et al. 2015) .",
+                "cite_spans": [
+                    {
+                        "start": 200,
+                        "end": 222,
+                        "text": "Crawford et al. (2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 507,
+                        "end": 529,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 698,
+                        "end": 720,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The rest of this paper is organized as follows: deceptive review detection (see Sect. 2) provides an overview on the nature and functionality of deceptive review detection, while techniques of deceptive review detection (see Sect. 3) presents methods of discovering deceptive reviews with a comprehensive evaluation of each method regarding their accuracy. Data collection (see Sect. 4) elaborates on the parameters of selected research papers for the survey and the graphical representations of data sources used by other researchers. The next section on comparative evaluation (see Sect. 5) summarizes all approaches and the final section (see Sect. 6) provides the conclusion of the paper.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Review spams are of three types and they are, namely: untruthful reviews (type 1), reviews on particular brands (type 2) and non-reviews (type 3) (Jindal and Liu 2008) . It has been found out that type 2 and type 3 reviews are relatively easy to identify merely by a content analysis of the review (Farooq and Khanday 2016) . Furthermore, traditional classification learning methods are quite user-friendly as they utilize manually labeled training data to detect these two types of spam. Nevertheless, recognizing whether a review is an untruthful opinion spam (type 1) is extremely difficult by manually reading the review because one can carefully craft a spam review similar to any other original/real review (Farooq and Khanday 2016) . Due to financial benefits offered for generating deceptive reviews, fraudsters attempt to generate fake reviews for the purpose of promoting or de-promoting a product/service. However, these spammers can easily disguise themselves in cyberspace, which makes it relatively difficult to identify them. Due to these phenomena, there is a lacuna of reliable data related to fake and genuine reviews that can be treated as training data.",
+                "cite_spans": [
+                    {
+                        "start": 146,
+                        "end": 167,
+                        "text": "(Jindal and Liu 2008)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 298,
+                        "end": 323,
+                        "text": "(Farooq and Khanday 2016)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 713,
+                        "end": 738,
+                        "text": "(Farooq and Khanday 2016)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Deceptive review detection",
+                "sec_num": "2"
+            },
+            {
+                "text": "Deceptive review detection methods can be classified into three major categories as to machine learning approaches, network-based approaches, and pattern-mining approaches. These three types of approaches are elaborated in the subsequent subsections.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Techniques of deceptive review detection",
+                "sec_num": "3"
+            },
+            {
+                "text": "Machine learning techniques are widely used in deceptive review detection where supervised learning requires labeled training data, unsupervised learning requires a set of unlabeled data and semi-supervised learning requires a relatively small set of labeled data supplemented with a large amount of unlabeled data. Semi-supervised learning is ideal for cases such as review spam detection where vast amounts of unlabeled data exist (Crawford et al. 2015) . Nonetheless, the most commonly used learning method is supervised learning (Crawford et al. 2015) . The content of reviews, authors who add reviews and combinations of these two have been considered in applying machine learning techniques.",
+                "cite_spans": [
+                    {
+                        "start": 433,
+                        "end": 455,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 533,
+                        "end": 555,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Machine learning approaches for deceptive review detection",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "The review-centric approach detects spam reviews by analyzing the content of the review. Review-centric features are the features that construct using the information contained in a single review (Crawford et al. 2015) . These features are categorized into linguistic features, POS tagging, N-grams, sentiments, textual features, rating-related features, and quality-related features. However, purely content-based classifiers have several limitations. Firstly, the spammers can easily manipulate the content to avoid review detection for spam. For example, if the duplicate reviews are to be considered as spam, the spammers may simply reword the content. Secondly, content-based spam detection is designed for specific application domains and it cannot be easily applied to diverse domains. Accordingly, the content-based approach compares the linguistic features of genuine and spam reviews. Thirdly, most content-based classifiers require manually-labeled real datasets.",
+                "cite_spans": [
+                    {
+                        "start": 196,
+                        "end": 218,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Machine learning approaches for deceptive review detection",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Reviewer centric features include the characteristics and behaviors of the person who writes a particular review. Further, it was observed that about 75% of spammers write more than five reviews on any given day (Crawford et al. 2015) ; therefore, the number of reviews a user writes per day can help to detect spammers since 90% of legitimate reviewers never create more than one review on any given day. Approximately 85% of spammers wrote more than 80% of their reviews as positive reviews; thus, a high percentage of positive reviews can be considered an indication of an untrustworthy reviewer. The average review length could also be regarded as an important indication of reviewers with questionable intentions since about 80% of spammers have no reviews longer than 135 words, while more than 92% of reliable reviewers have an average review length of greater than 200 words (Crawford et al. 2015) .",
+                "cite_spans": [
+                    {
+                        "start": 212,
+                        "end": 234,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 883,
+                        "end": 905,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Machine learning approaches for deceptive review detection",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Initially, the researchers who incorporated supervised learning for deceptive review detection used duplicate reviews as positive training examples (fake), and the rest of the reviews as negative training examples (non-fake) (Jindal and Liu 2008) . Duplicate and near-duplicate reviews were detected using the 2-gram method based on review content comparison and the review pairs with a similarity score of at least 90% were chosen as duplicates. They incorporated those examples to develop a model to discover non-duplicate reviews with similar characteristics, which could most probably be pseudo-reviews and the logistic regression (LR) they utilized outperformed support vector machine (SVM) and Naive Bayes (NB) classification. Banerjee et al. (2015) analyzed the extent to which authentic and pseudo-reviews are distinguishable using supervised learning based on four linguistic clues, namely, understand-ability, level of details, writing style, and cognition indicators. Several supervised learning algorithms were used to classify authentic and pseudo-reviews based on linguistic clues and some of the algorithms used included LR, decision tree, neural network, JRip, NB, random forest, SVM, and voting.",
+                "cite_spans": [
+                    {
+                        "start": 225,
+                        "end": 246,
+                        "text": "(Jindal and Liu 2008)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 733,
+                        "end": 755,
+                        "text": "Banerjee et al. (2015)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Supervised learning techniques",
+                "sec_num": "3.1.1"
+            },
+            {
+                "text": "In addition, Shojaee et al. (2013) proposed a novel method to detect review spam using Stylometric (Lexical and Syntactic) features. They built SVM and NB classifiers using a hybrid set of both lexical and syntactic features and compared that with either lexical or syntactic features. Shojaee et al. (2013) further found that SVM outperformed NB for all sets of features. Further, Li et al. (2011) tested several supervised methods including SVM, LR, and NB with all three types of features including review-centric, reviewer-centric and product-related features which NB showed outperformed results.",
+                "cite_spans": [
+                    {
+                        "start": 13,
+                        "end": 34,
+                        "text": "Shojaee et al. (2013)",
+                        "ref_id": "BIBREF43"
+                    },
+                    {
+                        "start": 286,
+                        "end": 307,
+                        "text": "Shojaee et al. (2013)",
+                        "ref_id": "BIBREF43"
+                    },
+                    {
+                        "start": 382,
+                        "end": 398,
+                        "text": "Li et al. (2011)",
+                        "ref_id": "BIBREF21"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Supervised learning techniques",
+                "sec_num": "3.1.1"
+            },
+            {
+                "text": "However, due to the lack of reliable truth label of fake/non-fake review data, existing research has relied mostly on ad-hoc or fake/non-fake labels for model building (Mukherjee et al. 2012) . Accordingly, Jindal and Liu (2008) used duplicate and nearduplicate reviews as fake reviews which were restrictive and, more often than not, unreliable. It should be noted that most of the other researchers have used manually labeled datasets, which also incurred reliability issues because the accuracy of human labeling of fake reviews is shown to be quite poor (Li et al. 2011; Ott et al. 2011) . Ott et al. (2011) used Amazon mechanical turk (AMT) to crowd-source pseudo hotel reviews by paying anonymous online workers (Turkers) to write fake reviews. These were not considered to be 'real' fake reviews as Turkers do not possess sufficient domain knowledge, psychological state of mind or experience to write convincing fake reviews (Mukherjee et al. 2012) . Further, Li et al. (2017) proposed a Bayesian approach named 'TopicSpam', a variation of latent Dirichlet allocation (LDA), for deceptive review detection. This aimed at detecting the subtle differences between the topic-word distributions of deceptive reviews vs. truthful reviews.",
+                "cite_spans": [
+                    {
+                        "start": 168,
+                        "end": 191,
+                        "text": "(Mukherjee et al. 2012)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 207,
+                        "end": 228,
+                        "text": "Jindal and Liu (2008)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 558,
+                        "end": 574,
+                        "text": "(Li et al. 2011;",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 575,
+                        "end": 591,
+                        "text": "Ott et al. 2011)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 594,
+                        "end": 611,
+                        "text": "Ott et al. (2011)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 933,
+                        "end": 956,
+                        "text": "(Mukherjee et al. 2012)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 968,
+                        "end": 984,
+                        "text": "Li et al. (2017)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Supervised learning techniques",
+                "sec_num": "3.1.1"
+            },
+            {
+                "text": "A model was created based on positive unlabeled (PU) learning incorporating several reliable negative examples identified from the unlabeled dataset (Ren et al. 2014) . The representative positive examples and negative examples were generated based on LDA. For the remaining unlabeled examples which could not be explicitly identified as positive and negative, two similarity weights were assigned, thereby displaying the probability of a spy example belonging to the positive class and the negative class. Finally, the spy examples and their similarity weights were incorporated into SVM to build an accurate classifier (Li et al. 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 149,
+                        "end": 166,
+                        "text": "(Ren et al. 2014)",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 621,
+                        "end": 637,
+                        "text": "(Li et al. 2014)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Semi-supervised learning techniques",
+                "sec_num": "3.1.2"
+            },
+            {
+                "text": "In addition to that, Rout et al. (2017) demonstrated how four popular semi-supervised learning approaches-Co-training algorithm, expectation maximization algorithm, label propagation and spreading and PU learning-can be used to improve the classification by incorporating new dimensions in the feature vector such as parts-of-speech features, linguistic and word count features and sentimental content features. They achieved highperformance levels using PU learning-based classification. It was observed that spammers' ratings tend to deviate from the average review rating at a far higher rate than legitimate reviewers, thus identifying that user rating deviations may help in detection of dishonest reviewers (Crawford et al. 2015) . Moreover, it was identified that the presence of similar reviews for different products by the same reviewer has been shown to be a strong indication of a spammer (Crawford et al. 2015) . If the reviews are written for verified purchases they will most likely reflect a genuine review and a reviewer with a higher ratio of verified purchases can be considered as more trustworthy (Crawford et al. 2015) . Jindal et al. (2010) suggested using unexpected deviations from the expected behavior of reviewers since unexpected rules discovered the suspicious behavior of reviewers. Furthermore, Lim et al. (2010) proposed a behavioral approach to detect review spammers who tried to manipulate review ratings on some target products or product groups. They derived an aggregated behavior scoring method to rank reviewers as per the degree they demonstrated spamming related behaviors. In addition, Feng et al. (2012) identified different types of distributional footprints of deceptive reviews which necessarily distorted its distribution of review scores.",
+                "cite_spans": [
+                    {
+                        "start": 21,
+                        "end": 39,
+                        "text": "Rout et al. (2017)",
+                        "ref_id": "BIBREF39"
+                    },
+                    {
+                        "start": 713,
+                        "end": 735,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 901,
+                        "end": 923,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 1118,
+                        "end": 1140,
+                        "text": "(Crawford et al. 2015)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 1143,
+                        "end": 1163,
+                        "text": "Jindal et al. (2010)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 1327,
+                        "end": 1344,
+                        "text": "Lim et al. (2010)",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 1630,
+                        "end": 1648,
+                        "text": "Feng et al. (2012)",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Semi-supervised learning techniques",
+                "sec_num": "3.1.2"
+            },
+            {
+                "text": "Due to the difficulty of human labeling which is required for supervised learning and evaluation, a novel unsupervised text mining model was suggested by confirming the semantic language modeling (SLM). Thus, the text mining-based computational model is effective for detection of untruthful reviews, even if spammers use different strategies (Lau et al. 2011) .",
+                "cite_spans": [
+                    {
+                        "start": 343,
+                        "end": 360,
+                        "text": "(Lau et al. 2011)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Un-supervised learning techniques",
+                "sec_num": "3.1.3"
+            },
+            {
+                "text": "A mechanism exists to delete dishonest reviews that would distort the popularity ranking significantly when compared with the removal of a similar set of reviews at random (Wu et al. 2010b) . This distortion could be quantified by comparing popularity rankings before and after deletion, using a distortion rank correlation. Mukherjee et al. (2013) proposed a mechanism to observe reviewing behaviors to detect fraudster reviewers using an unsupervised Bayesian inference framework. This unsupervised model is called 'Author Spamicity Model (ASM)' and its basis lies in the theoretical foundation of probabilistic model-based clustering.",
+                "cite_spans": [
+                    {
+                        "start": 172,
+                        "end": 189,
+                        "text": "(Wu et al. 2010b)",
+                        "ref_id": "BIBREF47"
+                    },
+                    {
+                        "start": 325,
+                        "end": 348,
+                        "text": "Mukherjee et al. (2013)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Un-supervised learning techniques",
+                "sec_num": "3.1.3"
+            },
+            {
+                "text": "The Bayesian framework facilitates the characterization of many behavioral phenomena of opinion spammers, using the estimated latent population distributions. Fei et al. (2013) modeled reviewers and their co-occurrence in bursts as a Markov random field (MRF) and employed the loopy belief propagation (LBP) method to infer whether a reviewer is a spammer or not.",
+                "cite_spans": [
+                    {
+                        "start": 159,
+                        "end": 176,
+                        "text": "Fei et al. (2013)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Un-supervised learning techniques",
+                "sec_num": "3.1.3"
+            },
+            {
+                "text": "In addition, Kolhe et al. (2014) proposed a scoring algorithm comprising three models; group spam-product model (GPM), member spam-product model (MPM) and group spammember spam model (GSMS), which were used to analyze the dataset and form candidate groups using the process of frequent itemset mining (FIM) method (Mukherjee et al. 2012) . All three types of features-review content features, reviewer behavioral features, and product-related features-are used in unison to identify the deceptive reviews. Mukherjee et al. (2013) formulated opinion spam detection as a Bayesian clustering problem, in which their model considered the degree of spamming of authors and reviews as latent variables with other observed behavioral and linguistic features in latent spam model (LSM).",
+                "cite_spans": [
+                    {
+                        "start": 13,
+                        "end": 32,
+                        "text": "Kolhe et al. (2014)",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 314,
+                        "end": 337,
+                        "text": "(Mukherjee et al. 2012)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 506,
+                        "end": 529,
+                        "text": "Mukherjee et al. (2013)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Un-supervised learning techniques",
+                "sec_num": "3.1.3"
+            },
+            {
+                "text": "Nevertheless, Lin et al. (2014) applied different features like review-centric and reviewer-centric with supervised classifiers LR and SVM, while using the unsupervised method by calculating a score value using weight parameters which turn the contributions of feature set and identify deceptive reviews using a threshold value. Further, Singh (2015) utilized the unsupervised Kth Nearest Neibour (KNN) method to detect the outliers of reviews based on the review, reviewer and product-centric features. In addition to that, Wu et al. (2017) defined the set of features that expected to be predictive of suspicious reviews by giving a score value for each feature. Thereafter, they used two aggregation methods named Singular Value Decomposition (SVD) and unsupervised Hedge Algorithm (UH) to calculate a single score of ranking.",
+                "cite_spans": [
+                    {
+                        "start": 14,
+                        "end": 31,
+                        "text": "Lin et al. (2014)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 338,
+                        "end": 350,
+                        "text": "Singh (2015)",
+                        "ref_id": "BIBREF44"
+                    },
+                    {
+                        "start": 525,
+                        "end": 541,
+                        "text": "Wu et al. (2017)",
+                        "ref_id": "BIBREF49"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Un-supervised learning techniques",
+                "sec_num": "3.1.3"
+            },
+            {
+                "text": "The Review Graph-based approach is used to capture relationships among reviewers, reviews, stores, items and group reviewers where each node of the graph is attached with a set of features. Wang et al. (2011) showed that certain types of spammers posted many similar reviews about one target entity, using the behavior of reviewers, text similarity, linguistic features, and rating patterns. They proposed a novel concept of a heterogeneous review graph to capture the relationships among reviewers, reviews and stores that the reviewers have reviewed. They further explored the interactions between nodes in that graph which could reveal the cause of spam and proposed an iterative model to identify suspicious reviewers (Wang et al. 2011 ). This was the first time such complicated relationships had been identified for review spam detection. Wang et al. (2011) also created an algorithm called Iterative Computation Framework (ICF) for calculating the trustworthiness of reviewers, the honesty of reviews, and the reliability of stores by exploring inter-dependencies between those three.",
+                "cite_spans": [
+                    {
+                        "start": 190,
+                        "end": 208,
+                        "text": "Wang et al. (2011)",
+                        "ref_id": "BIBREF48"
+                    },
+                    {
+                        "start": 722,
+                        "end": 739,
+                        "text": "(Wang et al. 2011",
+                        "ref_id": "BIBREF48"
+                    },
+                    {
+                        "start": 845,
+                        "end": 863,
+                        "text": "Wang et al. (2011)",
+                        "ref_id": "BIBREF48"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network based approaches",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "In a further attempt, a unified probabilistic graphical model named, Unified Review Spamming Model (URSM) was proposed to detect suspicious review spam, the review spammers, and suspicious items in an unsupervised manner (Xu et al. 2015) . The goal of URSM was to rank the review texts, the reviewers and items based on their spam behavior, which is modeled as a latent variable by observing abnormal features of reviews, users, items, and the text generality detected from the review text.",
+                "cite_spans": [
+                    {
+                        "start": 221,
+                        "end": 237,
+                        "text": "(Xu et al. 2015)",
+                        "ref_id": "BIBREF52"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network based approaches",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "An iterative algorithm was proposed by Noekhah et al. (2014) to detect pseudoreviews, review spammers and groups of spammers considering the above mentioned three types of features and entity relationships between reviews, reviewers, products and group of reviewers.",
+                "cite_spans": [
+                    {
+                        "start": 39,
+                        "end": 60,
+                        "text": "Noekhah et al. (2014)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network based approaches",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Further, Shehnepoor et al. (2017) proposed NetSpam framework that was a novel network-based approach which models review networks as heterogeneous information networks. Its classification step used different meta-path types which were innovative approaches in spam detection domain. Moreover, Shehnepoor et al. (2017) proposed a novel weighting method for spam features to determine the relative importance of each feature and demonstrated the effectiveness of each feature when identifying spam from normal reviews.",
+                "cite_spans": [
+                    {
+                        "start": 9,
+                        "end": 33,
+                        "text": "Shehnepoor et al. (2017)",
+                        "ref_id": "BIBREF41"
+                    },
+                    {
+                        "start": 293,
+                        "end": 317,
+                        "text": "Shehnepoor et al. (2017)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network based approaches",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Another unsupervised network-based framework presented by Akoglu et al. (2013) successfully captured the correlations of labels among users and products. This was an iterative, propagation-based algorithm that exploited the network structure and the long-range correlations to deduce the class labels of users, products, and reviews.",
+                "cite_spans": [
+                    {
+                        "start": 58,
+                        "end": 78,
+                        "text": "Akoglu et al. (2013)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network based approaches",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Furthermore, a neural network model to learn document-level representation for detecting deceptive opinion spam was later generated and it processed sentence representation with convolution neural network (CNN) (Ren and Ji 2017; Ren and Zhang 2016) . Then, sentence representations were combined using a Gated Recurrent Neural Network (GRNN). Finally, the document representations were directly used as features to identify deceptive opinion spam. Similarly, Wu et al. (2017) proposed a Twitter spam detection method based on deep learning which addressed the challenges of existing feature-based classifiers. Jain et al. (2016) demonstrated the procedure of spam detection using CNN and Recursive Neural Network (RNN) by learning from high-level features on their own with the help of raw data.",
+                "cite_spans": [
+                    {
+                        "start": 211,
+                        "end": 228,
+                        "text": "(Ren and Ji 2017;",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 229,
+                        "end": 248,
+                        "text": "Ren and Zhang 2016)",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 459,
+                        "end": 475,
+                        "text": "Wu et al. (2017)",
+                        "ref_id": "BIBREF49"
+                    },
+                    {
+                        "start": 610,
+                        "end": 628,
+                        "text": "Jain et al. (2016)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network based approaches",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Along with the successful utilization of Neural Networks on various classification applications, Aghakhani et al. (2018) suggested to use Generative Adversarial Networks (GANs) for deceptive review detection. GANs are a class of artificial intelligence algorithms used in unsupervised machine learning, implemented by a system of two neural networks contesting with each other in a zero-sum game framework (Aghakhani et al. 2018 ). Thus, using a semi-supervised learning method such as GAN can eliminate the issue of scarcity of labeled dataset.",
+                "cite_spans": [
+                    {
+                        "start": 97,
+                        "end": 120,
+                        "text": "Aghakhani et al. (2018)",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 406,
+                        "end": 428,
+                        "text": "(Aghakhani et al. 2018",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network based approaches",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Temporal patterns have demonstrated several longitudinal studies along the time dimension. At times, review spammers were active in certain days and certain reviewers displayed identified rating patterns over a time period. Further, the deceptive reviewers could be focused on certain locations. These temporal patterns enabled some longitudinal studies which use features along the time dimension. Nevertheless, it has been brought into focus that a majority of reviewers generally write single reviews. 68% of the reviewers write only one review on Amazon and such an occurrence is called a 'singleton review' (Xie et al. 2012) . Xie et al. (2012) introduced a novel approach that maps the singleton review spam detection problem to an abnormally correlated temporal pattern-detection problem. The algorithm they suggested was based on multi-scale multi-dimensional time series anomaly detection (Xie et al. 2012) .",
+                "cite_spans": [
+                    {
+                        "start": 612,
+                        "end": 629,
+                        "text": "(Xie et al. 2012)",
+                        "ref_id": "BIBREF50"
+                    },
+                    {
+                        "start": 632,
+                        "end": 649,
+                        "text": "Xie et al. (2012)",
+                        "ref_id": "BIBREF50"
+                    },
+                    {
+                        "start": 898,
+                        "end": 915,
+                        "text": "(Xie et al. 2012)",
+                        "ref_id": "BIBREF50"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Pattern mining approaches",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Furthermore, sentiment analysis techniques are incorporated for review spam detection by computing the sentiment score and then combining the discriminative rules from the abnormal time windows (Peng and Zhong 2014) . Li et al. (2015) considered meta-data patterns, both temporal and spatial when detecting deceptive reviews. It was found that the registration pattern of the reviewers, the average travel speed of a reviewer from the written location of one review to another, writing patterns over the weekdays and weekends, IP addresses, cookies and pattern of the locations where reviews are written to be noteworthy features of this review writing process.",
+                "cite_spans": [
+                    {
+                        "start": 194,
+                        "end": 215,
+                        "text": "(Peng and Zhong 2014)",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 218,
+                        "end": 234,
+                        "text": "Li et al. (2015)",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Pattern mining approaches",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "As per Li et al. (2016) , Labeled Hidden Markov Model (LHMM) was proposed to detect spammers by modeling their temporal posting behaviors. While this approach required only the time-stamp of reviews, their analysis showed major differences of temporal patterns of spammers and non-spammers (Li et al. 2016) . Further, Santosh and Mukherjee (2016) discovered various temporal patterns and their relationships with the rate at which fake reviews are posted. They had employed vector auto-regression (VAR) to predict the rate of deception across different spamming policies such as early spamming, mid spamming and late spamming. Additionally, they explored the effect of reviews on future rating and popularity prediction of entities as well.",
+                "cite_spans": [
+                    {
+                        "start": 7,
+                        "end": 23,
+                        "text": "Li et al. (2016)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 290,
+                        "end": 306,
+                        "text": "(Li et al. 2016)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 318,
+                        "end": 346,
+                        "text": "Santosh and Mukherjee (2016)",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Pattern mining approaches",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "This paper is mainly focused on research findings on the area of deceptive review detection. Around 63 research papers were studied in-depth to gather findings on different deceptive review detection techniques. According to Fig. 1 , around 30% of researchers used datasets from Amazon while 15% used AMT datasets by paying anonymous online workers to write fake reviews.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 230,
+                        "end": 231,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Data collection",
+                "sec_num": "4"
+            },
+            {
+                "text": "More than 30% of research has used the review content based features to detect deceptive reviews, while 24% has used both content features, reviewer behavioral features and product-related features (Fig. 2 ). Furthermore, less than 5% of research has used temporal and spatial approaches and big data analytic approaches (Fig. 2 ) and more than 40% of research detects deceptive reviews using the supervised method, while around 15% has used semi-supervised and unsupervised methods (Fig. 3 ). Overall, most of the research has incorporated machine-learning techniques whereas fewer have used self-supervised, LDA, pattern analysis, neural network and multitasking learning methods (Fig. 3 ).",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 204,
+                        "end": 205,
+                        "text": "2",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 327,
+                        "end": 328,
+                        "text": "2",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 489,
+                        "end": 490,
+                        "text": "3",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 688,
+                        "end": 689,
+                        "text": "3",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Data collection",
+                "sec_num": "4"
+            },
+            {
+                "text": "Tables 1 and 2 demonstrate that most of the research has used machine-learning techniques, Bayesian technique and topic-modeling technique for content analysis of the deceptive review detection. Further, the aforesaid approaches have used precision, accuracy, recall, F measure and Area Under the Curve (AUC) to evaluate the methods.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    },
+                    {
+                        "start": 13,
+                        "end": 14,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "When considering the review content-based deceptive review detection approach, the SVM technique outperformed NB, KNN, LR, and Decision Tree techniques while NB is more appropriate for small datasets, but SVM for large sets of data (Badresiya et al. 2014) . PU learning on SVM detects a large number of potential pseudo-reviews hidden in the unlabeled set (Li et al. 2014; Ren et al. 2014) . Nonetheless, LR has the potential of achieving high F Score value with PU learning (Rout et al. 2017) . Further, the SLM technique proves to be quite effective for untruthful detection and a combination of LR, KNN, and SVM is better for non-review detection (Lau et al. 2011) . Li et al. (2014 Li et al. ( , 2017 ) used a generative Bayesian approach which achieved better results in comparison to SVM and generative LDA-based topic modeling approach with high accuracy. In addition to that, Hai et al. (2016) concluded that high-quality unlabeled review data may help SMTL-LLR to learn better.",
+                "cite_spans": [
+                    {
+                        "start": 232,
+                        "end": 255,
+                        "text": "(Badresiya et al. 2014)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 356,
+                        "end": 372,
+                        "text": "(Li et al. 2014;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 373,
+                        "end": 389,
+                        "text": "Ren et al. 2014)",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 475,
+                        "end": 493,
+                        "text": "(Rout et al. 2017)",
+                        "ref_id": "BIBREF39"
+                    },
+                    {
+                        "start": 650,
+                        "end": 667,
+                        "text": "(Lau et al. 2011)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 670,
+                        "end": 685,
+                        "text": "Li et al. (2014",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 686,
+                        "end": 704,
+                        "text": "Li et al. ( , 2017",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 884,
+                        "end": 901,
+                        "text": "Hai et al. (2016)",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "When considering the features of review content, a high F-measure value could be achieved by applying SVM with SMO over a combination of both lexical and syntactic features (Shojaee et al. 2013 ) Also worth noting is that the sentence structure manipulates the genre of a text and detects deceptive opinions (Xu and Zhao 2012) . It should also be highlighted that detecting pseudo-reviews requires both linguistic features and behavioral features (Shivagangadhar et al. 2015) and the combinatory approach using psycho-linguistically motivated features and n-gram features can perform slightly better (Shivagangadhar et al. 2015) . Furthermore, Banerjee et al. (2015) exposed that the understandability, level of details, writing style, and cognition indicators offer useful linguistic clues to distinguish between authentic and fake reviews. Also, the titles of reviews are as useful as their descriptions can use to distinguish between authentic and fake reviews by incorporating meta-classification algorithms such as voting, which emerged as the best performing algorithm. In addition, Lai et al. (2010a) found that Self-supervised Decision Tree method is more flexible than most supervised spam detection systems which depend primarily on pre-classified data. The KL divergence and the probabilistic language modeling-based computational model are also considered to be effective for the detection of untruthful reviews. Moreover, the SVM-based method is yet another effective mechanism to detect non-reviews (Lai et al. 2010a) .",
+                "cite_spans": [
+                    {
+                        "start": 173,
+                        "end": 193,
+                        "text": "(Shojaee et al. 2013",
+                        "ref_id": "BIBREF43"
+                    },
+                    {
+                        "start": 308,
+                        "end": 326,
+                        "text": "(Xu and Zhao 2012)",
+                        "ref_id": "BIBREF51"
+                    },
+                    {
+                        "start": 447,
+                        "end": 475,
+                        "text": "(Shivagangadhar et al. 2015)",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 600,
+                        "end": 628,
+                        "text": "(Shivagangadhar et al. 2015)",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 644,
+                        "end": 666,
+                        "text": "Banerjee et al. (2015)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 1089,
+                        "end": 1107,
+                        "text": "Lai et al. (2010a)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1513,
+                        "end": 1531,
+                        "text": "(Lai et al. 2010a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "All aforesaid methods suggested to combine different features and to evaluate the approaches with large datasets in diverse domains. Lau et al. (2011) suggested to further improve the accuracy of SLM method, evaluate the effectiveness and efficiency of design artifacts based on a larger dataset and examine more sophisticated language modeling approaches, such as n-gram language models, to improve the effectiveness of the untruthful review detection method. Also, the semantic granularity of text will be examined as a candidate feature for untruthful review detection and the impact of fake reviews on product sales will be examined based on an econometric analysis. Table 3 summarizes the research which identified deceptive reviews based on reviewer behavioral analysis using machine learning approaches while Jindal et al. ( 2010) used a rulebased approach with unexpected rules. When considering the reviewer behavior, there exists a connection between the distributional anomaly and deceptive reviews (Feng et al. 2012) . Further, the aggregated behavior scoring methods depicted outperformed results (Lim et al. 2010 ) and unexpected rules and groups represented abnormal or unusual behaviors of reviewers, thereby indicating spam activities (Jindal et al. 2010) . Moreover, Mukherjee et al. (2013) found that the Author Spamicity Model is effective and it outperforms strong competitors. In view of this, it could be suggested to incorporate review spammer detection for review detection and vice versa to explore new ways to learn spamming related behavior patterns (Lim et al. 2010) .",
+                "cite_spans": [
+                    {
+                        "start": 133,
+                        "end": 150,
+                        "text": "Lau et al. (2011)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 1010,
+                        "end": 1028,
+                        "text": "(Feng et al. 2012)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 1110,
+                        "end": 1126,
+                        "text": "(Lim et al. 2010",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 1252,
+                        "end": 1272,
+                        "text": "(Jindal et al. 2010)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 1285,
+                        "end": 1308,
+                        "text": "Mukherjee et al. (2013)",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 1578,
+                        "end": 1595,
+                        "text": "(Lim et al. 2010)",
+                        "ref_id": "BIBREF26"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 677,
+                        "end": 678,
+                        "text": "3",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "Tables 4 and 5 summarise the research which used a combination of all features such as content specific, reviewer specific, product specific and semantic features, without being limited to one set of features. Most of the researches, in this context, focused on machinelearning techniques. Even though Jindal and Liu (2007, 2008) found LR to be highly effective, SVM presented a high accuracy and precision by including a new set of features (Christopher and Rahulnath 2016; Daiyan et al. 2014; Li et al. 2014) . Nonetheless, Rout et al. (2016) asserted that Decision Trees have the potential of achieving high performance in comparison to other supervised approaches, while Mushtaq et al. (2016) articulated that Bayes probabilistic classifier is more sensitive to detect spam. Lin et al. (2014) elaborated in their study that the unsupervised method which uses a spam score with a threshold value can achieve a relatively positive effect without training samples. Also worth noting is that unsupervised methods such as LSM-UP and LSM-HE significantly outperform baseline clustering methods on entropy, purity, and F1 (Mukherjee et al. 2013) . Further, singular value decomposition (SVD) is also known to outperform the unsupervised hedge algorithm (UH) (Wu et al. 2010a ). The unsupervised clustering explored distortion in popularity ranking and that distortion contributes to demarcate true positives from false positives (Wu et al. 2010b ). The semi-supervised two-view co-training algorithms can achieve better results than the single-view algorithms (Li et al. 2011) . Jindal and Liu (2007, 2008) further suggested using a dataset in a different domain and aligning with that, Christopher and Rahulnath (2016) , analysed on social media data which revealed more behavioral traits of reviewers. Li et al. (2011) , exploiting the probabilistic two-view algorithm such as Co-EM, suggested to model the uncertainty in review spam identification task and to test the co-training algorithm in other opinion resources such as blogs, or Twitter. Daiyan et al. (2014) also suggested improving the detection method with a different corpus.",
+                "cite_spans": [
+                    {
+                        "start": 302,
+                        "end": 312,
+                        "text": "Jindal and",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 313,
+                        "end": 329,
+                        "text": "Liu (2007, 2008)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 442,
+                        "end": 474,
+                        "text": "(Christopher and Rahulnath 2016;",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 475,
+                        "end": 494,
+                        "text": "Daiyan et al. 2014;",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 495,
+                        "end": 510,
+                        "text": "Li et al. 2014)",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 526,
+                        "end": 544,
+                        "text": "Rout et al. (2016)",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 675,
+                        "end": 696,
+                        "text": "Mushtaq et al. (2016)",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 779,
+                        "end": 796,
+                        "text": "Lin et al. (2014)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 1119,
+                        "end": 1142,
+                        "text": "(Mukherjee et al. 2013)",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 1255,
+                        "end": 1271,
+                        "text": "(Wu et al. 2010a",
+                        "ref_id": "BIBREF46"
+                    },
+                    {
+                        "start": 1426,
+                        "end": 1442,
+                        "text": "(Wu et al. 2010b",
+                        "ref_id": "BIBREF47"
+                    },
+                    {
+                        "start": 1557,
+                        "end": 1573,
+                        "text": "(Li et al. 2011)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 1576,
+                        "end": 1586,
+                        "text": "Jindal and",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1587,
+                        "end": 1603,
+                        "text": "Liu (2007, 2008)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1684,
+                        "end": 1716,
+                        "text": "Christopher and Rahulnath (2016)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 1801,
+                        "end": 1817,
+                        "text": "Li et al. (2011)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 2045,
+                        "end": 2065,
+                        "text": "Daiyan et al. (2014)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 13,
+                        "end": 14,
+                        "text": "5",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "Table 6 summarises the research which used graph-based and network-related approaches. Best results from graph-based approach were obtained when all behavioral and linguistic features are combined together (Noekhah et al. 2014 ) and it identified subtle spamming activities with fine precision and human evaluation agreement (Wang et al. 2011) . Also worth noting is that experimental results on three popular review datasets demonstrated the effectiveness of the probabilistic graphical model (Xu et al. 2015) . Shehnepoor et al. (2017) calculated weights using the meta-path concept which could be quite effective in identifying spam reviews and may lead to a better performance. Even without a train set, NetSpam could calculate the importance of each feature and it yielded better performance in the feature addition process, and performed better than previous work, with a limited number of features. Furthermore, reviews behavioral category performed better than other categories. In terms of the neural network approach, bi-directional gated recurrent neural network model with attention mechanism presented high accuracy.",
+                "cite_spans": [
+                    {
+                        "start": 206,
+                        "end": 226,
+                        "text": "(Noekhah et al. 2014",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 325,
+                        "end": 343,
+                        "text": "(Wang et al. 2011)",
+                        "ref_id": "BIBREF48"
+                    },
+                    {
+                        "start": 494,
+                        "end": 510,
+                        "text": "(Xu et al. 2015)",
+                        "ref_id": "BIBREF52"
+                    },
+                    {
+                        "start": 513,
+                        "end": 537,
+                        "text": "Shehnepoor et al. (2017)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "6",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "In addition to that, Ren and Zhang (2016) suggested to improve the accuracy by integrating discrete and neural features for the feature set and Shehnepoor et al. (2017) suggested to use a similar meta-path concept which could be used to find spammer communities, utilizing the product features. It certainly is a promising direction for future studies since they used features mostly related to spotting spammers and spam reviews, while single networks have received considerable attention from various disciplines for over a decade. It should also be noted that information diffusion and content sharing in multi-layer networks is still a young branch of research.",
+                "cite_spans": [
+                    {
+                        "start": 21,
+                        "end": 41,
+                        "text": "Ren and Zhang (2016)",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 144,
+                        "end": 168,
+                        "text": "Shehnepoor et al. (2017)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "In recent years, deep learning techniques are successfully used for text classification tasks. Though recurrent neural network (RecurrentNN) and convolutional neural network (CNN) showed satisfactory performance in classification, the complexity of such neural network-based methods requires much larger datasets to reach a reasonable performance (Aghakhani et al. 2018) . Further, Aghakhani et al. (2018) proposed a GAN based approach to detect deceptive reviews which required few credible datasets.",
+                "cite_spans": [
+                    {
+                        "start": 347,
+                        "end": 370,
+                        "text": "(Aghakhani et al. 2018)",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 382,
+                        "end": 405,
+                        "text": "Aghakhani et al. (2018)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "Table 7 summarises the research which used temporal and spatial features for the detection of deceptive reviews. As per Li et al. (2015) , a combination of uni-gram and bi-gram features, behavioral features, temporal and spatial features demonstrated high accuracy. The multi-scale anomaly detection algorithm on multi-dimensional time series based on curve fitting is effective in detecting singleton review spam (Xie et al. 2012) . Xie et al. (2012) further performed an extensive analysis on the temporal patterns of opinion spamming and analysed different temporal patterns of spammers and non-spammers.",
+                "cite_spans": [
+                    {
+                        "start": 120,
+                        "end": 136,
+                        "text": "Li et al. (2015)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 414,
+                        "end": 431,
+                        "text": "(Xie et al. 2012)",
+                        "ref_id": "BIBREF50"
+                    },
+                    {
+                        "start": 434,
+                        "end": 451,
+                        "text": "Xie et al. (2012)",
+                        "ref_id": "BIBREF50"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "7",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparative evaluation",
+                "sec_num": "5"
+            },
+            {
+                "text": "Table 8 summarises the research which followed association rule-based mining approaches, social relationship analysis approaches and multi-task learning approaches used to detect deceptive reviews. Wahyuni and Djunaidy (2016) stated that the precision value of rulebased ICF++ is higher than ICF, while Lai et al. (2010b) proposed an inferential language model which outperformed all the other methods in TREC-like experiment, with a large dataset downloaded from Amazon. The trust-based rating predictions-RWR algorithm achieved a higher accuracy than standard Computation Framework (CF) method and a strong correlation between social relationships and the computed trustworthiness scores (Xue et al. 2015) .",
+                "cite_spans": [
+                    {
+                        "start": 198,
+                        "end": 225,
+                        "text": "Wahyuni and Djunaidy (2016)",
+                        "ref_id": "BIBREF45"
+                    },
+                    {
+                        "start": 303,
+                        "end": 321,
+                        "text": "Lai et al. (2010b)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 690,
+                        "end": 707,
+                        "text": "(Xue et al. 2015)",
+                        "ref_id": "BIBREF53"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "8",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Alternative approaches",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Furthermore, a multi-task learning method via logistic regression (MTL-LR) has been developed in order to allow boosting of the learning for one task by means of sharing the knowledge contained in training signals of other related tasks (Hai et al. 2016) . To leverage the unlabeled data and regularize each base model, Hai et al. (2016) introduced a Laplacian graph and proposed a semi-supervised multi-task learning model via Laplacian regularized logistic regression (SMTL-LR), thus generating better performance standards. In addition to that, Yang et al. (2015) suggested a general framework to detect spam reviews based on coherent examination and iterative computational framework. This model attempted to analyze review coherence in the granularity of sentence using several metrics to investigate the coherence between sentiment words and other related words based on the smooth flow between sentences: word transition probability and word concurrence probability.",
+                "cite_spans": [
+                    {
+                        "start": 237,
+                        "end": 254,
+                        "text": "(Hai et al. 2016)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 320,
+                        "end": 337,
+                        "text": "Hai et al. (2016)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 548,
+                        "end": 566,
+                        "text": "Yang et al. (2015)",
+                        "ref_id": "BIBREF54"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Alternative approaches",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "It has also been suggested to optimize the proposed process (Wahyuni and Djunaidy 2016) and to improve computation of the sentiment score considering the modifier word and the expansion of the discriminative rules (Peng and Zhong 2014) . Lai et al. (2010b) too proposed an evaluation of both the effectiveness and the efficiency of the proposed method, based on a larger dataset and more sophisticated language modeling approaches such as n-gram language models.",
+                "cite_spans": [
+                    {
+                        "start": 60,
+                        "end": 87,
+                        "text": "(Wahyuni and Djunaidy 2016)",
+                        "ref_id": "BIBREF45"
+                    },
+                    {
+                        "start": 214,
+                        "end": 235,
+                        "text": "(Peng and Zhong 2014)",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 238,
+                        "end": 256,
+                        "text": "Lai et al. (2010b)",
+                        "ref_id": "BIBREF19"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Alternative approaches",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Apart from the discussed methods of deceptive review detection, big data analytics methods and tools can also be integrated with the detection process. Big data analytics can be classified as distributed or single host-based approaches. For single host approaches, analytical frameworks such as the BIG Data Suite support batch mode processing of big data, whereas the MOA framework can be used to analyze evolving big data streams (Zhang et al. 2014) . It is believed that combining both batch and streaming modes of analytics is essential to develop an operational big data analytics framework to support real-world applications. Since spammers tend to modify their deceptive styles, it is crucial to design an adaptive detection method that could continuously improve its feature set and system parameters based on users' feedback (Zhang et al. 2014) . Accordingly, Zhang et al. (2014) designed a novel big data analytic framework which influenced the distributed computing and streaming to efficiently process big social media data streams. Subsequently, they applied the proposed framework that was supported by a novel parallel co-evolution genetic algorithm to adaptively detect deceptive reviews with respect to different social media contexts (Zhang et al. 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 432,
+                        "end": 451,
+                        "text": "(Zhang et al. 2014)",
+                        "ref_id": "BIBREF55"
+                    },
+                    {
+                        "start": 834,
+                        "end": 853,
+                        "text": "(Zhang et al. 2014)",
+                        "ref_id": "BIBREF55"
+                    },
+                    {
+                        "start": 869,
+                        "end": 888,
+                        "text": "Zhang et al. (2014)",
+                        "ref_id": "BIBREF55"
+                    },
+                    {
+                        "start": 1252,
+                        "end": 1271,
+                        "text": "(Zhang et al. 2014)",
+                        "ref_id": "BIBREF55"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Big data analytic approach",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Further, Chavan et al. (2017) investigated opinion spam in reviews and proposed a technique to identify spam review using sentimental analysis and statistics using the MapReduce technique developed by Apache Hadoop. Ultimately, the deceptive reviews were decided by analysing the outliers.",
+                "cite_spans": [
+                    {
+                        "start": 9,
+                        "end": 29,
+                        "text": "Chavan et al. (2017)",
+                        "ref_id": "BIBREF6"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Big data analytic approach",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Table 9 describes the characteristics and drawbacks of the most prominent approaches discussed above. Approaches which mainly focus on the content of the review considered only the linguistic features. The behavior-based approach selects reviewer profile and behavioral features for the deceptive review detection. These two approaches require a large amount of labeled data for supervised learning.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "9",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Characteristics and drawbacks of the approaches",
+                "sec_num": "5.3"
+            },
+            {
+                "text": "Even though the graph-based approach analyses the relationship among reviews, reviewers, and products using graphs to identify the interdependent nature among all approaches, it may ignore textual features of reviews. Moreover, the interdependent nature of reviews, reviewers, and products need to be carefully analysed to filter spammers. Although this approach is effective, it is less efficient and scalable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics and drawbacks of the approaches",
+                "sec_num": "5.3"
+            },
+            {
+                "text": "Neural network approaches are ideal for deciphering semantics of lengthy texts. The continuous learning ability of Neural Networks has the potential of producing better deceptive detection rates by acquiring few input features. However, this approach requires high computational power and large amounts of data. Even though the approaches which consider the temporal and spatial features discovered unusual patterns to detect spammers, this approach tends to ignore the textual features of reviews. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics and drawbacks of the approaches",
+                "sec_num": "5.3"
+            },
+            {
+                "text": "Due to the advancements of the Internet, people are more inclined to buy and sell online products and services. Since the products and services through e-commerce sites are intangible for consumers, their trust and credibility are solely dependent on reviews; thus manipulating the purchasing decisions to a great extent. Manufacturers also rely heavily on reviews in order to improve the quality and features of the items according to customer preferences. Due to these reasons, it is integral to maintain and ensure the reliability of reviews. Alarming statistics on untruthful reviews on the internet have led many researchers to explore techniques to effectively and efficiently identify deceptive reviews from genuine reviews, yet their commentary is limited to opinions only on truthful reviews.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            },
+            {
+                "text": "Thus, the main concern of the current research can be summarized as follows. Supervised or semi-supervised methods require real-world data for model building. Even though certain researchers presume duplicate and near duplicate reviews as deceptive, such assumptions are often unreliable. Further, the usage of manually labeled data or AMT crowd-sourced data cannot be treated as reliable. Hence, future researchers should primarily focus on less number of labeled datasets or neither. Also worth nothing is that it does not suffice to extract a permanent set of features concerning the content of the review or reviewer behavior. Therefore, most of the researchers have used a combination of review-centric, reviewer-centric and product-related features when detecting deceptive reviews. Another major concern is that the consumer reviews are generated in high volume with velocity and variety, thereby being treated as big data which requires the application of big data analytic approaches to analyze reviews and identify deceptive reviews in real-time or near real-time. After having compared different approaches in a wider spectrum, it can be concluded that each approach has its own positive and negative impact. Hence, it is wise to consider a hybrid approach, taking all positive aspects identified in the above discussion.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            },
+            {
+                "text": "Thus, the ultimate goal of this research was to facilitate a way forward to ensure a satisfied customer who would increase the revenue of the business by increasing purchases led by trustworthy and reliable reviews.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "We are immensely grateful to all the researchers with whom we had the pleasure of working during the completion of this research. Further, we would like to thank each member of our staff who extended us their extensive personal and professional guidance throughout this research.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgements",
+                "sec_num": null
+            },
+            {
+                "text": "Publisher's Note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "annex",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Detecting deceptive reviews using generative adversarial networks",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Aghakhani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Machiry",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Nilizadeh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Kruegel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Vigna",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "1st deep learning and security workshop co-located with the 39th IEEE symposium on security and privacy",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:1805.10364[cs.CR]"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Aghakhani H, Machiry A, Nilizadeh S, Kruegel C, Vigna G (2018) Detecting deceptive reviews using gen- erative adversarial networks. In: 1st deep learning and security workshop co-located with the 39th IEEE symposium on security and privacy. arXiv :1805.10364 [cs.CR]",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Opinion fraud detection in online reviews by network effects",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Akoglu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Chandy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Faloutsos",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "International AAAI conference on web and social media, North America",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Akoglu L, Chandy R, Faloutsos C (2013) Opinion fraud detection in online reviews by network effects. In: International AAAI conference on web and social media, North America. https ://www.aaai.org/ocs/ index .php/ICWSM /ICWSM 13/paper /view/5981. Accessed 03 June 2017",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Performance analysis of supervised techniques for review spam detection",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Badresiya",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Vohra",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Teraiya",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Int J Adv Netw Appl Special Issue",
+                "volume": "",
+                "issue": "",
+                "pages": "21--24",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Badresiya A, Vohra S, Teraiya J (2014) Performance analysis of supervised techniques for review spam detection. Int J Adv Netw Appl Special Issue:21-24",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Using supervised learning to classify authentic and fake online reviews",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Banerjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Chua",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "International conference on ubiquitous information management and communication",
+                "volume": "",
+                "issue": "",
+                "pages": "1--6",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Banerjee S, Chua A, Kim, J (2015) Using supervised learning to classify authentic and fake online reviews. In: International conference on ubiquitous information management and communication. ACM, New York, pp 1-6",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "A self-supervised approach to comment spam detection based on content analysis",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Bhattarai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Dasgupta",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "1--253",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bhattarai A, Dasgupta D (2012) A self-supervised approach to comment spam detection based on content analysis. In: Nemati HR (ed) Privacy solutions and security frameworks in information protection, 1st edn. IGI Global, pp 1-253",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "The importance of reviews in eCommerce.2x Consulting Limited",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Campbell",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "15",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Campbell K (2014) The importance of reviews in eCommerce.2x Consulting Limited. https ://2xeco mmerc e.com/impor tance -revie ws-ecomm erce/. Accessed 15 May 2017",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Spam reviews detection using Hadoop",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Chavan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Darekar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Kulkarni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Jain",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Int J Eng Comput Sci",
+                "volume": "6",
+                "issue": "2",
+                "pages": "20320--20323",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chavan A, Darekar O, Kulkarni O, Jain Y (2017) Spam reviews detection using Hadoop. Int J Eng Comput Sci 6(2):20320-20323",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Review authenticity verification using supervised learning and reviewer personality traits",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Christopher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H ;",
+                        "middle": [],
+                        "last": "Rahulnath",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Crawford",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Khoshgoftaar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Prusa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Richter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Najada",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "J Big Data",
+                "volume": "2",
+                "issue": "1",
+                "pages": "2--23",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christopher S, Rahulnath H (2016) Review authenticity verification using supervised learning and reviewer personality traits. In: 2016 International conference on emerging technological trends Crawford M, Khoshgoftaar TM, Prusa JD, Richter AN, Najada HA (2015) Survey of review spam detection using machine learning techniques. J Big Data 2(1):2-23",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Mining product reviews for spam detection using supervised technique",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Daiyan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Tiwari",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Alam",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Int J Emerg Technol Adv Eng",
+                "volume": "4",
+                "issue": "8",
+                "pages": "619--623",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Daiyan M, Tiwari S, Alam M (2014) Mining product reviews for spam detection using supervised tech- nique. Int J Emerg Technol Adv Eng 4(8):619-623",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Opinion spam detection: a review",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Farooq",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Khanday",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Int J Eng Res Dev",
+                "volume": "12",
+                "issue": "4",
+                "pages": "1--8",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Farooq S, Khanday H (2016) Opinion spam detection: a review. Int J Eng Res Dev 12(4):1-8",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Exploiting burstiness in reviews for review spammer detection",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Fei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Hsu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Castellanos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Ghosh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of the 7th international AAAI conference on weblogs and social media. Association for the Advancement of Artificial Intelligence",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fei G, Liu B, Hsu M, Castellanos M, Ghosh R, Mukherjee A (2013) Exploiting burstiness in reviews for review spammer detection. In: Proceedings of the 7th international AAAI conference on weblogs and social media. Association for the Advancement of Artificial Intelligence. https ://www.aaai.org/ocs/ index .php/ICWSM /ICWSM 13/paper /viewF ile/6069/6356. Accessed 03 June 2017",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Distributional footprints of deceptive product reviews",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Feng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Xing",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Gogar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Choi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 6th international AAAI conference on weblogs and social media. Association for the Advancement of Artificial Intelligence",
+                "volume": "",
+                "issue": "",
+                "pages": "98--105",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Feng S, Xing L, Gogar A, Choi Y (2012) Distributional footprints of deceptive product reviews. In: Pro- ceedings of the 6th international AAAI conference on weblogs and social media. Association for the Advancement of Artificial Intelligence, pp 98-105",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Deceptive review spam detection via exploiting task relatedness and unlabeled data",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Hai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Zhao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of the 2016 conference on empirical methods in natural language processing",
+                "volume": "",
+                "issue": "",
+                "pages": "1817--1826",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hai Z, Zhao P, Cheng P, Yang P, Li X, Li G (2016) Deceptive review spam detection via exploiting task relatedness and unlabeled data. In: Proceedings of the 2016 conference on empirical methods in natu- ral language processing. Association for Computational Linguistics, Texas, pp 1817-1826",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "An overview of RNN and CNN techniques for spam detection in social media",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Jain",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Manisha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Agarwal",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Int J Adv Res Comput Sci Softw Eng",
+                "volume": "6",
+                "issue": "10",
+                "pages": "126--132",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jain G, Manisha, Agarwal B (2016) An overview of RNN and CNN techniques for spam detection in social media. Int J Adv Res Comput Sci Softw Eng 6(10):126-132",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Analyzing and detecting review spam",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "th IEEE international conference on data mining (ICDM 2007)",
+                "volume": "",
+                "issue": "",
+                "pages": "547--552",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jindal N, Liu B (2007) Analyzing and detecting review spam. In: 7th IEEE international conference on data mining (ICDM 2007), pp 547-552",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Opinion spam and analysis",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "219--230",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jindal N, Liu B (2008) Opinion spam and analysis. In: WSDM. ACM, New York, pp 219-230",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Finding unusual review patterns using unexpected rules",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Lim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 19th ACM international conference on information and knowledge management-CIKM'10",
+                "volume": "",
+                "issue": "",
+                "pages": "1549--1552",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jindal N, Liu B, Lim E (2010) Finding unusual review patterns using unexpected rules. In: Proceedings of the 19th ACM international conference on information and knowledge management-CIKM'10, pp 1549-1552",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Fake reviewer groups detection system",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Kolhe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Joshi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Jadhav",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Abhang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "IOSR J Comput Eng",
+                "volume": "16",
+                "issue": "1",
+                "pages": "6--09",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kolhe N, Joshi M, Jadhav A, Abhang P (2014) Fake reviewer groups detection system. IOSR J Comput Eng 16(1):06-09",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "a) High-order concept associations mining and inferential language modeling for online review spam detection",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Lai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Lau",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Song",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "2010 IEEE international conference on data mining workshops",
+                "volume": "",
+                "issue": "",
+                "pages": "1120--1127",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lai C, Xu K, Lau R, Li Y, Song D (2010a) High-order concept associations mining and inferential language modeling for online review spam detection. In: 2010 IEEE international conference on data mining workshops. IEEE, Sydney, pp 1120-1127",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Toward a language modeling approach for consumer review spam detection",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Lai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Lau",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Jing",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "IEEE international conference on e-business engineering",
+                "volume": "",
+                "issue": "",
+                "pages": "1--8",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lai C, Xu K, Lau R, Li Y, Jing L (2010b) Toward a language modeling approach for consumer review spam detection. In: IEEE international conference on e-business engineering. IEEE, New York, pp 1-8",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Text mining and probabilistic language modeling for online review spam detecting",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Lau",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Liao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Rcw",
+                        "middle": [],
+                        "last": "Kwok",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Xia",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "ACM Trans Manag Inf Syst",
+                "volume": "2",
+                "issue": "4",
+                "pages": "1--30",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lau RY, Liao SY, Kwok RCW, Xu K, Xia Y, Li Y (2011) Text mining and probabilistic language modeling for online review spam detecting. ACM Trans Manag Inf Syst 2(4):1-30",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Learning to identify review spam",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Huang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Zhu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "IJCAI proceedings-international joint conference on artificial intelligence",
+                "volume": "22",
+                "issue": "",
+                "pages": "2488--2493",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Li F, Huang M, Yang Y, Zhu X (2011) Learning to identify review spam. In: IJCAI proceedings-interna- tional joint conference on artificial intelligence, vol 22(3), pp 2488-2493",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Spotting fake reviews using positive-unlabeled learning",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Shao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Comput Syst",
+                "volume": "18",
+                "issue": "3",
+                "pages": "467--475",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Li H, Liu B, Mukherjee A, Shao J (2014) Spotting fake reviews using positive-unlabeled learning. Comput Syst 18(3):467-475",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Analyzing and detecting opinion spam on a large-scale dataset via temporal and spatial patterns",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Shao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Proceedings of the 9th international AAAI conference on web and social media",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Li H, Chen Z, Mukherjee A, Liu B, Shao J (2015) Analyzing and detecting opinion spam on a large-scale dataset via temporal and spatial patterns. In: Proceedings of the 9th international AAAI conference on web and social media",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Modeling review spam using temporal patterns and co-bursting Behaviors",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Fei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Shao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Shao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:1611.06625"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Li H, Fei G, Wang S, Liu B, Shao W, Mukherjee A, Shao J (2016) Modeling review spam using temporal patterns and co-bursting Behaviors. Preprint. arXiv :1611.06625",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "TopicSpam: a topic-model-based approach for spam detection",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Cardie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 51st annual meeting of the association for computational linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "217--221",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Li J, Cardie C, Li S (2017) TopicSpam: a topic-model-based approach for spam detection. In: Proceedings of the 51st annual meeting of the association for computational linguistics. Association for Computa- tional Linguistics, Bulgeria, pp 217-221",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Detecting product review spammers using rating behaviors",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Lim",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Nguyen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Lauw",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "CIKM'10 proceedings of the 19th ACM international conference on information and knowledge management",
+                "volume": "",
+                "issue": "",
+                "pages": "939--948",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lim EP, Nguyen VA, Jindal N, Liu B, Lauw HW (2010) Detecting product review spammers using rating behaviors. In: CIKM'10 proceedings of the 19th ACM international conference on information and knowledge management, pp 939-948",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Towards online review spam detection",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Zhu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Proceedings of the 23rd international conference on world wide web-WWW'14 companion",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lin Y, Zhu T, Wang X, Zhang J, Zhou A (2014) Towards online review spam detection. In: Proceedings of the 23rd international conference on world wide web-WWW'14 companion",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Opinion spam detection: an unsupervised approach using generative models",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Venkataraman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Mukherjee A, Venkataraman V (2014) Opinion spam detection: an unsupervised approach using generative models. Technical report, UH",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Spotting fake reviewer groups in consumer reviews",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Glance",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 21st international conference on world wide web-WWW'12",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Mukherjee A, Liu B, Glance N (2012) Spotting fake reviewer groups in consumer reviews. In: Proceed- ings of the 21st international conference on world wide web-WWW'12",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "What yelp fake review filter might be doing?",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Venkataraman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Glance",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "7th international AAAI conference on weblogs and social media",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Mukherjee A, Venkataraman V, Glance N, Liu B (2013) What yelp fake review filter might be doing? In: 7th international AAAI conference on weblogs and social media. https ://www.aaai.org/ocs/index .php/ICWSM /ICWSM 13/paper /view/6006. Accessed 08 June 2017",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Review spam detection using sentiments and novel features",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Mushtaq",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Faisal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Iqbal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Shah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Mehmood",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Abu",
+                        "middle": [],
+                        "last": "Akram",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Int J Comput Sci Inf Secur (IJCSIS)",
+                "volume": "14",
+                "issue": "10",
+                "pages": "324--328",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Mushtaq S, Faisal C, Iqbal K, Shah P, Mehmood I, Akram ABU (2016) Review spam detection using sentiments and novel features. Int J Comput Sci Inf Secur (IJCSIS) 14(10):324-328",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "A novel approach for opinion spam detection in e-commerce",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Noekhah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Fouladfar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Salim",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Ghorashi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Hozhabri",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Noekhah S, Fouladfar E, Salim N, Ghorashi S, Hozhabri A (2014) A novel approach for opinion spam detection in e-commerce. In: 8th international conference on e-commerce with focus on e-trust. IEEE, Iran",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Finding deceptive opinion spam by any stretch of the imagination",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Ott",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Choi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Cardie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Hancock",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "HLT'11 proceedings of the 49th annual meeting of the association for computational linguistics: human language technologies",
+                "volume": "",
+                "issue": "",
+                "pages": "309--319",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ott M, Choi Y, Cardie C, Hancock J (2011) Finding deceptive opinion spam by any stretch of the imagi- nation. In: HLT'11 proceedings of the 49th annual meeting of the association for computational linguistics: human language technologies. Association for Computational Linguistics, Oregon, pp 309-319",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Detecting spam review through sentiment analysis",
+                "authors": [
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Peng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Zhong",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Int J Softw Inf",
+                "volume": "8",
+                "issue": "",
+                "pages": "2065--2072",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Peng Q, Zhong M (2014) Detecting spam review through sentiment analysis. Int J Softw Inf 8:2065-2072",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Neural networks for deceptive opinion spam detection: an empirical study",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Ren",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ji",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "J Inf Sci",
+                "volume": "385",
+                "issue": "",
+                "pages": "213--224",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ren Y, Ji D (2017) Neural networks for deceptive opinion spam detection: an empirical study. J Inf Sci 385:213-224",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Deceptive opinion spam detection using neural network",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Ren",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of COLING 2016, the 26th international conference on computational linguistics: technical papers",
+                "volume": "",
+                "issue": "",
+                "pages": "140--150",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ren Y, Zhang Y (2016) Deceptive opinion spam detection using neural network. In: Proceedings of COLING 2016, the 26th international conference on computational linguistics: technical papers, Japan, pp 140-150",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Positive unlabeled learning for deceptive reviews detection",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Ren",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ji",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Hang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP)",
+                "volume": "",
+                "issue": "",
+                "pages": "488--498",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ren Y, Ji D, Hang H (2014) Positive unlabeled learning for deceptive reviews detection. In: Proceed- ings of the 2014 conference on empirical methods in natural language processing (EMNLP), pp 488-498",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Deceptive review detection using labeled and unlabeled data",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Rout",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Singh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Jena",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bakshi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Multimed Tools Appl",
+                "volume": "76",
+                "issue": "3",
+                "pages": "3187--3211",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rout J, Singh S, Jena S, Bakshi S (2016) Deceptive review detection using labeled and unlabeled data. Multimed Tools Appl 76(3):3187-3211",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Revisiting semi-supervised learning for online deceptive review detection",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Rout",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Dalmia",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Choo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bakshi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jena",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "IEEE Access",
+                "volume": "5",
+                "issue": "",
+                "pages": "1319--1327",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rout J, Dalmia A, Choo K, Bakshi S, Jena S (2017) Revisiting semi-supervised learning for online deceptive review detection. IEEE Access 5:1319-1327",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "On the temporal dynamics of opinion spamming: case studies on yelp",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Santosh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "369--379",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Santosh KC, Mukherjee A (2016) On the temporal dynamics of opinion spamming: case studies on yelp. In: WWW 2016, pp 369-379",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "NetSpam: a network-based spam detection framework for reviews in online social media",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Shehnepoor",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Salehi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Farahbakhsh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Crespi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "IEEE Trans Inf Forensics Secur",
+                "volume": "12",
+                "issue": "7",
+                "pages": "1585--1595",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shehnepoor S, Salehi M, Farahbakhsh R, Crespi N (2017) NetSpam: a network-based spam detection framework for reviews in online social media. IEEE Trans Inf Forensics Secur 12(7):1585-1595",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "Fraud detection in online reviews using machine learning techniques",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Shivagangadhar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Sagar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Vanipriya",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Sathyan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Int J Comput Eng Res (IJCER)",
+                "volume": "5",
+                "issue": "5",
+                "pages": "52--56",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shivagangadhar K, Sagar H, Vanipriya C, Sathyan S (2015) Fraud detection in online reviews using machine learning techniques. Int J Comput Eng Res (IJCER) 5(5):52-56",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "Detecting deceptive reviews using lexical and syntactic features",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Shojaee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Murad",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Azman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Sharef",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Nadali",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "2013 13th international conference on intelligent systems design and applications",
+                "volume": "",
+                "issue": "",
+                "pages": "53--58",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shojaee S, Murad M, Azman A, Sharef N, Nadali S (2013) Detecting deceptive reviews using lexical and syntactic features. In: 2013 13th international conference on intelligent systems design and applications, pp 53-58",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "Improved techniques for online review spam detection",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Singh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "MTech",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Singh S (2015) Improved techniques for online review spam detection. MTech, National Institute of Technology, Odisha",
+                "links": null
+            },
+            "BIBREF45": {
+                "ref_id": "b45",
+                "title": "Fake review detection from a product review using modified method of iterative computation framework",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Wahyuni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Djunaidy",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "The 3rd Bali international seminar on science, technology",
+                "volume": "",
+                "issue": "",
+                "pages": "1--7",
+                "other_ids": {
+                    "DOI": [
+                        "10.1051/matecconf/20165803003"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Wahyuni E, Djunaidy A (2016) Fake review detection from a product review using modified method of iterative computation framework. In: The 3rd Bali international seminar on science, technol- ogy (BISSTECH 2015). EDP Sciences, pp 1-7 https ://doi.org/10.1051/matec conf/20165 80300 3. Accessed 08 June 2017",
+                "links": null
+            },
+            "BIBREF46": {
+                "ref_id": "b46",
+                "title": "Merging multiple criteria to identify suspicious reviews",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Greene",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Cunningham",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 4th ACM conference on recommender systems-RecSys'10",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wu G, Greene D, Cunningham P (2010a) Merging multiple criteria to identify suspicious reviews. In: Proceedings of the 4th ACM conference on recommender systems-RecSys'10",
+                "links": null
+            },
+            "BIBREF47": {
+                "ref_id": "b47",
+                "title": "Distortion as a validation criterion in the identification of suspicious reviews",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Greene",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Smyth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Cunningham",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 1st workshop on social media analytics-SOMA'10",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wu G, Greene D, Smyth B, Cunningham P (2010b) Distortion as a validation criterion in the identification of suspicious reviews. In: Proceedings of the 1st workshop on social media analytics-SOMA'10",
+                "links": null
+            },
+            "BIBREF48": {
+                "ref_id": "b48",
+                "title": "Review graph based online store review spammer detection",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Xie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Yu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "11th IEEE international conference on data mining",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wang W, Xie S, Liu B, Yu PS (2011) Review graph based online store review spammer detection. In: 11th IEEE international conference on data mining",
+                "links": null
+            },
+            "BIBREF49": {
+                "ref_id": "b49",
+                "title": "Twitter spam detection based on deep learning",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Xiang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the Australasian computer science week multi",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wu T, Liu S, Zhang J, Xiang Y (2017) Twitter spam detection based on deep learning. In: Proceedings of the Australasian computer science week multi-conference on-ACSW'17",
+                "links": null
+            },
+            "BIBREF50": {
+                "ref_id": "b50",
+                "title": "Review spam detection via temporal pattern discovery",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Xie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Yu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 18th ACM SIGKDD international conference on knowledge discovery and data mining",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xie S, Wang G, Lin S, Yu P (2012) Review spam detection via temporal pattern discovery. In: Pro- ceedings of the 18th ACM SIGKDD international conference on knowledge discovery and data mining-KDD'12",
+                "links": null
+            },
+            "BIBREF51": {
+                "ref_id": "b51",
+                "title": "Using deep linguistic features for finding deceptive opinion spam",
+                "authors": [
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Zhao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of COLING 2012: posters",
+                "volume": "",
+                "issue": "",
+                "pages": "1341--1350",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xu Q, Zhao H (2012) Using deep linguistic features for finding deceptive opinion spam. In: Proceedings of COLING 2012: posters, pp 1341-1350",
+                "links": null
+            },
+            "BIBREF52": {
+                "ref_id": "b52",
+                "title": "A unified model for unsupervised opinion spamming detection incorporating text generality",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Shi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Tian",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Lam",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "IJCAI'15 proceedings of the 24th international conference on artificial intelligence",
+                "volume": "",
+                "issue": "",
+                "pages": "725--731",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xu Y, Shi B, Tian W, Lam W (2015) A unified model for unsupervised opinion spamming detection incorporating text generality. In: IJCAI'15 proceedings of the 24th international conference on arti- ficial intelligence. AAAI Press, Argentina, pp 725-731",
+                "links": null
+            },
+            "BIBREF53": {
+                "ref_id": "b53",
+                "title": "Trust-aware review spam detection",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Xue",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Seo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Pluretti",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Trustcom/BigDataSE/ ISPA",
+                "volume": "",
+                "issue": "",
+                "pages": "726--733",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xue H, Li F, Seo H, Pluretti R (2015) Trust-aware review spam detection. In: Trustcom/BigDataSE/ ISPA, 2015 IEEE. IEEE, Helsinki, pp 726-733",
+                "links": null
+            },
+            "BIBREF54": {
+                "ref_id": "b54",
+                "title": "One methodology for spam review detection based on review coherence metrics",
+                "authors": [
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Proceedings of 2015 international conference on intelligent computing and internet of things. IEEE, Harbin",
+                "volume": "",
+                "issue": "",
+                "pages": "99--102",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yang X (2015) One methodology for spam review detection based on review coherence metrics. In: Pro- ceedings of 2015 international conference on intelligent computing and internet of things. IEEE, Har- bin, pp 99-102. http://ieeex plore .ieee.org/docum ent/71115 47/. Accessed 01 June 2017",
+                "links": null
+            },
+            "BIBREF55": {
+                "ref_id": "b55",
+                "title": "Adaptive big data analytics for deceptive review detection in online social media",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Lau",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "th international conference on information systems",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhang W, Lau R, Li C (2014) Adaptive big data analytics for deceptive review detection in online social media. In: 35th international conference on information systems. https ://pdfs.seman ticsc holar .org/ d310/e5348 0bc12 57e7c 9119f ceb5e 72f5d df722 9.pdf. Accessed 03 June 2017",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "uris": null,
+                "fig_num": "1",
+                "num": null,
+                "text": "Fig. 1 Distribution of the dataset used in various researches",
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "uris": null,
+                "fig_num": "3",
+                "num": null,
+                "text": "Fig. 3 Distribution of techniques used in various researches",
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "content": "<table><tr><td/><td>66.44%</td><td colspan=\"2\">83.19%</td><td colspan=\"2\">68.56%</td><td>82.39%</td><td>51%</td><td>87.2%</td><td colspan=\"2\">85.2%</td><td>84%</td><td>82.9%</td><td>82.1%</td><td>81.8%</td><td>72.6%</td><td/><td/><td/><td/><td/></tr><tr><td>Result</td><td>Accuracy =</td><td colspan=\"2\">Accuracy =</td><td colspan=\"2\">Accuracy =</td><td>Accuracy =</td><td>Accuracy =</td><td>Accuracy =</td><td colspan=\"2\">Accuracy =</td><td>Accuracy =</td><td>Accuracy =</td><td>Accuracy =</td><td>Accuracy =</td><td>Accuracy =</td><td>84%</td><td/><td/><td/><td/><td>89.80%</td><td>91.70%</td></tr><tr><td>Evaluation criteria</td><td>Accuracy, precision</td><td>and recall using</td><td colspan=\"2\">Rapidminer data min-</td><td colspan=\"2\">ing tool</td><td/><td>Accuracy, precision</td><td>and recall</td><td/><td/><td/><td/><td/><td/><td>F measure</td><td/><td/><td/><td/><td>F measure</td></tr><tr><td>Method</td><td>NB</td><td colspan=\"2\">SVM</td><td colspan=\"2\">KNN</td><td>Logistic regression</td><td>Decision tree</td><td>SMTL-LLR</td><td colspan=\"2\">MTL-LR</td><td>MTRL</td><td>TSVM</td><td>LR</td><td>SVM</td><td>PU</td><td>Support vector machine</td><td>(SVM) with sequen-</td><td>tial minimal optimi-</td><td>zation (SMO)</td><td/><td>SVM</td><td>Maximum entropy</td><td>model using</td><td>openNLP MAXENT</td></tr><tr><td>Features used Approach</td><td>Content analysis Supervised</td><td/><td/><td/><td/><td/><td/><td>Text unigram and Semi-supervised</td><td>bigram term-fre-</td><td colspan=\"2\">quency features</td><td/><td/><td/><td/><td>Lexical and syntactic Supervised</td><td>features</td><td/><td/><td/><td>Deep linguistic features Supervised</td></tr><tr><td>Paper Dataset used</td><td>Badresiya et al. (2014) Amazon mechanical</td><td>turk (AMT) dataset</td><td colspan=\"2\">used in Ott et al.</td><td colspan=\"2\">(2011)</td><td/><td>Hai et al. (2016) 10,000 Unlabeled data</td><td>from doctor, hotel and</td><td colspan=\"2\">restaurant domains</td><td/><td/><td/><td/><td>Shojaee et al. (2013) 800 Truthful reviews</td><td>from Expedia, Hotels.</td><td>com, Orbitz, Price-</td><td>line, TripAdvisor and</td><td>Yelp and 800 fake</td><td>reviews from AMT</td><td>Xu and Zhao (2012) English gold standard</td><td>dataset from Ott et al.</td><td>(2011) and Chineese</td><td>dataset</td></tr></table>",
+                "num": null,
+                "html": null,
+                "text": "Summary of identifying deceptive reviews using content analysis (Part 1)",
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "content": "<table><tr><td>Result</td><td>High accuracy than the</td><td>human judged dataset</td><td/><td/><td/><td/><td>Cohen's Kappa value =</td><td>between 0.48 and 0.64</td><td>High</td><td/><td>Significant values</td><td>High accuracy than the</td><td>human evaluated results</td></tr><tr><td>Features used Approach Method Evaluation criteria</td><td>Rating distribution or Supervised LIBSVM Accuracy</td><td>the historic rating</td><td>distribution of a</td><td>reviewer</td><td/><td/><td>Rating behavior features Unsupervised Aggregated Inter-evaluator consist-</td><td>behavior scoring ency</td><td>methods Spammer ranking</td><td>performance</td><td>Behavioral features Rule based approach Unexpected rules Statistical test</td><td>Author features and Unsupervised ASM Accuracy and human</td><td>review features evaluation</td></tr><tr><td>Paper Dataset used</td><td>Feng et al. (2012) Pseduo-gold strandard</td><td>labeled dataset based</td><td>on different types of</td><td>distributional foot-</td><td>prints from TripAdvi-</td><td>sor and Amazon</td><td>Lim et al. (2010) Amazon dataset</td><td/><td/><td/><td>Jindal et al. (2010) Amazon dataset</td><td>Mukherjee et al. (2013) Reviews of manufac-</td><td>tured products from</td><td>Amazon.com</td></tr></table>",
+                "num": null,
+                "html": null,
+                "text": "Summary of identifying deceptive reviews using behavioral analysis",
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "content": "<table><tr><td>Result</td><td>93%</td><td/><td/><td/><td/><td>60.30%</td><td/><td/><td>75.90%</td><td colspan=\"2\">63.20%</td><td>80.10%</td><td>83.60%</td><td>84.10%</td><td/><td>Over 90%</td><td/><td>Higher F value and</td><td>accuracy for all the</td><td>datasets for the pro-</td><td>posed model</td><td>Larger value for top part</td><td>(TP), smaller values</td><td>for middle part (MP)</td><td>and bottom part (BP)</td><td>High accuracy</td></tr><tr><td>Method Evaluation criteria</td><td>Graph based model Accuracy</td><td>and iterative multi-</td><td>level algorithm</td><td/><td/><td>Graph based approach Precision of human</td><td>evaluators</td><td/><td>CNN Accuracy</td><td colspan=\"2\">RNN</td><td>GRNN</td><td>Bi-directional GRNN</td><td>Bi-directional GRNN</td><td>(attention)</td><td>Relation-based model AUC</td><td>of GSRank</td><td>URSM F measure and accu-</td><td>racy</td><td>Human evaluation</td><td>NetSpam AUC</td></tr><tr><td>Approach</td><td>Graph based</td><td/><td/><td/><td/><td>Graph based</td><td/><td/><td>Neural network</td><td/><td/><td/><td/><td/><td/><td>Relational Analysis</td><td/><td>Probabilistic graphical</td><td>model</td><td>Graph based</td></tr><tr><td>Features used</td><td>Behavioral and</td><td>linguistic features of</td><td>reviews, reviewers,</td><td>group of reviewers,</td><td>and their targets</td><td>Review, reviewer and</td><td>store based features</td><td/><td>Neural and descrete</td><td>features</td><td/><td/><td/><td/><td/><td>Group spam behavior</td><td>features</td><td>Abnormal features</td><td>about reviews, users</td><td>and items, text gen-</td><td>erality features</td><td>Review-behavioral,</td><td>Userbehavioral,</td><td>review-linguistic,</td><td>and user-linguistic</td></tr><tr><td>Paper Dataset used</td><td>Noekhah et al. (2014) Labeled data from</td><td>Amazon</td><td/><td/><td/><td>Wang et al. (2011) Store review data from</td><td>www.resel lerra tings</td><td>.com</td><td>Ren and Zhang (2016) Li et al. (2014) dataset</td><td>of domains hotels,</td><td colspan=\"2\">restaurant and doctor</td><td/><td/><td/><td>Mukherjee et al. Product reviews from</td><td>(2012) Amazon</td><td>Xu et al. (2015) Amazon audioCD</td><td>data, the TripAdvisor</td><td>hotel data, and the</td><td>Yelp restaurant data</td><td>Shehnepoor et al. Real-world review</td><td>(2017) datasets from Yelp</td><td>and Amazon Web</td><td>sites</td></tr></table>",
+                "num": null,
+                "html": null,
+                "text": "Summary of identifying deceptive reviews using graph based and neural network approaches",
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "content": "<table><tr><td>Result</td><td>Accuracy = 85%</td><td/><td>High accuracy</td><td/><td/><td/><td/><td>F1 Score = 84 % Preci-</td><td>sion = 78% Recall =</td><td>88% Accuracy = 83%</td><td>Purity = 83% entropy</td><td>= 67%</td><td>Purity = 86% entropy</td><td>= 73%</td><td>Purity = 88% entropy</td><td>= 73%</td><td>Combining TSF with NG</td><td>and BF feature sets,</td><td>resulted the highest</td><td>F-scores</td></tr><tr><td>Evaluation criteria</td><td>Accuracy, precision and</td><td>recall</td><td>Human evaluation</td><td/><td/><td/><td/><td>Accuracy, precision,</td><td>recall and F1-score</td><td/><td>Purity and entropy</td><td/><td/><td/><td/><td>Accuracy, precision,</td><td>recall and F1-score</td></tr><tr><td>Method</td><td>SVM</td><td/><td>Multi-scale anomaly</td><td>detection algorithm</td><td>on multi-dimensional</td><td>time series based on</td><td>curve fitting</td><td>Labeled Hidden</td><td>Markov Model to</td><td>detect spammers</td><td>Louvain</td><td/><td>Kmeans</td><td/><td>Hierarchical</td><td>Linear Kernal SVM</td></tr><tr><td>Approach</td><td>Supervised</td><td/><td>Pattern analysis</td><td/><td/><td/><td/><td>Pattern analysis</td><td/><td/><td>Co-bursting network</td><td>to detect spammer</td><td>groups</td><td/><td/><td>Combinational feature</td><td>approach</td></tr><tr><td>Features used</td><td>Spatial and temporal</td><td>features</td><td>Temporal features</td><td/><td/><td/><td/><td>Temporal behavior of</td><td>reviewers</td><td/><td/><td/><td/><td/><td/><td>Time series features</td><td>(TSF), behavioral fea-</td><td>tures (BF) and n-gram</td><td>features (NF)</td></tr><tr><td>Paper Dataset used</td><td>Li et al. (2015) Restaurant reviews from</td><td>Dianping.com</td><td>Xie et al. (2012) Review data from</td><td>(resellerratings.com)</td><td/><td/><td/><td>Li et al. (2016) Restaurant reviews from</td><td>dianping.com</td><td/><td/><td/><td/><td/><td/><td>Santosh and Reviews from yelp</td><td>Mukherjee restaurant</td><td>(2016)</td></tr></table>",
+                "num": null,
+                "html": null,
+                "text": "Summary of identifying deceptive reviews using temporal and spatial features",
+                "type_str": "table"
+            },
+            "TABREF4": {
+                "content": "<table><tr><td>Characteristics</td></tr><tr><td>Approach</td></tr></table>",
+                "num": null,
+                "html": null,
+                "text": "Characteristics and Bottlenecks of approaches",
+                "type_str": "table"
+            }
+        }
+    }
+}

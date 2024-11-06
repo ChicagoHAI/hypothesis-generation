@@ -1,0 +1,2347 @@
+{
+    "paper_id": "1-s2",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-06T17:58:46.534997Z"
+    },
+    "title": "How to identify an argument type? On the hermeneutics of persuasive discourse",
+    "authors": [
+        {
+            "first": "Jean",
+            "middle": [
+                "H M"
+            ],
+            "last": "Wagemans",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "Language and Cognition in Argumentation (LANCAR)",
+                "institution": "University of Amsterdam",
+                "location": {
+                    "country": "The Netherlands"
+                }
+            },
+            "email": "j.h.m.wagemans@uva.nl."
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "This paper proposes a theory of interpreting argument types as an integral part of a systematic and comprehensive 'hermeneutics of persuasive discourse'. It first explains how such a hermeneutics can be developed based on pragmatic insights about the use of language for persuasive purposes expressed in the philosophy of argument. Then, after having provided an overview of the main hermeneutical stages involved in interpreting persuasive discourse, the paper focuses on the stage of argument type identification. It formulates a 'hermeneutics of argument type' in terms of the Periodic Table of Arguments (PTA), an argument categorization framework systematizing existing accounts of arguments in the broad sense of the term (topoi, loci, argument schemes, fallacies, means of persuasion). For each of the three parameters within this framework, 'argument form', 'argument substance', and 'argument lever', the paper describes how to determine their value by analyzing several examples of natural arguments.",
+    "pdf_parse": {
+        "paper_id": "1-s2",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "This paper proposes a theory of interpreting argument types as an integral part of a systematic and comprehensive 'hermeneutics of persuasive discourse'. It first explains how such a hermeneutics can be developed based on pragmatic insights about the use of language for persuasive purposes expressed in the philosophy of argument. Then, after having provided an overview of the main hermeneutical stages involved in interpreting persuasive discourse, the paper focuses on the stage of argument type identification. It formulates a 'hermeneutics of argument type' in terms of the Periodic Table of Arguments (PTA), an argument categorization framework systematizing existing accounts of arguments in the broad sense of the term (topoi, loci, argument schemes, fallacies, means of persuasion). For each of the three parameters within this framework, 'argument form', 'argument substance', and 'argument lever', the paper describes how to determine their value by analyzing several examples of natural arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Since the start of the digital revolution, people have faced an information overload that is difficult to deal with, both in quantity and quality. Related phenomena such as mis-and disinformation can have deleterious consequences, especially when they occur in communicative interactions aimed at changing people's minds or behavior, in short, in 'persuasive communication': efforts to convince people to believe or do something run the risk of being perverted into efforts to manipulate them into believing and doing something (Brave et al., 2022; Floridi, 2014) . Gaining a better insight into the cognitive aspects of how people process information in persuasive messages could contribute to finding a solution for such problems of the information age. However, empirical questions about how people process information aimed at changing their minds or behavior can only be answered after generating theoretically informed hypotheses about how people interpret the discourse containing that information. How does such an interpretation take place? Which elements, parts, characteristics, or aspects of persuasive discourse are relevant to consider?",
+                "cite_spans": [
+                    {
+                        "start": 528,
+                        "end": 548,
+                        "text": "(Brave et al., 2022;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 549,
+                        "end": 563,
+                        "text": "Floridi, 2014)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Existing theories of interpreting persuasive discourse are normatively informed in that they are aimed at reconstructing the argumentation contained therein for the purpose of determining its validity, soundness, or acceptability. The criteria employed for such an evaluation are often 'external': they embody an ideal of reasonableness that deviates from how people evaluate persuasive messages in concrete cognitive environments. Examples of such normative ideals are the notion of a 'universal audience' (Perelman and Olbrechts-Tyteca, 1958) , the 'geometrical' concept of argument validity (Toulmin, 1976) , and the 'ideal speech situation ' (Habermas, 1981) . In this paper, I propose a theory of interpreting persuasive discourse that does not presuppose such an Archimedean point but instead builds on insights about the production of such discourse from the 'philosophy of argument,' a field of research originating from the three classical disciplines logic, dialectic, and rhetoric e for a recent overview, see Wagemans (2021b) . These insights are 'pragmatic' in that they pertain to the use of language for persuasive purposes.",
+                "cite_spans": [
+                    {
+                        "start": 507,
+                        "end": 544,
+                        "text": "(Perelman and Olbrechts-Tyteca, 1958)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 594,
+                        "end": 609,
+                        "text": "(Toulmin, 1976)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 644,
+                        "end": 662,
+                        "text": "' (Habermas, 1981)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1021,
+                        "end": 1037,
+                        "text": "Wagemans (2021b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "A common label for the type of discourse aimed at convincing people to believe or to do something is 'argumentative' discourse (van Eemeren et al., 2014) . Unlike 'informative' or 'explanatory' discourse, argumentative discourse emerges from communicative situations characterized by disagreement about the acceptability of a particular point of view or the desirability of carrying out a particular action (Govier, 2018) . Such discourse is ubiquitous: arguments or, more generally, persuasive techniques are used in discussions and speeches produced within a wide range of domains e from informal and private deliberations about which tv series to watch on a particular evening to highly regimented and public exchanges between lawyers in a courtroom.",
+                "cite_spans": [
+                    {
+                        "start": 127,
+                        "end": 153,
+                        "text": "(van Eemeren et al., 2014)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 407,
+                        "end": 421,
+                        "text": "(Govier, 2018)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The fact that argumentative or persuasive discourse is the product of communicative interaction aimed at managing disagreement is of particular importance here, as it provides a hint for which insights can be used to inform its interpretation without referring to an external normative viewpoint. From classical antiquity onwards, philosophers and rhetoricians have formulated guidelines for successfully producing such discourse, mainly by carefully observing a wide range of argumentative and persuasive practices and by theorizing about the factors that influence the success and failure of participants in achieving their communicative aims. Subsequently, they have generalized, ordered, and didacticized the instructions into a learnable system of production guidelines, in short, into an 'art'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The best-known example of such an art is classical rhetoric, which provides detailed insights into the rules and conventions governing the production of speeches e mainly of the judicial genre e aimed at convincing an audience of a particular point of view. Apart from rhetoric, the disciplines of dialectic and logic have played a crucial role in the development of the philosophy of argument. Dialectic is the art of debate, consisting of instructions for conducting a philosophical discussion. And logic can be characterized as the art of reasoning, i.e., as a set of instructions about how to conclude from premises in a successful, in casu, valid way. The three disciplines, then, while they focus on different subgenres and address other aspects of argumentative or persuasive discourse, can be seen as considerably overlapping and complementary sets of production guidelines for such discourse.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The idea that instructions for producing a particular type of discourse are related to insights about how to interpret that same type of discourse is also reflected in the classification of the arts into poetic, practical, and theoretical arts (Lausberg, 1998:5e8) . The goal of the latter is to provide an inspection (inspectio) of a given object, consisting of a recognition (cognitio) and an evaluation (aestimatio). When the inspected object has been produced by a poetic or practical art itself, such inspection can be seen as 'the theoretical counterpart of every poetic and practical ars [\u2026]. The \"critic\" [\u2026] is either a former practicing artist [\u2026] or merely a theoretically educated lay connoisseur (who has gone beyond empeiria [experience] to achieve the theoretical techn e [art])' (Lausberg, 1998:7) . If we apply these insights to the use of language for persuasive purposes, we can say that the art of interpreting argumentative or persuasive discourse is the theoretical counterpart of the art of producing it. Within this terminology, the activity of 'interpreting' the discourse includes both its analysis and evaluation.",
+                "cite_spans": [
+                    {
+                        "start": 244,
+                        "end": 264,
+                        "text": "(Lausberg, 1998:5e8)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 654,
+                        "end": 657,
+                        "text": "[\u2026]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 795,
+                        "end": 813,
+                        "text": "(Lausberg, 1998:7)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "These reflections on how to interpret persuasive messages bring us to the field of hermeneutics, the art of interpretation (ars interpretandi) e for general accounts, see, e.g., B\u00fchler, 2021; Gadamer, 1974; Grondin, 1996; R\u20ac od, 2021 . The hermeneutical tradition from classical antiquity onwards has developed various theories and techniques of interpretation, focusing on myths, sacred and classical texts, and legal discourse. The need for interpreting such texts or speech follows from the idea that there are all kinds of discrepancies between the 'literal' or 'perceived' meaning of the text and its 'intended', 'spiritual' or 'original' meaning, which is believed to be lost, hidden under the surface, or distorted by conventions or previous interpretations.",
+                "cite_spans": [
+                    {
+                        "start": 178,
+                        "end": 191,
+                        "text": "B\u00fchler, 2021;",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 192,
+                        "end": 206,
+                        "text": "Gadamer, 1974;",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 207,
+                        "end": 221,
+                        "text": "Grondin, 1996;",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 222,
+                        "end": 233,
+                        "text": "R\u20ac od, 2021",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "In a more general conceptualization, hermeneutics is not only relevant for interpreting specific discourse genres suffering from one or more of the above discrepancies but rather for any discourse genre. According to Schleiermacher, who generalized hermeneutics in this way in the 19th century, 'every act of interpretation is the reversal of an act of speaking, when it has to enter into consciousness what thinking formed the basis of the speech' (Schleiermacher, 1809/10 as quoted by Grondin, 1996 Grondin, :1364, my translation), my translation) . As Grondin observes, this brings hermeneutics in thematic relationship with rhetoric: 'Both have to do with conveying meaning, whereby rhetoric strives to convey the intended meaning to the persuasive expression and the hermeneutics goes back from the expression to the intended meaning ' (1996:1351, my translation) . Since the disciplines of logic, dialectic, and rhetoric are considerably overlapping and complementary sets of instructions for producing argumentative discourse, this characterization of the relationship between hermeneutics and rhetoric can be extended to logic and dialectic (in as far as they can be conceived as arts).",
+                "cite_spans": [
+                    {
+                        "start": 487,
+                        "end": 500,
+                        "text": "Grondin, 1996",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 501,
+                        "end": 549,
+                        "text": "Grondin, :1364, my translation), my translation)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 839,
+                        "end": 868,
+                        "text": "' (1996:1351, my translation)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "This paper, to recapitulate, develops a hermeneutics of argumentative or persuasive discourse that is not based on a normative ideal of reasonableness but rather on instructions for producing such discourse as formulated within the philosophy of argument, constituted by the three classical disciplines of logic, dialectic, and rhetoric. It is thus premised on the idea that the theoretical art of interpreting argumentative or persuasive discourse, which includes both its analysis and evaluation, mirrors the practical art of producing it. This methodology does not guarantee absence of discrepancies between how an argument is intended and how it is interpreted. After all, the arguer can, at most, aim to take the audience's viewpoint into account. 1 But since the guidelines for producing argumentative discourse reflect best practices and conventions about using language for persuasive purposes (independent from whether they have been applied consciously or not), they form a sound basis for developing a theory about how people usually interpret such discourse.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The paper is structured as follows. First, in Section 2, I formulate a general hermeneutics of persuasive discourse based on the classical rhetorical didactical framework of the 'tasks of the orator' for producing a speech. Then, in Section 3, I address the more specific challenge of how to identify an argument type. For this purpose, I use the argument categorization framework of the Periodic Table of Arguments (PTA) (Wagemans, 2016 (Wagemans, , 2019 (Wagemans, , 2020 (Wagemans, , 2021a)) , which systematically summarizes the insights about producing arguments formulated within the three disciplines constituting the philosophy of argument. In Section 4, I recapitulate my proposal, label the various hermeneutics involved accordingly, and indicate some directions for further research.",
+                "cite_spans": [
+                    {
+                        "start": 422,
+                        "end": 437,
+                        "text": "(Wagemans, 2016",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 438,
+                        "end": 455,
+                        "text": "(Wagemans, , 2019",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 456,
+                        "end": 473,
+                        "text": "(Wagemans, , 2020",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 474,
+                        "end": 494,
+                        "text": "(Wagemans, , 2021a))",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The above considerations about the relationship between, on the one hand, the classical disciplines logic, dialectic, and rhetoric, and, on the other, hermeneutics, were aimed at building the case that insights from the philosophy of argument can help formulate a theory about how people interpret persuasive discourse. But which insights from this vast field of research are relevant for this specific purpose? And how do we know what elements of the discourse should be considered in the first place?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "To answer these questions, we refer to the classical rhetorical idea that the production process of a speech consists of various stages, which are also known as the officii oratoris (tasks of the orator): the inventio (finding), dispositio (ordering), and elocutio (wording). In classical rhetoric, this idea is used to organize the set of instructions for how to produce the speech: some instructions pertain to the finding of the content of the speech, others to the ordering of the various parts of the speech, and yet others to the wording of the individual elements e see Fig. 1 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 582,
+                        "end": 583,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "In the system of classical rhetoric, the three main tasks have been subdivided into smaller tasks, each consisting of specific subsets of instructions e for a detailed description, see van Eemeren et al. (2014: 121e129) . The main task of inventio consists of two subtasks: intellectio, i.e., the finding of the main point of view to be defended in the speech, and inventio proper, i.e., the finding of the individual arguments in support of that point of view. For the intellectio, the speaker or writer can make use of insights about the characteristics of speech genres, the various degrees of defensibility of points of view, and status theory e the latter consisting of different strategic possibilities for choosing a particular point of view in relation to that of the other party in the controversy. For the inventio proper, the speaker or writer is provided with instructions regarding the use of the various means of persuasion (logos, ethos, pathos) as well as with lists of argument types based on which they can generate arguments in support of the point of view to be defended in the speech. The second main task, the dispositio, contains instructions about how to divide the speech into several parts and which content (generated during the inventio) should be expressed in which of these parts. The elocutio, finally, provides information about virtues (and vices) of style, various kinds of style, and lists of rhetorical figures and tropes that can be used for the embellishment of the speech.",
+                "cite_spans": [
+                    {
+                        "start": 185,
+                        "end": 219,
+                        "text": "van Eemeren et al. (2014: 121e129)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "There is some logic to the order of tasks in that carrying out the elocutio presupposes the content of the speech already found and ordered by having performed the tasks of the inventio and dispositio, respectively. In practice, as acknowledged by authors of rhetorical handbooks, the production process of a persuasive speech is not as linear as described within these books but instead follows an arbitrary order as the maker, i.c., the speaker or writer, usually goes back and forth between the (sub)tasks, making use of the associated (sub)sets of instructions e for an overview, see Table 1 . 1 I would like to thank one of the anonymous reviewers for pointing this out.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 594,
+                        "end": 595,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "In the next section of this paper, I shall formulate a specific hermeneutic of argument type, for which I use the instructions regarding the inventio in the strict sense, i.e., the finding of arguments. But first, I shall situate this effort within the broader context of formulating a general hermeneutic of argumentative or persuasive discourse, which consists of much more than individual arguments as it is the result of the entire production process.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "Analogous to the process of producing persuasive discourse, which is subdivided along the lines of the 'tasks of the speaker', the process of interpreting such discourse can be thought of as comprising several stages e see Table 2 . When interpreting an argumentative text or discussion, the addressee must identify the main claim (conclusion) and the argumentation, consisting of one or more arguments (premises). This hermeneutic stage, which I will call 'argument detection', describes the first step in the process of interpretation of persuasive discourse. The question of how to recognize utterances functioning as conclusions and premises is not only studied in argumentation theory but is also the main focus in the emerging research field of 'argument mining' (Lawrence and Reed, 2020) , i.e., the (semi-automated) extraction of argumentative elements from texts.",
+                "cite_spans": [
+                    {
+                        "start": 769,
+                        "end": 794,
+                        "text": "(Lawrence and Reed, 2020)",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 229,
+                        "end": 230,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "Next, to orientate themselves within the argumentative fabric of the discourse, the addressee needs to get an idea of the interrelations between the argumentative statements (conclusion and premises) contained in it. This hermeneutic stage can be called 'argument mapping', a term primarily used to indicate the activity of providing a general overview of the discourse and related to the notion of 'argumentation structure' (Snoeck Henkemans, 1992; Freeman 2011; van Eemeren et al., 2014: 21e24; Yu and Zenker, 2022) . The hermeneutical activities performed in this stage can be carried out by writing down a numbered list of arguments (van Eemeren et al., 2002) , by drawing boxes and arrows (Reed and Rowe, 2007) , using graphs (Dung, 1995) or adpositional trees (Gobbo et al., 2021 (Gobbo et al., , 2022)) . This stage is mainly informed by instructions concerning the dispositio, the ordering of the discourse.",
+                "cite_spans": [
+                    {
+                        "start": 425,
+                        "end": 449,
+                        "text": "(Snoeck Henkemans, 1992;",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 450,
+                        "end": 463,
+                        "text": "Freeman 2011;",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 464,
+                        "end": 496,
+                        "text": "van Eemeren et al., 2014: 21e24;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 497,
+                        "end": 517,
+                        "text": "Yu and Zenker, 2022)",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 637,
+                        "end": 663,
+                        "text": "(van Eemeren et al., 2002)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 694,
+                        "end": 715,
+                        "text": "(Reed and Rowe, 2007)",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 731,
+                        "end": 743,
+                        "text": "(Dung, 1995)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 766,
+                        "end": 785,
+                        "text": "(Gobbo et al., 2021",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 786,
+                        "end": 809,
+                        "text": "(Gobbo et al., , 2022))",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "Once the overall structure of the argumentative text or discussion is clear, the addressee can zoom in and proceed with identifying the type of arguments substantiated by the pairs of statements contained within that structure, i.e., any individual combination of a supported statement (conclusion) and a supporting statement (premise). While this activity is sometimes referred to as identifying the 'scheme' or 'structure' of the argument, I will call this hermeneutical stage 'argument type identification' and conceive it as being mainly informed by the instructions regarding the inventio proper, the finding of the arguments. Within the philosophy of argument, such instructions take the form of lists of argument types, which include, in the broad sense of the term 'argument', lists of argument schemes and fallacies as well as descriptions the means of persuasion (logos, ethos, and pathos). While the output of this particular stage consists of arguments labeled with the name of their type, it can also be added as a new layer of information in the output of the previous one, the argument map.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "Finally, there is the stage of 'argument evaluation', which is different from all previous stages in that the addressee employs specific criteria for evaluating the quality of the argument under scrutiny, thereby moving from analysis to evaluation or, in the classical terms referred to above, from cognitio to aestimatio. Approaches to such evaluation can be divided into two groups, one based on the concept of 'fallacies' (Hansen, 2020) , the other working with the concept of 'critical questions' (Hastings, 1963; Walton et al., 2008) or, more broadly conceived, 'procedural questions' (Hinton and Wagemans, 2021) . Like the stages distinguished within the production process of persuasive discourse, those distinguished within its interpretation process are not necessarily followed in a linear fashion. In fact, part of the problems regarding mis-and disinformation mentioned in the introduction might well be related to the addressee deviating from or taking short-cuts within the process of interpreting what has been produced by the speaker or writer. As noted earlier, gaining empirical knowledge about the nature and extent of these 'misinterpretations' requires a theory about how persuasive discourse is interpreted in the first place. In the next section, I provide part of such a theory by developing a specific hermeneutics of argument type.",
+                "cite_spans": [
+                    {
+                        "start": 425,
+                        "end": 439,
+                        "text": "(Hansen, 2020)",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 501,
+                        "end": 517,
+                        "text": "(Hastings, 1963;",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 518,
+                        "end": 538,
+                        "text": "Walton et al., 2008)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 590,
+                        "end": 617,
+                        "text": "(Hinton and Wagemans, 2021)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General hermeneutics of argumentative discourse",
+                "sec_num": "2."
+            },
+            {
+                "text": "Of the four hermeneutical stages distinguished in the previous section, the third stage of argument type identification takes as its 'input' parts of the results or 'output' of the earlier stages. The addressee will usually answer the question of what type of argument is instantiated by a particular conclusionepremise pair from having an idea about the main claim defended in the discourse and the function of the individual argument within the larger fabric as represented in the argument map. However, the following hermeneutic of argument type remains independent of this subjective knowledge and presupposes nothing as an input but the two statements functioning as the conclusion and the premise of the argument.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutics of argument type",
+                "sec_num": "3."
+            },
+            {
+                "text": "One problem in identifying the type of argument is that any such 'type' may have an unlimited number of linguistic realizations. What abstractions regarding the content should be made? Under what conditions does it make sense to talk of the same type of argument? And what are the boundaries of the linguistic variations defining such a type? For the purpose of developing a hermeneutic of argument type, I will use the instructions regarding the generation of arguments as they are found in the classical and modern taxonomies of arguments, fallacies, and other means of persuasion. In line with the general aim of the paper to enable the analyst to provide a systematic justification of their interpretation, the hermeneutic developed in this section is based on a systematic summary of these accounts as formulated in the argument categorization framework of the Periodic Table of Arguments (PTA).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutics of argument type",
+                "sec_num": "3."
+            },
+            {
+                "text": "The PTA shares with logical taxonomies of argument that it takes the form of an argument to be a fundamental characteristic. However, it also differs from these taxonomies in that the 'argument form' is not the only parameter considered in describing an argument type. Inspired by the classical dialectical and rhetorical taxonomies of arguments, two other parameters are also taken into account: the 'argument substance' and the 'argument lever'. In this respect, the PTA is in line with other theories of argumentation that seek to complement insights from logic with those from dialectic and rhetoric (van Eemeren et al., 2014) . At the same time, the PTA considerably differs from these endeavors: instead of providing an informal list of argument types (or argument(ation) schemes), it takes a 'parametric', 'combinatorial' or 'factorial' approach to argument classification by defining an 'argument type' as the unique combination of the values of three parameters (form, substance, and lever). This innovation not only enables the accommodation of any existing account of argument types in the more traditional sense of that term, be it from a logical, dialectical, or rhetorical origin, but also provides a systematic framework that can be used for comparative purposes.",
+                "cite_spans": [
+                    {
+                        "start": 604,
+                        "end": 630,
+                        "text": "(van Eemeren et al., 2014)",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutics of argument type",
+                "sec_num": "3."
+            },
+            {
+                "text": "In the following subsections, I provide separate explanations of each of the three parameters, followed by specifications of their hermeneutics. The explanations are based on previous work on the theoretical framework of the PTA (Wagemans, 2016 (Wagemans, , 2019 (Wagemans, , 2020) ) and the specifications of their hermeneutics are based on the Argument Type Identification Procedure (ATIP) e Version 4 (Wagemans, 2021a) . Their present iteration is an adapted version of the iterations in Wagemans (2020) and Hinton and Wagemans (2021) , elaborating on determining the values of the parameters defining an argument type.",
+                "cite_spans": [
+                    {
+                        "start": 229,
+                        "end": 244,
+                        "text": "(Wagemans, 2016",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 245,
+                        "end": 262,
+                        "text": "(Wagemans, , 2019",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 263,
+                        "end": 283,
+                        "text": "(Wagemans, , 2020) )",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 404,
+                        "end": 421,
+                        "text": "(Wagemans, 2021a)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 491,
+                        "end": 506,
+                        "text": "Wagemans (2020)",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 511,
+                        "end": 537,
+                        "text": "Hinton and Wagemans (2021)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutics of argument type",
+                "sec_num": "3."
+            },
+            {
+                "text": "Within the theoretical framework of the PTA, an argument is conceptualized from a linguistic and pragmatic perspective. When viewed linguistically, an argument combines two statements e a conclusion and a premise e occasionally connected by argumentative function indicators such as 'because' or 'therefore'. When viewed pragmatically, it can be assumed that an arguer puts forward the premise to support the conclusion, i.e., to make the conclusion (more) acceptable in the eyes of the addressee. The arguer, in other words, aims at changing the epistemic status of the conclusion from 'doubted' to 'accepted'. I shall refer to this projected change in the epistemic status of the conclusion with the term 'acceptability leverage'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "To explain how the acceptability leverage from the premise to the conclusion works, the PTA assumes the 'law of the common term'. This law states that the premise, to fulfill its pragmatic aim of rendering the conclusion (more) acceptable, should share precisely one common term with the conclusion. While this common term functions as the 'fulcrum' of the leverage of acceptability taking place within the argument, the relationship between the non-common terms, which expresses the underlying mechanism of the argument, functions as its 'lever'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Another starting point of the PTA is that in natural argumentative discourse, any statement can be expressed as a proposition or as an assertion. The difference between the two modes of expression is that in the latter, the arguer's doxastic attitude regarding the proposition is explicitly present in the discourse. The statement 'The president is doing a great job', for example, is expressed as a proposition. In contrast, the statement 'I believe that the president is doing a great job' is expressed as an assertion. While both contain the proposition 'the president is doing a great job', the assertion additionally has the doxastic attitude marker 'I believe that', indicating the fulfillment of the sincerity condition of the speech act of asserting something. In the following, I will assume that it is possible to add a standard doxastic attitude marker 'is true (T)' as a predicate to any proposition ('a is X') or as a replacement of any other doxastic attitude marker explicitly present in the discourse -such as 'I believe that' in the above example. Any statement functioning as the premise or the conclusion of an argument can thus be expressed in two ways: as a proposition 'a is X', for example, 'The president (a) is doing a great job (X)', or as an assertion 'a is X is T', for example, 'The president (a) is doing a great job (X) is true (T)'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Based on the above linguistic and pragmatic starting points about the constituents and working of arguments, the PTA distinguishes four basic argument forms. In what follows, I will briefly describe these forms and present an example for each of them. The analysis of the examples focuses on form but also mentions the lever, which will be analyzed in more detail in Section 3.3.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "If the conclusion is expressed as a proposition (a is X), the law of the common term yields two basic possibilities of argument forms. The first possibility is when the conclusion and the premise share the same subject (a), giving the argument the form 'a is X, because a is Y'. Within the framework of the PTA, such arguments are called 'predicate arguments' (pre): the subject (a) functions as the fulcrum and the relationship between the predicates (X and Y) as the lever of the argument. A concrete example is 'Unauthorized downloading (a) is not theft (X), because unauthorized downloading (a) does not deprive the original owner of the use of an object (Y)', which has unauthorized downloading (a) as its fulcrum and the relationship between 'does not deprive the original owner of the use of an object (Y)' and 'is not theft (X)' as its lever.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "The other basic possibility is when the common term is the predicate (X), which means the argument has the form 'a is X, because b is X'. In this case, the predicate (X) is the fulcrum, and the leverage of acceptability can be explained by assuming that there is a relationship between the non-common terms of the premise and the conclusion, namely their subjects (a and b). Within the framework of the PTA, such arguments are called 'subject arguments' (sub). An example is 'Cycling on the grass (a) is prohibited (X), because walking on the grass (b) is prohibited (X)', which has 'is prohibited (X)' as its fulcrum and the relationship between 'cycling on the grass (a)' and 'walking on the grass (b)' as its lever.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "In the two possibilities discussed so far, the conclusion is expressed as a proposition (a is X). As indicated above, an argument can also be expressed as an assertion (a is X is T), consisting of a proposition (a is X) and a doxastic attitude marker (T). When conceptualized as an attribution of a second-order predicate to a proposition that itself consists of a subject and a predicate, an assertion can be said to have a complete proposition (q) as its subject and a doxastic attitude marker (T) as its predicate. Under this assumption, application of the law of the common term yields another two possibilities of argument forms, which are found by varying either the predicate or the subject of the conclusion (q is T) and can thus again be labeled as predicate and subject arguments. To distinguish them from the former two possibilities, these are called 'second-order arguments'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "I will start by varying the predicate (T) of the conclusion (q is T), keeping its subject (q) the same. This yields 'q is T, because q is Z' as the argument form of a second-order predicate argument. An example is 'We only use 10% of our brain (q) is true (T), because we only use 10% of our brain (q) is said by Einstein (Z)', which has 'we only use 10% of our brain (q)' as its fulcrum and the relationship between 'is said by Einstein (Z)' and 'is true (T)' as its lever.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "The other possibility results from varying the subject (q) of the conclusion (q is T). This variation yields a premise with a completely different proposition (r) as its subject and the doxastic attitude marker (T) as its predicate, giving the second-order subject argument the form 'q is T, because r is T'. An example is 'Peace can be started by truth (q) is true (T), because war can be started by lies (r) is true (T)', which has 'is true (T)' as its fulcrum and the relationship between 'peace can be started by truth (q)' and 'war can be started by lies (r)' as its lever.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "In sum, the theoretical framework of the PTA distinguishes between, on the one hand, predicate and subject arguments, and, on the other, first-order and second-order arguments, yielding four basic argument forms e see Table 3 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 224,
+                        "end": 225,
+                        "text": "3",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "One of the challenges for developing a hermeneutic of argument form is to find a method for providing a justifiable determination of the form of an argument, given that there might be many different linguistic realizations of the same natural argument. Compare, for instance, the following two linguistic realizations of the argument mentioned above as an example of a first-order predicate argument:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Linguistic realization 1 Unauthorized downloading is not theft, because it does not deprive the original owner of the use of an object Linguistic realization 2 Since unauthorized downloading does not deprive the original owner of the use of an object, I don't believe it is theft How can we justify our claim that these two arguments have the same configuration of subjects and predicates expressed in their conclusion and premise? How can we show that these are 'just' two different linguistic realizations of the same argument? And if so, what is the fully explicit linguistic realization of that argument?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Table 3 The four basic argument forms distinguished in the PTA.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "3",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument form",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "First/second-order argument Subject/predicate argument",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "a is X, because a is Y first-order predicate a is X, because b is X first-order subject q is T, because q is Z (or a is X is T, because a is X is Z) second-order predicate q is T, because r is T (or a is X is T, because b is Y is T) second-order subject",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "In my view, the specific hermeneutics of argument form require the interpreter to provide a maximally explicit record of how they got from the original phrasing of the natural argument to a standardized version indicating the elements relevant for recognizing the argument form. The above examples, for instance, would then both be rephrased as 'Unauthorized downloading (a) is not theft (X), because unauthorized downloading (a) does not deprive the original owner of the use of an object (Y)'. In the rephrasing of the first linguistic realization, the only change is the substitution of 'it' by 'unauthorized downloading'. In rephrasing the second one, there is slightly more work to do. Apart from the substitution of 'it' by 'unauthorized downloading', the interpreter has changed the order of the statements expressing the conclusion and the premise, substituted the connective 'since' by the standard connective 'because', hidden the doxastic attitude marker 'I don't believe', and moved the negation 'not' inside the predicate 'is theft'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "To build such a record of transformations of the original phrasing of the argument toward its canonized version, I propose to use Quintilian's four 'categories of change' as a starting point. This so-called quadripartita ratio comprises four basic possibilities for changing something: (1) leaving something out (deletion), (2) adding something (addition), (3) replacing something (substitution), and (4) changing the order of something (permutation). While classical rhetoricians like Quintilian himself used these categories to provide a systematic description of the possible variations in the wording of a speech, present-day pragma-dialecticians have used them to describe how their reconstruction of argumentative discourse deviates from their model of a 'critical discussion' (Lausberg, 1998: 217e229 ; van Eemeren et al., 2014: 535; Wagemans, 2021b: 574) . The use of the four categories of change as proposed in this paper takes place on a different and more detailed level of analysis, respectively: that of the recognition of the form of an individual natural argument. As an example, I provide in Tables 4 and 5 the records of the hermeneutical transformations involved in canonizing the two linguistic realizations of the first-order predicate argument just mentioned.",
+                "cite_spans": [
+                    {
+                        "start": 783,
+                        "end": 809,
+                        "text": "(Lausberg, 1998: 217e229 ;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 810,
+                        "end": 840,
+                        "text": "van Eemeren et al., 2014: 535;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 841,
+                        "end": 862,
+                        "text": "Wagemans, 2021b: 574)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 1116,
+                        "end": 1117,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1122,
+                        "end": 1123,
+                        "text": "5",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "Original phrasing linguistic realization 1 Unauthorized downloading is not theft, because it does not deprive the original owner of the use of an object Standardized phrasing linguistic realization 1 Unauthorized downloading is not theft, because unauthorized downloading does not deprive the original owner of the use of an object Original phrasing linguistic realization 2 Since unauthorized downloading does not deprive the original owner of the use of an object, I don't believe it is theft Standardized phrasing linguistic realization 2 Unauthorized downloading is not theft, because unauthorized downloading does not deprive the original owner of the use of an object Related to the challenge posed by the fact there can be different linguistic realizations of the same natural argument, there is the challenge of determining which of the four basic argument forms fits best the configuration of subjects and predicates in a given natural argument. To meet this challenge, the interpreter can make use of a decision tree with heuristic questions and paths depending on how these questions are answered. The decision tree is pictured in Fig. 2 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 1147,
+                        "end": 1148,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "Hermeneutical transformations of linguistic realization 1.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Table 4",
+                "sec_num": null
+            },
+            {
+                "text": "Unauthorized downloading is not theft, because unauthorized downloading does not deprive the original owner of the use of an object substitution of 'it' by 'unauthorized downloading'",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Rephrasing Hermeneutical transformation",
+                "sec_num": null
+            },
+            {
+                "text": "Hermeneutical transformations of linguistic realization 2.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Table 5",
+                "sec_num": null
+            },
+            {
+                "text": "Since unauthorized downloading does not deprive the original owner of the use of an object, I don't believe unauthorized downloading is theft substitution of 'it' by 'unauthorized downloading' Since unauthorized downloading does not deprive the original owner of the use of an object, I believe unauthorized downloading is not theft permutation of the negation 'not'",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Rephrasing Hermeneutical transformation",
+                "sec_num": null
+            },
+            {
+                "text": "Since unauthorized downloading does not deprive the original owner of the use of an object, unauthorized downloading is not theft hiding of the doxastic attitude marker 'I believe' Unauthorized downloading is not theft, since unauthorized downloading does not deprive the original owner of the use of an object permutation of the conclusion and the premise Unauthorized downloading is not theft, because unauthorized downloading does not deprive the original owner of the use of an object substitution of the connective 'since' by the standard connective 'because'",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Rephrasing Hermeneutical transformation",
+                "sec_num": null
+            },
+            {
+                "text": "As explained above, the theoretical framework of the PTA assumes that the conclusion and the premise of an argument are expressed by statements and that the determination of an argument type requires the determination of the value of three basic parameters: the argument form, the argument substance, and the argument lever. While the 'argument form' is defined as the configuration of subjects and predicates of the statements constituting an argument, the 'argument substance' pertains to the content of the individual statements. It labels this content in terms of a widely used typology of statements that is developed in debate theory and distinguishes between statements of fact (F), statements of value (V), and statements of policy (P) (see, e.g., Broda-Bahm et al., 2004; Skorupski, 2010; Freeley and Steinberg, 2014; Schut and Wagemans, 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 756,
+                        "end": 780,
+                        "text": "Broda-Bahm et al., 2004;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 781,
+                        "end": 797,
+                        "text": "Skorupski, 2010;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 798,
+                        "end": 826,
+                        "text": "Freeley and Steinberg, 2014;",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 827,
+                        "end": 852,
+                        "text": "Schut and Wagemans, 2014)",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument substance",
+                "sec_num": "3.2."
+            },
+            {
+                "text": "Since any individual argument consists of one conclusion and one premise, the parameter 'argument substance' can take nine different values, conventionally indicated by mentioning the type of statement expressed in the conclusion followed by that in the premise: PP, PV, PF, VP, VV, VF, FP, FV, FF. The argument 'The government should invest in jobs, because this will lead to economic growth', for instance, can be characterized as a 'PF' argument, since it combines a statement of policy (P) in its conclusion with a statement of fact (F) in its premise.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument substance",
+                "sec_num": "3.2."
+            },
+            {
+                "text": "To determine the argument substance, the interpreter can use definitions of the three main statement types, lists of subtypes, and several examples. For each of the three types of statements, these hermeneutical tools are listed in Table 6 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 238,
+                        "end": 239,
+                        "text": "6",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument substance",
+                "sec_num": "3.2."
+            },
+            {
+                "text": "When the analyst or addressee is asked to justify their interpretation of the substance of a particular natural argument, they can refer to one or more of the three hermeneutical tools mentioned above. It is interesting to note that using each tool requires a different type of hermeneutical skill. For instance, to determine the substance based on the definitions of a statement of fact, value, and policy, one would need to subsume the statements of the argument under scrutiny under these definitions. If the hermeneutical tools included more specific definitions of the subtypes, this would require the same hermeneutical skill of subsumption under a definition. In contrast, to determine the substance by using examples requires the hermeneutical skill of comparing the statements under scrutiny with those examples in order to find the best match.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument substance",
+                "sec_num": "3.2."
+            },
+            {
+                "text": "After having discussed how an analyst of persuasive discourse can determine the argument form and argument substance, I turn to the hermeneutics of the third parameter: the argument lever. Within the framework of the PTA, the lever is defined as the underlying mechanism of the argument that expresses the connection between the premise and conclusion, thereby answering the question of how that premise is supposed to fulfill its pragmatic function of increasing or establishing the acceptability of the conclusion. As such, the concept of the argument lever is related to the concepts of 'linking', 'missing', and 'implicit' premise. Unlike these concepts, however, the lever does not have the status of a premise. One reason is to avoid infinite regress problems: if the link between a premise and a conclusion counts as another premise, there should be yet another premise that links the link to the conclusion, ad infinitum. Instead, the argument lever is given a status of its own by defining it as the relationship between the premise and conclusion or, more specifically and depending on whether the predicate or the subject functions as the fulcrum, the relationship between the two predicates or the two subjects of the statements involved. The lever, for instance, of the first-order predicate argument mentioned above, 'Unauthorized downloading is not theft, because unauthorized downloading does not deprive the original owner of the use of an object', is the relationship between the predicate of the premise, 'does not deprive the original owner of the use of an object', and the predicate of the conclusion, 'is not theft'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument lever",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "But how can we provide a more concrete interpretation of this relationship? What is its content? Since in natural persuasive discourse, the lever usually remains implicit, this is a genuine hermeneutical challenge. In terms of Quintilian's four categories of change, providing an interpretation of the argument lever would require the hearer or reader to add something to the discourse, running the risk of adding something that the speaker or writer did not intend to convey in their message or that they can 'plausibly deny' when explicated by the hearer e for various types of denial see, e.g., Boogaart et al. (2021) .",
+                "cite_spans": [
+                    {
+                        "start": 598,
+                        "end": 620,
+                        "text": "Boogaart et al. (2021)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument lever",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "One way to deal with this challenge is to work with idealized argument types already including elements that may have remained implicit in the discourse. This is how most dialectical and rhetorical approaches to argument description and classification solve the problem. To identify the type of an argument found in the wild, the analyst or addressee compares the observed characteristics of the argument under scrutiny to those of the idealized argument types mentioned in the list and chooses a type from the list that best matches them. But what should the analyst do if there is only a partial match? How many discrepancies between the ideal and the real are admissible? And what are the conditions for naming a new type of argument, one that is not on the list yet?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument lever",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "To avoid the problems involved in this hermeneutics of matching, the PTA works with a different type of hermeneutics, at least partially. The determination of the argument lever takes place in two steps. Since the lever is defined as the relationship (R) between the non-common terms of the conclusion and premise, the argument form provides information about the common element (fulcrum) as well as the non-common elements of these statements. The first step, therefore, is to derive the so-called 'abstract lever' from the argument form. Table 7 provides the fulcrum and the abstract lever of each of the four argument forms distinguished in the PTA.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 546,
+                        "end": 547,
+                        "text": "7",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument lever",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "The second step is to provide content, thereby specifying the abstract lever and turning it into a 'concrete lever'. Providing content to the predicates or the subjects can quickly be done by substituting their placeholders in the abstract lever with their actual linguistic expressions. Providing content to the relationship, however, is a more delicate matter since it requires the addressee to find a relevant keyword for expressing that relationship, which may involve adding something to the original discourse. At this point, the current version of the PTA, which is a summary of descriptions of argument types in the longstanding traditions of dialectic and rhetoric, can serve as a heuristic instrument e for updates, please see www.periodic-tableof-arguments.org. Since the relationship between 'depriving the original owner of the use of an object' and 'being theft', to use the example given above, can be characterized by the keyword DEFINITION, the argument can be labeled as an 'argument from definition'.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument lever",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "In conclusion, although this second step does not entirely absolve the interpreter from the problems related to the hermeneutics of matching, it at least diminishes them by reducing the possibilities for the lever based on the preceding determination of the argument form and the argument substance.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The hermeneutic of argument lever",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "In this paper, I started out developing a general theory of interpreting persuasive discourse by distinguishing four different hermeneutical stages: (1) argument detection, (2) argument mapping, (3) argument type identification, and (4) argument evaluation. Subsequently, I have focused on the third stage, argument type identification, providing a specification of the hermeneutics of argument type. For this purpose, I have worked from the assumption that a theory of interpreting the type of argument can be based on the instructions for generating arguments that are part of the classical task of the inventio, the 'finding' of the arguments (in the broad sense of the term). These instructions consist of descriptions and classifications, abbreviated as 'lists' of argument schemes (topoi, loci), fallacies, and means of persuasion (logos, ethos, and pathos). To maximize the extent to which the interpretation can be justified, I have worked with a systematic summary of these persuasive techniques as provided in the argument categorization framework of the Periodic Table of Arguments (PTA). Within this framework, an 'argument type' is conceived as a unique combination of values attributed to the parameters (1) argument form, (2) argument substance, and (3) argument lever. After having explained the parameters and the values they can take, I have provided their specific hermeneutics.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "4."
+            },
+            {
+                "text": "For determining the value of the first parameter, the argument form, the general idea is to look for the 'fulcrum' of the argument, i.e., the common term of the statements functioning as the conclusion and the premise. In the summarizing Table 8 , I have named this 'rule-based' hermeneutics, mainly because it can be expressed in a decision tree for determining the argument form -see Fig. 2 . The fulcrum search is preceded by an analysis of the constituents of the statements involved and requires a transformation of the original formulation of the argument into its canonical form. The associated hermeneutics I have listed in Table 8 as 'analytic' and 'transformative', respectively.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 244,
+                        "end": 245,
+                        "text": "8",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 391,
+                        "end": 392,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 638,
+                        "end": 639,
+                        "text": "8",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "4."
+            },
+            {
+                "text": "Fulcrum and abstract lever of the four basic argument forms.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Table 7",
+                "sec_num": null
+            },
+            {
+                "text": "Fulcrum Abstract lever",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "a is X, because a is Y a Y R X a is X, because b is X X a R b q is T, because r is T T q R r q is T, because q is Z q Z R T",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "The second parameter, the argument substance, can be determined in various ways. For example, one could work with definitions of the three types of statements (and their subtypes), which I called, in Table 8 , 'subsumptive' hermeneutics. Another possibility is to work with examples, which resembles the classical rhetorical practice of imitatio, i.e., learning how to give a speech by means of studying model speeches delivered by masters, be it that the latter is an operation on the production side of the discourse and not on the analytical side. In Table 8 , I indicated this as 'comparative' hermeneutics.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 206,
+                        "end": 207,
+                        "text": "8",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 560,
+                        "end": 561,
+                        "text": "8",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "Finally, the third parameter, the argument lever, requires a two-fold hermeneutics as it can be formulated based on argument form and argument substance, yielding an abstract lever and a concrete lever, respectively. The abstract lever is derived from the argument form because it is defined as the relationship between the non-common terms of the conclusion and the premise of the argument. In Table 8 , I called this 'derivative' hermeneutics. The formulation of the concrete lever requires more hermeneutical creativity. The analyst will have to come up with a keyword that connects these non-common elements, or, in other words, that concretizes the abstract lever by providing a specific description of the relationship between them. Since argument types are named after the keyword in the lever, the names of the argument types distinguished in the PTA can be used as a heuristic for finding the most relevant keyword. For this reason, in Table 8 , I called the interpretation strategy involved in formulating the concrete lever a 'comparative' hermeneutics.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 401,
+                        "end": 402,
+                        "text": "8",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 951,
+                        "end": 952,
+                        "text": "8",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "As illustrated by the names for the specific hermeneutics of the three parameters constituting an argument type in Table 8 , the hermeneutics of argument type identification consists of various types of interpretation strategies, which sometimes can be used in a complementary fashion.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 121,
+                        "end": 122,
+                        "text": "8",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "The development of a comprehensive hermeneutics of argumentative or persuasive discourse involves much more than articulating the strategies for determining the characteristics of individual arguments. As explained in Section 2, the hermeneutical stage of argument type identification is preceded by the stages of argument detection and argument mapping and followed by that of argument evaluation. Further research needs to be done to develop specific hermeneutics for these stages as detailed as those developed in this paper, thus enabling the interpreter to use the output of argument detection and mapping as the input for argument type identification. Then, based on the identification of their type, the individual arguments can be evaluated by making use of normative insights about the quality of arguments as they are formulated in, for instance, Hinton (2021) and Hinton and Wagemans (2021) . As such, the complete hermeneutics may function as a starting point for developing a procedure for 'rhetoric-checking' (Plug and Wagemans, 2020) , 'reason-checking' (Visser et al., 2020; Musi and Rocci, 2022) , or 'argument-checking' (Brave et al., 2022) as an extension of 'fact-checking'.",
+                "cite_spans": [
+                    {
+                        "start": 857,
+                        "end": 870,
+                        "text": "Hinton (2021)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 875,
+                        "end": 901,
+                        "text": "Hinton and Wagemans (2021)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 1023,
+                        "end": 1048,
+                        "text": "(Plug and Wagemans, 2020)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 1069,
+                        "end": 1090,
+                        "text": "(Visser et al., 2020;",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 1091,
+                        "end": 1112,
+                        "text": "Musi and Rocci, 2022)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 1138,
+                        "end": 1158,
+                        "text": "(Brave et al., 2022)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "Further research could also include the implementation of the hermeneutics of persuasive discourse in computational tools. While the current state of the art in argument mining has yielded interesting results in finding the statements possibly constituting an argument and a PTA-based human annotation of natural discourse seems promising (Visser et al., 2021) , a comprehensive computational tool reflecting the hermeneutics of persuasive discourse as developed within this paper has not yet been developed. A robust formalization of such hermeneutics, for instance, the one proposed in Adpositional Argumentation (AdArg) (Gobbo et al., 2021 (Gobbo et al., , 2022)) , may form the basis for developing software that can help people to analyze and evaluate natural arguments.",
+                "cite_spans": [
+                    {
+                        "start": 339,
+                        "end": 360,
+                        "text": "(Visser et al., 2021)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 623,
+                        "end": 642,
+                        "text": "(Gobbo et al., 2021",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 643,
+                        "end": 666,
+                        "text": "(Gobbo et al., , 2022))",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "As indicated in the introduction, one of the aims of developing a hermeneutics of argumentative or persuasive discourse is to facilitate cognitive psychological research into how people process such discourse. In this type of research, the procedures for argument detection, mapping, type identification, and assessment can be used to generate specific hypotheses about the way in which humans (and computers) interpret the text on the discourse level. These hypotheses are then tested empirically and fed back into the theory, thus enabling a further corroboration and refinement thereof. While the inclusion of an empirical component in the research cycle may particularly contribute to our knowledge about the assignment of values to parameters central to the hermeneutics of argument type identification spelled out in Section 3 of this paper, two additional remarks are in place. 2 First, it would be crucial to explore how the theory of interpreting argumentative or persuasive discourse developed in this paper could be integrated into well-researched corpus accounts such as, e.g., Koszowy et al. (2022) . Second, to further strengthen the general usefulness of the theory, it would be helpful to include an affective component in the method for argument type identification. The PTA's innovative method of describing characteristics of arguments in terms of a set of parameters and their values enables the incorporation of relevant insights about this component, as found in, e.g., Hample (2005 Hample ( , 2018) ) and Wirz (2018) . In fact, since the PTA takes a 'parametric' approach to argument description and classification, its theoretical framework can be extended with any parameters or values deemed relevant for specific types of research into argumentative or persuasive discourse.",
+                "cite_spans": [
+                    {
+                        "start": 394,
+                        "end": 409,
+                        "text": "(and computers)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1090,
+                        "end": 1111,
+                        "text": "Koszowy et al. (2022)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 1492,
+                        "end": 1504,
+                        "text": "Hample (2005",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 1505,
+                        "end": 1523,
+                        "text": "Hample ( , 2018) )",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 1528,
+                        "end": 1539,
+                        "text": "Wirz (2018)",
+                        "ref_id": "BIBREF35"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Argument form",
+                "sec_num": null
+            },
+            {
+                "text": "There is no conflict of interest.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Declaration of competing interest",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "No data was used for the research described in the article.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data availability",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Those are your words, not mine!\" Defence strategies for denying speaker commitment",
+                "authors": [
+                    {
+                        "first": "Ronny",
+                        "middle": [],
+                        "last": "Boogaart",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jansen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Henrike",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Maarten",
+                        "middle": [],
+                        "last": "Van Leeuwen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "Argumentation",
+                "volume": "35",
+                "issue": "",
+                "pages": "209--e235",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Boogaart, Ronny, Jansen, Henrike, van Leeuwen, Maarten, 2021. \"Those are your words, not mine!\" Defence strategies for denying speaker commitment. Argumentation 35, 209e235.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Argument-checking: a critical pedagogy approach to digital literacy",
+                "authors": [
+                    {
+                        "first": "Ruben",
+                        "middle": [],
+                        "last": "Brave",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Federica",
+                        "middle": [],
+                        "last": "Russo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "AIUCD 2022 -Culture digitali. Intersezioni: filosofia, arti, media. Proceedings della 11a conferenza nazionale",
+                "volume": "",
+                "issue": "",
+                "pages": "245--e248",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Brave, Ruben, Russo, Federica, Wagemans, Jean H.M., 2022. Argument-checking: a critical pedagogy approach to digital literacy. In: Cirac\u00ec, Fabio, Miglietta, Giulia, Gatto, Carola (Eds.), AIUCD 2022 -Culture digitali. Intersezioni: filosofia, arti, media. Proceedings della 11a conferenza nazionale, Lecce, 2022. Associazione per l'Informatica Umanistica e la Cultura Digitale, pp. 245e248.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Argument and Audience: Presenting Debates in Public Settings. International Debate Education Association",
+                "authors": [
+                    {
+                        "first": "Kenneth",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Broda-Bahm",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Daniela",
+                        "middle": [],
+                        "last": "Kempf",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "William",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Driscoll",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Broda-Bahm, Kenneth T., Kempf, Daniela, Driscoll, William J., 2004. Argument and Audience: Presenting Debates in Public Settings. International Debate Education Association, Amsterdam.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Hermeneutik",
+                "authors": [
+                    {
+                        "first": "Axel",
+                        "middle": [],
+                        "last": "B\u00fchler",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "Enzyklop\u20ac adie Philosophie",
+                "volume": "1",
+                "issue": "",
+                "pages": "988--e992",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "B\u00fchler, Axel, 2021. Hermeneutik. In: Sandk\u00fchler, Hans J\u20ac org (Ed.), Enzyklop\u20ac adie Philosophie, vol. 1. Felix Meiner Verlag, Hamburg, pp. 988e992.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games",
+                "authors": [
+                    {
+                        "first": "Phan",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Dung",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "Artif. Intell",
+                "volume": "77",
+                "issue": "2",
+                "pages": "321--e357",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dung, Phan M., 1995. On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games. Artif. Intell. 77 (2), 321e357.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "The 4th Revolution: How the Infosphere is Reshaping Human Reality",
+                "authors": [
+                    {
+                        "first": "Luciano",
+                        "middle": [],
+                        "last": "Floridi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Floridi, Luciano, 2014. The 4th Revolution: How the Infosphere is Reshaping Human Reality. Oxford University Press, New York and Oxford.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Argumentation and Debate: Critical Thinking for Reasoned Decision Making",
+                "authors": [
+                    {
+                        "first": "Austin",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Freeley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "David",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Steinberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wadsworth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Boston",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "James",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Freeman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Argument Structure: Representation and Theory",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Freeley, Austin J., Steinberg, David L., 2014. Argumentation and Debate: Critical Thinking for Reasoned Decision Making, thirteenth ed. Wadsworth, Boston MA. Freeman, James B., 2011. Argument Structure: Representation and Theory. Springer, Dordrecht and New York.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Complex arguments in Adpositional Argumentation (AdArg)",
+                "authors": [
+                    {
+                        "first": "Hans-Georg ;",
+                        "middle": [],
+                        "last": "Gadamer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Gobbo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Federico",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Benini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Marco",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1974,
+                "venue": "Proceedings of the Workshop on Advances in Argumentation in Artificial Intelligence (AI ^3 2021), co-located with the 19th International Conference of the Italian Association for Artificial Intelligence",
+                "volume": "3",
+                "issue": "",
+                "pages": "1061--e1073",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gadamer, Hans-Georg, 1974. Hermeneutik (Hermeneutics). In: Ritter, Joachim (Ed.), Historisches W\u20ac orterbuch der Philosophie, vol. 3. WBG, Darmstadt, pp. 1061e1073. Gobbo, Federico, Benini, Marco, Wagemans, Jean H.M., 2021. Complex arguments in Adpositional Argumentation (AdArg). In: D'Agostino, Marcello, D'Asaro, Fabio A., Larese, Costanza (Eds.), Proceedings of the Workshop on Advances in Argumentation in Artificial Intelligence (AI ^3 2021), co-located with the 19th International Conference of the Italian Association for Artificial Intelligence (AIxIA 2021), Milan, November 29, 2021. URL. http://ceur-ws. org/Vol-3086/.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "More than relata refero: representing the various roles of reported speech in argumentative discourse",
+                "authors": [
+                    {
+                        "first": "Federico",
+                        "middle": [],
+                        "last": "Gobbo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Benini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Marco",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Languages",
+                "volume": "7",
+                "issue": "59",
+                "pages": "1--e11",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gobbo, Federico, Benini, Marco, Wagemans, Jean H.M., 2022. More than relata refero: representing the various roles of reported speech in argumentative discourse. Languages 7 (59), 1e11.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Problems in Argument Analysis and Evaluation. Windsor Studies in Argumentation",
+                "authors": [
+                    {
+                        "first": "Trudy",
+                        "middle": [],
+                        "last": "Govier",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Govier, Trudy, 2018. Problems in Argument Analysis and Evaluation. Windsor Studies in Argumentation, Windsor.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Hermeneutik (Hermeneutics)",
+                "authors": [
+                    {
+                        "first": "Jean",
+                        "middle": [],
+                        "last": "Grondin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "Historisches W\u20ac orterbuch der Rhetorik",
+                "volume": "3",
+                "issue": "",
+                "pages": "1350--e1374",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Grondin, Jean, 1996. Hermeneutik (Hermeneutics). In: Ueding, Gert (Ed.), Historisches W\u20ac orterbuch der Rhetorik, vol. 3. WBG, Darmstadt, pp. 1350e1374. Habermas, J\u00fcrgen, 1981. Theorie des kommunikativen Handelns [Theory of Communicative Action].",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Arguing: Exchanging Reasons Face to Face",
+                "authors": [
+                    {
+                        "first": "Frankfurt",
+                        "middle": [],
+                        "last": "Suhrkamp",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Dale",
+                        "middle": [],
+                        "last": "Hample",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Suhrkamp, Frankfurt. Hample, Dale, 2005. Arguing: Exchanging Reasons Face to Face. Routledge, New York.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Interpersonal Arguing",
+                "authors": [
+                    {
+                        "first": "Dale",
+                        "middle": [],
+                        "last": "Hample",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hample, Dale, 2018. Interpersonal Arguing. Peter Lang, New York etc.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Fallacies",
+                "authors": [
+                    {
+                        "first": "Hans",
+                        "middle": [],
+                        "last": "Hansen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "The Stanford Encyclopedia of Philosophy, Summer 2020 Edition",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hansen, Hans, 2020. Fallacies. In: Zalta, Edward N. (Ed.), The Stanford Encyclopedia of Philosophy, Summer 2020 Edition. URL. https://plato.stanford.edu/ archives/sum2020/entries/fallacies.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "A Reformulation of the Modes of Reasoning in Argumentation. Doctoral dissertation",
+                "authors": [
+                    {
+                        "first": "Arthur",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Hastings",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1963,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hastings, Arthur C., 1963. A Reformulation of the Modes of Reasoning in Argumentation. Doctoral dissertation. Northwestern University, Evanston. Hinton, Martin, 2021. Evaluating the Language of Argument. Springer, Cham.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Evaluating reasoning in natural arguments: a procedural approach",
+                "authors": [
+                    {
+                        "first": "Martin",
+                        "middle": [],
+                        "last": "Hinton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "Argumentation",
+                "volume": "36",
+                "issue": "",
+                "pages": "61--e84",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hinton, Martin, Wagemans, Jean H.M., 2021. Evaluating reasoning in natural arguments: a procedural approach. Argumentation 36, 61e84.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "A pragmatic account of rephrase in argumentation: linguistic and cognitive evidence",
+                "authors": [
+                    {
+                        "first": "Marcin",
+                        "middle": [],
+                        "last": "Koszowy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Steve",
+                        "middle": [],
+                        "last": "Oswald",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Budzynska",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Katarzina",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Konat",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Barbara",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Pascal",
+                        "middle": [],
+                        "last": "Gygax",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Informal Log",
+                "volume": "42",
+                "issue": "1",
+                "pages": "49--e82",
+                "other_ids": {
+                    "DOI": [
+                        "10.22329/il.v42i1.7212"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Koszowy, Marcin, Oswald, Steve, Budzynska, Katarzina, Konat, Barbara, Gygax, Pascal, 2022. A pragmatic account of rephrase in argumentation: linguistic and cognitive evidence. Informal Log. 42 (1), 49e82. https://doi.org/10.22329/il.v42i1.7212.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Handbook of Literary Rhetoric: A Foundation for Literary Study",
+                "authors": [
+                    {
+                        "first": "Heinrich",
+                        "middle": [],
+                        "last": "Lausberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lausberg, Heinrich, 1998. Handbook of Literary Rhetoric: A Foundation for Literary Study. Brill, Leiden, Boston, and K\u20ac oln.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Argument mining: a survey",
+                "authors": [
+                    {
+                        "first": "John",
+                        "middle": [],
+                        "last": "Lawrence",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chris",
+                        "middle": [],
+                        "last": "Reed",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "Comput. Linguist",
+                "volume": "45",
+                "issue": "4",
+                "pages": "765--e818",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lawrence, John, Reed, Chris, 2020. Argument mining: a survey. Comput. Linguist. 45 (4), 765e818.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Staying up to date with fact and reason checking: an argumentative analysis of outdated news",
+                "authors": [
+                    {
+                        "first": "Elena",
+                        "middle": [],
+                        "last": "Musi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Andrea",
+                        "middle": [],
+                        "last": "Rocci",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "311--e330",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/978-3-030-91017-4_16"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Musi, Elena, Rocci, Andrea, 2022. Staying up to date with fact and reason checking: an argumentative analysis of outdated news. In: Oswald, Steve, Lewi nski, Marcin, Greco, Sara, Villata, Serena (Eds.), The Pandemic of Argumentation. Springer, Cham, pp. 311e330. https://doi.org/10.1007/978-3-030- 91017-4_16.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "La nouvelle rh etorique: Trait e de l'argumentation [The New Rhetoric: A Treatise on Argumentation",
+                "authors": [
+                    {
+                        "first": "Chaim",
+                        "middle": [],
+                        "last": "Perelman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lucie",
+                        "middle": [],
+                        "last": "Olbrechts-Tyteca",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1958,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Perelman, Chaim, Olbrechts-Tyteca, Lucie, 1958. La nouvelle rh etorique: Trait e de l'argumentation [The New Rhetoric: A Treatise on Argumentation]. Presses Universitaires de France, Paris.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "From fact-checking to rhetoric-checking: extending methods for evaluating populist discourse",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Plug",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "Vox populi: Rhetoric of populism",
+                "volume": "",
+                "issue": "",
+                "pages": "236--e252",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Plug, H. Jos e, Wagemans, Jean H.M., 2020. From fact-checking to rhetoric-checking: extending methods for evaluating populist discourse. In: van der Geest, Ingeborg M., Jansen, Henrike, van Klink, Bart (Eds.), Vox populi: Rhetoric of populism. Edward Elgar Publishing, Cheltenham, pp. 236e252.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "A pluralist approach to argument diagramming. Law Probab. Risk 6, 59e85. R\u20ac od, Wolfgang, 2021. Die hermeneutische Philosophie im 20",
+                "authors": [
+                    {
+                        "first": "Chris",
+                        "middle": [],
+                        "last": "Reed",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Glenn",
+                        "middle": [],
+                        "last": "Rowe",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Geschichte der Philosophie",
+                "volume": "14",
+                "issue": "",
+                "pages": "12--e26",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Reed, Chris, Rowe, Glenn, 2007. A pluralist approach to argument diagramming. Law Probab. Risk 6, 59e85. R\u20ac od, Wolfgang, 2021. Die hermeneutische Philosophie im 20. Jahrhundert. [Hermeneutical philosophy in the 20th century]. In: R\u20ac od, Wolfgang, Essler, Wilhelm K. (Eds.), Geschichte der Philosophie, vol. 14. WBG Academic, Darmstadt, pp. 12e26.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Argumentatie en debat [Argumentation and Debate",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Schut",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Daniel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Boom Lemma, Den Haag. Skorupski, John, 2010. The Domain of Reasons",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Schut, Daniel, Wagemans, Jean H.M., 2014. Argumentatie en debat [Argumentation and Debate]. Boom Lemma, Den Haag. Skorupski, John, 2010. The Domain of Reasons. Oxford University Press, Oxford.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Analysing Complex Argumentation: the Reconstruction of Multiple and Coordinatively Compound Argumentation in a Critical Discussion",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Snoeck Henkemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Francisca",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1992,
+                "venue": "SIC SAT",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Snoeck Henkemans, A. Francisca, 1992. Analysing Complex Argumentation: the Reconstruction of Multiple and Coordinatively Compound Argumentation in a Critical Discussion. SIC SAT, Amsterdam.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Knowing and Acting: an Invitation to Philosophy",
+                "authors": [
+                    {
+                        "first": "Stephen",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Toulmin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1976,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Toulmin, Stephen E., 1976. Knowing and Acting: an Invitation to Philosophy. Macmillan, New York.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Handbook of Argumentation Theory",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Van Eemeren",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Frans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Garssen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Bart",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Erik",
+                        "middle": [
+                            "C W"
+                        ],
+                        "last": "Krabbe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Snoeck Henkemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Francisca",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Verheij",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Bart",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "van Eemeren, Frans H., Garssen, Bart, Krabbe, Erik C.W., Snoeck Henkemans, A. Francisca, Verheij, Bart, Wagemans, Jean H.M., 2014. Handbook of Argu- mentation Theory. Springer, Dordrecht etc.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Reason-checking fake news",
+                "authors": [
+                    {
+                        "first": "Jacky",
+                        "middle": [],
+                        "last": "Visser",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Lawrence",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "John",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chris",
+                        "middle": [],
+                        "last": "Reed",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "Commun. ACM",
+                "volume": "63",
+                "issue": "11",
+                "pages": "38--e40",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Visser, Jacky, Lawrence, John, Reed, Chris, 2020. Reason-checking fake news. Commun. ACM 63 (11), 38e40.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Constructing a periodic table of arguments",
+                "authors": [
+                    {
+                        "first": "Jean",
+                        "middle": [
+                            "H M"
+                        ],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Argumentation, Objectivity, and Bias: Proceedings of the 11th International Conference of the Ontario Society for the Study of Argumentation (OSSA)",
+                "volume": "17",
+                "issue": "",
+                "pages": "57--e69",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wagemans, Jean H.M., 2016. Constructing a periodic table of arguments. In: Bondy, P., Benacquista, L. (Eds.), Argumentation, Objectivity, and Bias: Pro- ceedings of the 11th International Conference of the Ontario Society for the Study of Argumentation (OSSA), 18-21 May 2016. OSSA, Windsor, ON, pp. 1e12. Wagemans, Jean H.M., 2019. Four basic argument forms. Res. Lang. 17 (1), 57e69.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Why missing premises can be missed: evaluating arguments by determining their lever",
+                "authors": [
+                    {
+                        "first": "Jean",
+                        "middle": [
+                            "H M"
+                        ],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "Proceedings of OSSA 12: Evidence, Persuasion & Diversity. OSSA Conference Archive",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wagemans, Jean H.M., 2020. Why missing premises can be missed: evaluating arguments by determining their lever. In: Cook, J. (Ed.), Proceedings of OSSA 12: Evidence, Persuasion & Diversity. OSSA Conference Archive, Windsor, ON. https://scholar.uwindsor.ca/ossaarchive/OSSA12/Saturday/1.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "2021a. Argument Type Identification Procedure (ATIP) e Version 4. Published online December 30",
+                "authors": [
+                    {
+                        "first": "Jean",
+                        "middle": [
+                            "H M"
+                        ],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wagemans, Jean H.M., 2021a. Argument Type Identification Procedure (ATIP) e Version 4. Published online December 30, 2021. URL. www.periodic-table- of-arguments.org/argument-type-identification-procedure.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "The Cambridge Handbook of the Philosophy of Language",
+                "authors": [
+                    {
+                        "first": "Jean",
+                        "middle": [
+                            "H M"
+                        ],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "571--e589",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wagemans, Jean H.M., 2021b. The philosophy of argument. In: Stalmaszczyk, P. (Ed.), The Cambridge Handbook of the Philosophy of Language. Cambridge University Press, Cambridge, pp. 571e589.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Persuasion through emotion? An experimental test of the emotion-eliciting nature of populist communication",
+                "authors": [
+                    {
+                        "first": "Dominique",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Wirz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Int. J. Commun",
+                "volume": "12",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wirz, Dominique S., 2018. Persuasion through emotion? An experimental test of the emotion-eliciting nature of populist communication. Int. J. Commun. 12, 1114e1138.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Identifying linked and convergent argument structures",
+                "authors": [
+                    {
+                        "first": "Shiyang",
+                        "middle": [],
+                        "last": "Yu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Frank",
+                        "middle": [],
+                        "last": "Zenker",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Informal Log",
+                "volume": "42",
+                "issue": "2",
+                "pages": "363--e387",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yu, Shiyang, Zenker, Frank, 2022. Identifying linked and convergent argument structures. Informal Log. 42 (2), 363e387.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "He is involved in the RPA Human(e) AI funded Towards an Epistemological and Ethical XAI, the NWO VC funded Resistance to Metaphor, and the HORIZON 2020 funded COST action APPLY e European network for argumentation and public policy analysis, for which he also serves as the Science Communication Coordinator. Wagemans co-authored the Handbook of Argumentation Theory (2014) and Argumentation and debate (in Dutch, 2014), publishes scientific articles, web content, and popularizing columns, and regularly appears in the media to talk about his research and to provide expert commentary on current affairs. At the University of Amsterdam, Wagemans teaches courses and supervises theses at the BA, MA, and PhD level. He is a member of the editorial board of the journal Argumentation and a reviewer for Synthese, Informal Logic, Argument & Computation, and other scientific journals",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jean Wagemans is a philosopher of argument who specializes in dialectic and rhetoric. He serves as the Chair of the Department of Speech Communication, Argumentation Theory, and Rhetoric of the University of Amsterdam and is the Coordinator of the research group Language and Cognition in Argumentation (LANCAR) at the Amsterdam Center for Language and Communication (ACLC). Wagemans is the originator of the Periodic Table of Arguments, an argument classification framework that systematizes the traditional descriptions and taxonomies of persuasive techniques and has applications in formal linguistics, argument-checking, and explainable artificial intelligence (XAI). He is involved in the RPA Human(e) AI funded Towards an Epistemological and Ethical XAI, the NWO VC funded Resistance to Metaphor, and the HORIZON 2020 funded COST action APPLY e European network for argumentation and public policy analysis, for which he also serves as the Science Communication Coordinator. Wagemans co-authored the Handbook of Argumentation Theory (2014) and Argumentation and debate (in Dutch, 2014), publishes scientific articles, web content, and popularizing columns, and regularly appears in the media to talk about his research and to provide expert commentary on current affairs. At the University of Amsterdam, Wagemans teaches courses and supervises theses at the BA, MA, and PhD level. He is a member of the editorial board of the journal Argumentation and a reviewer for Synthese, Informal Logic, Argument & Computation, and other scientific journals. Wagemans co-directed the ISSA 9th International Conference on Argumentation and was a member of the scientific committees of ECA 2022, ARGAGE 2021, and other conferences in the field.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": "1",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Fig. 1. The production of argumentative discourse(Wagemans, 2021b: 573)."
+            },
+            "FIGREF1": {
+                "fig_num": "2",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Fig.2. Decision tree for determining the argument form(Wagemans, 2021a: 8)."
+            },
+            "TABREF0": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>(Sub)Task</td><td>(Sub)Set of instructions</td></tr><tr><td>invention of the standpoint (no\u00easis; intellectio)</td><td>-speech genres (gen\u00ea tou logou or t\u00eas rhetorik\u00eas gen\u00ea; genera causarum or rhetorices genera)</td></tr><tr><td/><td>-degrees of defensibility (causarum genera)</td></tr><tr><td/><td>-status theory</td></tr><tr><td>invention of the arguments (heuresis; inventio)</td><td>-modes of persuasion</td></tr><tr><td/><td>-topics (topoi; loci)</td></tr><tr><td>arrangement (taxis; dispositio or ordo)</td><td>-parts of a speech (logou mer\u00ea; orationis partes)</td></tr><tr><td>wording (lexis; elocutio)</td><td>-virtues (virtutes) of style</td></tr><tr><td/><td>-kinds of style (genera dicendi)</td></tr><tr><td/><td>-embellishments (ornatus): tropes and figures</td></tr></table>",
+                "text": "Overview of (sub)tasks and (sub)sets of instructions in classical rhetoric (adapted fromvan Eemeren et al., 2014: 123)."
+            },
+            "TABREF1": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Hermeneutical stage</td><td>Question</td><td>Output</td></tr><tr><td>argument detection</td><td>Which discourse elements count as argumentative?</td><td>elements labeled as argumentative</td></tr><tr><td>argument mapping</td><td>How are all the argumentative elements connected in an</td><td>an argument map connecting the elements</td></tr><tr><td/><td>argumentation structure?</td><td/></tr><tr><td>argument type identification</td><td>What type of arguments are instantiated by each of the</td><td>arguments labeled with the name of their type</td></tr><tr><td/><td>conclusionepremise pairs represented in the argument map?</td><td/></tr><tr><td>argument evaluation</td><td>What is the quality of the arguments?</td><td>evaluated arguments</td></tr></table>",
+                "text": "Overview of the questions and output in the four hermeneutical stages."
+            },
+            "TABREF2": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Statement type</td><td>Definition</td><td>Subtype (Example)</td></tr><tr><td>statement of fact</td><td>a description of a particular state of affairs that is</td><td>-empirical statement ('The tires left a trace of rubber on the road')</td></tr><tr><td/><td>or can be empirically observed in reality or can be</td><td>-existential statement ('Houston, we have a problem')</td></tr><tr><td/><td>imagined to exist in a particular universe of discourse</td><td>-predictive statement ('The economy will grow')</td></tr><tr><td/><td/><td>-fictive statement ('This unicorn has three wings')</td></tr><tr><td>statement of value</td><td>an evaluative judgment about something based on a</td><td>-aesthetic judgment ('The Corrections is a great novel')</td></tr><tr><td/><td>definition or one or more criteria and a decision rule</td><td>-moral or ethical judgment ('Circumcision is reprehensible')</td></tr><tr><td/><td/><td>-legal judgment ('Unauthorized copying is not theft')</td></tr><tr><td/><td/><td>-pragmatic judgment ('Our plan for reducing CO2-emission</td></tr><tr><td/><td/><td>is feasible')</td></tr><tr><td/><td/><td>-logical judgment ('This proposition is true')</td></tr><tr><td/><td/><td>-hedonistic judgment, such as 'Paragliding is fun'</td></tr><tr><td/><td/><td>-evaluative judgment ('The person who is currently running the</td></tr><tr><td/><td/><td>country has insufficient economical skills')</td></tr><tr><td>statement of policy</td><td>a directive or hortative statement that expresses</td><td>-advice ('Children should not sleep with artificial lighting')</td></tr><tr><td/><td>advice to do something or to refrain from doing</td><td>-incitement ('It would be wise for you to begin a daily program of</td></tr><tr><td/><td>something</td><td>exercise')</td></tr><tr><td/><td/><td>-imperative ('Go to your room')</td></tr><tr><td/><td/><td>-proposal ('Let's make the study of rhetoric great again')</td></tr><tr><td/><td/><td>-plan ('Maybe we should move to Amsterdam')</td></tr><tr><td/><td/><td>-policy ('The government should invest in solar energy')</td></tr></table>",
+                "text": "Definitions, subtypes, and examples of the three types of statements (adapted from Wagemans, 2021a)."
+            },
+            "TABREF3": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Parameter</td><td>Values</td><td>Hermeneutic</td><td>Description</td></tr><tr><td>argument form</td><td>alpha, beta, gamma, delta</td><td>analytic</td><td>argumentative function analysis of elements</td></tr><tr><td/><td/><td>transformative</td><td>canonization of the argument into standardized version</td></tr><tr><td/><td/><td>rule-based</td><td>determining the configuration of subjects and predicates</td></tr><tr><td>argument substance</td><td>PP, PV, PF, VP, VV, VF, FP, FV, FF</td><td>subsumptive</td><td>subsuming statements under the definition</td></tr><tr><td/><td/><td>comparative</td><td>matching statements with examples of subtypes</td></tr><tr><td>argument lever</td><td>abstract lever:</td><td>derivative</td><td>deriving the abstract lever from the argument form</td></tr><tr><td/><td>Y R X, a R b, q R r, Z R T</td><td/><td/></tr><tr><td/><td>concrete lever:</td><td>comparative</td><td>matching the candidate lever with an intuition about</td></tr><tr><td/><td>R associated with the argument</td><td/><td>what is missing</td></tr><tr><td/><td>types distinguished in the PTA</td><td/><td/></tr></table>",
+                "text": "The hermeneutics of argument type identification."
+            }
+        }
+    }
+}

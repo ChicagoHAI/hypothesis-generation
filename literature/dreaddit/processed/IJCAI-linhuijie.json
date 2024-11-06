@@ -1,0 +1,1506 @@
+{
+    "paper_id": "IJCAI-linhuijie",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-09T12:23:02.857808Z"
+    },
+    "title": "What Does Social Media Say about Your Stress?",
+    "authors": [
+        {
+            "first": "Huijie",
+            "middle": [],
+            "last": "Lin",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Tsinghua University",
+                "location": {
+                    "settlement": "Beijing",
+                    "country": "China"
+                }
+            },
+            "email": "linhuijie@gmail.com"
+        },
+        {
+            "first": "Jia",
+            "middle": [],
+            "last": "Jia",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Tsinghua University",
+                "location": {
+                    "settlement": "Beijing",
+                    "country": "China"
+                }
+            },
+            "email": "jjia@mail.tsinghua.edu.cn"
+        },
+        {
+            "first": "Liqiang",
+            "middle": [],
+            "last": "Nie",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shandong University",
+                "location": {}
+            },
+            "email": "nieliqiang@gmail.com"
+        },
+        {
+            "first": "Guangyao",
+            "middle": [],
+            "last": "Shen",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Tsinghua University",
+                "location": {
+                    "settlement": "Beijing",
+                    "country": "China"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Tat-Seng",
+            "middle": [],
+            "last": "Chua",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "National University of Singapore",
+                "location": {}
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "With the rise of social media such as Twitter, people are more willing to convey their stressful life events via these platforms. In a sense, it is feasible to detect stress from social media data for proactive health care. In psychology, stress is composed of stressor and stress level, where stressor further comprises of stressor event and subject. By far, little attention has been paid to estimate exact stressor and stress level from social media data, due to the following challenges: 1) stressor subject identification, 2) stressor event detection, and 3) data collection and representation. To address these problems, we devise a comprehensive scheme to measure a user's stress level from his/her social media data. In particular, we first build a benchmark dataset and extract a rich set of stress-oriented features. We then propose a novel hybrid multi-task model to detect the stressor event and subject, which is capable of modeling the relatedness among stressor events as well as stressor subjects. At last, we lookup an expert-defined stress table with the detected subject and event to estimate the stressor and stress level. Extensive experiments on real-world datasets well verify the effectiveness of our scheme.",
+    "pdf_parse": {
+        "paper_id": "IJCAI-linhuijie",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "With the rise of social media such as Twitter, people are more willing to convey their stressful life events via these platforms. In a sense, it is feasible to detect stress from social media data for proactive health care. In psychology, stress is composed of stressor and stress level, where stressor further comprises of stressor event and subject. By far, little attention has been paid to estimate exact stressor and stress level from social media data, due to the following challenges: 1) stressor subject identification, 2) stressor event detection, and 3) data collection and representation. To address these problems, we devise a comprehensive scheme to measure a user's stress level from his/her social media data. In particular, we first build a benchmark dataset and extract a rich set of stress-oriented features. We then propose a novel hybrid multi-task model to detect the stressor event and subject, which is capable of modeling the relatedness among stressor events as well as stressor subjects. At last, we lookup an expert-defined stress table with the detected subject and event to estimate the stressor and stress level. Extensive experiments on real-world datasets well verify the effectiveness of our scheme.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Aided by the convenience and constant access provided by mobile devices, about 65% of American adults and 92% of teens use social networking sites, a nearly tenfold jump in the past decade, reported by Pew Research Center 1 . We rely on social networks to share our or others' daily activities with a wide audience. Besides, we use social networks to disclose emotions and moods, happiness and unhappiness, since disclosure is intrinsically rewarding and can improve interpersonal intimacy. Inevitably, the language used in social media postings may signal feelings of exhaustion, sleeping problems, sweating, loss of appetite and difficulty concentrating that characterize the major stress. It is thus feasible to detect users' psychological stress from social media data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In psychology, stress is our bodies' response to any kind of frustrations, demand or threat [Selye and others, 1936] , which fill up our modern life. Thereby, stress is so commonplace that it has become a way of life. Some stress is normal and even useful. For example, it can help us win a race or finish an important job on time. But when stress becomes overwhelming or lasts too long, it can damage our health, mood, relationships, and quality of life. Also, it can increase the risk of strokes, ulcers, and mental disorders. It is hence of importance to recognize the signs of stress in advance, which enables us to take proactive care to reduce the harmful effects of stress.",
+                "cite_spans": [
+                    {
+                        "start": 92,
+                        "end": 116,
+                        "text": "[Selye and others, 1936]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "It is worth mentioning that few efforts thus far have been dedicated to stress detection by harvesting social media, except the followings. Lin et al. and Xue et al. proposed novel methods to detect tweet-level stress [2014a; 2013; 2014] and user-level stress [2014b] over a short time window respectively. Despite great success, they only classified samples into stressed or non-stressed categories, which is incapable of measuring the exact stressor and stress level. Stress is indeed much more complicated, which is composed of two key factors: stressor and stress level. Quite literally, stressor, comprising of stressor event and stressor subject, triggers stress; meanwhile, different stressors incur different stress levels. For instance, a layoff usually makes people more stressed in comparison to a project deadline. In addition, stressor events happening to other subjects can also be someone's stress trigger, but may have different affects. For instance, \"my friend's father just passed away\". Moreover, stress level depends on the stressor, and is measurable using various psychological stress scales, despite that stress is often thought of as a subjective experience. As claimed by psychologists, detecting stressor and measuring the stress levels are of essential importance to proactive care.",
+                "cite_spans": [
+                    {
+                        "start": 140,
+                        "end": 225,
+                        "text": "Lin et al. and Xue et al. proposed novel methods to detect tweet-level stress [2014a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 226,
+                        "end": 231,
+                        "text": "2013;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 232,
+                        "end": 237,
+                        "text": "2014]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In this paper, we work towards measuring stress via social media data. It is, however, non-trivial due to the following challenges: 1) Stressor subject identification. As known, social media postings are usually informally and ambiguously written with grammatical problems, while the current subject Lexicon tools are not well suited for such scenarios. 2) Stressor event detection. Psychologists manually define a set of stress-related events, which are usually not independent but correlated in a nonuniform way. Meanwhile, for some specific event categories, such as death, there are insufficient training samples. How to model the event relatedness and borrow training samples for the sample-lacking categories are largely untapped. And 3) data and representation. There is no publicly available benchmark datasets thus far that can be leveraged to conduct stress study and verify the effectiveness of models. In addition, it is of importance to extract a rich set of stress-oriented features to describe the data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "To address the aforementioned challenges, we devise a comprehensive scheme that is able to automatically detect stressor subjects and events, and further estimate the stressors and stress levels. As illustrated in Figure 1 , our scheme consists of three components. In particular, we first extract a set of discriminant features, including the hand-crafted statistical features and the high-level semantic features. We then propose a hybrid model combining multi-task learning with convolutional neural network (CNN) to respectively identify the stressor subjects and stressor events of the given social posts. It is worth mentioning that the relatedness among stressor events as well as stressor subjects is well captured and modeled in our model. Once we obtain the stressor subject and event category, we can lookup a standard psychological stress scale to measure the precise stressor and stress level. To verify our scheme, we construct a representative dataset from Weibo by an extendable set of seed words, and invite 30 volunteers to manually build the ground truth. Extensive experiments well validate our proposed scheme.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 221,
+                        "end": 222,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The main contributions are as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "\u2022 We extracted a set of stress-related features and proposed a hybrid model to boost the identification performance of stressor events and subjects. \u2022 We constructed a benchmark dataset in the field of stress detection. Meanwhile, we have released the data to-gether with codes and parameters to facilitate the research community2 .",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Literature on mental health care via social media and personal event detection is related to our work. Mental Health Care via Social Media: In recent years, there exist some studies on leveraging social media data for mental health care. De Choudhury et al. [2013] were the first to explore social media data for depression prediction. Tsugawa et al. [2015] further leveraged Twitter postings to predict depression for Japanese-speaking users. Xue et al. demonstrated the promising performance via using social media data for stress detection [2013; 2014] . In summary, these efforts have shown the feasibility of leveraging social media data for mental health care. They, however, mainly focused on the binary classification results, while the trigger event and level of mental problems are more important for successive cares.",
+                "cite_spans": [
+                    {
+                        "start": 241,
+                        "end": 264,
+                        "text": "Choudhury et al. [2013]",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 336,
+                        "end": 357,
+                        "text": "Tsugawa et al. [2015]",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 543,
+                        "end": 555,
+                        "text": "[2013; 2014]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Personal Event Detection: As compared to general event detection, personal event detection in social media is a quite new topic. Li and Cardie [2014] attempted to construct the history of users' life events based on their Twitter stream and proposed an unsupervised framework to create a chronological list for personal events. Li and Ritter [2014] learned a supervised classifier with manually defined textual features, which is able to classify users' tweets into predefined life event categories. However, each step of the system induces errors and negatively affects the following parts. Moreover, they assume that the detected personal event is related to the tweet owner, which may be violated in the real-world scenarios.",
+                "cite_spans": [
+                    {
+                        "start": 129,
+                        "end": 149,
+                        "text": "Li and Cardie [2014]",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 328,
+                        "end": 348,
+                        "text": "Li and Ritter [2014]",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "To formulate our problem, we declare some notations in advance. In particular, we use bold capital letters (e.g., X) and bold lowercase letters (e.g., x) to denote matrices and vectors, respectively. We employ non-bold letters (e.g., x) to represent scalars, and Greek letters (e.g., ) as parameters. If not clarified, all vectors are in column form.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Problem Formulation",
+                "sec_num": "3"
+            },
+            {
+                "text": "Suppose that we have K stressor events and M stressor subjects. Let us denote e i 2 R K as the event label vector, and s i 2 R M as the subject label vector, for the i-th tweet. Given a set of tweets T = {t 1 , t 2 , \u2022 \u2022 \u2022 , t N }, it consists of N distinct training samples. Let x i 2 R D be the feature vector of the i-th tweet. Each training sample t i = (x i , e i , s i ) consists of a feature vector denoted by x i , with the corresponding stressor event label e i and the stressor subject label",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Problem Formulation",
+                "sec_num": "3"
+            },
+            {
+                "text": "s i . Let X = [x 1 , x 2 , \u2022 \u2022 \u2022 , x N ] T 2 R N \u21e5D be the feature matrix, E = [e 1 , e 2 , \u2022 \u2022 \u2022 , e N ] T 2 R N \u21e5K be the stressor event label matrix, and S = [s 1 , s 2 , \u2022 \u2022 \u2022 , s N ] T 2 R N \u21e5M be the stressor subject label matrix, respectively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Problem Formulation",
+                "sec_num": "3"
+            },
+            {
+                "text": "With the notations above, we can formally define our problem as: Given a set of tweets T with their feature matrix X, the corresponding stressor event label matrix E and the stressor subject label matrix S, we aim to learn a model that is able to automatically detect stressor event and subject labels for unlabeled tweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Problem Formulation",
+                "sec_num": "3"
+            },
+            {
+                "text": "The word embeddings [Mikolov et al., 2013] have been found effective in estimating the semantic similarities among different words. In the light of this, it makes sense to gather a set of semantic similar words and hence to construct dictionaries. We learned the word embeddings with a 200dimensional vector on a one billion Weibo dataset, which was crawled from Weibo between 2009.6 and 2012.12 using Weibo's open APIs. The word segmentation method used to segment the tweets into words is the word segmentation module of LTP [Che et al., 2010] . Based on the trained word embeddings, we constructed two dictionaries:",
+                "cite_spans": [
+                    {
+                        "start": 20,
+                        "end": 42,
+                        "text": "[Mikolov et al., 2013]",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 527,
+                        "end": 545,
+                        "text": "[Che et al., 2010]",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Dictionaries",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "\u2022 Stressor Event Dictionary. Based on the event categories in the professional life events stress scale [Holmes and Rahe, 1967] , we first selected the top 12 categories of events that occur frequently in Weibo. We then defined a set of seed words for each selected category using LIWC [Tausczik and Pennebaker, 2010], and further calculated the similarities between each seed word and the words from the vocabulary of the learned word embeddings. Thereafter, we selected the top 100 most similar words for expansion. We ultimately got a stressor event dictionary with more than 1, 500 words. The samples of the dictionary is shown in Table 1 .",
+                "cite_spans": [
+                    {
+                        "start": 104,
+                        "end": 127,
+                        "text": "[Holmes and Rahe, 1967]",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 641,
+                        "end": 642,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Dictionaries",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "\u2022 Stressor Subject Dictionary. Stressor subject is defined as the social relation between a user and the one that a stressor event is related to, which plays an important role in stress measurement. There are some existing dictionaries, e.g., LIWC, containing some words of different social relations. However, stressor subjects expressed in Inspired by the work in [Haslam, 1994] , we categorized the subjects into six categories. We then collected a set of seed words for each category using LIWC. Thereafter, similar to the stressor event seed words expansion, we again employed the learned word embeddings to select the top 40 most similar words for each category. We finally collected a stressor subject dictionary containing about 200 words. The samples of the dictionary is shown in Table 2 .",
+                "cite_spans": [
+                    {
+                        "start": 366,
+                        "end": 380,
+                        "text": "[Haslam, 1994]",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 796,
+                        "end": 797,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Dictionaries",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "We defined some hand-crafted features based on the two predefined dictionaries and the grammatical analysis of tweets using the LTP tool [Che et al., 2010]:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hand-Crafted Feature",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "\u2022 Stressor Event Word Distribution. It is represented by the word histogram over stressor events, extracted from a tweet using the stressor event dictionary. It indicates the occurrence of the possible stressor events. \u2022 Stressor Subject Word Distribution. It is represented by the word histogram over stressor subjects, extracted from a tweet using the stressor subject dictionary. It can help locate the possible stressor subjects in a tweet.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hand-Crafted Feature",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "To aggregate the word-level vector representations to learn tweet-level features, we applied convolutional neural networks (CNN) [LeCun and Bengio, 1995] . We hence utilized the CNN to learn tweet-level features from a set of low-level word vectors extracted from pre-trained word embeddings.",
+                "cite_spans": [
+                    {
+                        "start": 129,
+                        "end": 153,
+                        "text": "[LeCun and Bengio, 1995]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "High-Level Feature",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "The CNN features derived will be combined with the aforementioned hand-crafted features in subsequent steps to detect the stressor event and subject.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "High-Level Feature",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "The stressor events and subjects are not independent. Some of them share certain similar patterns. For example, \"pregnancy\" shares many similar description patterns with \"birth\", but greatly differs from \"death\". Another example, subjects of \"family\" category share more similar patterns with \"relative\" compared to \"friend\". Moreover, the training samples of stressor event and subject categories are unbalanced. Further, the dimension of the learnt tweet features is usually very high, which requires sufficient training samples. To capture the relatedness among different event and subject categories and leverage the shared patterns to strengthen the learning performance, we regard each event or subject detection as a task and propose to use a multi-task learning (MTL) [Caruana, 1997] model. The MTL model is able to adaptively capture the relatedness among tasks, as well as to learn the task sharing and task-specific features.",
+                "cite_spans": [
+                    {
+                        "start": 776,
+                        "end": 791,
+                        "text": "[Caruana, 1997]",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "Objective Function. We align each event category with a task. Regarding stressor subject detection, each subject is treated as a task. save the space, we only detail the learning process of stressor event. The prediction function of the i-th task is defined as f i (x) = w T i x, where w i 2 R D is the weight vector for task T i . The weight matrix over K tasks is denoted as",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "W = [w 1 , w 2 , \u2022 \u2022 \u2022 , w K ] T 2 R K\u21e5D .",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "We formulate the objective function of stress event detection as,",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "min W,\u2326 1 2 ||XW Y|| 2 F + tr W T \u2326 1 W + 1 2 ||W|| 2 F s.t. \u2326 \u232b 0, tr (\u2326) = 1,",
+                        "eq_num": "(1)"
+                    }
+                ],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "where the first term measures the empirical error; the second term encodes the relatedness among different tasks; and the third term controls the generalization error; and are the regularization parameters, and \u2326 2 R K\u21e5K is a positive semidefinite matrix that we aim to learn, with the (i, j)-th entry represents the relation between task i and task j. Solution. We adopt the alternative optimization procedure to solve W and \u2326:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "\u2022 Optimizing W with \u2326 fixed. In this condition, the derivative of Eqn.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "(1) with respect to W is:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "rW = X T (XW Y)+ \u2326 1 + \u2326 T W + W.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "(2) Let rW = 0, we then have,",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "X T X + \u2326 1 + \u2326 T + I W = X T Y.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "(3) Thus, we have a closed-form solution for W:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "W = X T X + \u2326 1 + \u2326 T + I 1 X T Y.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "(4) Because of its low dimension, the right part in Eqn.( 4) can be easily solved by computing the pseudo-inverse based on singular value decomposition (SVD) [Ben-Israel and Greville, 2003 ].",
+                "cite_spans": [
+                    {
+                        "start": 158,
+                        "end": 188,
+                        "text": "[Ben-Israel and Greville, 2003",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "\u2022 Optimizing \u2326 with W fixed. When W is fixed, Eqn.( 1) is reduced to:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "min \u2326 tr W T \u2326 1 W = min \u2326 tr \u2326 1 WW T , s.t. \u2326 \u232b 0, tr (\u2326) = 1.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "(5)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "Let us denote A = WW T . We can restate Eqn.(5) as",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "tr \u2326 1 A = tr \u2326 1 A tr (\u2326) = tr \u21e3\u21e3 \u2326 1 2 A 1 2 \u2318 \u21e3 A 1 2 \u2326 1 2 \u2318\u2318 tr \u21e3 \u2326 1 2 \u2326 1 2 \u2318 \u21e3 tr \u21e3 \u2326 1 2 A 1 2 \u2326 1 2 \u2318\u2318 2 = \u21e3 tr \u21e3 A 1 2 \u2318\u2318 2 . (",
+                        "eq_num": "6"
+                    }
+                ],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "The equality holds if and only if",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "\u21e3 \u2326 1 2 A 1 2",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "\u2318 = a for some constant a and tr (\u2326) = 1. We thus can derive a closed-form solution for \u2326, as",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "\u2326 = WW T 1 2 tr \u21e3 WW T 1 2 \u2318 . (",
+                        "eq_num": "7"
+                    }
+                ],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "Hybrid Model. Instead of the shallow MTL, we enhance our proposed MTL model with stacked auto-encoders by treating it as the final classifier layer on top of the CNN. The gradient of the final multi-task learning layer is propagated to fine-tune the convolution layer in the training stage using the back propagation method to further improve the learnt features of CNN. As our aim is to detect both stressor event and subject, in this work, we train two independent models for stressor event and subject detection respectively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stressor Event and Subject Detection",
+                "sec_num": "5"
+            },
+            {
+                "text": "The measurement of psychological stress has been well studied by psychologists in the past decades. Most of these measurements [Rowlison and Felner, 1988; Brantley and Jones, 1993] are based on questionnaires and interviews. Among them, the Social Readjustment Rating Scale (SRRS) [Holmes and Rahe, 1967] is one of the widely-accepted metrics. It is composed of 43 predefined stressors (stressor events and subjects) and the corresponding stress scores, which are representative of major stressors that occur in people's lives.",
+                "cite_spans": [
+                    {
+                        "start": 127,
+                        "end": 154,
+                        "text": "[Rowlison and Felner, 1988;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 155,
+                        "end": 180,
+                        "text": "Brantley and Jones, 1993]",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 281,
+                        "end": 304,
+                        "text": "[Holmes and Rahe, 1967]",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stress Measurement",
+                "sec_num": "6"
+            },
+            {
+                "text": "We have thus far detected the stressor event and stressor subject from a given tweet via our proposed hybrid model, we then can leverage the psychological stress measure scale to estimate the stressor and the correponding stress level, which is valuable for insightful analysis of stress. To accomplish this, we first split the stressors of SRRS into stressor events and stressor subjects, and then group them into two separate categories, i.e., stressor event category and stressor subject category. Taking the stressor \"Death of Spouse\" as an example, it is splitted into the event \"Death\" and the subject \"Spouse\" separately. Hereafter, we can align the detected stressor event and stressor subject of a tweet to the stressor in the SRRS table, and get the corresponding stress level of the tweet. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Stress Measurement",
+                "sec_num": "6"
+            },
+            {
+                "text": "Dataset. To construct a benchmark dataset, we first categorized the stressor events into 43 categories based on the professional life events stress scale [Holmes and Rahe, 1967] .",
+                "cite_spans": [
+                    {
+                        "start": 154,
+                        "end": 177,
+                        "text": "[Holmes and Rahe, 1967]",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Setup",
+                "sec_num": "7.1"
+            },
+            {
+                "text": "We then manually defined a set of keyword patterns collected from the LIWC dictionary for each stressor event category. Using the collected keywords as seeds, we filtered matched tweets from the aforementioned one billion Weibo dataset.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Setup",
+                "sec_num": "7.1"
+            },
+            {
+                "text": "We then collected the top 12 stressor event categories and invited 30 volunteers to manually label the stressor events and stressor subjects of the tweets from the filtered Weibo data. In particular, we randomly and equally divided the tweets into 10 groups. For each group of tweets, three distinct volunteers with diverse backgrounds were invited to manually label the stressor event and subject of each tweet. Therefore, each tweet was labeled three times, and it was first labeled to be stress or non-stress related, and the stress related tweets were further categorized into one of 12 stressor event categories and six stressor subject categories, respectively. Following that, voting was performed to obtain the final ground truth. For the cases that there are two classes having the same number of ballots, a discussion was carried out among the labelers to decide the final ground truths. We finally collected a dataset containing nearly 2, 000 tweets. We also randomly selected 600 tweets that are labeled as non-stress related to be the negative samples. The detailed distribution of the labeled dataset is shown in Table 1 and 2. Evaluation Metrics. To throughly verify our model, we adopted the following metrics:",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 1133,
+                        "end": 1134,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    },
+                    {
+                        "start": 1139,
+                        "end": 1141,
+                        "text": "2.",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Experimental Setup",
+                "sec_num": "7.1"
+            },
+            {
+                "text": "\u2022 Effectiveness. We evaluated the performance of stressor event and subject detection of our model and the baselines in terms of Recall (Rec.), Precision (Prec.) and F1-Measure (F1). As for the measurement of stress level measure performance, we used the Mean Squared Error (MSE).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Setup",
+                "sec_num": "7.1"
+            },
+            {
+                "text": "\u2022 Efficiency. We evaluated the efficiency of the methods by comparing the CPU time of training each model. All experiments were performed on an x64 machine with two 2.6GHz intel E5-2650 CPUs and 128GB RAM.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Setup",
+                "sec_num": "7.1"
+            },
+            {
+                "text": "We compared the stressor event, stressor subject detection and the overall stress level measurement performance with some state-of-the-art models. All the reported results in this paper were based on 10-fold cross validation:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "\u2022 Support Vector Machine (SVM) [Chang and Lin, 2011] : It is a popular binary classifier that is found to effective in several classification problems.",
+                "cite_spans": [
+                    {
+                        "start": 42,
+                        "end": 52,
+                        "text": "Lin, 2011]",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "\u2022 Softmax Regression (SR) [B\u00f6hning, 1992] : It is a model that is used to predict the probabilities of the different possible outcomes of a categorically distributed dependent variable, given a set of independent variables.",
+                "cite_spans": [
+                    {
+                        "start": 26,
+                        "end": 41,
+                        "text": "[B\u00f6hning, 1992]",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "\u2022 Gradient Boosted Decision Tree (GBDT) [Friedman, 1999] : It trains a gradient boosted decision tree model with features associated with each tweet.",
+                "cite_spans": [
+                    {
+                        "start": 40,
+                        "end": 56,
+                        "text": "[Friedman, 1999]",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "\u2022 Lasso-MTL [Nie et al., 2010] : It is the Lasso regularized MTL which can achieve the goal of reducing model complexity and feature learning.",
+                "cite_spans": [
+                    {
+                        "start": 12,
+                        "end": 30,
+                        "text": "[Nie et al., 2010]",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "\u2022 `2,1 -MTL [Tibshirani, 2011] : It is the `2,1 -norm regularized MTL which encodes grouped sparsity by assuming that all tasks share a common set of features.",
+                "cite_spans": [
+                    {
+                        "start": 12,
+                        "end": 30,
+                        "text": "[Tibshirani, 2011]",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "\u2022 cASO-MTL [Chen et al., 2009] : It is a convex relaxation of the alternating structure optimization [Ando and Zhang, 2005] , which decomposes the predictive model of each task into the task-specific feature mapping and task-shared feature mapping.",
+                "cite_spans": [
+                    {
+                        "start": 11,
+                        "end": 30,
+                        "text": "[Chen et al., 2009]",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 101,
+                        "end": 123,
+                        "text": "[Ando and Zhang, 2005]",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "\u2022 h-MTL: It is our proposed hybrid model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "To ensure a fair comparison, we fed all the comparison methods with the same feature settings. For the SVM, SR and GBDT methods, we use the scikit-learn [Pedregosa et al., 2011] implementation. As for the comparison methods of MTL, we use the MALSAR package [Zhou et al., 2011] implementations with least squares loss.",
+                "cite_spans": [
+                    {
+                        "start": 153,
+                        "end": 177,
+                        "text": "[Pedregosa et al., 2011]",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 258,
+                        "end": 277,
+                        "text": "[Zhou et al., 2011]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "Evaluation Results. The evaluation results are shown in Figure 2 . It can be seen that shallow classification methods would not gain satisfactory performance on stressor event or subject detection tasks. However, our proposed hybrid model (h-MTL) is able to improve the detection performance by around 10% on F1-measure, indicating that the relatedness among different categories is important and our method can better capture the relatedness to enhance the detection performance. For the performance on stress level measurement tasks, it can be seen from Figure 2 (c) that our scheme gains much lower MSE (and thus higher prediction accuracy) compared with other methods. Meanwhile, Figure 2(d) shows that the training time of the proposed model is comparatively lower than SVM, GBDT and cASO-MTL, while achieving much higher performance. All the improvements reported are significant at 0.05 level under two-tailed t-tests.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 63,
+                        "end": 64,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 563,
+                        "end": 564,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 691,
+                        "end": 695,
+                        "text": "2(d)",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Model Evaluation",
+                "sec_num": "7.2"
+            },
+            {
+                "text": "To evaluate the effectiveness of different features for stressor event or subject detection, we further conducted an experiment to feed our model with different types of features, and the results in terms of F1-measure are shown in Figure 2 (e). We see that even using only the proposed hand-crafted features gives us promising performance, which verifies the effectiveness of our proposed features. Besides, we see that using the CNN learnt features or the word vector representations alone leads to suboptimal performances. However, by integrating the CNN features or word vector representations with our hand-crafted features, we are able to obtain further improved performance against both hand-crafted or learnt features.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 239,
+                        "end": 240,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Feature Discrimination Analysis",
+                "sec_num": "7.3"
+            },
+            {
+                "text": "There are two key parameters in our model, which are and in Eqn.(1) that controls the impact of task relatedness and the generalization error, respectively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Parameter Sensitivity Analysis",
+                "sec_num": "7.4"
+            },
+            {
+                "text": "We first fixed for stressor event ( = 70) and subject ( = 100) detection, and then varied from 0.001 to 500. The fixed values for are chosen based on the best performance of the corresponding task, and the experimental results over different 's are shown in Figure 2 (f). It can be seen that the detection performance obtains the best scores when is around 10 \u21e0 20 for stressor event detection and 50 \u21e0 80 for stressor subject detection. When goes too high or too low, the detection performance drops severely. This result is reasonable because the choice of trades off between model generalization and complexity based on regularization, and thus the best performance can only be achieved with proper settings of .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 265,
+                        "end": 266,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Parameter Sensitivity Analysis",
+                "sec_num": "7.4"
+            },
+            {
+                "text": "We then fixed for stressor event ( = 10) and subject ( = 55) detection with varying , where the results are illustrated in Figure 2 (g). It can be seen that the performance increases with the increase of , and tends to be stable when reaches 70 for stressor event and 100 for stressor subject detection. This observation further verifies that different tasks (i.e., event/subject categories) can be inherently related to each other, and by considering such an inherent relation with the spectral component, our hybrid MTL model is able to achieve progressively enhanced performances.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 130,
+                        "end": 131,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Parameter Sensitivity Analysis",
+                "sec_num": "7.4"
+            },
+            {
+                "text": "Figure 2 (h) shows the trend of detection performance with different proportions of training data. We can see that when using only 5% of all training data, the detection performance experiences a severe drop for both stressor event and subject detection. When adopting approximately 30% of all training data, our model can obtain an equally competitive performance compared with using the full data for stressor subject detection, while for event detection, it achieves over 80% of the F1-score. Moreover, the performance of event detection keeps increasing given more training data, while the performance of subject detection tends to keep stable. These results verify the data scalability of our hybrid MTL model.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Training Data Scalability Analysis",
+                "sec_num": "7.5"
+            },
+            {
+                "text": "This paper focuses on the broadest view of digital health with a comprehensive scheme for stress level estimation based on social media information, which comprises of three components. We first extract discriminative hand-crafted statistical features and high-level semantic features, and then proposed a hybrid model combining multi-task learning with convolutional neural network (CNN) to respectively identify the stressor subjects and stressor events of the given social posts. Finally, we evaluate the precise stressors and stress levels align with a widely-accepted psychological stress scale. To verify our scheme, we constructed a publicly available dataset with crowd-sourcing labeled ground truth. Experimental results show that our scheme achieves promising performances on measuring stress. Our technique serves as an assistant tool for psychologists to help detect stress, and our model as well as the released dataset further helps to promote the research of social media oriented intelligent digital health, which is destined to grow rapidly in the years ahead.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "8"
+            },
+            {
+                "text": "In future work, we plan to take the personalized coping ability of stress into consideration for fine-grained stress measurement, which is of importance for personalized cares according to psychologists.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "8"
+            },
+            {
+                "text": "Proceedings of the Twenty-Fifth International Joint Conference on Artificial Intelligence",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "http://stressmeasure.droppages.com/",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This work is supported by the National Basic Research Program (973 Program) of China (2012CB316401, 2013CB329304), National Natural and Science Foundation of China (61370023). This work is partially supported by the major project of the National Social Science Foundation of China(13&ZD189).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "funding",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "A framework for learning predictive structures from multiple tasks and unlabeled data",
+                "authors": [
+                    {
+                        "first": "Zhang ; Rie",
+                        "middle": [],
+                        "last": "Ando",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ando",
+                        "middle": [],
+                        "last": "Kubota",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Tong",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Generalized inverses: theory and applications",
+                "volume": "6",
+                "issue": "",
+                "pages": "1817--1853",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ando and Zhang, 2005] Rie Kubota Ando and Tong Zhang. A framework for learning predictive structures from multiple tasks and unlabeled data. Journal of Machine Learning Re- search, 6(3):1817-1853, 2005. [Ben-Israel and Greville, 2003] Adi Ben-Israel and Thomas NE Greville. Generalized inverses: theory and applications, volume 15. Springer Science & Business Media, 2003.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Multinomial logistic regression algorithm",
+                "authors": [
+                    {
+                        "first": "Dankmar",
+                        "middle": [],
+                        "last": "B\u00f6hning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "B\u00f6hning",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1992,
+                "venue": "Annals of the Institute of Statistical Mathematics",
+                "volume": "44",
+                "issue": "1",
+                "pages": "197--200",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "B\u00f6hning, 1992] Dankmar B\u00f6hning. Multinomial logistic re- gression algorithm. Annals of the Institute of Statistical Mathematics, 44(1):197-200, 1992.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Daily stress and stress-related disorders",
+                "authors": [
+                    {
+                        "first": "Jones ;",
+                        "middle": [],
+                        "last": "Brantley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Phillip",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Glenn",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Brantley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jones",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Annals of behavioral medicine",
+                "volume": "15",
+                "issue": "1",
+                "pages": "17--25",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Brantley and Jones, 1993] Phillip J Brantley and Glenn N Jones. Daily stress and stress-related disorders. Annals of behavioral medicine, 15(1):17-25, 1993.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Multitask learning",
+                "authors": [
+                    {
+                        "first": "Rich",
+                        "middle": [],
+                        "last": "Caruana",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Caruana",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1997,
+                "venue": "Machine learning",
+                "volume": "28",
+                "issue": "1",
+                "pages": "41--75",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Caruana, 1997] Rich Caruana. Multitask learning. Machine learning, 28(1):41-75, 1997.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Libsvm: a library for support vector machines",
+                "authors": [
+                    {
+                        "first": "Chang",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lin ; Chih-Chung",
+                        "middle": [],
+                        "last": "Chang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chih-Jen",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Che",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of International Conference on Computational Linguistics",
+                "volume": "2",
+                "issue": "",
+                "pages": "13--16",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chang and Lin, 2011] Chih-chung Chang and Chih-Jen Lin. Libsvm: a library for support vector machines. ACM Transactions on Intelligent Systems and Technology, 2(3):27, 2011. [Che et al., 2010] Wanxiang Che, Zhenghua Li, and Ting Liu. Ltp: A chinese language technology platform. In Proceed- ings of International Conference on Computational Linguis- tics, pages 13-16. ACL, 2010.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "A convex formulation for learning shared structures from multiple tasks",
+                "authors": [
+                    {
+                        "first": "Chen",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of the Annual International Conference on Machine Learning",
+                "volume": "",
+                "issue": "",
+                "pages": "137--144",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chen et al., 2009] Jianhui Chen, Lei Tang, Jun Liu, and Jieping Ye. A convex formulation for learning shared struc- tures from multiple tasks. In Proceedings of the Annual Inter- national Conference on Machine Learning, pages 137-144. ACM, 2009.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Predicting depression via social media",
+                "authors": [
+                    {
+                        "first": "De",
+                        "middle": [],
+                        "last": "Choudhury",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of International AAAI Conference On Web and Social Media",
+                "volume": "",
+                "issue": "",
+                "pages": "128--137",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "De Choudhury et al., 2013] Munmun De Choudhury, Michael Gamon, Scott Counts, and Eric Horvitz. Predicting de- pression via social media. In Proceedings of International AAAI Conference On Web and Social Media, pages 128-137. AAAI Press, 2013.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Greedy function approximation: A gradient boosting machine",
+                "authors": [
+                    {
+                        "first": "Jerome",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Friedman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Friedman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Annals of Statistics",
+                "volume": "29",
+                "issue": "5",
+                "pages": "1189--1232",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Friedman, 1999] Jerome H. Friedman. Greedy function ap- proximation: A gradient boosting machine. Annals of Statis- tics, 29(5):1189-1232, 1999.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "LeCun and Bengio, 1995] Yann LeCun and Yoshua Bengio. Convolutional networks for images, speech, and time series. The handbook of brain theory and neural networks",
+                "authors": [
+                    {
+                        "first": "Nick",
+                        "middle": [],
+                        "last": "Haslam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ";",
+                        "middle": [],
+                        "last": "Haslam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Thomas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Richard",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Holmes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Rahe",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1967,
+                "venue": "Journal of psychosomatic research",
+                "volume": "53",
+                "issue": "1",
+                "pages": "255--258",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Haslam, 1994] Nick Haslam. Categories of social relationship. Cognition, 53(1):59-90, 1994. [Holmes and Rahe, 1967] Thomas H Holmes and Richard H Rahe. The social readjustment rating scale. Journal of psy- chosomatic research, 11(2):213-218, 1967. [LeCun and Bengio, 1995] Yann LeCun and Yoshua Bengio. Convolutional networks for images, speech, and time se- ries. The handbook of brain theory and neural networks, 3361(10):255-258, 1995.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Timeline generation: Tracking individuals on twitter",
+                "authors": [
+                    {
+                        "first": "Cardie",
+                        "middle": [
+                            ";"
+                        ],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jiwei",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Claire",
+                        "middle": [],
+                        "last": "Cardie",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Proceedings of International Conference on World Wide Web",
+                "volume": "",
+                "issue": "",
+                "pages": "643--652",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Li and Cardie, 2014] Jiwei Li and Claire Cardie. Timeline generation: Tracking individuals on twitter. In Proceedings of International Conference on World Wide Web, pages 643- 652. ACM, 2014.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Major life event extraction from twitter based on congratulations/condolences speech acts",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Proceedings of Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "1997--2007",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Li et al., 2014] Jiwei Li, Alan Ritter, Claire Cardie, and Ed- uard Hovy. Major life event extraction from twitter based on congratulations/condolences speech acts. In Proceedings of Empirical Methods in Natural Language Processing, pages 1997-2007. ACL, 2014.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Psychological stress detection from cross-media microblog data using deep sparse neural network",
+                "authors": [
+                    {
+                        "first": "Lin",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of International Conference on Multimedia and Expo",
+                "volume": "",
+                "issue": "",
+                "pages": "1813--1821",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lin et al., 2014a] Huijie Lin, Jia Jia, Quan Guo, Yuanyuan Xue, Jie Huang, Lianhong Cai, and Ling Feng. Psycholog- ical stress detection from cross-media microblog data using deep sparse neural network. In Proceedings of International Conference on Multimedia and Expo, pages 1-6. IEEE, 2014. [Lin et al., 2014b] Huijie Lin, Jia Jia, Quan Guo, Yuanyuan Xue, Qi Li, Jie Huang, Lianhong Cai, and Ling Feng. User- level psychological stress detection from social media using deep neural network. In Proceedings of ACM International Conference on Multimedia, pages 507-516. ACM, 2014. [Mikolov et al., 2013] Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed represen- tations of words and phrases and their compositionality. In Advances in Neural Information Processing Systems, pages 3111-3119. Curran Associates, Inc., 2013. [Nie et al., 2010] Feiping Nie, Heng Huang, Xiao Cai, and Chris H Ding. Efficient and robust feature selection via joint l21-norms minimization. In Advances in Neural Information Processing Systems, pages 1813-1821. Curran Associates, Inc., 2010.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Major life events, hassles, and adaptation in adolescence: confounding in the conceptualization and measurement of life stress and adjustment revisited",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Pedregosa",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1936,
+                "venue": "Journal of personality and social psychology",
+                "volume": "12",
+                "issue": "3",
+                "pages": "24--54",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pedregosa et al., 2011] F. Pedregosa, G. Varoquaux, A. Gram- fort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Pret- tenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. Scikit-learn: Machine learning in Python. Journal of Ma- chine Learning Research, 12:2825-2830, 2011. [Rowlison and Felner, 1988] Richard T Rowlison and Robert D Felner. Major life events, hassles, and adaptation in adoles- cence: confounding in the conceptualization and measure- ment of life stress and adjustment revisited. Journal of per- sonality and social psychology, 55(3):432, 1988. [Selye and others, 1936] Hans Selye et al. A syndrome pro- duced by diverse nocuous agents. Nature, 138(3479):32, 1936. [Tausczik and Pennebaker, 2010] Yla R Tausczik and James W Pennebaker. The psychological meaning of words: Liwc and computerized text analysis methods. Journal of language and social psychology, 29(1):24-54, 2010.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Towards a micro-blog platform for sensing and easing adolescent psychological pressures",
+                "authors": [
+                    {
+                        "first": "Robert",
+                        "middle": [],
+                        "last": "Tibshirani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ";",
+                        "middle": [],
+                        "last": "Tibshirani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yusuke",
+                        "middle": [],
+                        "last": "Sho Tsugawa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Fumio",
+                        "middle": [],
+                        "last": "Kikuchi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Kosuke",
+                        "middle": [],
+                        "last": "Kishino",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yuichi",
+                        "middle": [],
+                        "last": "Nakajima",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hiroyuki",
+                        "middle": [],
+                        "last": "Itoh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ";",
+                        "middle": [],
+                        "last": "Ohsaki",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Xue",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the ACM conference on Pervasive and ubiquitous computing adjunct publication",
+                "volume": "73",
+                "issue": "",
+                "pages": "215--218",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tibshirani, 2011] Robert Tibshirani. Regression shrinkage and selection via the lasso: A retrospective. Journal of the Royal Statistical Society, 73(3):273-282, 2011. [Tsugawa et al., 2015] Sho Tsugawa, Yusuke Kikuchi, Fu- mio Kishino, Kosuke Nakajima, Yuichi Itoh, and Hiroyuki Ohsaki. Recognizing depression from twitter activity. In Proceedings of the Annual ACM Conference on Human Fac- tors in Computing Systems, pages 3187-3196. ACM, 2015. [Xue et al., 2013] Yuanyuan Xue, Qi Li, Ling Feng, Gari D Clifford, and David A Clifton. Towards a micro-blog plat- form for sensing and easing adolescent psychological pres- sures. In Proceedings of the ACM conference on Pervasive and ubiquitous computing adjunct publication, pages 215- 218. ACM, 2013.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Detecting adolescent psychological pressures from micro-blog",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Xue",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Health Information Science",
+                "volume": "",
+                "issue": "",
+                "pages": "83--94",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xue et al., 2014] Yuanyuan Xue, Qi Li, Li Jin, Ling Feng, David A Clifton, and Gari D Clifford. Detecting adolescent psychological pressures from micro-blog. In Health Infor- mation Science, pages 83-94. Springer, 2014. [Zhou et al., 2011] J. Zhou, J. Chen, and J. Ye. MALSAR: Multi-tAsk Learning via StructurAl Regularization. Arizona State University, 2011.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "uris": null,
+                "text": "Figure 1: Illustration of our scheme. It comprises of three components: 1) description component that extracts features from input tweets; 2) detection component that integrates handcrafted and CNN features with Multi-Task Learning (MTL) for stressor event and subject detection, where the CNN is fine-tuned by MTL to compose the hybrid model, and 3) measurement component leveraging a psychological stress scale to estimate the stressor and the corresponding stress level.",
+                "fig_num": "1",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "uris": null,
+                "text": "Figure 2: Experimental results of following validations: (a) performance of stressor event detection; (b) performance of stressor subject detection; (c) performance of stressor level measurement; (d) efficiency of model training and testing; (e) impact of feature combinations; (f) effects of the parameter of MTL controling the weight of task relatedness; (g) effects of the parameter of MTL controlling the weight of the generalization error, and (h) impact of training data scales.",
+                "fig_num": "2",
+                "num": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "text": "Summary of the manually labeled tweets for each stressor event category and the sampling words of the constructed stressor event dictionary.",
+                "html": null,
+                "content": "<table><tr><td>Events</td><td colspan=\"2\">Labeled Sampling words</td></tr><tr><td>Marriage</td><td>227</td><td>marry wedding bride</td></tr><tr><td>Financial</td><td>114</td><td>income salary rent</td></tr><tr><td>Illness</td><td>424</td><td>hospital sick pain</td></tr><tr><td>School</td><td>171</td><td>school holiday finals</td></tr><tr><td>Birth</td><td>133</td><td>born life baby</td></tr><tr><td>Fired</td><td>102</td><td>fired job lose</td></tr><tr><td>Argue</td><td>107</td><td>cold war quarrel argue</td></tr><tr><td>Blamed</td><td>199</td><td>question blame afraid</td></tr><tr><td colspan=\"2\">Pregnancy 132</td><td>baby pregnant mother-to-be</td></tr><tr><td>Habits</td><td>102</td><td>revise habits smoke drink</td></tr><tr><td>Death</td><td>127</td><td>pass away R.I.P</td></tr><tr><td>Divorce</td><td>112</td><td>divorce ex-wife cry</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "text": "Summary of the manually labeled tweets for each stressor subject category and the sampling words of the constructed stressor subject dictionary.",
+                "html": null,
+                "content": "<table><tr><td colspan=\"3\">Category Labeled Sampling words</td></tr><tr><td>I</td><td>647</td><td>I my our we</td></tr><tr><td>family</td><td>277</td><td>mother daughter</td></tr><tr><td>friend</td><td>327</td><td>friend teammate</td></tr><tr><td>spouse</td><td>207</td><td>wife husband dear</td></tr><tr><td>boss</td><td>161</td><td>boss teacher tutor</td></tr><tr><td>relative</td><td>123</td><td>aunt uncle cousin</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            }
+        }
+    }
+}

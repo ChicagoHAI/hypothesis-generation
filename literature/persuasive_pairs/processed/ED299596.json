@@ -1,0 +1,2826 @@
+{
+    "paper_id": "ED299596",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-06T17:58:37.836019Z"
+    },
+    "title": "Research Review: Patterns of Development in Writing Persuasive /Argumentative Discourse",
+    "authors": [
+        {
+            "first": "Marion",
+            "middle": [],
+            "last": "Crowhurst",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "The University of British",
+                "location": {
+                    "postCode": "1988",
+                    "settlement": "Columbia September"
+                }
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Existing evidence suggests that students do less well in writing argument than they do in writing narrative reports, and the reasons for the poorer performance are complex and interactive. In some ways argument is more cognitively demanding than narrative, but lack of experience in persuasive writing, and the interrelated nature of the writing situation and the assessment situation also play a role. A review of the literature reveals several lines of evidence which suggest that argumentative writing should not be neglected because it might be too difficult. Useful procedures for developing persuasive writing include the following: (1) topics should be cn issues important to students; (2) students should be encouraged ..o engage in persuasive writing to teachers, peers, principals, and others when they feel strongly on issues; (3) large and small group discussions are invaluable in developing associated skills; (4) exercises to sort out what the students think are an important bridge to argumentative writing; and (5) stuf.cnts in the upper elementary years and beyond should read persuasive writing for exposure to linguistic conventions. There is no good reason why this kind of writing should be regarded as a difficult form to be attempted only by older and brighter students. (Forty-seven references are attached.) (RS)",
+    "pdf_parse": {
+        "paper_id": "ED299596",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Existing evidence suggests that students do less well in writing argument than they do in writing narrative reports, and the reasons for the poorer performance are complex and interactive. In some ways argument is more cognitively demanding than narrative, but lack of experience in persuasive writing, and the interrelated nature of the writing situation and the assessment situation also play a role. A review of the literature reveals several lines of evidence which suggest that argumentative writing should not be neglected because it might be too difficult. Useful procedures for developing persuasive writing include the following: (1) topics should be cn issues important to students; (2) students should be encouraged ..o engage in persuasive writing to teachers, peers, principals, and others when they feel strongly on issues; (3) large and small group discussions are invaluable in developing associated skills; (4) exercises to sort out what the students think are an important bridge to argumentative writing; and (5) stuf.cnts in the upper elementary years and beyond should read persuasive writing for exposure to linguistic conventions. There is no good reason why this kind of writing should be regarded as a difficult form to be attempted only by older and brighter students. (Forty-seven references are attached.) (RS)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Writing which argues a case is an important kind of writing. It is important both for academic success and for general life purposes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The coherent presentation of a well-argued case is required in university entrance exams, and in academic papers in a variety of disciplines.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Tn personal disputes with business or bureaucracy, the ability to argue articulately and convincingly is an invaluable skill.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The exercise of democratic rights and responsibilities requires citizens to look critically on society, and to try to influence, by persuasion, their fellow citizens and their law makers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The importance of training in oral and written uses of argument has long been recognized in Western society. A variety of terms is used for the kind--or kinds--of writing discussed in this chapter. Applebee (1984) , for example, uses the term thesis/support essay for that type of writing which has a hierarchical, analytic structure and which requires that arguments be systematically supported (p. 87); persuasive writing for him is that kind of writing \"where the attempt to persuade overrides all other purroses (as in advertisements or propaganda)\" (p. 14). Martin and Rothery (1980; 1981; 1986) use exposition for writing which has as its goal \"persuad(ing) the reader of the truth or 'rightness' of a proposition\" (1986, p. 72) and which 1s the structure: Thesis followed by a variable number of Arguments followed by Conclusion. The terms argumentative, persuasive, and argumentative/persuasive are used interchangeably both in descriptions of the IEA study (Connor et al., 1987) and in reports of the APU assessments in the United Kingdom (Gorman, White, Brooks, MacLure, A Kispal, 1988) .",
+                "cite_spans": [
+                    {
+                        "start": 198,
+                        "end": 213,
+                        "text": "Applebee (1984)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 563,
+                        "end": 588,
+                        "text": "Martin and Rothery (1980;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 589,
+                        "end": 594,
+                        "text": "1981;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 595,
+                        "end": 600,
+                        "text": "1986)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 721,
+                        "end": 730,
+                        "text": "(1986, p.",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 966,
+                        "end": 987,
+                        "text": "(Connor et al., 1987)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1048,
+                        "end": 1096,
+                        "text": "(Gorman, White, Brooks, MacLure, A Kispal, 1988)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The IEA writers adopt a broad definition of the kind of writing they are discussing: \"written persuasive discourse is considered to be that which integrates the rational and affective appeals and the appeals to credibility. . . (A)rgumentation is a part of persuasion\" (p. 185). Persuasive writing is consistently used in the most recent NAEP reports (Applebee, Langer, & Mullis, 1986a; 1986b) .",
+                "cite_spans": [
+                    {
+                        "start": 351,
+                        "end": 386,
+                        "text": "(Applebee, Langer, & Mullis, 1986a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 387,
+                        "end": 393,
+                        "text": "1986b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Bereiter and Scardamalia (1982) use the term opinion essay.",
+                "cite_spans": [
+                    {
+                        "start": 13,
+                        "end": 31,
+                        "text": "Scardamalia (1982)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The preceding list, while not exhaustive, indicates something of the variety both of terms and of definitions for the kinds of writing discussed in various articles reviewed in this chapter. The fact that there may be differences among studies in the type of writing being examined is to be borne in mind.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "For purposes of this chapter, a broad definition has been adopted.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The intention has been to examine the development of that kind of writing which takes a point of view and supports it with either emotional appeals or logical arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The first section of the chapter reviews studies which have examined persuasive and argumentative writing at various age and grade levels.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The second section examines patterns of writing produced by young writers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The third section examines the interrelated questions of development, difficulty, and teachability.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Studies of argumentative/persuasive writing may be considered to fall into two major categories.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "STUDIES OF PERSUASIVE WRITING",
+                "sec_num": null
+            },
+            {
+                "text": "In one category, students' performance in two or more kinds of writing tasks is examined.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "STUDIES OF PERSUASIVE WRITING",
+                "sec_num": null
+            },
+            {
+                "text": "Such studies allow comparisons between students' performance in persuasive/argumentative writing and their performance in narration and, sometimes, in other kinds of writing as well. In the second category, persuasive/argumentative compositions written by students at various age levels are examined.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "STUDIES OF PERSUASIVE WRITING",
+                "sec_num": null
+            },
+            {
+                "text": "These studies allow comparisons between younger and older students in the writing of persuasive discourse.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "STUDIES OF PERSUASIVE WRITING",
+                "sec_num": null
+            },
+            {
+                "text": "Reports of national assessments in the United States have consistently commented on poor performance in persuasive writing (Applebee et al., 1986a ; National Assessment of Educational Progress, 1980) . Performance on persuasive writing tasks in the 1984 assessment are described as \"dismaying\" (Appiebee et al., 1986b, p. 36) . At all grade levels (4, 8 and 11), there was a high percentage of unsatisfactory responses and a low percentage that were adequate.",
+                "cite_spans": [
+                    {
+                        "start": 123,
+                        "end": 146,
+                        "text": "(Applebee et al., 1986a",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 184,
+                        "end": 199,
+                        "text": "Progress, 1980)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 294,
+                        "end": 325,
+                        "text": "(Appiebee et al., 1986b, p. 36)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "Even on the easiest task, only 25 percent of fourth graders, 36 percent of eighth graders, and 28 percent of eleventh graders were able to write papers that were adequate or better; on the most difficult task, the percentage performing adequately ranged from 4 percent at grade 4 to 15 percent at grade 11.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "In the United Kingdom, major assessments of writing were In each assessment, a variety of writing tasks was assigned to national samples of 11-and 15-year-olds. For both age groups, performance on narrative writing was better than on persuasive writing, though there was relatively little variation between tasks in the distribution of general impression scores (Gorman et al., 1988) .",
+                "cite_spans": [
+                    {
+                        "start": 362,
+                        "end": 383,
+                        "text": "(Gorman et al., 1988)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "In Canada, the provincial assessment in British Columbia in 1978 allowed eighth and twelfth graders--but not fourth graders-- to choose to write a story or to argue a point of view.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "Both eighth and twelfth graders performed poorly on argument.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "At grade 8, for example, 49 percent of students fell in the bottom one-third of the 9-point holistic scale, as against 28 percent in narrative (Conry & Rodgers, 1978) .",
+                "cite_spans": [
+                    {
+                        "start": 143,
+                        "end": 166,
+                        "text": "(Conry & Rodgers, 1978)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "In Ontario, Canada, Freedman and Pringle (1985) examined the ability of students in grades 5, 8 and 12 in two school boards to satisfy minimal criteria in writing narratives and arguments, \"argument\" being defined as \"writing organized around a clear thesis.",
+                "cite_spans": [
+                    {
+                        "start": 20,
+                        "end": 47,
+                        "text": "Freedman and Pringle (1985)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": ". which is substantiated logically and through illustration\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "(p.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Studies of Performance",
+                "sec_num": null
+            },
+            {
+                "text": "At all grade levels, the number Scardamalia, 1982; Crowhurst, 1978; 1980a; 1986; Freedman & Pringle, 1984; Pringle & Freedman, 1985) .",
+                "cite_spans": [
+                    {
+                        "start": 32,
+                        "end": 50,
+                        "text": "Scardamalia, 1982;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 51,
+                        "end": 67,
+                        "text": "Crowhurst, 1978;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 68,
+                        "end": 74,
+                        "text": "1980a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 75,
+                        "end": 80,
+                        "text": "1986;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 81,
+                        "end": 106,
+                        "text": "Freedman & Pringle, 1984;",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 107,
+                        "end": 132,
+                        "text": "Pringle & Freedman, 1985)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Students often fail to support their points of view (Applebee et. al., 1986b); content tends to be less original than for some other kinds of writing and gaps in basic knowledge are evident (Gorman et al., 1986) . A second weakness is poor organization often associated with lack of knowledge of argumentative structure (Coney & Rodgers, 1978; Gorman et al., 1988; Freedman & Pringle, 1985) .",
+                "cite_spans": [
+                    {
+                        "start": 190,
+                        "end": 211,
+                        "text": "(Gorman et al., 1986)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 320,
+                        "end": 343,
+                        "text": "(Coney & Rodgers, 1978;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 344,
+                        "end": 364,
+                        "text": "Gorman et al., 1988;",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 365,
+                        "end": 390,
+                        "text": "Freedman & Pringle, 1985)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Even high-rated scripts by 15-year-olds in the APU study exhibited problems in managing argumentative structure due to such matters as \"the sudden appearance of illogically placed information, gaps in knowledge, (or) wildly exaggerated statements. . .\" (Gorman et al., 1988, p. 146) .",
+                "cite_spans": [
+                    {
+                        "start": 253,
+                        "end": 282,
+                        "text": "(Gorman et al., 1988, p. 146)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "A third noted weakness is stylistic inappropriateness, particularly the use of informal or familiar language, and the over use of immature",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "1.4",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "connectors such as \"another thing\" and \"also,\" together with the failure to use connectors typical of argument (Crowhurst, 1987a; Gorman et al., 1988) .",
+                "cite_spans": [
+                    {
+                        "start": 111,
+                        "end": 129,
+                        "text": "(Crowhurst, 1987a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 130,
+                        "end": 150,
+                        "text": "Gorman et al., 1988)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Argumentative Writing across Age groups",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "The number of studies which have compared argumentative writing across age or grade levels is small. A few studies have examined comparative use of such linguistic variables as measures of syntactic complexity (Crowhurst, 1980a; 1980b; Crowhurst & Piche, 1979) or cohesion (Crowhurst, 1987a) .",
+                "cite_spans": [
+                    {
+                        "start": 210,
+                        "end": 228,
+                        "text": "(Crowhurst, 1980a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 229,
+                        "end": 235,
+                        "text": "1980b;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 236,
+                        "end": 260,
+                        "text": "Crowhurst & Piche, 1979)",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 273,
+                        "end": 291,
+                        "text": "(Crowhurst, 1987a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Others have attempted to quantify differences using such measures as language functions (Craig, 1986) or structural elements (McCann, no date).",
+                "cite_spans": [
+                    {
+                        "start": 88,
+                        "end": 101,
+                        "text": "(Craig, 1986)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "It is clearly established that syntactic complexity is areater in argument than in narrative or descriptive writing, and greater for older students than for younger (Crowhurst, 1980a; 1980b; Crowhurst & Piche, 1979) . Moreover, Crowhurst (1980b) found a positive relationship between quality and syntactic complexity in argument (but not in narration) for tenth and twelfth graders, but not for sixth graders. All three of these sub-functions are more characteristic of oral language and less characteristic of the more formal style expected in written argument.",
+                "cite_spans": [
+                    {
+                        "start": 165,
+                        "end": 183,
+                        "text": "(Crowhurst, 1980a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 184,
+                        "end": 190,
+                        "text": "1980b;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 191,
+                        "end": 215,
+                        "text": "Crowhurst & Piche, 1979)",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 218,
+                        "end": 245,
+                        "text": "Moreover, Crowhurst (1980b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Heavier use of informing and interpreting by grade 6 reflected the fact that many grade 6 compositions were more informative than persuasive. This was especially true for one of her two topics which, briefly stated, was as follows: \"Your class has $500.00 to spend. Decide how it should be spent and persuade your teacher to agree.\" This may be seen as an invitation to do two things: to describe how the money should be spent, and to 'ustify the suggestions made. Younger students wrote more on the first part (i.e., describing), some of them to the exclusion of the second part (justifying).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Another line of investigation has been to investigate students' knowledge of appropriate argument structure.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Two important recent reviews (Hillocks, 1986; Scardamalia & Bereiter, 1986) identify the study of discourse-schema-knowledge as an important emerging area of research in composition. Scardamalia and Bereiter believe that learning the essential form of various genres is \"a major requirement for competence in writing\" (p.",
+                "cite_spans": [
+                    {
+                        "start": 29,
+                        "end": 45,
+                        "text": "(Hillocks, 1986;",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 46,
+                        "end": 75,
+                        "text": "Scardamalia & Bereiter, 1986)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "783), a point strongly argued also by Martin and Rothery (1980; 1981; 1986) .",
+                "cite_spans": [
+                    {
+                        "start": 38,
+                        "end": 63,
+                        "text": "Martin and Rothery (1980;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 64,
+                        "end": 69,
+                        "text": "1981;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 70,
+                        "end": 75,
+                        "text": "1986)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "As noted above, student writing commonly fails to approximate conventicnal argument form (Pringle & Freedman, 1985) .",
+                "cite_spans": [
+                    {
+                        "start": 89,
+                        "end": 115,
+                        "text": "(Pringle & Freedman, 1985)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Yet even young students appear to possess knowledge of discourse elements found in argument.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "McCann (no date) found that when sixth-, ninth-, and twelfth grade students and adults were asked to judge whether or not passages were arguments, there was judgements made by the four groups.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "( 1982) found that students aged 10 to seven constructed prose Summary es of persuasive/argumentative writing are not only few in number, but also exhibit substantial methodological differences.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "While some conclusions may be drawn, they must be tentative.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "There is substantial evidence across studies that performance on persuasive writing is not as good as performance on narrative writing--though it is to be noted that neither on the NAEP in the United States nor on the APU assessments in the United Kingdom was persuasive writing the lowest-scoring type of writing (Applebee et al., 1936b; Gorman et al., 1988) .",
+                "cite_spans": [
+                    {
+                        "start": 314,
+                        "end": 338,
+                        "text": "(Applebee et al., 1936b;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 339,
+                        "end": 359,
+                        "text": "Gorman et al., 1988)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Persuasive compositions tend to be short and lacking in content, especially appropriate support for opinions. They often fail to exhibit appropriate structure, and are often marked by inappropriately informal and immature language, a fault not confined to argument but perhaps more acute in that kind of writing than in some others (Gorman et al., 1988) .",
+                "cite_spans": [
+                    {
+                        "start": 332,
+                        "end": 353,
+                        "text": "(Gorman et al., 1988)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "There is notable improvement in performance between elementary and upper secondary grades; however, performance by many twelfth graders remains poor.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "The opinion is widespread, but not unanimous, that performance on persuasive writing tasks is unusually poor. While the NAEP report describes performance as \"dismaying\" (Applebee et al., 1986b) , APU reports indicate little difference among writing tasks on general impression scores, and challenge the view that \"argumentative/persuasive writing is an especially difficult, intractable genre for children\" (White, 1987, p. 1) .",
+                "cite_spans": [
+                    {
+                        "start": 169,
+                        "end": 193,
+                        "text": "(Applebee et al., 1986b)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 407,
+                        "end": 426,
+                        "text": "(White, 1987, p. 1)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Whether the apparent difference of opinion between writers of the two different reports is due to methodological differences, different expectations, or differences in performance between students in the United States and those in the United Kingdom is not clear.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Light may be shed on this question by IEA study in which arguments were written by students in fourteen countries with identical prompts and standardized scoring procedures.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Early results seem to indicate disappointing results for argument in Finland, West Germany, and the Netherlands (Vahapassi, Lehmann, deGlopper, Lamb, & Langer, 1987) , but final comparative results",
+                "cite_spans": [
+                    {
+                        "start": 112,
+                        "end": 165,
+                        "text": "(Vahapassi, Lehmann, deGlopper, Lamb, & Langer, 1987)",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "are not yet available.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "26).",
+                "sec_num": null
+            },
+            {
+                "text": "Descriptive information contained in a variety of papers permit identification of characteristic patterns of persuasive writing by young students. A majority of students aged approximately ten to twelve write recognizably persuasive pieces in response to assignments asking them to persuade. Some of them write well.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "PATTERNS OF EARLY ARGUMENTATIVE WRITING",
+                "sec_num": null
+            },
+            {
+                "text": "However, many of their persuasive compositions deviate in characteristic ways from standard forms.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "PATTERNS OF EARLY ARGUMENTATIVE WRITING",
+                "sec_num": null
+            },
+            {
+                "text": "In addition, there are some young writers who respond with kinds of writing which are not recognizably persuasive. Several of these characteristic patterns are described below together with illustrations selected from approximately 1200 persuasive compositions written on a variety of topics by grade 5, 6 and 7 students for several different studies (Crowhurst, 1978; 1980a; 1986; 1987b; in press ).",
+                "cite_spans": [
+                    {
+                        "start": 351,
+                        "end": 368,
+                        "text": "(Crowhurst, 1978;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 369,
+                        "end": 375,
+                        "text": "1980a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 376,
+                        "end": 381,
+                        "text": "1986;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 382,
+                        "end": 388,
+                        "text": "1987b;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 389,
+                        "end": 397,
+                        "text": "in press",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "PATTERNS OF EARLY ARGUMENTATIVE WRITING",
+                "sec_num": null
+            },
+            {
+                "text": "Narratives.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "A small number of young students write narratives when they are asked to persuade. Sometimes the response is entirely narrative. Sometimes narrative appears as a kind of framework for a segment of argumentative writing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Sometimes compositions seem to start as an argument, but then \"drift\" into narrative. Script 1 is an example of a composition which is entirely While this composition contains an argument in embryo (a stated opinion and a reason), in form and function it is a narrative, an anecdote of an incident involving an attempt to persuade.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Narratives were invariably of this kind.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "White (1987) also reports examples of narrative anecdotes describing moments of disagreement written by 11 year-olds in the APU study.",
+                "cite_spans": [
+                    {
+                        "start": 6,
+                        "end": 12,
+                        "text": "(1987)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Sometimes the argument-in-embryo was more fully developed so that the narrative part seems to be a kind of framework for the In this example, the student is, perhaps, easing his way into an unfamiliar kind of writing by starting in a more familiar mode. As a committee member I choose the punishment as followed:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Make him sit in the office and do his work, have more Smith had to put it on her desk.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "(Grade 5)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "In this composition, the reason stated in the second sentence has such a strong narrative line, that the writer, perhaps, is side-tracked into pursuing the narrative, and abandoning the argument. Wilkinson et al. (1980) also found a number of compositions by 10-year-olds which alternated between stating opinions and lapsing into narrative anecdote.",
+                "cite_spans": [
+                    {
+                        "start": 196,
+                        "end": 219,
+                        "text": "Wilkinson et al. (1980)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Dialogues.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "A second kind of non-argument is the dialogue recording a conversational exchange between two people having a disagreement.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Sometimes the entire composition is a dialogue; sometimes students break into dramatic dialogue in the midst of standard prose. Script 5 is a response to an assignment asking The embarrassment would probably be too much to be able to face those of a grade 2 room to have to be sent there again.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "I am very confident that this punishment will be suitable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "The student wrote first an able, appealing composition in a well practiced form of discourse.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Having generated content by this, means, she seems to have turned to the business of transforming it into the less familiar argumentative mode required by the assignment, a mode, it is to be noted, which she does not carry off with quite the panache of the original narrative. Gunderson, 1981; White, 1987) .",
+                "cite_spans": [
+                    {
+                        "start": 277,
+                        "end": 293,
+                        "text": "Gunderson, 1981;",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 294,
+                        "end": 306,
+                        "text": "White, 1987)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Informative compositions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Compositions which inform or describe rather than trying to persuade are reported by Craig (1986) , Crowhurst (1983b) and Gorman et al. (1988) . Some tasks, in particular, seem likely to produce this kind of writing. One of the three assignments used by Crowhurst (1978 Crowhurst ( , 1980a Crowhurst ( , 1983a) ) which asked students to decide how a misbehaving classmate should be punished and to persuade the teacher to agree. Several grade 5 and grade 6 compositions in those studies concentrated heavily--and some of them exclusively--on the first part of the task, as in the following example: Possible explanations for young students' responding thus are that describing is easier than giving reasons, or that report writing (i.e., informative writing) is a more common kind of writing for elementary students than is persuasive writing.",
+                "cite_spans": [
+                    {
+                        "start": 91,
+                        "end": 97,
+                        "text": "(1986)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 100,
+                        "end": 117,
+                        "text": "Crowhurst (1983b)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 122,
+                        "end": 142,
+                        "text": "Gorman et al. (1988)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 254,
+                        "end": 269,
+                        "text": "Crowhurst (1978",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 270,
+                        "end": 289,
+                        "text": "Crowhurst ( , 1980a",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 290,
+                        "end": 312,
+                        "text": "Crowhurst ( , 1983a) )",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "However, the difficulty of explicitly two-part writing tasks is also to be noted.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Wilkinson and his colleagues found that comparatively few 10-year-olds attempted to respond to both parts of their writing task: \"Would it work if children came to school when they liked and could do what they liked there?\" Wishes. Gorman et al. (1988) report a small number of compositions which they call \"wishes.\" These compositions communicated personal likes and dislikes (e.g., I would like to be a karate expert) but lacked any sign of trying to persuade others to share their points of view.",
+                "cite_spans": [
+                    {
+                        "start": 232,
+                        "end": 252,
+                        "text": "Gorman et al. (1988)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Non-arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Examples of responses such as those described above have been Sometimes a number of unelaborated reasons are given resulting in a composition that reads like a list, as in Script 9: Script 9",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "No, I don't think this would be a very good trip for my class because some people cannot canoe, and some people might drown.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "There would be too many rocks to carry your canoe over. There wouldn't be enough canoes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "It would be better if it was in a semi-wilderness environment.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "They don't have enough food supply for all of them.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "They wouldn't be any place to put up their tent.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "They would have to take warm clothes or they might freeze in the night. There wouldn't be any bunk houses. (Grade 6)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Sometimes the reasons are actually numbered, emphasising the list-like nature of the composition:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "Script 10 I think kids should not have homework because:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "1.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "It would cut out their social life.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of Early Arguments",
+                "sec_num": null
+            },
+            {
+                "text": "They would be complaining of too much homework.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "2,",
+                "sec_num": null
+            },
+            {
+                "text": "3.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "2,",
+                "sec_num": null
+            },
+            {
+                "text": "It would cut out any sports they want to do.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "2,",
+                "sec_num": null
+            },
+            {
+                "text": "They can't go anywhere.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "4.",
+                "sec_num": null
+            },
+            {
+                "text": "They would get detentions because they're grumpy. no games to play outside.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "5.",
+                "sec_num": null
+            },
+            {
+                "text": "7.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "5.",
+                "sec_num": null
+            },
+            {
+                "text": "no friends in the house.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "5.",
+                "sec_num": null
+            },
+            {
+                "text": "They wouldn't be allowed to watch T.V. response is reported by Gorman et al. (1988) for their topic, which asked students to think of a subject on which they had a strong opinion and to persuade somebody else who did not share that opinion; such responses were also found by Crowhurst (1987b) for one of the four topics used,, a topic which asked students to think of one thing about their school that should be changed and to try to persuade the principal to change it. Instead of choosing one unsatisfactory aspect, they wrote about three or four.",
+                "cite_spans": [
+                    {
+                        "start": 63,
+                        "end": 83,
+                        "text": "Gorman et al. (1988)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 275,
+                        "end": 292,
+                        "text": "Crowhurst (1987b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "8.",
+                "sec_num": null
+            },
+            {
+                "text": "Such multi-topic responses did not occur when students were asked to persuade the principal on specifically identified questions such as whether homework should be eliminated.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "8.",
+                "sec_num": null
+            },
+            {
+                "text": "Comparatively few compositions are organized into paragraphs (Gorman et al., 1988) . Rather than logical organization based on separate but related points, appropriately elaborated and illustrated, young writers frequently engage in associative writing (Bereiter, 1980) where each successive sentence relates to the one immediately preceding. Freedman and Pringle (1984) report that 50 percent of the arguments of their seventh and eighth graders were of this kind.",
+                "cite_spans": [
+                    {
+                        "start": 61,
+                        "end": 82,
+                        "text": "(Gorman et al., 1988)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 253,
+                        "end": 269,
+                        "text": "(Bereiter, 1980)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 343,
+                        "end": 370,
+                        "text": "Freedman and Pringle (1984)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "8.",
+                "sec_num": null
+            },
+            {
+                "text": "Weaknesses so far mentioned have dealt with content and form--with students' having little to say and failing, for example, to support reasons, or to conclude their pieces in appropriate or expected ways. Another category of differences between the compositions of young writers and those of older writers deals with linguistic matters.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "8.",
+                "sec_num": null
+            },
+            {
+                "text": "Young writers use less diverse, less precise, less interesting vocabulary.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "8.",
+                "sec_num": null
+            },
+            {
+                "text": "They make monotonous use of a small , Persuasion 24 number of connectives (so, but, another thing, also). Sentences are shorter and simpler--perhaps significant in that syntactic complexity has been found to be related to quality for older students in argumentative writing, though not in narrative writing (Crowhurst, 1980b) .",
+                "cite_spans": [
+                    {
+                        "start": 307,
+                        "end": 325,
+                        "text": "(Crowhurst, 1980b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "8.",
+                "sec_num": null
+            },
+            {
+                "text": "reminiscent of spoken language are common, like the appeals with which they frequently conclude.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions and structures",
+                "sec_num": null
+            },
+            {
+                "text": "Students sometimes attempt to capture the prosodic features of spoken language by experimenting with graphic features such as capitals, underlining and exclamation marks (Gorman et al., 1988) .",
+                "cite_spans": [
+                    {
+                        "start": 170,
+                        "end": 191,
+                        "text": "(Gorman et al., 1988)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions and structures",
+                "sec_num": null
+            },
+            {
+                "text": "Not all the spoken-language features of the writing of 11- year -olds are interpreted negatively. Indeed White (1987) points out that \"much of the best writing from eleven-year-olds gains force and immediacy from the adaptation of spoken language exchanges\" (p. 13). However, the difference between good writing at age 15 and good writing at age 11 is clear. Whereas much of the best writing at age 11 reflects the conventions of speech-- as, indeed, does weaker writing by 15-year-olds--able 15-year- olds have learned a good deal more both about written argument and about the text-forming devices of language.",
+                "cite_spans": [
+                    {
+                        "start": 105,
+                        "end": 117,
+                        "text": "White (1987)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions and structures",
+                "sec_num": null
+            },
+            {
+                "text": "They have a variety of linguistic means at their disposal for conveying urgency and emphasis and have less need for the passionate personal statements and rhetorical questions of younger children.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Expressions and structures",
+                "sec_num": null
+            },
+            {
+                "text": "The above descriptions of young writers' responses to persuasive topics invite speculation about the processes by which young students construct arguments. They else/ invite discussion of the comparative difficulty of argument and narrati: appropriate methods of instruction and assessment.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "QUESTIONS OF DEVELOPMENT, DIFFICULTY AND TEACHABILITY",
+                "sec_num": null
+            },
+            {
+                "text": "One suggested reason for young students' comparatively poor performance in argument is that their schema for written argument--indeed their schemata for written forms in general--is derived from the textual structures of speech with which they become acquainted first (Bereiter & Scardamalia, 1982; Kress, 1982) .",
+                "cite_spans": [
+                    {
+                        "start": 268,
+                        "end": 298,
+                        "text": "(Bereiter & Scardamalia, 1982;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 299,
+                        "end": 311,
+                        "text": "Kress, 1982)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "Structures, like argument, which are heavily dependent, in spoken language, on the input of an interlocutor do not transfer as easily from spoken to written language as narrative structure and may therefore be expected to be acquired later.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "Certainly the influence of spoken language on the persuasive writing of young students is clear.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "Some compositions --dialogue compositions--are direct representations of spoken persuasive exchanges.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "A large -number of compositions which conform more closely to the expected form of argument show the influence of spoken language in the direct, colloquial forms of language used, and in the strategies used to persuade--direct appeals and imperatives, for example.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "Narrative compositions written by some students in response to persuasive tasks also reveal strong evidence of spoken persuasive discourse. Script 2 above, an example of an argument set in a narrative framework, contains what is, in fact, the record of a persuasive speech delivered to the punishment and of committee.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "When the writer of scripts 6 and 7 rewrites the The conclusion must be drawn that the influence of spoken language--perhaps in a variety of forms--on written persuasive pieces is substantial and pervasive, that when young students write, the structures and language of oral persuasion are readily available and freely used.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "Narrative writing in response to a persuasive task is attributed by White (1987) to lack of knowledge of the functions of language. She suggests that students may not know \"how to use 12). Scardamalia and Bereiter (1986) , on the other hand, suggest that deviations from argumentative forms are \"more likely attributable to losing hold than to lack of the appropriate schema\" (p. 784). Some examples seem to illustrate such \"losing hold\"--compositions that begin as arguments but then drift off into narrative (like script 3 above), for example, or into excessive illustrative material (see script 5 in White (1987) ), and never come back to the argument.",
+                "cite_spans": [
+                    {
+                        "start": 68,
+                        "end": 80,
+                        "text": "White (1987)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 189,
+                        "end": 220,
+                        "text": "Scardamalia and Bereiter (1986)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 603,
+                        "end": 615,
+                        "text": "White (1987)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "Such drifting off probably results from the use of a \"what next\" strategy resulting in \"associative writing\" in which the sentence just written, rather than an overall plan, triggers what comes next (Bereiter, 1980; Bereiter & Scardamalia, 1982; Bereiter & Scardamalia, 1987) .",
+                "cite_spans": [
+                    {
+                        "start": 199,
+                        "end": 215,
+                        "text": "(Bereiter, 1980;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 216,
+                        "end": 245,
+                        "text": "Bereiter & Scardamalia, 1982;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 246,
+                        "end": 275,
+                        "text": "Bereiter & Scardamalia, 1987)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "However, arguments set in narrative a framework (like script 2 above) fit this explanation less well. They appear, rather, to indicate uncertainty about how to get started on a persuasive piece, and to reflect lack of clear, accessible knowledge of argument structure.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "It is sometimes suggested that narrative writing should not be considered inappropriate as a response to argument assignments because arguments frequently make use of narrative and anecdotal illustrations to make a point, and because certain kinds of narratives function, in their entirety, as persuasive pieces. It is difficult, however, to justify such an argument. The anecdotes of young writers do not usually make points or illustrate points being made.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "In our research we have occasionally found a narrative by an older student which functions in this way.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "We have never found such an example in responses by fifth, sixth or seventh graders.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Development",
+                "sec_num": null
+            },
+            {
+                "text": "Poor performance in argument as against narrative has commonly been attributed to its greater cognitive difficulty (Bereiter, 1980; Crowhurst, 1983a; Freedman & Pringle, 1984; Moffett, 1968; Scardamalia, 1981; Wilkinson, Barnsley, Hanna, & Swan, 1980), such views deriving largely from Piagetian psychology. Moffett, for example, describes discourse as an abstractive hierarchy, beginning, at the lowest level, with narrative, followed by generalizing and theorizing. Narrative, structure, which closely resembles the chronological structure of external reality, is, he believes, the easiest and most natural form of discourse for children..",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "There is undoubtedly some validity in the enggestion that writing a formal argument is a demanding cognitive task. chronologically ordered text, but also the generation of usable content is an easier task for the story writer than for the persuader.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "Their whole world of experience is available to story writers who may take their narratives in any direction they choose, selecting from well known material appropriate content from which to fashion their stories. However once a topic is chosen by or assigned to a persuader, relevant material is considerably more limited. Information, moreover, is likely to be less accessible, stored in scattered nodes in memory.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "Generating content, always a difficult task for young writers, is especially difficult for universal topics or issues of public policy requiring, as they do, information--and even vocabulary-- somewhat removed from students' usual experience. appropriate place and proportion. (Applebee et al., 1986a, p. 26) Not all are equally difficult.",
+                "cite_spans": [
+                    {
+                        "start": 277,
+                        "end": 308,
+                        "text": "(Applebee et al., 1986a, p. 26)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "In the 1983 National Assessment for example, 25 percent of fourth graders managed to write an adequate letter persuading Aunt May on an issue of personal concern, but only 4 percent were adequate when the task was to convince the principal to change a school rule--a topic that required more general arguments than the personal opinions and examples that were appropriate for Aunt May. Miller (1980) found that her freshman students were well able to persuade an immediate audience on a personally important topic but that they could not write effectively on a universal topic for a general audience.",
+                "cite_spans": [
+                    {
+                        "start": 386,
+                        "end": 399,
+                        "text": "Miller (1980)",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "Given the reasonable assumption that an attempt to persuade implies both a commitment to a position and a desire to convince an other or others, one may well question the appropriateness of any assigned topic as a stimulus for effective persuasive writing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "Assigned tasks to persuade make-believe audiences on topics of peripheral interest to the writer seem to involve special difficulties.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "The problems and limitations of all testing are to be kept in mind in making judgements about students' ability.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "Large scale assessments and controlled research studies are inevitably a-rhetorical and a-contextual.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "They give limited information on carefully limited questions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "The informaticin thus acquired is useful in certain ways. But the writing tasks and assessment measures used in such studies must not be assumed to be appropriate models for instructional purposes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Difficulty",
+                "sec_num": null
+            },
+            {
+                "text": "Elementary students have little opportunity to become acquainted with written argumentation either in their reading or in their writing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Even the easier kinds of persuasive writing receive little attention during the middle school years.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Writers on three continents have protested the discontinuity between writing in the elementary school where the most common kind of writing is the \"story\"--a catch-all term that covers many kinds of writing--and the high school where argument becomes the required and valued form (Martin & Rothery, 1981; Newkirk, 1987; White, 1987) .",
+                "cite_spans": [
+                    {
+                        "start": 280,
+                        "end": 304,
+                        "text": "(Martin & Rothery, 1981;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 305,
+                        "end": 319,
+                        "text": "Newkirk, 1987;",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 320,
+                        "end": 332,
+                        "text": "White, 1987)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Yet, persuasion--as any parent can testify--is a form of discourse that develops early in the oral mode. Wilkinson (1986) calls argument \"a primary act of mind.\"",
+                "cite_spans": [
+                    {
+                        "start": 105,
+                        "end": 121,
+                        "text": "Wilkinson (1986)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Interesting evidence emerging from the primary grades suggests that precursors of exposition and argument also appear early in writing (Martin & Rothery, 1981; Newkirk, 1985; 1987) (Martin, 1980, p. 27) .",
+                "cite_spans": [
+                    {
+                        "start": 135,
+                        "end": 159,
+                        "text": "(Martin & Rothery, 1981;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 160,
+                        "end": 174,
+                        "text": "Newkirk, 1985;",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 175,
+                        "end": 180,
+                        "text": "1987)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 181,
+                        "end": 202,
+                        "text": "(Martin, 1980, p. 27)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "No kind of writing provides more opportunities for writing These subjects--and many others--were widely discussed on radio and television, talk shows, and in newspaper editorials and letters to editors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "To take up such matters in school allows Another source of difficulty arises from the interrelated matters of the writing situation and the assessment situation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Persuasive strategies cannot be judged except in the context of the audience to whom the persuasive writing is addressed. What persuades me may not persur_2e you.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "A teacher-reader is not necessarily well equipped to judge the effectiveness of language and arguments addressed to the make-believe peer of a 12-year- old.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Highly personal reasons may be inappropriate for some topics and some audiences, but they are not inappropriate for all.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "There are, then, some problems with assessment when the assessor is not the intended audience, or when writing is addressed to no real audience at all, as is usually the case in assessments and controlled research studies. Appropriate uses and forms of language are learned when language is used for real purposes in interactive situations. Despite the considerable advances in recent years in devising more valid tasks in writing assessments, contextually relevant writing will remain difficult, especially for persuasive writing since the audience is critical to the means and to the language of persuasion. persuasive uses of language appear early in spoken language; b. precursors of argument appear in the writing of very young children in the early years of schooling;",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "c.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "even poor persuasive writing in the pre-teen years presents knowledge of and embryonic forms of argument; d.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "there are abundant opportunities for contextually relevant writing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Useful procedures fir developing persuasive writing ability include the following:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "1.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Topics should always be issued important to students.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "2.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Even in the early school years, individual students should be encouraged to engage in persuasive writing to teachers, classmates, principals, and others when they feel strongly on issues.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Such writing, of course, should be sent to the intended audience.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "3.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "Large and small group discussions of issues are invaluable, not only for developing oral skills, but also for identifying relevant content and for the clarification of individual stances on matters under discussion.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "4. Dixon and Stratta (1981) suggest the \"ruminative essay\"",
+                "cite_spans": [
+                    {
+                        "start": 3,
+                        "end": 27,
+                        "text": "Dixon and Stratta (1981)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "as an important bridge to argumentative writing. The purpose of such essays is to think around or mull over an issue, to sort out for oneself what one thinks. There is no good reason why this kind of writing should be regarded as a difficult form to he attempted only by older and brighter students.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Teachability",
+                "sec_num": null
+            },
+            {
+                "text": "&Vahapassi, 1987, p.181).Recognition of the importance of written argumentation is reflected in the inclusion of persuasive/argumentative tasks in a wide variety of major assessments of writing in recent years, for example, in the National Assessment of Educational Progress(NAEP) in the United States, in assessments conducted by the",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "Major Assertion: Buy a design-a-button (implied).Major Reason: Low cost.Evidence: The cost is 75 cents.Evidence: The cost is lower than last year.Major Reason: The many designs (implied).Evidence: Chucky Cheese, Rainbows, Unicorns and more (Newkirk, 1985, pp. 297-8) . (Martin & Rothery, 1981; Newkirk, 1985; 1987) .Influential voices urge the importance of teaching argumentative writing (Dixon & Stratta, 1986; Kress, 1982; Martin & Rothery, 1980; 1981; White, 1987) .Given the importance of argumentative/persuasive writing in a wide range of life situations and evidence that elementary students have at least rudimentary knowledge of the genre, White believes that to exclude them from practice in this form of writing \"amounts to a form of linguistic disenfranchisement\" (1987, p. 1).A steady stream of evidence indicates that little writing instruction, of any kind, occurs in schools. Applebee (1981; 1984) found that writing instruction was rarely given either prior to Contexts for learning_ to write:Studies of secondary school instruction.Norwood, NJ:Ablex.Applebee, A. N., Langer, J. A., & Mullis, I. V. S.",
+                "cite_spans": [
+                    {
+                        "start": 240,
+                        "end": 266,
+                        "text": "(Newkirk, 1985, pp. 297-8)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 269,
+                        "end": 293,
+                        "text": "(Martin & Rothery, 1981;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 294,
+                        "end": 308,
+                        "text": "Newkirk, 1985;",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 309,
+                        "end": 314,
+                        "text": "1987)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 389,
+                        "end": 412,
+                        "text": "(Dixon & Stratta, 1986;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 413,
+                        "end": 425,
+                        "text": "Kress, 1982;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 426,
+                        "end": 449,
+                        "text": "Martin & Rothery, 1980;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 450,
+                        "end": 455,
+                        "text": "1981;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 456,
+                        "end": 468,
+                        "text": "White, 1987)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 893,
+                        "end": 908,
+                        "text": "Applebee (1981;",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 909,
+                        "end": 914,
+                        "text": "1984)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "annex",
+                "sec_num": null
+            },
+            {
+                "text": "Writing:Trends across the decade, 1974-1984. Princeton, NJ:The National Assessment of Educational Progress. (1982) .From conversatior to compOgitton:The role of instruction in a developmental The psychology of written composition. Hillsdale, N.J.: Erlbaum.Britton, J.N., Burgess, T., Martin, N., McLeod, A., & Rosen, H. (1975) .The development of writing abilities (11-18).London: Macmillan Education. (1987) .The argumentative/persuasive task.In T. P. Gorman, A. C.Purves, & R. E. Degenhart (Eds), The IEA study of written composition.Volume 1.The international Writing scales and scoring scales (pp. 181-202).Jyvaskyla, Finland:Institute for Educational Research.Jraig, S. G. (1986) .The effect of audience on language Assessing language development. Oxford:",
+                "cite_spans": [
+                    {
+                        "start": 108,
+                        "end": 114,
+                        "text": "(1982)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 284,
+                        "end": 326,
+                        "text": "Martin, N., McLeod, A., & Rosen, H. (1975)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 402,
+                        "end": 408,
+                        "text": "(1987)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 678,
+                        "end": 684,
+                        "text": "(1986)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "(1986a).",
+                "sec_num": null
+            },
+            {
+                "text": "Press.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Oxford University",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Writing in the secondary school",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Applebee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Applebee, A.N. (1981). Writing in the secondary school.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Annual Meeting of the American Educational Research Association, Montreal",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Applebee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1984,
+                "venue": "ERIC Document Reproduction Service",
+                "volume": "230",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Applebee, A. N. (1984). at the Annual Meeting of the American Educational Research Association, Montreal. (ERIC Document Reproduction Service No. ED 230 977)",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Revision strategies of students at three grade levels",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Crowhurst",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "A developmental perspective on persuasive writing. Paper presented at the Annual Meeting of the Conference on College Composition and Communication",
+                "volume": "19",
+                "issue": "",
+                "pages": "217--226",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Crowhurst, M. (1983b). A developmental perspective on persuasive writing. Paper presented at the Annual Meeting of the Con- ference on College Composition and Communication, Detroit. Crowhurst, M. (1986). Revision strategies of students at three grade levels. English Quarterly, 19(3), 217-226.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Cohesion in argument and narration at three grade levels",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Crowhurst",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "Research in the Teaching of English",
+                "volume": "21",
+                "issue": "",
+                "pages": "185--201",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Crowhurst, M. (1987a). Cohesion in argument and narration at three grade levels. Research in the Teaching of English, 21, 185-201.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "The effect of reading instruction and writing instruction on reading and writing_ persuasion",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Crowhurst",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "Annual Meeting of the American Educational Research Association",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Crowhurst, M. (1987b) The effect of reading instruction and writing instruction on reading and writing_ persuasion. Paper presented at tue Annual Meeting of the American Educational Research Association, Washington, D.C. Crowhurst, M. (In press). Reading/writing relationships: An in-_rvention study. Canadian Journal of Education.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Audience and mode of discourse effects on syntactic complexity in writing at two grade levels",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Crowhurst",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Piche",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Dixon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Stratta",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1979,
+                "venue": "The writing of writing",
+                "volume": "13",
+                "issue": "",
+                "pages": "101--110",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Crowhurst, M., & Piche, G.L. (1979). Audience and mode of discourse effects on syntactic complexity in writing at two grade levels. Research in the Teaching of English, 13, 101- 110. Dixon, J., & Stratta, L. (1986). Argument and the teaching of English. In A. Wilkinson (Ed.), The writing of writing (pp.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Teaching and assessing argument",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Dixon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Stratta",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1982,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dixon, J., & Stratta, L. (1982). Teaching and assessing argument. Southampton: Southern Regional Examinations Board.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Descriptive and persuasive writing skills of children",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Fowler",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Glynn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "Annual Meeting of the",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fowler, L.M., & Glynn, S.M. (1983). Descriptive and persuasive writing skills of children. Paper presented at the Annual Meeting of the American Educational Research Association, Montreal.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Why students can't write arguments",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Freedman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Pringle",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1984,
+                "venue": "English in Education",
+                "volume": "18",
+                "issue": "2",
+                "pages": "73--84",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Freedman, A., & Pringle, I. (1984). Why students can't write arguments. English in Education, 18 (2), 73-84.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "A review of language monitoring 1979-83",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Gorman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "White",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Brooks",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Maclure",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kispal",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gorman, T. P., White, J., Brooks, C., MacLure, M., & Kispal, A. (1988). A review of language monitoring 1979-83. London: Assessment of Performance Unit, HMSO.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Develo mental characteristics of the writing of urban students at grades 2, 5, and 11",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Gunderson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "Paper presented at the Annual Meeting of the National Council of Teachers of English",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gunderson, L. (1981). Develo mental characteristics of the writing of urban students at grades 2, 5, and 11. Paper presented at the Annual Meeting of the National Council of Teachers of English, Boston.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Research on written composition: new directions for teaching",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Hillocks",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jr",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1986,
+                "venue": "ERIC Clearinghouse on Reading and Communications Skills and the National Conference on Research in English",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hillocks, G., Jr. (1986). Research on written composition: new directions for teaching. Urbana, IL.: ERIC Clearinghouse on Reading and Communications Skills and the National Conference on Research in English.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Analyzing the structure of written arguments",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Hillocks",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jr",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1982,
+                "venue": "Annual Meeting of the American Education Research Association",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hillocks, G., Jr. (1987). Analyzing the structure of written arguments. Paper presented at the Annual Meeting of the American Education Research Association, Washington, DC. Kress, G. (1982). Learning to write. London: Routledge & Kegan Paul.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Student argumentative writing, knowledge and ability",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Mccann",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "",
+                "volume": "43",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McCann, T.M. (no date). Student argumentative writing, knowledge and ability. Chicago: University of Chicago. 43 Persuasion 44",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Exposition: Literary criticism",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Martin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1980,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Martin, J. R. (1980). Exposition: Literary criticism. In J.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Working papers in linguistics",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "2",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Martin, & J. Rothery (Eds.), Working papers in linguistics. No. 1. Paper 2. Sydney, NSW: Linguistics Department, University of Sydney.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "The ontogenesis of written genre",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Martin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Rothery",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "Working papers in linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "1--59",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Martin, J. R., & Rothery, J. (1981). The ontogenesis of written genre. In J. R. Martin, & J. Rothery (Eds.), Working papers in linguistics. No. 2. (pp. 1-59). Sydney, NSW: Linguistics Department, University of Sydney.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Working papers in linguistics",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Martin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Rothery",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1986,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Martin, J. R., & Rothery, J. (1986). Working papers in linguistics. No. 4. Sydney, NSW: Linguistics Department, University of Sydney.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Rhetorical maturity: Definition and development",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Miller",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1980,
+                "venue": "Reinventing the rhetorical tradition",
+                "volume": "",
+                "issue": "",
+                "pages": "119--127",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Miller, S. (1980). Rhetorical maturity: Definition and development. In A Freedman, & I. Pringle (Eds), Reinventing the rhetorical tradition (pp. 119-27). Conway, Ark.: L&S Books for the CCTE.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Teaching the universe of discourse",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Moffett",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1968,
+                "venue": "Writing achievement: Results from the third national writing assessment. Vols. 1-3",
+                "volume": "196",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Moffett, J. (1968). Teaching the universe of discourse. Boston: Houghton Mifflin. National Assessment of Educational Progress. (1980). Writing achievement: Results from the third national writing assessment. Vols. 1-3. Denver, Colo.: Education Commission of the States. (ERIC Document Reproduction Service No. ED 196 042, 043, 044)",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Tie hedgehog or the fox: The dilemma of writing development",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Newkirk",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Language Arts",
+                "volume": "62",
+                "issue": "",
+                "pages": "593--603",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Newkirk, T. (1985). Tie hedgehog or the fox: The dilemma of writing development. Language Arts, 62, 593-603.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "The non-narrative writing of young children",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Newkirk",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "Research in the Teaching of English",
+                "volume": "21",
+                "issue": "",
+                "pages": "121--144",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Newkirk, T. (1987). The non-narrative writing of young children. Research in the Teaching of English, 21, 121-144.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "A comparative study of writing abilities in two modes at the grade 5, 8, and 12 levels",
+                "authors": [
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Pringle",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Freedman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pringle, I., & Freedman, A. (1985). A comparative study of writing abilities in two modes at the grade 5, 8, and 12 levels. Toronto: Ministry of Education.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "How children cope with the cognitive demands of writing",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Scardamalia",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "Writing: The nature, development and teaching of written communication",
+                "volume": "2",
+                "issue": "",
+                "pages": "81--103",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Scardamalia, M. (1981). How children cope with the cognitive demands of writing. In C.F. Frederiksen, & J. F. Dominic (Eds.), Writing: The nature, development and teaching of written communication (Vol. 2) (pp. 81-103).",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Research on written composition",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Scardamalia",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Bereiter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1986,
+                "venue": "Handbook of research on teaching",
+                "volume": "",
+                "issue": "",
+                "pages": "778--803",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Scardamalia, M., Bereiter, C. (1986). Research on written composition. In M.C. Wittrock (Ed.), Handbook of research on teaching (Third edition) (pp. 778-803). New York:",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "The IEA study of written composition: Reports from four countries--Finland_ Federal Republic of Germany",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Vahapassi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Lehmann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Deglopper",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Lamb",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Langer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "Symposium presented at the Annual Meeting of the American Educational Research Association",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Vahapassi, A., Lehmann, R., deGlopper, K., Lamb, H., Langer, J. (1987). The IEA study of written composition: Reports from four countries--Finland_ Federal Republic of Germany, The Netherlands, New Zealand. Symposium presented at the Annual Meeting of the American Educational Research Association, Washington, D.C. Wignell, P. (1987). In your own words. In S. Eggins, J.R.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Working papers in linguistics",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "1--24",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Martin, & P. Wignell (Eds.), Working papers in linguistics, No. 5 (pp. 1-24). Sydney, NSW: Linguistics Department, University of Sydney.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Children's argumentative writing: A reappraisal of difficulties",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "White",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "White, J. (1987). Children's argumentative writing: A reappraisal of difficulties. Paper presented at AILA",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Argument as a primary act of mind",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Wilkinson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1986,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wilkinson, A.M. (1986). Argument as a primary act of mind.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF1": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "a good number of the discourse elements of argument (e.g., statement of belief, reason, elaboration); they attribute this knowledge to students' knowledge of oral persuasion.McCann (no date) compared arguments 1, itten by students at grades 6, 9 and 12 using a primary trait scoring system based onHillocks'(1987) model of the structure of argument--a promising model that permits the differentiation of simple linear arguments from more complex recursive arguments.McCann found a steady impro-ement from grade to grade; sixth graders scored lower that something is true) and warrants (explain why data support the claim).Neither warrants nor data (grounds for stating the claim) were much used at any grade level."
+            },
+            "FIGREF2": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "argument with a stated position supported by a reason, but drifts into narrative halfway through the second sentence. Script 3"
+            },
+            "FIGREF3": {
+                "fig_num": "8",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "think the punishment would be is he should stay after school for 1 hour every day for a month or three weeks. I would let the committee decide when he could leave. I would give him extra homework, give him lines, and to clean up the school yard. I would give him extra homework so he wouldn't do that again. I would give him lines that says I will not shoot elastic bands again and I would tell him to pick up the garbage after school. (grade 5)"
+            },
+            "FIGREF6": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "argument--is more difficult than the chronological ordering of information which is typical of narrative and some reporting styles. Not only the production of"
+            },
+            "FIGREF7": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "about real issues for real audiences than does argument. Issues constantly arise in classrooms and schools about which students are likely to have firm personal opinions. Alert teachers can easily channel the interest thus aroused into productive writing, addressed, for example, to teachers or principal. Opportunities for discussion and argument are also presented by a constant stream of controversial topics in the public arena which students can easily relate to. Topics widely and hotly debated in my region in the recent past have included the following: capital punishment (occasioned by a free vote in the federal parliament on the possible reintroduction of the death penalty); immigration policy (occasioned by the arrival off the coast of eastern Canada of a boat load of illegal immigrants); wolf kills authorized by the provincial government as a measure of wild-life management; whether or not the provincial government should pay for lunches for hungry school children and expensive drugs for AIDS victims."
+            },
+            "FIGREF8": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "less likely to be acquired unless students are exposed to good models of various kinds. Discussion of such readings should cover both content and structure.Attempts to persuade occur early in the life of a child.Argument,Wilkinson (1986) claims, is one of two \"natural or universal genres rooted in the human psyche\" (p. 137)--the other being narrative."
+            },
+            "TABREF5": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "homework, and have him in an isolated room for a week every month after school for an hour. After all he did take his eraser and fling it across the room when it hit Amy in the"
+            },
+            "TABREF6": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td colspan=\"3\">the writer to persuade a friend to support a camping field-trip: so, what good would that do?\" She tried to make me forget</td></tr><tr><td>Script 5 it but I wouldn't give up.</td><td colspan=\"2\">\"Mrs. Smith what age level do</td></tr><tr><td colspan=\"3\">\"You mean to say you don't like camping,\" I said. you think shooting elastics around the room is?\"</td><td>She</td></tr><tr><td colspan=\"3\">\"No I don't. I hate being outside.\" answered me quickly with a \"that's not the point\" routine,</td></tr><tr><td colspan=\"3\">\"You must be crazy. The fresh air and sunshine is good for but she's not going to get me to give up that easy. \"Mrs.</td></tr><tr><td colspan=\"3\">you.\" Smith if I got caught shooting elastics and my punishment</td></tr><tr><td colspan=\"3\">\"What I really hate is the bugs,\" she said. was cleaning the board it wouldn't stop me.\"</td><td>I thought I</td></tr><tr><td colspan=\"2\">was putting up a good fight so far.</td><td>\"Well that just goes to</td></tr><tr><td colspan=\"3\">show what kinda person you are but we are talking about</td></tr><tr><td>(Grade 6)</td><td/></tr><tr><td colspan=\"3\">A particularly interesting example of dialogue-narrative I know that</td></tr><tr><td colspan=\"3\">writing is a composition written by a seventh grader who wrote a sounded kinda harsh but I didn't think you could let someone</td></tr><tr><td colspan=\"3\">first draft as presented in Script 6: off that easy. All Mrs. Smith answered with was \"I get your</td></tr><tr><td colspan=\"3\">Script 6 point and I will certainly think about it.\"</td><td>I thought I</td></tr><tr><td colspan=\"3\">\"I think the whole class should get to hit him with an deserved at least a maybe.</td></tr><tr><td colspan=\"3\">elastic band.\" That was Gail's idea. Right now I'm in room Three days later, when the composition was returned for revision</td></tr><tr><td colspan=\"3\">9 thinking of a punishment for Billy Jones. --without teacher response, or intervening writing instruction--In our class</td></tr><tr><td colspan=\"3\">we have a system where if a kid disobeys, our \"crime the student produced the composition presented in Script 7:</td></tr><tr><td colspan=\"3\">committee\" must find a punishment for him or her. Script 7</td><td>So many</td></tr><tr><td colspan=\"3\">ideas were floating around the room and here I am thinking Mrs. Bernard and members of the crime committee we are here</td></tr><tr><td colspan=\"3\">for au appzopriate punishment. to find a suitable punishment for those who deserve to be Then suddenly it dawned on</td></tr><tr><td>me. punished.</td><td/></tr></table>",
+                "text": "2 would do they should have to spend a day in a grade 2 room if that doesn't work grade 1 if not that kindergarten if that doesn't work they must be a juvenile delinquent on your hands. I feel that having to spend a day in a primary classroom would be more than enough of a punishient and that person would not be a bother anymore."
+            },
+            "TABREF12": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td colspan=\"5\">or during writing, that assignments consisted of little more than</td></tr><tr><td colspan=\"5\">the presentation of a topic, a length, and a due date, findings</td></tr><tr><td colspan=\"5\">echoed by Wignell (1987) in Australia. \"Since text and context are in a deterministic relation, various Insofar as it occurs at</td></tr><tr><td colspan=\"5\">all, writing instruction comes after the writing is finished, and techniques can be used to improve a student's writing without him</td></tr><tr><td colspan=\"5\">is ever knowing what schematic structure . . . (is)\" (Martin, 1980, delivered by means of written teacher comments and</td></tr><tr><td colspan=\"5\">corrections. Such response is more often negative than positive, p. 28). What is important is for the teacher to know enough</td></tr><tr><td colspan=\"5\">and is often vague with no indication of how to improve. about the genre to organize writing situations so that students</td></tr><tr><td colspan=\"5\">. Newkirk argues persuasively Martin (1980) believes that teachers make vague comments will master the genre. \"In order to get good writing, a good</td></tr><tr><td colspan=\"5\">against theorists who because of their lack of explicit knowledge about genres. claim that children first writing context must be effected. . . That is, students must be produce They</td></tr><tr><td colspan=\"5\">expressive or narrative writing (e.g., Moffett, 1968; Britton et have good intuitions about whether writing is good or bad because clear about what they are writing about (the topic), who they are</td></tr><tr><td colspan=\"5\">al., 1975), and gives many examples of non-narrative writing by they have an implicit knowledge of the requirements of various writing to (the addressee), . . .and why they are writing (what</td></tr><tr><td colspan=\"5\">children in primary grades, including the writing of incipient genres which enables them to recognize when things go wrong. their purpose is)\"</td></tr><tr><td colspan=\"5\">arguments, But they cannot give credit and encouragement for what is good A case in point is the argument made by six-year-old</td></tr><tr><td colspan=\"5\">Sarah in a sign for a booth at a lawn fair where children could and right because they lack explicit knowledge. Such full and</td></tr><tr><td colspan=\"5\">make their own pin-on buttons: explicit knowledge might enable teachers to take what Newkirk</td></tr><tr><td colspan=\"5\">Desin-a-button calls another angle of vision which would uncover the competence</td></tr><tr><td colspan=\"5\">only 75 cents of children writing argument. the desires Instead of \"a 'deficit' model</td></tr><tr><td colspan=\"5\">cuck.E.Cheese which views children's writing as deficient adult writing, as</td></tr><tr><td colspan=\"5\">Unicons rainbows writing which suffers from various cognitive overloads or</td></tr><tr><td colspan=\"5\">and much much breakdowns,\" a more precise understanding of what is involved in</td></tr><tr><td colspan=\"5\">more writing argument may permit \"an incremental viewpoint which</td></tr><tr><td colspan=\"2\">it's better pric examines the approximations</td><td>children</td><td>successfully</td><td>attempt\"</td></tr><tr><td>than last year (Newkirk, 1987, p. 142).</td><td colspan=\"4\">Such a viewpoint would allow teachers</td></tr><tr><td colspan=\"5\">75 cents to recognize the beginnings of argument in writing which does not</td></tr><tr><td colspan=\"5\">The argument is quite complex: conform to conventional expectations but which yet reveals some</td></tr><tr><td colspan=\"3\">understanding of what argument involves.</td><td/></tr></table>",
+                "text": "Talk of \"teaching\" argument does not, of course, mean only or mainly instructing students in the structure. of argument."
+            },
+            "TABREF13": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td colspan=\"7\">schema for written argument.</td><td colspan=\"3\">Compositions start and end</td></tr><tr><td colspan=\"10\">abruptly; reasons are often not elaborated; some students respond</td></tr><tr><td>with</td><td colspan=\"3\">unexpected</td><td>kinds</td><td>of</td><td colspan=\"4\">writing--narratives,</td><td>dialogues,</td></tr><tr><td colspan=\"3\">descriptions.</td><td/><td/><td/><td/><td/><td/></tr><tr><td/><td colspan=\"9\">While cognitive difficulty undoubtedly plays a</td><td>role,</td></tr><tr><td colspan=\"10\">difficulties of other kinds must also be considered.</td><td>One such</td></tr><tr><td colspan=\"10\">opportunity for students to read examples--good and bad, difficulty is lack of experience. Young students lack two kinds</td></tr><tr><td colspan=\"10\">emotional and rational--of persuasive writing in the world around of experience:</td></tr><tr><td>them.</td><td colspan=\"9\">It also allows classroom discussion, an important support</td></tr><tr><td colspan=\"7\">for writing which may follow.</td><td colspan=\"2\">Finally,</td><td>there is ample</td></tr><tr><td colspan=\"10\">opportunity for writing for real purposes to newspapers and to</td></tr><tr><td colspan=\"10\">members of parliament and other public figures on topics of</td></tr><tr><td colspan=\"5\">current public interest.</td><td colspan=\"5\">Teachers interested in contextually</td></tr><tr><td colspan=\"10\">situated writing will find rich opportunities in persuasive</td></tr><tr><td colspan=\"2\">writing.</td><td colspan=\"8\">Argumentation need not be the sterile exercise on</td></tr><tr><td colspan=\"10\">topics far removed from students' interest which Dixon and</td></tr><tr><td colspan=\"10\">Stratta have criticized so eloquently (e.g., 1986).</td></tr><tr><td/><td/><td/><td/><td/><td colspan=\"3\">CONCLUSION</td><td/></tr><tr><td colspan=\"10\">Existing evidence suggests that students do less well writing</td></tr><tr><td colspan=\"10\">argument than writing narrative, or descriptive reports. Reasons</td></tr><tr><td colspan=\"10\">for poorer performance in argument are complex and interactive.</td></tr><tr><td colspan=\"10\">In some ways argument is more cognitively demanding--in the</td></tr><tr><td colspan=\"2\">location</td><td>of</td><td colspan=\"2\">relevant</td><td colspan=\"2\">content,</td><td>for</td><td colspan=\"2\">example,</td><td>and</td><td>in</td><td>the</td></tr><tr><td colspan=\"3\">organization</td><td>and</td><td colspan=\"2\">logical</td><td>use</td><td>of</td><td>that</td><td>content.</td></tr></table>",
+                "text": "they often lack experience of the kind that would give them information and vocabulary to discuss topics of interest; secondly, they lack experience with written argument.They do not read argumentative writing and therefore have little opportunity to acquire either the organizaUon structures or the linguistic structures that typify formal argumentation. Further, they are not usually encouraged to write argument, either because it is judged too difficult, or because expressive writing is more highly valued."
+            }
+        }
+    }
+}

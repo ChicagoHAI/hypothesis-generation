@@ -1,0 +1,2797 @@
+{
+    "paper_id": "1107",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-07-18T17:36:47.273242Z"
+    },
+    "title": "Finding Deceptive Opinion Spam by Any Stretch of the Imagination",
+    "authors": [
+        {
+            "first": "Myle",
+            "middle": [],
+            "last": "Ott",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Cornell University Ithaca",
+                "location": {
+                    "postCode": "14853",
+                    "region": "NY"
+                }
+            },
+            "email": "myleott@cs.cornell.edu"
+        },
+        {
+            "first": "Yejin",
+            "middle": [],
+            "last": "Choi",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Cornell University Ithaca",
+                "location": {
+                    "postCode": "14853",
+                    "region": "NY"
+                }
+            },
+            "email": "ychoi@cs.cornell.edu"
+        },
+        {
+            "first": "Claire",
+            "middle": [],
+            "last": "Cardie",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Cornell University Ithaca",
+                "location": {
+                    "postCode": "14853",
+                    "region": "NY"
+                }
+            },
+            "email": "cardie@cs.cornell.edu"
+        },
+        {
+            "first": "Jeffrey",
+            "middle": [
+                "T"
+            ],
+            "last": "Hancock",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Consumers increasingly rate, review and research products online (Jansen, 2010; Litvin et al., 2008) . Consequently, websites containing consumer reviews are becoming targets of opinion spam. While recent work has focused primarily on manually identifiable instances of opinion spam, in this work we study deceptive opinion spam-fictitious opinions that have been deliberately written to sound authentic. Integrating work from psychology and computational linguistics, we develop and compare three approaches to detecting deceptive opinion spam, and ultimately develop a classifier that is nearly 90% accurate on our gold-standard opinion spam dataset. Based on feature analysis of our learned models, we additionally make several theoretical contributions, including revealing a relationship between deceptive opinions and imaginative writing.",
+    "pdf_parse": {
+        "paper_id": "1107",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Consumers increasingly rate, review and research products online (Jansen, 2010; Litvin et al., 2008) . Consequently, websites containing consumer reviews are becoming targets of opinion spam. While recent work has focused primarily on manually identifiable instances of opinion spam, in this work we study deceptive opinion spam-fictitious opinions that have been deliberately written to sound authentic. Integrating work from psychology and computational linguistics, we develop and compare three approaches to detecting deceptive opinion spam, and ultimately develop a classifier that is nearly 90% accurate on our gold-standard opinion spam dataset. Based on feature analysis of our learned models, we additionally make several theoretical contributions, including revealing a relationship between deceptive opinions and imaginative writing.",
+                "cite_spans": [
+                    {
+                        "start": 65,
+                        "end": 79,
+                        "text": "(Jansen, 2010;",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 80,
+                        "end": 100,
+                        "text": "Litvin et al., 2008)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "With the ever-increasing popularity of review websites that feature user-generated opinions (e.g., TripAdvisor1 and Yelp2 ), there comes an increasing potential for monetary gain through opinion spaminappropriate or fraudulent reviews. Opinion spam can range from annoying self-promotion of an unrelated website or blog to deliberate review fraud, as in the recent case3 of a Belkin employee who hired people to write positive reviews for an otherwise poorly reviewed product. 4While other kinds of spam have received considerable computational attention, regrettably there has been little work to date (see Section 2) on opinion spam detection. Furthermore, most previous work in the area has focused on the detection of DISRUPTIVE OPINION SPAM-uncontroversial instances of spam that are easily identified by a human reader, e.g., advertisements, questions, and other irrelevant or nonopinion text (Jindal and Liu, 2008) . And while the presence of disruptive opinion spam is certainly a nuisance, the risk it poses to the user is minimal, since the user can always choose to ignore it.",
+                "cite_spans": [
+                    {
+                        "start": 899,
+                        "end": 921,
+                        "text": "(Jindal and Liu, 2008)",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "We focus here on a potentially more insidious type of opinion spam: DECEPTIVE OPINION SPAM-fictitious opinions that have been deliberately written to sound authentic, in order to deceive the reader. For example, one of the following two hotel reviews is truthful and the other is deceptive opinion spam:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "1. I have stayed at many hotels traveling for both business and pleasure and I can honestly stay that The James is tops. The service at the hotel is first class. The rooms are modern and very comfortable. The location is perfect within walking distance to all of the great sights and restaurants. Highly recommend to both business travellers and couples. 2. My husband and I stayed at the James Chicago Hotel for our anniversary. This place is fantastic! We knew as soon as we arrived we made the right choice! The rooms are BEAUTIFUL and the staff very attentive and wonderful!! The area of the hotel is great, since I love to shop I couldn't ask for more!! We will definatly be back to Chicago and we will for sure be back to the James Chicago.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Typically, these deceptive opinions are neither easily ignored nor even identifiable by a human reader;5 consequently, there are few good sources of labeled data for this research. Indeed, in the absence of gold-standard data, related studies (see Section 2) have been forced to utilize ad hoc procedures for evaluation. In contrast, one contribution of the work presented here is the creation of the first largescale, publicly available6 dataset for deceptive opinion spam research, containing 400 truthful and 400 gold-standard deceptive reviews.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "To obtain a deeper understanding of the nature of deceptive opinion spam, we explore the relative utility of three potentially complementary framings of our problem. Specifically, we view the task as: (a) a standard text categorization task, in which we use n-gram-based classifiers to label opinions as either deceptive or truthful (Joachims, 1998; Sebastiani, 2002) ; (b) an instance of psycholinguistic deception detection, in which we expect deceptive statements to exemplify the psychological effects of lying, such as increased negative emotion and psychological distancing (Hancock et al., 2008; Newman et al., 2003) ; and, (c) a problem of genre identification, in which we view deceptive and truthful writing as sub-genres of imaginative and informative writing, respectively (Biber et al., 1999; Rayson et al., 2001) .",
+                "cite_spans": [
+                    {
+                        "start": 333,
+                        "end": 349,
+                        "text": "(Joachims, 1998;",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 350,
+                        "end": 367,
+                        "text": "Sebastiani, 2002)",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 580,
+                        "end": 602,
+                        "text": "(Hancock et al., 2008;",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 603,
+                        "end": 623,
+                        "text": "Newman et al., 2003)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 785,
+                        "end": 805,
+                        "text": "(Biber et al., 1999;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 806,
+                        "end": 826,
+                        "text": "Rayson et al., 2001)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "We compare the performance of each approach on our novel dataset. Particularly, we find that machine learning classifiers trained on features traditionally employed in (a) psychological studies of deception and (b) genre identification are both outperformed at statistically significant levels by ngram-based text categorization techniques. Notably, a combined classifier with both n-gram and psychological deception features achieves nearly 90% cross-validated accuracy on this task. In contrast, we find deceptive opinion spam detection to be well beyond the capabilities of most human judges, who perform roughly at-chance-a finding that is consistent with decades of traditional deception detection research (Bond and DePaulo, 2006) .",
+                "cite_spans": [
+                    {
+                        "start": 712,
+                        "end": 736,
+                        "text": "(Bond and DePaulo, 2006)",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Additionally, we make several theoretical contributions based on an examination of the feature weights learned by our machine learning classifiers. Specifically, we shed light on an ongoing debate in the deception literature regarding the importance of considering the context and motivation of a deception, rather than simply identifying a universal set of deception cues. We also present findings that are consistent with recent work highlighting the difficulties that liars have encoding spatial information (Vrij et al., 2009) . Lastly, our study of deceptive opinion spam detection as a genre identification problem reveals relationships between deceptive opinions and imaginative writing, and between truthful opinions and informative writing.",
+                "cite_spans": [
+                    {
+                        "start": 511,
+                        "end": 530,
+                        "text": "(Vrij et al., 2009)",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The rest of this paper is organized as follows: in Section 2, we summarize related work; in Section 3, we explain our methodology for gathering data and evaluate human performance; in Section 4, we describe the features and classifiers employed by our three automated detection approaches; in Section 5, we present and discuss experimental results; finally, conclusions and directions for future work are given in Section 6.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Spam has historically been studied in the contexts of e-mail (Drucker et al., 2002) , and the Web (Gy\u00f6ngyi et al., 2004; Ntoulas et al., 2006) . Recently, researchers have began to look at opinion spam as well (Jindal and Liu, 2008; Wu et al., 2010; Yoo and Gretzel, 2009) . Jindal and Liu (2008) find that opinion spam is both widespread and different in nature from either e-mail or Web spam. Using product review data, and in the absence of gold-standard deceptive opinions, they train models using features based on the review text, reviewer, and product, to distinguish between duplicate opinions7 (considered deceptive spam) and non-duplicate opinions (considered truthful). Wu et al. (2010) propose an alternative strategy for detecting deceptive opinion spam in the absence of gold-standard data, based on the distortion of popularity rankings. Both of these heuristic evaluation approaches are unnecessary in our work, since we compare gold-standard deceptive and truthful opinions. Yoo and Gretzel (2009) gather 40 truthful and 42 deceptive hotel reviews and, using a standard statistical test, manually compare the psychologically relevant linguistic differences between them. In contrast, we create a much larger dataset of 800 opinions that we use to develop and evaluate automated deception classifiers.",
+                "cite_spans": [
+                    {
+                        "start": 61,
+                        "end": 83,
+                        "text": "(Drucker et al., 2002)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 98,
+                        "end": 120,
+                        "text": "(Gy\u00f6ngyi et al., 2004;",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 121,
+                        "end": 142,
+                        "text": "Ntoulas et al., 2006)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 210,
+                        "end": 232,
+                        "text": "(Jindal and Liu, 2008;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 233,
+                        "end": 249,
+                        "text": "Wu et al., 2010;",
+                        "ref_id": "BIBREF41"
+                    },
+                    {
+                        "start": 250,
+                        "end": 272,
+                        "text": "Yoo and Gretzel, 2009)",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 275,
+                        "end": 296,
+                        "text": "Jindal and Liu (2008)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 681,
+                        "end": 697,
+                        "text": "Wu et al. (2010)",
+                        "ref_id": "BIBREF41"
+                    },
+                    {
+                        "start": 992,
+                        "end": 1014,
+                        "text": "Yoo and Gretzel (2009)",
+                        "ref_id": "BIBREF42"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Research has also been conducted on the related task of psycholinguistic deception detection. Newman et al. (2003) , and later Mihalcea and Strapparava (2009) , ask participants to give both their true and untrue views on personal issues (e.g., their stance on the death penalty). Zhou et al. (2004; 2008) consider computer-mediated deception in role-playing games designed to be played over instant messaging and e-mail. However, while these studies compare n-gram-based deception classifiers to a random guess baseline of 50%, we additionally evaluate and compare two other computational approaches (described in Section 4), as well as the performance of human judges (described in Section 3.3).",
+                "cite_spans": [
+                    {
+                        "start": 94,
+                        "end": 114,
+                        "text": "Newman et al. (2003)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 127,
+                        "end": 158,
+                        "text": "Mihalcea and Strapparava (2009)",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 281,
+                        "end": 299,
+                        "text": "Zhou et al. (2004;",
+                        "ref_id": "BIBREF43"
+                    },
+                    {
+                        "start": 300,
+                        "end": 305,
+                        "text": "2008)",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Lastly, automatic approaches to determining review quality have been studied-directly (Weimer et al., 2007) , and in the contexts of helpfulness (Danescu-Niculescu-Mizil et al., 2009; Kim et al., 2006; O'Mahony and Smyth, 2009) and credibility (Weerkamp and De Rijke, 2008) . Unfortunately, most measures of quality employed in those works are based exclusively on human judgments, which we find in Section 3 to be poorly calibrated to detecting deceptive opinion spam.",
+                "cite_spans": [
+                    {
+                        "start": 86,
+                        "end": 107,
+                        "text": "(Weimer et al., 2007)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 145,
+                        "end": 183,
+                        "text": "(Danescu-Niculescu-Mizil et al., 2009;",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 184,
+                        "end": 201,
+                        "text": "Kim et al., 2006;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 202,
+                        "end": 227,
+                        "text": "O'Mahony and Smyth, 2009)",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 244,
+                        "end": 273,
+                        "text": "(Weerkamp and De Rijke, 2008)",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "While truthful opinions are ubiquitous online, deceptive opinions are difficult to obtain without resorting to heuristic methods (Jindal and Liu, 2008; Wu et al., 2010) . In this section, we report our efforts to gather (and validate with human judgments) the first publicly available opinion spam dataset with gold-standard deceptive opinions.",
+                "cite_spans": [
+                    {
+                        "start": 129,
+                        "end": 151,
+                        "text": "(Jindal and Liu, 2008;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 152,
+                        "end": 168,
+                        "text": "Wu et al., 2010)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset Construction and Human Performance",
+                "sec_num": "3"
+            },
+            {
+                "text": "Following the work of Yoo and Gretzel (2009) , we compare truthful and deceptive positive reviews for hotels found on TripAdvisor. Specifically, we mine all 5-star truthful reviews from the 20 most popular hotels on TripAdvisor8 in the Chicago area.9 Deceptive opinions are gathered for those same 20 hotels using Amazon Mechanical Turk10 (AMT). Below, we provide details of the collection methodologies for deceptive (Section 3.1) and truthful opinions (Section 3.2). Ultimately, we collect 20 truthful and 20 deceptive opinions for each of the 20 chosen hotels (800 opinions total).",
+                "cite_spans": [
+                    {
+                        "start": 22,
+                        "end": 44,
+                        "text": "Yoo and Gretzel (2009)",
+                        "ref_id": "BIBREF42"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset Construction and Human Performance",
+                "sec_num": "3"
+            },
+            {
+                "text": "Crowdsourcing services such as AMT have made large-scale data annotation and collection efforts financially affordable by granting anyone with basic programming skills access to a marketplace of anonymous online workers (known as Turkers) willing to complete small tasks.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Deceptive opinions via Mechanical Turk",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "To solicit gold-standard deceptive opinion spam using AMT, we create a pool of 400 Human-Intelligence Tasks (HITs) and allocate them evenly across our 20 chosen hotels. To ensure that opinions are written by unique authors, we allow only a single submission per Turker. We also restrict our task to Turkers who are located in the United States, and who maintain an approval rating of at least 90%. Turkers are allowed a maximum of 30 minutes to work on the HIT, and are paid one US dollar for an accepted submission.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Deceptive opinions via Mechanical Turk",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Each HIT presents the Turker with the name and website of a hotel. The HIT instructions ask the Turker to assume that they work for the hotel's marketing department, and to pretend that their boss wants them to write a fake review (as if they were a customer) to be posted on a travel review website; additionally, the review needs to sound realistic and portray the hotel in a positive light. A disclaimer indicates that any submission found to be of insufficient quality (e.g., written for the wrong hotel, unintelligible, unreasonably short,11 plagiarized,12 etc.) will be rejected.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Deceptive opinions via Mechanical Turk",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "It took approximately 14 days to collect 400 satisfactory deceptive opinions. Descriptive statistics appear in Table 1 . Submissions vary quite dramatically both in length, and time spent on the task. Particularly, nearly 12% of the submissions were completed in under one minute. Surprisingly, an independent two-tailed t-test between the mean length of these submissions ( lt<1 ) and the other submissions ( lt\u22651 ) reveals no significant difference (p = 0.83). We suspect that these \"quick\" users may have started working prior to having formally accepted the HIT, presumably to circumvent the imposed time limit. Indeed, the quickest submission took just 5 seconds and contained 114 words.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 117,
+                        "end": 118,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Deceptive opinions via Mechanical Turk",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "For truthful opinions, we mine all 6,977 reviews from the 20 most popular Chicago hotels on TripAdvisor. From these we eliminate:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Truthful opinions from TripAdvisor",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 3,130 non-5-star reviews;",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Truthful opinions from TripAdvisor",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 41 non-English reviews;13 \u2022 75 reviews with fewer than 150 characters since, by construction, deceptive opinions are at least 150 characters long (see footnote 11 in Section 3.1); \u2022 1,607 reviews written by first-time authorsnew users who have not previously posted an opinion on TripAdvisor-since these opinions are more likely to contain opinion spam, which would reduce the integrity of our truthful review data (Wu et al., 2010) .",
+                "cite_spans": [
+                    {
+                        "start": 417,
+                        "end": 434,
+                        "text": "(Wu et al., 2010)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Truthful opinions from TripAdvisor",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Finally, we balance the number of truthful and deceptive opinions by selecting 400 of the remaining 2,124 truthful reviews, such that the document lengths of the selected truthful reviews are similarly distributed to those of the deceptive reviews. Work by Serrano et al. (2009) suggests that a log-normal distribution is appropriate for modeling document lengths. Thus, for each of the 20 chosen hotels, we select 20 truthful reviews from a log-normal (lefttruncated at 150 characters) distribution fit to the lengths of the deceptive reviews. 14 Combined with the 400 deceptive reviews gathered in Section 3.1 this yields our final dataset of 800 reviews.",
+                "cite_spans": [
+                    {
+                        "start": 257,
+                        "end": 278,
+                        "text": "Serrano et al. (2009)",
+                        "ref_id": "BIBREF33"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Truthful opinions from TripAdvisor",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Assessing human deception detection performance is important for several reasons. First, there are few other baselines for our classification task; indeed, related studies (Jindal and Liu, 2008; Mihalcea and Strapparava, 2009) have only considered a random guess baseline. Second, assessing human performance is necessary to validate the deceptive opinions gathered in Section 3.1. If human performance is low, then our deceptive opinions are convincing, and therefore, deserving of further attention.",
+                "cite_spans": [
+                    {
+                        "start": 172,
+                        "end": 194,
+                        "text": "(Jindal and Liu, 2008;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 195,
+                        "end": 226,
+                        "text": "Mihalcea and Strapparava, 2009)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human performance",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Our initial approach to assessing human performance on this task was with Mechanical Turk. Unfortunately, we found that some Turkers selected among the choices seemingly at random, presumably to maximize their hourly earnings by obviating the need to read the review. While a similar effect has been observed previously (Akkaya et al., 2010) , there remains no universal solution.",
+                "cite_spans": [
+                    {
+                        "start": 320,
+                        "end": 341,
+                        "text": "(Akkaya et al., 2010)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human performance",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Instead, we solicit the help of three volunteer undergraduate university students to make judgments on a subset of our data. This balanced subset, corresponding to the first fold of our cross-validation experiments described in Section 5, contains all 40 reviews from each of four randomly chosen hotels.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human performance",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Unlike the Turkers, our student volunteers are not offered a monetary reward. Consequently, we consider their judgements to be more honest than those obtained via AMT. Additionally, to test the extent to which the individual human judges are biased, we evaluate the performance of two virtual meta-judges. Specifically, the MAJORITY meta-judge predicts \"deceptive\" when at least two out of three human judges believe the review to be deceptive, and the SKEP-TIC meta-judge predicts \"deceptive\" when any human judge believes the review to be deceptive.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human performance",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Human and meta-judge performance is given in Table 2 . It is clear from the results that human judges are not particularly effective at this task. Indeed, a two-tailed binomial test fails to reject the null hypothesis that JUDGE 2 and JUDGE 3 perform at-chance (p = 0.003, 0.10, 0.48 for the three judges, respectively). Furthermore, all three judges suffer from truth-bias (Vrij, 2008) , a common finding in deception detection research in which human judges are more likely to classify an opinion as truthful than deceptive. In fact, JUDGE 2 classified fewer than 12% of the opinions as deceptive! Interestingly, this bias is effectively smoothed by the SKEPTIC meta-judge, which produces nearly perfectly class-balanced predictions. A subsequent reevaluation of human performance on this task suggests that the truth-bias can be reduced if judges are given the class-proportions in advance, although such prior knowledge is unrealistic; and ultimately, performance remains similar to that of Table 2 .",
+                "cite_spans": [
+                    {
+                        "start": 374,
+                        "end": 386,
+                        "text": "(Vrij, 2008)",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 51,
+                        "end": 52,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    },
+                    {
+                        "start": 1001,
+                        "end": 1002,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Human performance",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Inter-annotator agreement among the three judges, computed using Fleiss' kappa, is 0.11. While there is no precise rule for interpreting kappa scores, Landis and Koch (1977) suggest that scores in the range (0.00, 0.20] correspond to \"slight agreement\" between annotators. The largest pairwise Cohen's kappa is 0.12, between JUDGE 2 and JUDGE 3-a value far below generally accepted pairwise agreement levels. We suspect that agreement among our human judges is so low precisely because humans are poor judges of deception (Vrij, 2008) , and therefore they perform nearly at-chance respective to one another.",
+                "cite_spans": [
+                    {
+                        "start": 151,
+                        "end": 173,
+                        "text": "Landis and Koch (1977)",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 522,
+                        "end": 534,
+                        "text": "(Vrij, 2008)",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human performance",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "We consider three automated approaches to detecting deceptive opinion spam, each of which utilizes classifiers (described in Section 4.4) trained on the dataset of Section 3. The features employed by each strategy are outlined here.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Automated Approaches to Deceptive Opinion Spam Detection",
+                "sec_num": "4"
+            },
+            {
+                "text": "Work in computational linguistics has shown that the frequency distribution of part-of-speech (POS) tags in a text is often dependent on the genre of the text (Biber et al., 1999; Rayson et al., 2001) . In our genre identification approach to deceptive opinion spam detection, we test if such a relationship exists for truthful and deceptive reviews by constructing, for each review, features based on the frequencies of each POS tag. 15 These features are also intended to provide a good baseline with which to compare our other automated approaches.",
+                "cite_spans": [
+                    {
+                        "start": 159,
+                        "end": 179,
+                        "text": "(Biber et al., 1999;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 180,
+                        "end": 200,
+                        "text": "Rayson et al., 2001)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Genre identification",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "The Linguistic Inquiry and Word Count (LIWC) software (Pennebaker et al., 2007 ) is a popular automated text analysis tool used widely in the social sciences. It has been used to detect personality traits (Mairesse et al., 2007) , to study tutoring dynamics (Cade et al., 2010) , and, most relevantly, to analyze deception (Hancock et al., 2008; Mihalcea and Strapparava, 2009; Vrij et al., 2007) . While LIWC does not include a text classifier, we can create one with features derived from the LIWC output. In particular, LIWC counts and groups the number of instances of nearly 4,500 keywords into 80 psychologically meaningful dimensions. We construct one feature for each of the 80 LIWC dimensions, which can be summarized broadly under the following four categories:",
+                "cite_spans": [
+                    {
+                        "start": 54,
+                        "end": 78,
+                        "text": "(Pennebaker et al., 2007",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 205,
+                        "end": 228,
+                        "text": "(Mairesse et al., 2007)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 258,
+                        "end": 277,
+                        "text": "(Cade et al., 2010)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 323,
+                        "end": 345,
+                        "text": "(Hancock et al., 2008;",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 346,
+                        "end": 377,
+                        "text": "Mihalcea and Strapparava, 2009;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 378,
+                        "end": 396,
+                        "text": "Vrij et al., 2007)",
+                        "ref_id": "BIBREF36"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Psycholinguistic deception detection",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "1. Linguistic processes: Functional aspects of text (e.g., the average number of words per sentence, the rate of misspelling, swearing, etc.) 2. Psychological processes: Includes all social, emotional, cognitive, perceptual and biological processes, as well as anything related to time or space. 3. Personal concerns: Any references to work, leisure, money, religion, etc. 4. Spoken categories: Primarily filler and agreement words.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Psycholinguistic deception detection",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "While other features have been considered in past deception detection work, notably those of Zhou et al. (2004) , early experiments found LIWC features to perform best. Indeed, the LIWC2007 software used in our experiments subsumes most of the features introduced in other work. Thus, we focus our psycholinguistic approach to deception detection on LIWC-based features.",
+                "cite_spans": [
+                    {
+                        "start": 93,
+                        "end": 111,
+                        "text": "Zhou et al. (2004)",
+                        "ref_id": "BIBREF43"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Psycholinguistic deception detection",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "In contrast to the other strategies just discussed, our text categorization approach to deception detection allows us to model both content and context with n-gram features. Specifically, we consider the following three n-gram feature sets, with the corresponding features lowercased and unstemmed: UNIGRAMS, BIGRAMS + , TRIGRAMS + , where the superscript + indicates that the feature set subsumes the preceding feature set.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Text categorization",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Features from the three approaches just introduced are used to train Na\u00efve Bayes and Support Vector Machine classifiers, both of which have performed well in related work (Jindal and Liu, 2008; Mihalcea and Strapparava, 2009; Zhou et al., 2008) .",
+                "cite_spans": [
+                    {
+                        "start": 171,
+                        "end": 193,
+                        "text": "(Jindal and Liu, 2008;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 194,
+                        "end": 225,
+                        "text": "Mihalcea and Strapparava, 2009;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 226,
+                        "end": 244,
+                        "text": "Zhou et al., 2008)",
+                        "ref_id": "BIBREF44"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "For a document x, with label y, the Na\u00efve Bayes (NB) classifier gives us the following decision rule:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "\u0177 = arg max c Pr(y = c) \u2022 Pr( x | y = c) (1)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "When the class prior is uniform, for example when the classes are balanced (as in our case), ( 1) can be simplified to the maximum likelihood classifier (Peng and Schuurmans, 2003) :",
+                "cite_spans": [
+                    {
+                        "start": 153,
+                        "end": 180,
+                        "text": "(Peng and Schuurmans, 2003)",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "\u0177 = arg max c Pr( x | y = c) (2)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Under ( 2), both the NB classifier used by Mihalcea and Strapparava ( 2009) and the language model classifier used by Zhou et al. (2008) are equivalent. Thus, following Zhou et al. (2008) , we use the SRI Language Modeling Toolkit (Stolcke, 2002) to estimate individual language models, Pr( x | y = c), for truthful and deceptive opinions. We consider all three n-gram feature sets, namely UNIGRAMS, BIGRAMS + , and TRIGRAMS + , with corresponding language models smoothed using the interpolated Kneser-Ney method (Chen and Goodman, 1996) .",
+                "cite_spans": [
+                    {
+                        "start": 118,
+                        "end": 136,
+                        "text": "Zhou et al. (2008)",
+                        "ref_id": "BIBREF44"
+                    },
+                    {
+                        "start": 169,
+                        "end": 187,
+                        "text": "Zhou et al. (2008)",
+                        "ref_id": "BIBREF44"
+                    },
+                    {
+                        "start": 231,
+                        "end": 246,
+                        "text": "(Stolcke, 2002)",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 514,
+                        "end": 538,
+                        "text": "(Chen and Goodman, 1996)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "We also train Support Vector Machine (SVM) classifiers, which find a high-dimensional separating hyperplane between two groups of data. To simplify feature analysis in Section 5, we restrict our evaluation to linear SVMs, which learn a weight vector w and bias term b, such that a document x can be classified by:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "\u0177 = sign( w \u2022 x + b)",
+                        "eq_num": "(3)"
+                    }
+                ],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "We use SVM light (Joachims, 1999) to train our linear SVM models on all three approaches and feature sets described above, namely POS, LIWC, UNIGRAMS, BIGRAMS + , and TRIGRAMS + . We also evaluate every combination of these features, but for brevity include only LIWC+BIGRAMS + , which performs best. Following standard practice, document vectors are normalized to unit-length. For LIWC+BIGRAMS + , we unit-length normalize LIWC and BIGRAMS + features individually before combining them. Table 3 : Automated classifier performance for three approaches based on nested 5-fold cross-validation experiments.",
+                "cite_spans": [
+                    {
+                        "start": 17,
+                        "end": 33,
+                        "text": "(Joachims, 1999)",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 494,
+                        "end": 495,
+                        "text": "3",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Reported precision, recall and F-score are computed using a micro-average, i.e., from the aggregate true positive, false positive and false negative rates, as suggested by Forman and Scholz (2009) . Human performance is repeated here for JUDGE 1, JUDGE 2 and the SKEPTIC meta-judge, although they cannot be directly compared since the 160-opinion subset on which they are assessed only corresponds to the first cross-validation fold.",
+                "cite_spans": [
+                    {
+                        "start": 172,
+                        "end": 196,
+                        "text": "Forman and Scholz (2009)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Classifiers",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "The deception detection strategies described in Section 4 are evaluated using a 5-fold nested crossvalidation (CV) procedure (Quadrianto et al., 2009) , where model parameters are selected for each test fold based on standard CV experiments on the training folds. Folds are selected so that each contains all reviews from four hotels; thus, learned models are always evaluated on reviews from unseen hotels. Results appear in Table 3 . We observe that automated classifiers outperform human judges for every metric, except truthful recall where JUDGE 2 performs best. 16 However, this is expected given that untrained humans often focus on unreliable cues to deception (Vrij, 2008) . For example, one study examining deception in online dating found that humans perform at-chance detecting deceptive profiles because they rely on text-based cues that are unrelated to deception, such as second-person pronouns (Toma and Hancock, In Press) .",
+                "cite_spans": [
+                    {
+                        "start": 125,
+                        "end": 150,
+                        "text": "(Quadrianto et al., 2009)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 669,
+                        "end": 681,
+                        "text": "(Vrij, 2008)",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 910,
+                        "end": 938,
+                        "text": "(Toma and Hancock, In Press)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 432,
+                        "end": 433,
+                        "text": "3",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": "5"
+            },
+            {
+                "text": "Among the automated classifiers, baseline performance is given by the simple genre identification approach (POS SVM ) proposed in Section 4.1. Surprisingly, we find that even this simple auto- 16 As mentioned in Section 3.3, JUDGE 2 classified fewer than 12% of opinions as deceptive. While achieving 95% truthful recall, this judge's corresponding precision was not significantly better than chance (two-tailed binomial p = 0.4). mated classifier outperforms most human judges (one-tailed sign test p = 0.06, 0.01, 0.001 for the three judges, respectively, on the first fold). This result is best explained by theories of reality monitoring (Johnson and Raye, 1981) , which suggest that truthful and deceptive opinions might be classified into informative and imaginative genres, respectively. Work by Rayson et al. (2001) has found strong distributional differences between informative and imaginative writing, namely that the former typically consists of more nouns, adjectives, prepositions, determiners, and coordinating conjunctions, while the latter consists of more verbs,17 adverbs,18 pronouns, and pre-determiners. Indeed, we find that the weights learned by POS SVM (found in Table 4 ) are largely in agreement with these findings, notably except for adjective and adverb superlatives, the latter of which was found to be an exception by Rayson et al. (2001) . However, that deceptive opinions contain more superlatives is not unexpected, since deceptive writing (but not necessarily imaginative writing in general) often contains exaggerated language (Buller and Burgoon, 1996; Hancock et al., 2008) .",
+                "cite_spans": [
+                    {
+                        "start": 642,
+                        "end": 666,
+                        "text": "(Johnson and Raye, 1981)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 803,
+                        "end": 823,
+                        "text": "Rayson et al. (2001)",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 1349,
+                        "end": 1369,
+                        "text": "Rayson et al. (2001)",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 1563,
+                        "end": 1589,
+                        "text": "(Buller and Burgoon, 1996;",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 1590,
+                        "end": 1611,
+                        "text": "Hancock et al., 2008)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 1193,
+                        "end": 1194,
+                        "text": "4",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": "5"
+            },
+            {
+                "text": "Both remaining automated approaches to detecting deceptive opinion spam outperform the simple Rayson et al. (2001) , we expect weights on the left to be positive (predictive of truthful opinions), and weights on the right to be negative (predictive of deceptive opinions). Boldface entries are at odds with these expectations. We report average feature weights of unit-normalized weight vectors, rather than raw weights vectors, to account for potential differences in magnitude between the folds.",
+                "cite_spans": [
+                    {
+                        "start": 94,
+                        "end": 114,
+                        "text": "Rayson et al. (2001)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": "5"
+            },
+            {
+                "text": "genre identification baseline just discussed. Specifically, the psycholinguistic approach (LIWC SVM ) proposed in Section 4.2 performs 3.8% more accurately (one-tailed sign test p = 0.02), and the standard text categorization approach proposed in Section 4.3 performs between 14.6% and 16.6% more accurately. However, best performance overall is achieved by combining features from these two approaches. Particularly, the combined model LIWC+BIGRAMS + SVM is 89.8% accurate at detecting deceptive opinion spam. 19 Surprisingly, models trained only on UNIGRAMS-the simplest n-gram feature setoutperform all non-text-categorization approaches, and models trained on BIGRAMS + perform even better (one-tailed sign test p = 0.07). This suggests that a universal set of keyword-based deception cues (e.g., LIWC) is not the best approach to detecting deception, and a context-sensitive approach (e.g., BIGRAMS + ) might be necessary to achieve state-of-the-art deception detection performance.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": "5"
+            },
+            {
+                "text": "To better understand the models learned by these automated approaches, we report in Table 5 the top 15 highest weighted features for each class (truthful and deceptive) as learned by LIWC+BIGRAMS + SVM and LIWC SVM . In agreement with theories of reality monitoring (Johnson and Raye, 1981) , we observe that truthful opinions tend to include more sensorial and concrete language than deceptive opinions; in 19 The result is not significantly better than BIGRAMS + SVM . particular, truthful opinions are more specific about spatial configurations (e.g., small, bathroom, on, location). This finding is also supported by recent work by Vrij et al. (2009) suggesting that liars have considerable difficultly encoding spatial information into their lies. Accordingly, we observe an increased focus in deceptive opinions on aspects external to the hotel being reviewed (e.g., husband, business, vacation).",
+                "cite_spans": [
+                    {
+                        "start": 266,
+                        "end": 290,
+                        "text": "(Johnson and Raye, 1981)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 636,
+                        "end": 654,
+                        "text": "Vrij et al. (2009)",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 90,
+                        "end": 91,
+                        "text": "5",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": "5"
+            },
+            {
+                "text": "We also acknowledge several findings that, on the surface, are in contrast to previous psycholinguistic studies of deception (Hancock et al., 2008; Newman et al., 2003) . For instance, while deception is often associated with negative emotion terms, our deceptive reviews have more positive and fewer negative emotion terms. This pattern makes sense when one considers the goal of our deceivers, namely to create a positive review (Buller and Burgoon, 1996) .",
+                "cite_spans": [
+                    {
+                        "start": 125,
+                        "end": 147,
+                        "text": "(Hancock et al., 2008;",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 148,
+                        "end": 168,
+                        "text": "Newman et al., 2003)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 431,
+                        "end": 457,
+                        "text": "(Buller and Burgoon, 1996)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": "5"
+            },
+            {
+                "text": "Deception has also previously been associated with decreased usage of first person singular, an effect attributed to psychological distancing (Newman et al., 2003) . In contrast, we find increased first person singular to be among the largest indicators of deception, which we speculate is due to our deceivers attempting to enhance the credibility of their reviews by emphasizing their own presence in the review. Additional work is required, but these findings further suggest the importance of moving beyond a universal set of deceptive language features (e.g., LIWC) by considering both the contextual (e.g., BIGRAMS + ) and motivational parameters underlying a deception as well.",
+                "cite_spans": [
+                    {
+                        "start": 142,
+                        "end": 163,
+                        "text": "(Newman et al., 2003)",
+                        "ref_id": "BIBREF24"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": "5"
+            },
+            {
+                "text": "In this work we have developed the first large-scale dataset containing gold-standard deceptive opinion spam. With it, we have shown that the detection of deceptive opinion spam is well beyond the capabilities of human judges, most of whom perform roughly at-chance. Accordingly, we have introduced three automated approaches to deceptive opinion spam detection, based on insights coming from research in computational linguistics and psychology. We find that while standard n-gram-based text categorization is the best individual detection approach, a combination approach using psycholinguisticallymotivated features and n-gram features can perform slightly better.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion and Future Work",
+                "sec_num": "6"
+            },
+            {
+                "text": "Finally, we have made several theoretical contributions. Specifically, our findings suggest the importance of considering both the context (e.g., BIGRAMS + ) and motivations underlying a deception, rather than strictly adhering to a universal set of deception cues (e.g., LIWC). We have also presented results based on the feature weights learned by our classifiers that illustrate the difficulties faced by liars in encoding spatial information. Lastly, we have discovered a plausible relationship between deceptive opinion spam and imaginative writing, based on POS distributional similarities.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion and Future Work",
+                "sec_num": "6"
+            },
+            {
+                "text": "Possible directions for future work include an extended evaluation of the methods proposed in this work to both negative opinions, as well as opinions coming from other domains. Many additional approaches to detecting deceptive opinion spam are also possible, and a focus on approaches with high deceptive precision might be useful for production environments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion and Future Work",
+                "sec_num": "6"
+            },
+            {
+                "text": "http://tripadvisor.com",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "http://yelp.com",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "http://news.cnet.com/8301-1001_ 3-10145399-92.html",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "It is also possible for opinion spam to be negative, potentially in order to sully the reputation of a competitor.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The second example review is deceptive opinion spam.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Available by request at: http://www.cs.cornell. edu/ \u02dcmyleott/op_spam",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Duplicate (or near-duplicate) opinions are opinions that appear more than once in the corpus with the same (or similar) text. While these opinions are likely to be deceptive, they are unlikely to be representative of deceptive opinion spam in general. Moreover, they are potentially detectable via off-the-shelf plagiarism detection software.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "TripAdvisor utilizes a proprietary ranking system to assess hotel popularity. We chose the 20 hotels with the greatest number of reviews, irrespective of the TripAdvisor ranking.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "9 It has been hypothesized that popular offerings are less likely to become targets of deceptive opinion spam, since the relative impact of the spam in such cases is small(Jindal and Liu, 2008;Lim et al., 2010). By considering only the most popular hotels, we hope to minimize the risk of mining opinion spam and labeling it as",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "truthful. 10 http://mturk.com",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "A submission is considered unreasonably short if it contains fewer than 150 characters.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "12 Submissions are individually checked for plagiarism at http://plagiarisma.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "net.13 Language is determined using http://tagthe.net.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "We use the R package GAMLSS(Rigby and Stasinopoulos, 2005) to fit the left-truncated log-normal distribution.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "We use the Stanford Parser(Klein and Manning, 2003) to obtain the relative POS frequencies.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Past participle verbs were an exception.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Superlative adverbs were an exception.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This work was supported in part by National Science Foundation Grants BCS-0624277, BCS-0904822, HSD-0624267, IIS-0968450, and NSCC-0904822, as well as a gift from Google, and the Jack Kent Cooke Foundation. We also thank, alphabetically, Rachel Boochever, Cristian Danescu-Niculescu-Mizil, Alicia Granstein, Ulrike Gretzel, Danielle Kirshenblat, Lillian Lee, Bin Lu, Jack Newton, Melissa Sackler, Mark Thomas, and Angie Yoo, as well as members of the Cornell NLP seminar group and the ACL reviewers for their insightful comments, suggestions and advice on various aspects of this work.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgments",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Amazon mechanical turk for subjectivity word sense disambiguation",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Akkaya",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Conrad",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wiebe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Mihalcea",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the NAACL HLT 2010 Workshop on Creating Speech and Language Data with Amazons Mechanical Turk",
+                "volume": "",
+                "issue": "",
+                "pages": "195--203",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Akkaya, A. Conrad, J. Wiebe, and R. Mihalcea. 2010. Amazon mechanical turk for subjectivity word sense disambiguation. In Proceedings of the NAACL HLT 2010 Workshop on Creating Speech and Language Data with Amazons Mechanical Turk, Los Angeles, pages 195-203.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Longman grammar of spoken and written English",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Biber",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Johansson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Leech",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Conrad",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Finegan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Quirk",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "",
+                "volume": "2",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D. Biber, S. Johansson, G. Leech, S. Conrad, E. Finegan, and R. Quirk. 1999. Longman grammar of spoken and written English, volume 2. MIT Press.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Accuracy of deception judgments",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Bond",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Depaulo",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Personality and Social Psychology Review",
+                "volume": "10",
+                "issue": "3",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C.F. Bond and B.M. DePaulo. 2006. Accuracy of de- ception judgments. Personality and Social Psychology Review, 10(3):214.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Interpersonal deception theory",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Buller",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Burgoon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1996,
+                "venue": "Communication Theory",
+                "volume": "6",
+                "issue": "3",
+                "pages": "203--242",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D.B. Buller and J.K. Burgoon. 1996. Interpersonal deception theory. Communication Theory, 6(3):203- 242.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "An exploration of off topic conversation",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Cade",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Lehman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Olney",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Human Language Technologies: The 2010 Annual Conference of the North American Chapter of the Association for Computational Linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "669--672",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "W.L. Cade, B.A. Lehman, and A. Olney. 2010. An ex- ploration of off topic conversation. In Human Lan- guage Technologies: The 2010 Annual Conference of the North American Chapter of the Association for Computational Linguistics, pages 669-672. Associa- tion for Computational Linguistics.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "An empirical study of smoothing techniques for language modeling",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Goodman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1996,
+                "venue": "Proceedings of the 34th annual meeting on Association for Computational Linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "310--318",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S.F. Chen and J. Goodman. 1996. An empirical study of smoothing techniques for language modeling. In Pro- ceedings of the 34th annual meeting on Association for Computational Linguistics, pages 310-318. Asso- ciation for Computational Linguistics.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "How opinions are received by online communities: a case study on amazon.com helpfulness votes",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Danescu-Niculescu-Mizil",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Kossinets",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kleinberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of the 18th international conference on World wide web",
+                "volume": "",
+                "issue": "",
+                "pages": "141--150",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Danescu-Niculescu-Mizil, G. Kossinets, J. Kleinberg, and L. Lee. 2009. How opinions are received by on- line communities: a case study on amazon.com help- fulness votes. In Proceedings of the 18th international conference on World wide web, pages 141-150. ACM.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Support vector machines for spam categorization. Neural Networks",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Drucker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Vapnik",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "IEEE Transactions on",
+                "volume": "10",
+                "issue": "5",
+                "pages": "1048--1054",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "H. Drucker, D. Wu, and V.N. Vapnik. 2002. Support vector machines for spam categorization. Neural Net- works, IEEE Transactions on, 10(5):1048-1054.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Apples-to-Apples in Cross-Validation Studies: Pitfalls in Classifier Performance Measurement",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Forman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Scholz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "ACM SIGKDD Explorations",
+                "volume": "12",
+                "issue": "1",
+                "pages": "49--57",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "G. Forman and M. Scholz. 2009. Apples-to-Apples in Cross-Validation Studies: Pitfalls in Classifier Perfor- mance Measurement. ACM SIGKDD Explorations, 12(1):49-57.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Combating web spam with trustrank",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Gy\u00f6ngyi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Garcia-Molina",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Pedersen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Proceedings of the Thirtieth international conference on Very large data bases",
+                "volume": "30",
+                "issue": "",
+                "pages": "576--587",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Z. Gy\u00f6ngyi, H. Garcia-Molina, and J. Pedersen. 2004. Combating web spam with trustrank. In Proceedings of the Thirtieth international conference on Very large data bases-Volume 30, pages 576-587. VLDB Endow- ment.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "On lying and being lied to: A linguistic analysis of deception in computer-mediated communication",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Hancock",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Curry",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Goorha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Woodworth",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Discourse Processes",
+                "volume": "45",
+                "issue": "1",
+                "pages": "1--23",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J.T. Hancock, L.E. Curry, S. Goorha, and M. Woodworth. 2008. On lying and being lied to: A linguistic anal- ysis of deception in computer-mediated communica- tion. Discourse Processes, 45(1):1-23.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Online product research",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Jansen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Jansen. 2010. Online product research. Pew Internet & American Life Project Report.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Opinion spam and analysis",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Proceedings of the international conference on Web search and web data mining",
+                "volume": "",
+                "issue": "",
+                "pages": "219--230",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "N. Jindal and B. Liu. 2008. Opinion spam and analysis. In Proceedings of the international conference on Web search and web data mining, pages 219-230. ACM.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Text categorization with support vector machines: Learning with many relevant features",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Joachims",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "Machine Learning: ECML-98",
+                "volume": "",
+                "issue": "",
+                "pages": "137--142",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "T. Joachims. 1998. Text categorization with support vec- tor machines: Learning with many relevant features. Machine Learning: ECML-98, pages 137-142.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Making large-scale support vector machine learning practical",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Joachims",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Advances in kernel methods",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "T. Joachims. 1999. Making large-scale support vec- tor machine learning practical. In Advances in kernel methods, page 184. MIT Press.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Reality monitoring",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Johnson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Raye",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "Psychological Review",
+                "volume": "88",
+                "issue": "1",
+                "pages": "67--85",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M.K. Johnson and C.L. Raye. 1981. Reality monitoring. Psychological Review, 88(1):67-85.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Automatically assessing review helpfulness",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Kim",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Pantel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Chklovski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Pennacchiotti",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Proceedings of the 2006 Conference on Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "423--430",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S.M. Kim, P. Pantel, T. Chklovski, and M. Pennacchiotti. 2006. Automatically assessing review helpfulness. In Proceedings of the 2006 Conference on Empirical Methods in Natural Language Processing, pages 423- 430. Association for Computational Linguistics.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Accurate unlexicalized parsing",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Klein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Manning",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Proceedings of the 41st Annual Meeting on Association for Computational Linguistics",
+                "volume": "1",
+                "issue": "",
+                "pages": "423--430",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D. Klein and C.D. Manning. 2003. Accurate unlexical- ized parsing. In Proceedings of the 41st Annual Meet- ing on Association for Computational Linguistics- Volume 1, pages 423-430. Association for Computa- tional Linguistics.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "The measurement of observer agreement for categorical data",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Landis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Koch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1977,
+                "venue": "Biometrics",
+                "volume": "33",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J.R. Landis and G.G. Koch. 1977. The measurement of observer agreement for categorical data. Biometrics, 33(1):159.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Detecting product review spammers using rating behaviors",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Lim",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Nguyen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Lauw",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 19th ACM international conference on Information and knowledge management",
+                "volume": "",
+                "issue": "",
+                "pages": "939--948",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "E.P. Lim, V.A. Nguyen, N. Jindal, B. Liu, and H.W. Lauw. 2010. Detecting product review spammers us- ing rating behaviors. In Proceedings of the 19th ACM international conference on Information and knowl- edge management, pages 939-948. ACM.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Electronic word-of-mouth in hospitality and tourism management",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Litvin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Goldsmith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Pan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Tourism management",
+                "volume": "29",
+                "issue": "3",
+                "pages": "458--468",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S.W. Litvin, R.E. Goldsmith, and B. Pan. 2008. Elec- tronic word-of-mouth in hospitality and tourism man- agement. Tourism management, 29(3):458-468.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Using linguistic cues for the automatic recognition of personality in conversation and text",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Mairesse",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Walker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Mehl",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Moore",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Journal of Artificial Intelligence Research",
+                "volume": "30",
+                "issue": "1",
+                "pages": "457--500",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "F. Mairesse, M.A. Walker, M.R. Mehl, and R.K. Moore. 2007. Using linguistic cues for the automatic recogni- tion of personality in conversation and text. Journal of Artificial Intelligence Research, 30(1):457-500.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "The lie detector: Explorations in the automatic recognition of deceptive language",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Mihalcea",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Strapparava",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of the ACL-IJCNLP",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Mihalcea and C. Strapparava. 2009. The lie detector: Explorations in the automatic recognition of deceptive language. In Proceedings of the ACL-IJCNLP 2009",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Conference Short Papers",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "309--312",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Conference Short Papers, pages 309-312. Association for Computational Linguistics.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Lying words: Predicting deception from linguistic styles",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Newman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Pennebaker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Berry",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Richards",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Personality and Social Psychology Bulletin",
+                "volume": "29",
+                "issue": "5",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M.L. Newman, J.W. Pennebaker, D.S. Berry, and J.M. Richards. 2003. Lying words: Predicting deception from linguistic styles. Personality and Social Psychol- ogy Bulletin, 29(5):665.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Detecting spam web pages through content analysis",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Ntoulas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Najork",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Manasse",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Fetterly",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Proceedings of the 15th international conference on World Wide Web",
+                "volume": "",
+                "issue": "",
+                "pages": "83--92",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Ntoulas, M. Najork, M. Manasse, and D. Fetterly. 2006. Detecting spam web pages through content analysis. In Proceedings of the 15th international con- ference on World Wide Web, pages 83-92. ACM.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Learning to recommend helpful hotel reviews",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "O'mahony",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Smyth",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of the third ACM conference on Recommender systems",
+                "volume": "",
+                "issue": "",
+                "pages": "305--308",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M.P. O'Mahony and B. Smyth. 2009. Learning to rec- ommend helpful hotel reviews. In Proceedings of the third ACM conference on Recommender systems, pages 305-308. ACM.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Combining naive Bayes and n-gram language models for text classification",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Peng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Schuurmans",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Advances in Information Retrieval",
+                "volume": "",
+                "issue": "",
+                "pages": "547--547",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "F. Peng and D. Schuurmans. 2003. Combining naive Bayes and n-gram language models for text classifica- tion. Advances in Information Retrieval, pages 547- 547.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "The development and psychometric properties of LIWC",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Pennebaker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Chung",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Ireland",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Gonzales",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Booth",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J.W. Pennebaker, C.K. Chung, M. Ireland, A. Gonzales, and R.J. Booth. 2007. The development and psycho- metric properties of LIWC2007. Austin, TX, LIWC. Net.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Estimating labels from label proportions",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Quadrianto",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Smola",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Caetano",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [
+                            "V"
+                        ],
+                        "last": "Le",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "The Journal of Machine Learning Research",
+                "volume": "10",
+                "issue": "",
+                "pages": "2349--2374",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "N. Quadrianto, A.J. Smola, T.S. Caetano, and Q.V. Le. 2009. Estimating labels from label proportions. The Journal of Machine Learning Research, 10:2349- 2374.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Grammatical word class variation within the British National Corpus sampler",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Rayson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Wilson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Leech",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Language and Computers",
+                "volume": "36",
+                "issue": "1",
+                "pages": "295--306",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "P. Rayson, A. Wilson, and G. Leech. 2001. Grammatical word class variation within the British National Cor- pus sampler. Language and Computers, 36(1):295- 306.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Generalized additive models for location, scale and shape",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Rigby",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Stasinopoulos",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Journal of the Royal Statistical Society: Series C (Applied Statistics)",
+                "volume": "54",
+                "issue": "3",
+                "pages": "507--554",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R.A. Rigby and D.M. Stasinopoulos. 2005. Generalized additive models for location, scale and shape. Jour- nal of the Royal Statistical Society: Series C (Applied Statistics), 54(3):507-554.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Machine learning in automated text categorization",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Sebastiani",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "ACM computing surveys (CSUR)",
+                "volume": "34",
+                "issue": "1",
+                "pages": "1--47",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "F. Sebastiani. 2002. Machine learning in automated text categorization. ACM computing surveys (CSUR), 34(1):1-47.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Modeling statistical properties of written text",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "\u00c1"
+                        ],
+                        "last": "Serrano",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Flammini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Menczer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "PloS one",
+                "volume": "4",
+                "issue": "4",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M. \u00c1. Serrano, A. Flammini, and F. Menczer. 2009. Modeling statistical properties of written text. PloS one, 4(4):5372.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "SRILM-an extensible language modeling toolkit",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Stolcke",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "Seventh International Conference on Spoken Language Processing",
+                "volume": "3",
+                "issue": "",
+                "pages": "901--904",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Stolcke. 2002. SRILM-an extensible language mod- eling toolkit. In Seventh International Conference on Spoken Language Processing, volume 3, pages 901- 904. Citeseer.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "What Lies Beneath: The Linguistic Traces of Deception in Online Dating Profiles",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Toma",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Hancock",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "Press",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Toma and J.T. Hancock. In Press. What Lies Beneath: The Linguistic Traces of Deception in Online Dating Profiles. Journal of Communication.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Cues to deception and ability to detect lies as a function of police interview styles",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Vrij",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Mann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Kristen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Fisher",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Law and human behavior",
+                "volume": "31",
+                "issue": "5",
+                "pages": "499--518",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Vrij, S. Mann, S. Kristen, and R.P. Fisher. 2007. Cues to deception and ability to detect lies as a function of police interview styles. Law and human behavior, 31(5):499-518.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Outsmarting the liars: The benefit of asking unanticipated questions",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Vrij",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Leal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Granhag",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Mann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Fisher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Hillman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sperry",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Law and human behavior",
+                "volume": "33",
+                "issue": "2",
+                "pages": "159--166",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Vrij, S. Leal, P.A. Granhag, S. Mann, R.P. Fisher, J. Hillman, and K. Sperry. 2009. Outsmarting the liars: The benefit of asking unanticipated questions. Law and human behavior, 33(2):159-166.",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Detecting lies and deceit: Pitfalls and opportunities",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Vrij",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Vrij. 2008. Detecting lies and deceit: Pitfalls and opportunities. Wiley-Interscience.",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Credibility improves topical blog post retrieval",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Weerkamp",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "De Rijke",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "923--931",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "W. Weerkamp and M. De Rijke. 2008. Credibility im- proves topical blog post retrieval. ACL-08: HLT, pages 923-931.",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "Automatically assessing the post quality in online discussions on software",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Weimer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "M\u00fchlh\u00e4user",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Proceedings of the 45th Annual Meeting of the ACL on Interactive Poster and Demonstration Sessions",
+                "volume": "",
+                "issue": "",
+                "pages": "125--128",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M. Weimer, I. Gurevych, and M. M\u00fchlh\u00e4user. 2007. Au- tomatically assessing the post quality in online discus- sions on software. In Proceedings of the 45th An- nual Meeting of the ACL on Interactive Poster and Demonstration Sessions, pages 125-128. Association for Computational Linguistics.",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Distortion as a validation criterion in the identification of suspicious reviews",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Greene",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Smyth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Cunningham",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "G. Wu, D. Greene, B. Smyth, and P. Cunningham. 2010. Distortion as a validation criterion in the identification of suspicious reviews. Technical report, UCD-CSI- 2010-04, University College Dublin.",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "Comparison of Deceptive and Truthful Travel Reviews. Information and Communication Technologies in Tourism",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Yoo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "U",
+                        "middle": [],
+                        "last": "Gretzel",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "37--47",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "K.H. Yoo and U. Gretzel. 2009. Comparison of De- ceptive and Truthful Travel Reviews. Information and Communication Technologies in Tourism 2009, pages 37-47.",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "A comparison of classification methods for predicting deception in computermediated communication",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Burgoon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Twitchell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Qin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Nunamaker",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Journal of Management Information Systems",
+                "volume": "20",
+                "issue": "4",
+                "pages": "139--166",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L. Zhou, J.K. Burgoon, D.P. Twitchell, T. Qin, and J.F. Nunamaker Jr. 2004. A comparison of classifica- tion methods for predicting deception in computer- mediated communication. Journal of Management In- formation Systems, 20(4):139-166.",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "A Statistical Language Modeling Approach to Online Deception Detection",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Shi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "IEEE Transactions on Knowledge and Data Engineering",
+                "volume": "20",
+                "issue": "8",
+                "pages": "1077--1081",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L. Zhou, Y. Shi, and D. Zhang. 2008. A Statistical Lan- guage Modeling Approach to Online Deception De- tection. IEEE Transactions on Knowledge and Data Engineering, 20(8):1077-1081.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "TABREF0": {
+                "text": "Descriptive statistics for 400 deceptive opinion spam submissions gathered using AMT. s corresponds to the sample standard deviation.",
+                "num": null,
+                "html": null,
+                "content": "<table><tr><td colspan=\"2\">Time spent t (minutes)</td></tr><tr><td/><td>count: 400</td></tr><tr><td>All submissions</td><td>tmin: 0.08, tmax: 29.78</td></tr><tr><td/><td>t: 8.06, s: 6.32</td></tr><tr><td colspan=\"2\">Length \u2113 (words)</td></tr><tr><td>All submissions</td><td>\u2113min: 25, \u2113max: 425 l: 115.75, s: 61.30</td></tr><tr><td/><td>count: 47</td></tr><tr><td>Time spent t &lt; 1</td><td>\u2113min: 39, \u2113max: 407</td></tr><tr><td/><td>l: 113.94, s: 66.24</td></tr><tr><td/><td>count: 353</td></tr><tr><td>Time spent t \u2265 1</td><td>\u2113min: 25, \u2113max: 425</td></tr><tr><td/><td>l: 115.99, s: 60.71</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "text": "Performance of three human judges and two meta-judges on a subset of 160 opinions, corresponding to the first fold of our cross-validation experiments in Section 5. Boldface indicates the largest value for each column.",
+                "num": null,
+                "html": null,
+                "content": "<table><tr><td/><td/><td>Accuracy</td><td>P</td><td>R</td><td>F</td><td>P</td><td>R</td><td>F</td></tr><tr><td/><td>JUDGE 1</td><td>61.9%</td><td colspan=\"5\">57.9 87.5 69.7 74.4 36.3 48.7</td></tr><tr><td>HUMAN</td><td>JUDGE 2</td><td>56.9%</td><td colspan=\"5\">53.9 95.0 68.8 78.9 18.8 30.3</td></tr><tr><td/><td>JUDGE 3</td><td>53.1%</td><td colspan=\"5\">52.3 70.0 59.9 54.7 36.3 43.6</td></tr><tr><td>META</td><td>MAJORITY SKEPTIC</td><td>58.1% 60.6%</td><td colspan=\"5\">54.8 92.5 68.8 76.0 23.8 36.2 60.8 60.0 60.4 60.5 61.3 60.9</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "text": "Average feature weights learned by POS SVM . Based on work by",
+                "num": null,
+                "html": null,
+                "content": "<table><tr><td colspan=\"2\">TRUTHFUL/INFORMATIVE</td><td/><td colspan=\"2\">DECEPTIVE/IMAGINATIVE</td><td/></tr><tr><td>Category</td><td>Variant</td><td>Weight</td><td>Category</td><td>Variant</td><td>Weight</td></tr><tr><td/><td>Singular</td><td>0.008</td><td/><td>Base</td><td>-0.057</td></tr><tr><td>NOUNS</td><td>Plural Proper, singular</td><td>0.002 -0.041</td><td/><td>Past tense Present participle</td><td>0.041 -0.089</td></tr><tr><td/><td>Proper, plural</td><td>0.091</td><td>VERBS</td><td>Singular, present</td><td>-0.031</td></tr><tr><td>ADJECTIVES</td><td>General Comparative</td><td>0.002 0.058</td><td/><td>Third person singular, present</td><td>0.026</td></tr><tr><td/><td>Superlative</td><td>-0.164</td><td/><td>Modal</td><td>-0.063</td></tr><tr><td>PREPOSITIONS DETERMINERS</td><td>General General</td><td>0.064 0.009</td><td>ADVERBS</td><td>General Comparative</td><td>0.001 -0.035</td></tr><tr><td>COORD. CONJ. VERBS</td><td>General Past participle</td><td>0.094 0.053</td><td>PRONOUNS</td><td>Personal Possessive</td><td>-0.098 -0.303</td></tr><tr><td>ADVERBS</td><td>Superlative</td><td>-0.094</td><td>PRE-DETERMINERS</td><td>General</td><td>0.017</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF4": {
+                "text": "Top 15 highest weighted truthful and deceptive features learned by LIWC+BIGRAMS + SVM and LIWC SVM . Ambiguous features are subscripted to indicate the source of the feature. LIWC features correspond to groups of keywords as explained in Section 4.2; more details about LIWC and the LIWC categories are available at http://liwc.net.",
+                "num": null,
+                "html": null,
+                "content": "<table><tr><td colspan=\"2\">LIWC+BIGRAMS</td><td>+ SVM</td><td colspan=\"2\">LIWCSVM</td></tr><tr><td>TRUTHFUL</td><td colspan=\"2\">DECEPTIVE</td><td>TRUTHFUL</td><td>DECEPTIVE</td></tr><tr><td>-</td><td colspan=\"2\">chicago</td><td>hear</td><td>i</td></tr><tr><td>...</td><td>my</td><td/><td>number</td><td>family</td></tr><tr><td>on</td><td>hotel</td><td/><td>allpunct</td><td>perspron</td></tr><tr><td>location</td><td>, and</td><td/><td>negemo</td><td>see</td></tr><tr><td>)</td><td colspan=\"2\">luxury</td><td>dash</td><td>pronoun</td></tr><tr><td colspan=\"3\">allpunctLIWC experience</td><td>exclusive</td><td>leisure</td></tr><tr><td>floor</td><td colspan=\"2\">hilton</td><td>we</td><td>exclampunct</td></tr><tr><td>(</td><td colspan=\"2\">business</td><td>sexual</td><td>sixletters</td></tr><tr><td>the hotel</td><td colspan=\"2\">vacation</td><td>period</td><td>posemo</td></tr><tr><td>bathroom</td><td>i</td><td/><td>otherpunct</td><td>comma</td></tr><tr><td>small</td><td>spa</td><td/><td>space</td><td>cause</td></tr><tr><td>helpful</td><td colspan=\"2\">looking</td><td>human</td><td>auxverb</td></tr><tr><td>$</td><td>while</td><td/><td>past</td><td>future</td></tr><tr><td>hotel .</td><td colspan=\"2\">husband</td><td>inhibition</td><td>perceptual</td></tr><tr><td>other</td><td colspan=\"3\">my husband assent</td><td>feel</td></tr></table>",
+                "type_str": "table"
+            }
+        }
+    }
+}

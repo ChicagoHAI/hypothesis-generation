@@ -1,0 +1,2591 @@
+{
+    "paper_id": "lischinsky-2008-examples-as-persuasive-argument-in-popular-management-literature",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-06T17:58:31.601362Z"
+    },
+    "title": "Lischinsky: Examples as persuasive argument in popular management literature 243",
+    "authors": [
+        {
+            "first": "A",
+            "middle": [
+                "L"
+            ],
+            "last": "O N L I S C H I N S K Y P O M P E U Fa B R A U N I V E R S I T Y , S Pa I N",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "In this article we take the use of examples as a means to explore the processes of persuasion and consensus-construction involved in the legitimation of popular management knowledge. Examples, as concrete instances or events used to substantiate a wider argument, have been variedly regarded in different research traditions. Classical logic and rhetoric have considered them an inferior form of argument, useful for pedagogic or public debate but inadequate for higher forms of thought. This spirit still permeates much psychological research on communication, where the great persuasive import of examples has been contrasted with more scientific and formal resources for argumentation. Considered in this light, the contingent and episodic nature of examples seems to make them cognitively inferior to explicit statements of general rules. However, various strands of research on the nature of scientific knowledge have shown that implicit forms of knowledge are an integral part of scientific expertise. Examples may thus be more central to disciplinary thought than the conventional normative view seems to allow. In this spirit, we explore the use of examples in a hotly contested field, that of popular discourse on business and management. The profusion of examples in this kind of writing has been often noted, and almost as often criticized. We seek to explore more fully how these examples are deployed, examining the discursive devices that mark examples within the development of the text, their function as rhetorical moves, and their role in presenting arguments that are never otherwise made explicit.",
+    "pdf_parse": {
+        "paper_id": "lischinsky-2008-examples-as-persuasive-argument-in-popular-management-literature",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "In this article we take the use of examples as a means to explore the processes of persuasion and consensus-construction involved in the legitimation of popular management knowledge. Examples, as concrete instances or events used to substantiate a wider argument, have been variedly regarded in different research traditions. Classical logic and rhetoric have considered them an inferior form of argument, useful for pedagogic or public debate but inadequate for higher forms of thought. This spirit still permeates much psychological research on communication, where the great persuasive import of examples has been contrasted with more scientific and formal resources for argumentation. Considered in this light, the contingent and episodic nature of examples seems to make them cognitively inferior to explicit statements of general rules. However, various strands of research on the nature of scientific knowledge have shown that implicit forms of knowledge are an integral part of scientific expertise. Examples may thus be more central to disciplinary thought than the conventional normative view seems to allow. In this spirit, we explore the use of examples in a hotly contested field, that of popular discourse on business and management. The profusion of examples in this kind of writing has been often noted, and almost as often criticized. We seek to explore more fully how these examples are deployed, examining the discursive devices that mark examples within the development of the text, their function as rhetorical moves, and their role in presenting arguments that are never otherwise made explicit.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Of the wide range of devices known to classical and contemporary rhetoric, few may claim such widespread use as examples. Their sheer prevalence in both everyday and formal speech seems to obscure the strategic role they play in most forms of expository or persuasive discourse. Examples seem not a rhetorical choice, but rather a natural fact of communication. Nevertheless, they possess great discursive and cognitive depth. Being episodic and often narrative, examples are much richer in features than the general rules they are supposed to illustrate. As they always frame general claims in a specific light, with the concrete features of a particular instance, the message they convey is never entirely coincident with the premise that they support.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The cognitive effort involved in bridging this gap has been the occasion for many different analyses. While traditional theories of demonstration considered it a shortcoming in their logic validity (Aristotle, 1984) , inferior to that of scientific proof, current research on knowledge accumulation and transmission has argued that it constitutes an essential element in higher cognition (Collins, 2001; Kuhn, 1970) . From this point of view, abstract categories can never be entirely detached from the concrete experiences, and all forms of thought retain traces of the specific exemplars upon which they are modelled. Strategies and patterns of exemplification thus go beyond a matter of rhetorical design to crucially impact on the interpretive process that gives rise to the meaning of a text.",
+                "cite_spans": [
+                    {
+                        "start": 198,
+                        "end": 215,
+                        "text": "(Aristotle, 1984)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 388,
+                        "end": 403,
+                        "text": "(Collins, 2001;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 404,
+                        "end": 415,
+                        "text": "Kuhn, 1970)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "In this study, we investigate the use of examples in a corpus of popular texts on management, which despite their relative recency have become well established as a genre. Since the publication of Peters and Waterman (1982) , the first best-seller to go beyond the specialized market to be read by a general audience, management books have gradually become entrenched as a staple of contemporary popular culture. The phenomenon has not failed to attract attention from scholars in business and organization, and has been the occasion for heated arguments about the nature and validity of their content. After briefly reviewing previous studies on the subject, we examine how examples are presented and functionally characterized. We then turn to an exploration of how examples are deployed to persuasive effect in popular management texts, before discussing our findings in the larger context of knowledge construction in disciplinary communities.",
+                "cite_spans": [
+                    {
+                        "start": 197,
+                        "end": 223,
+                        "text": "Peters and Waterman (1982)",
+                        "ref_id": "BIBREF28"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Studies on the persuasive function of examples date back to the earliest traditions of rhetorical and logical analysis. Aristotle (1984) viewed arguments by example as the rhetorical analogue of inductive reasoning. However, as his theory of rhetoric was conceived as a further application of the general theory of demonstration, examples were viewed as falling short of the standards set for serious thought, and reasoning based on such basis was deemed fit for the kind of 'persons who cannot take in at a glance a complicated argument, or follow a long chain of reasoning' (Aristotle, 1984 (Aristotle, : 1357a)) . Cicero (1996 Cicero ( [1942]] ) held a similar opinion, valuing examples for their ornamental value and the warrant they provide for the ethos of the speaker, rather than for their contribution to cognition.",
+                "cite_spans": [
+                    {
+                        "start": 120,
+                        "end": 136,
+                        "text": "Aristotle (1984)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 576,
+                        "end": 592,
+                        "text": "(Aristotle, 1984",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 593,
+                        "end": 614,
+                        "text": "(Aristotle, : 1357a))",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 617,
+                        "end": 629,
+                        "text": "Cicero (1996",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 630,
+                        "end": 646,
+                        "text": "Cicero ( [1942]]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN RHETORIC",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "In medieval religious literature, moral exempla -which offered models for imitation or rejection in narrative form -played a major role as persuasive devices in preaching (Br\u00e9mond et al., 1982) , although theorizing on the matter was scant. With the rise of rationalism by the 17th century and the progressive formalization of scientific enquiry, examples seemed to be increasingly relegated to non-specialized or marginal forms of discourse (Lyons, 1989) .",
+                "cite_spans": [
+                    {
+                        "start": 171,
+                        "end": 193,
+                        "text": "(Br\u00e9mond et al., 1982)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 442,
+                        "end": 455,
+                        "text": "(Lyons, 1989)",
+                        "ref_id": "BIBREF21"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN RHETORIC",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "The view of examples advanced by Perelman and Olbrechts-Tyteca (1958 ) expanded the traditional model in that it detached persuasive value from inferential validity. In their idiosyncratic taxonomy, arguments employing examples occupy an important place. They do not view such arguments as echoing logical forms, but rather as devices seeking to establish the structure of reality, as they are concerned with obtaining assent to a general conclusion about the world based on already-known or accepted premises. They distinguish argument by example proper, being the presentation of several regular cases to persuade of a general thesis, from illustration, where examples are used to add weight or import to generalizations already shared between rhetor and audience. Finally, the sort of moral injunction used in medieval exempla is assigned to a third kind, called argument by model, where a case is described in order to guide the future actions of the audience. The description of an excellent or exemplary instance does not ground its normative value in frequency, but rather on exceptional rigour or purity, hoping to lead the audience to imitation.",
+                "cite_spans": [
+                    {
+                        "start": 33,
+                        "end": 68,
+                        "text": "Perelman and Olbrechts-Tyteca (1958",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN RHETORIC",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "This duality in examples, which can be used to depict both an average tendency and an ideal prototype, surfaced also in cognitive studies, where the term exemplar has been customarily used to refer to specific instances entering into the cognitive process of forming a concept. The cognitive study of exemplars gained prominence with the research of Rosch (1973 Rosch ( , 1975)) . In the face of the serious problems attached to the traditional theory of concept formation -such as the lack of clearly expressible definitions for everyday concepts, and the evidence for fuzzy boundaries in category membership -research on cognition focused on how categorization rules were derived from concrete instances. Two main types of theories were produced to explain this, both focusing on relations of similarity, but differing in the process that led to their inference.",
+                "cite_spans": [
+                    {
+                        "start": 350,
+                        "end": 361,
+                        "text": "Rosch (1973",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 362,
+                        "end": 378,
+                        "text": "Rosch ( , 1975))",
+                        "ref_id": "BIBREF31"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN COGNITIVE THEORY",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Prototype theories, such as that proposed by Rosch, viewed concepts as a central tendency abstracted from all known exemplars; entities are classified into a category when they are within a similarity threshold to its prototypical features. As prototypes are dynamically elaborated from exposure to concrete exemplars, the specific items met in experience or argumentation become of paramount importance. Exemplar-based theories of concepts are similar, holding that conceptualization processes involve the comparison of perceived items with the whole stock of exemplars in memory. Particularly salient features are assigned a greater value in computing similitude.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN COGNITIVE THEORY",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Both exemplar-and prototype-based theories have been largely superseded in contemporary cognitive science, where most current research presents categorization processes as arising from fully theoretical interpretations of the world based on background knowledge and complex modelization (Gopnik and Wellman, 1994; Murphy and Medin, 1985) . Nevertheless, they helped raise interest in the cognitive function of examples in communication. As concrete exemplars were shown to enter into the formation of general knowledge, research focused on the cognitive import of examples provided in persuasive or informative discourse. Most researchers in this field follow psycholinguistic usage and speak of exemplars rather than examples. For our purposes, both terms are equivalent; we employ the latter for consistency whenever discourse is the subject, reserving the former for strictly psychological issues.",
+                "cite_spans": [
+                    {
+                        "start": 287,
+                        "end": 313,
+                        "text": "(Gopnik and Wellman, 1994;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 314,
+                        "end": 337,
+                        "text": "Murphy and Medin, 1985)",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN COMMUNICATION THEORY",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "Most of this research centres on how exemplification impacts on readers' estimations of the likelihood, desirability or importance of events, especially in journalistic texts where -according to Zillmann and Brosius (2000) -almost no print article fails to include examples. Experimental measures indicate that readers' estimate of the frequency of certain events tends to be linked to how often they are depicted in a text, while explicit statistical descriptions tend to be disregarded (Zillmann et al., 1992) . Brosius and Bathelt (1994) found, in addition, that the stance expressed in the examples also influences the readers' evaluation of the subject. Interestingly, subjects do not find a text biased or inconsistent even when the selection of examples contradicts the information expressed in statistical form. Strange and Leung (1999) hold that the effect of examples on judgement does not proceed from explicit impression generalization -that is, that they may effectively affect judgement or appreciation of causes without leading the subjects to consciously modify previous descriptive beliefs about the issue. This seems to explain why examples are compatible with contradictory base-rate information, and suggests that the schemata and models they elicit are not necessarily tested for coherence with other semantic information.",
+                "cite_spans": [
+                    {
+                        "start": 195,
+                        "end": 222,
+                        "text": "Zillmann and Brosius (2000)",
+                        "ref_id": "BIBREF43"
+                    },
+                    {
+                        "start": 488,
+                        "end": 511,
+                        "text": "(Zillmann et al., 1992)",
+                        "ref_id": "BIBREF44"
+                    },
+                    {
+                        "start": 514,
+                        "end": 540,
+                        "text": "Brosius and Bathelt (1994)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 820,
+                        "end": 844,
+                        "text": "Strange and Leung (1999)",
+                        "ref_id": "BIBREF35"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN COMMUNICATION THEORY",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "The range of topics, genres and subjects covered by these studies is limited. In this article we do not deal with the thorny issue of whether exemplary or statistical evidence is 'more' persuasive, not least because making such a comparison in the precise, quantitative manner many of the above-quoted studies pursue requires so much abstraction from discursive and contextual factors as to risk irrelevance. The very sophisticated statistical apparatus employed in some of them obscures the fact that any attempt to extrapolate their results to cases dealing with anything but the reading college students make of issues they neither know nor care much about, in highly stereotyped genres and formats, is likely to be fruitless, but it seems reasonable to accept their claim that examples may be strongly persuasive even when not laid out as a specific form of argument. This has often been explained in terms of the theory of heuristics (Tversky and Kahneman, 1974) , which argues that evaluations and predictions are seldom made using all potentially available information. Rather, strategies are employed that operate on a more limited range of data, trading accuracy for processing speed. Studies have suggested the existence of a representativeness heuristic -the process of judging an observed sample of data to be reliably indicative of the characteristics of an entire population despite considerations of size and sampling methods -and an availability heuristic -the disproportionate influence of easily retrievable information in the construction of the mental model. Thus, Brosius and Bathelt (1994) hold that statistical data are discarded because of the effort of processing them accurately. Gibson and Zillmann (1994) add that concrete examples are more salient and tend to attract more attention, thus earning a more central place in the information-building routines. Also promising is the notion that the episodic structure of narratives provides a cognitive interface that is intrinsically more accessible than that of abstract information (Bruner, 2002) . Brosius (1999: 215) asserts that, in the extensive literature available, no single variable can explain the persuasive power of examples besides structure itself: 'it is obviously an inherent quality of exemplars that makes recipients' judgements so strongly influenced by their distribution'.",
+                "cite_spans": [
+                    {
+                        "start": 939,
+                        "end": 967,
+                        "text": "(Tversky and Kahneman, 1974)",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 1585,
+                        "end": 1611,
+                        "text": "Brosius and Bathelt (1994)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 1706,
+                        "end": 1732,
+                        "text": "Gibson and Zillmann (1994)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 2059,
+                        "end": 2073,
+                        "text": "(Bruner, 2002)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 2076,
+                        "end": 2095,
+                        "text": "Brosius (1999: 215)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN COMMUNICATION THEORY",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "Authors adopting discursive approaches to cognition have held that the abovedescribed view of categorization is distorting, in that it detaches thought from the contexts of social action. They argue instead that cognition does not simply involve the abstract manipulation of data, but takes place within a lifeworld informed by patterns of social expectations, actions and goals. Rather than unilaterally determining discursive processes, categorization is driven by the social and interactional goals of discursive action. Cognitive processes should be understood then in terms of the kind of discursive work they are intended for within specific contexts of interaction (Edwards, 1991) .",
+                "cite_spans": [
+                    {
+                        "start": 672,
+                        "end": 687,
+                        "text": "(Edwards, 1991)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN DISCOURSE",
+                "sec_num": "2.4"
+            },
+            {
+                "text": "This approach takes up some classic issues in cognition, such as ad-hoc categories -those created on-line for a specific need, like 'things to take on a picnic' (Barsalou, 1983) -that have been often presented as a serious challenge to similarity-based models, but goes beyond them to argue that all cognitive and linguistic resources are shaped for the performance of situated social action. This entails that there is no clear difference between forms of categorization deliberately and overtly presented by a speaker who argues that x is an instance of y -traditionally called propositional classifications -and the semantic grouping of classes of objects built into the grammar and lexicon of a discourse; in both cases, it is the social goals pursued by the speaker that lead them to select a form of expression, and its uptake by the interlocutors depends in turn on their own goals and purposes.",
+                "cite_spans": [
+                    {
+                        "start": 161,
+                        "end": 177,
+                        "text": "(Barsalou, 1983)",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN DISCOURSE",
+                "sec_num": "2.4"
+            },
+            {
+                "text": "This model helps explain the inherent persuasive efficacy of exemplification. Examples are episodic representations of singular events, but their discursive deployment selectively cues features and traits for the formation of a meaningful mental model of what the text is about. This cognitive guidance implicitly drives the generalization process that leads to category construction. Despite their concrete nature, examples are thus always tied to the formulation of the general rules constituting semantic knowledge about the world. This view has much in common with that held by Lyons (1989: x) , who argues that [a]n example is a dependent statement qualifying a more general and independent statement by naming a member of the class established by the general statement. An example cannot exist without (a) a general statement and (b) an indication of this subordinate status. This description, however, seems overly restrictive in its definition of examples. It seems in principle possible that the semantic rules being established through examples never be made fully explicit in the text, but rather cued only by the selective presentation of exemplary traits. In fact, descriptive theories of discourse structure -such as the Rhetorical Structure Theory of Mann and Thompson (1988) -have argued that most functional relations in text lack surface marks.",
+                "cite_spans": [
+                    {
+                        "start": 582,
+                        "end": 597,
+                        "text": "Lyons (1989: x)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1266,
+                        "end": 1290,
+                        "text": "Mann and Thompson (1988)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN DISCOURSE",
+                "sec_num": "2.4"
+            },
+            {
+                "text": "Our analysis begins from the premise that examples and categories are always constructed in a specific interaction, and that it is discursive goals and patterns rather than specific linguistic cues that reveal exemplification. Certain constraints are evident: to qualify as an example, a stretch of text must be more concrete and less general than the rule it is related to, but this still gives ample room for strategic deployment. Beyond this, there is little agreement on what are the defining traits of exemplification. Any episodic content may have an exemplary function given the appropriate contextual and co-textual cues. And examples themselves may serve a variety of rhetorical purposes, as the different functions ascribed to exemplification in the literature show. Longacre (1983) , for example, considers exemplification to be a case of illustration and thus an elaborative device, defined in essence by the addition of concrete information to an abstract formulation. Halliday and Hasan (1976) focus instead on its illocutionary potential for granting evidence to a claim. Knott and Dale (1993) distinguish exemplification from the addition of information, arguing that one cannot substitute for the other without altering a text's meaning, but they do not address its pragmatic intent at all. Hobbs (1985) , who does take this dimension into account, views exemplification as intended to ease the reader's difficulties of comprehension by providing peripheral information about the discourse referents. Mann and Thompson (1988) regard elaboration as the main purpose of examples, although the constraint they place on this relationship -that the satellite should only supplement the information in the nucleus, and never contextualize it -makes some examples appear to fulfil a background role as well. Before exploring the different forms of example use in our corpus, we briefly present its specific nature, as well as the theoretical importance of examples to the study of management discourse.",
+                "cite_spans": [
+                    {
+                        "start": 777,
+                        "end": 792,
+                        "text": "Longacre (1983)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 982,
+                        "end": 1007,
+                        "text": "Halliday and Hasan (1976)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1087,
+                        "end": 1108,
+                        "text": "Knott and Dale (1993)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1308,
+                        "end": 1320,
+                        "text": "Hobbs (1985)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1518,
+                        "end": 1542,
+                        "text": "Mann and Thompson (1988)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN DISCOURSE",
+                "sec_num": "2.4"
+            },
+            {
+                "text": "One of the remarkable traits that sociological studies of contemporary management literature have identified is its growing detachment from traditional scientific formulations. Just as the proposed ideals of organizational life have shifted from minutely programmed and hierarchically regulated activities to a state of flux, where tasks, needs and skills must be constantly and creatively adjusted to match an ever-shifting market (Hammer and Champy, 1993; Kanter, 2001; Senge, 1990) , the disciplinary ideal of management has partially abandoned the scientific models of rule-based, normalized evaluation and prediction for a pattern centred on creativity, innovation and emotional compromise (Alonso, 2002) .",
+                "cite_spans": [
+                    {
+                        "start": 432,
+                        "end": 457,
+                        "text": "(Hammer and Champy, 1993;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 458,
+                        "end": 471,
+                        "text": "Kanter, 2001;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 472,
+                        "end": 484,
+                        "text": "Senge, 1990)",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 695,
+                        "end": 709,
+                        "text": "(Alonso, 2002)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN MANAGEMENT",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "In an empirical study on the reading preferences of managers, Pagel and Westerfelhaus (2005) found that -together with brevity, simplicity of language and directness -the presence of concrete examples is one of the features they value most in management texts. Texts without examples are rarely described as enjoyable or useful. While the authors go to some length to analyse the rationale for this preference -mostly in terms of its fit with the pragmatic requirements of managerial practice -their analysis does not systematically take into account cognitive processes. However, subjects themselves seem to attach significant importance to this factor. A reported manager emphasized the point that examples are read for guidance as to the potential effects of the theories the text promotes and their applicability (p. 439); another subject plainly stated that, in their view '[t]he theory is helpful at some point, but only if it is chased with an anecdote' (p. 432).",
+                "cite_spans": [
+                    {
+                        "start": 62,
+                        "end": 92,
+                        "text": "Pagel and Westerfelhaus (2005)",
+                        "ref_id": "BIBREF26"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN MANAGEMENT",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "Hackley (2003: 1342) notes that presentations of concepts and theories in marketing texts are profusely peppered with 'case vignettes' describing products, companies or entrepreneurs. Although their textual placement makes it obvious that these exemplars are presented as warrants for the effectiveness of the associated technique, Hackley argues that the grounds for application are never fleshed out, making the association 'spurious'. Chiefly of the same opinion are Alonso and Fern\u00e1ndez Rodr\u00edguez (2006: 137, our translation) , who assert that popular managerial writing relies on an 'anthology of more or less arbitrary examples whose historical verisimilitude will always be open to doubt'.",
+                "cite_spans": [
+                    {
+                        "start": 8,
+                        "end": 20,
+                        "text": "(2003: 1342)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 470,
+                        "end": 529,
+                        "text": "Alonso and Fern\u00e1ndez Rodr\u00edguez (2006: 137, our translation)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN MANAGEMENT",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "In one of the very few available studies on popular management discourse from a Critical Discourse Analysis perspective, Chiapello and Fairclough (2002; see also Fairclough, 2003) discuss how the usage of brief, anecdotal examples helps Harvard Business School professor and management guru Rosabeth Moss Kanter (2001) manage a pervasive textual oscillation between description and prescription, shifting from epistemic sentences purportedly based on observation to deontic ones prescribing courses of action and identities. This serves to link both types of propositions in a topos often characterized as the TINA ('there-is-no-alternative') principle (Fairclough, 2000) . In a distinctive manner, some of the declarative statements are predicated of an entity created in the text itself, 'changemasters'. While this could be understood as the presentation of a theoretical model, the creation of this construct is never explicitly thematized. Rather, it is immediately juxtaposed with exemplary snippets that work to provide it with the immediacy it would, as a concept, lack.",
+                "cite_spans": [
+                    {
+                        "start": 121,
+                        "end": 152,
+                        "text": "Chiapello and Fairclough (2002;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 153,
+                        "end": 179,
+                        "text": "see also Fairclough, 2003)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 653,
+                        "end": 671,
+                        "text": "(Fairclough, 2000)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN MANAGEMENT",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "In the following section, we explore how such texturing is performed through the use of examples, allowing writers to put forward models and guidelines for professional practice without explicit thematization. The samples we present are drawn from a corpus of over 100 best-selling management books, selected to provide a representative sample of managerial materials. The quoted excerpts illustrating it come from two texts, representing diverging strategies within a disciplinary community deeply divided by issues of method, theories and goals (Engwall, 1995) . In Information Rules (henceforward IR), by Shapiro and Varian (1998) , authors make use of their own personal authority but openly draw from conventional forms of knowledge. Other authors openly disregard theoretical prediction and emphasize the impossibility to fully account for the context of managerial practice. We show this choice instantiated in Unleashing the Killer App (Downes and Mui, 1998) (henceforward UTKA).",
+                "cite_spans": [
+                    {
+                        "start": 547,
+                        "end": 562,
+                        "text": "(Engwall, 1995)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 608,
+                        "end": 633,
+                        "text": "Shapiro and Varian (1998)",
+                        "ref_id": "BIBREF34"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES IN MANAGEMENT",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "As examples are defined by their function within the text rather than by any formal linguistic properties, identifying them may not always be a straightforward task. In some cases, the authors make their exemplificative intent explicit through metadiscursive (Hyland and Tse, 2004 ) markers that explicitly organize the material and guide the reader in its interpretation. In others, the exemplary character has no surface markings, but rather depends on the readers' understanding of the textual structure.",
+                "cite_spans": [
+                    {
+                        "start": 259,
+                        "end": 280,
+                        "text": "(Hyland and Tse, 2004",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Situating examples in text",
+                "sec_num": "3."
+            },
+            {
+                "text": "To indicate the introduction of an exemplificative sequence, an explicit reference can be made to boundaries in discourse itself, labelling a segment in such a way as to make clear its nature. This is the strategy used in the following excerpts from IR. Unless otherwise indicated, all emphasis is ours and has been added for clarification.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXPLICIT EXAMPLES",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "(1) [W]e think that content owners tend to be too conservative with respect to the management of their intellectual property. The history of the video industry is a good example.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXPLICIT EXAMPLES",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "(2) Technologies subject to strong network effects tend to exhibit long lead times followed by explosive growth. [. . .] Fax machines illustrate nicely the common pattern.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXPLICIT EXAMPLES",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "In both these cases, the highlighted cue signals a relation between textual structures: a more or less extended description is shown to instance of a general proposition presented immediately before. The authors' claim of an exemplary nature for this description is explicitly stated. Other forms of exemplification do not emphasize the sequencing of the text itself, but rather show a semantic relation of similarity or analogy between content elements. The following excerpts from IR do not make reference to the nature of the textual sequence, although metalinguistic cues about its elements are still explicit.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXPLICIT EXAMPLES",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "(3) You may need to employ marketing tools such as penetration pricing to ignite the positive feedback.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXPLICIT EXAMPLES",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "(4) Information businesses -like those in the print, music, and movie industries -have devised various strategies to get wary consumers to overcome their reluctance to purchase information before they know what they are getting.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXPLICIT EXAMPLES",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "While cognitive guidance in these devices remains overt, it is much less prominent than in the former kind. The signals employed are also characteristically more ambiguous; metadiscursive frame markers of the first kind ('for example', 'for instance', 'a case of ') are unlikely to be used for anything but indicating exemplification, but the adjectives and conjunctions that form the bulk of the latter one may play many different roles. Their exemplificative nature is thus backgrounded. The matter of typicality is not presented here as the topic of talk, but rather as a parenthetical aside from the main point.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXPLICIT EXAMPLES",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "The complexity of the processes involved in exemplification is even more evident when interpretive signals are ambiguous or absent. The following excerpt from IR illustrates this latter case, where the passage's role as an example can surface only through the reader's interpretation of the move structure:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IMPLICIT EXAMPLES",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "(5) Any idiot can establish a Web presence -and lots of them have. The big problem is letting people know about it. Amazon.com, the on-line bookstore, recently entered into a long-term, exclusive agreement with America Online (AOL) to gain access to AOL's 8.5 million customers. The cost of this deal is in the order of $19 million, which can be understood as the cost of purchasing the attention of AOL subscribers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IMPLICIT EXAMPLES",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "While the last two sentences in this excerpt clearly serve as examples, no overt linguistic marking seems to signal this. Identifying them as such depends on understanding the passage in the context of the adjacent rhetorical moves. It is the specific interactive purpose to which the text is put that provides the necessary prompts for correctly understanding their function. This shows that the relation between examples and rules can remain implicit under certain conditions, as writers believe their readership capable of recovering it from the text without the need for formal prompts. Actually, as shown in Table 1 , this is by no means an uncommon authorial strategy. We can see the three kinds of examples as a cline of metadiscursive emphasis. Selection from this repertoire is doubtlessly bound to the degree to which the text responds to a textual pattern already known to the reader. When generic conventions are violated or unclear, authors cannot rely on previously shared knowledge in the context model to guide the meaning and intent of the text (van Dijk, 2006) , and must employ explicit rhetorical resources to embed an interpretive roadmap into it. Similarly, texts with a pedagogic or directive bent often have to explicitly lay out rules for interpretation to compensate for the asymmetry in competence between author and reader (Crismore and Farnsworth, 1990; Hyland, 1998) .",
+                "cite_spans": [
+                    {
+                        "start": 1062,
+                        "end": 1078,
+                        "text": "(van Dijk, 2006)",
+                        "ref_id": "BIBREF41"
+                    },
+                    {
+                        "start": 1351,
+                        "end": 1382,
+                        "text": "(Crismore and Farnsworth, 1990;",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 1383,
+                        "end": 1396,
+                        "text": "Hyland, 1998)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 619,
+                        "end": 620,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "IMPLICIT EXAMPLES",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "The form of this guidance, however, is very often genre-and field-specific. The particular literacies and beliefs of different communities are reflected in commensurable variations in practices of communication. In the following section, we explore in what contexts are examples deployed, and how they are articulated for persuasive and explanatory goals.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IMPLICIT EXAMPLES",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "The texts in our corpus belong to an ostensibly persuasive genre, in which writers do not only seek to make their message comprehensible to a particular readership, but also to gain support for the claims it advances. Achieving this entails not only ensuring a clear communication of the message and fitting it with the world knowledge of the audience, but also structuring it so as to accommodate their beliefs about accuracy, validity and provability.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "SEQUENCING EXEMPLIFICATION",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Within more or less stable discourse communities, one way to secure support for claims is to signal respect for the shared conventions that mark a common membership (Swales, 1990) . In academic research, this often means establishing how the new knowledge fits with the established tenets of the discipline, and explaining its importance for further advance in the disciplinary programme. In practitioner-oriented genres, justifying a given claim hinges instead on showing the advantages it offers for professional practice (Lemke, 1998) . We can expect the rhetorical structuring of persuasive texts to vary in accord with these different emphases.",
+                "cite_spans": [
+                    {
+                        "start": 165,
+                        "end": 179,
+                        "text": "(Swales, 1990)",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 524,
+                        "end": 537,
+                        "text": "(Lemke, 1998)",
+                        "ref_id": "BIBREF19"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "SEQUENCING EXEMPLIFICATION",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "In our corpus, examples are often used to do work in more than one of these dimensions. They help establish the warrantability of assertions by showing instances of real life that correspond to the more general claims. Specific accounts of concrete events draw their authority from their factual character, being unquestionably 'something that actually happened' (Myers, 1990: 198 , emphasis in the original). Examples provide details and specifics that seem amenable to direct confirmation, and thus more reliable than abstract data, whose relation to experience is more mediate and involves the application of theories and models. By presenting information in an ostensibly empirical form, authors seem not to be doing any classification themselves, adopting instead an apparently neutral footing (Goffman, 1979) towards 'data'.",
+                "cite_spans": [
+                    {
+                        "start": 363,
+                        "end": 380,
+                        "text": "(Myers, 1990: 198",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 799,
+                        "end": 814,
+                        "text": "(Goffman, 1979)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "SEQUENCING EXEMPLIFICATION",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "When several examples are jointly presented, the multiplicity of instances seems also to warrant the normality of the claimed proposition. Significance and desirability are more indirectly but no less often argued for in this manner; as examples are perceived as typical cases, the features of their presentation and evaluation are made extensive to the entire class.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "SEQUENCING EXEMPLIFICATION",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "As examples can easily perform multiple roles, relying on the discursive organization and the readers' cognitive effort to provide the missing links, texts can be arranged in a highly compressed argumentative structure. Unlike forms of discourse where the boundary between theory and data is thematized -as in the creation of research spaces in academic prose (Swales, 1990) -those organized around examples can adopt a regular pattern to systematically condense different rhetorical moves. In our corpus, development involving the following stages seems typical:",
+                "cite_spans": [
+                    {
+                        "start": 360,
+                        "end": 374,
+                        "text": "(Swales, 1990)",
+                        "ref_id": "BIBREF36"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "1. the presentation of a general claim; 2. the exemplification of this claim; 3. an explanation of its significance, often realized as: This typical structure, allowing for some variations, accounts for over 85 percent of the paragraphs in the opening chapter of IR, and almost the entirety of UTKA. Most of the remainder consists of frame markers organizing the different sections of the text, as well as the extended introductory examples that we discuss in the following section. Frequent variations include the omission of the third, or more rarely the fourth, move, as well as the cycling of some stages. Presenting more fully the text sampled in Excerpt 1 earlier, we can see this structure at work (emphasis in the original):",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "(6) [Claim ] [W]e think that content owners tend to be too conservative with respect to the management of their intellectual property.",
+                "cite_spans": [
+                    {
+                        "start": 4,
+                        "end": 12,
+                        "text": "[Claim ]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "[Example ] The history of the video industry is a good example. Hollywood was petrified by the advent of videotape recorders.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "[Subexample 1 ] The TV industry filed suits to prevent home copying of TV programs, and",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "[Subexample 2 ] Disney attempted to distinguish video sales and rentals through licensing arrangements. All of these attempts failed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "[Implication ] Ironically, Hollywood now makes more from video than from theater presentations for most productions. The video sales and rental market, once so feared, has become a giant revenue source for Hollywood.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "[Desirability ] When managing intellectual property, your goal should be to choose the terms and conditions that maximize the value of your intellectual property, not the terms and conditions that maximize the protection",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Patterns of exemplification",
+                "sec_num": "3.3.1"
+            },
+            {
+                "text": "The kind of work performed by this example is rather straightforward in argumentative terms: it helps make the claim factual, by linking a general proposition to a real-world instance where it held true. [Example ] Amazon.com, the on-line bookstore, recently entered into a long-term, exclusive agreement with America Online (AOL) to gain access to AOL's 8.5 million customers. The cost of this deal is in the order of $19 million,",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Indirect and misleading examples",
+                "sec_num": "3.3.2"
+            },
+            {
+                "text": "[Implication ] which can be understood as the cost of purchasing the attention of AOL subscribers",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Indirect and misleading examples",
+                "sec_num": "3.3.2"
+            },
+            {
+                "text": "[Example ] Wal-Mart recently launched the Wal-Mart Television Network, which broadcasts commercials on the television sets lined up for sale at the company's 1,950 stores nationwide.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Indirect and misleading examples",
+                "sec_num": "3.3.2"
+            },
+            {
+                "text": "[Implication ] Like AOL, Wal-Mart realized that it could sell the attention of its customers to advertisers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Indirect and misleading examples",
+                "sec_num": "3.3.2"
+            },
+            {
+                "text": "[Forecast ] As health clubs, doctors' offices, and other locations attempt to grab our valuable attention, information overload will worsen.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Indirect and misleading examples",
+                "sec_num": "3.3.2"
+            },
+            {
+                "text": "The structural similarity between this example and the former obscures a significant difference in the nature of the support presented. In this case, while the general rule concerns the 'big problem[s]' entailed in reaching an audience through the Internet, the examples adduced are not cases of problematic situations. They are rather processes that become textually defined as solutions to such problems only by their adjacency in textual development. Exemplification substitutes here for the argumentative articulation between problem and solution. The difference is important, in that the episodic character of the evidence leads attention away from the interpretive process involved in the formulation of the data. What the concrete items drawn from the 'world out there' (Potter, 1996: 150) do, in discursive terms, has nevertheless very little to do with a straightforward illustration, as the implied premise -namely, that these 'problems' can be solved mainly by the expenditure of money -on which all the passage hinges is never stated. Their ostensible perceptual immediacy downplays the theoretical underpinnings on which the reasoning is based, presenting the relationship as a natural datum.",
+                "cite_spans": [
+                    {
+                        "start": 777,
+                        "end": 796,
+                        "text": "(Potter, 1996: 150)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Indirect and misleading examples",
+                "sec_num": "3.3.2"
+            },
+            {
+                "text": "Examples overtly or tacitly make a claim of typicality, suggesting the existence of a larger stock of parallel instances. This extensible character is sometimes emphasized through lists; when semantic marking is used to introduce them, the nature of the comparative particle ('such as', 'like', etc.) often entails extensibility, as in Excerpt 4 earlier. In other cases, there are explicit markings:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Implications of exemplification",
+                "sec_num": "3.3.3"
+            },
+            {
+                "text": "(8) These components typically include a range of assets: data files (LP records, COBOL programs, word processing documents, etc.), various pieces of durable hardware, and training, or human capital.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Implications of exemplification",
+                "sec_num": "3.3.3"
+            },
+            {
+                "text": "Linguistic cues in both lists signal that the enumeration is not exhaustive. In traditional logical terms, here the analytic process of intensional definition is replaced with an extensional, ostensive accumulation of cases, leaving the determination of what constitutes a 'data file' to the reader. And, surprisingly, when intensional features are presented, they are not necessarily congruent with the perceptible features of the illustrative examples. In the excerpt below, one of the very few cases in which the theoretical rationale behind a rule is explicitly presented, the characteristics of the model it is based on are marginal to the strategic development of the text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Implications of exemplification",
+                "sec_num": "3.3.3"
+            },
+            {
+                "text": "(9) We use the term information very broadly. Essentially, anything that can be digitized -encoded as a stream of bits -is information. For our purposes, baseball scores, books, databases, magazines, movies, music, stock quotes, and Web pages are all information goods. [. . .] Information is costly to produce but cheap to reproduce. Books that cost hundreds of thousands of dollars to produce can be printed and bound for a dollar or two, and 100-million dollar movies can be copied on videotape for a few cents.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Implications of exemplification",
+                "sec_num": "3.3.3"
+            },
+            {
+                "text": "While the concept of 'information' is couched in the arid terms of mathematical theories of communication (Shannon, 1948) , thematic development follows a rather different -and far less abstract -direction: the production cost and sales value of 'intellectual property'. One should notice that the examples presented are, as in Excerpt 5, quite unlike the rule they claimed to illustrate: the printing and binding of books is not a digital process, nor is VHS copying, where data are stored in an analogue magnetic medium. But also the theoretical claims lack a connecting thread; the economic notion of 'information goods', centred on the consumption of meaning, has nothing to do with Shannon's coding parameters, which entirely disregard semantic aspects. Despite the incoherence, the rhetorical pairing serves a strategic goal. On one hand, the language of science serves to legitimize the text as an intellectual pursuit, presenting the authors as sophisticated users of complex theories, and soberly hedging their claims by reference to a specific theoretical standpoint. At the same time, it ensures that the particular theory endorsed is not one that readers are likely to challenge -not least because it is largely irrelevant to the main argument. When business concepts -which are more likely than semiotic ones to attract the interest of the buyers of a book subtitled A Strategic Guide to the Network Economy -are introduced, none of this disciplinary caution is exercised. The long list of items used to illustrate grounds the text again in reality, and pervasively establishes the mode of the text as one of descriptive identification. This shift from an ostensible process of persuasion, in which the validity of intellectual claims is jointly negotiated, to one of apparent description, where the text seems to simply describe the state of affairs, backgrounds the interpretive process exactly at the moment that it begins to be relevant to the text goals.",
+                "cite_spans": [
+                    {
+                        "start": 106,
+                        "end": 121,
+                        "text": "(Shannon, 1948)",
+                        "ref_id": "BIBREF33"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Implications of exemplification",
+                "sec_num": "3.3.3"
+            },
+            {
+                "text": "Discursive analysis of the rhetorical patterns in academic prose has often suggested that introductory devices do not only seek to summarize the main points of the main document or section, but also actively persuade the reader to proceed further. Once reading is under way, the weight of the cumulative investment may be enough to maintain the reader's attention, but at the beginning bold persuasive moves may be required of the author to engage their audience. Examples gain their persuasive force from their ability to reconstruct the context of practice. Texts organized around exemplification highlight the immediacy of experience, with all the interpretive patterns that are automatically attached to it by the experienced practitioner, and thus present the insider credentials of the author (Faber, 1996) .",
+                "cite_spans": [
+                    {
+                        "start": 799,
+                        "end": 812,
+                        "text": "(Faber, 1996)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "The opening of the text is, rhetorically speaking, a very particular position. Beyond what's conveyed in the title and the context model, there is no thematic background to guide the process of interpretation. Framing the message with an example, whose processing always involves a certain degree of interpretive ambiguity, may be more challenging than metadiscursively presenting the structure of the subsequent text, but also sets up a more vivid textual structure than would be otherwise possible. By presenting a narrated situation with little guidance as to its meaning or relevance, the text leads the reader to undertake an exacting process of interpretation; at the same time, the episodic nature of narratives helps provide a schematic structuring, and generates a cognitive tension that impels readers forward. In a sample of 60 texts from our corpus, more than three-quarters employed a concrete narrative for their crucial, pacesetting beginning (see Table 2 ).",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 969,
+                        "end": 970,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "Under these conditions, it is the readers' knowledge of the world and their expectations of the genre that provide the main interpretive background, selectively cued and primed according to the purpose of the author. The beginning paragraphs of IR challenge their readers to dramatic effect, presenting them with a situation whose familiar character they seek to make evident, and immediately disavowing its identification:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "(10) As the century closed, the world became smaller. The public rapidly gained access to new and dramatically faster communication technologies. Entrepreneurs, able to draw on unprecedented scale economies, built vast empires. Great fortunes were made. The government demanded that these powerful new monopolists be held accountable under antitrust law. Every day brought forth new technological advances to which the old business models seemed no longer to apply. Yet, somehow, the basic laws of economics asserted themselves. Those who mastered these laws survived in the new environment. Those who did not, failed. The effect of this presentation crucially depends on the misunderstanding it elicits on its readers, and its subsequent correction. Hints are plentiful: temporal deictic aside (the book was first published in 1998, when the reference to the end of the century would have been commonplace), the processes described in the passage are recognizably those attributed to the 'digital economies' of the Internet era. But, while unequivocal, this recognition is based in a frame of reference that is far from universal. By devising a text only intelligible to readers familiar with the financial media's excitement about Nasdaq and the antitrust case of United States of America v. Microsoft Corporation, they make a point of signalling the ideal reader they seek and the interests that will guide the thrust of the text. The exemplary introduction handles at once the need to ground the text in reality, showing as little interpretation as possible, and the decision to present it already embedded in the cognitive and evaluative habitus of a certain community.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "Introducing the subject through a concrete example, instead of deriving its central thesis that 'durable economic principles can guide [one] in today's frenetic business environment' in a more conventional academic way, serves other purposes as well. It is instrumental in portraying the claim as more momentous and daring than it would be within the context of academic business learning, where courses on economics are indispensable (although not extremely popular, being regarded as harder, more theoretical and more quantitative than other subjects; Gregorowicz and Hegji, 1998) . In the narrative presentation, the relevant information is distributed so as to provoke both surprise when a certain interpretation of the data is suggested and then challenged, and well-grounded in concrete material.",
+                "cite_spans": [
+                    {
+                        "start": 554,
+                        "end": 582,
+                        "text": "Gregorowicz and Hegji, 1998)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "It also demonstrates the authors' knowledge of the conventions and interests of the target audience, focusing on preoccupations that readers are likely to have. In a field where the d\u00e9calage between academic interests and practical concerns has repeatedly been shown to be marked (Collins, 2004) , this show of familiarity is crucial to establish an identity as a trusted expert. Finally, it enacts the relation of asymmetric competence on which the author-reader relationship is built in a very graphic manner. As the guiding intervention by the authors is strongly backgrounded until the second paragraph, the erroneous interpretation of the situation seems to be entirely the fault of the readers -corrected in turn by the authors' ability to see through the misleading appearance of events. This is reinforced by the elegant, if deceptive, use of parallelism: all sentences in the first paragraph share the same basic structure, declarative sentences in a definitely realis mode, although the 'basic laws of economics' are a very different kind of participant from 'the public', 'entrepreneurs' or 'the government'. Presenting concrete descriptions and model-bound abstract interpretations in an identical manner, the writers predefine the situation so as to maximize the impact and persuasiveness of their latter assertions.",
+                "cite_spans": [
+                    {
+                        "start": 280,
+                        "end": 295,
+                        "text": "(Collins, 2004)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "The short narrative used to introduce the first chapter of UTKA also makes extensive use of presuppositions of shared knowledge, a particularly striking instance of which is the opening negative sentence. Negation is often used to implicate that the presented case runs contrary to usual expectations (van Dijk, 1985) ; given the particular content it has here, only a reader entertaining the singular belief that 'start[ing] a revolution' enters within the goals and capabilities of managers qua managers can make sense of the text:",
+                "cite_spans": [
+                    {
+                        "start": 301,
+                        "end": 317,
+                        "text": "(van Dijk, 1985)",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "(11) Christopher Brennan wasn't trying to start a revolution. The regional manager for British Petroleum's (BP) sixteen hundred gas stations in Germany, Chris was looking for new sources of revenue in a saturated, largely commodity-priced business dominated by a few brands. Then he got an idea. [. . .] Chris had heard about the future of electronic shopping from his colleague Matthias Richly. Why wait for the future? Why not invent it now?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "The development of this initial anecdote -that extends over a further 400 words before first shifting out of narrative mode to offer some preliminaries about its goal and theoretical stance -is decidedly iconic in the text's reproduction of the readers' situation. Not only is its participant a manager, as are the members of its intended audience, but also the steps in the narrative development closely mimic the hypothetical stages of his action; temporal markers ('then', 'had heard', 'the future', 'wait') are mobilized to this effect, while rhetorical questions signal the moments of deliberation in the flow of the action. Much like we have seen in IR, the example itself pushes forward the authors' claims of novelty and relevance. Not only the assertive, 'revolutionary' character of the story told conveys this, but also the many evaluations inserted throughout the text:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "(12) [merchants were] eager to try a new marketing channel [. . .] They [shoppers] confounded traditional marketing dogma by using the kiosk to purchase precisely the kind of goods that no one expected anyone would want to buy [. . .] a channel that conventional wisdom had told Chris didn't exist.",
+                "cite_spans": [
+                    {
+                        "start": 59,
+                        "end": 66,
+                        "text": "[. . .]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 72,
+                        "end": 82,
+                        "text": "[shoppers]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 227,
+                        "end": 234,
+                        "text": "[. . .]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "These analyses make evident the cognitive framework to be used, without thereby breaking the smooth development of the story. Together with the informal language and the iconic narrative structure, the choice of a concrete instance rather than a metadiscursive depiction of the book's arguments align the authors with their readers' point of view. Without necessarily building an abstract model at any stage, the narrative told here nevertheless provides an exemplary pattern to inspire its readers' action.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "INCIPITS",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "Underlying the theoretical debates we reviewed in Section 2 is one of the great issues in contemporary research on psychological, sociological and philosophical aspects of knowledge: to what extent actual cognitive processes can be explained in terms of general rules. While traditional notions of cognition, both in philosophical and the psychological research, tended to associate valid knowledge with clearly definable rules for understanding, many contemporary models have challenged this view. In this last section of analysis, we discuss some conflicting positions about this matter that coexist within popular management.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "Most of the literature discussing the uptake of these debates has argued that the dispositions and inclinations of practitioners lead them to more conservative ('Whiggish') epistemological positions (Nickles, 1998) than theoretically inclined academics. Management is unusual in that radical challenges to rules have not been uncommon among writers, even of a popular kind (Alonso, 2002) . This is one aspect in which the discipline remains very much a 'fragmented adhocracy' (Engwall, 1995) , showing often irreconcilable differences among research and practice traditions.",
+                "cite_spans": [
+                    {
+                        "start": 199,
+                        "end": 214,
+                        "text": "(Nickles, 1998)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 373,
+                        "end": 387,
+                        "text": "(Alonso, 2002)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 476,
+                        "end": 491,
+                        "text": "(Engwall, 1995)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "The exemplification strategies we analysed in the preceding sections can often be explained in terms of expected reader preferences; the authors of IR, both economists, rely on examples to make their claims factual and persuasive, recontextualizing their academic knowledge of economics so as to suit an audience unwilling to invest time and effort in the semiotic resources that economic explanation favours. Business disciplines and economics have, despite their very different professional orientations, a very close bound based on their shared concern with processes of production, distribution and consumption of economic goods. It is thus not surprising that Shapiro and Varian not only draw on the considerable disciplinary capital they possess within the discipline, but also on specific modes of argument and patterns of thinking that are peculiar to economic argument:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "(13) The thesis of this book is that durable economic principles can guide you in today's frenetic business environment. Technology changes. Economic laws do not. [. . .] there is order in the chaos: a few basic economic concepts go a long way toward explaining how today's industries are evolving.",
+                "cite_spans": [
+                    {
+                        "start": 163,
+                        "end": 170,
+                        "text": "[. . .]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "The commitment of the authors to the core disciplinary belief that future events will reflect a pattern that is a) globally invariant; b) analytically expressible in terms of systematic laws; and c) adequately modelable through equations, is evident throughout the text, whose language and quoted authorities all belong to economics (emphases in the original):",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "(14) Economists say that production of an information good involves high fixed costs but low marginal costs [. . .] Economists say that a good is an experience good if consumers must experience it to value it [. . .]",
+                "cite_spans": [
+                    {
+                        "start": 108,
+                        "end": 115,
+                        "text": "[. . .]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "Nobel prize-winning economist Herbert Simon spoke for us all when he said that 'a wealth of information creates a poverty of attention' [. . .]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "When the value of a product to one user depends on how many other users there are, economists say that this product exhibits network externalities, or network effects.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "Even if its relation to business education and training remains strained, economics has strong discursive assets from which the authors draw: its reputation for exactitude, its prestige within social sciences, its global prominence as a central advisory field in policy and politics. Its strong scientist allegiance is textually made evident in the hypothetical-deductive form the authors favour for their predictions and advice:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "(15) Firms that master this sort of marketing will thrive, while those that continue to conduct unfocused and excessively broad advertising campaigns will be at a competitive disadvantage [. . .] The company that best understands information systems and complementary products will be best positioned to move rapidly and aggressively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "This position is, however, far from hegemonic among management writers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "In developing a taxonomy of gurus, Huczynski (1993) lists consultancy and professional practice in large-scale corporations as sources of authority parallel to that conferred by academia. Their coexistence is not an easy one; a strong current of criticism has questioned the value of these authors' contributions, often portraying it as hero-worshipping, unresearched, arbitrary quackery and pseudoscience (see, for instance, Hilmer and Donaldson, 1996) . While most writers have ignored this criticism outright, traces of it get regularly incorporated into some works, especially those of drawing on more academic identities and authorities. The concluding remarks in IR are particularly explicit in this regard, echoing the most frequent criticisms raised against the genre (emphasis in the original):",
+                "cite_spans": [
+                    {
+                        "start": 426,
+                        "end": 453,
+                        "text": "Hilmer and Donaldson, 1996)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "(16) We've explained what this book is about. We also should say what our book is not about and what distinguishes our approach from others. First, this book is not about trends. Lots of books about the impact of technology are attempts to forecast the future [. . .] But the methodology for forecasting these trends is unclear; typically, it is just extrapolation from recent developments [. . .]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "Second, this book is not about vocabulary. We're not going to invent any new buzzwords (although we do hope to resurrect a few old ones) [. . .] Third, this book is not about analogies. We won't tell you that devising business strategy is like restoring an ecosystem, fighting a war, or making love.",
+                "cite_spans": [
+                    {
+                        "start": 137,
+                        "end": 144,
+                        "text": "[. . .]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "We seek models, not trends; concepts, not vocabulary; and analysis, not analogies.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "Of course, there is much in this kind of assertions that should not be taken at face value. Claiming 'durability' and 'proof ' for one's own work, in the absence of further arguments, is simply an empty show of commitment to traditional scientific values -the kind of argument that often gets dismissively called 'rhetoric'. This particular text falls short of its own measuring yard in several respects. Forecasting in the absence of hard empiric data is evident, for instance, at the end of Excerpt 3.2. The use of analogy is far more pervasive, and especially intensive as regards the 'battle' metaphor for business practice. Frequent to the point of catachresis in financial and business speech (Koller, 2004) , the mapping is similar to the 'ARGUMENT is WAR' one studied by Lakoff and Johnson (1980) . Both 'war' (once) and 'battle' (six times) feature in the lexical repertoire used to describe market competition in the first chapter of IR; a later one is entitled 'Waging a Standards War'. 'Rivalry', 'aggression', 'allies', 'sword', 'vulnerable' and the crucial term 'strategy', are other elements reinforcing this set of analogue representations, which is likely to be responsible in no small degree for the vividness and persuasive character of the offered models. It would not be hard to point out other conceptual metaphors underwriting the analysis, such as 'MARKET is NATURE', with its 'giants', its laws of 'evolution' and its 'breathlessness'. Testing their claims about buzzwords would require cumbersome statistical analysis, infeasible within the limits of this article; we are, nevertheless, more interested in how the comparison serves to demarcate currents within management writing. Downes and Mui's attempts at forecasting do not show any of this disciplinary circumspection. UTKA is cavalier about the specifics of future happenings and developments, to the point of presenting them sometimes in the present tense, as part of an ongoing but already established process: At the same time, this certitude about the future is curiously coupled with an explicit criticism of systematic analysis and planning. The following excerpt, a dramatic punch line to the extended narrative that introduces the book, clearly states the text's stance towards the interface of theory and practice:",
+                "cite_spans": [
+                    {
+                        "start": 699,
+                        "end": 713,
+                        "text": "(Koller, 2004)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 779,
+                        "end": 804,
+                        "text": "Lakoff and Johnson (1980)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "(18) What does the BP kiosk have to do with business strategy? There was no strategy here, just an idea followed by an experiment. Chris did no long-term planning or detailed analysis of the industry. [. . .] Perhaps this is your immediate response.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "A few years ago it would have been ours. [. . .] What Chris did wasn't strategy, it was just an application, a reordering of relationships. In a word, it was creative. [. . .] In the new world, that is strategy.",
+                "cite_spans": [
+                    {
+                        "start": 168,
+                        "end": 175,
+                        "text": "[. . .]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "A number of local and textual cues indicate the great importance attributed to its crucial proposition: there are no rules. The use of personal pronouns and other personal markers is one of the main linguistic realizations in which this is embodied; exclusive 'you' clearly establishes a contrast between author and reader, assigning them very different roles in the text. Hyland (2002) argued that personal pronouns can play a significant role in building an image of certainty by foregrounding the presence of the writer in the text, far from the conventional pluralis modestiae. This function is emphasized by the contrastive presentation, marking distance between author and reader. Notice as well the rhetorical question, which in English prose and speech is customarily employed to provide a semblance of interaction -bearing the ostensible markings of conversation, where the coparticipant is expected to cue in at the end of the turn -although their basic orientation is directive (Taiwo, 2005) . The listener is directed to the point being made, by echoing the process of deliberation presented by the speaker.",
+                "cite_spans": [
+                    {
+                        "start": 373,
+                        "end": 386,
+                        "text": "Hyland (2002)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 989,
+                        "end": 1002,
+                        "text": "(Taiwo, 2005)",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "As such, the interactional process triggered largely presupposes agreement between the parties, and is very closely bound to its context. Articulating a reluctance to analyse with the explicit prescriptive goals of the book seems a daunting task. Examples can fill this hiatus by presenting success stories that may spark imitation, while carefully avoiding the extraction of general rules from them. This form incorporates a number of scientistic conventions, much like those behind the model-centred argumentative structures of IR, but differs crucially in its framing. In UTKA, the suggested 'digital strategies' are based on so-called 'laws', eponymously named after entrepreneurengineers Gordon E. Moore and Robert Metcalfe:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "(19) Moore bet his new company on the belief that new generations of chips, with double the power of the previous generation, could be produced every eighteen months. The cost of producing the new chip, according to Moore, would be the same or less than the cost of producing its predecessor, since improvements in manufacturing technology and increased volumes minimized the cost of new facilities [. . .] Hence Moore's Law: Every eighteen months, processing power doubles while cost holds constant Robert Metcalfe [. . .] observed that new technologies are valuable only if many people use them. Specifically, the usefulness, or utility, of a network equals the square of the number of users, a function known as Metcalfe's Law.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "(See Figure 1 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 12,
+                        "end": 13,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "2) The more people who use your software, your network, your standard, your game, or your book, the more valuable it becomes, and the more new users it will attract, increasing both its utility and the speed of its adoption by still more users.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "Both these descriptions are prime instances of discourse hybridization between the science and business domains. Moore's proposition is labelled a 'law', but described in terms of a 'belief ' whose main claim to validity is Moore's confidence as shown in basing his business strategy on it. Notice the shift in mood from the description of precedence to the actual enunciation, where the simple present of the indicative settles it squarely within the realm of timeless general truths. Metcalfe's 'law' is presented in the multiple semiotic modalities of scientific assertion, including a plotted graph and an equation; it foregoes scientific conventions in glossing over previous research, which would have proved Metcalfe's to be simply a reformulation of the well-known economic theory of interdependent demand. However, far more interesting to our purposes is the corollary which Downes and Mui extract from their joint action: How can the thesis that the conjunction of distinct technological processes tends to spontaneously trigger society-wide disruptions in the form of products and processes whose value and impact could not be foreseen be tied to the book's alleged purpose of providing keys to business strategy? It seems evident that 'killer apps', whatever their nature and source, are by definition unpredictable. The challenge this poses for managerial thinking cannot escape acknowledgment. However, the text projects IR only as facing 'traditional' managerial thinking (see Excerpt 8); the approach advocated by Downes and Mui seeks to appear unaffected. The difference between traditional and contemporary management has often been viewed in terms of the mystique of the creative entrepreneur, prominent in the latter kind of writing (Alonso and Fern\u00e1ndez Rodr\u00edguez, 2006) . Analysts have intepreted it as a shift from modern bureaucratic modes of rationality to a premodern form of charismatic leadership. However, whatever their inspirational value, purely charismatic justifications of leadership cannot even purport to offer systematic guidance or strategy. The rationalistic elements of the scientific genres can help compensate for this, fitting this trend into the hybrid conventions of popular management discourse.",
+                "cite_spans": [
+                    {
+                        "start": 1753,
+                        "end": 1791,
+                        "text": "(Alonso and Fern\u00e1ndez Rodr\u00edguez, 2006)",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "The use of examples can thus help reconcile the disparate tendencies towards creativity and prescription. On one hand, exemplary anecdotes can be used to depict the unique character of corporate heroes and their personal characteristics in the face of challenge. The story told in Excerpt 11 contains several signs of this depiction: the rhetorical questions present the deliberation of the hero in a manner employed since classical Antiquity; the creative process is foregrounded by the evaluations emphasized in Excerpt 12; the rebellious, independent character of the deed is highlighted by the punch line to the anecdote, ending chapter one of the book: On the other hand, the relevance of these anecdotes to the readers' own actions is granted by grounding them on shared cognitive frames. As we saw in the opening narratives in Excerpts 10 and 11 the text uses common presuppositions and world-knowledge in its presentation of events and the orientation it provides. Most importantly, these cognitive frames and their interaction are not necessarily made explicit in a systematic whole. The accumulation of examples provides an inductive semblance of a coherent progression, even when -as in Excerpt 9 -the explicitly argued logical properties do not fit the offered examples.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "As the work of building them into a coherent whole is left to the reader, with much of their cognitive underpinnings remaining tacit, the inconsistencies and dislocations in the discursive structure are easily glossed over.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "EXAMPLES AND RULES",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "In this article, we have explored the use of examples in popular management texts. We have shown that argumentation structures often follow a cyclical exemplification/generalization pattern, where the inherent interpretive richness of examples allows them to perform a variety of functions -establishing factuality, significance and desirability, often at the same time -and leading to textual forms less rigidly articulated than is usual in academic prose. We have also shown that the pervasive semblance of factuality conveyed by examples allows writers to embed arguments that would not seem warranted if the interpretive nature of the text were presented as such, multiplying the instances of a remote premise to enhance the credibility of a conclusion, or textually juxtaposing actions in order to suggest cause/consequence relations. Finally, we have discussed how examples are used to cue common assumptions about the world, evoking a disciplinary frame even for practice-oriented fields where orientation to theory is severely dispreferred. This situation leads to an epistemological curiosity: while sociological accounts of scientific knowledge have routinely found practitioners to be more conservative than academics, in management it is writers from the consulting camp who show more extreme positions as regards the impossibility to establish rules for professional practice. We argue that this has reasons in disciplinary conventions. A model of practice based on conventional, 'Whiggish' scientific tenets would hold that examples cannot be correctly assessed or understood without the backdrop of a theory that indicated the relevant parallels and the conceptual features in which the analogy is based; this is in itself an effect of a certain theory of scientific practice, where reflexive mutual control by competing practitioners determines the suitability of a proposal. In managerial practice, this underlying pattern is rather inferred from the practical effects, in terms of business success or failure, the theory provides.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4."
+            },
+            {
+                "text": "Discussing a model or technique in terms of its practical results rather than circuitously debating the disciplinary background upon which it was gradually built allows writers to package their arguments in a much more compressed form. This type of textual structure has been called 'fast' (Bloor, 1999; Swales, 1990) because it allows writers to dispense with certain justificatory moves, assuming the readers' knowledge and acceptance of some crucial theses. Examples allow the writer to take for granted a large part of the interpretive apparatus that will be deployed in understanding the text. Just as (academic) citation practices offload part of the responsibility for the writer's claims to the cited author, thus ascribing the work to a larger disciplinary tradition in which the intended readers also share, exemplification invokes the common experience of professional practice and the tacit shared knowledge that is put to play in everyday encounters with problematic situations. However, while citations are explicit to some degree about the socially constructed nature of the evidence they adduce, examples tend to frame it as a direct encounter with the facts themselves, a slice of life brought to breathe life to an argument. John Lyons (1989: ix) , observing this characteristic, held that examples 'qualify as the most ideological of figures, in the sense of being the figure that is most intimately bound to a representation of the world and that most serves as a veil for the mechanics of that representation'. This is true, in a rather obvious sense, of the choice of examples; selecting the specific instances that are supposed to stand in for a more general concept allows the author to stipulate the traits that will be seen as typical, as well as guide the evaluations and reactions towards them. But other discursive features are no less important; selective salience, the specific semantic representation of exemplary features, and the degree and manner in which the example is isolated from or related to its original context are part of the textual work exercised upon the example to turn it into a useful rhetorical tool (Boddington and Hogben, 2006; Worsham, 1999) . As with any textual construct, examples never directly manifest facts or data; they employ them for a definite communicative purpose, 'reframing them into something that suits the direction of a text' (Lyons, 1989: ix) .",
+                "cite_spans": [
+                    {
+                        "start": 290,
+                        "end": 303,
+                        "text": "(Bloor, 1999;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 304,
+                        "end": 317,
+                        "text": "Swales, 1990)",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 1248,
+                        "end": 1264,
+                        "text": "Lyons (1989: ix)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 2152,
+                        "end": 2181,
+                        "text": "(Boddington and Hogben, 2006;",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 2182,
+                        "end": 2196,
+                        "text": "Worsham, 1999)",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 2400,
+                        "end": 2417,
+                        "text": "(Lyons, 1989: ix)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4."
+            },
+            {
+                "text": "A thorough explanation of these differences should go beyond the written text to ethnographically engage the sense-making practices that different players in the management professions employ to orient themselves and define their community membership. But texts reflect them, inasmuch as they signal shared knowledge and the skilled practices, ingrained so as to become a second nature, used to interpret the world. Both in their propositional structure and in their implicit semantics, examples are tightly bound with the goals and values that direct managerial activity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4."
+            },
+            {
+                "text": "The research here presented has only begun to examine the surface of these phenomena. Among the strictly discursive research possibilities we have left unexplored is the directive potential that examples have for practice. Being interpreted against the backdrop of categorizations that are largely protected from induction, examples do moral work in that they provide a normative model against which readers measure the fitness of their own actions. The directive implications of example usage could be profitably explored through the analysis of personal deictics and other person signals.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4."
+            },
+            {
+                "text": "From a psychological point of view, the issue of schema-based cognition and its relation to exemplary, prototypical or formally regular expressions seems a prime field for further research. It is likely that examples resonate effectively with readers only inasmuch as they follow established patterns of storytelling that are not exclusive to popular management texts, but appear in other domains as well. We have made reference in passing to the theory theory approach in cognition, where categorization is seen as part of a sophisticated process of comprehending the world that takes into account vast amounts of not directly related background knowledge. Introducing practical goals and self-representations into these models would help compensate the shortcomings that Edwards and others have decried in more conventional cognitive theories.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4."
+            },
+            {
+                "text": "Finally, the contrastive organization typical of many of the examples we presented offers great potential. Research in cognitively oriented discourse analysis (Van Dijk, 1998 ), anthropology (D'Andrade, 1990) and sociology (Bourdieu, 1984) has shown the importance of binary opposition in organizing models of the social world and governing action. Binary oppositions may seem arbitrary given the complexity of perceptual experience, but they are crucial in the design of social action in a hierarchically organized world.",
+                "cite_spans": [
+                    {
+                        "start": 159,
+                        "end": 174,
+                        "text": "(Van Dijk, 1998",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 175,
+                        "end": 208,
+                        "text": "), anthropology (D'Andrade, 1990)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 223,
+                        "end": 239,
+                        "text": "(Bourdieu, 1984)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4."
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "Essays on Comparative Human Development, pp. 65-129. Cambridge: Cambridge University Press. Downes, L. and Mui, C. (1998) Unleashing the Killer App: Digital Strategies for Market Dominance. Boston, MA: Harvard Business School Press. Edwards, D. (1991) 'Categories are for Talking', Theory and Psychology 1(4): 515-42. Engwall, L. (1995) 'Management Research: A Fragmented Adhocracy?', Scandinavian Journal of Management 11(3): 225-35. Faber, B. (1996) 'Rhetoric in Competition: The Formation of Organizational Discourse in Conference on College Composition and Communication Abstracts', Written Communication 13(3): 355-84. Fairclough, N. (2000) New Labour, New Language? Routledge. Fairclough, N. (2003) 'Critical Discourse Analysis and Change in Management Discourse and Ideology: A Transdisciplinary Approach', in II Congreso Internacional sobre Discurso, Comunicaci\u00f3n e a Empresa, Universidad de Vigo. Gibson, R. and Zillmann, D. (1994) 'Exaggerated versus Representative Exemplification in News Reports: Perception of Issues and Personal Consequences', Communication Research 21(5): 603-24. Goffman, E. (1979) 'Footing', Semiotica 25(1/2): 1-29. Gopnik, A. and Wellman, H.M. (1994) 'The Theory Theory', in L.A. Hirschfeld and S.A. Gelman (eds) Mapping the Mind: Domain Specificity in Cognition and Culture, pp. 257-93. Cambridge: Cambridge University Press. Gregorowicz, P. and Hegji, C.E. (1998) 'Economics in the MBA curriculum: Some Preliminary Survey Results', The Journal of Economic Education 29(1): 81-7. Hackley, C. (2003) '''We are All Customers Now. . .\": Rhetorical Strategy and Ideological Control in Marketing Management Texts', Journal of Management Studies 40(5): 1325-52. Halliday, M.A.K. and Hasan, R. (1976) Cohesion in English. London: Longman. Hammer, M. and Champy, J. (1993) Reengineering the Corporation: A Manifesto for Business Revolution. New York: HarperBusiness. Hilmer, F.G. and Donaldson, L. (1996) Management Redeemed: Debunking the Fads that Undermine Our Corporations. New York: Free Press. Hobbs, J.R. (1985) 'On the Coherence and Structure of Discourse', technical report 85-37, Center for the Study of Language and Information, Stanford University, Stanford, CA. Huczynski, A. (1993) Management Gurus: What Makes Them and How to Become One. London: Routledge. Hyland, K. (1998) 'Persuasion and Context: The Pragmatics of Academic Metadiscourse', Journal of Pragmatics 30: 437-55. Hyland, K. (2002) 'What Do They Mean? Questions in Academic Writing', Text 22(4): 529-57. Hyland, K. and Tse, P. (2004) 'Metadiscourse in Academic Writing: A Reappraisal', Applied Linguistics 25(2): 156-77. Kanter, R. (2001) Evolve! Succeeding in the Digital Culture of Tomorrow. Cambridge, MA: Harvard Business School Press. Knott, A. and Dale, R. (1993) 'Using Linguistic Phenomena to Motivate a Set of Rhetorical Relations', technical report HCRC/RP-39, Human Communication Research Centre, University of Edinburgh. Koller, V. (2004) 'Businesswomen and War Metaphors: ''Possessive, Jealous and Pugnacious''?', Journal of Sociolinguistics 8(1): 3-22. Kuhn, T. (1970) The Structure of Scientific Revolutions, 2nd edn. Chicago, IL: University of Chicago Press.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "funding",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Excerpts reproduced by permission of Harvard Business School Press from Downes",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "C K N O W L E D G E M E N T ;",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Mui",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Shapiro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Varian",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A C K N O W L E D G E M E N T Excerpts reproduced by permission of Harvard Business School Press from Downes, L. and Mui, C. (1998) Unleashing the Killer App: Digital Strategies for Market Dominance; and Shapiro, C. and Varian, H.R. (1998) Information Rules: A Strategic Guide to the Network Economy. Harvard Business School Press, Boston, MA. Copyright \u00a91998 by the Harvard Business School Publishing Corporation; all rights reserved.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "El discurso de la sociedad del conocimiento y el declive de la reforma social. del management del caos al caos del management",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Alonso",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Alonso, L.E. (2002) 'El discurso de la sociedad del conocimiento y el declive de la reforma social. del management del caos al caos del management', in VII Congreso Espa\u00f1ol de Sociolog\u00eda, Salamanca.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "El imaginario managerial: el discurso de la fluidez en la sociedad econ\u00f3mica",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Alonso",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Fern\u00e1ndez Rodr\u00edguez",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Pol\u00edtica y Sociedad",
+                "volume": "43",
+                "issue": "2",
+                "pages": "127--151",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Alonso, L.E. and Fern\u00e1ndez Rodr\u00edguez, C.J. (2006) 'El imaginario managerial: el discurso de la fluidez en la sociedad econ\u00f3mica', Pol\u00edtica y Sociedad 43(2): 127-51.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "The Complete Works of Aristotle: The Revised Oxford Translation",
+                "authors": [
+                    {
+                        "first": "Aristotle",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1984,
+                "venue": "tome I of Bollingen Series",
+                "volume": "LXXI",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Aristotle (1984) 'Rhetoric', in J. Barnes (ed.) The Complete Works of Aristotle: The Revised Oxford Translation, volume LXXI, tome I of Bollingen Series. Princeton, NJ: Princeton University Press.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Ad-hoc Categories",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Barsalou",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "Memory and Cognition",
+                "volume": "11",
+                "issue": "",
+                "pages": "211--227",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Barsalou, L.W. (1983) ' Ad-hoc Categories', Memory and Cognition 11: 211-27.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Variation in the Methods Sections of Research Articles across Disciplines: The Case of Fast and Slow Text",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Bloor",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Issues in EAP Writing Research and Instruction",
+                "volume": "",
+                "issue": "",
+                "pages": "84--106",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bloor, M. (1999) 'Variation in the Methods Sections of Research Articles across Disciplines: The Case of Fast and Slow Text', in P. Thompson (ed.) Issues in EAP Writing Research and Instruction, pp. 84-106. Reading: University of Reading Press.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Working Up Policy: The Use of Specific Disease Exemplars in Formulating General Principles Governing Childhood Genetic Testing",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Boddington",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Hogben",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Health Care Analysis",
+                "volume": "14",
+                "issue": "1",
+                "pages": "1--13",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Boddington, P. and Hogben, S. (2006) 'Working Up Policy: The Use of Specific Disease Exemplars in Formulating General Principles Governing Childhood Genetic Testing', Health Care Analysis 14(1): 1-13.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Questions de sociologie",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Bourdieu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1984,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bourdieu, P. (1984) Questions de sociologie. Paris: Minuit.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Research Note: The Influence of Exemplars on Recipients' Judgements: The Part Played by Similarity between Exemplar and Recipient",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Brosius",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "European Journal of Communication",
+                "volume": "14",
+                "issue": "2",
+                "pages": "213--224",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Brosius, H.B. (1999) 'Research Note: The Influence of Exemplars on Recipients' Judgements: The Part Played by Similarity between Exemplar and Recipient', European Journal of Communication 14(2): 213-24.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "The Utility of Exemplars in Persuasive Communications",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Brosius",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Bathelt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Communication Research",
+                "volume": "21",
+                "issue": "1",
+                "pages": "48--78",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Brosius, H.B. and Bathelt, A. (1994) 'The Utility of Exemplars in Persuasive Com- munications', Communication Research 21(1): 48-78.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Making Stories: Law, Literature, Life",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Bruner",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bruner, J. (2002) Making Stories: Law, Literature, Life. New York: Farrar, Straus and Giroux.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Understanding the New Management Ideology: A Transdisciplinary Contribution from Critical Discourse Analysis and the New Sociology of Capitalism",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Chiapello",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Fairclough",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "Discourse & Society",
+                "volume": "13",
+                "issue": "2",
+                "pages": "185--208",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chiapello, E. and Fairclough, N. (2002) 'Understanding the New Management Ideology: A Transdisciplinary Contribution from Critical Discourse Analysis and the New Sociology of Capitalism', Discourse & Society 13(2): 185-208.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Who Put the Con in Consultancy? Fads, Recipes and ''Vodka Margarine",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Collins",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Human Relations",
+                "volume": "57",
+                "issue": "5",
+                "pages": "553--572",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Collins, D. (2004) 'Who Put the Con in Consultancy? Fads, Recipes and ''Vodka Margarine''', Human Relations 57(5): 553-72.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Tacit Knowledge, Trust and the Q of Sapphire",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Collins",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Social Studies of Science",
+                "volume": "31",
+                "issue": "1",
+                "pages": "71--85",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Collins, H.M. (2001) 'Tacit Knowledge, Trust and the Q of Sapphire', Social Studies of Science 31(1): 71-85.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Metadiscourse in Popular and Professional Science Discourse",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Crismore",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Farnsworth",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "The Writing Scholar: Studies in Academic Discourse",
+                "volume": "",
+                "issue": "",
+                "pages": "118--136",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Crismore, A. and Farnsworth, R. (1990) 'Metadiscourse in Popular and Professional Science Discourse', in W. Nash (ed.) The Writing Scholar: Studies in Academic Discourse, pp. 118-36. Newbury Park, CA: SAGE.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Some Propositions about the Relations between Culture and Human Cognition",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "D'andrade",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1980,
+                "venue": "Metaphors We Live By",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D'Andrade, R.G. (1990) 'Some Propositions about the Relations between Culture and Human Cognition', in J.W. Stigler, R.A. Shweder and G. Herdt (eds) Cultural Psychology: Lakoff, G. and Johnson, M. (1980) Metaphors We Live By. Chicago, IL: University of Chicago Press.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Resources for Attitudinal Meaning: Evaluative Orientations in Text Semantics",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Lemke",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "Functions of Language",
+                "volume": "5",
+                "issue": "1",
+                "pages": "33--56",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lemke, J.L. (1998) 'Resources for Attitudinal Meaning: Evaluative Orientations in Text Semantics', Functions of Language 5(1): 33-56.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "The Grammar of Discourse",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Longacre",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Longacre, R.E. (1983) The Grammar of Discourse. New York: Plenum.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Exemplum: The Rhetoric of Example in Early Modern France and Italy",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Lyons",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1989,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lyons, J.D. (1989) Exemplum: The Rhetoric of Example in Early Modern France and Italy. Princeton, NJ: Princeton University Press.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Rhetorical Structure Theory: Toward a Functional Theory of Text Organization",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Mann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Thompson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Text",
+                "volume": "8",
+                "issue": "3",
+                "pages": "243--281",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Mann, W.C. and Thompson, S.A. (1988) 'Rhetorical Structure Theory: Toward a Functional Theory of Text Organization', Text 8(3): 243-81.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "The Role of Theories in Conceptual Coherence",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Murphy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Medin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Psychological Review",
+                "volume": "92",
+                "issue": "3",
+                "pages": "289--316",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Murphy, G.L. and Medin, D.L. (1985) 'The Role of Theories in Conceptual Coherence', Psychological Review 92(3): 289-316.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Writing Biology: Texts in the Social Construction of Scientific Knowledge",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Myers",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "Science and Literature Series",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Myers, G. (1990) Writing Biology: Texts in the Social Construction of Scientific Knowledge. Science and Literature Series. Madison: University of Wisconsin Press.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Kuhn, Historical Philosophy of Science, and Case-based Reasoning",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Nickles",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "Configurations",
+                "volume": "6",
+                "issue": "1",
+                "pages": "51--85",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Nickles, T. (1998) 'Kuhn, Historical Philosophy of Science, and Case-based Reasoning', Configurations 6(1): 51-85.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Charting Managerial Reading Preferences in Relation to Popular Management Theory Books: A Semiotic Analysis",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Pagel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Westerfelhaus",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Journal of Business Communication",
+                "volume": "42",
+                "issue": "4",
+                "pages": "420--448",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pagel, S. and Westerfelhaus, R. (2005) 'Charting Managerial Reading Preferences in Relation to Popular Management Theory Books: A Semiotic Analysis', Journal of Business Communication 42(4): 420-48.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Trait\u00e9 de l'argumentation: La nouvelle rh\u00e9torique",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Perelman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Olbrechts-Tyteca",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1958,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Perelman, C. and Olbrechts-Tyteca, L. (1958) Trait\u00e9 de l'argumentation: La nouvelle rh\u00e9torique. Paris: Presses Universitaires de France.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Search of Excellence: Lessons from America's Best Run Companies",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Peters",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Waterman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1982,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Peters, T.J. and Waterman, R.H. (1982) In Search of Excellence: Lessons from America's Best Run Companies. New York: Harper and Row.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Representing Reality: Discourse, Rhetoric and Social Construction",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Potter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1996,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Potter, J. (1996) Representing Reality: Discourse, Rhetoric and Social Construction. London: SAGE.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "On the Internal Structure of Perceptual and Semantic Categories",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Rosch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1973,
+                "venue": "Cognitive Development and the Acquisition of Language",
+                "volume": "",
+                "issue": "",
+                "pages": "111--144",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rosch, E. (1973) 'On the Internal Structure of Perceptual and Semantic Categories', in T.E. Moore (ed.) Cognitive Development and the Acquisition of Language, pp. 111-44. New York: Academic Press.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Cognitive Representations of Semantic Categories",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Rosch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1975,
+                "venue": "Journal of Experimental Psychology: General",
+                "volume": "104",
+                "issue": "3",
+                "pages": "192--233",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rosch, E. (1975) 'Cognitive Representations of Semantic Categories', Journal of Experimental Psychology: General 104(3): 192-233.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "The Fifth Discipline: The Art and Practice of the Learning Organization",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Senge",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Senge, P.M. (1990) The Fifth Discipline: The Art and Practice of the Learning Organization. New York: Doubleday Currency.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "A Mathematical Theory of Communication",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Shannon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1948,
+                "venue": "Bell System Technical Journal",
+                "volume": "27",
+                "issue": "",
+                "pages": "623--656",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shannon, C.E. (1948) ' A Mathematical Theory of Communication', Bell System Technical Journal 27: 379-423, 623-56.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Information Rules: A Strategic Guide to the Network Economy",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Shapiro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Varian",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shapiro, C. and Varian, H.R. (1998) Information Rules: A Strategic Guide to the Network Economy. Harvard, MA: Harvard Business School Press.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "How Anecdotal Accounts in News and in Fiction Can Influence Judgments of a Social Problem's Urgency, Causes, and Cures",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Strange",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Leung",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Personality and Social Psychology Bulletin",
+                "volume": "25",
+                "issue": "4",
+                "pages": "436--449",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Strange, J.J. and Leung, C.C. (1999) 'How Anecdotal Accounts in News and in Fiction Can Influence Judgments of a Social Problem's Urgency, Causes, and Cures', Personality and Social Psychology Bulletin 25(4): 436-49.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Genre Analysis: English in Academic and Research Settings",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Swales",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "Cambridge Applied Linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Swales, J.M. (1990) Genre Analysis: English in Academic and Research Settings. Cambridge Applied Linguistics. Cambridge: Cambridge University Press.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Forms and Functions of Interrogation in Charismatic Christian Pulpit Discourse",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Taiwo",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Nebula",
+                "volume": "2",
+                "issue": "4",
+                "pages": "117--131",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Taiwo, R. (2005) 'Forms and Functions of Interrogation in Charismatic Christian Pulpit Discourse', Nebula 2(4): 117-31.",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Judgment and Uncertainty: Heuristics and Biases",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Tversky",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Kahneman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1974,
+                "venue": "Science",
+                "volume": "185",
+                "issue": "",
+                "pages": "1124--1131",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tversky, A. and Kahneman, D. (1974) 'Judgment and Uncertainty: Heuristics and Biases', Science 185: 1124-31.",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Semantic Discourse Analysis",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Van Dijk",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Handbook of Discourse Analysis",
+                "volume": "2",
+                "issue": "",
+                "pages": "103--112",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Van Dijk, T.A. (1985) 'Semantic Discourse Analysis', in T.A. van Dijk (ed.) Handbook of Discourse Analysis: Volume 2: Dimensions of Discourse, chapter 7, pp. 103-12. Orlando, FL: Academic Press.",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "Ideology: A Multidisciplinary Approach",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Van Dijk",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1998,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Van Dijk, T.A. (1998) Ideology: A Multidisciplinary Approach. London: SAGE.",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Discourse, Context and Cognition",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Van Dijk",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Discourse Studies",
+                "volume": "8",
+                "issue": "1",
+                "pages": "159--177",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Van Dijk, T.A. (2006) 'Discourse, Context and Cognition', Discourse Studies 8(1): 159-77.",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "On the Discipline and Pleasure of Perilous Acts",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Worsham",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "JAC",
+                "volume": "19",
+                "issue": "4",
+                "pages": "707--721",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Worsham, L. (1999) 'On the Discipline and Pleasure of Perilous Acts', JAC 19(4): 707-21.",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "Exemplification in Communication: The Influence of Case Reports on the Perception of Issues",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Zillmann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Brosius",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2000,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zillmann, D. and Brosius, H.B. (2000) Exemplification in Communication: The Influence of Case Reports on the Perception of Issues. Mahwah, NJ: Lawrence Erlbaum Associates.",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "Impression-formation Effects of Printed News Varying in Descriptive Precision and Exemplification",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Zillmann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Perkins",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Sundar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1992,
+                "venue": "Medienpsychologie: Zeitschrift f\u00fcr Individual-und Massenkommunikation",
+                "volume": "4",
+                "issue": "",
+                "pages": "168--185",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zillmann, D., Perkins, J.W. and Sundar, S.S. (1992) 'Impression-formation Effects of Printed News Varying in Descriptive Precision and Exemplification', Medienpsychologie: Zeitschrift f\u00fcr Individual-und Massenkommunikation 4: 168-85.",
+                "links": null
+            },
+            "BIBREF45": {
+                "ref_id": "b45",
+                "title": "where his focus is on the legitimation strategies involved in the construction of management knowledge. His interests include the discursive performance of boundaries between knowledge fields, and the role of discourse in legitimating and building expert systems",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "L O N L I S C H I N S K Y",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "He holds a BA in Philosophy and an M.Phil. in Sociology. A D D R E S S : Departament de Traducci\u00f3 i Filologia",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A L O N L I S C H I N S K Y is a doctoral candidate at the Department of Philology and Translation, Universitat Pompeu Fabra, Barcelona, where his focus is on the legitimation strategies involved in the construction of management knowledge. His interests include the dis- cursive performance of boundaries between knowledge fields, and the role of discourse in legitimating and building expert systems. He holds a BA in Philosophy and an M.Phil. in Sociology. A D D R E S S : Departament de Traducci\u00f3 i Filologia, Universitat Pompeu Fabra, La Rambla 30-32, 08002 Barcelona, Spain. [email: alon@lischinsky.net; web: http://alon.lischinsky.net]",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "(a) a generalization of the example, restating the original claim in a more technical language; (b) a restatement of its concrete implications; (c) a forecasting of future trends, based on this general claim; 4. a claim of desirability."
+            },
+            "FIGREF1": {
+                "fig_num": "17",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Everything having to do with digital technology gets relentlessly faster, smaller, and cheaper[. . .]    In the future, all the devices you use from day to day will have chips. [. . .] What starts out as a clever feature of your coffee maker just might create an entirely new industry model for public utilities."
+            },
+            "FIGREF2": {
+                "fig_num": "20",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "We refer to these second-order effects, the combination of Moore's Law and Metcalfe's Law, as the Law of Disruption. (See Figure1.4) It can be simply stated as follows: Social, political, and economic systems change incrementally, but technology changes exponentially. The systems that make up human civilization, including commercial systems, change over time, but they do so on an incremental basis [. . .] Technology change instead follows the track of Metcalfe's curve[. . .]  It is in the growing chasm between the different rates of change that secondary effects occur [. . .] Technology change initially affects technology, in other words, but once critical mass is reached, the disruption takes place in other, unrelated systems."
+            },
+            "FIGREF3": {
+                "fig_num": "21",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Then they did something really radical. They told the folks at BP headquarters what they'd been up to"
+            },
+            "TABREF0": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Item</td><td>Quantity</td></tr><tr><td>Explicitly marked examples</td><td>17 (13.93%)</td></tr><tr><td>Semantically marked examples</td><td>19 (15.57%)</td></tr><tr><td>Implicit examples</td><td>86 (70.50%)</td></tr><tr><td>Total examples</td><td>122 (100%)</td></tr><tr><td>Total words</td><td>6265</td></tr><tr><td>Examples per 10,000 words</td><td>194.73</td></tr></table>",
+                "text": "Examples in the introductory chapter of Information Rules"
+            },
+            "TABREF1": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "While the example cannot verify the rule, it can nevertheless grant it verisimilitude and ensure the audience's adhesion. It is interesting to see how the nesting of examples provides recursive support: Hollywood's reluctance is an instance of the global claim about excessive conservatism, and the specific actions of television networks and film corporations are in turn instantiations of this reluctance. Thus, while a single example might have seemed insufficient to warrant a general claim, the nesting of instances widens the base for this support.In other cases, multiple separate examples are presented:(7)[Claim ]  Any idiot can establish a Web presence -and lots of them have. The big problem is letting people know about it."
+            }
+        }
+    }
+}
