@@ -47,6 +47,25 @@ class LLMWrapper(ABC):
             max_backoff=max_backoff,
         )
 
+    @abstractmethod
+    def _generate(
+        self,
+        messages: List[Dict[str, str]],
+        model,
+        **kwargs,
+    ) -> str:
+        pass
+
+    @abstractmethod
+    def _batched_generate(
+        self,
+        messages: List[List[Dict[str, str]]],
+        model: str,
+        max_concurrent=3,
+        **kwargs,
+    ) -> List[str]:
+        pass
+
     def generate(
         self,
         messages: List[Dict[str, str]],
@@ -73,6 +92,9 @@ class LLMWrapper(ABC):
         cache_seed=None,
         **kwargs,
     ):
+        if len(messages) == 1:
+            return [self.generate(messages[0], cache_seed=cache_seed, **kwargs)]
+
         if cache_seed is not None:
             return self.api_with_cache.batched_generate(
                 messages=messages,

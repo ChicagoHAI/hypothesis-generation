@@ -1,0 +1,1999 @@
+{
+    "paper_id": "D13-1199",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-07-18T17:38:08.767704Z"
+    },
+    "title": "Identifying Manipulated Offerings on Review Portals",
+    "authors": [
+        {
+            "first": "Jiwei",
+            "middle": [],
+            "last": "Li",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Carnegie Mellon University Pittsburgh",
+                "location": {
+                    "postCode": "15213",
+                    "region": "PA",
+                    "country": "USA"
+                }
+            },
+            "email": "jiweil@cs.cmu.edu"
+        },
+        {
+            "first": "Myle",
+            "middle": [],
+            "last": "Ott",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Cornell University Ithaca",
+                "location": {
+                    "postCode": "14853",
+                    "region": "NY",
+                    "country": "USA"
+                }
+            },
+            "email": "myleott@cs.cornell.edu"
+        },
+        {
+            "first": "Claire",
+            "middle": [],
+            "last": "Cardie",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Cornell University Ithaca",
+                "location": {
+                    "postCode": "14853",
+                    "region": "NY",
+                    "country": "USA"
+                }
+            },
+            "email": "cardie@cs.cornell.edu"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Recent work has developed supervised methods for detecting deceptive opinion spamfake reviews written to sound authentic and deliberately mislead readers. And whereas past work has focused on identifying individual fake reviews, this paper aims to identify offerings (e.g., hotels) that contain fake reviews. We introduce a semi-supervised manifold ranking algorithm for this task, which relies on a small set of labeled individual reviews for training. Then, in the absence of gold standard labels (at an offering level), we introduce a novel evaluation procedure that ranks artificial instances of real offerings, where each artificial offering contains a known number of injected deceptive reviews. Experiments on a novel dataset of hotel reviews show that the proposed method outperforms state-of-art learning baselines. * If yw = 1: draw w \u223c M ulti(\u03c6B) * If yw = 2: draw w \u223c M ulti(\u03c6 d ) * If yw = 3: draw w \u223c M ulti(\u03c6 h ) * If yw = 4: draw w \u223c M ulti(\u03c6c)",
+    "pdf_parse": {
+        "paper_id": "D13-1199",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Recent work has developed supervised methods for detecting deceptive opinion spamfake reviews written to sound authentic and deliberately mislead readers. And whereas past work has focused on identifying individual fake reviews, this paper aims to identify offerings (e.g., hotels) that contain fake reviews. We introduce a semi-supervised manifold ranking algorithm for this task, which relies on a small set of labeled individual reviews for training. Then, in the absence of gold standard labels (at an offering level), we introduce a novel evaluation procedure that ranks artificial instances of real offerings, where each artificial offering contains a known number of injected deceptive reviews. Experiments on a novel dataset of hotel reviews show that the proposed method outperforms state-of-art learning baselines. * If yw = 1: draw w \u223c M ulti(\u03c6B) * If yw = 2: draw w \u223c M ulti(\u03c6 d ) * If yw = 3: draw w \u223c M ulti(\u03c6 h ) * If yw = 4: draw w \u223c M ulti(\u03c6c)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Consumers increasingly rely on user-generated online reviews when making purchase decisions (Cone, 2011; Ipsos, 2012) . Unfortunately, the ease of posting content to the Web, potentially anonymously, combined with the public's trust and growing reliance on opinions and other information found online, create opportunities and incentives for unscrupulous businesses to post deceptive opinion spam-fraudulent or fictitious reviews that are deliberately written to sound authentic, in order to deceive the reader (Ott et al, 2011) .",
+                "cite_spans": [
+                    {
+                        "start": 92,
+                        "end": 104,
+                        "text": "(Cone, 2011;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 105,
+                        "end": 117,
+                        "text": "Ipsos, 2012)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 511,
+                        "end": 528,
+                        "text": "(Ott et al, 2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Unlike other kinds of spam, such as Web (Martinez-Romo and Araujo, 2009; Castillo et al, 2006 ) and e-mail spam (Chirita et al, 2005) , recent work has found that deceptive opinion spam is neither easily ignored nor easily identified by human readers (Ott et al, 2011) . Accordingly, there is growing interest in developing automatic, usually learning-based, methods to help users identify deceptive opinion spam (see Section 2). Even in fully-supervised settings, however, automatic methods are imperfect at identifying individual deceptive reviews, and erroneously labeling genuine reviews as deceptive may frustrate and alienate honest reviewers.",
+                "cite_spans": [
+                    {
+                        "start": 40,
+                        "end": 72,
+                        "text": "(Martinez-Romo and Araujo, 2009;",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 73,
+                        "end": 93,
+                        "text": "Castillo et al, 2006",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 112,
+                        "end": 133,
+                        "text": "(Chirita et al, 2005)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 251,
+                        "end": 268,
+                        "text": "(Ott et al, 2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "An alternative approach, not yet considered in previous work, is to instead identify those product or service offerings where fake reviews appear with high probability. For example, a hotel manager may post fake positive reviews to promote their own hotel, or fake negative reviews to demote a competitor's hotel. In both cases, rather than identifying these deceptive reviews individually, it may be preferable to identify the manipulated offering (i.e., the hotel) so that review portal operators, such as TripAdvisor or Yelp, can further investigate the situation without alienating users. 1Accordingly, this paper addresses the novel task of identifying manipulated offerings, which we frame as a ranking problem, where the goal is to rank offerings by the proportion of their reviews that are believed to be deceptive. We propose a novel threelayer graph model, based on manifold ranking (Zhou et al, 2003a; 2003b) , to jointly model deceptive language at the offering-, review-and term-level. In particular, rather than treating reviews within the same offering as independent units, there is a reinforcing relationship between offerings and reviews. Our manifold ranking approach is semisupervised in that it requires no supervisory information at the offering level; rather, it requires only a small amount of labeled data at a review level. Intuitively, and as depicted in Figure 1 for hotel offerings, we represent hotels, reviews and terms as nodes in a graph, where each hotel is connected to its reviews, and each review, in turn, is connected to the terms used within it. The influence of labeled data is propagated along the graph to unlabeled data, such that a hotel is considered more deceptive if it is heavily linked with other deceptive reviews, and a review, in turn, is more deceptive if it is generated by a deceptive hotel.",
+                "cite_spans": [
+                    {
+                        "start": 893,
+                        "end": 912,
+                        "text": "(Zhou et al, 2003a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 913,
+                        "end": 919,
+                        "text": "2003b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 1389,
+                        "end": 1390,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The success of our semi-supervised approach further depends on the ability to learn patterns of truthful and deceptive reviews that generalize across reviews of different offerings. This is challenging, because reviews often contain offering-specific vocabulary. For example, reviews of hotels in Los Angeles are more likely to include keywords such as \"beach\", \"sea\", \"sunshine\" or \"LA\", while reviews of Juneau hotels may contain \"glacier\", \"Juneau\", \"bear\" or \"aurora borealis.\" A hotel review might also mention the hotel's restaurant or bar by name.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Unfortunately, it is unclear how important (or detrimental) offering-specific features are when deciding whether a review is fake. Accordingly, we propose a dimensionality-reduction approach, based on Latent Dirichlet Allocation (LDA) (Blei et al, 2003) , to obtain a vector representation of reviews for the ranking algorithm that generalizes across reviews of different offerings. Specifically, we train an LDA-based topic model to view each review as a mixture of aspect-, city-, hotel-and review-specific topics (see Section 6). We then reduce the dimensionality of our data (i.e., labeled and unlabeled reviews) by replacing each review term vector with a vector that corresponds to its term distribution over just its aspect-specific topics, i.e., excluding city-, hotel-and review-specific topics. We find that, compared to models trained either on the full vocabulary, or trained on standard LDA document-topic vectors, this representation allows our models to generalize better across reviews of different offerings.",
+                "cite_spans": [
+                    {
+                        "start": 235,
+                        "end": 253,
+                        "text": "(Blei et al, 2003)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "We evaluate our approach on the task of identifying (ranking) manipulated hotels. In particular, in the absence of gold standard offering-level labels, we introduce a novel evaluation procedure for this task, in which we rank numerous versions of each hotel, where each hotel version contains a different number of injected, known deceptive reviews. Thus, we expect hotel versions with larger proportions of deceptive reviews to be ranked higher than those with smaller proportions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "For labeled training data, we use the Ott et al. (2011) dataset of 800 positive (5-star) reviews of 20 Chicago hotels (400 deceptive and 400 truthful). For evaluation, we construct a new FOUR-CITIES dataset, containing 40 deceptive and 40 truthful reviews for each of eight hotels in four different cities (640 reviews total), following the procedure outlined in Ott et al. (2011) . We find that our manifold ranking approach outperforms several state-of-theart learning baselines on this task, including transductive Support Vector Regression. We additionally apply our approach to a large-scale collection of real-world reviews from TripAdvisor and explore the resulting ranking.",
+                "cite_spans": [
+                    {
+                        "start": 38,
+                        "end": 55,
+                        "text": "Ott et al. (2011)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 363,
+                        "end": 380,
+                        "text": "Ott et al. (2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In the sections below, we discuss related work (Section 2) and describe the datasets used in this work (Section 3), the dimensionality-reduction approach for representing reviews (Section 4), and the semi-supervised manifold ranking approach (Section 5). We then evaluate the methods quantitatively (Sections 6 and 7) and qualitatively (Section 8).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "A number of recent approaches have focused on identifying individual fake reviews or users who post fake reviews. For example, Jindal and Liu (2008) train machine learning classifiers to identify duplicate (or near duplicate) reviews. Yoo and Gretzel (2009) gathered 40 truthful and 42 deceptive hotel reviews and manually compare the psychologically relevant linguistic differences between them. Lim et al. (2010) propose an approach based on abnormal user behavior to predict spam users, without using any textual features. Ott et al. (2011) solicit deceptive reviews from workers on Amazon Mechanical Turk, and built a dataset containing 400 deceptive and 400 truthful reviews, which they use to train and evaluate supervised SVM classifiers. Ott et al. (2012) expand upon this work to estimate prevalences of deception in a review community. Mukherjee et al. (2012) study spam produced by groups of fake reviewers. Li et al. (2013) use topic models to detect differences between deceptive and truthful topic-word distributions. In contrast, in this work we aim to identify fake reviews at an offering level.2 LDA Topic Models. LDA topic models (Blei et al, 2003) have been employed for many NLP tasks in recent years. Here, we build on earlier work that uses topic models to (a) separate background information from information discussing the various \"aspects\" of products (e.g., Chemudugunta et al. (2007) ) and (b) identify different levels of information (e.g., user-specific, location-specific, timespecific) (Ramage et al., 2009) .",
+                "cite_spans": [
+                    {
+                        "start": 127,
+                        "end": 148,
+                        "text": "Jindal and Liu (2008)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 235,
+                        "end": 257,
+                        "text": "Yoo and Gretzel (2009)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 397,
+                        "end": 414,
+                        "text": "Lim et al. (2010)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 526,
+                        "end": 543,
+                        "text": "Ott et al. (2011)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 746,
+                        "end": 763,
+                        "text": "Ott et al. (2012)",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 846,
+                        "end": 869,
+                        "text": "Mukherjee et al. (2012)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 919,
+                        "end": 935,
+                        "text": "Li et al. (2013)",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 1148,
+                        "end": 1166,
+                        "text": "(Blei et al, 2003)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1384,
+                        "end": 1410,
+                        "text": "Chemudugunta et al. (2007)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1517,
+                        "end": 1538,
+                        "text": "(Ramage et al., 2009)",
+                        "ref_id": "BIBREF16"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Manifold Ranking Algorithm. The manifoldranking method (Zhou et al, 2003a; Zhou et al, 2003b ) is a mutual reinforcement ranking approach initially proposed to rank data points along their underlying manifold structure. It has been widely used in many different ranking applications, such as summarization (Wan et al, 2007; Wan and Yang, 2007) .",
+                "cite_spans": [
+                    {
+                        "start": 55,
+                        "end": 74,
+                        "text": "(Zhou et al, 2003a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 75,
+                        "end": 92,
+                        "text": "Zhou et al, 2003b",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 306,
+                        "end": 323,
+                        "text": "(Wan et al, 2007;",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 324,
+                        "end": 343,
+                        "text": "Wan and Yang, 2007)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "In this paper, we train all of our models using the CHICAGO dataset of Ott et al (2011) , which contains 20 deceptive and 20 truthful reviews from each of 20 Chicago hotels (800 reviews total). This dataset is unique in that it contains known (gold standard) deceptive reviews, solicited through Amazon Mechanical Turk, and is publicly-available. 3Unfortunately, the CHICAGO dataset is limited, both in size (800 reviews) and scope, in that it only contains reviews of hotels in one city: Chicago. Accordingly, in order to perform a more realistic evaluation for our task, we construct a new dataset, FOUR-CITIES, that contains 40 deceptive and 40 truthful reviews from each of eight hotels in four different cities (640 reviews total).",
+                "cite_spans": [
+                    {
+                        "start": 71,
+                        "end": 87,
+                        "text": "Ott et al (2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset",
+                "sec_num": "3"
+            },
+            {
+                "text": "We build the FOUR-CITIES dataset using the same procedure as Ott et al (2011) , by creating and dividing 320 Mechanical Turk jobs, called Human-Intelligence Tasks (HITs), evenly across eight of the most popular hotels in our four chosen cities (see Table 1 ). Each HIT presents a worker with the name of a hotel and a link to the hotel's website. Workers are asked to imagine that they work for the marketing department of the hotel and that their boss has asked them to write a fake positive review, as if they were a customer, to be posted on a travel review website. Each worker is allowed to submit a single review, and is paid $1 for an acceptable submission.",
+                "cite_spans": [
+                    {
+                        "start": 61,
+                        "end": 77,
+                        "text": "Ott et al (2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 255,
+                        "end": 256,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Dataset",
+                "sec_num": "3"
+            },
+            {
+                "text": "Finally, we augment our deceptive FOUR-CITIES reviews with a matching set of truthful reviews from TripAdvisor by randomly sampling 40 positive (5star) reviews for each of the eight chosen hotels. While we cannot know for sure that the sampled reviews are truthful, previous work has suggested that rates of deception among popular hotels is likely to be low (Jindal and Liu, 2008; Lim et al, 2010) .",
+                "cite_spans": [
+                    {
+                        "start": 359,
+                        "end": 381,
+                        "text": "(Jindal and Liu, 2008;",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 382,
+                        "end": 398,
+                        "text": "Lim et al, 2010)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset",
+                "sec_num": "3"
+            },
+            {
+                "text": "As mentioned in the introduction, we want to learn patterns of truthful and deceptive reviews that apply across hotels in different locations. This is challenging, however, because hotel reviews often contain specific information about the hotel or city, and it is unclear whether these features will generalize to reviews of other hotels.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Topic Models for Dimensionality Reduction",
+                "sec_num": "4"
+            },
+            {
+                "text": "We therefore investigate an LDA-based dimensionality-reduction approach (RLDA) to derive effective vector representations of reviews. Specifically, we model each document as a bag of words, generated from a mixture of: (a) \"aspect\" topics (that discuss various dimensions of the offering); (b) city-specific topics; (c) hotel-specific topics; (d) review-specific topics; 4 and (e) a background topic. We use this model to reduce the dimensionality of the review representation in our training and test sets, by replacing each review's term vector with a vector corresponding to the distribution over only the aspect-based topics, i.e., we exclude city, hotel and review-specific topics, as well as the background topic.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Topic Models for Dimensionality Reduction",
+                "sec_num": "4"
+            },
+            {
+                "text": "Below we present specific details of our model (Sections 4.1 and 4.2). The effectiveness of our dimensionality-reduction approach will be directly evaluated in Section 6, by comparing the performance of various classifiers trained either on the full vocabulary, or on our reduced feature representation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Topic Models for Dimensionality Reduction",
+                "sec_num": "4"
+            },
+            {
+                "text": "The plate diagram and generative story for our model are given in Figures 2 and 3 , respectively. Our model has a similar general structure to standard LDA, but with additional machinery to handle different levels of information. In particular, in order to model K aspects in a collection of R reviews, 4 These will be terms used in just a small number of reviews. of H hotels, in C cities, we first draw multinomial word distributions corresponding to: the background topic, \u03c6 B ; aspect topics,",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 74,
+                        "end": 75,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 80,
+                        "end": 81,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "RLDA Model Details",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "\u2022 Draw \u03c6B \u223c Dir(\u03bb) \u2022 For each aspect z = 1, 2, ..., K: draw \u03c6 z \u223c Dir(\u03bb) \u2022 For each city c = 1, 2, ..., C: draw \u03c6 c \u223c Dir(\u03bb) \u2022 For each hotel h = 1, 2, ..., H: draw \u03c6 h \u223c Dir(\u03bb) \u2022 For each review r: -Draw \u03c0 r \u223c Dir(\u03b2) -Draw \u03c6 r \u223c Dir(\u03bb) -Draw \u03b8 r \u223c Dir(\u03b1) -For each word w in d: * Draw yw \u223c M ulti(\u03c0r) * If yw = 0: \u2022 Draw zw \u223c M ulti(\u03b8) \u2022 Draw w \u223c M ulti(\u03c6 zw )",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "RLDA Model Details",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "\u03c6 k for k \u2208 [1, K]; review- specific topics, \u03c6 r for r \u2208 [1, R]; hotel-specific top- ics, \u03c6 h for h \u2208 [1, H]; and city-specific topics, \u03c6 c for c \u2208 [1, C].",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "RLDA Model Details",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Then, for each word w in review R, we sample a switch variable, y \u2208 [0, 4], indicating whether w comes from one of the aspect topics (y = 0), or the background topic (y = 1), reviewspecific topic (y = 2), hotel-specific topic (y = 3) or city-specific topic (y = 4). If the word comes from one of the aspect topics, then we further sample the specific aspect topic, z w \u2208 [1, K]. Finally, we generate the word, w, from the corresponding \u03c6.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "RLDA Model Details",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Given the review collection, our goal is to find the most likely assignment y w (and z w if y w = 0) for each word, w, in each review. We perform inference using Gibbs sampling. It is relatively straightforward to derive Gibbs sampling equations that allow joint sampling of the z w and y w latent variables for each word token w:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "P (y w = 0, Z w = k) = N a r,-w + \u03b2 N r,-w + 5\u03b2 \u00d7 C k r,-w + \u03b1 k C k r,-w + K\u03b1 \u00d7 E w k + \u03bb w E w k + V \u03bb , P (y w = m, m = 1, 2, 3, 4) = N m r,-w + \u03b2 N r,-w + 5\u03b2 \u00d7 E w m + \u03bb w E w m + V \u03bb ,",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Note that the subscript -w indicates that the count for word token w is excluded.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Also, N r denotes the number of words in review r and N a r,-w , N 1 r,-w , N 2 r,-w , N 3 r,-w , N 4 r,-w are the number of words in review r assigned to the aspect, background, review-specific, hotel-specific and city-specific topics, respectively, excluding the current word. C k r,-w denotes the number of words in review r assigned to aspect topic k. E w k , E w 1 , E w 2 , E w 3 , E w 4 denote the number of times that the word w is assigned to aspect k, the background topic, review-specific topic r, hotel-specific topic h, and cityspecific topic c, respectively. We set hyperparameter \u03b1 to 1, \u03b2 to 0.5, \u03bb to 0.01. We run 200 iterations of Gibbs sampling until the topic distribution stabilizes. After each iteration in Gibbs sampling, we obtain:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "\u03c0 i r = N i r + \u03b2 i N i r + 5\u03b2 \u03b8 k r = C k r + \u03b1 k C k r + K\u03b1 \u03c6 w z = E w z + \u03bb w E w z + V \u03bb \u03c6 w m = E w m + \u03bb w E w m + V \u03bb (1)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Finally, at the end of Gibbs sampling, we filter out background, document-specific, hotel-specific and city-specific information, by replacing each document's term vector with a 1 \u00d7 K aspect-topic vector,",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "G r = \u03b8 1 r , \u03b8 2 r , \u2022 \u2022 \u2022 , \u03b8 K r .",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "5 Manifold Ranking for Hotels",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "In this section, we describe our ranking algorithmbased on manifold ranking (Zhou et al, 2003a; Zhou et al, 2003b) -that tries to jointly model deceptive language at the hotel-, review-and term-level.",
+                "cite_spans": [
+                    {
+                        "start": 76,
+                        "end": 95,
+                        "text": "(Zhou et al, 2003a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 96,
+                        "end": 114,
+                        "text": "Zhou et al, 2003b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inference for RLDA",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "We use a three-layer (hotel layer, review layer and term layer) mutual reinforcement model (see Figure 1 ). Formally, we represent our three-layer graph as",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 103,
+                        "end": 104,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "G = V H , V R , V T , E HR , E RR , E RT , E T T , where V H = {H i } i=N H i=1 , V R = {R} i=H R i=1 and V T = {T i } i=V",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "i=1 correspond to the set of hotels, reviews and terms respectively. E HR , E RR and E RT respectively denote the edges between hotels and reviews, reviews and reviews and reviews and terms. Each edge is associated with a weight that denotes the similarity between two nodes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Let sim(H i , R j ), where H i \u2208 V H and R j \u2208 V R , denote the edge weight between hotel H i and review R j , calculated as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "sim(H i , R j ) = 1 if R i \u2208 H j 0 if R i \u2208 H j (2)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Then we get row normalized matrices D HR \u2208 R N H \u00d7N R and D RH \u2208 R N R \u00d7N H as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "D HR (i, j) = sim(H i , R j ) i sim(H i , R j ) D RH (i, j) = sim(H i , R j ) j sim(H i , R j )",
+                        "eq_num": "(3)"
+                    }
+                ],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "As described in Section 4.2, each review is represented with a 1 \u00d7 K aspect vector G r after filtering undesired information. The edge weight between two reviews is then the cosine similarity, sim(R i , R j ), between two reviews and can be calculated as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "sim(R i , R j ) = t=K t=1 G t i \u2022 G t j t=K t=1 G t2 i \u2022 t=K t=1 G t2 j (4)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Since the normalization process will make the review-to-review relation matrix asymmetric, we adopt the following strategy: let P denote the similarity matrix between reviews, where P (i, j) = sim(R i , R j ) and M denotes the diagonal matrix with (i,i)-element equal to the sum of the i th row of SIM . The normalized matrix between reviews D RR \u2208 R N R \u00d7N R is calculated as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "D RR = M -1 2 \u2022 P \u2022 M -1 2 (5)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "sim(R i , w j ) denotes the similarity between review R i and term w j and is the conditional probability of word w j given review R i . If w j \u2208 R j , sim(R i , w j ) is calculated according to Eq. ( 6) by integrating out latent parameters \u03b8 and \u03c0. Else if",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "w j \u2208 R j , sim(R i , w j ) = 0. sim(R i , w j ) = k=K k=1 p(z = k|r i ) \u00d7 p(w j |z = k) + t\u2208{B,h,c,d} p(w j |y i = t)p(y i = t|r i ) = \u03c0 (a) d k=K k=1 \u03b8 z d \u2022 \u03c6 (wj ) z + t\u2208{B,h,c,d} \u03c0 (t) d \u03c6 (wj ) t",
+                        "eq_num": "(6)"
+                    }
+                ],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Similar to Eq. ( 3), we further get the normalized matrix",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "D RT \u2208 R H R \u00d7V and D T R \u2208 R V \u00d7H R .",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Similarity between terms sim(w i , w j ) is given by the WordNet path-similarity,5 normalized to create the matrix D V V .",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Input: The hotel set V D , review set V R , term set V T , normalized transition probability matrix D HR , D RR , D RH , D RT , D T T , D T R . Output: the ranking vectors S R , S H , S T . Begin:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "1. Initialization: set the score labeled reviews to +1 or -1 and other unlabeled reviews 0: S 0 R = [+1, ..., +1, -1, ..., -1, 0, ..., 0]. Set S 0 H and S 0 T to 0. Normalize the score vector. 2. update S k R , S k H and S k T according to Eq. ( 7). 3. normalize S k R , S k H and S k T . 4. fix the score of labeled reviews to +1 and -1.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Go to step (2) until convergence.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Figure 4 : Semi-Supervised Reinforcement Ranking.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "4",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Graph Construction",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Based on the set of labeled reviews, nodes for truthful reviews (positive) are initialized with a high score (1) and nodes for deceptive reviews, a low score (-1). Given the weighted graph, our task is to assign a score to the each hotel, each term, and the remaining unlabeled reviews. Let S H , S R and S T denote the ranking scores of hotels, reviews and terms, which are updated during each iteration as follows until convergence 6 :",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Reinforcement Ranking Based on the Manifold Method",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "\uf8f1 \uf8f4 \uf8f2 \uf8f4 \uf8f3 S k+1 H = D HR \u2022 S k R S k+1 R = 1 D RR \u2022 S k R + 2 D RH \u2022 S k H + 3 D RT \u2022 S k t S k+1 T = 4 D T T \u2022 S k T + 5 D T R \u2022 S k R (7)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Reinforcement Ranking Based on the Manifold Method",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "where 1 + 2 + 3 = 1 and 4 + 5 = 1. (The score of labeled reviews will be fixed to +1 or -1.)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Reinforcement Ranking Based on the Manifold Method",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "In Section 4, we introduced RLDA to filter out review-, hotel-and city-specific information from our vector-based review representation. Here, we will directly evaluate the effectiveness of RLDA by comparing the performance of binary deceptive vs. truthful classifiers trained on three feature sets: (a) the full vocabulary, encoded as unigrams and bigrams (N-GRAMS); (b) a reduced-dimensionality feature space, based on standard LDA (Blei et al, 2003) ; and (c) a reduced-dimensionality feature 6 Convergence is achieved if the difference between ranking scores in two consecutive iterations is less than 0.00001. space, based on our proposed revised LDA approach (RLDA).",
+                "cite_spans": [
+                    {
+                        "start": 434,
+                        "end": 452,
+                        "text": "(Blei et al, 2003)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Learning Generalizable Classifiers",
+                "sec_num": "6"
+            },
+            {
+                "text": "We compare two kinds of classifiers, which are trained on only the labeled CHICAGO dataset and tested on the FOUR-CITIES dataset. First, we use SVM light (Joachims, 1999) to train linear SVM classifiers, which have been shown to perform well in related work (Ott et al, 2011) . Second, we train a two-layer manifold classifier, which is a simplified version of the model presented in Section 5. In this model, the graph consists of only review and term layers, and the score of a labeled review is fixed to 1 or -1 in each iteration. After convergence, reviews with scores greater than 0 are classified as truthful, and less than 0 as deceptive.",
+                "cite_spans": [
+                    {
+                        "start": 154,
+                        "end": 170,
+                        "text": "(Joachims, 1999)",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 258,
+                        "end": 275,
+                        "text": "(Ott et al, 2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Learning Generalizable Classifiers",
+                "sec_num": "6"
+            },
+            {
+                "text": "The results are shown in Table 2 and show the average accuracy and precision/recall w.r.t. the truthful (positive) class. We find that SVM and MANIFOLD are comparable in all six conditions, and not surprisingly, perform best when evaluated on reviews from the two Chicago hotels in our FOUR-CITIES data. However, the N-GRAM and LDA feature sets perform much worse than RDLA when evaluation is performed on reviews from the other three (non-Chicago) cities. This confirms that classifiers trained on n-gram features overfit to the training data (CHICAGO) and do not generalize well to reviews from other cities. In addition, the standard LDA-based method for dimensionality reduction is not sufficient for our specific task.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 31,
+                        "end": 32,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results and Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "In this section, we evaluate the performance of our manifold ranking approach (see Section 5) on the task of identifying manipulated hotels.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "Baselines. We consider several baseline ranking approaches to compare to our manifold ranking approach. Like the manifold ranking approach, the baselines also employ both the CHICAGO dataset (labeled) and FOUR-CITIES dataset (without labels). 7For fair comparison, we use identical processing techniques for each approach. Topic number is set to five for all topic-model-based approaches. Each baseline makes review-level predictions and then ranks each hotel by the average of those predictions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "\u2022 Review-SVR: Uses linear Tranductive Support Vector Regression with unigram and bigram features, similar to Ott et al. (2011) . \u2022 Review-SVR+LDA (R): Similar to REVIEW-SVR but uses our revised LDA (RLDA) topic model for dimensionality reduction (R). \u2022 Two-Layer Manifold (S): A simplified version of our model where the hotel-level is removed from the graph. Dimensionality reduction is performed using standard LDA (S). \u2022 Two-Layer Manifold (R): Similar to TWO-LAYER MANIFOLD (S) but uses the revised LDA (RLDA) model for dimensionality reduction. \u2022 Three-layer Manifold (tf-idf): Our three-layer manifold ranking model, except with each review represented as a TF-IDF term vector. Review similarity is calculated based on the cosine similarity between these vectors.",
+                "cite_spans": [
+                    {
+                        "start": 109,
+                        "end": 126,
+                        "text": "Ott et al. (2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "Evaluation Method. To evaluate ranking performance in the absence of a gold standard set of manipulated hotels, we rearrange the FOUR-CITIES test set of 40 truthful and 40 deceptive reviews for each of eight hotels: we create 41 versions of each hotel, where each hotel version contains a different number of injected deceptive reviews, ranging from 0 to 40. For example, the first version of a hotel will have 40 truthful and 0 deceptive reviews, the second version 39 truthful and 1 deceptive, and the 41st version 0 truthful and 40 deceptive. In total, we generate 41 \u00d7 8 = 328 versions of hotel reviews. We expect versions with larger proportions of deceptive reviews to receive lower scores by the ranking models (i.e., they are ranked higher/more deceptive).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "Metrics. To qualitatively evaluate the ranking results, we use the Normalized Discounted Cumulative Gain (NDCG), which is commonly used to evaluate retrieval algorithms with respect to an ideal relevance-based ranking. In particular, NDCG rewards rankings with the most relevant results at the top positions (Liu, 2009) , which is also our objective, namely, to rank versions that have higher proportions of deceptive reviews nearer to the top.",
+                "cite_spans": [
+                    {
+                        "start": 308,
+                        "end": 319,
+                        "text": "(Liu, 2009)",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "Let R(m) denote the relevance score of m th ranked hotel version. Then, NDCG N is defined as:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "N DCG N = 1 IDCG N m=N m=1 2 R(m) -1 log 2 (1 + m)",
+                        "eq_num": "(8)"
+                    }
+                ],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "where IDCG N refers to discounted cumulative gain (DCG) of the ideal ranking of the top N results. We define the ideal ranking according to the proportion of deceptive reviews in different versions, and report NDCG scores for the N th ranked hotel versions (N = 8 to 321), at intervals of 8 (to account for ties among the eight hotels).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "Results and Discussion. NDCG results are shown in Figure 5 . We observe that our approach (using 2, 5 or 10 topics) generally outperforms the other approaches. In particular, approaches that use our RLDA text representation (OUR APPROACH, TWO-LAYER MANIFOLD (R), and REVIEW-SVR+LDA (R)), which tries to remove city-and hotel-specific information, perform better than those that use the full vocabulary (REVIEW-SVR, TWO-LAYER MANIFOLD (S), and THREE-LAYER MANIFOLD (TF-IDF)). This further confirms that our RLDA dimensionality reduction technique allows models, trained on limited data, to generalize to reviews of different hotels and in different locations. We also find that approaches that model a reinforcing relationship between hotels and their reviews are better than approaches that model reviews as independent units, e.g., TWO-LAYER MANIFOLD (R) vs. REVIEW-SVR+LDA and TWO-LAYER MANI-FOLD (S) vs. REVIEW-SVR. This confirms our intuition that a hotel is more deceptive if it is connected with many deceptive reviews, and, in turn, a review is more deceptive if from a deceptive hotel.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 57,
+                        "end": 58,
+                        "text": "5",
+                        "ref_id": "FIGREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Identifying Manipulated Hotels",
+                "sec_num": "7"
+            },
+            {
+                "text": "We now present qualitative evaluations for the RLDA topic model and the manifold ranking model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Qualitative Evaluation",
+                "sec_num": "8"
+            },
+            {
+                "text": "Topic Quality. Table 3 gives the top words for four aspect topics and four city-specific topics in the RLDA topic model; Table 4 gives the highest and lowest ranking term weights in our three-layer manifold model. By comparing the first row of topics in this data in previous work (Li et al., 2013) .",
+                "cite_spans": [
+                    {
+                        "start": 281,
+                        "end": 298,
+                        "text": "(Li et al., 2013)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 21,
+                        "end": 22,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    },
+                    {
+                        "start": 127,
+                        "end": 128,
+                        "text": "4",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Qualitative Evaluation",
+                "sec_num": "8"
+            },
+            {
+                "text": "With respect to the second row in Table 4 , containing top words from city-specific topics, we observe that each topic does contain primarily cityspecific information. This helps to explain why removing terms associated with these topics resulted in a better vector representation for reviews. Real-world Evaluation. Finally, we apply our ranking model to a large-scale collection of realworld reviews from TripAdvisor. We crawl 878,561 reviews from 3,945 hotels in 25 US cities from Tri-pAdvisor excluding all non-5-star reviews and removing hotels with fewer than 100 reviews. In the end, we collect 244,810 reviews from 838 hotels.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 40,
+                        "end": 41,
+                        "text": "4",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Qualitative Evaluation",
+                "sec_num": "8"
+            },
+            {
+                "text": "We apply our manifold ranking model and rank all 838 hotels. First, we present a histogram of the resulting manifold ranking scores in Figure 6 . We observe that the distribution reaches a peak around 0.04, which in our quantitative evaluation (Section 7) corresponded to a hotel with 34 truthful and 6 deceptive reviews. These results suggest that the majority of reviews in TripAdvisor are truthful, in line with previous findings by Ott et al. (2011) .",
+                "cite_spans": [
+                    {
+                        "start": 436,
+                        "end": 453,
+                        "text": "Ott et al. (2011)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 142,
+                        "end": 143,
+                        "text": "6",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Qualitative Evaluation",
+                "sec_num": "8"
+            },
+            {
+                "text": "Next, we note that previous work has hypothesized that deceptive reviews are more likely to be posted by first-time review writers, or singleton reviewers (Ott et al, 2011; Wu et al, 2011) . Accordingly, if this hypothesis were valid, then manipulated hotels would have an above-average proportion of singleton reviews. Figure 7 shows a histogram of the average proportion of singleton reviews, as a function of the ranking scores produced by our model. Noting that lower scores correspond to a higher predicted proportion of deceptive reviews, we observe that hotels that are ranked as being more deceptive by our model have much higher proportions of singleton reviews, on average, compared to hotels ranked as less deceptive.",
+                "cite_spans": [
+                    {
+                        "start": 155,
+                        "end": 172,
+                        "text": "(Ott et al, 2011;",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 173,
+                        "end": 188,
+                        "text": "Wu et al, 2011)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 327,
+                        "end": 328,
+                        "text": "7",
+                        "ref_id": "FIGREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Qualitative Evaluation",
+                "sec_num": "8"
+            },
+            {
+                "text": "We study the problem of identifying manipulated offerings on review portals and propose a novel threelayer graph model, based on manifold ranking for ranking offerings based on the proportion of reviews expected to be instances of deceptive opinion spam. Experimental results illustrate the effectiveness of our model over several learning-based baselines.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "9"
+            },
+            {
+                "text": "Manipulating online reviews may also have legal consequences. For example, the Federal Trade Commission (FTC) has updated their guidelines on the use of endorsements and testimonials in advertising to suggest that posting deceptive reviews may be unlawful in the United States (",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "FTC, 2009).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Approaches for identifying individual fake reviews may be applied to our task, for example, by averaging the review-level predictions for an offering. This averaging approach is one of our baselines in Section 7.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "We use the dataset available at: http://www.cs. cornell.edu/ \u02dcmyleott/op_spam.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Path-similarity is based on the shortest path that connects the senses in the \"is-a\" (hypernym/hyponym) taxonomy.See http://nltk.googlecode.com/svn/ trunk/doc/howto/wordnet.html.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "While we have not investigated the effects of unlabeled data in detail, providing additional unlabeled data (beyond the test set) boosts the manifold ranking performances reported below by 1-2%.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This work was supported in part by National Science Foundation Grant BCS-0904822, a DARPA Deft grant, as well as a gift from Google. We also thank the EMNLP reviewers for their helpful comments and advice.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgments",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Latent Dirichlet allocation. 2003",
+                "authors": [
+                    {
+                        "first": "David",
+                        "middle": [],
+                        "last": "Blei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ng",
+                        "middle": [],
+                        "last": "Andrew",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [],
+                        "last": "Jordan",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "Journal of Machine Learning Research",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "David Blei, Ng Andrew and Michael Jordan. Latent Dirichlet allocation. 2003. In Journal of Machine Learning Research.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Massimo Santini and Sebastiano Vigna. A reference collection for web spam",
+                "authors": [
+                    {
+                        "first": "Carlos",
+                        "middle": [],
+                        "last": "Castillo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Debora",
+                        "middle": [],
+                        "last": "Donato",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Luca",
+                        "middle": [],
+                        "last": "Becchetti",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Paolo",
+                        "middle": [],
+                        "last": "Boldi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Stefano",
+                        "middle": [],
+                        "last": "Leonardi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "ACM Sigir Forum",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Carlos Castillo, Debora Donato, Luca Becchetti, Paolo Boldi, Stefano Leonardi, Massimo Santini and Sebas- tiano Vigna. A reference collection for web spam. In ACM Sigir Forum. 2006.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "MailRank: using ranking for spam detection",
+                "authors": [
+                    {
+                        "first": "Paul-Alexandru",
+                        "middle": [],
+                        "last": "Chirita",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jrg",
+                        "middle": [],
+                        "last": "Diederich",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Wolfgang",
+                        "middle": [],
+                        "last": "Nejdl",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Proceedings of the 14th ACM international conference on Information and knowledge management",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Paul-Alexandru Chirita, Jrg Diederich and Wolfgang Ne- jdl. MailRank: using ranking for spam detection. In Proceedings of the 14th ACM international conference on Information and knowledge management. 2005. Cone. 2011 Online Influence Trend Tracker. http://www.coneinc.com/negative-reviews-online- reverse-purchase-decisions. August.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Federal Trade Commission. Guides Concerning Use of Endorsements and Testimonials in Advertising",
+                "authors": [
+                    {
+                        "first": "Yajuan",
+                        "middle": [],
+                        "last": "Duan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Zhumin",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Furu",
+                        "middle": [],
+                        "last": "Wei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ming",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Heung-Yeung",
+                        "middle": [],
+                        "last": "Shum",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of 24th International Conference on Computational Linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yajuan Duan, Zhumin Chen, Furu Wei, Ming Zhou and Heung-Yeung Shum. Twitter Topic Summarization by Ranking Tweets Using Social Influence and Content Quality. In Proceedings of 24th International Confer- ence on Computational Linguistics 2012. Federal Trade Commission. Guides Concerning Use of Endorsements and Testimonials in Advertising. In FTC 16 CFR Part 255. 2009. Socialogue: Five Stars? Thumbs Up? A+ or Just Average? URL:http://www.ipsos-na.com/news- polls/pressrelease.aspx?id=5929g",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Opinion spam and analysis",
+                "authors": [
+                    {
+                        "first": "Nitin",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bing",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Proceedings of the 2008 International Conference on Web Search and Data Mining",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Nitin Jindal, and Bing Liu. Opinion spam and analysis. In Proceedings of the 2008 International Conference on Web Search and Data Mining. 2008.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Finding Unusual Review Patterns Using Unexpected Rules",
+                "authors": [
+                    {
+                        "first": "Nitin",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bing",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ee-Peng",
+                        "middle": [],
+                        "last": "Lim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 19th ACM international conference on Information and knowledge management",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Nitin Jindal, Bing Liu and Ee-Peng Lim. Finding Unusual Review Patterns Using Unexpected Rules. In Proceed- ings of the 19th ACM international conference on In- formation and knowledge management.2010.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Making large-scale support vector machine learning practical",
+                "authors": [
+                    {
+                        "first": "Thorsten",
+                        "middle": [],
+                        "last": "Joachims",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Advances in kernel methods",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Thorsten Joachims. Making large-scale support vector machine learning practical. In Advances in kernel methods.1999.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Learning to identify review Spam",
+                "authors": [
+                    {
+                        "first": "Fangtao",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Minlie",
+                        "middle": [],
+                        "last": "Huang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yi",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xiaoyan",
+                        "middle": [],
+                        "last": "Zhu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the Twenty-Second international joint conference on Artificial Intelligence",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fangtao Li, Minlie Huang, Yi Yang and Xiaoyan Zhu. Learning to identify review Spam. In Proceedings of the Twenty-Second international joint conference on Artificial Intelligence. 2011.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "TopicSpam: a Topic-Model-Based Approach for Spam Detection",
+                "authors": [
+                    {
+                        "first": "Jiwei",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Claire",
+                        "middle": [],
+                        "last": "Cardie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Sujian",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of the 51th Annual Meeting of the Association for Computational Linguis-tics",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jiwei Li, Claire Cardie and Sujian Li. TopicSpam: a Topic-Model-Based Approach for Spam Detection. In Proceedings of the 51th Annual Meeting of the Associ- ation for Computational Linguis-tics. 2013.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Generating templates of entity summaries with an entity-aspect model and pattern mining",
+                "authors": [
+                    {
+                        "first": "Peng",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jing",
+                        "middle": [],
+                        "last": "Jiang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yinglin",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Peng Li, Jing Jiang and Yinglin Wang. Generating tem- plates of entity summaries with an entity-aspect model and pattern mining. In Proceedings of the 48th Annual Meeting of the Association for Computational Linguis- tics. 2010.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Detecting Product Review Spammers Using Rating Behavior",
+                "authors": [
+                    {
+                        "first": "Ee-Peng",
+                        "middle": [],
+                        "last": "Lim",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Viet-An",
+                        "middle": [],
+                        "last": "Nguyen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Nitin",
+                        "middle": [],
+                        "last": "Jindal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bing",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hady",
+                        "middle": [
+                            "Wirawan"
+                        ],
+                        "last": "Lauw",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 19th ACM international conference on Information and knowledge management",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ee-Peng Lim, Viet-An Nguyen, Nitin Jindal, Bing Liu, and Hady Wirawan Lauw. Detecting Product Review Spammers Using Rating Behavior. In Proceedings of the 19th ACM international conference on Information and knowledge management. 2010.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Learning to Rank for Information Retrieval",
+                "authors": [
+                    {
+                        "first": "Tieyan",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Foundations and Trends in Information Retrieval",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tieyan Liu. Learning to Rank for Information Retrieval. In Foundations and Trends in Information Retrieval 2009.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Spotting Fake Reviewer Groups in Consumer Reviews",
+                "authors": [
+                    {
+                        "first": "Arjun",
+                        "middle": [],
+                        "last": "Mukherjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bing",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Natalie",
+                        "middle": [],
+                        "last": "Glance",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 21st international conference on World Wide Web",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Arjun Mukherjee, Bing Liu and Natalie Glance. Spotting Fake Reviewer Groups in Consumer Reviews . In Pro- ceedings of the 21st international conference on World Wide Web. 2012.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Web spam identification through language model analysis",
+                "authors": [
+                    {
+                        "first": "Juan",
+                        "middle": [],
+                        "last": "Martinez-Romo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lourdes",
+                        "middle": [],
+                        "last": "Araujo",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of the 5th international workshop on adversarial information retrieval on the web",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Juan Martinez-Romo and Lourdes Araujo. Web spam identification through language model analysis. In Proceedings of the 5th international workshop on ad- versarial information retrieval on the web. 2009.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Estimating the Prevalence of Deception in Online Review Communities",
+                "authors": [
+                    {
+                        "first": "Myle",
+                        "middle": [],
+                        "last": "Ott",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Claire",
+                        "middle": [],
+                        "last": "Cardie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jeffrey",
+                        "middle": [],
+                        "last": "Hancock",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 21st international conference on World Wide Web",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Myle Ott, Claire Cardie and Jeffrey Hancock. Estimating the Prevalence of Deception in Online Review Com- munities. In Proceedings of the 21st international con- ference on World Wide Web. 2012.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Finding Deceptive Opinion Spam by Any Stretch of the Imagination",
+                "authors": [
+                    {
+                        "first": "Myle",
+                        "middle": [],
+                        "last": "Ott",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yejin",
+                        "middle": [],
+                        "last": "Choi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Claire",
+                        "middle": [],
+                        "last": "Cardie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jeffrey",
+                        "middle": [],
+                        "last": "Hancock",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Myle Ott, Yejin Choi, Claire Cardie and Jeffrey Hancock. Finding Deceptive Opinion Spam by Any Stretch of the Imagination. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguis- tics. 2011.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Labeled LDA: A supervised topic model for credit attribution in multi-labeled corpora",
+                "authors": [
+                    {
+                        "first": "Daniel",
+                        "middle": [],
+                        "last": "Ramage",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "David",
+                        "middle": [],
+                        "last": "Hall",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ramesh",
+                        "middle": [],
+                        "last": "Nallapati",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Christopher",
+                        "middle": [],
+                        "last": "Manning",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of the 2009 Conference on Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Daniel Ramage, David Hall, Ramesh Nallapati and Christopher Manning. Labeled LDA: A supervised topic model for credit attribution in multi-labeled corpora. In Proceedings of the 2009 Conference on Empirical Methods in Natural Language Processing. 2009.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Xiaojun Wan and Jianwu Yang. Multi-Document Summarization Using Cluster-Based Link Analysis",
+                "authors": [
+                    {
+                        "first": "Michal",
+                        "middle": [],
+                        "last": "Rosen-Zvi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Thomas",
+                        "middle": [],
+                        "last": "Griffith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Mark",
+                        "middle": [],
+                        "last": "Steyvers",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Padhraic",
+                        "middle": [],
+                        "last": "Smyth",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Proceedings of the 31st annual international ACM SI-GIR conference on Research and development in information retrieval",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Michal Rosen-zvi, Thomas Griffith, Mark Steyvers and Padhraic Smyth. The author-topic model for authors and documents. In Proceedings of the 20th conference on Uncertainty in artificial intelligence.2004. Xiaojun Wan and Jianwu Yang. Multi-Document Sum- marization Using Cluster-Based Link Analysis. In Proceedings of the 31st annual international ACM SI- GIR conference on Research and development in in- formation retrieval. 2008.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Jianwu Yang and Jianguo Xiao Manifold-Ranking Based Topic-Focused Multi-Document Summarization",
+                "authors": [
+                    {
+                        "first": "Xiaojun",
+                        "middle": [],
+                        "last": "Wan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Proceedings of International Joint Conferences on Artificial Intelligence",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xiaojun Wan, Jianwu Yang and Jianguo Xiao Manifold- Ranking Based Topic-Focused Multi-Document Sum- marization. In Proceedings of International Joint Con- ferences on Artificial Intelligence,2007.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Review Graph based Online Store Review Spammer Detection",
+                "authors": [
+                    {
+                        "first": "Guan",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Sihong",
+                        "middle": [],
+                        "last": "Xie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bing",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Philip",
+                        "middle": [],
+                        "last": "Yu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of International Conference of Data Mining",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guan Wang, Sihong Xie, Bing Liu and Philip Yu. Re- view Graph based Online Store Review Spammer De- tection. In Proceedings of International Conference of Data Mining. 2011.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Merging multiple criteria to identify suspicious reviews",
+                "authors": [
+                    {
+                        "first": "Guangyu",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Derek",
+                        "middle": [],
+                        "last": "Greene",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Padraig",
+                        "middle": [],
+                        "last": "Cunningham",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the fourth ACM conference on Recommender systems",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guangyu Wu, Derek Greene and , Padraig Cunningham. Merging multiple criteria to identify suspicious re- views. In Proceedings of the fourth ACM conference on Recommender systems. 2011.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Comparison of Deceptive and Truthful Travel Reviews",
+                "authors": [
+                    {
+                        "first": "Kyung-Hyan",
+                        "middle": [],
+                        "last": "Yoo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ulrike",
+                        "middle": [],
+                        "last": "Gretzel",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Information and Communication Technologies in Tourism",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kyung-Hyan Yoo and Ulrike Gretzel. Comparison of De- ceptive and Truthful Travel Reviews. In Information and Communication Technologies in Tourism. 2009.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Learning with local and global consistency",
+                "authors": [
+                    {
+                        "first": "Dengyong",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Olivier",
+                        "middle": [],
+                        "last": "Bousquet",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Thomas",
+                        "middle": [],
+                        "last": "Navin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jason",
+                        "middle": [],
+                        "last": "Weston",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Proceedings of Advances in neural information processing systems",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dengyong Zhou, Olivier Bousquet, Thomas Navin and Jason Weston. Learning with local and global consis- tency. In Proceedings of Advances in neural informa- tion processing systems.2003.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Ranking on data manifolds",
+                "authors": [
+                    {
+                        "first": "Dengyong",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jason",
+                        "middle": [],
+                        "last": "Weston",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Arthur",
+                        "middle": [],
+                        "last": "Gretton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Olivier",
+                        "middle": [],
+                        "last": "Bousquet",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Proceedings of Advances in neural information processing systems",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dengyong Zhou, Jason Weston, Arthur Gretton and Olivier Bousquet. Ranking on data manifolds. In Pro- ceedings of Advances in neural information processing systems.2003.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "text": "Figure 1: Mutual Reinforcement Graph Model for Hotel Ranking using the Manifold-Ranking Method",
+                "fig_num": "1",
+                "type_str": "figure",
+                "uris": null,
+                "num": null
+            },
+            "FIGREF1": {
+                "text": "Figure 2: Graphical illustration of the RLDA topic model.",
+                "fig_num": "2",
+                "type_str": "figure",
+                "uris": null,
+                "num": null
+            },
+            "FIGREF2": {
+                "text": "Figure 3: Generative story for the RLDA topic model.",
+                "fig_num": "3",
+                "type_str": "figure",
+                "uris": null,
+                "num": null
+            },
+            "FIGREF3": {
+                "text": "Figure 5: NDCG N results for different approaches. K indicates the number of topics.",
+                "fig_num": "5",
+                "type_str": "figure",
+                "uris": null,
+                "num": null
+            },
+            "FIGREF4": {
+                "text": "Figure 6: Hotel Ranking Distribution on TripAdvisor",
+                "fig_num": "6",
+                "type_str": "figure",
+                "uris": null,
+                "num": null
+            },
+            "FIGREF5": {
+                "text": "Figure 7: Proportion of Singletons vs. Hotel Ranking.",
+                "fig_num": "7",
+                "type_str": "figure",
+                "uris": null,
+                "num": null
+            },
+            "TABREF0": {
+                "text": "Details of our FOUR-CITIES evaluation data.",
+                "html": null,
+                "type_str": "table",
+                "content": "<table><tr><td>City</td><td>Hotels</td></tr><tr><td>Chicago</td><td>W Chicago, Palomar Chicago</td></tr><tr><td>New York</td><td>Hotel Pennsylvania, Waldorf Astoria</td></tr><tr><td>Los Angeles</td><td>Sheraton Gateway, The Westin Los Angeles Airport</td></tr><tr><td>Houston</td><td>Magnolia Hotel, Crowne Plaza Houston River Oaks</td></tr></table>",
+                "num": null
+            },
+            "TABREF1": {
+                "text": "Binary classification results showing that n-gram features overfit to the CHICAGO training data. Results correspond to evaluation on reviews for the two Chicago hotels from FOUR-CITIES and non-Chicago FOUR-CITIES reviews (six hotels).",
+                "html": null,
+                "type_str": "table",
+                "content": "<table><tr><td>city</td><td>feature set</td><td colspan=\"6\">SVM Accuracy Precision Recall Accuracy Precision Recall Manifold</td></tr><tr><td/><td>N-GRAMS</td><td>0.831</td><td>0.844</td><td>0.818</td><td>0.835</td><td>0.844</td><td>0.825</td></tr><tr><td>Chicago</td><td>LDA</td><td>0.833</td><td>0.846</td><td>0.819</td><td>0.817</td><td>0.832</td><td>0.802</td></tr><tr><td/><td>RLDA</td><td>0.830</td><td>0.838</td><td>0.822</td><td>0.841</td><td>0.819</td><td>0.863</td></tr><tr><td/><td>N-GRAMS</td><td>0.728</td><td>0.744</td><td>0.714</td><td>0.733</td><td>0.738</td><td>0.727</td></tr><tr><td>Non-Chicago</td><td>LDA</td><td>0.714</td><td>0.696</td><td>0.732</td><td>0.728</td><td>0.715</td><td>0.741</td></tr><tr><td/><td>RLDA</td><td>0.791</td><td>0.799</td><td>0.780</td><td>0.801</td><td>0.787</td><td>0.815</td></tr></table>",
+                "num": null
+            },
+            "TABREF2": {
+                "text": "corresponding to aspect topics, to the top words in Table4, we observe that the learned topics relate to truthful and deceptive classes.",
+                "html": null,
+                "type_str": "table",
+                "content": "<table><tr><td>For ex-</td></tr></table>",
+                "num": null
+            },
+            "TABREF3": {
+                "text": "Top words in topics extracted from RLDA topic model (see Section 4). The top row presents topic words from four aspect topics (K = 10) and the bottom row presents top words from four city-specific topics.",
+                "html": null,
+                "type_str": "table",
+                "content": "<table><tr><td colspan=\"2\">Deceptive</td><td colspan=\"2\">Truthful</td></tr><tr><td>term</td><td>score</td><td>term</td><td>score</td></tr><tr><td>my</td><td>-1.063</td><td>$</td><td>0.964</td></tr><tr><td>visit</td><td>-0.944</td><td>location</td><td>0.922</td></tr><tr><td>we</td><td>-0.882</td><td>(</td><td>0.884</td></tr><tr><td>hotel</td><td>-0.863</td><td>)</td><td>0.884</td></tr><tr><td>husband</td><td>-0.828</td><td colspan=\"2\">bathroom 0.842</td></tr><tr><td>family</td><td>-0.824</td><td>floor</td><td>0.810</td></tr><tr><td>amazing</td><td>-0.782</td><td colspan=\"2\">breakfast 0.784</td></tr><tr><td>experience</td><td>-0.740</td><td>bar</td><td>0.762</td></tr><tr><td colspan=\"2\">recommend -0.732</td><td>block</td><td>0.747</td></tr><tr><td>wife</td><td>-0.680</td><td>small</td><td>0.721</td></tr><tr><td>relax</td><td>-0.678</td><td>but</td><td>0.720</td></tr><tr><td>vacation</td><td>-0.651</td><td>walk</td><td>0.707</td></tr><tr><td>will</td><td>-0.651</td><td>lobby</td><td>0.707</td></tr><tr><td>friendly</td><td>-0.646</td><td>quiet</td><td>0.684</td></tr></table>",
+                "num": null
+            },
+            "TABREF4": {
+                "text": "Term scores from our ranking algorithm.",
+                "html": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "num": null
+            }
+        }
+    }
+}

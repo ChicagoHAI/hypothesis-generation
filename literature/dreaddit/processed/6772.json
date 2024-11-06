@@ -1,0 +1,1978 @@
+{
+    "paper_id": "6772",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-09T12:22:57.228027Z"
+    },
+    "title": "User Stress Detection Using Social Media Text: A Novel Machine Learning Approach",
+    "authors": [
+        {
+            "first": "Xiangxuan",
+            "middle": [
+                "X"
+            ],
+            "last": "Wan",
+            "suffix": "",
+            "affiliation": {},
+            "email": "xiangxuan_wan@163.com"
+        },
+        {
+            "first": "Li",
+            "middle": [],
+            "last": "Tian",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "This paper introduces a novel Attention-based Bidirectional Long Short-Term Memory (Bi-LSTM) model for detecting stress in social media text, aiming to enhance mental health monitoring in the digital age. Utilizing the unique communicative nature of social media, this study employs user-generated content to analyze emotional and stress levels. The proposed model incorporates an attention mechanism with the Bi-LSTM architecture to improve the identification of temporal features and context relationships in text data, which is crucial for detecting stress indicators. This model stands out by dynamically focusing on text segments that significantly denote stress, thereby boosting the detection sensitivity and accuracy. Through rigorous testing against baseline models such as Text-CNN, LSTM, GRU, and standard Bi-LSTM, our method demonstrates superior performance, achieving the highest F1-score of 81.21%. These results underscore its potential for practical applications in mental health monitoring where accurate and timely detection of stress is essential.",
+    "pdf_parse": {
+        "paper_id": "6772",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "This paper introduces a novel Attention-based Bidirectional Long Short-Term Memory (Bi-LSTM) model for detecting stress in social media text, aiming to enhance mental health monitoring in the digital age. Utilizing the unique communicative nature of social media, this study employs user-generated content to analyze emotional and stress levels. The proposed model incorporates an attention mechanism with the Bi-LSTM architecture to improve the identification of temporal features and context relationships in text data, which is crucial for detecting stress indicators. This model stands out by dynamically focusing on text segments that significantly denote stress, thereby boosting the detection sensitivity and accuracy. Through rigorous testing against baseline models such as Text-CNN, LSTM, GRU, and standard Bi-LSTM, our method demonstrates superior performance, achieving the highest F1-score of 81.21%. These results underscore its potential for practical applications in mental health monitoring where accurate and timely detection of stress is essential.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "The monitoring and management of stress are crucial for maintaining individual mental health and overall well-being, especially in today's rapidly changing societal context. Stress is widely recognized as a key factor contributing to a variety of psychological and physiological health issues, including but not limited to anxiety, depression, cardiovascular diseases, and other long-term health problems that can affect the quality of life. Therefore, the ability to timely identify and effectively respond to stress not only helps individuals maintain health and productivity but also reduces the burden on the healthcare system and lowers the costs associated with treating and managing stress-related illnesses [1, 2] . and succeeding textual elements. This capability is essential in identifying stress-related expressions within natural language, as it allows the model to process and understand the complex dependencies that occur over extended sequences of text. Such an approach is vital for capturing the nuanced expressions of stress that can be subtly embedded in language.",
+                "cite_spans": [
+                    {
+                        "start": 715,
+                        "end": 718,
+                        "text": "[1,",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 719,
+                        "end": 721,
+                        "text": "2]",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "2. Dynamic Focus via Attention Mechanisms: By incorporating attention mechanisms, our model not only processes textual data but also intelligently identifies and focuses on segments of text most indicative of stress. The attention layer dynamically highlights key emotional cues within large blocks of text, enabling the model to concentrate computational resources on the most relevant parts of the data. This focus improves the accuracy of stress detection by ensuring that significant emotional signals are not diluted by surrounding noise.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "3. Empirical Performance Improvements: To quantitatively demonstrate the superiority of our model, we compared its performance against standard baseline models such as traditional LSTM and CNN-based text analysis frameworks. Our Bi-LSTM with attention mechanism showed significant improvement in accuracy and a recall for detecting stress indicators in text. These enhancements are particularly pronounced in complex data scenarios where the contextual and nuanced understanding of text plays a pivotal role.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The reminder of this paper is as follows: Section 2 reviews related works, emphasizing the evolution of attention mechanisms and their impact on model performance. Section 3 details the methodological framework, including data preprocessing and model specifics. Section 4 presents empirical results demonstrating the model's superiority. Section 5 explores theoretical implications and practical applications, and Section 6 concludes with a summary of findings and future research directions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The integration of social media data mining into public health research offers transformative insights into human behavior and societal trends [13] .. Recent studies have demonstrated innovative applications of these methodologies, revealing nuanced aspects of public health and sentiment that traditional data collection methods may miss.",
+                "cite_spans": [
+                    {
+                        "start": 143,
+                        "end": 147,
+                        "text": "[13]",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data Mining from Social Media",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "In contrast, Lin et al. [14] . and Bravo et al. [15] . illustrate how social media can be used to evaluate and refine public health interventions. Lin et al.'s analysis of antitobacco campaigns on Facebook reveals how engagement metrics can guide the effectiveness of public health messaging, while Bravo et al.'s study on travel-related disease risks offers insights into public perceptions that can inform more targeted health communication strategies. Both studies underscore the potential of social media data to optimize health communication efforts based on real-time public feedback.",
+                "cite_spans": [
+                    {
+                        "start": 24,
+                        "end": 28,
+                        "text": "[14]",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 48,
+                        "end": 52,
+                        "text": "[15]",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data Mining from Social Media",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Moreover, Hou, Hou, and Cai [16] . and Pei and O'Brien [17] . explore how social media platforms serve as crucial outlets for public expression and support networks. Hou et al. provide a dynamic picture of public interest and sentiment during the COVID-19 pandemic, highlighting the critical role of timely and accurate information dissemination. Similarly, Pei and O'Brien leverage social media to understand the specific needs and concerns of individuals with traumatic brain injuries, demonstrating the platform's utility in fostering community and understanding around niche medical conditions.",
+                "cite_spans": [
+                    {
+                        "start": 28,
+                        "end": 32,
+                        "text": "[16]",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 55,
+                        "end": 59,
+                        "text": "[17]",
+                        "ref_id": "BIBREF16"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data Mining from Social Media",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "These studies collectively highlight the diverse applications of social media data mining in health research, each contributing to a broader understanding of public health dynamics. The capacity of social media data to provide real-time, granular insights into public sentiment and behavior is particularly valuable in a rapidly changing world. However, challenges remain, particularly in ensuring data authenticity and representativeness. As researchers continue to refine these methods, the potential for social media to inform public health policies and interventions will likely expand, necessitating ongoing dialogue around the ethical use of these powerful tools.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data Mining from Social Media",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "The advent of the attention mechanism in Natural Language Processing (NLP) has catalyzed transformative changes across various domains, from sentiment analysis to recommendation systems. This mechanism, which mimics the human ability to focus selectively on parts of information, has been instrumental in addressing longstanding challenges in NLP related to data processing and model performance.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Mechanism in NLP",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "One of the fundamental impacts of attention in NLP, as explored in foundational research such as that by Galassi, Lippi, and Torroni [18] ., is its ability to enhance model interpretability and efficiency. By allowing models to 'attend' to specific parts of input data, attention mechanisms have improved the contextual relevance of model outputs, making them not only more accurate but also more aligned with human cognitive processes. This alignment is crucial in applications where understanding the context and nuances of language data is paramount, such as in sentiment analysis.",
+                "cite_spans": [
+                    {
+                        "start": 133,
+                        "end": 137,
+                        "text": "[18]",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Mechanism in NLP",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "In sentiment analysis, models integrated with attention mechanisms, such as those developed by Usama et al. [19] . and Deng et al. [20] ., demonstrate significantly improved accuracy. These models benefit from the attention mechanism's capacity to dynamically prioritize text segments that are more emotionally charged or pertinent to the sentiment being analyzed. This ability not only enhances the precision of sentiment classification but also provides insights into which text features are most influential in shaping the model's decisions, offering a clearer window into the 'black box' of algorithmic decision-making [21] .. Moreover, hybrid models like the one proposed by Ramaswamy and Chinnappan [22] . signify another leap in NLP model evolution. By combining LSTM and CNN architectures with attention, these models leverage the strengths of each approach-long-term dependency handling by LSTMs, feature extraction by CNNs, and focus enhancement by attention. This synergy not only boosts the model's performance across various metrics but also broadens its applicability across different types of NLP tasks, demonstrating a robust adaptability.",
+                "cite_spans": [
+                    {
+                        "start": 108,
+                        "end": 112,
+                        "text": "[19]",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 131,
+                        "end": 135,
+                        "text": "[20]",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 623,
+                        "end": 627,
+                        "text": "[21]",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 705,
+                        "end": 709,
+                        "text": "[22]",
+                        "ref_id": "BIBREF21"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Mechanism in NLP",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Overall, the integration of attention mechanisms into NLP signifies a critical advancement in the field's development, marking a shift towards more nuanced, context-aware, and user-focused applications. As this technology continues to evolve, it promises to pave the way for even more sophisticated interactions between computers and human language, significantly impacting how machines understand and process the nuances of human communication. The ongoing research and development in this area are poised to further refine these capabilities, underscoring the potential for future innovations that could revolutionize our interaction with technology.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Mechanism in NLP",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Section 2.1 highlights the transformative role of social media data mining in public health research, demonstrating its ability to uncover unique insights into human behavior and societal trends that traditional methods might miss. Studies in this area utilize innovative approaches like spatiotemporal analysis to explore the psychological impacts of global crises and evaluate the effectiveness of public health interventions. These methodologies provide real-time, detailed insights that are crucial in a rapidly evolving world. They emphasize the importance of data authenticity and the ethical implications of data use, suggesting potential for more informed public health policies as these techniques mature.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Summary",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "Section 2.2 delves into the advent of the attention mechanism in Natural Language Processing (NLP), which mimics human selective focus to improve model interpretability and efficiency. This mechanism has significantly enhanced the performance of NLP applications, from sentiment analysis to recommendation systems, by allowing models to prioritize contextually relevant data. The integration of attention mechanisms not only bolsters model accuracy but also aligns their functioning more closely with human cognitive processes, facilitating more nuanced and user-focused applications. Ongoing advancements in this technology hold promise for even more sophisticated interactions between computers and human language.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Summary",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "Both sections underscore the broader theme of leveraging sophisticated algorithms and complex data to address challenges in public health and language processing. These technological advancements suggest a trend towards smarter, more adaptive systems capable of managing real-world complexity and variability. The continual improvement of these technologies is essential for developing more accurate, ethical, and context-aware solutions that can dynamically respond to changing conditions and needs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Summary",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "The overall framework for social media text analysis, particularly focusing on stress detection, integrates advanced machine learning and deep learning techniques to process and analyze textual data efficiently. The framework for analyzing social media texts for stress detection involves several detailed steps, each critical to the efficiency and accuracy of the process:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Data Collection: Collect textual data from various social media platforms to gather a broad and diverse dataset.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Preprocessing: Clean the collected text to remove noise and irrelevant information. This step includes text cleaning (removing special characters, URLs, etc.), tokenization (splitting the text into individual words or tokens), and normalization (converting all text to a standard format, like lowercase).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Vectorization: Transform the preprocessed text into numerical vectors. This is achieved using embedding techniques, such as word embeddings, that capture semantic relationships between words, allowing the model to understand language nuances.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Bi-LSTM Integration: Feed these vectors into a Bidirectional Long Short-Term Memory (Bi-LSTM) network. The bidirectional approach processes the text in both forward and backward directions, enhancing the model's ability to capture contextual information from both past and future tokens in the sequence.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Attention Mechanism: Integrate an attention mechanism with the Bi-LSTM. This mechanism calculates alignment scores that help the model dynamically focus on the most significant parts of the text indicative of stress. It prioritizes words and phrases that are crucial for understanding the overall sentiment or emotional state.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Model Training: Train the model using backpropagation. During this phase, the cross-entropy loss function is used to measure how well the model's predictions align with the actual data labels. Errors from the predictions are used to compute gradients, which in turn update the model's parameters through gradient descent.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Application: Utilize the trained model to detect stress in new social media texts, facilitating real-time mental health monitoring and potential intervention.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Overall Framework",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "In social media text analysis, Embedding and Bidirectional Long Short-Term Memory Networks (Bi-LSTM) are two key technologies used to effectively extract and process textual data. These techniques capture deep semantic information and contextual dependencies within complex social media texts, laying the groundwork for further analysis and applications.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Embedding technology is primarily used to convert words or phrases from text into numerical vectors that machines can process. Represented in a high-dimensional space, these vectors capture the relationships and semantic similarities between words. Popular embedding models such as Word2Vec, GloVe, or BERT learn vector representations by analyzing the co-occurrence relationships of words within large text corpora, effectively reducing data dimensions and deepening semantic understanding of the text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Bi-LSTM, a specialized type of Recurrent Neural Network (RNN), is designed to handle sequence data, particularly excelling at capturing long-distance dependencies. Unlike traditional unidirectional LSTM, Bi-LSTM processes text from both the beginning to the end and from the end to the beginning simultaneously, comprehensively capturing contextual information. This bidirectional structure enables Bi-LSTM to excel at understanding the relationships between language contexts and dealing with ambiguities and complex structures in language. In social media text analysis, Bi-LSTM effectively identifies key information such as emotional tendencies, thematic content, and user behavior patterns.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "The state updating process of Bi-LSTM is detailed as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Forget gate decides what information to discard or retain:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "f t = \u03c3 (W f \u2022 [h t-1 , x t ] + b f ) (1)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "input gate and new candidate information together determine the amount of current input to store:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "i t = \u03c3 (W i \u2022 [h t-1 , x t ] + b i ) (2) Ct = tanh (W C \u2022 [h t-1 , x t ] + b C ) (",
+                        "eq_num": "3"
+                    }
+                ],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "cell state is updated as:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "C t = f t * C t-1 + i t * Ct (4)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "output gate decides what value to output:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "o t = \u03c3 (W o \u2022 [h t-1 , x t ] + b o ) , h t = o t * tanh (C t )",
+                        "eq_num": "(5)"
+                    }
+                ],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Combining embedding technology and Bi-LSTM is particularly effective for feature extraction from social media texts. Initially, texts are transformed into vectors via an embedding model, retaining rich semantic attributes. These vectors are then fed into a Bi-LSTM model for further analysis. By processing embedded vectors through its bidirectional structure, Bi-LSTM synthesizes information from both past and future contexts, improving accuracy in grasping the overall meaning and nuances of the text. For instance, in sentiment analysis of user comments, embedding technology structures scattered textual data into numerical vectors, while Bi-LSTM analyzes sequence dependencies within these vectors to effectively recognize and predict user emotions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Embedding and Bi-LSTM",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "In the context of social media, where textual data is abundant and diverse, encompassing user emotions, attitudes, and social interactions, accurately identifying stress signals from vast amounts of social media text is crucial for mental health monitoring and intervention. The integration of the attention mechanism with Bidirectional Long Short-Term Memory Networks (Attention Bi-LSTM) showcases unique advantages in enhancing the performance and accuracy of social media text analysis.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Firstly, the Attention Bi-LSTM, through its bidirectional structure, can fully capture the contextual relationships within the text data, which is particularly important for understanding fluctuations in emotional context. For instance, when a person expresses stress or discomfort, their statements might include a variety of emotionally charged words, which could be positioned differently within the text. The bidirectional processing capability of the Bi-LSTM ensures comprehension from both directions, enhancing the overall semantic capture.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Secondly, by integrating the attention mechanism into Bi-LSTM, the model can autonomously evaluate the contribution of each word or phrase within the text to the current determination of stress levels. The attention mechanism dynamically adjusts the model's focus on key information, such as stress-indicating vocabulary, by calculating alignment scores at each time step. This focus allows the model to assign higher weights to key terms when encountering text segments that express stress or anxiety, thus improving the accuracy and sensitivity of stress detection.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "The mechanism can be mathematically expressed as follows: Alignment Score Calculation: The alignment score is used to assess the contribution of each word in the input sequence to the current task (e.g., stress detection). This score is calculated through a specific neural network architecture, typically involving a fully connected layer and an activation function. The formula is:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "e t,i = \u03bd T tanh (W h h i + W s s t-1 + b attn )",
+                        "eq_num": "(6)"
+                    }
+                ],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "where, W h and W s are weight matrices that transform the hidden state h i and the previous context or hidden state s ( t -1), respectively, \u03bd T is a transposed weight vector, and b attn is a bias term adjusting the output of the activation function.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Attention Weights: The alignment scores are normalized using the softmax function to convert them into attention weights, which indicate the importance of different parts in contributing to the output:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "\u03b1 t,i = exp (e t,i ) T K=1 exp (e t,k )",
+                        "eq_num": "(7)"
+                    }
+                ],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "where T is the length of the input sequence, and \u03b1 t,i represents the attention weight of time step t for the i -th element of the input sequence. Context Vector: The context vector is obtained by weighting the sum of all hidden states, determined by the attention weights. This vector captures the essence of all relevant information in the input sequence and will be used for subsequent predictions:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "c t = T i=1 \u03b1 t,i h i (",
+                        "eq_num": "8"
+                    }
+                ],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "c t represents the context vector at time step t, synthesizing information from the entire input sequence to provide a comprehensive background for generating responses or decisions. Final Prediction: The final prediction is based on the context vector and the current hidden state s_t, typically accomplished through one or more fully connected layers, possibly including a nonlinear activation function, to produce the final output, such as an emotional label or stress level:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "s t = tanh (W c \u2022 [c t ; s t-1 ] + b c ) (",
+                        "eq_num": "9"
+                    }
+                ],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "W c is a weight matrix, and b c is a bias term, used to generate the final output state at the current time step.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attention Bi-LSTM",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Transfer learning was utilized to enhance the performance of our Attention Bi-LSTM model by leveraging pre-training on a large text classification dataset. This approach allows the model to transfer the knowledge gained from a related task with abundant data to the specific task of stress detection in social media text, which may have comparatively limited labeled data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Transfer Learning",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "We pre-trained our model on a large-scale text classification dataset to capture general language patterns and semantic relationships. This dataset included millions of labeled instances across various categories, providing a comprehensive foundation for understanding diverse textual contexts. The pre-training phase involved training the Bi-LSTM with attention mechanism on this extensive dataset to learn robust feature representations.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Transfer Learning",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "After pre-training, we fine-tuned the model specifically for the task of stress detection using our labeled social media dataset. This fine-tuning process involved adjusting the pre-trained weights to better capture the nuances of stress-related expressions in social media text. The combination of pre-training and fine-tuning helped the model adapt its generalized language understanding to the specific requirements of stress detection.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Transfer Learning",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "Transfer learning significantly improved our model's performance by providing a strong initialization point, reducing the training time, and enhancing the model's ability to generalize from a smaller dataset. The use of a large text classification dataset for pre-training allowed the model to learn rich language features and semantic representations, which were then fine-tuned to capture stress-specific patterns in social media text. This approach resulted in more accurate and sensitive stress detection.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Transfer Learning",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "In the training of the Attention Bi-LSTM model, we utilize the backpropagation algorithm to optimize the network parameters. A key component of this process is the loss function used to measure the discrepancy between the predicted outputs of the model and the actual labels. For multiclass classification tasks, the categorical cross-entropy loss function is particularly apt. This function is formulated as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backpropagation and Parameter Updates",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "L = -N o=1 M C=1 y o,c log (p o,c )",
+                        "eq_num": "(10)"
+                    }
+                ],
+                "section": "Backpropagation and Parameter Updates",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "variable y o,c is a binary indicator (0 or 1) which indicates whether class c is the correct classification for observation o, and p o,c denotes the predicted probability of observation o being of class c. This loss function effectively penalizes the deviation of the predicted probabilities from the actual class labels, guiding the model to improve its accuracy over iterations by minimizing this loss.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backpropagation and Parameter Updates",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "During backpropagation, forward propagation first generates the predictive outputs, followed by the calculation of the loss. Subsequently, the gradients of the loss function with respect to each parameter are computed, indicating the direction and magnitude of adjustments needed to reduce the error. Finally, weights and biases are updated using gradient descent or another optimization algorithm, with the update formula being:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backpropagation and Parameter Updates",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "W new = W old -\u03b7 \u2202L \u2202W (",
+                        "eq_num": "11"
+                    }
+                ],
+                "section": "Backpropagation and Parameter Updates",
+                "sec_num": "3.5"
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backpropagation and Parameter Updates",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "where \u03b7 is the learning rate. Through this process, the model gradually optimizes during training, enhancing its performance in social media text analysis tasks, particularly in applications such as emotion analysis or stress detection.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backpropagation and Parameter Updates",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "The dataset used in this study is Dreaddit, a Reddit dataset specifically compiled for stress analysis in social media. Dreaddit, created by Elsbeth Turcan and Kathleen McKeown from Columbia University, comprises 190,000 posts from five distinct categories of Reddit communities. The dataset includes a subset of 3,553 labeled segments, sourced from 3,000 posts, annotated using Amazon Mechanical Turk. These annotations help in identifying stress-related content within the text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Dreaddit provides a diverse and extensive collection of social media data, spanning various domains such as interpersonal conflict, mental illness (including anxiety and PTSD), financial need, and social relationships. This diversity allows for a comprehensive analysis of stress expressions in different contexts. Each category contains posts that vary in length and complexity, providing a rich source of data for developing and testing stress detection models. The dataset's detailed annotations and extensive scope make it a valuable resource for advancing research in computational stress analysis and mental health monitoring.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "The experiments were conducted on a high-performance workstation running Windows 10, equipped with an NVIDIA RTX 2080 GPU and 64GB of RAM. The software environment included Python 3.8, TensorFlow 2.4, and Scikit-learn 0.24 for implementing and training the models.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Implementation",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "For the Attention Bi-LSTM model, key hyperparameters were configured as follows: a learning rate of 0.001, a batch size of 64, and 100 epochs with early stopping based on validation loss to prevent overfitting. The embedding layer utilized pre-trained Word2Vec vectors with 300 dimensions. Dropout regularization with a rate of 0.5 was applied to the LSTM layers to further mitigate overfitting.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Implementation",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Evaluation metrics included accuracy, precision, recall, and F1-score to comprehensively assess model performance. To ensure robust evaluation and mitigate overfitting, 10-fold cross-validation was employed. This involved dividing the data into 10 subsets, training on 9 subsets and testing on the remaining one iteratively, providing a reliable assessment of the model's generalization capability across diverse social media text data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Implementation",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "In this study, we compared our proposed method against several baseline models commonly used in text classification and stress detection tasks. These baseline models include Text-CNN, LSTM, GRU, Bi-LSTM, and Attention Bi-LSTM. Each model has its strengths and weaknesses in handling textual data, particularly in capturing contextual information and dealing with sequential dependencies.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Text-CNN: Convolutional Neural Networks (CNN) applied to text data, effective for capturing local features and patterns.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "LSTM: Long Short-Term Memory networks, a type of Recurrent Neural Network (RNN) designed to capture long-term dependencies in sequential data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "GRU: Gated Recurrent Units, a variation of RNNs that aim to solve the vanishing gradient problem and are computationally more efficient than LSTMs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Bi-LSTM: Bidirectional LSTM networks process the data in both forward and backward directions, capturing more comprehensive contextual information.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Attention Bi-LSTM: Integrates attention mechanisms with Bi-LSTM to focus on important parts of the input sequence, enhancing model performance in capturing relevant features.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "The performance of each model was evaluated using precision, recall, and F1-score metrics, which are standard in assessing the effectiveness of classification models. Table 1 presents a detailed comparison of these metrics for all models.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 173,
+                        "end": 174,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "From the table, it is evident that the proposed method outperforms all baseline models across all evaluation metrics. Specifically, the proposed method achieves the highest F1-score of 81.21%, indicating a balanced performance between precision and recall.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Text-CNN: While effective in capturing local patterns, it falls short in understanding long-term dependencies, resulting in the lowest F1-score. LSTM and GRU: Both models improve over Text-CNN by capturing sequential dependencies, with GRU slightly outperforming LSTM due to its efficient gating mechanisms. Bi-LSTM: The bidirectional nature of this model allows it to capture more contextual information, resulting in better performance than unidirectional LSTM and GRU. Attention Bi-LSTM: By incorporating an attention mechanism, this model focuses on the most relevant parts of the input sequence, further improving the performance.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "The superior performance of the proposed method can be attributed to the combination of pretraining on a large text classification dataset and fine-tuning for the specific task of stress detection in social media texts. This transfer learning approach enables the model to leverage vast amounts of pre-existing linguistic knowledge, improving its ability to understand and classify complex textual data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Overall, the results demonstrate that the proposed method provides significant improvements in precision, recall, and F1-score, highlighting its effectiveness in stress detection tasks compared to traditional baseline models. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparisons with Baseline Model",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "The significance of hyperparameter analysis in the development and optimization of neural network models is crucial, yet often underappreciated in discussions. Our manuscript aims to address this by providing a thorough exploration of how variations in learning rates, batch sizes, and the number of training epochs impact model performance, particularly as measured by the F1 score-a critical metric that balances precision and recall.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "To elucidate, the learning rate is fundamental in controlling the speed at which a model learns; an optimally set learning rate ensures that the model can efficiently converge to a minimum without overshooting it. Our analysis shows that a learning rate of 0.006 maximizes F1 score performance, indicating an ideal balance where the model updates its weights optimally to improve accuracy without becoming unstable. https://doi.org/10.15837/ijccc.2024.5.6772",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Similarly, the batch size affects model generalization and training dynamics. A medium batch size of 50 is identified as optimal, providing a good trade-off between the efficiency of computational resources and the stability of the learning process. This size is large enough to ensure meaningful gradient approximations but small enough to avoid the pitfalls of excessive averaging over data points, which can mask informative signals during training.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Finally, increasing the number of training epochs generally improves model performance as it allows more iterative refinements of model weights. Our findings suggest that extending training to 100 epochs significantly enhances F1 scores, providing the model with ample opportunity to learn complex patterns in the data without overfitting, as indicated by the continual improvement in performance across epochs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "These insights are not pivotal for optimizing the current model's performance but also serve as valuable guidelines for future research and practical applications, suggesting ways to fine-tune neural networks to achieve superior accuracy and efficiency in various tasks.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Figure 1 : The F1 varies with the learning rate Figure 1 shows the Learning Rate Analysis. The graph showing the F1 score as a function of learning rate reveals a clear peak in model performance. The F1 score increases steadily as the learning rate is adjusted upwards from 0.000 to 0.006, reaching a maximum of slightly over 81%. This suggests that the model benefits from a faster learning rate initially, likely due to more significant gradient steps that escape local minima. However, as the learning rate exceeds 0.006, there is a sharp decline in performance, with the F1 score falling below 78% at a learning rate of 0.010. This decrease could be attributed to the model overshooting the minimum, indicating a critical threshold beyond which the learning rate becomes counterproductive.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "1",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 55,
+                        "end": 56,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Figure 2 shows the Batch Size Analysis. The relationship between batch size and F1 score exhibits more variability. Starting from a batch size of 20, the F1 score initially shows fluctuations but generally trends upward, peaking at a batch size of 50 with an F1 score of just over 79.5%. The trend reverses sharply as the batch size increases further, with the F1 score dropping significantly at a batch size of 60. This pattern suggests that smaller to medium batch sizes are optimal for this model, providing a balance between efficient computation and robust estimations of the error gradient.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "2",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Figure 3 shows the Epochs Analysis. A clear and consistent positive trend is observed in the F1 score as the number of training epochs increases. The score starts at around 77% at 20 epochs and climbs steadily, with a notable increase in the rate of improvement beyond 70 epochs, culminating in an F1 score of approximately 82% at 100 epochs. This indicates that the model continues to learn and refine its predictions over more iterations, benefiting from extended exposure to the training data without evident signs of overfitting within the examined range.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "3",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "These findings underscore the importance of carefully selecting and tuning hyperparameters to optimize model performance. The optimal settings derived from this analysis-such as a learning rate around 0.006, a batch size of 50, and a higher number of epochs-demonstrate how nuanced Overall, the study provides a detailed comparison of machine learning models for text classification and stress detection, with the proposed method outperforming baseline models such as Text-CNN, LSTM, GRU, Bi-LSTM, and Attention Bi-LSTM, achieving the highest F1-score of 81.21%. This superior performance is attributed to the method's advanced pre-training and fine-tuning on extensive text data, which optimizes its linguistic understanding and accuracy. Hyperparametric analysis further reveals that optimal performance is achieved with a learning rate of 0.006, a batch size of 50, and extended training periods. These settings allow the model to efficiently learn and adapt without overshooting loss minimums or risking underfitting, demonstrating the importance of careful hyperparameter tuning. The findings emphasize the model's capability to handle complex text classification tasks and provide actionable insights into enhancing predictive accuracy and generalization in real-world applications, setting a benchmark for future research in the field.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hyperparametric Analysis",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "The research presented in this paper contributes significantly to the theoretical underpinnings of stress detection using NLP and machine learning. By integrating Bi-LSTM with attention mechanisms, this study advances our understanding of how sequential data analysis can be enhanced to better capture the subtleties of human emotion and stress indicators in text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theoretical and Practical Implications",
+                "sec_num": "5"
+            },
+            {
+                "text": "The application of an attention mechanism within a bidirectional LSTM framework marks a significant theoretical advancement in NLP, particularly when addressing the complex dynamics of social media language. This approach not only enhances the model's capacity to parse and interpret nuanced language variations across conversation threads but also aligns closely with cognitive theories of human attention. These theories highlight the selective nature of attention and its critical role in perception and memory, underpinning the human ability to focus on salient aspects of sensory input while filtering out less relevant information.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theoretical and Practical Implications",
+                "sec_num": "5"
+            },
+            {
+                "text": "Integrating these cognitive principles into NLP models introduces a powerful parallel between human cognition and artificial systems. By focusing on key textual elements that signal sentiment or emotional states, attention-based models mirror the cognitive processing of humans, who selectively attend to information that is most pertinent or impactful to their current context or emotional state. This selective attention mechanism enables models to manage the vast and varied inputs typical of social media environments, where context and sentiment can shift dramatically within short spans of text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theoretical and Practical Implications",
+                "sec_num": "5"
+            },
+            {
+                "text": "Such theoretical insights not only validate the use of attention mechanisms in complex NLP tasks but also open pathways for more sophisticated developments in AI. These advancements could lead to the creation of models that more accurately reflect human cognitive processes, offering deeper and more contextually aware analyses of language. This progression holds substantial implications for improving how machines understand and interact with human language, potentially enhancing the effectiveness of AI applications in areas ranging from sentiment analysis to personalized communication and beyond. Practically, the findings of this study have significant implications for the development of real-world applications, especially in the realms of public health and mental health monitoring. The ability to accurately detect stress through automated analysis of social media text opens up new pathways for early intervention in mental health care. This capability could be particularly valuable in large-scale monitoring systems, where mental health professionals can utilize these tools to identify at-risk individuals based on their social media activity and intervene appropriately.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theoretical and Practical Implications",
+                "sec_num": "5"
+            },
+            {
+                "text": "Furthermore, the use of these advanced computational techniques can significantly reduce the workload on mental health professionals by providing them with tools that can pre-screen large volumes of data and flag cases that require human attention. This could lead to more efficient use of resources and potentially better outcomes for individuals suffering from stress and related conditions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theoretical and Practical Implications",
+                "sec_num": "5"
+            },
+            {
+                "text": "In addition, the methodologies developed in this study could be adapted for use in other fields where understanding human sentiment is crucial, such as marketing, customer service, and public relations. By applying these techniques, organizations can gain deeper insights into consumer behavior and improve their strategies for engagement and communication.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theoretical and Practical Implications",
+                "sec_num": "5"
+            },
+            {
+                "text": "Overall, the integration of NLP technologies with psychological and behavioral science not only enhances our theoretical understanding but also provides practical tools that can be leveraged to improve mental health outcomes and foster a greater understanding of human emotional states in various professional fields.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Theoretical and Practical Implications",
+                "sec_num": "5"
+            },
+            {
+                "text": "This paper developed a novel methodology for stress detection by integrating an Attention-based Bi-LSTM model with social media text analysis. The core of this approach lies in its ability to dynamically focus on relevant textual segments that indicate stress, thereby enhancing the accuracy of stress detection. This integration captures the nuanced expressions of stress that can vary widely across different social media posts, making the model robust in handling the diverse linguistic styles found on these platforms.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "6"
+            },
+            {
+                "text": "The experimental results demonstrate the effectiveness of the proposed model. When compared against several baseline models, including Text-CNN, LSTM, GRU, and standard Bi-LSTM models, the Attention Bi-LSTM showed superior performance in all key metrics-precision, recall, and F1score. The model achieved the highest F1-score, indicating a balanced performance in identifying relevant features and minimizing false detections. This highlights the model's capability to accurately and reliably detect stress from text data, which is crucial for applications in mental health monitoring.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "6"
+            },
+            {
+                "text": "While the findings are promising, there are several limitations to consider. The model relies heavily on the quality and representativeness of the data used for training and testing. Social media data can sometimes be biased or non-representative of the general population, which can affect the generalizability of the results. Additionally, the model's performance could be influenced by evolving language use on social media, slang, and emerging new forms of communication such as memes and emojis, which were not extensively covered in this study.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "6"
+            },
+            {
+                "text": "Future research in natural language processing for social media should focus on expanding and diversifying datasets to include modern communication forms like ephemeral stories and multimedia posts, which represent evolving language and interaction patterns. Incorporating multi-modal data that combines textual, visual, and auditory inputs will enhance models' understanding of complex emotional cues, improving their ability to detect stress signals. Developing dynamic models capable of adapting to new trends in real-time and addressing ethical concerns around data use are also critical. These advancements will not only improve the robustness and applicability of models but also ensure they are ethically and responsibly implemented, maintaining user privacy while handling sensitive information.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "6"
+            },
+            {
+                "text": "Moreover, there is a need for continuous adaptation of the model to keep up with the fast-paced changes in social media usage patterns. Developing adaptive learning systems that can update their parameters in real-time as new data becomes available could help in maintaining the efficacy of the model over time. Finally, ethical considerations and privacy concerns related to the use of social media data for stress detection must be rigorously addressed to ensure that these technologies are used responsibly and beneficially.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusions",
+                "sec_num": "6"
+            }
+        ],
+        "back_matter": [],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Stress management interventions to facilitate psychological and physiological adaptation and optimal health outcomes in cancer patients and survivors",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Antoni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "I"
+                        ],
+                        "last": "Moreno",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Penedo",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Annual review of psychology",
+                "volume": "74",
+                "issue": "",
+                "pages": "423--455",
+                "other_ids": {
+                    "DOI": [
+                        "10.1146/annurev-psych-030122-124119"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Antoni, M. H., Moreno, P. I., & Penedo, F. J. (2023). Stress management interventions to facili- tate psychological and physiological adaptation and optimal health outcomes in cancer patients and survivors, Annual review of psychology, 74, 423-455. https://doi.org/10.1146/annurev-psych- 030122-124119",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Healthcare monitoring using machine learning based data analytics",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Janani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Subramanian",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Karthik",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Vimalarani",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "International Journal of Computers Communications & Control",
+                "volume": "18",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Janani, S. R., Subramanian, R., Karthik, S., & Vimalarani, C. (2023). Healthcare monitoring us- ing machine learning based data analytics, International Journal of Computers Communications & Control, 18(1).",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "The role of social media in determining tourists' choices of Nepalese destinations",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Khadka",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Khadka",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Journal of Logistics, Informatics and Service Science",
+                "volume": "10",
+                "issue": "3",
+                "pages": "180--193",
+                "other_ids": {
+                    "DOI": [
+                        "10.33168/JLISS.2023.0314"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Khadka, S., & Khadka, A. K. (2023). The role of social media in determining tourists' choices of Nepalese destinations, Journal of Logistics, Informatics and Service Science, 10(3), 180-193. https://doi.org/10.33168/JLISS.2023.0314",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Social media communication network analysis and influence propagation model: A case study",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zhu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "De Costa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Bin Yasin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Journal of Logistics, Informatics and Service Science",
+                "volume": "10",
+                "issue": "3",
+                "pages": "264--279",
+                "other_ids": {
+                    "DOI": [
+                        "10.33168/JLISS.2023.0320"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhu, L., De Costa, F., & Bin Yasin, M. A. (2023). Social media communication network analysis and influence propagation model: A case study, Journal of Logistics, Informatics and Service Science, 10(3), 264-279. https://doi.org/10.33168/JLISS.2023.0320",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "The effectiveness of TV promotion and social media applications in achieving consumer brand loyalty",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Shaban",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Journal of System and Management Sciences",
+                "volume": "13",
+                "issue": "4",
+                "pages": "140--151",
+                "other_ids": {
+                    "DOI": [
+                        "10.33168/JSMS.2023.0408"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Shaban, A. M. (2023). The effectiveness of TV promotion and social media applications in achieving consumer brand loyalty, Journal of System and Management Sciences, 13(4), 140-151. https://doi.org/10.33168/JSMS.2023.0408",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Crowdsourcing platform for QoE evaluation for cloud multimedia services",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Laghari",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "He",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Khan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Laghari",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Yin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Computer Science and Information Systems",
+                "volume": "19",
+                "issue": "3",
+                "pages": "1305--1328",
+                "other_ids": {
+                    "DOI": [
+                        "10.2298/CSIS220322038L"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Laghari, A. A., He, H., Khan, A., Laghari, R. A., Yin, S., & Wang, J. (2022). Crowdsourcing platform for QoE evaluation for cloud multimedia services, Computer Science and Information Systems, 19(3), 1305-1328. https://doi.org/10.2298/CSIS220322038L",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Mental health analysis in social media posts: A survey, Archives of Computational",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Garg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Methods in Engineering",
+                "volume": "30",
+                "issue": "3",
+                "pages": "1819--1842",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/s11831-022-09863-z"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Garg, M. (2023). Mental health analysis in social media posts: A survey, Archives of Computa- tional Methods in Engineering, 30(3), 1819-1842. https://doi.org/10.1007/s11831-022-09863-z",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Fast Disaster Event Detection from Social Media: An Active Learning Method",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Adili",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "International Journal of Computers Communications & Control",
+                "volume": "19",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Adili, P., & Chen, Y. (2024). Fast Disaster Event Detection from Social Media: An Active Learning Method, International Journal of Computers Communications & Control, 19(2).",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "A hybrid technological innovation text mining, ensemble learning and risk scorecard approach for enterprise credit risk assessment, Tehni\u010dki vjesnik",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Mao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Gong",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "30",
+                "issue": "",
+                "pages": "1692--1703",
+                "other_ids": {
+                    "DOI": [
+                        "10.17559/TV-20230316000447"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Mao, Y., Liu, S., & Gong, D. (2023). A hybrid technological innovation text mining, ensemble learning and risk scorecard approach for enterprise credit risk assessment, Tehni\u010dki vjesnik, 30(6), 1692-1703. https://doi.org/10.17559/TV-20230316000447",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Text detection of transformer based on deep learning algorithm",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Wan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Sima",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Hu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Tehni\u010dki vjesnik",
+                "volume": "29",
+                "issue": "3",
+                "pages": "861--866",
+                "other_ids": {
+                    "DOI": [
+                        "10.17559/TV-20211027110610"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Cheng, Y., Wan, Y., Sima, Y., Zhang, Y., Hu, S., & Wu, S. (2022). Text detection of transformer based on deep learning algorithm, Tehni\u010dki vjesnik, 29(3), 861-866. https://doi.org/10.17559/TV- 20211027110610",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Data mining techniques in social media: A survey",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Injadat",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Salo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Nassif",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "214",
+                "issue": "",
+                "pages": "654--670",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.neucom.2016.06.045"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Injadat, M., Salo, F., & Nassif, A. B. (2016). Data mining techniques in social media: A survey, Neurocomputing, 214, 654-670. https://doi.org/10.1016/j.neucom.2016.06.045",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Data mining in social media, Social network data analytics",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Barbier",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "327--352",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/978-1-4419-8462-3_12"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Barbier, G., & Liu, H. (2011). Data mining in social media, Social network data analytics, 327-352. https://doi.org/10.1007/978-1-4419-8462-3_12",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Hybrid Filtering-based Physician Recommender Systems using Fuzzy Analytic Hierarchy Process and User Ratings",
+                "authors": [
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Mani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Thilagamani",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "International Journal of Computers Communications & Control",
+                "volume": "18",
+                "issue": "6",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Mani, V., & Thilagamani, S. (2023). Hybrid Filtering-based Physician Recommender Systems using Fuzzy Analytic Hierarchy Process and User Ratings, International Journal of Computers Communications & Control, 18(6).",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Social media data mining of antitobacco campaign messages: machine learning analysis of facebook posts",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Yannam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Barnes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Koch",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ".",
+                        "middle": [
+                            "."
+                        ],
+                        "last": "Xue",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Journal of Medical Internet Research",
+                "volume": "",
+                "issue": "",
+                "pages": "25--e42863",
+                "other_ids": {
+                    "DOI": [
+                        "10.2196/42863"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Lin, S. Y., Cheng, X., Zhang, J., Yannam, J. S., Barnes, A. J., Koch, J. R., ... & Xue, H. (2023). Social media data mining of antitobacco campaign messages: machine learning analysis of facebook posts, Journal of Medical Internet Research, 25, e42863. https://doi.org/10.2196/42863",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Use of Social Media Data Mining to Examine Needs, Concerns, and Experiences of People With Traumatic Brain Injury",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Pei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "O'brien",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "American Journal of Speech-Language Pathology",
+                "volume": "33",
+                "issue": "2",
+                "pages": "831--847",
+                "other_ids": {
+                    "DOI": [
+                        "10.1044/2023_ajslp-23-00297"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Pei, Y., & O'Brien, K. H. (2024). Use of Social Media Data Mining to Examine Needs, Concerns, and Experiences of People With Traumatic Brain Injury, American Journal of Speech-Language Pathology, 33(2), 831-847. https://doi.org/10.1044/2023_ajslp-23-00297",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Using social media listening and data mining to understand travellers' perspectives on travel disease risks and vaccine-related attitudes and behaviours",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Bravo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Castells",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Zietek-Gutsch",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Bodin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Molony",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Fr\u00fchwein",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Journal of Travel Medicine",
+                "volume": "29",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1093/jtm/taac009"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Bravo, C., Castells, V. B., Zietek-Gutsch, S., Bodin, P. A., Molony, C., & Fr\u00fchwein, M. (2022). Using social media listening and data mining to understand travellers' perspectives on travel disease risks and vaccine-related attitudes and behaviours, Journal of Travel Medicine 29(2), taac009. https://doi.org/10.1093/jtm/taac009",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Public attention about COVID-19 on social media: An investigation based on data mining and text analysis",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Hou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Hou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Cai",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "Personality and individual differences",
+                "volume": "175",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.paid.2021.110701"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Hou, K., Hou, T., & Cai, L. (2021). Public attention about COVID-19 on social media: An investigation based on data mining and text analysis, Personality and individual differences, 175, 110701. https://doi.org/10.1016/j.paid.2021.110701",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Attention in natural language processing",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Galassi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Lippi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Torroni",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "IEEE transactions on neural networks and learning systems",
+                "volume": "32",
+                "issue": "10",
+                "pages": "4291--4308",
+                "other_ids": {
+                    "DOI": [
+                        "10.1109/tnnls.2020.3019893"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Galassi, A., Lippi, M., & Torroni, P. (2020). Attention in natural language process- ing, IEEE transactions on neural networks and learning systems, 32(10), 4291-4308. https://doi.org/10.1109/tnnls.2020.3019893",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Attention-based sentiment analysis using convolutional and recurrent neural network",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Usama",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Ahmad",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Song",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Hossain",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Alrashoud",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Muhammad",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "Future Generation Computer Systems",
+                "volume": "113",
+                "issue": "",
+                "pages": "571--578",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.future.2020.07.022"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Usama, M., Ahmad, B., Song, E., Hossain, M. S., Alrashoud, M., & Muhammad, G. (2020). Attention-based sentiment analysis using convolutional and recurrent neural network, Future Generation Computer Systems, 113, 571-578. https://doi.org/10.1016/j.future.2020.07.022",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Text sentiment analysis of fusion model based on attention mechanism",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Deng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Ergu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Cai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Ma",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Procedia Computer Science",
+                "volume": "199",
+                "issue": "",
+                "pages": "741--748",
+                "other_ids": {
+                    "DOI": [
+                        "10.1016/j.procs.2022.01.092"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Deng, H., Ergu, D., Liu, F., Cai, Y., & Ma, B. (2022). Text sentiment analysis of fusion model based on attention mechanism, Procedia Computer Science, 199, 741-748. https://doi.org/10.1016/j.procs.2022.01.092",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "SenticGAT: Sentiment Knowledge Enhanced Graph Attention Network for Multi-view Feature Representation in Aspect-based Sentiment Analysis",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Xing",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "International Journal of Computers Communications & Control",
+                "volume": "18",
+                "issue": "5",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yang, B., Li, H., & Xing, Y. (2023). SenticGAT: Sentiment Knowledge Enhanced Graph Atten- tion Network for Multi-view Feature Representation in Aspect-based Sentiment Analysis, Inter- national Journal of Computers Communications & Control, 18(5).",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "RecogNet-LSTM+ CNN: a hybrid network with attention mechanism for aspect categorization and sentiment classification",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Ramaswamy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Chinnappan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Journal of Intelligent Information Systems",
+                "volume": "58",
+                "issue": "2",
+                "pages": "379--404",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/s10844-021-00692-3"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Ramaswamy, S. L.,& Chinnappan, J. (2022). RecogNet-LSTM+ CNN: a hybrid network with attention mechanism for aspect categorization and sentiment classification, Journal of Intelligent Information Systems, 58(2), 379-404. https://doi.org/10.1007/s10844-021-00692-3 Cite this paper as:",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "uris": null,
+                "text": "Figure 2: The F1 varies with the batch size",
+                "fig_num": "2",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "uris": null,
+                "text": "Figure 3: The F1 varies with the number of epochs",
+                "fig_num": "3",
+                "num": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "text": "Comparison with baseline models",
+                "html": null,
+                "content": "<table><tr><td>Method</td><td colspan=\"3\">Precise (%) Recall (%) F1 (%)</td></tr><tr><td>Text-CNN</td><td>70.50</td><td>68.90</td><td>69.69</td></tr><tr><td>LSTM</td><td>72.30</td><td>70.10</td><td>71.19</td></tr><tr><td>GRU</td><td>73.80</td><td>71.50</td><td>72.63</td></tr><tr><td>Bi-LSTM</td><td>75.20</td><td>73.00</td><td>74.09</td></tr><tr><td colspan=\"2\">Attention Bi-LSTM 77.40</td><td>75.10</td><td>76.23</td></tr><tr><td>Proposed method</td><td>82.00</td><td>80.50</td><td>81.21</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            }
+        }
+    }
+}

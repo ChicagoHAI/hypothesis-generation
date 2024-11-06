@@ -1,0 +1,1359 @@
+{
+    "paper_id": "16HarvJLPubPoly195",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-06T17:58:40.326954Z"
+    },
+    "title": "A MULTIDISCIPLINARY ANALYSIS OF THE STRUCTURE OF PERSUASIVE ARGUMENTS",
+    "authors": [
+        {
+            "first": "Paul",
+            "middle": [
+                "T"
+            ],
+            "last": "Wangerin",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "A Multidisciplinary Analysis 197 lawyers and their teachers have described the skills that lawyers use, or should use, to create persuasive written-and courtroom 6 arguments.\nSome of this law-related literature is quite provocative. Giandomenico Majone, for example, in a recent book on the way people use evidence, argument, and persuasion in the policy process, successfully moved beyond purely legal issues. 7 Likewise, in a similar, albeit far less comprehensive, work on persuasion in policy analysis, Frank Fisher moves beyond the fields of law and policy and discusses structural aspects of communication theory.' More significantly, several people who have written about legal issues for non-lawyers 9 and lawyers 10 alike",
+    "pdf_parse": {
+        "paper_id": "16HarvJLPubPoly195",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "A Multidisciplinary Analysis 197 lawyers and their teachers have described the skills that lawyers use, or should use, to create persuasive written-and courtroom 6 arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "Some of this law-related literature is quite provocative. Giandomenico Majone, for example, in a recent book on the way people use evidence, argument, and persuasion in the policy process, successfully moved beyond purely legal issues. 7 Likewise, in a similar, albeit far less comprehensive, work on persuasion in policy analysis, Frank Fisher moves beyond the fields of law and policy and discusses structural aspects of communication theory.' More significantly, several people who have written about legal issues for non-lawyers 9 and lawyers 10 alike",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "People in various professional fields who talk or write about the process of \"persuasion,\" and, consequently, the \"structure\" of persuasive arguments, seem to assume that the only people who have anything of value to say about these two related topics are people from within the professional field to which the speakers or writers themselves belong. For example, when lawyers and legal educators discuss persuasion and persuasive arguments they appear, for the most part, to be interested only in the ideas of other lawyers and legal educators. Likewise, when journalists and journalism educators talk and write about persuasion and persuasive arguments, they seem convinced that no one other than someone trained or experienced in journalism could have anything worthwhile to say about the topics. One can say the same things about debaters and communication theorists, indeed about any group of people who study and use persuasive arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "The present analysis attempts to break free of this parochialism. It argues that anyone who is interested in the process of persuasion-including \"editorialists, propagandists, advertisers, political campaigners, ministers, lawyers, courtiers, and seducers\"-can learn from anyone who is interested in the art of persuasion. The article includes five main parts. Part II, which follows this introduction, briefly describes ideas from the fields of law, communication theory, and argumentation theory that analyze the nature of persuasion and the structure of persuasive messages. Part III contains an elaborate discussion of the work of the informal logician, Stephen Toulmin. In particular, it considers Toulmin's model for persuasive arguments. Part IV of the paper explores ideas about argumentation and argument structure in the literature of cognitive psychology and com-puter science. Part V returns to one of the topics discussed briefly in Part III-\"rebuttals\"-and suggests that rebuttals, correctly done, can be tremendously potent argumentative devices. Part VI proposes a new model for persuasive arguments, a model that simultaneously builds on and modifies Toulmin's model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "As an initial matter, I must clarify this article's definition of \"argument.\" A number of writers have rather elaborately noted in recent years something that probably seems obvious to most people. The word \"argument\" has two completely different meanings. 2 An argument can be something that people have (for example, \"The Dean had an argument with the Chancellor.\"). In addition, an argument can be something that people make (as in, \"The Dean presented her argument about faculty salaries to the Chancellor.\"). The present article deals only with the second of these two kinds of arguments-namely, the kind that people make. Thus, this article excludes from its discussion all of the literature that addresses the kinds of arguments that people have and the ways that people and groups resolve the arguments that they have.",
+                "cite_spans": [
+                    {
+                        "start": 257,
+                        "end": 258,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Common sense suggests that the field of law is a good place to commence a search for comprehensive ideas about the nature of persuasion generally and the structure of persuasive arguments specifically. Lawyers, or at least lawyers in an \"adversary system\" of justice such as that used in the United States, constantly attempt to persuade people. Thus, lawyers constantly create and use persuasive arguments. It is not surprising, therefore, that the field of law has produced an enormous amount of literature concerning argumentation and related issues. For example, there is a huge body of literature that describes in general the thinking skills used by lawyers in connection with the creation of legal arguments. 4 Likewise, have directly linked legal practice to communication theory.",
+                "cite_spans": [
+                    {
+                        "start": 716,
+                        "end": 717,
+                        "text": "4",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. THE LITERATURE OF LAW AND ARGUMENTATION THEORY",
+                "sec_num": null
+            },
+            {
+                "text": "A number of people writing in the legal literature have discussed legal argumentation issues in light of ideas drawn from the fields of both formal and informal logic. For example, there are at least two impossibly dense works linking legal argumentation and formal logic,\" as well as at least three relatively readable works on the same topic.' 2 More importantly, the ideas developed by \"informal\" logicians have in recent years begun to play a significant role in argument theory.' 3 Two logicians, for example,' 4 have discussed legal argumentation in light of the informal logic ideas of Chaim Perelman.' And in a very important work on legal argumentation,' 6 Robert Condlin referred, if only briefly, to the extraordinarily important ideas of the informal logician, Stephen Toulmin.'",
+                "cite_spans": [
+                    {
+                        "start": 664,
+                        "end": 665,
+                        "text": "6",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. THE LITERATURE OF LAW AND ARGUMENTATION THEORY",
+                "sec_num": null
+            },
+            {
+                "text": "Even that listing does not describe the extent of this literature. A number of people who have in recent years written about argumentation theory have specifically discussed, sometimes quite extensively, argumentation issues in the context of legal practice. W.L. Benoit, for example, has recently analyzed opinions of the United States Supreme Court in light of argu- 12. RUGGEROJ. ALDISERT, LOGIC FOR LAWYERS: A GUIDE TO CLEAR LEGAL THINKING (1989); J.S. COVINGTON, THE STRUCTURE OF LEGAL ARGUMENT: CASES, MATERIALS AND ANALYSES (1990) ;Jack L. Landau, Logic for Lawyers, 13 PAC. Lj. 'N 88 (1985). 188 (1984).",
+                "cite_spans": [
+                    {
+                        "start": 522,
+                        "end": 537,
+                        "text": "ANALYSES (1990)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. THE LITERATURE OF LAW AND ARGUMENTATION THEORY",
+                "sec_num": null
+            },
+            {
+                "text": "16. RobertJ. Condlin, \"Cases on Both Sides\" Patterns ofArgument in Legal Dispute- Negotiation, 44 MD. L. REv. 65 (1985). 17. See STEPHEN TOULMIN ET AL., AN INTRODUCTION TO REASONING (2d ed. 1984).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. THE LITERATURE OF LAW AND ARGUMENTATION THEORY",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. THE LITERATURE OF LAW AND ARGUMENTATION THEORY",
+                "sec_num": null
+            },
+            {
+                "text": "A Multidisciplinary Analysis 199 mentation theory.\" i Furthermore, Richard Rieke and his colleagues have repeatedly discussed legal arguments as representative examples of arguments generally. 19 Law-related literature, of course, is not the only scholarship dealing with this topic. In fact, the general literature of argumentation theory, and particularly the theoretical literature in this field, is immense. 20 Unfortunately, much of the literature dealing with argumentation theory is filled with incomprehensible jargon. Thus, much of this work is inaccessible to the lay reader. Nevertheless, at least some writings in the field are accessible to outsiders, particularly those books on persuasion that appear to be directed at audiences of undergraduate students or educated lay persons. 2 1",
+                "cite_spans": [
+                    {
+                        "start": 193,
+                        "end": 195,
+                        "text": "19",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 412,
+                        "end": 414,
+                        "text": "20",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "Unfortunately, for purposes of the present work, a serious problem exists with much of this literature. Because argumentation theory deals with all facets of the process of persuasion, much of the literature in the field has little or nothing to do with the structure of persuasive arguments. Consider, for example, research regarding the personal characteristics of different kinds of audiences and the \"involvement\" of members of an audience in an issue. Virtually all argumentation theory researchers now think that different audiences respond differently to different types of arguments. 2 2 Likewise, researchers now largely agree that audiences that have \"high involvement\" with the issue being argued tend to be persuaded to different degrees, and in different ways, than people who have \"low involvement\" with the issue. 2 1 Similarly, research about the connection between the persuasiveness of an argument and the credibility of the source of the argument demonstrates that credible people are more persuasive than non-credible people. 2 4 Other researchers who have focused on persuasiveness as a gender function have concluded that the gender of audiences and persuaders may play a role in persuasiveness. 25 While surely these analyses are useful in their own spheres, they do not bear on the structure of persuasive arguments. At least some work in argumentation theory, however, including some rather general treatments, does deal with ideas related to the structure of persuasive arguments. 2 6 This is the work that is of most interest here. Some researchers, for example, have studied the way that individual arguments are \"chained\" together to create a total argument. of a persuasive argument and can quickly reveal when some crucial piece is missing. Furthermore, other researchers have compared the relative persuasiveness of organized versus disorganized arguments. 28 These researchers have discovered, among other things, that audiences tend to think that people who make organized arguments are more credible than people who make disorganized arguments. Also, as noted above, credible people tend to be more persuasive than noncredible people. 29 Research on the differences between organized and disorganized arguments has also revealed that audiences tend to have certain relatively dear expectations regarding the organization or structure of arguments. Thus, researchers in this field now think that audiences react more favorably to arguments that are organized in familiar forms than to arguments that are organized in unfamiliar forms.",
+                "cite_spans": [
+                    {
+                        "start": 1218,
+                        "end": 1220,
+                        "text": "25",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1889,
+                        "end": 1891,
+                        "text": "28",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 2170,
+                        "end": 2172,
+                        "text": "29",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "Nor is this the only work that has been done regarding the actual structure of arguments. Some people have studied the effect, if any, of the length of an argument \u00b0 and the effect, if any, of the place in a total message in which a particular argument appears.a t Some of these researchers have discovered a \"primacy\" effect. 32 Arguments that appear at the beginning of a message are more persuasive than those that appear elsewhere. Other researchers think that a \"recency\" effect exists: arguments that appear at the end of a message are more persuasive than those made earlier. 3 3 Another group of argumentation theorists has produced a mixed bag of evidence regarding the effect, if any, of the total number of arguments in a message and the effect, if any, of the repetition of arguments within a message. 3 4 Some of these researchers believe that in certain circumstances several component arguments are better than a single argument. Repetition of similar arguments may No. 1] also be more persuasive than a single presentation. 5 Two other specific branches of argumentation research must also be mentioned briefly. First, some argumentation researchers study the differences, if any, between \"one-sided\" and \"two-sided\" arguments. 3 6 In one-sided arguments, proponents put forward only their own points. Conversely, in two-sided arguments, proponents put forward their own points and then also describe some of their opponents' points. Most researchers in this field believe that highly educated people tend to be persuaded more by two-sided arguments than by one-sided arguments. Second, a number of people who have studied the way that persuasive arguments are organized believe that arguments should begin with some kind of reference to the issue or the problem being addressed. For this reason, two key forms of argument, the \"problem-solution\" and \"motivated sequence\" models, both begin with a statement of the problem or the issue. STEPHEN TOULMIN AND THE \"STRUCTURE\" OF PERSUASIVE",
+                "cite_spans": [
+                    {
+                        "start": 327,
+                        "end": 329,
+                        "text": "32",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1040,
+                        "end": 1041,
+                        "text": "5",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1244,
+                        "end": 1247,
+                        "text": "3 6",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "Many of the points already discussed herein will not present expert persuaders with much in the way of new information. It is obvious, for example, that a question can be posed in such a way as to predict its own answer. It also should not be terribly surprising that two-sided arguments may well be more persuasive than one-sided arguments. Not everything about persuasion and argumentation theory, however, is quite so obvious. It is to those non-obvious concepts that this analysis now turns.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "ARGUMENTS",
+                "sec_num": null
+            },
+            {
+                "text": "It is probably safe to say that Stephen Toulmin is perhaps the pre-eminent modem figure in the field of argumentation the- ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "ARGUMENTS",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "202",
+                "sec_num": null
+            },
+            {
+                "text": "ory. s Toulmin, whose ideas are constantly discussed in the argumentation literature, 4 \" believes that the classical philosophers did not accurately describe either the component parts of persuasive arguments or the way in which those parts fit together. Thus, Toulmin believes, among other things, that classical descriptions of the difference between deductive and inductive logic make no sense in day-to-day argumentation. 4 ' Toulmin also thinks that people who create arguments in the real world, unlike people who create arguments in ivory towers, constantly mix together inductive and deductive reasoning. 4 2 * Only philosophers, he explains, actually believe that bright lines differentiate inductive from deductive reasoning. 4 Toulmin has other controversial ideas about the nature of argumentation. He believes, for example,'that universal principles cannot be used alone to judge arguments. 4 4 Rather, a whole different system of judging must be used. 4 5 Some parts of all arguments, Toulmin thinks, can only be judged pursuant to criteria that change from one field of inquiry to another. Toulmin calls these parts of arguments \"field dependent.\" 4 6 Conversely, Toulmin acknowledges that one can judge some parts of arguments, namely parts having to do with what he calls the \"force\" or intensity of the argument, using factors that do not vary from one field of inquiry to another. Toulmin calls these parts \"field invariant. 47 An example best illustrates Toulmin's classification system in operation. Consider these two arguments: \"George Bush un-39. See ToULMIN ET AL., supra note 17. 40. See, e.g., Richard Fulkerson, Technical Logic, Comp-Logk, and questionably is a better president than Ronald Reagan,\" and \"Michael Jordan unquestionably is a better basketball player than Larry Bird.\" Since political and statesmanship skills are wildly different from basketball skills, the criteria that must be used to judge these two different arguments are wildly different. Thus, the arguments are, at least in part, field dependent. At the same time, however, one aspect of both of these arguments is field invariant. In both of these arguments the word \"unquestionably\" means exactly the same thing.",
+                "cite_spans": [
+                    {
+                        "start": 737,
+                        "end": 738,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1445,
+                        "end": 1447,
+                        "text": "47",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "202",
+                "sec_num": null
+            },
+            {
+                "text": "Toulmin's ideas about the field dependence and field invariance of arguments introduce what is perhaps Toulmin's most important point. He believes that the structure of persuasive arguments is for the most part field invariant. 4 Thus, Toulmin explains that even if the subject matter of arguments differs wildly, and even if arguments are made in completely different fields of inquiry, the structure of the arguments should remain more or less the same. 4 9 That structure, in turn, consists of two groups of three parts each. The first group, the more important group, includes parts that Toulmin calls \"grounds,\" \"claims,\" and \"warrants.\" 5 0 The second group includes parts that Toulmin calls \"backing,\" \"qualifiers,\" and \"rebuttals. ' 1 \"Grounds,\" which roughly correspond in Toulmin's thinking to the minor premise in a classical syllogism, essentially are any data, observations, personal opinions or factual materials relevant to an issue being considered. Grounds, in other words, are the factual evidence in a particular situation. For example, if the facts of a situation are such that a person left his car in a metered spot without putting money in the meter, then, using Toulmin's terminology, those facts would be grounds for an argument in law. Likewise, if the facts of a situation are such that a patient displays a virus-like pallor, lethargy, and low fever, those symptoms would be the grounds of an argument in the field of medicine. Finally, if the facts of a situation are such that a person has again and again chosen to work hard at publicly visible projects and has never followed through on jobs calling for a lot of invisible hard work, those facts are the grounds for an argument in the field of psychology. [Vol. 16 \"Claims,\" in Toulmin's terminology, are the conclusions that people making arguments wish audiences to accept. Claims, in other words, roughly correspond to the conclusion in a classical syllogism. In the legal problem just described, for example, the claim might be that the person who did not feed the meter is guilty of the offense. Likewise, in the medical problem, the claim might be that the patient is suffering from a viral infection. Finally, in the psychology problem, the claim might be that the person's appearance of hard work and conscientiousness is a pose. \"Warrants,\" which roughly correspond in the Toulmin system to the major premise in a classical syllogism, link the grounds to the claim. Warrants, in other words, explain why a claim is \"warranted.\" For example, in the foregoing parking meter example, the warrant used probably would be a rule of law stating that anyone who leaves a car in a metered space without putting money in the meter can be found guilty of a parking meter offense. Likewise, the warrant in the foregoing medical example probably would be the generally accepted medical principle that pallor, lethargy and low fever often mean viral or bacterial infection. Finally, the warrant in the psychology example could be the accepted notion in that field that someone who seeks to work only at what is rewarded is not conscientious.",
+                "cite_spans": [
+                    {
+                        "start": 228,
+                        "end": 229,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 739,
+                        "end": 742,
+                        "text": "' 1",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "202",
+                "sec_num": null
+            },
+            {
+                "text": "According to Toulmin, all persuasive arguments in all fields of inquiry must contain the three parts just described: grounds, claims, and warrants. 52 Indeed, messages that do not contain these parts are not arguments. As noted earlier, however, arguments also can contain a second group of three parts, a group consisting of backing, rebuttals, and qualifiers. These parts, according to Toulmin, need not be included in persuasive arguments. Their inclusion, however, makes an argument more persuasive.",
+                "cite_spans": [
+                    {
+                        "start": 148,
+                        "end": 150,
+                        "text": "52",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "202",
+                "sec_num": null
+            },
+            {
+                "text": "The \"backing\" in Toulmin's scheme is, essentially, the authority for the warrant (rule). For example, in the parking meter situation described above, the backing for the warrant might be a particular section of a criminal code, a previously decided appellate court decision, or a section of an important 52. I. at 25-27.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "202",
+                "sec_num": null
+            },
+            {
+                "text": "legal treatise. In the medicine and psychology examples, the backing for the warrant might be a diagnostic manual. Unfortunately, Toulmin himself does not really explain why backing increases the persuasiveness of arguments. John Reinard, however, provides just such an explanation. 3 Reinard's own research and other research that he cites indicate that people who use \"evidence\" as part of their arguments-that is, people who refer to facts and information that they themselves did not produce-tend to be viewed by most audiences as more credible than people who do not use evidence. 5 4 Evidence, of course, is just a different name for backing. Credibility, in turn, is critical. As noted earlier, the credibility of the source of an argument is a major factor in determining the persuasiveness of the argument itself 5 Consider in this context a simple example. Assume that Professor Smith states at a faculty meeting that \"post-tenure\" review is a bad idea. This statement is, in Toulmin's terminology, a warrant. When questioned as to why this should be so, Smith responds: \"Because I think so!\" Now assume that Professor Jones states at that same faculty meeting that post-tenure review is a good idea. Again, this is a warrant. When questioned as to why, however, Jones responds that dozens of researchers at numerous higher education institutions have studied the issue of post-tenure review and have uniformly concluded that it is a good thing. BecauseJones provides evidence or backing for her warrant, whereas Smith provides none, Jones is a more credible persuader than Smith. Thus, at least in theory, Jones' argument should be more persuasive than Smith's. Jones, of course, may not actually persuade anyone at all on this point. But if she fails to persuade, it will not be because her argument itself is less persuasive than Smith's. Rather, she will fail for reasons earlier noted herein, perhaps reasons having to do with the \"audience\" for the argument she delivers and the level of \"involvement\" that the audience has in the issue being discussed. 6 \"Qualifiers,\" in Toulmin's thinking, are the elements of ar- ",
+                "cite_spans": [
+                    {
+                        "start": 822,
+                        "end": 823,
+                        "text": "5",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 2070,
+                        "end": 2071,
+                        "text": "6",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "No. 1]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "A Multidisciplinary Analysis 207",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "guments that convert the terms of arguments from absolute terms to probabilistic terms. In the parking meter situation, for example, a qualifier might state that the individual \"probably\" would be found guilty. In the medicine example, such a qualifier might state that the patient \"most likely\" has a viral infection and in the psychology example, a qualifier might indicate that the individual \"possibly\" was posing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "Once again, Toulmin himself does not provide much explanation as to why qualifiers increase the persuasiveness of arguments. But, again, Reinard helps out. Reinard notes that research done by people who study the issue of message \"discrepancy\" suggests that arguments are persuasive only if the changes in audience belief called for by the arguments fall within the audience's latitude for change or acceptance. 5 7 Thus, an argument that calls for a large change of belief is less likely to be persuasive than an argument that calls for a small change of belief simply because a large change of belief is less likely to be within an audience's latitude for change. Qualifiers tend to reduce the amount of change in belief called for by an argument. Qualifiers also seem to make arguments more persuasive because many people, and particularly many educated people, seem to be more willing to accept somewhat tentative positions than they are to accept absolute positions. The word \"unquestionably\" in an argument, for example, is not at all tentative. It allows for no possible exception and no subsequent changes of mind. Conversely, the word \"possibly\" in an argument is tentative. It does allow for subsequent retrenchment.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "Consider again in this context the argument already described concerning Larry Bird and Michael Jordan. Many people would not find persuasive the claim, to use Toulmin's terminology, that Michael Jordan \"unquestionably\" is a better basketball player than Larry Bird. The force of this claim is simply too strong. At the same time, however, a substantial number of people-although nobody from Boston-might find persuasive the claim that Jordan \"possibly\" or \"probably\" is a better player than Bird. This difference in response is likely to occur for two reasons. The qualifier used here (\"possibly\" or \"probably\") reduces the force of the claim and allows for a tentative conclusion. And, to the extent that it calls for a change in 57. Reinard, supra note 53, at 211. belief, a claim that includes the words \"possibly\" or \"probably\" calls for less of a change in belief than a claim that uses the word \"unquestionably.\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "\"Rebuttals,\" in Toulmin's terminology, are the parts of an argument that acknowledge the existence of counter arguments or exceptions to the suggested link between claims (conclusions), grounds (facts), and warrants (rules). Rebuttals usually contain references to one or more factual situations in which similar grounds (facts) and warrants (rules) existed, but in which different claims (conclusions) ultimately occurred. In the parking meter situation, for example, the rebuttal might consist of a reference to a situation in which someone was not found guilty of a parking meter violation because he did not put money in a broken meter. In the medicine situation, a rebuttal might state that the symptoms described might also have been produced by overwork or neurotic stress. And, finally, in the psychology example a rebuttal might state that some people who willingly do publicly visible work but do not do private work may not be posing at all.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "Consider again the Jordan-Bird argument. The claim that Jordan is better than Bird must rest on some sort of grounds (facts) and on some sort of warrant (rule) that links the warrant and the grounds. In this situation, therefore, the warrant might be: \"Basketball players who possess the best physical skills are the best players.\" And in this situation the grounds might be: 'Jordan has better physical skills than Bird.\" Rebuttal to this argument would then involve examples of basketball players with great physical skills-many of whom exist-who are not generally considered good players.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "Rebuttals in the Toulmin scheme play a role in arguments that is related to the role that qualifiers play. As noted earlier, two-sided messages tend to be more persuasive than one-sided messages, at least when the audience for an argument has a substantial amount of education. 5 \" Two reasons have been advanced for why this is so. 59 The first of the reasons involves what is called \"inoculation\" theory. This theory, built upon a biological analogy, suggests that audiences pre-exposed to weakened counter-arguments will tend to be less persuaded by those counter-arguments when they are subsequently ",
+                "cite_spans": [
+                    {
+                        "start": 333,
+                        "end": 335,
+                        "text": "59",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "206"
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "208",
+                "sec_num": null
+            },
+            {
+                "text": "presented. 60 Pre-exposure to weakened counter-arguments, like pre-exposure to weakened forms of disease, causes recipients to build up defenses to the full fledged counter-arguments. The second reason that rebuttals might increase the persuasiveness of arguments involves what is called \"correspondence\" theory. 6 ' Research suggests that audiences, for reasons that need not be detailed here, tend to think that people who make two-sided arguments are more likely to believe in the arguments that they make than people who make one-sided arguments. Furthermore, research suggests that audiences are more likely to be persuaded by arguments that they think \"correspond\" to the persuader's true feelings or disposition than they are to be persuaded by arguments that they think reflect situational constraints on the person making the argument. 6 2 Hence, audiences tend to find two-sided arguments more persuasive than one-sided arguments.",
+                "cite_spans": [
+                    {
+                        "start": 11,
+                        "end": 13,
+                        "text": "60",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 313,
+                        "end": 314,
+                        "text": "6",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "208",
+                "sec_num": null
+            },
+            {
+                "text": "One last point about Toulmin's thinking must now be noted. Toulmin thinks that the structure of arguments can be represented in pictorial diagrams, diagrams that reveal the relationships between the six constituent parts in individual arguments. Admittedly, this diagraming technique has caused some controversy. 63 Regardless, no harm is caused here by duplicating several of Toulmin's own examples.' (See Figures 1 and 2 .) IV.",
+                "cite_spans": [
+                    {
+                        "start": 313,
+                        "end": 315,
+                        "text": "63",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 415,
+                        "end": 416,
+                        "text": "1",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 421,
+                        "end": 422,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "208",
+                "sec_num": null
+            },
+            {
+                "text": "Notwithstanding their seeming comprehensiveness, Toulmin's ideas about the structure of persuasive arguments contain one glaring weakness, a weakness also inherent in most of the other social science research on persuasion and argumentation that has already been discussed. Toulmin seems to thinkand in this he is joined by most of the researchers whose work is discussed above-that people create persuasive arguments through the use of only one kind of reasoning process. That reasoning process involves the application of some sort of general rule-a warrant, to use Toulmin's terminology-to particular factual incidents. Rule-based reasoning, which is what we can call the reasoning described by Toulmin and most persuasion researchers, surely plays a critical role in the creation of persuasive arguments. However, it is not the only kind of reasoning that plays such a role.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED, RULE-BASED AND POLICY-BASED REASONING",
+                "sec_num": null
+            },
+            {
+                "text": "In recent years, cognitive scientists and computer scientists have concluded that human beings, and computers programmed to \"think\" like human beings, engage in two different other kind of reasoning, called \"case-based\" reasoning, occurs when human beings or machines look for past situations or events with facts similar to those of present problems and then extrapolate the results in those past situations to the present events. 6 Case-based reasoning, which will be discussed first, is simultaneously simpler than and more complicated than rule-based reasoning. We know it is simpler than rule-based reasoning because human beings, particularly small children, use case-based reasoning before they use rule-based reasoning. When a child is deciding whether to spread jelly on the cat, for example, that child is far more likely to remember the spanking she received the last time she did this than some general rule about jellyspreading. Case-based reasoning is also more complex than rule-based reasoning, however. We know this because it is the kind of reasoning that very sophisticated human beings use when rule-based reasoning cannot solve a problem.",
+                "cite_spans": [
+                    {
+                        "start": 432,
+                        "end": 433,
+                        "text": "6",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED, RULE-BASED AND POLICY-BASED REASONING",
+                "sec_num": null
+            },
+            {
+                "text": "When people or computers engage in case-based reasoning they do two things. First, they search their memories for past ''cases\" or episodes in which the facts are similar to the facts of present problems or situations. Second, once past cases have been found with facts similar to those of present problems, humans and machines engaging in case-based reasoning extrapolate the result in the past case to the present problem. In other words, the reasoner decides that what was done as a consequence of the facts in the past case should also be done in connection with the current problem. (Lawyers, incidentally, have specific names for this process-the use of \"precedent\" or \"stare decisis.\") Consider, for example, how case-based reasoning works in connection with the following hypothetical situation. The facts, which are drawn from a classic contract law case, Ricketts v. Scothorn,\" 7 are these:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED, RULE-BASED AND POLICY-BASED REASONING",
+                "sec_num": null
+            },
+            {
+                "text": "A grandfather promised to give his granddaughter a large sum of money if she quit her job and stayed at home. He later repeated that promise to her in front of a group of people, and put it in writing. Thereafter, relying on that promise, the granddaughter quit her job. The grandfather then died and his estate refused to perform on the promise. The granddaughter sued and the court concluded, for reasons that are not important here, that the promise involved was of a kind that is not generally enforceable in courts of law. The question thus is this: What else, if anything, should the court do?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED, RULE-BASED AND POLICY-BASED REASONING",
+                "sec_num": null
+            },
+            {
+                "text": "Case-based reasoners facing this problem would do two things. First, they would search for past cases that had facts similar to those of the present problem. They might then find this past case-a case, incidentally, which is drawn from Feinberg v. Pfeiffer Co.: 68 An elderly woman with heart trouble quit her job after her employer made a promise to her, in writing and in front of a group of business people, of a pension for life. The employer explicitly stated that the elderly woman did not have to do anything in exchange for the pension. The employer then died and his successors refused to pay the pension. The woman sued and the court initially concluded that the promise at issue was of a kind not generally enforceable in courts of law. Ultimately, however, the court concluded that the woman's reliance made the promise enforceable. ",
+                "cite_spans": [
+                    {
+                        "start": 262,
+                        "end": 264,
+                        "text": "68",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CASE-BASED, RULE-BASED AND POLICY-BASED REASONING",
+                "sec_num": null
+            },
+            {
+                "text": "Because a rather close fit seems to exist between the facts of the past case and the facts of the present problem, case-based reasoners would then proceed to extrapolate the result in the past case to the present problem. In the past case the court ultimately concluded that the promise at issue should be enforced because of the elderly woman's \"reliance.\" In other words, even though the promise in the past case was not enforceable under traditional rules, a reliance exception to those traditional rules was invoked. When the result in that past case is extrapolated to the present problem, the granddaughter wins.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "Lawyers are not the only professionals who use case-based reasoning. Consider, for example, a doctor who encounters a patient who displays very unusual symptoms. While working with this patient, the doctor might suddenly recall that many years earlier he had treated a patient with similar symptoms. That earlier patient, the doctor recalls, had ultimately been diagnosed as having, say, malaria. The doctor then asks the present patient whether she has recently been out of the country. \"Oh,\" is the reply. \"Why do you ask? I just got back from a safari in Africa.\" This doctor, like the lawyer described earlier, is engaging in case-based reasoning. Likewise, consider a journalist who is preparing an editorial about the war in the Middle East. This journalist, like so many who have already written on the Middle Eastern situation, may elaborately compare the Middle East war, and the circumstances leading up to it, to the conflict in Vietnam in the 1960's and 1970's, and the circumstances leading up to that conflict. The journalist might then conclude that disaster is likely to strike the United States in the Middle East, just as disaster earlier struck in Vietnam. The journalist, of course, like the doctor and lawyer already described, is engaging in case-based reasoning.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "A critical fact concerning case-based reasoning must now be explained. Case-based reasoning works best when reasoners, whether human or machine, can locate past cases that are not obvious-cases not superficially the same as the problems upon which they are working.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "Cognitive psychologists and computer scientists have spent a great deal of time studying the processes in which people (and machines) engage when they search for factually similar, but not obviously related, past cases. Three ideas have emerged",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "214",
+                "sec_num": null
+            },
+            {
+                "text": "A Multidisciplinary Analysis 215 from this research. First, novice reasoners (and inexpertly programmed machines) tend to look for \"surface\" factual similarities between present problems and past cases. Second, expert reasoners (and sophisticated machines) tend to look for \"structural\" similarities between the facts of past cases and the facts of present problems. Third, expert reasoners identify structural similarities between past cases and present problems by first creating \"schemata\" that capture the underlying nature of the facts involved in the present problem. Expert reasoners then search for past cases that match the schemata. 69 Consider again the granddaughter problem. Novice casebased reasoners (and inexpertly programmed machines) thinking about this problem would search for past cases that share surface factual characteristics with the present problem. Thus, novice reasoners dealing with this problem would search primarily for past cases involving granddaughters promised money by grandfathers. Or, if they expanded the scope of their searches somewhat, novice reasoners might look for past cases involving gift promises made by relatives. Because these novices would so limit their searches, however, they would be unlikely to find the case of the elderly woman. They would not find this case because its surface-factual characteristics are not similar to the surface-factual characteristics of the grandfather problem. Conversely, expert case-based reasoners dealing with the grandfather problem would do two things. First, they would create a schemata of the facts in the problem, perhaps a schemata indicating that the problem involves reliance by someone on a promise that is, for whatever reason, not generally enforceable in a court of law. Second, they would search for past cases that fit that schemata. These reasoners would then quickly find the elderly woman case because it involves reliance on a generally unenforceable promise.",
+                "cite_spans": [
+                    {
+                        "start": 643,
+                        "end": 645,
+                        "text": "69",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "Ironically, the schemata process just described brings this analysis of case-based reasoning back to where it started, namely, to the relationship between rule-based and case-based reasoning. Rules often are nothing more than a synthesis of the results in a number of past cases. Or, to use Toulmin's terminology, a warrant is a synthesis of the various things that serve as the backing for the warrant. In American contract law, for 69. See Caplan & Schooler, supra note 66.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "example, a synthesis of many past cases dealing with reliance on promises has led to a rule stating that, in some circumstances, promises that are relied upon will be enforced even though traditional rules preclude enforcement. That fact, in turn, shows how rule-based reasoning is connected to the casebased reasoning of experts. The schemata that expert casebased reasoners use in order to find past cases are closely related to rules (warrants). In the grandfather situation, for example, expert reasoners who create and use a factual schema describing reliance upon otherwise unenforceable promises are creating and using something that is extremely close to the reliance rule itself.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "These facts raise a number of intriguing questions about case-based reasoning in general and schemata formation in particular. What exactly is the thinking process in which expert case-based reasoners engage when they create factual schemata? Does that process primarily involve skills of analysis and synthesis? Or, does that process primarily involve the recollection of previously formulated rules? In other words, will expert case-based reasoners working on the grandfather problem successfully locate the elderly woman case because those experts can identify the structural facets of the grandfather problem or because those experts know and can remember the general rule about relied-upon promises?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "All of this discussion brings this analysis to rule-based reasoning, a concept that has already been reviewed extensively in connection with this essay's review of Toulmin's ideas. Rulebased reasoning, it should be recalled, is simply the application of a rule (warrant) to a new set of facts (grounds) in order to produce a conclusion (claim). v\u00b0 Having now analyzed casebased reasoning, three important additional points about rulebased reasoning should be made. First, rule-based reasoning has at least one distinct advantage over case-based reasoning, an advantage flowing from evidentiary weight alone. Casebased reasoning extrapolates the result in one past case to present problems. Rules, however, usually synthesize the results of a number of past cases. In short, rules are accompanied, almost by definition, by more \"backing\" than are cases. Because of that fact, the results brought about by the applica-70. See supra text accompanying notes 48-52.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16 tion of rules to a new set of facts tend to be viewed as more credible than results brought about by extrapolating the result in a single past case to a present problem.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "216",
+                "sec_num": null
+            },
+            {
+                "text": "Second, it is not at all uncommon for reasoners to use cases as part of what is essentially rule-based reasoning. Reasoners do this because past cases can be used in two ways-one that involves case-based reasoning and one that involves rule-based reasoning. Consider again the granddaughter problem. Many people creating an argument in connection with that problem will discuss the elderly woman case. Different people, however, will discuss the case in different ways. Some people will describe the facts of the case and then extrapolate its result to the present problem. These people will be engaging in case-based reasoning. Some people, however, will simply cite that case as authority or backing for a general rule about relied-upon promises. Though these people will be using a past case, they will be engaging in rule-based reasoning.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "216",
+                "sec_num": null
+            },
+            {
+                "text": "Third, the aforementioned simplistic examples of rule-based reasoning-examples involving parking meters, medical diagnosis, and basketball players-should not in any sense be read as suggesting that rule-based reasoning is an easy intellectual skill to use. Just the opposite is true. In many situations the facts of a present problem can easily be classified in several different ways. In the grandfather situation, for example, one could classify the facts as involving reliance. However, one also could classify them as involving an \"exchange.\" (For reasons that are not important here, the presence or absence of an exchange is important in American contract law.) 7 1 Yet, if the facts are classified differently-if different factual \"schemata\" are used-then different rules might be used. If different rules are used, then different results might be obtained. Furthermore, in many situations rules carry with them a whole slew of exceptions. Some of those exceptions are explicitly stated in the rules themselves. Some, however, are merely implicit. Finally, in many situations the terms and words used in rules are vague or ambiguous. The official formulation of the reliance rule already described, for example, contains the words \"rea-71. In American law, only bargained-for promises are enforceable. Courts look for evidence of a bargain in the consideration given for the exchange. That is, they look to to see if one party either suffered a detriment or bestowed a benefit as the price of the other's promise or performance. See, e.g., Batsakis v. Dematsis, 226 S.W.2d 673 (Tex. sonable\" and \"injustice.\" 2 Do we know what those two words actually mean?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "216",
+                "sec_num": null
+            },
+            {
+                "text": "The problems just noted that are incident to the use of rulebased reasoning and comparable problems incident to the use of case-based reasoning, have, in at least some fields of inquiry, led to the use of another kind of reasoning that is wholly different from rule-based and case-based reasoning. This kind of reasoning, which good lawyers use all the time in persuasive arguments, is perhaps best called \"policy-based\" reasoning. Policy-based reasoning involves reference to and the use of the \"reasons\" or \"purposes\" behind rules. Policy-based reasoning also involves reference to and the use of the reasons or purposes that caused the results in past cases.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "216",
+                "sec_num": null
+            },
+            {
+                "text": "One can use policy-based reasoning both to complement case-based and rule-based reasoning and to contradict such reasoning. One can do this in a number of ways. First, policybased reasoning can be used to provide definitions for vague or ambiguous words in rules. Consider, for example, the word \"injustice\" in the reliance rule already described. The policy behind the reliance rule might provide a definition of that word. Second, policy-based reasoning can provide a test for determining what one should and should not include in the factual schemata used to search for past cases that are structurally similar to present problems. In connection with the granddaughter problem, for example, the ruling in the past case involving the elderly woman might explicitly or implicitly indicate that the age and gender of the relying person in that case played no role in the result obtained. If this is so, then the factual schema used in connection with searches for past cases would not have to include references to the age or gender of relying promisees. Conversely, if the ruling in the past case indicated explicitly or implicitly that either or both of these matters were important, then the schema would have to include reference to one or both of them. Finally, one can use policybased reasoning to complement case-based and rule-based reasoning in the sense that it can simply provide additional support to an argument based on rules or past cases. Thus, for example, an argument in the grandfather problem referring to the reliance rule already described, or referring to the case of 72. See RESTATEMENT (SECOND) OF CONTRACTS, supra note 71, at \u00a7 90.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "216",
+                "sec_num": null
+            },
+            {
+                "text": "A Multidisciplinary Analysis the elderly woman, might also refer to the reasons or purposes behind that rule or the reasons or purposes behind the result in the past case.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "218"
+            },
+            {
+                "text": "Perhaps a more important use of policy-based reasoning must now be noted. One can use policy-based reasoning to contradict the results seemingly called for by case-based and rule-based reasoning. This use is possible, in turn, because the policies behind rules or past cases are generally capable of \"trumping\" the rules or cases themselves. In other words, if a rule or a past case in a particular situation calls for one result but the policy behind the rule or the case calls for another result, the policy usually prevails.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "218"
+            },
+            {
+                "text": "A wholly new example best illustrates the ability of policybased reasoning to trump rule-based and case-based reasoning:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "218"
+            },
+            {
+                "text": "Assume that a state law prohibited school buses from crossing railroad tracks without stopping and required bus companies to fire drivers who violated this rule. Assume further that on several occasions in the past school bus companies in the pertinent jurisdiction had fired drivers for violating the rule. Now assume that a school bus driver and her bus load of children were proceeding down an icy hill toward a railroad track. Before reaching the tracks, the driver, who had been having problems with skidding all afternoon, carefully looked down the tracks in both directions and determined that no trains were in sight. (The view in either direction was unobstructed for several miles.) Without using the brakes, the driver slowed the bus down to about ten miles per hour before it reached the bottom of the hill and the tracks. Nevertheless, the driver took the bus across the tracks without stopping.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "218"
+            },
+            {
+                "text": "If a court uses either rule-based or case-based reasoning in connection with this problem, the bus driver will get fired. Consider, however, what might happen if a court used policybased reasoning. Assume that the policy behind the railroad track rule and the reason behind the results in the past case involve an attempt to maximize the safety of children riding school buses. If the facts of this problem are analyzed in light of that policy, then it is not at all clear that the driver should be fired. Although the driver broke the rule, she broke it in order to advance its underlying purpose, namely, to advance the safety of children. Thus, in light of this policy, perhaps the driver should not be fired.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "[Vol. 16",
+                "sec_num": "218"
+            },
+            {
+                "text": "Of course, policy-based reasoning does not always contradict rule-based and case-based reasoning. As noted earlier, policybased reasoning can be used both to contradict and to complement case-based or rule-based reasoning. This dual usage is possible because different, and sometimes absolutely contradictory, policy explanations can be put forward for individual rules or past cases. Consider, for example, a different way of looking at the policy involved in the bus driver problem. Assume now that the school board, the state legislature, and the hearing officers who decided the past cases did not do what they did in order to maximize the safety of children. Rather, assume that these people, for good reasons or bad ones, put into place this particular rule, or decided the past cases as they did, because they felt they could not fully trust school bus drivers to make wise decisions in stressful situations, situations such as those created by the slippery hill and the railroad track. Furthermore, assume that these people, again for good reasons or bad ones, decided that school bus drivers will tend wrongfully to manipulate any rules that give them discretion. If these are the policies behind the rule and past cases involved here, then the driver should be fired. Thus, the policy in this situation complements the rule and past cases, rather than contradicts them.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "No. 1]",
+                "sec_num": null
+            },
+            {
+                "text": "One final situation in which policy-based reasoning can play a critical role in the creation of persuasive arguments takes the present analysis back to case-based reasoning. As noted above, case-based reasoning builds on one core notion: if the facts of a past case resemble the facts of a present problem, then the result in the past case should be extrapolated to the present problem. This notion, however, leads to terrible problems in connection with what Toulmin calls \"counter examples\" or \"rebuttals.\"\" 3 Counter examples are past cases in which the facts closely resemble the facts of present problems, but in which the results obtained are inconsistent with, or even opposite of, those desired in the present problem.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "V. REBU-TALS REVISITED",
+                "sec_num": null
+            },
+            {
+                "text": "Consider the aforementioned hypothetical involving the grandfather who promised to give his granddaughter some ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "V. REBU-TALS REVISITED",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16 money if she quit her job. Assume now that one finds a different past case with the following facts. (This new past case, incidentally, is drawn from Kirksey v. Kirksey.) 74 Shortly after her husband died, a young woman received a letter from her brother-in-law telling her that if she moved to his farm he would give her and her children a place to stay. Thereafter, relying on that promise, the woman boarded up her own farm and moved to her brother-in-law's farm. Later, the brother-in-law changed his mind and evicted the woman and her children from his farm. Admittedly, the facts of this case superficially are unlike the facts of the granddaughter problem. At a structural level, however, the facts of this past case and the facts of the present problem are remarkably similar. As case-based reasoning dictates, since the facts are so similar, the result in the past case should be extrapolated to the present problem. But, there's the rub. In this particular past case, the brother-in-law prevailed.",
+                "cite_spans": [
+                    {
+                        "start": 180,
+                        "end": 182,
+                        "text": "74",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "Rebuttals are the way that persuaders deal with counter examples such as the one just described. Rebuttals come in two forms. \"Passive\" rebuttals, the kind of rebuttal discussed earlier, simply refer to the existence of counter examples. (As noted earlier, passive rebuttals work, if at all, because of either the \"inoculation\" effect or the \"correspondence\" effect.) In connection with the foregoing problem, for example, a passive rebuttal made by the granddaughter would consist solely of a reference to the case of the dead farmer's wife. Nothing more would be said about this case. \"Active\" rebuttals, a kind of rebuttal that does not seem to play much of a role in Toulmin's thinking, are completely different. Active rebuttals attempt either to treat counter examples as irrelevant-a process lawyers call \"distinguishing\"-or to turn around and use counter examples to opposite advantage-a process lawyers call \"'reconciling.\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "When proponents of an argument create a distinguishing rebuttal, they suggest that the facts of a counter example do not really resemble the facts of the present problem as closely as it appears. Rather, the facts are subtly but importantly different. In connection with the foregoing problem, for example, the granddaughter might distinguish the past case by stating that the promisor in the past case was alive when the promise was 74. 8 Ala. 131 (1845).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "broken, but that the promisor in the present problem was dead when the promise was broken. (In the present case, it should be recalled, the grandfather's estate, and not the grandfather himself, refused to pay the money.)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "Distinguishing rebuttals work, of course, for a very simple reason: the results in past cases must be extrapolated to present problems only if the facts in those past cases closely resemble the facts in present problems. Thus, where the facts differ between the present problem and the past case, the results in the past case cannot be extrapolated to the present problem.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "Of course, factual differences of some sort will exist, almost by definition, between any past case and any present problem. Thus, one can potentially distinguish all past cases from all present problems. A slight extension of a point made earlier, however, easily deals with this objection. First, when one engages in case-based reasoning, the only factual similarities between past cases and present problems that matter are factual similarities that involve structural facts. Thus, in the application of case-based reasoning, it makes no difference if surface facts in a present problem and a past case differ. The same idea controls in connection with distinguishing rebuttals. Second, the only way to differentiate structural facts from surface facts in present problems and past cases is to engage in policy-based reasoning.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "Complex as the process of creating distinguishing rebuttals is, that process is nowhere near so complicated as the process of creating reconciling rebuttals. People who attempt to reconcile counter examples do not simply suggest, as do people who distinguish rebuttals, that counter examples have no applicability to the present problems. Rather, reconcilers insist that counter examples indeed do have applicability to present problems. They are applicable, however, not because they are counter examples, but because they actually support, rather than refute, the original proposition.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "Lawyers, who perhaps more than any other group of professional writers have perfected the skill of reconciling, know that the process of creating a reconciling rebuttal involves two distinct steps. First, when a reconciliation is created, one must distinguish the facts of a counter example from the facts of a present problem. -In other words, differences in at least some structural fact must be shown to exist between the counter ex-",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "220",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "ample and the present problem. Once this is done, one need not extrapolate the result in the counter example to the present problem. Second, when a reconciliation is created, one must create a warrant (rule) or a policy that grows out of the facts just distinguished. This new warrant or policy, however, must do a rather strange thing. When applied to the facts of the counter example, this warrant or policy must produce the result actually reached in the counter example. Yet, when applied to the facts of the present problem, this same warrant or policy must produce the opposite result. Consider, for example, how a reconciling rebuttal might work in connection with the granddaughter problem and the counter example of the dead farmer's wife. First, the granddaughter would distinguish the facts of the counter example at a structural level from the facts of the present problem. In the granddaughter problem, as noted above, the promisor was dead when the promise was broken. In the counter example, however, the promisor was alive when the promise was broken. If one accepts, at least for the moment, that this factual difference involves structural rather than surface facts, then the past case has been distinguished. Second, the granddaughter would create a new warrant or policy that grows out of these distinguished facts and that produces opposite results in the past case and the present problem. The following warrant (rule) might then result: \"Gift promises that are revoked by promisors before their deaths are not enforceable even though those promises have been relied upon.\" Application of this warrant to the facts of the counter example produces the actual result in the counter example. At the same time, however, application of this warrant to the facts of the present problem produces victory for the granddaughter.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "An additional example further demonstrates how the reconciliation process works. Assume that the facts of a present problem are these:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "A young woman found a shiny stone and, not knowing what it was, showed it to a jeweler. The jeweler, who at that time did not know what the stone was, offered to give the woman a dollar for it. The woman agreed and promised to return with the stone the next day. That night, however, the woman discovered that the stone was a precious emerald and thereafter refused to hand it over to the jeweler. The jeweler has brought suit against the young woman.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "Assume further that the young woman's lawyer has found the past case of Wood v. Boynton, 75 a classic case indeed. The facts of Wood are these:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "A young girl found a shiny stone and, not knowing what it was, showed it to ajeweler. The jeweler, who at that time did not know what it was, offered to give the girl a dollar for it.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "The girl agreed and handed over the stone. That night, however, the girl discovered that the stone was a precious diamond and brought suit against the jeweler for return of the stone. Ultimately, the jeweler prevailed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "The facts of the counter example just described (the little girl and the diamond) seem to be remarkably similar to the facts of the present problem (the young woman and the emerald). Thus, at first glance, it appears that the result in the past case, victory for the jeweler, should be extrapolated to the present problem. In fact, however, a skilled lawyer could easily reconcile this counter example. Again, the process involves two steps. First, the lawyer would distinguish the past case from the present problem by searching for differences in structural facts between the two situations. This search would produce the following differences. In the present problem, the young woman had not turned over the emerald before the mistake was discovered. Thus, when the mistake was discovered in the present problem, the young woman possessed the jewel. In the past case, however, the young girl had turned over the diamond before the mistake was discovered. Thus, when the mistake was discovered in the past case, the jeweler possessed the jewel. If it is assumed that these possession facts are structural facts, then the woman's lawyer has distinguished the past case from the present problem. Second, the lawyer would use the factual difference just described to create a reconciling warrant (rule): \"Conflicts over ownership of mistakenly identified goods should be resolved so as to award ownership to the person in possession of the goods at the time when the mistake is discovered.\" When this warrant is applied to the facts of the counter example, the actual result in that past case is obtained-the jeweler wins. Conversely, when the warrant is applied to the facts of the present problem, the young woman wins. The counter example, therefore, has been reconciled.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "Two additional comments should be made about reconcilia- ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "222",
+                "sec_num": null
+            },
+            {
+                "text": "Recall now Toulmin's own model for persuasive arguments, a model that includes the six parts already described: grounds, warrants, claims, backing, qualifiers and rebuttals. It should be clear that this model, impressive as it might be, does not fully detail the myriad reasoning techniques that one can use to create persuasive messages. Toulmin's model fails in part because it does not put sufficient emphasis on the role that rebuttals-either passive or active-can play, and it certainly does not put sufficient emphasis on the role that reconciling rebuttals can play. More generally, Toulmin's model also fails because it only describes rule-based reasoning, that is, the application of warrants to grounds in order to produce claims. As has been demonstrated, however, rule-based reasoning is only one of three different kinds of reasoning: rule-based, casebased, and policy-based reasoning.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "ARGUMENTS",
+                "sec_num": null
+            },
+            {
+                "text": "In view of the above shortcomings, Toulmin's model for persuasive arguments should be modified in two significant ways. First, Toulmin's model should be changed so that policy and past cases are no longer treated simply as part of the overall \"backing\" for the warrant. Admittedly, policy and past cases may play a role in backing. 77 As this article suggests, however, they can also do much more. With the new model, one should use case-based and policy-based reasoning to supplement rulebased (warrant-based) reasoning. Second, although Toulmin's model calls for the use of rebuttals, rebuttals in his model play a relatively minor role. This article suggests, however, that rebuttals, particularly reconciling rebuttals, can play a crucial role in the overall persuasiveness of arguments. Thus, the new model explicitly calls for a reconciliation as part of the rebuttal. (See Figure 5 .)",
+                "cite_spans": [
+                    {
+                        "start": 332,
+                        "end": 334,
+                        "text": "77",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 887,
+                        "end": 888,
+                        "text": "5",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "ARGUMENTS",
+                "sec_num": null
+            },
+            {
+                "text": "Policy-based reasoning is often used in urging consideration of the \"spirit\" rather than the \"letter\" of the law. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "77.",
+                "sec_num": null
+            },
+            {
+                "text": "One might now object on two grounds to the sample arguments in the text or the Appendix that use the Toulmin Plus model. First, the foregoing sample argument, as well as the",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "VII. CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "232",
+                "sec_num": null
+            },
+            {
+                "text": "analysis that precedes it, contains rather elementary observations. Everybody continually engages in rule-based reasoning and case-based reasoning. Likewise, almost everybody engages in policy-based reasoning fairly regularly (at least if policybased reasoning is assumed to be nothing more than an analysis of the reasons or purposes behind cases and rules). Thus, this objection suggests that the foregoing analysis has been much ado about nothing. Second, the foregoing sample argument and the analysis that precedes it do not even begin to reveal the complexity of the process of creating persuasive arguments. In the real world, rules, past cases, and policy are never as easy to find as this analysis suggests. Likewise, rules conflict with each other, as do cases and policy ideas. Thus, this objection suggests that the foregoing analysis suffers from rampant oversimplification.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "232",
+                "sec_num": null
+            },
+            {
+                "text": "Both of these objections have some validity. To expert persuaders, much of the analysis contained herein probably is both a restatement of the obvious and an oversimplification.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "232",
+                "sec_num": null
+            },
+            {
+                "text": "It is important to note, however, that researchers who study the processes of thinking have in recent years achieved considerable success in determining what separates \"experts\" at a particular kind of thinking activity from \"novices\" at that same kind of activity. 79 Three distinctions stand out. First, research suggests that experts differ from novices with respect to the amount of informational knowledge they possess. Experts tend to know a lot of information about their fields of expertise. Novices tend not to know very much information. To be sure, researchers do not think that anybody who possesses a lot of informational knowledge will be an expert. Nevertheless, most researchers agree that the absence of large amounts of knowledge makes expertise unlikely. Second, research suggests that experts do not necessarily differ from novices with regard to \"generic\" thinking skills. Experts, in other words, are not necessarily better than novices at inductive reasoning or deductive reasoning. Thus, novices cannot be turned into experts simply by instruction in generic thinking skills. Finally, and most sig- nificantly, research suggests that expert thinkers consciously or subconsciously use \"schemata,\" \"heuristics,\" or \"models\" in conjunction with their thinking activities, whereas novices do not. Just as an expert cook consciously or subconsciously uses a recipe in order to organize a mass of food materials, an expert thinker uses heuristics to organize a mass of informational knowledge. Novice cooks and novice thinkers, however, do not know the recipes or heuristics, or, if they know them, do not know how to use them.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "232",
+                "sec_num": null
+            },
+            {
+                "text": "These three differences between experts and novices suggest that the shortcomings of the present analysis-its simultaneous obviousness and oversimplification-are actually not shortcomings at all. This article does not attempt to explain the exhaustive intricacies of the process of creating persuasive messages. Rather, its two-fold goal is more limited. First, by linking up different bodies of knowledge that have heretofore been more or less separate, this article increases the overall store of informational knowledge available to anybody, in whatever field, who writes and thinks about the structure of persuasive arguments. In doing this, the article suggests a number of new directions for thought and research. Currently, for example, persuasion researchers have not compared the relative persuasiveness of messages that use rule-based, case-based, or policybased reasoning, or various combinations of the different kinds of reasoning. The work of cognitive and computer scientists, however, suggests that such persuasion research is long overdue. Likewise, the work of persuasion researchers suggests that cognitive and computer scientists have a great deal to learn about the process of persuasion itself. Second, this article provides explicit pictures of several heuristics or models, including the Toulmin Plus model, that expert persuaders might subconsciously use when they create persuasive messages. Experts themselves can use these pictures both to improve their own work and, more significantly, to train novices.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "232",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16 APPENDIX Two brief introductory notes must be provided regarding the following full-text argument. First, Professor \"Jones\" in the following argument is, obviously, the present writer. Second, the substantive points discussed in this argument, most notably the policy explanations behind the \"no-hassle-pass\" rule, deserve attention on their own as much as they deserve attention as examples of parts of an argument. Third, in several places in the text of the argument itself, some terms are provided in brackets. The bracketed terms describe the role played by the sentences that immediately follow them. More significantly, the bracketed terms indicate that subparts of an overall argument might themselves be systematically organized.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "234",
+                "sec_num": null
+            },
+            {
+                "text": "The syllabus in ProfessorJones's class indicates thatJones employs what might be called a \"No Hassle Pass\" rule, with a twist. Students who are unprepared for her class may attend class without fear of being called on if they leave an \"unprepared\" note in the folder on her door (Room 537) no later than 15 minutes before class. In these notes, students need not provide an explanation for their unprepared status. The syllabus for Jones' class also states, however, that ifJones calls on an unprepared student in her class who has not dropped off an unprepared note before class, Jones automatically penalizes that student one-half letter grade for the entire course. In addition, the syllabus clearly states that she allows absolutely no exceptions to this automatic penalty rule.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Warrant",
+                "sec_num": null
+            },
+            {
+                "text": "In the situation at issue, Smith, a student in Jones's class, mistakenly put an unprepared notice in the folder on the office door adjacent to Jones' office door. Thus, although Smith delivered this note well before class began, Jones did not see it. Jones later called on Smith in class. Smith responded that he was unprepared but that he had left a note in the folder on Jones's door.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Warrant",
+                "sec_num": null
+            },
+            {
+                "text": "[Statement of Issue or Problem] These facts present this problem: Should Jones impose the automatic penalty for violation of her unprepared rule on someone who has inadvertently violated that rule?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Warrant",
+                "sec_num": null
+            },
+            {
+                "text": "As noted above, Jones's Syllabus clearly states. . [t]hatJones employs in her classes a No Hassle Pass rule, a rule that operates with a draconian twist and allows no exceptions. If students who have not left an unprepared note are called, Jones automatically penalizes them one-half letter grade for the course. [Warrant Application.] In the present situation, both of the things needed to trigger application of Jones's unprepared rule occurred. Jones (1) called on a student in class (2) who had not placed an unprepared notice in the folder on her door. Thus, it appears that Jones should penalize Smith one-half letter grade for the course.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Warrant",
+                "sec_num": null
+            },
+            {
+                "text": "[Transition into Policy-Based Reasoning.] Appearances, however, should not necessarily control in this instance because of the policy that lies behind Jones's rule.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Policy",
+                "sec_num": null
+            },
+            {
+                "text": "Three principal reasons explain Jones's unprepared rule. First, it is clear that when unprepared students are called on in a class, other students are discouraged and teachers are annoyed. Because Jones's rule makes it so terribly costly for students to respond in class when they are unprepared, they almost never do this. Thus, the problems of student discouragement and teacher annoyance almost never occur. Second, because this rule simultaneously sets a realistic standard regarding student classroom preparation and creates a draconian penalty for failure to comply with its simple requirements, it almost completely eliminates problems with the \"take-a-chance\" attitude that so many unprepared students normally bring with them to class. In Jones's class, no unprepared student takes a chance of being called. Finally, and perhaps most significantly, Jones's rule eliminates another common student practice, a practice employed by fully prepared students rather than by unprepared students. This practice, which can be called \"folding,\" occurs when prepared students who are called on respond that they are unprepared simply because they do not wish to answer a particular question or simply because they do not have the energy to get involved in class discussion on a particular day. Jones's rule, of course, eliminates this practice entirely.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Policy",
+                "sec_num": null
+            },
+            {
+                "text": "[Policy Application.] The policy behind Jones's rule counsels a different result from that seemingly required by the rule itself. The Jones rule clearly acknowledges the frailty of human beings. Why else, after all, does it allow students to turn in unprepared notices at all? Here, the student's mistake is simply an example of human frailty. Furthermore, because the student here immediately stated when called on during class that he had given an unprepared notice to Jones, the class itself did not experi-",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Policy",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "236",
+                "sec_num": null
+            },
+            {
+                "text": "ence the sense of discouragement that usually occurs when unprepared students are called. Rather, the class immediately knew, as Jones herself also clearly knew, that some kind of mix-up may well have occurred. In addition, in this situation the student clearly did not display either of the kinds of conduct that Jones's rule seeks to discourage, namely, \"take-a-chance\" and \"fold\" conduct. All of these facts suggest that some kind of \"good faith\" exception should be attached to Jones's rule. To be sure, the rule itself makes no mention of such an exception. Indeed, the rule itself indicates exactly the opposite, namely, that no exceptions to it will be allowed. Nevertheless, the various policies behind Jones's rule are not advanced in the present situation by imposing the penalty. Thus, the penalty should not be imposed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "236",
+                "sec_num": null
+            },
+            {
+                "text": "[Transition to Case-Based Reasoning.] Nor is the policy behind Jones's rule the only thing that suggests that Smith should not be penalized here. The facts of \"Jennifer's Case\" are remarkably similar to the facts involved here.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Case",
+                "sec_num": null
+            },
+            {
+                "text": "[Facts of Past Case.] Some time ago, Jones, who constantly talks about her children in class, told the class thatJennifer, her college-aged daughter, is required to call in if she is going to be out later than 1:00 a.m. (This rule only applies, incidentally, when Jennifer is home from college.) Jennifer does not have to provide any explanation for the anticipated late arrival but no exceptions to the rule are allowed. Jones also told the class that ifJennifer does not call in on time, a severe penalty is imposed-no car for a week. Jones recently told the class that on a recent occasion Jennifer was out late on a Sunday night. When she checked a clock in a store window for the time-she had forgotten her watch-she saw that it was 12:30 a.m., certainly early enough to get home without calling. What Jennifer did not realize, however, was that the time had changed the night before and that the store clock she looked at had not been reset. By the time she realized her mistake, Jennifer had missed her deadline. She then immediately called home.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Case",
+                "sec_num": null
+            },
+            {
+                "text": "[Statement Comparing Facts of Past Case to Facts of Present Problem.] The facts involved in Jennifer's case are very similar to the facts involved in the present problem. Here, a student inadvertently violated a minor procedural rule. The violation was immediately corrected upon discovery and",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Case",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol.16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "6. See generally, e.g., MARK A. DOMBROFF, DYNAMIC CLOSING ARGUMENTS (1985); RICH-ARD A. GIVENS, ADVOCACY: THE ART OF PLEADING A CAUSE (1985); GRACE W. HOLMES, PERSUASION: THE KEY TO SUCCESS IN TRIAL (1977); THEODORE I. KOSLOFF, ESSAYS ON ADVOCACY (1988); LEONARD PACKEL & DOLORES B. SPINA, TRALk ADVOCACY: A SYSTEM-ATIC APPROACH (1984).7. GIANDOMENICO MAJONE, EVIDENCE, ARGUMENTATION, AND PERSUASION IN THE POL-ICY PROCESS (1989).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "funding",
+                "sec_num": null
+            },
+            {
+                "text": "TECHNOCRACY AND THE POLITICS OF EXPERTISE 240 (1990). 9. BRUCE N. WALLER, CRITICAL THINKING: CONSIDER THE VERDICT (1988). 10. See, e.g., AMERICAN LAW INSTrrTE-AMERICAN BAR ASSOCIATION, A DAY ON TRIAL: PERSUASION TECHNIQUES IN THE COURTROOM: ALI-ABA PROFESSIONAL SKILLS COURSE No. 1]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "FRANK FISHER, Critical Discourse and Policy Expertise: A Methodological Case Study, in",
+                "sec_num": "8."
+            },
+            {
+                "text": "Consider the school bus problem, where the policy behind the rule \"trumps\" the rule and some past cases. (An extra case, involving Driver B, has been added here for illustrative purposes.) 78 78. Countless different examples could be provided to illustrate the Toulmin Plus model for persuasive arguments. As the Appendix to this essay suggests, one could also use an argument in full text to illustrate that model. (The full text argument in the Appendix involves a student's inadvertent violation of a classroom rule that the author of the rule uses to eliminate problems with \"unprepared\" students. The full text argument in the Appendix also uses some amusing stories about the writer's two daughters as the past case, the reconciliation, and the rebuttal.)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "annex",
+                "sec_num": null
+            },
+            {
+                "text": "Reconciliation/ Rebuttal no real harm was done. Likewise, in Jennifer's case a minor procedural rule was violated. The violation was corrected immediately upon discovery and no real harm was done. (Jones and his wife are both very sound sleepers.)[Invocation of Theory Behind Case-based Reasoning.] Since the facts involved in Smith's situation are so similar to the facts in Jennifer's case, the result in Jennifer's case should be duplicated here.[Statement of result in past case.] Jones told us that her husband wanted to penalize Jennifer, but that Jones, after much pleading, got the penalty waived. Thus, Jennifer was not penalized even though she violated the rule. [Conclusion.] Since Jennifer was not penalized for her inadvertent rule violation, Smith should not be penalized here for his similarly inadvertent rule violation.[Transition to Reconciliation.] It must now candidly be acknowledged that \"Sonny's Case\" at first glance conflicts with the argument made here against imposition of the penalty on Smith. (Sonny, age 8, is Jones's other daughter.)[Facts and Result of Past Negative Case.] Sonny, while visiting friends, crossed a gravel road in the country by herself. When asked about this, and when reminded that a family rule prohibited her from crossing streets by herself, Sonny noted that she did not think that a gravel country road was a \"street.\" Despite this excuse, Jones punished Sonny severely-no cartoons for a week.[Recognition of Seeming Factual Correspondence in Past Negative Case.] Admittedly, the facts of Sonny's case superficially resemble the facts in the present problem, the problem involving Smith and the misplaced note. [Transition into Distinguishing.] Careful analysis reveals, however, that an important factual difference exists between these two situations. [Distinguishing Facts.] It is clear that inadvertent rule violations like Sonny's could easily lead to very serious injury, or even death. Conversely, it is clear that inadvertent rule violations like Smith's will not produce bad consequences. [Transition to Reconciling Rule.] That factual difference, in turn, suggests the existence of a common-sense rule, [Backing for Reconciling Rule.] a rule that is supported by Jennifer's case: [Reconciling Rule.] Inadvertent rule violations involving important matters should be treated much more severely than inadvertent rule violations in-",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Harvard Journal of Law & Public Policy",
+                "sec_num": null
+            },
+            {
+                "text": "[Vol. 16",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "238",
+                "sec_num": null
+            },
+            {
+                "text": "volving minor matters. In other words, the higher the stakes, the lower should be the tolerance for inadvertent errors.[Application of Reconciling Rule to Past Case and Present Problem.] It is clear now that Sonny's case actually helps Smith, rather than hurts him. In Sonny's case, the stakes were very, very high. Thus, the common-sense rule just described required that Jones penalize Sonny. In Smith's case, however, the stakes are very, very low. Thus, the common-sense rule just described indicates that Jones should not penalize Smith.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A Multidisciplinary Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "The ultimate conclusion is now obvious. Despite the fact that Jones's rule itself suggests that Smith should be penalized following his inadvertent rule violation, many other factors counsel a different result. The policy behind the rule suggests that no penalty should be imposed, as does a significant past case-Jennifer's case. Furthermore, Sonny's case, which initially looks like it requires imposition of the penalty on Smith, turns out actually to support the argument opposed to the penalty. For all of these reasons, Jones should not penalize Smith.No. 1]",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Claim",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {},
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "(1990); GARY BELLOW & BEA MOULTON, THE LAWYERING PROCESS: MATERI- ALS FOR CLINICAL INSTRUCTION IN ADVOCACY (1978); RICHARD J. CRAWFORD, THE PER- SUASION EDGE: WINNING PSYCHOLOGICAL STRATEGIES AND TACTICS FOR LAWYERS (1989); RONALD J. MATLON, COMMUNICATION IN THE LEGAL PROCESS (1988); POPULAR TRIALS: RHETORIC, MASS MEDIA AND THE LAW (Robert B. Hariman ed., 1990); BETTYRUTH WAL-TER, THE JURY SUMMATION AS SPEECH GENRE: AN ETHNOGRAPHIC STUDY OF WHAT IT IS AND WHAT IT MEANS TO THOSE WHO USE IT (1988); Brad E. Bell & Elizabeth F. Loftus, Trivial Persuasion in the Courtroom: The Power of(a Few) Minor Details, 56J. PERSONALITY & SOC. PSYCHOL. 669 (1989); Robert G. Lawson, Experimental Research on the Organization of Persuasive Arguments: An Application to Courtroom Communications, 1970 L. & SOC. ORD. 579. 11. H.J.M. BOUKEMA, JUDGING: TOWARDS A RATIONAL JUDICIAL PROCESS (1980); ILMAR TAMMELO, MODERN LOGIC IN THE SERVICE OF LAW (1978)."
+            },
+            "FIGREF1": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "See CHAIM PERELMAN & LUCIE OLBRECHTs-TYTECA, THE NEW RHETORIC: A TREA-TISE ON ARGUMENTATION (John Wilkinson & Purcell Weaver trans., 1969); Chaim Perelman, The New Rhetoric and the Rhetoricians: Remembrances and Comments, 70 0, J. SPEECH"
+            },
+            "FIGREF3": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "58.See supra note 37 and accompanying text. 59. See Kamins & Assael, supra note 36."
+            },
+            "FIGREF4": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 2"
+            },
+            "FIGREF5": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "67. 77 N.W. 365 (Neb. 1889). 68. 322 S.W.2d 163 (Mo. Ct. App. 1959)."
+            },
+            "FIGREF6": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "1949); RESTATEMENT (SECOND) OF CoNTruTs \u00a7 \u00a7 71, 72, 79 (1981)."
+            },
+            "FIGREF7": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "73.See TOULMIN ET AL., supra note 17, at 81-83."
+            },
+            "FIGREF8": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "See supra note 53 and accompanying text."
+            },
+            "FIGREF9": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 3 Backing"
+            },
+            "FIGREF10": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 4 (Backing) The relevant legal and constitutional provisions being what they are,"
+            },
+            "FIGREF11": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 5"
+            },
+            "FIGREF12": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 6"
+            },
+            "FIGREF13": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 7"
+            },
+            "FIGREF14": {
+                "fig_num": null,
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "SeeJoAN B. BARON & ROBERTJ. STERNBERG, TEACHING THINKING SKILLS: THEORY AND PRACTICE (1987); FRANCIS W. DAUER, CRITICAL THINKING: AN INTRODUCTION TO REASONING (1989); RAYMOND S. NICKERSON ET AL., THE TEACHING OF THINKING (1985); LAUREN B. RESNICK & LEOPOLD E. KLOPFER, TOWARD THE THINKING CURRICULUM: CUR- RENT COGNITIVE RESEARCH (1989); RobertJ. Sternberg &Judith Davidson, A Four-Pronged Modelfor Intellectual Development, 22 J. RES. & DEVELOPMENT IN EDUC. 22 (1989)."
+            },
+            "TABREF1": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF2": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF3": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ".Van Eemeren et al. eds.,"
+            },
+            "TABREF4": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF5": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "Mark P. Zanna et al. eds.,"
+            },
+            "TABREF6": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF7": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>21, at 166-67,</td></tr><tr><td>233-34; Michael Burgoon &amp; Erwin P. Bettinghaus, Persuasive Message Strategies, in PER-</td></tr><tr><td>SUASION: NEW DIRECTIONS IN THEORY AND RESEARCH 141, 148-49 (Michael E. Roloff&amp;</td></tr><tr><td>Gerald R. Miller eds., 1980); BarbaraJ. O'Keefe, The Logic of Message Design: Individual</td></tr><tr><td>Differences in Reasoning about Communication, 55 COMM, MONOGRAPHS 80 (1988); see also</td></tr><tr><td>EXPERIMENTS IN PERSUASION (Ralph L. Rosnow &amp; E.J. Robinson eds., 1967)(compiling</td></tr><tr><td>articles from diverse sources).</td></tr></table>",
+                "text": "2 7 These researchers suggest that diagrams can reveal the overall structure Attitudes and Attitude Change, 41 ANN. REV.PSYCHOL. 479 (1990). Informal logicians, most notably those who build on Chaim Perelman's work on the universal audience, largely agree with this idea. See, e.g.,"
+            },
+            "TABREF8": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>24 and accompanying text.</td></tr><tr><td>30. See Richard E. Petty &amp;John T. Cacioppo, The Effects of Involvement on Response to</td></tr><tr><td>Argument Quantity and Quality: Central and Peripheral Routes to Persuasion, 46J. PERSONALITY</td></tr><tr><td>&amp; Soc. PSYCHOL. 69 (1984).</td></tr><tr><td>31. See BETINGHAUS &amp; CODY, supra note 21, at 141-47; Adrian Furnham, The Robust-</td></tr><tr><td>ness of the Recency Effect: Studies Using Legal Evidence,</td></tr></table>",
+                "text": ""
+            },
+            "TABREF9": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Allan Lind, The Psychology of Courtroom Procedure, in THE PSYCHOLOGY OF THE COURTROOM</td></tr><tr><td>13, 24-27 (Norbert L. Kerr &amp; Robert M. Bray eds., 1982).</td></tr><tr><td>32. See BErNGrHAus &amp; Cony, supra note 21, at 147-48; Lind, supra note 31, at 24-25.</td></tr><tr><td>33. See Furnham, supra note 31, at 355-56.</td></tr><tr><td>34. See BET-INGHAUS &amp; Cony, supra note 21, at 151-53;Joseph F. Pentony, Relation-</td></tr><tr><td>ship Between Involvement</td></tr></table>",
+                "text": ""
+            },
+            "TABREF10": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF11": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>34.</td></tr><tr><td>36. See, e.g., BETrINGHAUS &amp; CODY, supra note 21, at 148-50;Jean-Charles Chebat &amp;</td></tr><tr><td>Jacques Picard, Receivers' Self-Acceptance and the Effectiveness of Two-Sided Messages, 128 J.</td></tr><tr><td>Soc. PSYCHOL. 353 (1988); Carl I. Hovland et al., The Effects of Presenting \"One Side\"</td></tr><tr><td>Versus \"Both Sides\" in Changing Opinions on a Controversial Subject, in EXPERIMENTS IN PER-</td></tr><tr><td>SUASION, supra note 26, at 71; Michael A. Kamins &amp; Henry Assael, Two-Sided Versus One-</td></tr><tr><td>Sided Appeals: A Cognitive Perspective on Argumentation, Source Derogation, and the Effect of</td></tr><tr><td>Disconfirming Trial on Belief Change, 24 J. MARKETING RES. 29 (1987).</td></tr><tr><td>37. See BETrINGHAUS &amp; CODY, supra note 21, at 149; see also Chebat &amp; Picard, supra</td></tr><tr><td>note 36 (correlating the persuasiveness of two-sided arguments with high \"self-accept-</td></tr><tr><td>ance\" on the part of the listener).</td></tr><tr><td>38. See BEM~NGHAUS &amp; ConY, supra note 21, at 145 (addressing the \"problem-solu-</td></tr></table>",
+                "text": ""
+            },
+            "TABREF12": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF13": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>GUMENTATION 269 (1990).</td></tr><tr><td>41. See</td></tr></table>",
+                "text": "(1987); Marc Weinstein, Towards an Account of Argumentation in Science, 4 AR-"
+            },
+            "TABREF14": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>42. See Linda Bomstad &amp; Perry Weddle, Introduction, 3</td></tr></table>",
+                "text": ""
+            },
+            "TABREF15": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>44. On this point, Toulmin strenuously disagrees with formal logicians who write</td></tr><tr><td>about the nature of argumentation.</td></tr></table>",
+                "text": ""
+            },
+            "TABREF16": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>(1984); George H. Goebel, Andromache 192-204: The Pattern of Argument, 84 CLASSICAL</td></tr><tr><td>PHILOLOGY 32 (1989);Jaakko Hintikka, The Role of Logic in Argumentation,</td></tr></table>",
+                "text": ""
+            },
+            "TABREF17": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF20": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>60. See id-61. See id (Grounds) This patient has straightforward URI. 62. Figure 1 (Backing) Clinical experience indicates that ()arrant) Straightforward URI's call for penicillin treatment. (Cualifier So, presumably (Rebuttal) Unless the patient is allergic to penicillin, or there is some other contra-indication.</td><td>(Claim This patient needs penicillin treatment.</td></tr></table>",
+                "text": "See id. 63. Charles Willard, for example, has soundly criticized the practice, arguing that diagrams oversimplify a complex process. See Charles A. Willard, On the Utility of Descriptive Diagrams for the Analysis and Criticism of Arguments, 43 COMM. MONOGRAPHS 308(1976). But, then, Willard's work on argumentation is completely impenetrable to nonspecialists. See generally WILLARD, supra note 20. Other researchers support diagraming."
+            },
+            "TABREF21": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td/><td>2</td><td/><td/></tr><tr><td/><td>(Backing)</td><td/><td/></tr><tr><td/><td>The relevant legal</td><td/><td/></tr><tr><td/><td>and constitutional</td><td/><td/></tr><tr><td/><td>provisions being</td><td/><td/></tr><tr><td/><td>what they are,</td><td/><td/></tr><tr><td/><td>(Warrant)</td><td/><td/></tr><tr><td/><td>All taxpayers are</td><td/><td/></tr><tr><td/><td>normally allowed</td><td/><td/></tr><tr><td/><td>to vote at town</td><td/><td/></tr><tr><td/><td>meetings.</td><td/><td/></tr><tr><td>( rounds Hannah Smith is a local taxpayer.</td><td>(Qualifier) So, presumably</td><td>-</td><td>(Claim) Hannah Smith is entitled to vote at a town meeting.</td></tr><tr><td/><td>(Rebuttal)</td><td/><td/></tr><tr><td/><td>Unless she is a</td><td/><td/></tr><tr><td/><td>non-citizen, a</td><td/><td/></tr><tr><td/><td>minor, a lunatic</td><td/><td/></tr><tr><td/><td>or an otherwise</td><td/><td/></tr><tr><td/><td>disqualified</td><td/><td/></tr><tr><td/><td>person.</td><td/><td/></tr><tr><td colspan=\"4\">kinds of reasoning. One kind of reasoning, called \"rule-based\"</td></tr><tr><td colspan=\"4\">reasoning, occurs when human beings or computers apply a</td></tr><tr><td colspan=\"4\">pre-existing rule (warrant) to a new factual situation. This is the</td></tr><tr><td colspan=\"4\">kind of reasoning that traditional philosophers call deductive</td></tr><tr><td colspan=\"4\">logic and the kind of reasoning that Toulmin describes in con-</td></tr><tr><td colspan=\"4\">nection with his system of claims, warrants, and grounds. Rule-</td></tr><tr><td colspan=\"4\">based reasoning is also what computers engage in when they operate what are generally called \"expert systems. ' '65 The</td></tr></table>",
+                "text": ""
+            },
+            "TABREF22": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "Not surprisingly, the cognitive scientists who study this process in human beings, a process scientists sometimes call \"episode-based\" reasoning, have developed great insight into the way human beings use past cases when they reason. See COGNITIONAND   (1989); Leslie J. Caplan & Carmi Schooler, Problem Solving by Reference to Rules or Previous Episodes: The Effects of Organized Training, Analogical Models and Subsequent Complexity of Experience, 18 MEMORY & COGNITION215 (1990). Furthermore, and perhaps more significantly, computer scientists who study case-based reasoning, particularly computer scientists who study this kind of reasoning in connection with law-related issues, have learned a great deal about the way human beings think. See ANALOGICAL"
+            },
+            "TABREF23": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "David H. Helman ed., 1988);"
+            },
+            "TABREF24": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ", Defining Salience in Case-Based Arguments, in CASE-BASED REASONING: PROCEEDINGS OF A WORKSHOP ON CASE BASED REASONING 537 (Janet Kolodner ed., 1989)[hereinafter Kolodner]; Kevin D. Ashley & Edwina L. Rissland, Compare and Contrast, A Test of Expertise, in Kolodner, supra, at 31; L. Karl Branting, The Role of Explanation in Reasoning from Legal Precedents, in Kolodner, supra, at 224; Dedre Gentner, Finding the Needle: Accessing and Reasoningfrom Prior Cases, in Kolodner, supra, at 137; Win-Bin Huang & George R. Cross, Reasoning about Trademark Infringement Cases, in Kolodner, supra, at 270; Edwina L. Rissland, Artificial Intelligence and the Law: Stepping Stones to a Model of Legal Reasoning, 99 YALE Lj. 1957 (1990); Edwina L. Rissland & David B. Skalak, Combining Case-Based and Rule-Based Reasoning, in Kolodner, supra, at 524 (1989); Colleen M. Seifert, Analogy and Case-Based Reasoning, in Kolodner, supra, at 125; Mallory Selfridge & Barbara Cuthill, Retrieving Relevant Out-of-Context Cases: A Dynamic Memory Approach to Case-Based Reasoning, in Kolodner, supra, at 313; David B. Skalak, Options for Controlling Mixed Paradigm Systems, in Kolodner, supra, at 318; Katia P."
+            },
+            "TABREF25": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "and rebuttals. First, as Toulmin and others repeatedly note,76  warrants that are accompanied by backing or authority tend to be more persuasive than warrants that stand alone. For that reason, warrants used with reconciliation rebuttals probably should themselves be accompanied by backing. In the shiny stone problem, for example, the young woman's lawyer should cite backing or authority for the possession warrant. Likewise, in the granddaughter problem, the granddaughter's lawyer should cite backing or authority for the dead promisor warrant. Second, reconciliation and rebuttals should come at the end of total arguments, or at least relatively near the end. In part, this is necessary because of the \"recency\" effect mentioned earlier.The recency effect suggests that the end of an overall message is a particularly good place to put a strong argument; reconciliations, if done well, can be extraordinarily potent. Reconciliation rebuttals should also appear relatively near the end of arguments because they tend to violate audience expectations. (As noted earlier, arguments that violate audience expectations tend to be more persuasive than arguments that follow standard form.) Audiences, after all, do not expect arguers to use counter examples to support original claims."
+            }
+        }
+    }
+}
