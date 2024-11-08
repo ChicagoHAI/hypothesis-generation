@@ -67,8 +67,7 @@ make
 
 ## Usage
 
-The datasets used in the paper [Hypothesis Generation with Large Language Models](https://arxiv.org/abs/2404.04326) for **HypoGeniC** is at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).  
-The datasets used in the paper [Literature Meets Data: A Synergistic Approach to Hypothesis Generation](https://arxiv.org/abs/2410.17309) for **HypoRefine** and Union methods is at [Hypothesis-agent-datasets](https://github.com/ChicagoHAI/Hypothesis-agent-datasets)
+The datasets used in our works are at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).
 
 For replicating the results in the paper, you can follow the steps below:
 ### 1. [Optional] Start Redis server
