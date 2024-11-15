@@ -229,7 +229,7 @@ def main():
     from hypogenic.utils import set_seed
     from hypogenic.LLM_wrapper import llm_wrapper_register
     from hypogenic.algorithm.summary_information import (
-        dict_to_summary_information,
+        SummaryInformation
     )
 
     from hypogenic.algorithm.generation import generation_register
@@ -304,7 +304,7 @@ def main():
     else:
         dict = load_dict(args.old_hypothesis_file)
         for hypothesis in dict:
-            hypotheses_bank[hypothesis] = dict_to_summary_information(dict[hypothesis])
+            hypotheses_bank[hypothesis] = SummaryInformation.from_dict(dict[hypothesis])
     for epoch in range(1):
         hypotheses_bank = update_class.update(
             current_epoch=epoch,

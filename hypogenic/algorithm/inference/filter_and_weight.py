@@ -92,7 +92,7 @@ class FilterAndWeightInference(Inference):
 
         Parameters
             data: the specific dataset
-            index: the specific index to filter for
+            indices: the specific indices to filter for
             hyp_bank: a dictionary of hypotheses
 
         Returns

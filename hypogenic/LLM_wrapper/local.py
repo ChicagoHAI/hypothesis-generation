@@ -12,6 +12,7 @@ import random
 import openai
 
 import vllm
+from vllm.lora.request import LoRARequest
 import asyncio
 import tqdm
 from openai import AsyncOpenAI, OpenAI
@@ -186,6 +187,11 @@ class LocalVllmWrapper(LocalModelWrapper):
             **kwargs,
         )
         if self.api is None:
+            lora_path = self.api_kwargs.pop("lora_path", None)
+            if lora_path is not None:
+                self.lora = LoRARequest("lora", 1, lora_path)
+            else:
+                self.lora = None
             self.api = vllm.LLM(**self.api_kwargs)
         tokenizer = self.api.get_tokenizer()
         formatted_prompts = [
@@ -193,5 +199,7 @@ class LocalVllmWrapper(LocalModelWrapper):
             for m in messages
         ]
 
-        output = self.api.generate(formatted_prompts, sampling_params)
+        output = self.api.generate(
+            formatted_prompts, sampling_params, lora_request=self.lora
+        )
         return [o.outputs[0].text for o in output]

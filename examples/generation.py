@@ -18,14 +18,14 @@ from hypogenic.extract_label import extract_label_register
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
 from hypogenic.utils import set_seed
+
+
+from hypogenic.algorithm.summary_information import SummaryInformation
 from hypogenic.LLM_wrapper import (
     GPTWrapper,
     LLMWrapper,
     LocalVllmWrapper,
     llm_wrapper_register,
-)
-from hypogenic.algorithm.summary_information import (
-    dict_to_summary_information,
 )
 
 from hypogenic.algorithm.generation import DefaultGeneration
@@ -131,7 +131,7 @@ def main():
         else:
             dict = load_dict(old_hypothesis_file)
             for hypothesis in dict:
-                hypotheses_bank[hypothesis] = dict_to_summary_information(
+                hypotheses_bank[hypothesis] = SummaryInformation.from_dict(
                     dict[hypothesis]
                 )
         for epoch in range(1):

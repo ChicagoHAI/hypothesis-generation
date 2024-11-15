@@ -9,7 +9,7 @@ class SummaryInformation:
     """
 
     def __init__(
-        self, hypothesis="", acc=0.0, reward=0, num_visits=0, correct_examples=[]
+        self, hypothesis="", acc=0.0, reward=0, num_visits=0, correct_examples=None
     ):
         """
         Initialize the SummaryInformation object
@@ -27,6 +27,8 @@ class SummaryInformation:
         self.reward = reward
         self.correct_examples = (
             correct_examples  # a list of tuples of the form (sample index, label)
+            if correct_examples is not None
+            else []
         )
 
     def set_accuracy(self, new_accuracy):
@@ -72,8 +74,8 @@ class SummaryInformation:
 
     # essentially redistributes the dataset
     def get_examples(self, train_data: pd.DataFrame):
-        return train_data.iloc[[index for index, _ in self.correct_examples]]
+        return train_data.iloc[[index for index, *_ in self.correct_examples]]
 
-
-def dict_to_summary_information(dict):
-    return SummaryInformation(**dict)
+    @staticmethod
+    def from_dict(data: dict) -> "SummaryInformation":
+        return SummaryInformation(**data)
