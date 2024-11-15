@@ -24,7 +24,6 @@ from hypogenic.utils import (
 from hypogenic.LLM_wrapper import LocalVllmWrapper, GPTWrapper
 from hypogenic.algorithm.summary_information import (
     SummaryInformation,
-    dict_to_summary_information,
 )
 from hypogenic.algorithm.generation.utils import extract_hypotheses
 from hypogenic.algorithm.inference import (
@@ -103,7 +102,7 @@ def main():
         for hypothesis in dict:
             tmp_dict = dict[hypothesis].copy()
             tmp_dict.pop("num_select", None)
-            hyp_bank[hypothesis] = dict_to_summary_information(tmp_dict)
+            hyp_bank[hypothesis] = SummaryInformation.from_dict(tmp_dict)
 
         assert adaptive_num_hypotheses <= len(
             hyp_bank
