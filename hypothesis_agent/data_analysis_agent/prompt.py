@@ -9,7 +9,6 @@ from hypogenic.prompt import BasePrompt
 from hypogenic.tasks import BaseTask
 from hypogenic.algorithm.summary_information import (
     SummaryInformation,
-    dict_to_summary_information,
 )
 from hypogenic.LLM_wrapper import LocalVllmWrapper, GPTWrapper, LLMWrapper
 from hypogenic.algorithm.generation.utils import extract_hypotheses
