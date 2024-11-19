@@ -50,3 +50,17 @@ def set_seed(seed):
     random.seed(seed)
     torch.manual_seed(seed)
     np.random.seed(seed)
+
+def adjust_label(preds, labels):
+    preds_out = []
+    existing_labels = set(labels)
+    for i in range(len(labels)):
+        if preds[i] not in existing_labels:
+            for existing_label in existing_labels:
+                if labels[i] != existing_label:
+                    preds_out.append(existing_label)
+                    break
+        else:
+            preds_out.append(preds[i])
+
+    return preds_out
