@@ -1,0 +1,2164 @@
+{
+    "paper_id": "admin,+3",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-06T17:58:35.630460Z"
+    },
+    "title": "Sains Humanika Persuasive Writing: How Students Argue",
+    "authors": [
+        {
+            "first": "Farous",
+            "middle": [],
+            "last": "Izwan",
+            "suffix": "",
+            "affiliation": {},
+            "email": "fizwan5@live.utm.my"
+        },
+        {
+            "first": "Abdul",
+            "middle": [],
+            "last": "Aziz",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Universiti Teknologi Malaysia (UTM) Skudai",
+                "location": {
+                    "postCode": "81310",
+                    "settlement": "Johor",
+                    "country": "Malaysia"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Ummul",
+            "middle": [],
+            "last": "Khair",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Universiti Teknologi Malaysia (UTM) Skudai",
+                "location": {
+                    "postCode": "81310",
+                    "settlement": "Johor",
+                    "country": "Malaysia"
+                }
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "English persuasive writing is an important skill to be mastered by students as it is highly valued when and if students continue their studies to a higher education level. The objectives of this study are to: (1) identify the distinctive features of persuasive essays commonly adopted by Malaysian students; (2) investigate the problems students encounter while developing their arguments, and (3) to suggest strategies that can improve students' persuasive writing skills. Seventynine essay samples from four secondary schools were selected for the analysis and Toulmin's Model was employed as the tool for analyzing the essays. The focus of the analysis is to uncover the persuasive elements that the students have applied in their writing. The raw data were gathered by reading each of the essays and labeling the persuasive elements (claim, grounds, warrant, backing, rebuttal and qualifiers) which were identified. Findings from the analysis have indicated that the students applied the basic persuasive elements: claim, grounds and warrant. It was also discovered that the students lacked the optional persuasive elements; qualifier, rebuttal and backing. Students need to be exposed to new or alternative strategies of composing in order to help improve their persuasive writing skills.",
+    "pdf_parse": {
+        "paper_id": "admin,+3",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "English persuasive writing is an important skill to be mastered by students as it is highly valued when and if students continue their studies to a higher education level. The objectives of this study are to: (1) identify the distinctive features of persuasive essays commonly adopted by Malaysian students; (2) investigate the problems students encounter while developing their arguments, and (3) to suggest strategies that can improve students' persuasive writing skills. Seventynine essay samples from four secondary schools were selected for the analysis and Toulmin's Model was employed as the tool for analyzing the essays. The focus of the analysis is to uncover the persuasive elements that the students have applied in their writing. The raw data were gathered by reading each of the essays and labeling the persuasive elements (claim, grounds, warrant, backing, rebuttal and qualifiers) which were identified. Findings from the analysis have indicated that the students applied the basic persuasive elements: claim, grounds and warrant. It was also discovered that the students lacked the optional persuasive elements; qualifier, rebuttal and backing. Students need to be exposed to new or alternative strategies of composing in order to help improve their persuasive writing skills.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Writing is a cognitive process which requires the use of analytical thinking skills in order to organize ideas while being creative and critical. The process of writing is best understood as a set of distinctive thinking processes which are organized by the writer during composition (Flower & Hayes, 1981) . While writing is a very broad subject with multiple genres being taught in schools, this study is primarily focused on the persuasive writing genre in English.",
+                "cite_spans": [
+                    {
+                        "start": 284,
+                        "end": 306,
+                        "text": "(Flower & Hayes, 1981)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a21.0 INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "The goal of persuasive writing is to persuade the audience to change their minds and agree with the writer or take action toward a specific issue through the use of logical reasoning. Persuasive writing is known to be complex and challenging, and it is difficult to learn and to master, especially when students have to write in another language of which they do not have full control. In particular, when learning the persuasive genre, second language (L2) student writers not only face difficulties with content but also in the structure and language while attempting to compose a persuasive essay (Crowhurst, 1990) . Students also find persuasive writing difficult due to its complex mode of discourse (Knudson, 2012) . Thus, it is not surprising that Malaysian students avoid the persuasive genre in the annual national exam Sijil Pelajaran Malaysia (SPM), preferring to write descriptive and narrative essays, which they are more familiar with (Rashid & Chan, 2008) .",
+                "cite_spans": [
+                    {
+                        "start": 600,
+                        "end": 617,
+                        "text": "(Crowhurst, 1990)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 705,
+                        "end": 720,
+                        "text": "(Knudson, 2012)",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 949,
+                        "end": 970,
+                        "text": "(Rashid & Chan, 2008)",
+                        "ref_id": "BIBREF24"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a21.0 INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Numerous factors can be considered as to being the cause of students' overall weaknesses (thus, fear) in composing an effective and successful persuasive essay. These factors include the students' background or the methods used to teach persuasive writing. Overall low proficiency in the English language (Osman & Bakar, 2009 ) and the challenging nature of persuasive writing (Gleason, 1999) can also be attributed to the students' unwillingness to attempt persuasive writing, especially when they cannot argue effectively. As students in Malaysia are exposed mostly to descriptive and narrative modes of writing (Rashid & Chan, 2008) , the lack of proper exposure to the persuasive writing genre would also make composing a persuasive essay very difficult.",
+                "cite_spans": [
+                    {
+                        "start": 305,
+                        "end": 325,
+                        "text": "(Osman & Bakar, 2009",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 377,
+                        "end": 392,
+                        "text": "(Gleason, 1999)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 614,
+                        "end": 635,
+                        "text": "(Rashid & Chan, 2008)",
+                        "ref_id": "BIBREF24"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a21.0 INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Fortunately, there are numerous strategies and models specifically tailored towards persuasive writing to help students master their persuasive writing skills such as the Flower and Hayes' Model (Flower & Hayes, 1981) , the Socio-Cognitive Model (Fei-Wen, 2010) , the Hamburger and Dagwood Models (Stambaugh, 2011) . Amongst the most widely accepted tool to study persuasive writing is Toulmin's Model (Fei-Wen & Yueh-Miao, 2009 ). Toulmin's Model (Toulmin, 2003) breaks arguments down into six different elements, which are then divided into two groups. The first group, known as primary elements, form the foundation for the argument: 'claim', 'grounds', and 'warrant'. The second group of elements are known as auxiliary elements, which are optional, and can be used to strengthen the argument by complementing the primary elements; these elements are known as 'rebuttal', 'qualifier' and 'backing'. This study focuses on the quality of persuasive writing skills demonstrated by secondary school students and why a definitive instructional model is necessary to improve their persuasive writing skills.",
+                "cite_spans": [
+                    {
+                        "start": 195,
+                        "end": 217,
+                        "text": "(Flower & Hayes, 1981)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 246,
+                        "end": 261,
+                        "text": "(Fei-Wen, 2010)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 297,
+                        "end": 314,
+                        "text": "(Stambaugh, 2011)",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 386,
+                        "end": 428,
+                        "text": "Toulmin's Model (Fei-Wen & Yueh-Miao, 2009",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 448,
+                        "end": 463,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 864,
+                        "end": 902,
+                        "text": "'rebuttal', 'qualifier' and 'backing'.",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a21.0 INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "The goal of a persuasive essay is to persuade the reader to adopt the writer's point of view, and convince them to take a course of action. Persuasive writing assignments in the upper secondary school level are normally straightforward. The teachers will present an issue to students and instruct them to write their arguments on paper. The issues presented to the students would focus on either one of the five areas: social issues, health, people, environment, and science and technology, which are themes extracted from the secondary school English textbooks. Listed below are examples of essay prompts for Sijil Pelajaran Malaysia (SPM) papers:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Persuasive Writing Models",
+                "sec_num": null
+            },
+            {
+                "text": "1. How can we help promote tourism in Malaysia? (SPM 2004) 2. How can television help students in their studies? (SPM 2006) 3. Teenagers today are only interested in Entertainment. Do you agree? Support your opinion. (SPM 2007) 4. Examinations--Good or Bad? (SPM 2008) Over the years, various models for persuasive writing instruction have been formulated to make writing tasks less daunting for students. For instance, in Malaysian schools, the five-paragraph essay model is used to teach students writing (Smith, 2008) . By identifying the paragraphs (introduction paragraph, 3-body paragraphs, and conclusion), students learn how to present, develop and summarize their ideas. Model essays are often used to teach essay writing (Tan, 2006) . Modelling can provide a basis for cohesive organization which is important during composition. However, the five-paragraph essay style does not fully satisfy the requirements needed for a strong persuasive argument. Despite its rigidity (Johnson et al., 2012) , under timed conditions as in the national examination, the format can be helpful as it allows the writer to formulate clearer arguments and gives them more time to develop ideas (Durst et al., 1990) .",
+                "cite_spans": [
+                    {
+                        "start": 48,
+                        "end": 58,
+                        "text": "(SPM 2004)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 113,
+                        "end": 123,
+                        "text": "(SPM 2006)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 217,
+                        "end": 227,
+                        "text": "(SPM 2007)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 231,
+                        "end": 268,
+                        "text": "Examinations--Good or Bad? (SPM 2008)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 507,
+                        "end": 520,
+                        "text": "(Smith, 2008)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 731,
+                        "end": 742,
+                        "text": "(Tan, 2006)",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 982,
+                        "end": 1004,
+                        "text": "(Johnson et al., 2012)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 1185,
+                        "end": 1205,
+                        "text": "(Durst et al., 1990)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Persuasive Writing Models",
+                "sec_num": null
+            },
+            {
+                "text": "For their English essays, students in Form 4 and Form 5 are graded using the SPM grading system for English language subjects, which focuses on content, syntax and mechanics. During examinations, students are expected to have the proficiency in persuasive essay writing despite the lack of extensive formal training in the area. For most students, they are forced to write persuasive essays without a clear foundation to begin with. Ideally, before the student can begin his argument, he must first present his points of view and then makes a stand (Ooi & Seelan, 2011) , telling the readers that he either supports or opposes the issue. As the student constructs his arguments, he must maintain his position of supporting or opposing the issue. Throughout the process of writing, the student needs to be aware of the audience. He also needs to support his opinions with facts, which can include quotations from texts, statistics, charts, graphs, scientific data and so forth (Lunsford, 2002) .",
+                "cite_spans": [
+                    {
+                        "start": 549,
+                        "end": 569,
+                        "text": "(Ooi & Seelan, 2011)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 976,
+                        "end": 992,
+                        "text": "(Lunsford, 2002)",
+                        "ref_id": "BIBREF19"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Persuasive Writing Models",
+                "sec_num": null
+            },
+            {
+                "text": "The socio-cognitive model to teaching writing is based on two perspectives: social and cognitive. From a cognitive perspective, writing is a problem-solving process shaped by the way the writer interprets the rhetorical problems posed by the purpose, the needs of the reader, the exigency of the situation, the goals that are set, and the strategies they control to solve the problem (Flower & Hayes, 1981) . From a social perspective, writing must take into account the discourse practice of writing through goal setting, task appreciation and juggling multiple demands (Fei-Wen & Yueh-Miao, 2009) . The Flower and Hayes' model (Flower & Hayes, 1981) describes writing as a cognitive process and sees writing as an application of ideas on paper. The model rightly suggests that writing is a highly complex, goal-directed and recursive activity. While it provides a proper framework for essay organization, reminding students to think about the topic and to recognize their audience while making corrections and revisions, the model is too procedural. It focuses more on the organization of the essay rather than the rhetorical content. Therefore, while beneficial to writing practice for novices, its lack of focus on the rhetorical genre does not make it a preferable model for persuasive writing instruction.",
+                "cite_spans": [
+                    {
+                        "start": 384,
+                        "end": 406,
+                        "text": "(Flower & Hayes, 1981)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 571,
+                        "end": 598,
+                        "text": "(Fei-Wen & Yueh-Miao, 2009)",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 629,
+                        "end": 651,
+                        "text": "(Flower & Hayes, 1981)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Persuasive Writing Models",
+                "sec_num": null
+            },
+            {
+                "text": "Rhetorical models for essay writings are more focused on the art of rhetorics, which is the art of speaking persuasively (Smith, 2008) , by developing persuasive arguments within persuasive composition. One of the models that has been built based on the rhetorical approach is Toulmin's Model (Toulmin, 2003) which was also composed based on the rhetorical approach towards arguments. It is considered the definitive model for developing persuasive arguments for its practicality, accuracy, ability to generate new ideas, focus on audience and flexibility (Nimehchisalem and Mukundan, 2011; Karbach, 1987 ). Toulmin's Model best captures the features of persuasive writing as it provides scaffolding for substantial reasoning and critical thinking.",
+                "cite_spans": [
+                    {
+                        "start": 121,
+                        "end": 134,
+                        "text": "(Smith, 2008)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 293,
+                        "end": 308,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 556,
+                        "end": 590,
+                        "text": "(Nimehchisalem and Mukundan, 2011;",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 591,
+                        "end": 604,
+                        "text": "Karbach, 1987",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Persuasive Writing Models",
+                "sec_num": null
+            },
+            {
+                "text": "Numerous studies have been conducted on persuasive writing in the past by various researchers using the Toulmin's Model (see Black,1989; Hormazabal, 2007; Connor, 1990, and Smith, 2008) . Table 1 summarizes some of their findings. The Toulmin model measures credibility appeal, and the syntactic factor of Abstract vs. Situated Style were the best predictors of writing quality. The findings showed that the U.S. compositions scored lower compared to the British and New Zealand compositions on the use of grounds and warrant. There were also significant differences in syntactic features. The U.S. writers prefer to use colloquial and interactive features associated to Interactive vs. Edited Text. The U.S. compositions were less passive and used nominalized style compared to the British and New Zealand compositions. Pre-test and post-test essays, revealed overall improvement in students' argumentative writing and critical thinking skills. The mean scores between the pre-test and post-test results showed a significant positive difference. With Toulmin's Model, the subjects could analyze their essays and therefore improved the quality of their writing for each element. This shows that the subjects' critical thinking skills have improved. Thus, the results concluded that with Toulmin's Model as scaffolding, students can improve the quality of their persuasive writing and critical thinking skills. Uccelli, Dobbs & Scott (2012) Examined language predictors of writing quality.",
+                "cite_spans": [
+                    {
+                        "start": 125,
+                        "end": 136,
+                        "text": "Black,1989;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 137,
+                        "end": 154,
+                        "text": "Hormazabal, 2007;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 155,
+                        "end": 172,
+                        "text": "Connor, 1990, and",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 173,
+                        "end": 185,
+                        "text": "Smith, 2008)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 1410,
+                        "end": 1439,
+                        "text": "Uccelli, Dobbs & Scott (2012)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 194,
+                        "end": 195,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Past Studies Using Toulmin's Model Of Argumentation",
+                "sec_num": null
+            },
+            {
+                "text": "51 persuasive essays of high school students from linguistically and ethnically diverse inner-city school in Northeastern U.S.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Rafik",
+                "sec_num": null
+            },
+            {
+                "text": "Results revealed that the frequency of organizational markers and epistemic stance marker can significantly predict persuasive essays' writing quality. Stapleton (2001) carried out a study to assess the critical thinking level of Japanese University students based on their writing using the Toulmin's Model as reference. He collected essay samples which were written in response to two essays that were written for two different topics. Based on the results of the study, he concluded that argument (claim), evidence (grounds) and recognition of opposition (rebuttal) were key components of argumentation. Stapleton (2001) criticised the use of familiar content as it encourages well-rehearsed reasoning as students regurgitate facts provided by the media. While unfamiliar topics would require more time, research and preparation, this also encourages the students to think outside of their comfort zone. However, during exams with a fixed time limit, students default to more familiar topics in order to compose an argument within the allotted time. Cahyono (2000) claims that instruction plays an important role in developing a student's performance. His study, which focuses on Indonesian university students, investigates rhetorical strategies that play an important role in developing a student's persuasive writing skills. Cahyono (2000) compared the writings of first year and fourth year students, which showed a significant difference in their skill level. The results were biased because the students in the fourth year had taken more courses and had more experience. Applying Toulmin's Model (Toulmin, 2003) to the analysis, Cahyono (2000) concluded that instruction plays an important part in developing the students' performance, and that the students' overall proficiency demonstrates the success of rhetorical strategies. Irish (2003) utilized the Toulmin's Model for a case study. He used Toulmin's Model as a writing strategy to improve the writing skills of an engineering student. At the end of the study, he concluded that the Toulmin's Model provides a framework for writers to check their work and helps writers to think about writing, while also acting as a composing tool that helps writers to develop their ideas and content. Therefore, the model greatly improves the student's persuasive writing skills and deepens his abilities to create solid and logical arguments.",
+                "cite_spans": [
+                    {
+                        "start": 152,
+                        "end": 168,
+                        "text": "Stapleton (2001)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 607,
+                        "end": 623,
+                        "text": "Stapleton (2001)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 1053,
+                        "end": 1067,
+                        "text": "Cahyono (2000)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 1331,
+                        "end": 1345,
+                        "text": "Cahyono (2000)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 1605,
+                        "end": 1620,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 1638,
+                        "end": 1652,
+                        "text": "Cahyono (2000)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 1839,
+                        "end": 1851,
+                        "text": "Irish (2003)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Rafik",
+                "sec_num": null
+            },
+            {
+                "text": "Fei-Wen and Yueh-Miao ( 2009) both conducted a study by comparing the writings of Taiwanese students with American students in order to examine the use of English argumentative features based on Toulmin's Model. They concluded that Taiwanese students provided less complex writing compared to the writing of American students who are shown to provide extended arguments in order to support their ideas. According to the results of their study, claim, grounds and warrant are the backbone of every argument while the auxiliary elements are regarded as optional structures. However, while backing, rebuttal and qualifier are considered optional elements, they are no less important as they strengthen the credibility of the essay.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Rafik",
+                "sec_num": null
+            },
+            {
+                "text": "Based on the previous studies featured, writing researchers were shown to have had various levels of success when applying Toulmin's Model of Argumentation as a pedagogical tool. Many researchers approve that Toulmin's Model provides the necessary framework for substantial reasoning and critical thinking. However, only a few studies on its use in the teaching of critical thinking have been done in Asia (see Rafik-Galea, et al., 2008 and Zainuddin & Rafik-Galea, 2016) .",
+                "cite_spans": [
+                    {
+                        "start": 411,
+                        "end": 440,
+                        "text": "Rafik-Galea, et al., 2008 and",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 441,
+                        "end": 452,
+                        "text": "Zainuddin &",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 453,
+                        "end": 471,
+                        "text": "Rafik-Galea, 2016)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Rafik",
+                "sec_num": null
+            },
+            {
+                "text": "This study uses the corpus based method for design and analysis. The corpus which refers to the essay samples collected from the students was analyzed to determine the presence of pre-determined features of persuasive essays. The salient features were identified according to the argumentative elements featured in the Toulmin's Model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a23.0 METHODOLOGY",
+                "sec_num": null
+            },
+            {
+                "text": "Through purposive sampling, four urban schools which are all located in the district of Johor Bahru were selected for the study. The schools were selected based on their above average exam scores in the subject of English language in the national SPM examination. The target samples comprised both male and female students from Form 4. The question papers with writing prompts selected from past SPM examinations were distributed to the students and they were instructed to complete their essays within an hour. The students were instructed to choose only one prompt out of the four given:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a23.0 METHODOLOGY",
+                "sec_num": null
+            },
+            {
+                "text": "1. The more A's we score in our examination, the better students we become. What is your opinion? (SPM Trial Paper, Terengganu, 2007) 2. \"Teenagers today are only interested in entertainment\". Do you agree? Support your opinion. (SPM, 2007) 3. School children should not have long holidays. Do you agree? Support your opinion. (SPM, 2009) 4. The internet is mostly a good thing. Do you agree? Support your opinion. (SPM, 2010) Each collected essay was analyzed using Toulmin's Model to check for persuasive elements. The essay organization was analyzed to see how the students arranged and constructed their arguments with the persuasive elements they employed. The researcher read the essays and based on Toulmin's Model, identified the persuasive components from the sentences. Each of the sentences was coded based on the model and labeled as C for 'claim', G for 'Grounds, W for 'warrant', Q for 'qualifier, R for 'rebuttal, and B for 'backing'. The coding was then verified by an independent rater using the same method.",
+                "cite_spans": [
+                    {
+                        "start": 229,
+                        "end": 240,
+                        "text": "(SPM, 2007)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 327,
+                        "end": 338,
+                        "text": "(SPM, 2009)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 415,
+                        "end": 426,
+                        "text": "(SPM, 2010)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a23.0 METHODOLOGY",
+                "sec_num": null
+            },
+            {
+                "text": "The Toulmin's Model was developed by Stephen Toulmin who identifies the elements of a persuasive argument. Toulmin's Model is specifically tailored towards persuasive writing. It emphasises on the arguers making their claims, supporting the claims with evidence before finally concluding them (Hormazabal, 2007) . The model is illustrated in Figure 1 .",
+                "cite_spans": [
+                    {
+                        "start": 293,
+                        "end": 311,
+                        "text": "(Hormazabal, 2007)",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 349,
+                        "end": 350,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Toulmin's Model",
+                "sec_num": null
+            },
+            {
+                "text": "Figure 1 Toulmin's model of arguments (Toulmin, 2003) Figure 1 shows the six elements of Toulmin's Model. The primary components used to compose the basic foundation of an argument are claim, grounds and warrant (Toulmin, 2003) . The claim is the basic purpose of the argument (Karbach, 1987) . It is the statement being argued (Toulmin, 2003) and the main point of an argument which the writer attempts to have accepted by the other person (Rafik-Galea et al., 2008; Wood, 2001) . It is also known as the 'thesis' (Toulmin, 2003) . The following show extracts from sample essays to illustrate each of the features in the model.",
+                "cite_spans": [
+                    {
+                        "start": 38,
+                        "end": 53,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 212,
+                        "end": 227,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 277,
+                        "end": 292,
+                        "text": "(Karbach, 1987)",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 328,
+                        "end": 343,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 441,
+                        "end": 467,
+                        "text": "(Rafik-Galea et al., 2008;",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 468,
+                        "end": 479,
+                        "text": "Wood, 2001)",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 515,
+                        "end": 530,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "1",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 61,
+                        "end": 62,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Toulmin's Model",
+                "sec_num": null
+            },
+            {
+                "text": "The above statement is an example of a claim. A claim, however, cannot stand on its own as an argument without any additional statements that support it.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 1: Excerpt from Essay No. 4 School children should not have long holidays (claim)",
+                "sec_num": null
+            },
+            {
+                "text": "Grounds, also known as 'data' are supporting facts and evidence that are used to prove an argument, thus supporting the claim and making it indisputable (Toulmin, 2003; Wood, 2001) . Example 2 shows how a claim can be made stronger when there are grounds to support it.",
+                "cite_spans": [
+                    {
+                        "start": 153,
+                        "end": 168,
+                        "text": "(Toulmin, 2003;",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 169,
+                        "end": 180,
+                        "text": "Wood, 2001)",
+                        "ref_id": "BIBREF31"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 1: Excerpt from Essay No. 4 School children should not have long holidays (claim)",
+                "sec_num": null
+            },
+            {
+                "text": "Example 2: Excerpt from Essay No. 4 Furthermore, they would not study at home (claim). They will forget about homework (ground #1). They will be lazy all the time and not want to finish their homework (ground #2). They will forget about their responsibility as students (ground #3) and ignore their parents' advice (ground #4)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 1: Excerpt from Essay No. 4 School children should not have long holidays (claim)",
+                "sec_num": null
+            },
+            {
+                "text": "In the example above, the student offered four supporting statements (grounds) to support his claim that students are less likely to study at home.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 1: Excerpt from Essay No. 4 School children should not have long holidays (claim)",
+                "sec_num": null
+            },
+            {
+                "text": "Finally, the warrant is a general, hypothetical, and often implicit logical statement that serves as a bridge between the claim and grounds (Toulmin, 2003) . The warrant can be implied or stated as it links the claim to the grounds and provides the grounds with general support (Karbach, 1987) . The following example shows a warrant being employed in the paragraph.",
+                "cite_spans": [
+                    {
+                        "start": 140,
+                        "end": 155,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 278,
+                        "end": 293,
+                        "text": "(Karbach, 1987)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 1: Excerpt from Essay No. 4 School children should not have long holidays (claim)",
+                "sec_num": null
+            },
+            {
+                "text": "Example 3: Excerpt from Essay No. 34 Next, we can play online games (claim). If we do too much work, we can get stressed. So, online games are a good way to de-stress after a long and tiring day (ground). At least that way we can forget about how tired we are (warrant). The warrant in the example above provides a justification for the grounds to be linked to the claim. The warrant provides the logical justification for the claim and shows that the grounds are legitimate (Rafik-Galea et al., 2008; Irish, 2003) . In short, the grounds justify the claim and the warrant justifies the grounds. What can weaken an argument is a weak warrant (Toulmin, 2003) , thus a weak warrant can invalidate the argument. This is depicted in Figure 2 as shown below. Additionally, backing, rebuttal and qualifiers are used as auxiliary elements that can be used to strengthen the argument. The backing for an argument is made up of facts and general statements that support the warrant by answering different questions (Fei-Wen, 2010; Wood, 2001) . The backing establishes the reliability and relevance of the warrant and acknowledges exceptions which may invalidate the claim (Karbach, 1987) . An example of this is shown below:",
+                "cite_spans": [
+                    {
+                        "start": 475,
+                        "end": 501,
+                        "text": "(Rafik-Galea et al., 2008;",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 502,
+                        "end": 514,
+                        "text": "Irish, 2003)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 642,
+                        "end": 657,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 1006,
+                        "end": 1021,
+                        "text": "(Fei-Wen, 2010;",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 1022,
+                        "end": 1033,
+                        "text": "Wood, 2001)",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 1164,
+                        "end": 1179,
+                        "text": "(Karbach, 1987)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 736,
+                        "end": 737,
+                        "text": "2",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Example 1: Excerpt from Essay No. 4 School children should not have long holidays (claim)",
+                "sec_num": null
+            },
+            {
+                "text": "The Internet helps us to stay connected with the entire world (claim). Social network sites such as Facebook are used by people all across the world (ground #1). Social network sites can help us reconnect with old friends that we have not seen in a long time (ground #2). Parents who have children studying overseas can easily contact them and stay connected (warrant). Unlike the telephone, there are no additional charges for using social network sites (backing).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 4: Excerpt from Essay No. 56",
+                "sec_num": null
+            },
+            {
+                "text": "In the above example, the claim is being supported by the grounds which are also justified by the warrant. In addition, the backing is used to support the warrant by providing additional information to justify it.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 4: Excerpt from Essay No. 56",
+                "sec_num": null
+            },
+            {
+                "text": "The rebuttal establishes what is wrong, invalid or unacceptable within an argument by presenting counter-arguments that represent different points of view (Irish, 2003) . The rebuttal can come in the form of a counter-argument or statements that indicate circumstances when the general argument does not hold true (Toulmin, 2003) . The rebuttal also shows that the writer recognises opposing points of view and can be used to the writer's advantage:",
+                "cite_spans": [
+                    {
+                        "start": 155,
+                        "end": 168,
+                        "text": "(Irish, 2003)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 314,
+                        "end": 329,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 4: Excerpt from Essay No. 56",
+                "sec_num": null
+            },
+            {
+                "text": "The Internet is mainly a good thing because it helps people to communicate with each other all across the world (claim). Social network sites such as Facebook, MySpace and Twitter enable users to express their thoughts and feelings freely (grounds). However, I am well aware that online social media can do as much harm as good (rebuttal #1). This is because we are not careful and not aware of how to use the Internet safely (rebuttal #2).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 5: Excerpt from Essay No. 92",
+                "sec_num": null
+            },
+            {
+                "text": "Qualifiers are statements or words that modify or limit the strength of the claim and grounds (Fei-Wen, 2010; Toulmin, 2003) .",
+                "cite_spans": [
+                    {
+                        "start": 94,
+                        "end": 109,
+                        "text": "(Fei-Wen, 2010;",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 110,
+                        "end": 124,
+                        "text": "Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 5: Excerpt from Essay No. 92",
+                "sec_num": null
+            },
+            {
+                "text": "There are many (qualifier) advantages of social media.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 6: Excerpt from Essay No. 31",
+                "sec_num": null
+            },
+            {
+                "text": "The example shows a qualifier being used to modify the statement with an ambiguously large amount. As backing, qualifier and rebuttal are considered optional, they are not necessary to compose an argument but can still be used to strengthen the argument. Figure 3 shows the connection between claim, grounds and warrant. The warrant balances the claim and grounds by providing justification for the grounds. The following figure 4 is a paragraph that is being dissected and analyzed using Toulmin's Model. (Karbach, 1987) Figure 4 as illustrated by Karbach (1987) shows how Toulmin's Model is used to present specific facts, backed by general conclusion about those facts, leads to a general premise or a claim. All the elements are identified and labelled. First of all, the claim here is that \"Ann's bedroom is on fire\". This establishes the premise of the argument. This is proven in the next statement: \"Smoke is pouring from Ann's bedroom\". This is the 'grounds' that supports the claim. The warrant justifies this by stating smoke is a sign of fire. Once the foundation of the argument has been formed, the auxiliary elements are applied. First, the 'qualifier' which could be the conjunction \"because\" to demonstrate cause and effect. The 'rebuttal' here suggests that the fire was done deliberately through the use of chemicals. Finally, the backing is used to support the warrant by providing additional facts.",
+                "cite_spans": [
+                    {
+                        "start": 506,
+                        "end": 521,
+                        "text": "(Karbach, 1987)",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 549,
+                        "end": 563,
+                        "text": "Karbach (1987)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 262,
+                        "end": 263,
+                        "text": "3",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 429,
+                        "end": 430,
+                        "text": "4",
+                        "ref_id": "FIGREF2"
+                    },
+                    {
+                        "start": 529,
+                        "end": 530,
+                        "text": "4",
+                        "ref_id": "FIGREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Example 6: Excerpt from Essay No. 31",
+                "sec_num": null
+            },
+            {
+                "text": "From the initial 113 essay samples collected, only 79 essays were accepted for analysis. The rejected 34 essay samples were discarded since the essays were incomplete or they did not reach the targeted minimum 250 words. According to Table 2 , 40 of the essay samples included the use of the auxiliary persuasive elements, rebuttal, qualifier and backing, while 39 did not include the auxiliary persuasive elements. This shows that over half of the essays written only utilized the three main elements of argumentative writing (claim or statement being argued, grounds that support the argument, and warrants that logically link the claims and grounds) presented in Toulmin's Model to construct the foundation for a strong argument. Table 3 shows the frequency count of essays utilizing claims, grounds and warrants, along with an optional element. A total of 29 essays utilized the primary elements and included one of the optional elements, either qualifier, rebuttal or backing. Backing is seen as being the most utilized of the optional elements. The low number of rebuttals is because the students mainly focused on one side of the argument and did not consider any counter-arguments. As few qualifiers are used, they may suggest the students were not well-versed in their use to modify and limit their arguments. Below are paragraph samples from the essays which illustrated the use of the primary elements (claim, grounds and warrant) with one of the auxiliary elements.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 240,
+                        "end": 241,
+                        "text": "2",
+                        "ref_id": "TABREF2"
+                    },
+                    {
+                        "start": 739,
+                        "end": 740,
+                        "text": "3",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "\uf0a24.0 FINDINGS",
+                "sec_num": null
+            },
+            {
+                "text": "The internet is mainly used to gain information (Claim). The internet is more convenient for the students these days to find the information needed (Qualifier).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 7: Essay No. 110, Paragraph 2",
+                "sec_num": null
+            },
+            {
+                "text": "In the above excerpt, the argument is composed in accordance with Toulmin's Model. The first sentence is the 'claim' and the subsequent sentences are the 'grounds' which support the claim. The 'warrant' is used as the concluding sentence of the paragraph to resolve the argument. The 'qualifier' is also included to strengthen the argument. Below this example is the model of the paragraph based on Toulmin's Model. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Students at schools and universities usually use the internet to gather information and ideas for their assignments or presentations (Grounds). Besides, they also use the internet for research purposes (Grounds). It is not only used by students but also by working adults to get some data (Warrant)",
+                "sec_num": null
+            },
+            {
+                "text": "The above examples show how rebuttals are added to the paragraph. Below is a diagram of the Toulmin's Model being applied to the paragraph. Other than that, latest news will automatically updated after an incident occurs (Claim). If one is connected to the Internet, then he is a person who knows most of the latest news (Grounds). For example, an earthquake with a magnitude of 8.9 recently happened in our neighboring country, Indonesia which caused a tsunami (Grounds). This incident has been a popular issue in Facebook right after about 15 minutes the incident occurs (Warrant) This shows the positiveness of using Internet (Backing)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Besides, Internet is mainly a good thing because it helps people to communicate to everyone around the world (Claim). Social networks such as Facebook, MySpace and Twitter enables people to express their opinion about a certain topic freely without any restrictions (Grounds). One of the good examples of social networks helping people these days especially student is when teachers have Facebook accounts to check on their students' welfare and their studies (Grounds). I do accept the fact that if the usage of social networks was not carefully done, it might lead the user to harm (Rebuttal). This is only because the users are not fully educated on the safe ways to use social networks (Rebuttal). Therefore, social networks have benefits and dangers (Warrants)",
+                "sec_num": null
+            },
+            {
+                "text": "In Example 9, backing is added to the paragraph. Figure 7 is the persuasive pattern of the paragraph. Table 4 shows the frequency count and percentage of essays which utilized the three primary persuasive elements and included two of the optional elements. The least used combination is claim, grounds and warrant with qualifier and rebuttal (CGW+QB) while the most used combination is claim, grounds and warrant, with backing and qualifier (CGW+BQ). The students commonly constructed their essays in a C-G-W pattern. Rebuttal is used as a counter argument while backing supports the warrant. Below is a set of examples that show the students utilizing two of the optional elements with the three primary elements.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 56,
+                        "end": 57,
+                        "text": "7",
+                        "ref_id": "FIGREF5"
+                    },
+                    {
+                        "start": 108,
+                        "end": 109,
+                        "text": "4",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Besides, Internet is mainly a good thing because it helps people to communicate to everyone around the world (Claim). Social networks such as Facebook, MySpace and Twitter enables people to express their opinion about a certain topic freely without any restrictions (Grounds). One of the good examples of social networks helping people these days especially student is when teachers have Facebook accounts to check on their students' welfare and their studies (Grounds). I do accept the fact that if the usage of social networks was not carefully done, it might lead the user to harm (Rebuttal). This is only because the users are not fully educated on the safe ways to use social networks (Rebuttal). Therefore, social networks have benefits and dangers (Warrants)",
+                "sec_num": null
+            },
+            {
+                "text": "In this modern era of technology, the internet has become the most important gadget in life (Claim). The internet makes life easier and more comfortable for mankind (Grounds). I strongly agree that the internet is more of a boon than a bane (Qualifier). On the other hand, the internet can also be influence of negative source (Rebuttal). However, if we are intelligent to use the internet, it would be mostly a good thing to us (Warrant)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 10: Essay No. 110, Paragraph 1",
+                "sec_num": null
+            },
+            {
+                "text": "In Example 10 a rebuttal and qualifier are used in the paragraph. Figure 8 depicts the persuasive pattern of the paragraph. Ever felt like you needed some good stress relief? The internet can be used to release stress too (Claim). The Internet offers many websites with interesting games, fun facts and quizzes for anyone of any age (Grounds). Students especially are encouraged to visit these websites to just have fun and relax (Grounds). Some people though regard this access to internet games as a bad thing (Rebuttal). The problem does not lie in the internet but lies in the individual (Warrant). As long as one don't indulge too much in these games, parents then would have an ease of mind (Backing)",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 73,
+                        "end": 74,
+                        "text": "8",
+                        "ref_id": "FIGREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Example 10: Essay No. 110, Paragraph 1",
+                "sec_num": null
+            },
+            {
+                "text": "The excerpt shows rebuttal and backing being used in the paragraph. Figure 9 presents the persuasive pattern of the excerpt. Then we can also have a social network such as facebook, myspace, Friendster and hi-5 (Claim). There are many advantages (Qualifier). Within the social network, we meet friends that we can have been apart for a long time (Grounds). Besides meeting old friends, we can also make new friends around the world (Grounds). Besides making new friends, we can also change our opinion about something with them such as how to become a better person and so on (Grounds). There are advantages at having a social network (Warrant). At least having one social network account is enough (Backing)",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 75,
+                        "end": 76,
+                        "text": "9",
+                        "ref_id": "FIGREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Example 10: Essay No. 110, Paragraph 1",
+                "sec_num": null
+            },
+            {
+                "text": "Example 12 shows qualifier and backing being used in the paragraph. Figure 10 is its corresponding persuasive pattern. Figure 10 shows the persuasive pattern of Example 12. Depicted in Figure 10 , it is shown that the qualifier is used to modify the strength of the argument while the backing is used to support the warrant. The qualifier puts emphasis on the statement for the 'advantages of the internet' while the backing was used to further justify the warrant. However, a rebuttal should be considered to provide additional information as a form of caution to the audience. The extra information will allow the audience to make a sound judgment.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 75,
+                        "end": 77,
+                        "text": "10",
+                        "ref_id": "FIGREF8"
+                    },
+                    {
+                        "start": 126,
+                        "end": 128,
+                        "text": "10",
+                        "ref_id": "FIGREF8"
+                    },
+                    {
+                        "start": 192,
+                        "end": 194,
+                        "text": "10",
+                        "ref_id": "FIGREF8"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Example 10: Essay No. 110, Paragraph 1",
+                "sec_num": null
+            },
+            {
+                "text": "Based on the data and results of the analysis, the number of essays that combined the usage of both primary and optional elements was low. There was no indication of the students utilizing all three of the optional elements with the primary elements. Therefore, no corresponding data could be gathered.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example 10: Essay No. 110, Paragraph 1",
+                "sec_num": null
+            },
+            {
+                "text": "The purpose of persuasive writing is to generate a composition that can convince and persuade the audience to embrace the writer's point of view or to take action. Clearly, argumentative writing is an important skill which requires a mastery of analytical skills, evaluative skills, and critical thinking skills to predict the response of the audience (Fei-Wen, 2010). For many students who are only beginning to learn how to write extended essays, the audience is normally elusive (Hamizah & Moore, 2003) . Many students thus select their teacher (or the examiner) as their audience (Connor, 1990) .",
+                "cite_spans": [
+                    {
+                        "start": 482,
+                        "end": 505,
+                        "text": "(Hamizah & Moore, 2003)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 584,
+                        "end": 598,
+                        "text": "(Connor, 1990)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a25.0 DISCUSSION",
+                "sec_num": null
+            },
+            {
+                "text": "For the purpose of this research, Toulmin's Model for Argumentation (Toulmin, 2003) was utilized for the analysis of the essay samples. Based on the essays collected for this study, the students have managed to utilize claims, grounds and warrants in their persuasive writing. According to Toulmin (2003) , this primary set of persuasive elements is required to form the foundation for an argument. On the other hand, the secondary set of persuasive elements is optional and can be used by the writers if they intend to strengthen or modify their arguments.",
+                "cite_spans": [
+                    {
+                        "start": 68,
+                        "end": 83,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 290,
+                        "end": 304,
+                        "text": "Toulmin (2003)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a25.0 DISCUSSION",
+                "sec_num": null
+            },
+            {
+                "text": "As demonstrated by the students in this study, they naturally comprehend the concept of argument construction as they are born arguers (Burkhalter, 1995) . They are able to make a claim, support their claim with grounds, and justify the grounds with a warrant. However, the students do not fully take advantage of all three optional elements to complement the primary elements and put too much emphasis on claim, grounds and warrant. Even when utilized, the optional elements are not used efficiently. Within the essays, there exists evidence that at least one optional element is included within a paragraph. At most, the students use a combination of two optional elements to complement the primary elements. Unfortunately, this is rarely done by the students. This is a problem as the optional elements are needed to further strengthen the arguments as qualifier, rebuttal and backing are still important to make the essay more credible (Fei-Wen & Yueh-Miao, 2009) .",
+                "cite_spans": [
+                    {
+                        "start": 135,
+                        "end": 153,
+                        "text": "(Burkhalter, 1995)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 940,
+                        "end": 967,
+                        "text": "(Fei-Wen & Yueh-Miao, 2009)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a25.0 DISCUSSION",
+                "sec_num": null
+            },
+            {
+                "text": "The complexity of the writing genre is to blame for the students' weakness (El-daly, 2011) as they find persuasive writing difficult to master (Applebee et al., 1986) . As a result, ESL learners encounter more difficulties and challenges while composing persuasive essays (Fei-Wen, 2012) . While Burkhalter (1995) states that students can improve their persuasive skills over time, this is hardly possible without proper guidance. According to Rashid and Chan (2008) , Malaysian schools focus more time on narrative and descriptive writing genres than the persuasive genre which is only included in the syllabus for Form 5. This lack of proper exposure to the persuasive genre in English results in students experiencing difficulties due to the complexity of the genre, making persuasive writing a difficult skill for students to master (Appleee et al., 1986) . The results of the study indicate that students require further guidance in writing a strong and valid persuasive essay.",
+                "cite_spans": [
+                    {
+                        "start": 143,
+                        "end": 166,
+                        "text": "(Applebee et al., 1986)",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 272,
+                        "end": 287,
+                        "text": "(Fei-Wen, 2012)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 296,
+                        "end": 313,
+                        "text": "Burkhalter (1995)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 444,
+                        "end": 466,
+                        "text": "Rashid and Chan (2008)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 837,
+                        "end": 859,
+                        "text": "(Appleee et al., 1986)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a25.0 DISCUSSION",
+                "sec_num": null
+            },
+            {
+                "text": "This research focuses on the persuasive writing genre as done by students from four urban schools in Johor Bahru. As proposed by Toulmin (2003) , a persuasive argument is first made up of three primary elements (claim, grounds and warrant) to create the foundation for an argument and can be further strengthened with optional elements (qualifier, rebuttal and backing). Even though the optional elements are not necessary to form a basic argument, they can still be used to improve the argument.",
+                "cite_spans": [
+                    {
+                        "start": 129,
+                        "end": 143,
+                        "text": "Toulmin (2003)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a26.0 CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "As shown in the research findings, students are capable of structuring basic arguments in their essays. However, based on analysis done with Toulmin's Model (Toulmin, 2003) , the students lack the ability to strengthen their arguments. Only a small fraction of the essays demonstrate the use of optional elements being used within the students' arguments.",
+                "cite_spans": [
+                    {
+                        "start": 157,
+                        "end": 172,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a26.0 CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "As secondary school students struggle with persuasive writing, they require a strategy that is designed to organize the patterns of persuasion and train them in persuasive writing. One strategy that can be introduced in the classroom is Toulmin's Model (Toulmin, 2003) . Toulmin (2003) proposed his model for persuasive arguments based on legal arguments to study the features of an argument in a courtroom setting. Toulmin's Model was later employed as a tool to teach persuasive essay writing to students by providing the foundation and framework to improve their persuasive writing skills (Wood, 2001; Irish, 2003) . Toulmin's Model can also be used alongside other strategies such as the five-paragraph essay style to teach persuasive writing by providing basic instruction in constructing, arranging and writing arguments (Hillocks, 2001) .",
+                "cite_spans": [
+                    {
+                        "start": 253,
+                        "end": 268,
+                        "text": "(Toulmin, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 271,
+                        "end": 285,
+                        "text": "Toulmin (2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 592,
+                        "end": 604,
+                        "text": "(Wood, 2001;",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 605,
+                        "end": 617,
+                        "text": "Irish, 2003)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 827,
+                        "end": 843,
+                        "text": "(Hillocks, 2001)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a26.0 CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "Students can be trained to use all six persuasive elements that are presented in the Toulmin's Model and improve their writing through classroom practices. Before any persuasive writing can begin, however, the teacher must first introduces Toulmin's Model to the students and present the elements of the model to them (Hernandez et al., 2006) . The teacher will then explain the function of each element using prewritten persuasive essay samples and how the elements are used to construct and strengthen an argument.",
+                "cite_spans": [
+                    {
+                        "start": 318,
+                        "end": 342,
+                        "text": "(Hernandez et al., 2006)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a26.0 CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "By using Toulmin's Model as a basis, the students can dissect and analyze the persuasive elements within the essays, and how they interconnect and complement each other. As the students learn to identify the persuasive elements within the model essay, they can learn how to properly organize the elements to develop their persuasive writing skills. This also serves as a good exercise to improve their critical thinking skills. By studying, understanding, and putting Toulmin's model to practice, students will be able to properly apply the argumentative elements, including the optional elements, to complement their argument, thus strengthening and improving their persuasive writing skills as a result. By taking full advantage of all the elements presented in Toulmin's Model, the students will be able to win their audience over with a fortified argument that is more effective than what they could initially compose.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "\uf0a26.0 CONCLUSION",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "The Writing Report Card: Writing Achievements In American Schools",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Applebee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Langer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Mullis",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1986,
+                "venue": "",
+                "volume": "23",
+                "issue": "",
+                "pages": "231--253",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Applebee, A., Langer, J. & Mullis, I. (1986). The Writing Report Card: Writing Achievements In American Schools. Princeton, NJ: Education Testing Services. Black, K. (1989). Audience Analysis And Persuasive Writing At The College Level. Research in the Teaching of English, 23(3), 231-253.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "A Vygotsky-Based Curriculum For Teaching Persuasive Writing In The Elementary Grades",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Burkhalter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "Language Arts",
+                "volume": "72",
+                "issue": "3",
+                "pages": "192--199",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Burkhalter, N. (1995). A Vygotsky-Based Curriculum For Teaching Persuasive Writing In The Elementary Grades. Language Arts, 72(3), 192-199.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Rhetorical Strategies Used In The English Persuasive Essays Of Indonesian University Students of EFL",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Cahyono",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2000,
+                "venue": "PETRA",
+                "volume": "2",
+                "issue": "1",
+                "pages": "31--39",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cahyono, B.Y. (2000). Rhetorical Strategies Used In The English Persuasive Essays Of Indonesian University Students of EFL. PETRA, 2(1), 31-39.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Linguistic/Rhetorical Measures For International Persuasive Student Writing",
+                "authors": [
+                    {
+                        "first": "U",
+                        "middle": [],
+                        "last": "Connor",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "Research in the Teaching of English",
+                "volume": "24",
+                "issue": "1",
+                "pages": "67--87",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Connor, U. (1990). Linguistic/Rhetorical Measures For International Persuasive Student Writing. Research in the Teaching of English, 24(1), 67-87.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Teaching and Learning The Writing Of Persuasive / Argumentative Discourse",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Crowhurst",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "Canadian Journal of Education",
+                "volume": "15",
+                "issue": "4",
+                "pages": "348--359",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Crowhurst, M. (1990). Teaching and Learning The Writing Of Persuasive / Argumentative Discourse. Canadian Journal of Education, 15(4), 348-359.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Appealing Texts: The Persuasive Writing Of High School Students",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Durst",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Laine",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Schultz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Vilter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "",
+                "volume": "7",
+                "issue": "",
+                "pages": "232--255",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Durst, R., Laine, C., Schultz, L. M., & Vilter, W. (1990). Appealing Texts: The Persuasive Writing Of High School Students. Written Communication, 7(2), 232-255.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Linguistic Aspects Of The Narrative And Persuasive Written Productions Of Arabic And Spanish Speakers: Focus On The Role Of Explicit Knowledge Of Grammar",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "El-Daly",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Arab World English Journal",
+                "volume": "2",
+                "issue": "1",
+                "pages": "77--122",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "El-daly, H.M. (2011). Linguistic Aspects Of The Narrative And Persuasive Written Productions Of Arabic And Spanish Speakers: Focus On The Role Of Explicit Knowledge Of Grammar. Arab World English Journal, 2(1), 77-122.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "A Cognitive Process Theory Of Writing. College Composition and Communication",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Flower",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Hayes",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "",
+                "volume": "32",
+                "issue": "",
+                "pages": "365--387",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Flower, L. & Hayes, J. R. (1981). A Cognitive Process Theory Of Writing. College Composition and Communication, 32(4), 365-387.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Taiwanese Argumentation Skills: Contrastive Rhetoric Perspective",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Fei-Wen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Yueh-Miao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Taiwan International ESP Journal",
+                "volume": "1",
+                "issue": "1",
+                "pages": "23--50",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fei-Wen, C. & Yueh-Miao, C. (2009). Taiwanese Argumentation Skills: Contrastive Rhetoric Perspective. Taiwan International ESP Journal, 1(1), 23-50.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "A Socio-Cognitive Modeling Approach To Teaching English Argumentation",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Fei-Wen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Asian ESP Journal",
+                "volume": "6",
+                "issue": "1",
+                "pages": "120--146",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fei-Wen, C. (2010). A Socio-Cognitive Modeling Approach To Teaching English Argumentation. Asian ESP Journal, 6(1), 120-146.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "The Role Of Evidence In Argumentative Writing",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Gleason",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Reading & Writing Quarterly",
+                "volume": "15",
+                "issue": "1",
+                "pages": "81--106",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gleason, M. M. (1999). The Role Of Evidence In Argumentative Writing. Reading & Writing Quarterly, 15(1), 81-106.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Audience Awareness In L1 And L2 Of Bilingual Writers",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Hamizah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Moore",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "TESL EJ",
+                "volume": "7",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hamizah, Z & Moore, R.A. (2003) Audience Awareness In L1 And L2 Of Bilingual Writers. TESL EJ 7(1), Date of Retrieval: October 26, 2011 from: http://www.tesl- ej.org/wordpress/issues/volume7/ej25/ej25a2.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Argumentative Writing Strategies And Perceptions Of Writing Academic By EFL College Students",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Hormazabal",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Literatura y Linguistica",
+                "volume": "18",
+                "issue": "",
+                "pages": "253--282",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hormazabal, R. D. (2007). Argumentative Writing Strategies And Perceptions Of Writing Academic By EFL College Students, Literatura y Linguistica, 18, 253-282",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "For the Sake Of Argument",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Hernandez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Kaplan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Educational Leadership",
+                "volume": "64",
+                "issue": "2",
+                "pages": "48--52",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hernandez, A. Kaplan, M. A., Schwartz, R. (2006). For the Sake Of Argument. Educational Leadership, 64(2), 48-52.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Teaching Argument Writing, Grades 6-12: Supporting Claims With Relevant Evidence And Clear Reasoning",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Hillocks",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "HEINEMANN",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hillocks, G. (2011). Teaching Argument Writing, Grades 6-12: Supporting Claims With Relevant Evidence And Clear Reasoning. HEINEMANN, Portsmouth, NH.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "The Uses Of Toulmin: The Value Of An Explicit Model Of Argument For Academic And Working Engineers. IEEE International Professional Communication Conference",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Irish",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "IEEE International",
+                "volume": "",
+                "issue": "",
+                "pages": "48--55",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Irish, R. K. (2003). The Uses Of Toulmin: The Value Of An Explicit Model Of Argument For Academic And Working Engineers. IEEE International Professional Communication Conference. 2003. IEEE International, 48-55.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "To Teach The Five-Paragraph Theme Learning",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Johnson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Thompson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Smagorinsky",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Fry",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Research in the Teaching of English",
+                "volume": "38",
+                "issue": "2",
+                "pages": "136--176",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Johnson, T. S., Thompson, L., Smagorinsky, P., & Fry, P. G. (2012). To Teach The Five-Paragraph Theme Learning. Research in the Teaching of English, 38(2), 136- 176.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Using Toulmin's Model Of Argumentation",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Karbach",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "Journal of Teaching Writing",
+                "volume": "6",
+                "issue": "1",
+                "pages": "81--91",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Karbach, J. (1987). Using Toulmin's Model Of Argumentation. Journal of Teaching Writing, 6(1), 81-91.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Effects Strategies, Grade, And Sex On Students' Persuasive Writing",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Knudson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "The Journal of Experimental Education",
+                "volume": "59",
+                "issue": "2",
+                "pages": "141--152",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Knudson, R. E. (2012). Effects Strategies, Grade, And Sex On Students' Persuasive Writing. The Journal of Experimental Education, 59(2), 141-152.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Contexualizing Toulmin's Model In The Writing Classroom: A Case Study. Written Communication",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Lunsford",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "",
+                "volume": "19",
+                "issue": "",
+                "pages": "109--174",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lunsford, K. J. (2002). Contexualizing Toulmin's Model In The Writing Classroom: A Case Study. Written Communication, 19(1), 109-174.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Determining the Evaluative Criteria Of An Argumentative Writing Scale",
+                "authors": [
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Nimehchisalem",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Mukundan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "English Language Teaching",
+                "volume": "4",
+                "issue": "1",
+                "pages": "58--70",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Nimehchisalem, V., & Mukundan, J. (2011). Determining the Evaluative Criteria Of An Argumentative Writing Scale. English Language Teaching, 4(1), 58-70.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "SPM Composition: Learning Through Diagrams",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Ooi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Seelan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ooi, J & Seelan, S. (2011). SPM Composition: Learning Through Diagrams.UG Press Sdn. Bhd, Selangor Darul Ehsan.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Learning To Write An Academic Paper Among Medical Students of Universiti Malaysia Sabah. 2nd International Conference of Teaching and Learning",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Osman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "L A"
+                        ],
+                        "last": "Bakar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "1--21",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Osman, W.H. & Bakar, A.L.A. (2009). Learning To Write An Academic Paper Among Medical Students of Universiti Malaysia Sabah. 2nd International Conference of Teaching and Learning. 2009. INTI University College, Malaysia, 1-21.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Learning to Think Critically The Toulmin Way. 13th Seminar International Conference on Thinking",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Rafik-Galea",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "Z"
+                        ],
+                        "last": "Zainuddin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "V"
+                        ],
+                        "last": "Galea",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rafik-Galea S., Zainuddin, S. Z., & Galea, P. V. (2008). Learning to Think Critically The Toulmin Way. 13th Seminar International Conference on Thinking. 2008. Sweden.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Exploring the Interplay Of Mode Of Discourse And Proficiency Level In ESL Writing Performance : Implications For Testing",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Rashid",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chan",
+                        "middle": [
+                            "S H"
+                        ],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "The English Teacher",
+                "volume": "XXXVII",
+                "issue": "",
+                "pages": "105--122",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rashid, S, & Chan. S. H. (2008). Exploring the Interplay Of Mode Of Discourse And Proficiency Level In ESL Writing Performance : Implications For Testing. The English Teacher, XXXVII, 105-122.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "The Art Of Rhetoric: Understanding The How Of Persuasive Writing. Date of Retrieval",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Smith",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Smith, S. N. (2008). The Art Of Rhetoric: Understanding The How Of Persuasive Writing. Date of Retrieval: 10 th May 2017 from: http://www.ic.arizona.edu/ic/snsmith/rhetanal/AristotleChartForm.pdf.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "William and Mary for beginners: Research based models. College William and Mary",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Stambaugh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Stambaugh, T. (2011). William and Mary for beginners: Research based models. College William and Mary: Centre for Gifted Education.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Assessing Critical Thinking In The Writing Of Japanese University Students: Insights About Assumptions And Content Familiarity. Written Communication",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Stapleton",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "",
+                "volume": "18",
+                "issue": "",
+                "pages": "506--548",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Stapleton, P. (2001). Assessing Critical Thinking In The Writing Of Japanese University Students: Insights About Assumptions And Content Familiarity. Written Communication, 18(4), 506-548.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Writing English Essays Within Dominant Discourses In Malaysian Schools",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Tan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "The Asia Pacific Journal of Educators and Education",
+                "volume": "21",
+                "issue": "1",
+                "pages": "23--45",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tan K. E. (2006). Writing English Essays Within Dominant Discourses In Malaysian Schools. The Asia Pacific Journal of Educators and Education, 21(1), 23-45.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "The Uses Of Argument",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Toulmin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Toulmin, S. (2003). The Uses Of Argument. Cambridge, England: Cambridge University Press.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Mastering Academic Language: Organization And Stance In The Persuasive Writing Of High School Students",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Uccelli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Dobbs",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Scott",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "",
+                "volume": "30",
+                "issue": "",
+                "pages": "36--62",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Uccelli, P., Dobbs, C. L., & Scott, J. (2012). Mastering Academic Language: Organization And Stance In The Persuasive Writing Of High School Students. Written Communication, 30(1), 36-62.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Perspectives on argument",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [
+                            "V"
+                        ],
+                        "last": "Wood",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wood, N. V. (2001). Perspectives on argument. (Third Edition). Upper Saddle River, New Jersey: Prentice Hall.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Effects of Training In The Use Of Toulmin's Model On ESL Students' Argumentative Writing And Critical Thinking Ability",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "Z"
+                        ],
+                        "last": "Zainuddin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Rafik-Galea",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Malaysian Journal of Languages and Linguistics",
+                "volume": "5",
+                "issue": "2",
+                "pages": "112--131",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zainuddin, S. Z., & Rafik-Galea, S. (2016). Effects of Training In The Use Of Toulmin's Model On ESL Students' Argumentative Writing And Critical Thinking Ability. Malaysian Journal of Languages and Linguistics, 5(2), 112-131.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": "2",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 2 A link between claim, grounds and warrant"
+            },
+            "FIGREF1": {
+                "fig_num": "3",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure3The Connection between claim, grounds and warrant(Rafik-Galea et al., 2008)"
+            },
+            "FIGREF2": {
+                "fig_num": "4",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure4An example of the Toulmin's Model being employed(Karbach, 1987)"
+            },
+            "FIGREF3": {
+                "fig_num": "5",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 5 Claim, grounds & warrant +qualifier Figure 5 illustrates the persuasive pattern of the excerpt from Example 7. As seen in the diagram, it demonstrates how the qualifier is used to strengthen the argument. The claim, grounds and warrant are also arranged to include the qualifier. The qualifier is shown to be positioned between both the claim and grounds with the warrant connected to all three, thus tying the argument together. The next example shows a paragraph which includes rebuttal with claim, grounds and warrant."
+            },
+            "FIGREF4": {
+                "fig_num": "6",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 6 Claim, grounds & warrant + rebuttal Figure 6 shows the pattern of persuasion for Example 8, which originates from Sample Essay No. 92. As seen in the above figure, the rebuttal was added to the standard three elements to provide a counter argument. The rebuttal is shown to be connected to both the claim and grounds by providing an alternate perspective for the argument. The warrant is still included to provide a resolution for the argument. The following example shows how the backing is incorporated in the argumentative pattern. Example 9: From Essay No. 56, Paragraph 6Other than that, latest news will automatically updated after an incident occurs (Claim). If one is connected to the Internet, then he is a person who knows most of the latest news (Grounds). For example, an earthquake with a magnitude of 8.9 recently happened in our neighboring country, Indonesia which caused a tsunami (Grounds). This incident has been a popular issue in Facebook right after about 15 minutes the incident occurs (Warrant) This shows the positiveness of using Internet (Backing)"
+            },
+            "FIGREF5": {
+                "fig_num": "7",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 7 Claim, grounds & warrant +backing Figure 7 illustrates the persuasive pattern of the excerpt from Example 9. As seen in the diagram, the claim, grounds and warrant are connected. The backing is shown to justify the use of the warrant within the argument. Based on the examples, the students were attempting to build a strong case for their arguments by setting a firm foundation. Unfortunately, the students are limited to only using one of the optional elements to complement their arguments. The students should consider expanding themselves by including the other optional elements while composing their arguments to strengthen them further. The students should receive practice by identifying the elements of persuasive essays in order to improve their skills."
+            },
+            "FIGREF6": {
+                "fig_num": "8",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 8 Claim, grounds & warrant +qualifier & rebuttalFigure8shows the qualifier and rebuttal being used to complement the primary elements of claim, grounds and warrant. The claim, grounds and warrant form the foundation of the argument, while the rebuttal provides an opposing point of view. The qualifier is included to put emphasis on the student's stance in the argument. The next example shows backing and rebuttal being included with the primary elements.Example 11: Essay No. 98, Paragraph 3 Ever felt like you needed some good stress relief? The internet can be used to release stress too (Claim). The Internet offers many websites with interesting games, fun facts and quizzes for anyone of any age (Grounds). Students especially are encouraged to visit these websites to just have fun and relax (Grounds). Some people though regard this access to internet games as a bad thing (Rebuttal). The problem does not lie in the internet but lies in the individual (Warrant).As long as one don't indulge too much in these games, parents then would have an ease of mind (Backing)"
+            },
+            "FIGREF7": {
+                "fig_num": "9",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 9 Claim, grouds & warrant + rebuttal & backing"
+            },
+            "FIGREF8": {
+                "fig_num": "10",
+                "uris": null,
+                "num": null,
+                "type_str": "figure",
+                "text": "Figure 10 Claim, grounds & warrant +backing & qualifier"
+            },
+            "TABREF0": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Author(s)</td><td colspan=\"2\">THE STUDY</td><td>SAMPLES/</td><td>FINDINGS</td></tr><tr><td/><td/><td/><td>SUBJECTS</td></tr><tr><td colspan=\"2\">Connor (1990) Developed</td><td/><td>150 essays written for the IEA</td></tr><tr><td/><td colspan=\"2\">linguistic/rhetorical</td><td>International Study of written</td></tr><tr><td/><td colspan=\"2\">measures to analyze and</td><td>composition by high school</td></tr><tr><td/><td colspan=\"2\">evaluate argumentative/</td><td>students from three English-</td></tr><tr><td/><td>persuasive</td><td>students'</td><td>speaking countries: the United</td></tr><tr><td/><td>writing</td><td/><td>States of America, Britain and</td></tr><tr><td/><td/><td/><td>New Zealand</td></tr></table>",
+                "text": "Past studies using the Toulmin's Model"
+            },
+            "TABREF2": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Counts</td><td>%</td></tr></table>",
+                "text": "Frequency Count and percentage of essays which did not employ auxiliary elements"
+            },
+            "TABREF3": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Persuasive Elements</td><td>Claims, Grounds and Warrant +</td><td>Claim, Grounds and Warrant +</td><td>Claim, Grounds and Warrant +</td></tr><tr><td/><td>Qualifier</td><td>Rebuttal</td><td>Backing</td></tr><tr><td>Counts</td><td>7</td><td>8</td><td>14</td></tr><tr><td>Percentage</td><td>8.86%</td><td>10.13%</td><td>17.72%</td></tr></table>",
+                "text": "Frequency count and percentage of essays which utilize claim, grounds and warrants and included one of the optional elements (N=79)"
+            },
+            "TABREF4": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Persuasive</td><td>Claims, Grounds and</td><td>Claim, Grounds and Warrant</td><td>Claim, Grounds and</td></tr><tr><td>Elements</td><td>Warrant + Qualifier and</td><td>+ Rebuttal and Backing</td><td>Warrant + Backing and</td></tr><tr><td/><td>Rebuttal</td><td/><td>Qualifier.</td></tr><tr><td>Counts</td><td>1</td><td>2</td><td>6</td></tr><tr><td>Percentage</td><td>1.27%</td><td>2.53%</td><td>7.59%</td></tr></table>",
+                "text": "Frequency count and percentage of essays which utilize claim, grounds and warrants with two of the optional elements."
+            }
+        }
+    }
+}

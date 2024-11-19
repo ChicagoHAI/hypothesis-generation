@@ -1,0 +1,1720 @@
+{
+    "paper_id": "P18-1058",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-06T17:58:27.207382Z"
+    },
+    "title": "Give Me More Feedback: Annotating Argument Persuasiveness and Related Attributes in Student Essays",
+    "authors": [
+        {
+            "first": "Winston",
+            "middle": [],
+            "last": "Carlile",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Texas at Dallas Richardson",
+                "location": {
+                    "postCode": "75083-0688",
+                    "region": "TX"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Nishant",
+            "middle": [],
+            "last": "Gurrapadi",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Texas at Dallas Richardson",
+                "location": {
+                    "postCode": "75083-0688",
+                    "region": "TX"
+                }
+            },
+            "email": "nishant.gurrapadi@utdallas.edu"
+        },
+        {
+            "first": "Zixuan",
+            "middle": [],
+            "last": "Ke",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Texas at Dallas Richardson",
+                "location": {
+                    "postCode": "75083-0688",
+                    "region": "TX"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Vincent",
+            "middle": [],
+            "last": "Ng",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Texas at Dallas Richardson",
+                "location": {
+                    "postCode": "75083-0688",
+                    "region": "TX"
+                }
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "While argument persuasiveness is one of the most important dimensions of argumentative essay quality, it is relatively little studied in automated essay scoring research. Progress on scoring argument persuasiveness is hindered in part by the scarcity of annotated corpora. We present the first corpus of essays that are simultaneously annotated with argument components, argument persuasiveness scores, and attributes of argument components that impact an argument's persuasiveness. This corpus could trigger the development of novel computational models concerning argument persuasiveness that provide useful feedback to students on why their arguments are (un)persuasive in addition to how persuasive they are.",
+    "pdf_parse": {
+        "paper_id": "P18-1058",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "While argument persuasiveness is one of the most important dimensions of argumentative essay quality, it is relatively little studied in automated essay scoring research. Progress on scoring argument persuasiveness is hindered in part by the scarcity of annotated corpora. We present the first corpus of essays that are simultaneously annotated with argument components, argument persuasiveness scores, and attributes of argument components that impact an argument's persuasiveness. This corpus could trigger the development of novel computational models concerning argument persuasiveness that provide useful feedback to students on why their arguments are (un)persuasive in addition to how persuasive they are.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "The vast majority of existing work on automated essay scoring has focused on holistic scoring, which summarizes the quality of an essay with a single score and thus provides very limited feedback to the writer (see Shermis and Burstein (2013) for the state of the art). While recent attempts address this problem by scoring a particular dimension of essay quality such as coherence (Miltsakaki and Kukich, 2004) , technical errors, relevance to prompt (Higgins et al., 2004; Persing and Ng, 2014) , organization (Persing et al., 2010) , and thesis clarity (Persing and Ng, 2013) , argument persuasiveness is largely ignored in existing automated essay scoring research despite being one of the most important dimensions of essay quality.",
+                "cite_spans": [
+                    {
+                        "start": 215,
+                        "end": 242,
+                        "text": "Shermis and Burstein (2013)",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 382,
+                        "end": 411,
+                        "text": "(Miltsakaki and Kukich, 2004)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 452,
+                        "end": 474,
+                        "text": "(Higgins et al., 2004;",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 475,
+                        "end": 496,
+                        "text": "Persing and Ng, 2014)",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 512,
+                        "end": 534,
+                        "text": "(Persing et al., 2010)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 556,
+                        "end": 578,
+                        "text": "(Persing and Ng, 2013)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Nevertheless, scoring the persuasiveness of arguments in student essays is by no means easy.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The difficulty stems in part from the scarcity of persuasiveness-annotated corpora of student essays. While persuasiveness-annotated corpora exist for other domains such as online debates (e.g., Habernal and Gurevych (2016a; 2016b) ), to our knowledge only one corpus of persuasivenessannotated student essays has been made publicly available so far (Persing and Ng, 2015) .",
+                "cite_spans": [
+                    {
+                        "start": 195,
+                        "end": 224,
+                        "text": "Habernal and Gurevych (2016a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 225,
+                        "end": 231,
+                        "text": "2016b)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 350,
+                        "end": 372,
+                        "text": "(Persing and Ng, 2015)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Though a valuable resource, Persing and Ng's (2015) (P&N) corpus has several weaknesses that limit its impact on automated essay scoring research. First, P&N assign only one persuasiveness score to each essay that indicates the persuasiveness of the argument an essay makes for its thesis. However, multiple arguments are typically made in a persuasive essay. Specifically, the arguments of an essay are typically structured as an argument tree, where the major claim, which is situated at the root of the tree, is supported by one or more claims (the children of the root node), each of which is in turn supported by one or more premises. Hence, each node and its children constitute an argument. In P&N's dataset, only the persuasiveness of the overall argument (i.e., the argument represented at the root and its children) of each essay is scored. Hence, any system trained on their dataset cannot provide any feedback to students on the persuasiveness of any arguments other than the overall argument. Second, P&N's corpus does not contain annotations that explain why the overall argument is not persuasive if its score is low. This is undesirable from a feedback perspective, as a student will not understand why her argument is not persuasive if its score is low.",
+                "cite_spans": [
+                    {
+                        "start": 28,
+                        "end": 51,
+                        "text": "Persing and Ng's (2015)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Our goal in this paper is to annotate and make publicly available a corpus of persuasive student essays that addresses the aforementioned weaknesses via designing appropriate annotation schemes and scoring rubrics. Specifically, not only do we score the persuasiveness of each ar-gument in each essay (rather than simply the persuasiveness of the overall argument), but we also identify a set of attributes that can explain an argument's persuasiveness and annotate each argument with the values of these attributes. These annotations enable the development of systems that can provide useful feedback to students, as the attribute values predicted by these systems can help a student understand why her essay receives a particular persuasiveness score. To our knowledge, this is the first corpus of essays that are simultaneously annotated with argument components, persuasiveness scores, and related attributes. 1",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "While argument mining research has traditionally focused on determining the argumentative structure of a text document (i.e., identifying its major claim, claims, and premises, as well as the relationships between these argument components) (Stab and Gurevych, 2014b, 2017a; Eger et al., 2017) , researchers have recently begun to study new argument mining tasks, as described below.",
+                "cite_spans": [
+                    {
+                        "start": 241,
+                        "end": 250,
+                        "text": "(Stab and",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 251,
+                        "end": 274,
+                        "text": "Gurevych, 2014b, 2017a;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 275,
+                        "end": 293,
+                        "text": "Eger et al., 2017)",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Persuasiveness-related tasks. Most related to our study is work involving argument persuasiveness. For instance, Habernal and Gurevych (2016b) and Wei et al. (2016) study the persuasiveness ranking task, where the goal is to rank two internet debate arguments written for the same topic w.r.t. their persuasiveness. As noted by Habernal and Gurevych, ranking arguments is a relatively easier task than scoring an argument's persuasiveness: in ranking, a system simply determines whether one argument is more persuasive than the other, but not how much more persuasive one argument is than the other; in scoring, however, a system has to determine how persuasive an argument is on an absolute scale. Note that ranking is not an acceptable evaluation setting for studying argument persuasiveness in the essay domain, as feedback for an essay has to be provided independently of other essays.",
+                "cite_spans": [
+                    {
+                        "start": 113,
+                        "end": 142,
+                        "text": "Habernal and Gurevych (2016b)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 147,
+                        "end": 164,
+                        "text": "Wei et al. (2016)",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "In contrast, there are studies that focus on factors affecting argument persuasiveness in internet debates. For instance, Lukin et al. (2017) examine how audience variables (e.g., personalities) interact with argument style (e.g., factual vs. emotional arguments) to affect argument persuasive- ness. Persing and Ng (2017) identify factors that negatively impact persuasiveness, so their factors, unlike ours, cannot explain what makes an argument persuasive. Other argument mining tasks. Some of the attributes that we annotate our corpus with have been studied. For instance, Hidey et al. (2017) examine the different semantic types of claims and premises, whereas Higgins and Walker (2012) investigate persuasion strategies (i.e., ethos, pathos, logos) . Unlike ours, these studies use data from online debate forums and social/environment reports. Perhaps more importantly, they study these attributes independently of persuasiveness.",
+                "cite_spans": [
+                    {
+                        "start": 122,
+                        "end": 141,
+                        "text": "Lukin et al. (2017)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 301,
+                        "end": 322,
+                        "text": "Persing and Ng (2017)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 578,
+                        "end": 597,
+                        "text": "Hidey et al. (2017)",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 667,
+                        "end": 755,
+                        "text": "Higgins and Walker (2012) investigate persuasion strategies (i.e., ethos, pathos, logos)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Several argument mining tasks have recently been proposed. For instance, Stab and Gurevych (2017b) examine the task of whether an argument is sufficiently supported. Al Khatib et al. (2016) identify and annotate a news editorial corpus with fine-grained argumentative discourse units for the purpose of analyzing the argumentation strategies used to persuade readers. Wachsmuth et al. (2017) focus on identifying and annotating 15 logical, rhetorical, and dialectical dimensions that would be useful for automatically accessing the quality of an argument. Most recently, the Argument Reasoning Comprehension task organized as part of SemEval 2018 has focused on selecting the correct warrant that explains reasoning of an argument that consists of a claim and a reason.2 ",
+                "cite_spans": [
+                    {
+                        "start": 73,
+                        "end": 98,
+                        "text": "Stab and Gurevych (2017b)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 169,
+                        "end": 189,
+                        "text": "Khatib et al. (2016)",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 368,
+                        "end": 391,
+                        "text": "Wachsmuth et al. (2017)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2"
+            },
+            {
+                "text": "The corpus we chose to annotate is composed of 102 essays randomly chosen from the Argument Annotated Essays corpus (Stab and Gurevych, 2014a) . This collection of essays was taken from essayforum3 , a site offering feedback to students wishing to improve their ability to write persuasive essays for tests. Each essay is written in response to a topic such as \"should high school make music lessons compulsory?\" and has already been annotated by Stab and Gurevych with an argument tree. Hence, rather than annotate everything from scratch, we annotate the persuasiveness score of each argument in the already-annotated argument trees in this essay collection as well as the attributes that potentially impact persuasiveness.",
+                "cite_spans": [
+                    {
+                        "start": 116,
+                        "end": 142,
+                        "text": "(Stab and Gurevych, 2014a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Corpus",
+                "sec_num": "3"
+            },
+            {
+                "text": "Each argument tree is composed of three types of tree nodes that correspond to argument compo- Each argument tree has three to four levels. The root is a major claim. Each node in the second level is a claim that supports or attacks its parent (i.e., the major claim). Each node is the third level is a premise that supports or attacks its parent (i.e., a claim). There is an optional fourth level consisting of nodes that correspond to premises. Each of these premises either supports or attacks its (premise) parent. Stab and Gurevych (2014a) report high inter-annotator agreement on these annotations: for the annotations of major claims, claims, and premises, the Krippendorff's \u03b1 values (Krippendorff, 1980) are 0.77, 0.70, and 0.76 respectively, and for the annotations of support and attack relations, the \u03b1 values are both 0.81.",
+                "cite_spans": [
+                    {
+                        "start": 519,
+                        "end": 544,
+                        "text": "Stab and Gurevych (2014a)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 692,
+                        "end": 712,
+                        "text": "(Krippendorff, 1980)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Corpus",
+                "sec_num": "3"
+            },
+            {
+                "text": "Note that Stab and Gurevych (2014a) determine premises and claims by their position in the argument tree and not by their semantic meaning. Due to the difficulty of treating an opinion as a nonnegotiable unit of evidence, we convert all subjective premises into claims to demonstrate that they are subjective and require backing. At the end of this process, several essays contain argument trees that violate the scheme used by Stab and Gurevych, due to some premises supported by opinion premises, now converted to claims. Although the ideal argument should not violate the canonical structure, students attempting to improve their persuasive writing skills may not understand this, and mistakenly support evidence with their own opinions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Corpus",
+                "sec_num": "3"
+            },
+            {
+                "text": "Statistics of this corpus are shown in Table 1 . Its extensive use in argument mining research in recent years together with its reliably annotated ar-gument trees makes it an ideal corpus to use for our annotation task.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 45,
+                        "end": 46,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Corpus",
+                "sec_num": "3"
+            },
+            {
+                "text": "Since persuasiveness is defined on an argument, in order to annotate persuasiveness we need to define precisely what an argument is. Following van Eemeren et al. ( 2014), we define an argument as consisting of a conclusion that may or may not be supported/attacked by a set of evidences. Given an argument tree, a non-leaf node can be interpreted as a \"conclusion\" that is supported or attacked by its children, which can therefore be interpreted as \"evidences\" for the conclusion. In contrast, a leaf node can be interpreted as an unsupported conclusion. Hence, for the purposes of our work, an argument is composed of a node in an argument tree and all of its children, if any.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Definition",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Recall that the goal of our annotation is to score each argument w.r.t. its persuasiveness (see Table 2 for the rubric for scoring persuasiveness) and annotate each of its components with a set of predefined attributes that could impact the argument's persuasiveness. Table 3 presents a summary of the attributes we annotate. The rest of this subsection describes these attributes.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 274,
+                        "end": 275,
+                        "text": "3",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Annotation Scheme",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Each component type (MajorClaim, Claim, Premise) has a distinct set of attributes. All component types have three attributes in common: Eloquence, Specificity, and Evidence. Eloquence is how well the author uses language to convey ideas, similar to clarity and fluency. Specificity refers to the narrowness of a statement's scope. Statements that are specific are more believable because they indicate an author's confidence and depth of knowledge about a subject matter. Argument assertions (major claims and claims) need not be believable on their own since that is the job of the supporting evidence. The Evidence score describes how well the supporting components support the parent component. The rubrics for scoring Eloquence, Evidence, Claim/MajorClaim Specificity, and Premise Specificity are shown in Tables 4, 5 , 6, and 7 respectively. MajorClaim Since the major claim represents the overall argument of the essay, it is in this component that we annotate the persuasive strategies employed (i.e., Ethos, Pathos and Logos). These Score Description 6 A very strong, clear argument. It would persuade most readers and is devoid of errors that might detract from its strength or make it difficult to understand. 5",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 817,
+                        "end": 819,
+                        "text": "4,",
+                        "ref_id": "TABREF4"
+                    },
+                    {
+                        "start": 820,
+                        "end": 821,
+                        "text": "5",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Annotation Scheme",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "A strong, pretty clear argument. It would persuade most readers, but may contain some minor errors that detract from its strength or understandability. 4",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Annotation Scheme",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "A decent, fairly clear argument. It could persuade some readers, but contains errors that detract from its strength or understandability.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Annotation Scheme",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "A poor, understandable argument. It might persuade readers who are already inclined to agree with it, but contains severe errors that detract from its strength or understandability. 2",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "It is unclear what the author is trying to argue or the argument is poor and just so riddled with errors as to be completely unpersuasive. 1",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "The author does not appear to make any argument (e.g. he may just describe some incident without explaining why it is important). It could not persuade any readers because there is nothing to be persuaded of. It may or may not contain detectable errors, but errors are moot since there is not an argument for them to interfere with. Score Description 5 Demonstrates mastery of English. There are no grammatical errors that distract from the meaning of the sentence. Exhibits a well thought out, flowing sentence structure that is easy to read and conveys the idea exceptionally well. 4",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Demonstrates fluency in English. If there are any grammatical or syntactical errors, their affect on the meaning is negligible. Word choice suggests a broad vocabulary. 3",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Demonstrates competence in English. There might be a few errors that are noticeable but forgivable, such as an incorrect verb tense or unnecessary pluralization. Demonstrates a typical vocabulary and a simple sentence structure. 2",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Demonstrates poor understanding of sentence composition and/or poor vocabulary. The choice of words or grammatical errors force the reader to reread the sentence before moving on. 1",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Demonstrates minimal eloquence. The sentence contains errors so severe that the sentence must be carefully analyzed to deduce its meaning. There is no argument body for the given component.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Table 5 : Description of the Evidence scores.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "5",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "three attributes are not inherent to the text identifying the major claim but instead summarize the child components in the argument tree.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Claim The claim argument component possesses all of the attributes of a major claim in addition to a Relevance score and a ClaimType. In order for an argument to be persuasive, all supporting components must be relevant to the component that they support/attack. The scoring rubric for Relevance is shown in Table 8 . The ClaimType can be value (e.g., something is good or bad, important or not important, etc.), fact (e.g. something The claim summarizes the argument well and has a qualifier that indicates the extent to which the claim holds true. Claims that summarize the argument well must reference most or all of the supporting components. 4",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 314,
+                        "end": 315,
+                        "text": "8",
+                        "ref_id": "TABREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "The claim summarizes the argument very well by mentioning most or all of the supporting components, but does not have a qualifier indicating the conditions under which the claim holds true. Alternatively, the claim may moderately summarize the argument by referencing a minority of supporting components and contain qualifier. 3",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "The claim has a qualifier clause or references a minority of the supporting components, but not both. 2",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "The claim does not make an attempt to summarize the argument nor does it contain a qualifier clause. 1",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Simply rephrases the major claim or is outside scope of the major claim (argument components were annotated incorrectly: major claim could be used to support claim). is true or false), or policy (claiming that some action should or should not be taken).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "Premise The attributes exclusive to premises are PremiseType and Strength. To understand Strength, recall that only premises can persuade readers, but also that an argument can be composed of a premise and a set of supporting/attacking premises.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "In an argument of this kind, Strength refers to how well the parent premise contributes to the persuasiveness independently of the contributions from its children. The scoring rubric for Strength is shown in Table 9 . PremiseType takes on a discrete value from one of the following: real example, invented instance, analogy, testi-mony, statistics, definition, common knowledge, and warrant. Analogy, testimony, statistics, and definition are self-explanatory. A premise is labeled invented instance when it describes a hypothetical situation, and definition when it provides a definition to be used elsewhere in the argument. A premise has type warrant when it does not fit any other type, but serves a functional purpose to explain the relationship between two entities or clarify/quantify another statement. The real example premise type indicates that the statement is a historical event that actually occurred, or something that is verfiably true about the real world. them on five essays (not included in our corpus).",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 214,
+                        "end": 215,
+                        "text": "9",
+                        "ref_id": "TABREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "After that, they were both asked to annotate a randomly selected set of 30 essays and discuss the resulting annotations to resolve any discrepancies. Finally, the remaining essays were partitioned into two sets, and each annotator received one set to annotate. The resulting distributions of scores/classes for persuasiveness and the attributes are shown in Table 10 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 364,
+                        "end": 366,
+                        "text": "10",
+                        "ref_id": "TABREF10"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "3",
+                "sec_num": null
+            },
+            {
+                "text": "We use Krippendorff's \u03b1 to measure interannotator agreement. Results are shown in Table 11. As we can see, all attributes exhibit an agreement above 0.5, showing a correlation much more significant than random chance. Persuasiveness has an agreement of 0.688, which suggests that it can be agreed upon in a reasonably general sense. The MajorClaim components have the highest Persuasiveness agreement, and it declines as the type changes to Claim and then to Premise. This would indicate that persuasiveness is easier to articulate in a wholistic sense, but difficult to explain as the number of details involved in the explanation increases.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inter-Annotator Agreement",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "The agreement scores that immediately stand out are the perfect 1.0's for Logos and Ethos. The perfect Logos score is explained by the fact that every major claim was marked to use logos. Although ethos is far less common, both annotators easily recognized it. This is largely due to the indisputability of recognizing a reference to an accepted authority on a given subject. Very few authors utilize this approach, so when they do it is extremely apparent. Contrary to Persuasiveness, Evidence agreement exhibits an upward trend as the component scope narrows. Even with this pattern, the Evidence agreement is always higher than Persuasiveness agreement, which suggests that it is not the only determiner of persuasiveness.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inter-Annotator Agreement",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "In spite of a rubric defining how to score Eloquence, it remains one of the attributes with the lowest agreement. This indicates that it is difficult to agree on exact eloquence levels beyond basic English fluency. Additionally, Specificity produced unexpectedly low agreement in claims and major claims. Precisely quantifying how well a claim summarizes its argument turned out to be a complicated and subjective task. Relevance agreement for premises is one of the lowest, partly because there are multiple scores for high relevance, and no examples were given in the rubric.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inter-Annotator Agreement",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "All attributes but those with the highest agreement are plagued by inherent subjectivity, regardless of how specific the rubric is written. There are often multiple interpretations of a given sentence, sometimes due to the complexity of natural language, and sometimes due to the poor writing of the author. Naturally, this makes it difficult to identify certain attributes such as Pathos, Claim-Type, and PremiseType.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inter-Annotator Agreement",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Although great care was taken to make each attribute as independent of the others as possible, they are all related to each other to a minuscule degree (e.g., Eloquence and Specificity). While annotators generally agree on what makes a persuasive argument, the act of assigning blame to the persuasiveness (or lack thereof) is tainted by this overlapping of attributes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Inter-Annotator Agreement",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "To understand whether the attributes we annotated are indeed useful for predicting persuasiveness, we compute the Pearson's Correlation Coefficient (PC) between persuasiveness and each of the attributes along with the corresponding p-values. Results are shown in Table 12 . Among the correlations that are statistically significant at the p < .05 level, we see, as expected, that Persuasiveness is positively correlated with Specificity, Evidence, Eloquence, and Strength. Neither is it sur- prising that support provided by a premise in the form of statistics and examples is positively correlated with Persuasiveness. While Logos and invented instance also have significant correlations with Persuasiveness, the correlation is very weak. Next, we conduct an oracle experiment in an attempt to understand how well these attributes, when used together, can explain the persuasiveness of an argument. Specifically, we train three linear SVM regressors (using the SVM light software (Joachims, 1999) with default learning parameters except for C (the regularization parameter), which is tuned on development data using grid search) to score an argument's persuasiveness using the gold attributes as features. The three regressors are trained on arguments having Ma-jorClaims, Claims, and Premises as parents. For instance, to train the regressor involving Major-Claims, each instance corresponds to an argument represented by all and only those attributes involved in the major claim and all of its children. 4Five-fold cross-validation results, which are",
+                "cite_spans": [
+                    {
+                        "start": 981,
+                        "end": 997,
+                        "text": "(Joachims, 1999)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 269,
+                        "end": 271,
+                        "text": "12",
+                        "ref_id": "TABREF12"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Analysis of Annotations",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "Prompt: Government budget focus, young children or university? Education plays a significant role in a country's long-lasting prosperity. It is no wonder that governments throughout the world lay special emphasis on education development. As for the two integral components within the system, elementary and advanced education, there's no doubt that a government is supposed to offer sufficient financial support for both.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of Annotations",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "Concerning that elementary education is the fundamental requirement to be a qualified citizen in today's society, government should guarantee that all people have equal and convenient access to it. So a lack of well-established primary education goes hand in hand with a high rate of illiteracy, and this interplay compromises a country's future development.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of Annotations",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "In other words, if countries, especially developing ones, are determined to take off, one of the key points governments should set on agenda is to educate more qualified future citizens through elementary education. . . . Table 15 : The argument components in the example in Table 14 and the scores of their associated attributes: Persuasiveness, Eloquence, Specificity, Evidence, Relevance, Strength, Logos, Pathos, Ethos, claimType, and premiseType.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 228,
+                        "end": 230,
+                        "text": "15",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 281,
+                        "end": 283,
+                        "text": "14",
+                        "ref_id": "TABREF14"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Analysis of Annotations",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "shown in Table 13 , are expressed in terms of two evaluation metrics, P C and M E (the mean absolute distance between a system's prediction and the gold score). Since P C is a correlation metric, higher correlation implies better performance. In contrast, M E is an error metric, so lower scores imply better performance. As we can see, the large P C values and the relatively low M E values provide suggestive evidence that these attributes, when used in combination, can largely explain the persuasiveness of an argument.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 15,
+                        "end": 17,
+                        "text": "13",
+                        "ref_id": "TABREF13"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Analysis of Annotations",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "What these results imply in practice is that models that are trained on these attributes for persuasiveness scoring could provide useful feedback to students on why their arguments are (un)persuasive. For instance, one can build a pipeline system for persuasiveness scoring as follows. Given an argument, this system first predicts its attributes and then scores its persuasiveness using the predicted attribute values computed in the first step. Since the persuasiveness score of an argument is computed using its predicted attributes, these attributes can explain the persuasiveness score. Hence, a student can figure out which aspect of persuasiveness needs improvements by examining the values of the predicted at-tributes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of Annotations",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "To better understand our annotation scheme, we use the essay in Table 14 to illustrate how we obtain the attribute values in Table 15 . In this essay, Claim C1, which supports MajorClaim M1, is supported by three children, Premises P1 and P2 as well as Claim C2.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 70,
+                        "end": 72,
+                        "text": "14",
+                        "ref_id": "TABREF14"
+                    },
+                    {
+                        "start": 131,
+                        "end": 133,
+                        "text": "15",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Example",
+                "sec_num": "4.6"
+            },
+            {
+                "text": "After reading the essay in its entirety and acquiring a holistic impression of the argument's strengths and weaknesses, we begin annotating the atomic argument components bottom up, starting with the leaf nodes of the argument tree. First, we consider P2. Its Evidence score is 1 because it is a leaf node with no supporting evidence. Its Eloquence score is 5 because the sentence has no serious grammatical or syntactic errors, has a flowing, well thought out sentence structure, and uses articulate vocabulary. Its Specificity score is 3 because it is essentially saying that poor primary education causes illiteracy and consequently inhibits a country's development. It does not state why or to what extent, so we cannot assign a score of 4. However, it does explain a simple relationship with little ambiguity due to the lack of hedge words, so we can assign a score of 3. Its PremiseType is common knowledge because it is reasonable to assume most people would agree that poor primary education causes illiteracy, and also that illiteracy inhibits a country's development. Its Relevance score is 6: its relationship with its parent is clear because the two components exhibit coreference. Specifically, P2 contains a reference to primary/elementary education and shows how this affects a country's inability to transition from developing to developed. Its Strength is 4: though eloquent and relevant, P2 is lacking substance in order to be considered for a score of 5 or 6. The PremiseType is common knowledge, which is mediocre compared to statistics and real example. In order for a premise that is not grounded in the real world to be strong, it must be very specific. P2 only scored a 3 in Specificity, so we assign a Strength score of 4. Finally, the argument headed by P2, which does not have any children, has a Persuasiveness score of 4, which is obtained by summarizing the inherent strength of the premise and the supporting evidence. Although there is no supporting evidence for this premise, this does not adversely affect persuasiveness due to the standalone nature of premises. In this case the persuasiveness is derived totally from the strength.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example",
+                "sec_num": "4.6"
+            },
+            {
+                "text": "Next, the annotator would score C2 and P1, but for demonstration purposes we will examine the scoring of C1. C1's Eloquence score is 5 because it shows fluency, broad vocabulary, and attention to how well the sentence structure reads. Its ClaimType is policy because it specifically says that the government should put something on their agenda. Its Specificity score is 4: while it contains information relevant to all the child premises (i.e., creating qualified citizens, whose role it is to provide the education, and the effect of education on a country's development), it does not contain a qualifier stating the extent to which the assertion holds true. Its Evidence score is 4: C1 has two premises with decent persuasiveness scores and one claim with a poor persuasiveness score, and there are no attacking premises, so intuitively, we may say that this is a midpoint between many low quality premises and few high quality premises. We mark Logos as true, Pathos as false, and Ethos as false: rather than use an emotional appeal or an appeal to authority of any sort, the author attempts to use logical reasoning in order to prove their point. Its Persuasiveness score is 4: this score is mainly determined by the strength of the supporting evidence, given that the assertion is precise and clear as determined by the specificity and eloquence. Its Relevance score is 6, as anyone can see how endorsement of elementary education in C1 relates to the endorsement of elementary and university education in its parent (i.e., M1).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example",
+                "sec_num": "4.6"
+            },
+            {
+                "text": "After all of the claims have been annotated in the bottom-up method, the annotator moves on to the major claim, M1. M1's Eloquence score is 4: while it shows fluency and a large vocabulary, it is terse and does not convey the idea exceptionally well. Its persuasion strategies are obtained by simply taking the logical disjunction of those used in its child claims. Since every claim in this essay relied on logos and did not employ pathos nor ethos, M1 is marked with Logos as true, Pathos as false, and Ethos as false. Its Evidence score is 3: in this essay there are two other supporting claims not in the excerpt, with persuasiveness scores of only 3 and 2, so M1's evidence has one decently persuasive claim, one claim that is poor but understandable, and one claim that is so poor as to be completely unpersuasive (in this case it has no supporting premises). Its Specificity score is 2 because it does not have a quantifier nor does it attempt to summarize the main points of the evidence. Finally, its Persuasiveness score is 3: all supporting claims rely on logos, so there is no added persuasiveness from a variety of persuasion strategies, and since the eloquence and specificity are adequate, they do not detract from the Evidence score.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Example",
+                "sec_num": "4.6"
+            },
+            {
+                "text": "We presented the first corpus of 102 persuasive student essays that are simultaneously annotated with argument trees, persuasiveness scores, and attributes of argument components that impact these scores. We believe that this corpus will push the frontiers of research in content-based essay grading by triggering the development of novel computational models concerning argument persuasiveness that could provide useful feedback to students on why their arguments are (un)persuasive in addition to how persuasive they are.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "5"
+            },
+            {
+                "text": "https://competitions.codalab.org/competitions/17327",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "www.essayforum.com",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "There is a caveat. If we define features for each of the children, the number of features will be proportional to the number of children. However, SVMs cannot handle a variable number of features. Hence, all of the children will be represented by one set of features. For instance, the Specificity feature value of the children will be the Specificity values averaged over all of the children.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "We thank the three anonymous reviewers for their detailed and insightful comments on an earlier draft of the paper. This work was supported in part by NSF Grants IIS-1219142 and IIS-1528037.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgments",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "A news editorial corpus for mining argumentation strategies",
+                "authors": [
+                    {
+                        "first": "Al",
+                        "middle": [],
+                        "last": "Khalid",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Henning",
+                        "middle": [],
+                        "last": "Khatib",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Johannes",
+                        "middle": [],
+                        "last": "Wachsmuth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Matthias",
+                        "middle": [],
+                        "last": "Kiesel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Benno",
+                        "middle": [],
+                        "last": "Hagen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Stein",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers",
+                "volume": "",
+                "issue": "",
+                "pages": "3433--3443",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Khalid Al Khatib, Henning Wachsmuth, Johannes Kiesel, Matthias Hagen, and Benno Stein. 2016. A news editorial corpus for mining argumentation strategies. In Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers, pages 3433-3443.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Handbook of Argumentation Theory",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Frans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bart",
+                        "middle": [],
+                        "last": "Van Eemeren",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Garssen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Erik",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Francisca",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Krabbe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Snoeck",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bart",
+                        "middle": [],
+                        "last": "Henkemans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jean",
+                        "middle": [
+                            "H M"
+                        ],
+                        "last": "Verheij",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Wagemans",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Frans H. van Eemeren, Bart Garssen, Erik C. W. Krabbe, Francisca A. Snoeck Henkemans, Bart Ver- heij, and Jean H. M. Wagemans. 2014. In Handbook of Argumentation Theory. Springer, Dordrecht.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Neural end-to-end learning for computational argumentation mining",
+                "authors": [
+                    {
+                        "first": "Steffen",
+                        "middle": [],
+                        "last": "Eger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Johannes",
+                        "middle": [],
+                        "last": "Daxenberger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Iryna",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics",
+                "volume": "1",
+                "issue": "",
+                "pages": "11--22",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Steffen Eger, Johannes Daxenberger, and Iryna Gurevych. 2017. Neural end-to-end learning for computational argumentation mining. In Proceed- ings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Pa- pers), pages 11-22.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "What makes a convincing argument? Empirical analysis and detecting attributes of convincingness in Web argumentation",
+                "authors": [
+                    {
+                        "first": "Ivan",
+                        "middle": [],
+                        "last": "Habernal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Iryna",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "1214--1223",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ivan Habernal and Iryna Gurevych. 2016a. What makes a convincing argument? Empirical analysis and detecting attributes of convincingness in Web argumentation. In Proceedings of the 2016 Con- ference on Empirical Methods in Natural Language Processing, pages 1214-1223.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Which argument is more convincing? Analyzing and predicting convincingness of Web arguments using bidirectional LSTM",
+                "authors": [
+                    {
+                        "first": "Ivan",
+                        "middle": [],
+                        "last": "Habernal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Iryna",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics",
+                "volume": "1",
+                "issue": "",
+                "pages": "1589--1599",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ivan Habernal and Iryna Gurevych. 2016b. Which ar- gument is more convincing? Analyzing and predict- ing convincingness of Web arguments using bidi- rectional LSTM. In Proceedings of the 54th An- nual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1589- 1599.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Analyzing the semantic types of claims and premises in an online persuasive forum",
+                "authors": [
+                    {
+                        "first": "Christopher",
+                        "middle": [],
+                        "last": "Hidey",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Elena",
+                        "middle": [],
+                        "last": "Musi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alyssa",
+                        "middle": [],
+                        "last": "Hwang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Smaranda",
+                        "middle": [],
+                        "last": "Muresan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Kathy",
+                        "middle": [],
+                        "last": "Mckeown",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 4th Workshop on Argument Mining",
+                "volume": "",
+                "issue": "",
+                "pages": "11--21",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christopher Hidey, Elena Musi, Alyssa Hwang, Smaranda Muresan, and Kathy McKeown. 2017. Analyzing the semantic types of claims and premises in an online persuasive forum. In Proceed- ings of the 4th Workshop on Argument Mining, pages 11-21.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Ethos, logos, pathos: Strategies of persuasion in social/environmental reports",
+                "authors": [
+                    {
+                        "first": "Colin",
+                        "middle": [],
+                        "last": "Higgins",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Robyn",
+                        "middle": [],
+                        "last": "Walker",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Accounting Forum",
+                "volume": "36",
+                "issue": "",
+                "pages": "194--208",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Colin Higgins and Robyn Walker. 2012. Ethos, logos, pathos: Strategies of persuasion in so- cial/environmental reports. Accounting Forum, 36:194-208.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Evaluating multiple aspects of coherence in student essays",
+                "authors": [
+                    {
+                        "first": "Derrick",
+                        "middle": [],
+                        "last": "Higgins",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jill",
+                        "middle": [],
+                        "last": "Burstein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Daniel",
+                        "middle": [],
+                        "last": "Marcu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Claudia",
+                        "middle": [],
+                        "last": "Gentile",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Human Language Technologies: The 2004 Annual Conference of the North American Chapter of the Association for Computational Linguistics",
+                "volume": "",
+                "issue": "",
+                "pages": "185--192",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Derrick Higgins, Jill Burstein, Daniel Marcu, and Claudia Gentile. 2004. Evaluating multiple aspects of coherence in student essays. In Human Lan- guage Technologies: The 2004 Annual Conference of the North American Chapter of the Association for Computational Linguistics, pages 185-192.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Making large-scale SVM learning practical",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Joachims",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Advances in Kernel Methods -Support Vector Learning",
+                "volume": "",
+                "issue": "",
+                "pages": "169--184",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "T. Joachims. 1999. Making large-scale SVM learn- ing practical. In B. Sch\u00f6lkopf, C. Burges, and A. Smola, editors, Advances in Kernel Methods - Support Vector Learning, chapter 11, pages 169- 184. MIT Press, Cambridge, MA.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Content Analysis: An Introduction to Its Methodology",
+                "authors": [
+                    {
+                        "first": "Klaus",
+                        "middle": [],
+                        "last": "Krippendorff",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1980,
+                "venue": "Sage commtext series",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Klaus Krippendorff. 1980. Content Analysis: An Intro- duction to Its Methodology. Sage commtext series. Sage, Thousand Oaks, CA.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Argument strength is in the eye of the beholder: Audience effects in persuasion",
+                "authors": [
+                    {
+                        "first": "Stephanie",
+                        "middle": [],
+                        "last": "Lukin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Pranav",
+                        "middle": [],
+                        "last": "Anand",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Marilyn",
+                        "middle": [],
+                        "last": "Walker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Steve",
+                        "middle": [],
+                        "last": "Whittaker",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 15th Conference of the European Chapter",
+                "volume": "1",
+                "issue": "",
+                "pages": "742--753",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Stephanie Lukin, Pranav Anand, Marilyn Walker, and Steve Whittaker. 2017. Argument strength is in the eye of the beholder: Audience effects in persuasion. In Proceedings of the 15th Conference of the Euro- pean Chapter of the Association for Computational Linguistics: Volume 1, Long Papers, pages 742-753.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Evaluation of text coherence for electronic essay scoring systems",
+                "authors": [
+                    {
+                        "first": "Eleni",
+                        "middle": [],
+                        "last": "Miltsakaki",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Karen",
+                        "middle": [],
+                        "last": "Kukich",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Natural Language Engineering",
+                "volume": "10",
+                "issue": "1",
+                "pages": "25--55",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Eleni Miltsakaki and Karen Kukich. 2004. Evaluation of text coherence for electronic essay scoring sys- tems. Natural Language Engineering, 10(1):25-55.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Modeling organization in student essays",
+                "authors": [
+                    {
+                        "first": "Isaac",
+                        "middle": [],
+                        "last": "Persing",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alan",
+                        "middle": [],
+                        "last": "Davis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Vincent",
+                        "middle": [],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 2010 Conference on Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "229--239",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Isaac Persing, Alan Davis, and Vincent Ng. 2010. Modeling organization in student essays. In Pro- ceedings of the 2010 Conference on Empirical Meth- ods in Natural Language Processing, pages 229- 239.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Modeling thesis clarity in student essays",
+                "authors": [
+                    {
+                        "first": "Isaac",
+                        "middle": [],
+                        "last": "Persing",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Vincent",
+                        "middle": [],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics",
+                "volume": "1",
+                "issue": "",
+                "pages": "260--269",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Isaac Persing and Vincent Ng. 2013. Modeling the- sis clarity in student essays. In Proceedings of the 51st Annual Meeting of the Association for Compu- tational Linguistics (Volume 1: Long Papers), pages 260-269.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Modeling prompt adherence in student essays",
+                "authors": [
+                    {
+                        "first": "Isaac",
+                        "middle": [],
+                        "last": "Persing",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Vincent",
+                        "middle": [],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics",
+                "volume": "1",
+                "issue": "",
+                "pages": "1534--1543",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Isaac Persing and Vincent Ng. 2014. Modeling prompt adherence in student essays. In Proceedings of the 52nd Annual Meeting of the Association for Compu- tational Linguistics (Volume 1: Long Papers), pages 1534-1543.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Modeling argument strength in student essays",
+                "authors": [
+                    {
+                        "first": "Isaac",
+                        "middle": [],
+                        "last": "Persing",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Vincent",
+                        "middle": [],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing",
+                "volume": "1",
+                "issue": "",
+                "pages": "543--552",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Isaac Persing and Vincent Ng. 2015. Modeling ar- gument strength in student essays. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 1: Long Papers), pages 543-552.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Why can't you convince me? Modeling weaknesses in unpersuasive arguments",
+                "authors": [
+                    {
+                        "first": "Isaac",
+                        "middle": [],
+                        "last": "Persing",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Vincent",
+                        "middle": [],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 26th International Joint Conference on Artificial Intelligence",
+                "volume": "",
+                "issue": "",
+                "pages": "4082--4088",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Isaac Persing and Vincent Ng. 2017. Why can't you convince me? Modeling weaknesses in unpersua- sive arguments. In Proceedings of the 26th Inter- national Joint Conference on Artificial Intelligence, pages 4082-4088.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Handbook of Automated Essay Evaluation: Current Applications and New Directions",
+                "authors": [
+                    {
+                        "first": "Mark",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Shermis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jill",
+                        "middle": [],
+                        "last": "Burstein",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Mark D. Shermis and Jill Burstein. 2013. Handbook of Automated Essay Evaluation: Current Applications and New Directions. Routledge Chapman & Hall.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Annotating argument components and relations in persuasive essays",
+                "authors": [
+                    {
+                        "first": "Christian",
+                        "middle": [],
+                        "last": "Stab",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Iryna",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Proceedings of the 25th International Conference on Computational Linguistics: Technical Papers",
+                "volume": "",
+                "issue": "",
+                "pages": "1501--1510",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christian Stab and Iryna Gurevych. 2014a. Annotat- ing argument components and relations in persua- sive essays. In Proceedings of the 25th International Conference on Computational Linguistics: Techni- cal Papers, pages 1501-1510.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "2014b. Identifying argumentative discourse structures in persuasive essays",
+                "authors": [
+                    {
+                        "first": "Christian",
+                        "middle": [],
+                        "last": "Stab",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Iryna",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "46--56",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christian Stab and Iryna Gurevych. 2014b. Identify- ing argumentative discourse structures in persuasive essays. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Process- ing, pages 46-56.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Parsing argumentation structures in persuasive essays",
+                "authors": [
+                    {
+                        "first": "Christian",
+                        "middle": [],
+                        "last": "Stab",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Iryna",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Computational Linguistics",
+                "volume": "43",
+                "issue": "3",
+                "pages": "619--659",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christian Stab and Iryna Gurevych. 2017a. Parsing ar- gumentation structures in persuasive essays. Com- putational Linguistics, 43(3):619-659.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Recognizing insufficiently supported arguments in argumentative essays",
+                "authors": [
+                    {
+                        "first": "Christian",
+                        "middle": [],
+                        "last": "Stab",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Iryna",
+                        "middle": [],
+                        "last": "Gurevych",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 15th Conference of the European Chapter",
+                "volume": "1",
+                "issue": "",
+                "pages": "980--990",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christian Stab and Iryna Gurevych. 2017b. Recogniz- ing insufficiently supported arguments in argumen- tative essays. In Proceedings of the 15th Confer- ence of the European Chapter of the Association for Computational Linguistics: Volume 1, Long Papers, pages 980-990.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Computational argumentation quality assessment in natural language",
+                "authors": [
+                    {
+                        "first": "Henning",
+                        "middle": [],
+                        "last": "Wachsmuth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Nona",
+                        "middle": [],
+                        "last": "Naderi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yufang",
+                        "middle": [],
+                        "last": "Hou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yonatan",
+                        "middle": [],
+                        "last": "Bilu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Tim",
+                        "middle": [
+                            "Alberdingk"
+                        ],
+                        "last": "Vinodkumar Prabhakaran",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Graeme",
+                        "middle": [],
+                        "last": "Thijm",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Benno",
+                        "middle": [],
+                        "last": "Hirst",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Stein",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics",
+                "volume": "1",
+                "issue": "",
+                "pages": "176--187",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Henning Wachsmuth, Nona Naderi, Yufang Hou, Yonatan Bilu, Vinodkumar Prabhakaran, Tim Al- berdingk Thijm, Graeme Hirst, and Benno Stein. 2017. Computational argumentation quality assess- ment in natural language. In Proceedings of the 15th Conference of the European Chapter of the Associa- tion for Computational Linguistics: Volume 1, Long Papers, pages 176-187.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Is this post persuasive? Ranking argumentative comments in online forum",
+                "authors": [
+                    {
+                        "first": "Zhongyu",
+                        "middle": [],
+                        "last": "Wei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yang",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yi",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics",
+                "volume": "2",
+                "issue": "",
+                "pages": "195--200",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhongyu Wei, Yang Liu, and Yi Li. 2016. Is this post persuasive? Ranking argumentative comments in online forum. In Proceedings of the 54th Annual Meeting of the Association for Computational Lin- guistics (Volume 2: Short Papers), pages 195-200.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "TABREF2": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Attribute</td><td>Possible Values</td><td colspan=\"2\">Applicability Description</td></tr><tr><td>Specificity</td><td>1-5</td><td>MC,C,P</td><td>How detailed and specific the statement is</td></tr><tr><td>Eloquence</td><td>1-5</td><td>MC,C,P</td><td>How well the idea is presented</td></tr><tr><td>Evidence</td><td>1-6</td><td>MC,C,P</td><td>How well the supporting statements support their parent</td></tr><tr><td colspan=\"2\">Logos/Pathos/Ethos yes,no</td><td>MC,C</td><td>Whether the argument uses the respective persuasive strategy</td></tr><tr><td>Relevance</td><td>1-6</td><td>C,P</td><td>The relevance of the statement to the parent statement</td></tr><tr><td>ClaimType</td><td colspan=\"2\">value,fact,policy C</td><td>The category of what is being claimed</td></tr><tr><td>PremiseType</td><td>see Section 4.2</td><td>P</td><td>The type of Premise, e.g. statistics, definition, real example,</td></tr><tr><td/><td/><td/><td>etc.</td></tr><tr><td>Strength</td><td>1-6</td><td>P</td><td>How well a single statement contributes to persuasiveness</td></tr></table>",
+                "text": "Description of the Persuasiveness scores."
+            },
+            "TABREF3": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": ""
+            },
+            "TABREF4": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td colspan=\"2\">Score Description</td></tr><tr><td>6</td><td>A very strong, very persuasive argument body. There are many supporting components that have high Relevance</td></tr><tr><td/><td>scores. There may be a few attacking child components, but these components must be used for either concession</td></tr><tr><td/><td>or refuting counterarguments as opposed to making the argument indecisive or contradictory.</td></tr><tr><td>5</td><td>A strong, persuasive argument body. There are sufficient supporting components with respectable scores.</td></tr><tr><td>4</td><td>A decent, fairly persuasive argument body.</td></tr><tr><td>3</td><td>A poor, possibly persuasive argument body.</td></tr><tr><td>2</td><td>A totally unpersuasive argument body.</td></tr><tr><td>1</td><td/></tr></table>",
+                "text": "Description of the Eloquence scores."
+            },
+            "TABREF5": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Score Description</td></tr><tr><td>5</td></tr></table>",
+                "text": "Description of the Claim and MajorClaim Specificity scores. An elaborate, very specific statement. The statement contains numerical data, or a historical example from the real world. There is (1) both a sufficient qualifier indicating the extent to which the statement holds true and an explanation of why the statement is true, or (2) at least one real world example, or (3) a sufficient description of a hypothetical situation that would evoke a mental image of the situation in the minds of most readers. 4A more specific statement. It is characterized by either an explanation of why the statement is true, or a qualifier indicating when/to what extent the statement is true. Alternatively, it may list examples of items that do not qualify as historical events. 3 A sufficiently specific statement. It simply states a relationship or a fact with little ambiguity. 2 A broad statement. A statement with hedge words and without other redeeming factors such as explicit examples, or elaborate reasoning. Additionally, there are few adjectives or adverbs. 1 An extremely broad statement. There is no underlying explanation, qualifiers, or real-world examples."
+            },
+            "TABREF6": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Score Description</td></tr><tr><td>6</td></tr></table>",
+                "text": "Description of the Premise Specificity scores. Anyone can see how the support relates to the parent claim. The relationship between the two components is either explicit or extremely easy to infer. The relationship is thoroughly explained in the text because the two components contain the same words or exhibit coreference. 5There is an implied relationship that is obvious, but it could be improved upon to remove all doubt. If the relationship is obvious, both relating components must have high Eloquence and Specificity scores."
+            },
+            "TABREF7": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "Description of the Relevance scores."
+            },
+            "TABREF8": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td colspan=\"2\">Score Description</td></tr><tr><td>6</td><td>A very strong premise.</td></tr></table>",
+                "text": "Not much can be improved in order to contribute better to the argument. 5A strong premise. It contributes to the persuasiveness of the argument very well on its own. 4A decent premise. It is a fairly strong point but lacking in one or more areas possibly affecting its perception by the audience.3A fairly weak premise. It is not a strong point and might only resonate with a minority of readers.2A totally weak statement. May only help to persuade a small number of readers. 1The statement does not contribute at all."
+            },
+            "TABREF9": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Attribute</td><td>Value</td><td>MC</td><td>C</td><td>P</td></tr><tr><td>Specificity</td><td>1</td><td>0</td><td>80</td><td>64</td></tr><tr><td/><td>2</td><td>73</td><td colspan=\"2\">259 134</td></tr><tr><td/><td>3</td><td>72</td><td colspan=\"2\">155 238</td></tr><tr><td/><td>4</td><td>32</td><td>59</td><td>173</td></tr><tr><td/><td>5</td><td>8</td><td>14</td><td>98</td></tr><tr><td>Logos</td><td>Yes</td><td colspan=\"2\">181 304</td><td/></tr><tr><td/><td>No</td><td>4</td><td>263</td><td/></tr><tr><td>Pathos</td><td>Yes</td><td>67</td><td>59</td><td/></tr><tr><td/><td>No</td><td colspan=\"2\">118 508</td><td/></tr><tr><td>Ethos</td><td>Yes</td><td>16</td><td>9</td><td/></tr><tr><td/><td>No</td><td colspan=\"2\">169 558</td><td/></tr><tr><td>Relevance</td><td>1</td><td/><td>1</td><td>5</td></tr><tr><td/><td>2</td><td/><td>33</td><td>45</td></tr><tr><td/><td>3</td><td/><td>58</td><td>59</td></tr><tr><td/><td>4</td><td/><td colspan=\"2\">132 145</td></tr><tr><td/><td>5</td><td/><td>97</td><td>147</td></tr><tr><td/><td>6</td><td/><td colspan=\"2\">246 306</td></tr><tr><td>Evidence</td><td>1</td><td>3</td><td colspan=\"2\">246 614</td></tr><tr><td/><td>2</td><td>62</td><td>115</td><td>28</td></tr><tr><td/><td>3</td><td>57</td><td>85</td><td>12</td></tr><tr><td/><td>4</td><td>33</td><td>80</td><td>26</td></tr><tr><td/><td>5</td><td>16</td><td>35</td><td>15</td></tr><tr><td/><td>6</td><td>14</td><td>6</td><td>12</td></tr><tr><td>Eloquence</td><td>1</td><td>3</td><td>23</td><td>24</td></tr><tr><td/><td>2</td><td>19</td><td>106</td><td>97</td></tr><tr><td/><td>3</td><td colspan=\"3\">116 320 383</td></tr><tr><td/><td>4</td><td>42</td><td colspan=\"2\">102 154</td></tr><tr><td/><td>5</td><td>5</td><td>16</td><td>49</td></tr><tr><td>ClaimType</td><td>fact</td><td/><td>368</td><td/></tr><tr><td/><td>value</td><td/><td>145</td><td/></tr><tr><td/><td>policy</td><td/><td>54</td><td/></tr><tr><td>PremiseType</td><td>real example</td><td/><td/><td>93</td></tr><tr><td/><td>invented instance</td><td/><td/><td>53</td></tr><tr><td/><td>analogy</td><td/><td/><td>2</td></tr><tr><td/><td>testimony</td><td/><td/><td>4</td></tr><tr><td/><td>statistics</td><td/><td/><td>15</td></tr><tr><td/><td>definition</td><td/><td/><td>3</td></tr><tr><td/><td>common know.</td><td/><td/><td>493</td></tr><tr><td/><td>warrant</td><td/><td/><td>44</td></tr><tr><td colspan=\"2\">Persuasiveness 1</td><td>3</td><td>82</td><td>8</td></tr><tr><td/><td>2</td><td>62</td><td colspan=\"2\">278 112</td></tr><tr><td/><td>3</td><td>60</td><td>84</td><td>145</td></tr><tr><td/><td>4</td><td>28</td><td>74</td><td>249</td></tr><tr><td/><td>5</td><td>17</td><td>39</td><td>123</td></tr><tr><td/><td>6</td><td>15</td><td>10</td><td>70</td></tr></table>",
+                "text": "Description of the Strength scores."
+            },
+            "TABREF10": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>: Class/Score distributions by component</td></tr><tr><td>type.</td></tr><tr><td>4.3 Annotation Procedure</td></tr><tr><td>Our 102 essays were annotated by two native</td></tr><tr><td>speakers of English. We first familiarized them</td></tr><tr><td>with the rubrics and definitions and then trained</td></tr></table>",
+                "text": ""
+            },
+            "TABREF11": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "Krippendorff's \u03b1 agreement on each attribute by component type."
+            },
+            "TABREF12": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>Attribute</td><td/><td/><td>P C</td><td>p-value</td></tr><tr><td>Specificity</td><td/><td/><td colspan=\"2\">.5680</td><td>0</td></tr><tr><td>Relevance</td><td/><td/><td colspan=\"2\">-.0435</td><td>.163</td></tr><tr><td>Eloquence</td><td/><td/><td colspan=\"2\">.4723</td><td>0</td></tr><tr><td>Evidence</td><td/><td/><td colspan=\"2\">.2658</td><td>0</td></tr><tr><td>Strength</td><td/><td/><td colspan=\"2\">.9456</td><td>0</td></tr><tr><td>Logos</td><td/><td/><td colspan=\"2\">-.1618</td><td>0</td></tr><tr><td>Ethos</td><td/><td/><td colspan=\"2\">-.0616</td><td>.1666</td></tr><tr><td>Pathos</td><td/><td/><td colspan=\"2\">-.0835</td><td>.0605</td></tr><tr><td>ClaimType:fact</td><td/><td/><td colspan=\"2\">.0901</td><td>.1072</td></tr><tr><td colspan=\"2\">ClaimType:value</td><td/><td colspan=\"2\">-.0858</td><td>.1251</td></tr><tr><td colspan=\"2\">ClaimType:policy</td><td/><td colspan=\"2\">-.0212</td><td>.7046</td></tr><tr><td colspan=\"2\">PremiseType:real example</td><td/><td colspan=\"2\">.2414</td><td>0</td></tr><tr><td colspan=\"3\">PremiseType:invented instance</td><td colspan=\"2\">.0829</td><td>.0276</td></tr><tr><td colspan=\"2\">PremiseType:analogy</td><td/><td colspan=\"2\">.0300</td><td>.4261</td></tr><tr><td colspan=\"2\">PremiseType:testimony</td><td/><td colspan=\"2\">.0269</td><td>.4746</td></tr><tr><td colspan=\"2\">PremiseType:statistics</td><td/><td colspan=\"2\">.1515</td><td>0</td></tr><tr><td colspan=\"2\">PremiseType:definition</td><td/><td colspan=\"2\">.0278</td><td>.4608</td></tr><tr><td colspan=\"5\">PremiseType:common knowledge -.2948</td><td>1.228</td></tr><tr><td colspan=\"2\">PremiseType:warrant</td><td/><td colspan=\"2\">.0198</td><td>.6009</td></tr><tr><td/><td>MC</td><td>C</td><td>P</td><td>Avg</td></tr><tr><td>P C</td><td colspan=\"4\">.9688 .9400 .9494 .9495</td></tr><tr><td>M E</td><td colspan=\"4\">.0710 .1486 .0954 .1061</td></tr></table>",
+                "text": "Correlation of each attribute with Persuasiveness and the corresponding p-value."
+            },
+            "TABREF13": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table/>",
+                "text": "Persuasiveness scoring using gold attributes."
+            },
+            "TABREF14": {
+                "html": null,
+                "num": null,
+                "type_str": "table",
+                "content": "<table><tr><td>P E S Ev R St Lo Pa Et cType pType</td></tr></table>",
+                "text": "An example essay. Owing to space limitations, only its first two paragraphs are shown."
+            }
+        }
+    }
+}

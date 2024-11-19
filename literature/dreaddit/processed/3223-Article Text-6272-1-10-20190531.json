@@ -1,0 +1,3919 @@
+{
+    "paper_id": "3223-Article Text-6272-1-10-20190531",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-09T12:23:15.189790Z"
+    },
+    "title": "Understanding and Measuring Psychological Stress Using Social Media",
+    "authors": [
+        {
+            "first": "Sharath",
+            "middle": [],
+            "last": "Chandra Guntuku",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Pennsylvania",
+                "location": {}
+            },
+            "email": "sharathg@sas"
+        },
+        {
+            "first": "Anneke",
+            "middle": [],
+            "last": "Buffone",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Pennsylvania",
+                "location": {}
+            },
+            "email": "annekeb@sas"
+        },
+        {
+            "first": "Kokil",
+            "middle": [],
+            "last": "Jaidka",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Nanyang Technological University",
+                "location": {}
+            },
+            "email": "jaidka@ntu.edu.sg"
+        },
+        {
+            "first": "Johannes",
+            "middle": [
+                "C"
+            ],
+            "last": "Eichstaedt",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Pennsylvania",
+                "location": {}
+            },
+            "email": ""
+        },
+        {
+            "first": "Lyle",
+            "middle": [
+                "H"
+            ],
+            "last": "Ungar",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Pennsylvania",
+                "location": {}
+            },
+            "email": "ungar@cis.upenn.edu"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "A body of literature has demonstrated that users' mental health conditions, such as depression and anxiety, can be predicted from their social media language. There is still a gap in the scientific understanding of how psychological stress is expressed on social media. Stress is one of the primary underlying causes and correlates of chronic physical illnesses and mental health conditions. In this paper, we explore the language of psychological stress with a dataset of 601 social media users, who answered the Perceived Stress Scale questionnaire and also consented to share their Facebook and Twitter data. Firstly, we find that stressed users post about exhaustion, losing control, increased self-focus and physical pain as compared to posts about breakfast, family-time, and travel by users who are not stressed. Secondly, we find that Facebook language is more predictive of stress than Twitter language. Thirdly, we demonstrate how the language based models thus developed can be adapted and be scaled to measure county-level trends. Since county-level language is easily available on Twitter using the Streaming API, we explore multiple domain adaptation algorithms to adapt user-level Facebook models to Twitter language. We find that domain-adapted and scaled social mediabased measurements of stress outperform sociodemographic variables (age, gender, race, education, and income), against ground-truth survey-based stress measurements, both at the user-and the county-level in the U.S. Twitter language that scores higher in stress is also predictive of poorer health, less access to facilities and lower socioeconomic status in counties. We conclude with a discussion of the implications of using social media as a new tool for monitoring stress levels of both individuals and counties.",
+    "pdf_parse": {
+        "paper_id": "3223-Article Text-6272-1-10-20190531",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "A body of literature has demonstrated that users' mental health conditions, such as depression and anxiety, can be predicted from their social media language. There is still a gap in the scientific understanding of how psychological stress is expressed on social media. Stress is one of the primary underlying causes and correlates of chronic physical illnesses and mental health conditions. In this paper, we explore the language of psychological stress with a dataset of 601 social media users, who answered the Perceived Stress Scale questionnaire and also consented to share their Facebook and Twitter data. Firstly, we find that stressed users post about exhaustion, losing control, increased self-focus and physical pain as compared to posts about breakfast, family-time, and travel by users who are not stressed. Secondly, we find that Facebook language is more predictive of stress than Twitter language. Thirdly, we demonstrate how the language based models thus developed can be adapted and be scaled to measure county-level trends. Since county-level language is easily available on Twitter using the Streaming API, we explore multiple domain adaptation algorithms to adapt user-level Facebook models to Twitter language. We find that domain-adapted and scaled social mediabased measurements of stress outperform sociodemographic variables (age, gender, race, education, and income), against ground-truth survey-based stress measurements, both at the user-and the county-level in the U.S. Twitter language that scores higher in stress is also predictive of poorer health, less access to facilities and lower socioeconomic status in counties. We conclude with a discussion of the implications of using social media as a new tool for monitoring stress levels of both individuals and counties.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Stress is defined as perceived distress caused by an interaction between a person and their environment (Cohen, Miller, and Rabin 2001) . While people can handle stress better or worse depending on their general coping skills, experiencing stress too frequently is known to affect well-being and physical and mental health negatively. Stress is seen to be a single pervasive trait influencing health, through a broad range of negative affective states and somatic pathways (McEwen and Stellar 1993) . Considering that the symptoms associated with depression and other severe mental health conditions are Copyright c 2019, Association for the Advancement of Artificial Intelligence (www.aaai.org). All rights reserved.",
+                "cite_spans": [
+                    {
+                        "start": 104,
+                        "end": 135,
+                        "text": "(Cohen, Miller, and Rabin 2001)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 473,
+                        "end": 498,
+                        "text": "(McEwen and Stellar 1993)",
+                        "ref_id": "BIBREF28"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Figure 1 : Overview of the approach taken to build language based stress prediction model. very severe, alleviating psychological stress and promoting a healthy lifestyle is more efficient compared to treating a more acute and chronic condition (Wilkinson 2005) .",
+                "cite_spans": [
+                    {
+                        "start": 245,
+                        "end": 261,
+                        "text": "(Wilkinson 2005)",
+                        "ref_id": "BIBREF56"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "People are increasingly using social media platforms in order to inform others about their mental states, solicit social support, as well as keep records of their daily activities, preferences, and interests. Notwithstanding the challenge of working with a non-random, non-representative sample of social media users, studies have identified the markers of selfdisclosure which concern depression (Guntuku et al. 2017c) , schizophrenia (Ernala et al. 2017) , ADHD (Guntuku et al. 2017b) , alcohol consumption (Liu, Weitzman, and Chunara 2017) , and personality (Guntuku et al. 2017a) . With respect to stress, the linguistic features of event-related stress have been predicted from social media posts about experiences such as travel and work (Lin et al. 2014 ); however, these findings cannot be applied to improve the psychological understanding of stress, because people suffering from chronic stress do so irrespective of stressful events. For instance, preparing for an exam is a stressful event, while chronically feeling overwhelmed with responsibilities is trait-related stress. Another research gap is that the previous work has focused on known stressors collected using search keywords (Thelwall 2017) . However the labels thus acquired likely have personality confounds (Preotiuc-Pietro et al. 2015) , emphasizing the need for using stronger ground truth. Instead, we anticipate that insights into psychological stress could help in (a) designing social-media-based interventions to enable a lowstress lifestyle, and (b) developing a better understanding of regional variations in stress.",
+                "cite_spans": [
+                    {
+                        "start": 397,
+                        "end": 419,
+                        "text": "(Guntuku et al. 2017c)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 436,
+                        "end": 456,
+                        "text": "(Ernala et al. 2017)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 464,
+                        "end": 486,
+                        "text": "(Guntuku et al. 2017b)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 509,
+                        "end": 542,
+                        "text": "(Liu, Weitzman, and Chunara 2017)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 561,
+                        "end": 583,
+                        "text": "(Guntuku et al. 2017a)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 744,
+                        "end": 760,
+                        "text": "(Lin et al. 2014",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 1198,
+                        "end": 1213,
+                        "text": "(Thelwall 2017)",
+                        "ref_id": "BIBREF54"
+                    },
+                    {
+                        "start": 1283,
+                        "end": 1312,
+                        "text": "(Preotiuc-Pietro et al. 2015)",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "In the last month, how often have you: -been upset because of something that happened unexpectedly? -felt that you were unable to control the important things in your life? -felt nervous and \"stressed\"? -felt confident about your ability to handle your personal problems? (-) -felt that things were going your way? (-) -found that you could not cope with all the things that you had to do? -been able to control irritations in your life? (-) -felt that you were on top of things?(-) -been angered because of things that were outside of your control? -felt difficulties were piling up so high that you could not overcome them?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Table 1 : Items on the Cohen's stress scale: Each question is assessed on a Likert Scale. (-) indicates reverse coded items.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "The ubiquitous nature of smart devices and Internet access in almost all parts of the world means that social media is a potentially powerful tool to measure the psychological states and behaviors of people at both micro-(individual) and macro-(county) levels. However, except for a few studies, little has been done to explore how to scale language models to study regions, and no work yet has attempted to do this for stress. Although some studies have analyzed the geographic variation in social media language corresponding to chronic illnesses (Culotta 2014) , depression (Bagroy, Kumaraguru, and De Choudhury 2017) , well-being (Schwartz et al. 2013a ), heart-disease (Eichstaedt et al. 2015) , and happiness (Quercia et al. 2012) , they are often challenged by (a) a limited understanding of how to scale user-level models to measure counties, and (b) the lack of ground truth about a large population. Recent work has shown the need to use weighting and scaling techniques to transform user-level language estimates from Twitter to county-level estimates (Rieman et al. 2017) , in order to avoid the ecological fallacies reported in the studies mentioned above. However, there are challenges associated with transferring predictive models from one social media platform to another, because of differences in self-disclosure on Facebook vs. Twitter (Jaidka et al. 2018 ). This study contributes with (a) effective off-the-shelf methods for cross-domain adaptation of user-level stress models to measure county-level stress, and (b) validation against ground-truth survey data built on over two million responses.",
+                "cite_spans": [
+                    {
+                        "start": 549,
+                        "end": 563,
+                        "text": "(Culotta 2014)",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 577,
+                        "end": 620,
+                        "text": "(Bagroy, Kumaraguru, and De Choudhury 2017)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 634,
+                        "end": 656,
+                        "text": "(Schwartz et al. 2013a",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 674,
+                        "end": 698,
+                        "text": "(Eichstaedt et al. 2015)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 715,
+                        "end": 736,
+                        "text": "(Quercia et al. 2012)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 1063,
+                        "end": 1083,
+                        "text": "(Rieman et al. 2017)",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 1356,
+                        "end": 1375,
+                        "text": "(Jaidka et al. 2018",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "To summarize, the research gaps in previous work are the lack of language models to predict psychological stress, a limited understanding of scaling and transforming Facebook language models to work on Twitter, and the lack of validation against the region-level ground truth. We show in Figure 1 , how our study uses transfer learning to adapt user-level models trained on their Facebook language, to predict countylevel stress from the county-level Twitter language. This is necessary because it is easier to train predictive models on the language of a small population of social media users, but it is expensive to survey entire counties for training purposes. Furthermore, county-level social media language is only available for Twitter, where approximately 20% of all public posts are geo-tagged with their location information, and they can be easily mined by using Twitter's Streaming API 1 . On the contrary, Facebook needs user authentication for accessing their posts which is resource intensive to collect 1 https://developer.twitter.com/en from a large number of people for this research study. Adapting models trained at user-level to predict stress in counties has multiple applications in monitoring health and well-being in counties, especially where survey data is hard to collect. Thus motivated, in this paper we address the following research questions:",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 295,
+                        "end": 296,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "RQ1 How does social media language of users who are stressed differ from those who are not?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "RQ2 How do Facebook and Twitter language differ in predicting user-level stress? Since county-level language is easily available on Twitter, can off-the-shelf domain adaptation algorithms be used to improve prediction on Twitter language?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "RQ3 How do domain-adapted social media-based measurements of stress at the county level correlate with health behaviors and socioeconomic characteristics at the county level?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "RQ1: Differential Language Analysis of Stressed Users",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "User-level social media data: We deployed a survey on Qualtrics2 (a platform similar to Amazon Mechanical Turk), comprising several demographic questions (age, gender, race, education, and income) and the Cohen's 10-item Stress scale (Cohen, Kessler, and Gordon 1997) (Table 1 ), and invited users to share access to their Facebook status updates and/or Twitter usernames. Users received an incentive for their participation, and we obtained their informed consent to access their Facebook and Twitter posts. All users were based in the US. This study received approval from the IRB of our institution.",
+                "cite_spans": [
+                    {
+                        "start": 234,
+                        "end": 267,
+                        "text": "(Cohen, Kessler, and Gordon 1997)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 275,
+                        "end": 276,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": null
+            },
+            {
+                "text": "Out of all users who took the survey, 601 users completed the survey and had active accounts with more than 900 words on both Facebook and Twitter. We collected their Facebook posts by using the Facebook Graph API and downloaded their Twitter posts using the Twitter API. Of these 601 users, 265 self-identified as female. The mean age of the sample was 38. The stress scores range from 6 to 39 (mean 30). Each item in the scale is scored on 0-4, with an absolute maximum summing to 40.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": null
+            },
+            {
+                "text": "We process all our social media posts using the HappierFunTokenizer available with the DLATK package (Schwartz et al. 2017) which is emoticon-and social mediaaware. We then represent the language of each user and county as a set of features. In the dictionary-based method, we transform social media language into numerical features representing percentage proportions of lexical categories in an existing dictionary. In the data-driven method, we transform language into numerical features which represent the proportions of word clusters which are statistically similar according to their frequency distributions.",
+                "cite_spans": [
+                    {
+                        "start": 101,
+                        "end": 123,
+                        "text": "(Schwartz et al. 2017)",
+                        "ref_id": "BIBREF49"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features:",
+                "sec_num": null
+            },
+            {
+                "text": "LIWC: We use Linguistic Inquiry and Word Count (LIWC) (Pennebaker, Booth, and Francis 2007), a dictionary comprising 73 different psycholinguistic categories (e.g., topical categories, emotions, parts-of-speech) to represent the language of each user and county as the normalized frequency distributions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features:",
+                "sec_num": null
+            },
+            {
+                "text": "Topics: In the data-driven method, we represent the language of each user and county as normalized frequency distributions for a set of topics derived using Latent Dirichlet Allocation. These topics are an open-source resource available through the DLATK package (Schwartz et al. 2017 ) and were trained on a corpus of over 20 million Facebook statuses (Schwartz et al. 2013b) .",
+                "cite_spans": [
+                    {
+                        "start": 263,
+                        "end": 284,
+                        "text": "(Schwartz et al. 2017",
+                        "ref_id": "BIBREF49"
+                    },
+                    {
+                        "start": 353,
+                        "end": 376,
+                        "text": "(Schwartz et al. 2013b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features:",
+                "sec_num": null
+            },
+            {
+                "text": "TensiStrength: To detect direct and indirect expressions of stress or relaxation, a stress lexicon (Thelwall 2017 ) is used. We obtain stress scores at the sentence level, from each post on Facebook and Twitter and aggregate them to users by calculating mean stress scores.",
+                "cite_spans": [
+                    {
+                        "start": 99,
+                        "end": 113,
+                        "text": "(Thelwall 2017",
+                        "ref_id": "BIBREF54"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features:",
+                "sec_num": null
+            },
+            {
+                "text": "User engagement We extracted features such as the number of posts made between 12am-6am, mean message length, and number of URLs & hashtags. These features were shown to be predictive of stress by (Lin et al. 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 197,
+                        "end": 214,
+                        "text": "(Lin et al. 2014)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features:",
+                "sec_num": null
+            },
+            {
+                "text": "We identify the linguistic characteristics indicative of high and low psychological stress based on the social media language of individual users on Facebook. We conducted a similar analysis on Twitter and present them in the appendix. Since we explore several features simultaneously, we consider coefficients significant if they are less than a Bonferronicorrected two-tailed p of 0.01 (i.e., when examining 1000 features, in the case of words and phrases, a passing p-value is less than 1x10 -5 ; when examining 2000 topics p-value is less than 5x10 -6 , and when examining 73 LIWC categories p-value is less than 1.3x10 -4 ).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Ngrams: We extract 1-,2-, and 3-grams from all posts to analyze significant associations between words & phrases and stress. Figure 2 provides a visualization of the Pearson correlations of words and phrases with stress on Facebook. In general, the language of stress has a prominent self-focus. Given that psychologists have found stress to be a state result-ing from an individual assessing the demands of the stressful stimulus and determining own coping abilities (Staal 2004 ), this result is very intuitive. It should be noted that increased self-focus in stressful situations is likely adaptive, but a prolonged self-focus in one's thoughts, especially in the context of negative affect, is known to psychologists as rumination and linked to negative effects for health and well-being (Moberly and Watkins 2008) . Hate could signify aggressive or angry affect, which also tends to be maladaptive and could signify the experience of frustration while perceiving resources fall short of perceived demands.",
+                "cite_spans": [
+                    {
+                        "start": 468,
+                        "end": 479,
+                        "text": "(Staal 2004",
+                        "ref_id": "BIBREF52"
+                    },
+                    {
+                        "start": 792,
+                        "end": 818,
+                        "text": "(Moberly and Watkins 2008)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 132,
+                        "end": 133,
+                        "text": "2",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Words and phrases such as \"me\", \"I had\", \"feel like\", \"I don't\" and \"I hate\" are significantly correlated with high stress. Furthermore, the language of high stress appears to be marked by expressions of perceived lack of control and expressions of a need state or lack of resources (\"struggling with\", \"tired of\", \"I need\"), as well as negative-angry affect (\"hate\", \"I hate\"). Further, high stress language seem to be comorbid with mental health conditions (\"depression\", \"depressed\", \"anxiety\", \"bipolar\"). It is interesting that language reflects the adverse effects that stress can have on health (Watson and Pennebaker 1989) . The language of low stress has prominent positive affect (\"excited to\"), discussions of meals (\"breakfast\"), as well as feelings of social inclusion (\"joined the\"). The language of low stress comprises the discussion of meals, specifically \"breakfast\", which may indicate relaxation and enjoyment inasmuch as meals are often taken in the company of others, social inclusion, as well as with positive affect (\"excited to\").",
+                "cite_spans": [
+                    {
+                        "start": 602,
+                        "end": 630,
+                        "text": "(Watson and Pennebaker 1989)",
+                        "ref_id": "BIBREF55"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "LIWC: LIWC categories from Facebook language that significantly correlate with stress are shown in Table 2 . The top correlated categories in Facebook comprise first person singular pronouns (\"I\"), indicating increased self-focus, which corroborate previous findings (Pennebaker and Lay 2002) that self-references by individuals increase in emotionally vulnerable situations. Users on Facebook are more likely to use adverbs such as \"very\" and \"really\" to emphasize their point, and more likely to explicitly use words denoting negative emotions, such as \"hurt\" and \"anger\". Mentions of negative emotion confirms our expectations, because stress is an aversive state (Cohen, Kessler, and Gordon 1997) . Filler word associations may indicate a lack of self-esteem or feeling down on oneself, and hedging as a result (Abouserie 1994) . Negation further suggests a 'lack of' things, mentioned and experienced by those who are also prone to high stress. On the other hand, the first person plural pronouns (\"We\"), and the LIWC \"Affiliation\" categories are negatively correlated with stress, which implies that a high-stress individual often depicts themselves as isolated, with a certain disassociation from their social circles. Negative correlations of stress with positive emotion reflects that those individuals reporting lower stress are significantly more likely to express positive emotion.",
+                "cite_spans": [
+                    {
+                        "start": 667,
+                        "end": 700,
+                        "text": "(Cohen, Kessler, and Gordon 1997)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 815,
+                        "end": 831,
+                        "text": "(Abouserie 1994)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 105,
+                        "end": 106,
+                        "text": "2",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Topics: Topics which significantly correlate with stress are provided in Table 3 . Exhaustion is typical of prolonged stress (McManus, Winder, and Gordon 2002) . Feeling hurt, physical pain, and feeling sick are known correlates of stress (Gil et al. 2004 ). Lack of control also signifies the concept of resources falling short of demands, and possibly reducing their ability to cope with stressors (Gray, Waytz, and Young 2012) .",
+                "cite_spans": [
+                    {
+                        "start": 125,
+                        "end": 159,
+                        "text": "(McManus, Winder, and Gordon 2002)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 239,
+                        "end": 255,
+                        "text": "(Gil et al. 2004",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 400,
+                        "end": 429,
+                        "text": "(Gray, Waytz, and Young 2012)",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 79,
+                        "end": 80,
+                        "text": "3",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Our findings also reiterate previous research on language use in mental health (De Choudhury et al. 2013) , as they describe symptoms of physical pain and sickness, besides expressing a lack of control and negative emotions. On the other hand, the mention of family meals on Facebook has a negative correlation with stress, suggesting a good social support network and taking time to spend with loved ones as well as travel, are ways people relax.",
+                "cite_spans": [
+                    {
+                        "start": 79,
+                        "end": 105,
+                        "text": "(De Choudhury et al. 2013)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Stress using Facebook and Twitter",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "RQ2: Predicting User-Level Psychological",
+                "sec_num": null
+            },
+            {
+                "text": "We utilize the Facebook and Twitter data from the same users, described in the previous section, to evaluate the performance of supervised models trained on Facebook and Twitter language at predicting users' stress for a held-out set. We stratify In the five-fold cross-validation setting, we perform linear regression with several regularization methods such as ridge, elastic-net, LASSO and L2 penalized SVMs and find that elastic-net showed marginally superior performance over the others. Accordingly, we report results only using elastic-net. The performance was measured by calculating Pearson's r over the aggregated predictions from the five folds.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": null
+            },
+            {
+                "text": "We first evaluate the above features to predict stress within domain -i.e., we train and test on the same platform. Engagement features are part of the feature set used in (Lin et al. 2014) for predicting user-level stress. We also examine how the models perform when compared to sociodemographic variables, namely age, gender, race, income, and education.",
+                "cite_spans": [
+                    {
+                        "start": 172,
+                        "end": 189,
+                        "text": "(Lin et al. 2014)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": null
+            },
+            {
+                "text": "Then, we evaluate how models trained on Facebook perform at predicting stress from Twitter language in a crossdomain setting. Previous studies showed that predictive performance changes in cross-domain applications (Jaidka et al. 2018; Zhong et al. 2017) . Therefore, we then attempt to Facebook Twitter User Engagement (Lin et al. 2014) .11 .05 TensiStrength (Thelwall 2017) .17",
+                "cite_spans": [
+                    {
+                        "start": 215,
+                        "end": 235,
+                        "text": "(Jaidka et al. 2018;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 236,
+                        "end": 254,
+                        "text": "Zhong et al. 2017)",
+                        "ref_id": "BIBREF58"
+                    },
+                    {
+                        "start": 320,
+                        "end": 337,
+                        "text": "(Lin et al. 2014)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 360,
+                        "end": 375,
+                        "text": "(Thelwall 2017)",
+                        "ref_id": "BIBREF54"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": null
+            },
+            {
+                "text": ". ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": null
+            },
+            {
+                "text": "Table 4 shows the performance of predicting stress using sociodemographic variables and social media language. Within the domain, Facebook does better than Twitter by a slight margin. On Facebook, both LIWC and Topics outperform sociodemographic variables (age, gender, race, income, and education). Topics outperform LIWC on Facebook (r=.305), and LIWC outperforms Topics on Twitter (r=.218). These correlations, which are considered a high correlation in measuring internal traits (Meyer, Finn, and others 2001) , show that linguistic features perform reliably well at predicting stress. User engagement features performed rather poorly when compared to linguistic features indicating that trait-prediction is a different task when compared to state-prediction. A similar observation has been made while using user engagement features for predicting other traits (Preotiuc-Pietro et al. 2016) .",
+                "cite_spans": [
+                    {
+                        "start": 483,
+                        "end": 513,
+                        "text": "(Meyer, Finn, and others 2001)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 865,
+                        "end": 894,
+                        "text": "(Preotiuc-Pietro et al. 2016)",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "4",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results for Within Domain Predictions",
+                "sec_num": null
+            },
+            {
+                "text": "The correlation between stress scores collected from survey and user-aggregated TensiStrength scores was .17 for Facebook and .11 for Twitter. TensiStrength was developed by annotating keyword-selected Twitter posts, which makes them inapplicable for measuring psychological stress. Consequently, we dropped engagement features and TensiStrength from subsequent analysis. We also limited the posting period to the previous one month (consistent with the time period in the Cohen's survey questionnaire) and observed that the performance shows a non-significant drop by 0.02 in r.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results for Within Domain Predictions",
+                "sec_num": null
+            },
+            {
+                "text": "Since our goal is to predict stress in counties using Twitter, we examined how models trained on Facebook perform on Twitter (shown in Table 5 ). Performance drops (by 5% compared to within domain performance) when Facebook models are used to predict stress from the Twitter language. Specifically, topics see a larger drop (by 50%) possibly due to not being able to generalize across platforms. We have seen that expressions of stress in Facebook language vs. Twitter language are significantly different in terms of the vocabulary used. Consequently, a standardized theory-driven dictionary such as LIWC is stable across both platforms. We also combined both Facebook and Twitter corpora, and the model trained on both platforms together gives a marginal improvement in prediction performance.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 141,
+                        "end": 142,
+                        "text": "5",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results for Cross-Domain Predictions",
+                "sec_num": null
+            },
+            {
+                "text": "Given the marked distinction between expressions of stress in Facebook and Twitter language, we investigate several approaches to improve the predictive performance of models on Twitter. This problem can be viewed as a domain adaptation task, where we are adapting from a source domain: users' language on one platform, to a target domain: the same users' language on another platform.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results for Cross-Domain Predictions",
+                "sec_num": null
+            },
+            {
+                "text": "Trained ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature",
+                "sec_num": null
+            },
+            {
+                "text": "Most prior work on domain adaptation has focused on the case where some labels are available on both the source and target domains and is usually done by combining (often in some weighted fashion) training data sets or, less commonly, trained models from the source and target domains. A simple and effective supervised method was proposed by Daum\u00e9 (Daum\u00e9 III, Kumar, and Saha 2010) which applied a supervised heuristic mapping from labeled data the source and target domains, to a higher dimensional feature space, which are used to train standard classifiers or linear regression models. This approach has demonstrated the best performance in several comparative evaluations conducted for image-, textand sentiment-classification (Pan and Yang 2010) .",
+                "cite_spans": [
+                    {
+                        "start": 349,
+                        "end": 382,
+                        "text": "(Daum\u00e9 III, Kumar, and Saha 2010)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 732,
+                        "end": 751,
+                        "text": "(Pan and Yang 2010)",
+                        "ref_id": "BIBREF34"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "We test two standard domain adaptation techniques for improving the cross-platform performance of predictive models: one supervised approach; Easy Adapt (Daum\u00e9 III, Kumar, and Saha 2010), which uses labeled data from both the source and the target, and one unsupervised approach: Transfer Component Analysis -TCA (Pan et al. 2011) , which requires no labels on the target domain. While there are several candidate algorithms within both supervised and unsupervised approaches, we chose Easy Adapt and TCA for their simplicity in application.",
+                "cite_spans": [
+                    {
+                        "start": 313,
+                        "end": 330,
+                        "text": "(Pan et al. 2011)",
+                        "ref_id": "BIBREF35"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "The standard notation used throughout this section is that X S refers to labeled observations in the source domain and X T refers to the test set in the target domain.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "EasyAdapt : We define our problem according to the implementation described by Daum\u00e9 (Daum\u00e9 III, Kumar, and Saha 2010) . Let X1 denote the original feature space for the user in the source domain, X1 = R F . We construct an augmented feature space X1 = R 3F , by creating an platformspecific, and user-specific version of each feature in X. For this, we define \u03a6 s : X -\u2192 X to transform feature vectors corresponding to the platform-specific and user-specific feature spaces. The mappings are defined by the following equation:",
+                "cite_spans": [
+                    {
+                        "start": 85,
+                        "end": 118,
+                        "text": "(Daum\u00e9 III, Kumar, and Saha 2010)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "\u03a6 s (x) = x, x, 0 , \u03a6 t (x) = x, 0, x",
+                        "eq_num": "(1)"
+                    }
+                ],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "Here, \u03a6 s (x) is the feature vector for the source domain, \u03a6 t (x) is the corresponding vector for the target domain. 0 = 0, 0, ..., 0 \u2208 R F is the zero vector.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "We thus augment the original feature space with the labeled data points (for the same set of individuals) from the target domain, excluding the held out sample for testing. Next, we train a regression model between this augmented feature space and stress scores of the users. We similarly transform the feature space of the held out sample before prediction.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "Transfer Component Analysis (TCA) TCA exploits the Maximum Mean Discrepancy Embedding (MMDE) for comparing the distributions between the source and target domain, based on the Reproducing Kernel Hilbert Space (RKHS). The empirical estimate of the distance between D S and D T ,",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "Dist(D S , D T ), is || 1 n 1 n1 i=1 s i - 1 n 2 n2 i=1 u i || H",
+                        "eq_num": "(2)"
+                    }
+                ],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "where u and s are individual observations in D S and D U , H is a universal RKHS and \u03c6 : X -\u2192H.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "After applying domain adaptation (results in Table 6 ), performance increases by 16% when compared to using Facebook models alone to predict stress from Twitter language without any domain adaptation. TCA is seen to outperform EasyAdapt.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 51,
+                        "end": 52,
+                        "text": "6",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results with Domain adaptation",
+                "sec_num": null
+            },
+            {
+                "text": "No et al. 2012) . Tweets were geo-mapped to US counties using latitude/longitude coordinates and the self-reported location field when available, following the approach described in (Schwartz et al. 2013a) . In this manner, 20% of the tweets could be successfully mapped, resulting in over 1.7 billion geo-located tweets. A threshold of 100,000 words per county is used in order to ensure that any word-to-outcome correlations observed were stable, resulting in a dataset of 2710 counties. On an average, each county had 8,892,568 words.",
+                "cite_spans": [
+                    {
+                        "start": 3,
+                        "end": 15,
+                        "text": "et al. 2012)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 182,
+                        "end": 205,
+                        "text": "(Schwartz et al. 2013a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature",
+                "sec_num": null
+            },
+            {
+                "text": "County Health outcomes: We use two sets of county health outcomes in our work: 1. Gallup-Sharecare Well-Being data and 2. County health statistics for the United States.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature",
+                "sec_num": null
+            },
+            {
+                "text": "From the Gallup-Sharecare Well-Being Index, we use the stress outcome to validate the stress predictions made by our language model. Gallup data is collected as a part of 1,000 telephone interviews conducted every day across the US (Huppert and So 2010) . The questions on the interview range from topics such as health behaviors, work environment to social and county factors, and financial security. We specifically used the stress fields from the Gallup data aggregated to counties.",
+                "cite_spans": [
+                    {
+                        "start": 232,
+                        "end": 253,
+                        "text": "(Huppert and So 2010)",
+                        "ref_id": "BIBREF21"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature",
+                "sec_num": null
+            },
+            {
+                "text": "From US County Health Rankings and Roadmaps portal3 , we obtained county socioeconomic characteristics and health behaviors which provides access to county-level health factors from a wide range of sources, including Behavioral Risk Factor Surveillance System, American counties Survey, and the National Center for Health Statistics.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature",
+                "sec_num": null
+            },
+            {
+                "text": "After analyzing the performance of different models at predicting stress in the cross-domain setting, we use the domainadapted model trained on LIWC features to predict stress using Twitter language from US counties (shown in Figure 3 ). We validate our language-predicted stress with county-level stress reported by Gallup, and further with county-level estimates of health behaviors and socioeconomic characteristics.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 233,
+                        "end": 234,
+                        "text": "3",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "First, we use the Gallup-Sharecare Well-Being data, with county-aggregated stress labels (termed as 'Gallup stress' hereon), as a means of validating our language-predicted stress. We compare Gallup stress and language-predicted stress (referred to as 'Twitter stress' hereon). We aim to train the best performing user-level model, as this directly impacts the county-level prediction accuracy. We experiment with models trained on individual platforms (best r = 0.26), and find a significant difference in predicting Gallup stress after domain adaptation (r = 0.34). These correlations are considered a high correlation in psychology, especially when measuring outcomes like stress (Meyer, Finn, and others 2001) . Part of this improvement is due to the amount of information that Facebook contains over Twitter (Table 4 ). However, Facebook alone is insufficient as the Twitter language is substantially different from Facebook (Tables 5 and 6 ). Predictive performance of sociodemographic variables (age, gender, income and education) and Twitter language are r=.24 and r=.34 respectivelt. Twitter language outperforms sociodemographic variables at predicting stress in counties.",
+                "cite_spans": [
+                    {
+                        "start": 683,
+                        "end": 713,
+                        "text": "(Meyer, Finn, and others 2001)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 820,
+                        "end": 821,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 938,
+                        "end": 939,
+                        "text": "5",
+                        "ref_id": "TABREF4"
+                    },
+                    {
+                        "start": 944,
+                        "end": 945,
+                        "text": "6",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Having validated the language-estimated stress in counties, we examine the correlation of stress with socioeconomic characteristics and health behaviors in US counties. The results are shown in Table 7 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 200,
+                        "end": 201,
+                        "text": "7",
+                        "ref_id": "TABREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Health Behaviors Counties with higher stress have higher mortality, a higher percentage of physically inactive people, a higher percentage of poor mental health days, and a higher percentage of smokers, teen pregnancy, and higher rates of drug poisoning. These are all factors which have known correlation and causality structures as reported by (Stults-Kolehmainen and Sinha 2014; Steptoe et al. 1996; Watson and Pennebaker 1989) . Individuals living in highstress counties appear to suffer from poor health, affected both by aspects in their individual lives as well as by the nature of their counties. Using social media language as a real-time proxy to assess a county's stress, and consequently, health, could help design interventions and policies to alleviate stressors. Language has the specific advantage of getting at the causes/stressors that counties are experiencing, and this could greatly complement and also inform traditional survey mechanisms (such as Gallup).",
+                "cite_spans": [
+                    {
+                        "start": 382,
+                        "end": 402,
+                        "text": "Steptoe et al. 1996;",
+                        "ref_id": "BIBREF53"
+                    },
+                    {
+                        "start": 403,
+                        "end": 430,
+                        "text": "Watson and Pennebaker 1989)",
+                        "ref_id": "BIBREF55"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Socioeconomic Characteristics Counties which are rich and educated express less stress (Karlamangla, Singer, and Seeman 2006) . This is observed by the low correlation between language-predicted stress and Median Household Income (r=-.271) and Education level, % people who attended some college, (r=.345) in counties. Furthermore, counties where people have access to exercise facilities also have low stress (Salmon 2001) . Our language-based findings of stress and income are corroborated by an analysis of the Gallup data reported by (De Neve and Ward 2017). High-stress counties also have higher avoidable hospitalization rates and have less access to providers for mental and physical health. These ",
+                "cite_spans": [
+                    {
+                        "start": 87,
+                        "end": 125,
+                        "text": "(Karlamangla, Singer, and Seeman 2006)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 410,
+                        "end": 423,
+                        "text": "(Salmon 2001)",
+                        "ref_id": "BIBREF45"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Our work provides some of the first insights into the linguistic manifestation of psychological stress on social media, while also showing the feasibility of applying models trained at the user-level to predict stress in counties with validity. Language associated with stress is indicative of exhaustion (McManus, Winder, and Gordon 2002) , comorbidity with mental health conditions (Watson and Pennebaker 1989) , pronounced self-focus (Pennebaker and Lay 2002) and feelings of hurt, physical pain, and being sick, which also known correlates of stress (Gil et al. 2004) . Our findings also reiterate previous research on language use in mental health (De Choudhury et al. 2013 ). An important insight from our work was that the predictive utility of different platforms varies, as has been seen in prior research looking at differences in self-disclosure (Jaidka et al. 2018; Zhong et al. 2017) . This motivates the need for transfer learning when the stress model trained on Facebook language needs to be applied to Twitter language. This observation has implications for other researchers interested in training and applying machine learning models across domains.",
+                "cite_spans": [
+                    {
+                        "start": 305,
+                        "end": 339,
+                        "text": "(McManus, Winder, and Gordon 2002)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 384,
+                        "end": 412,
+                        "text": "(Watson and Pennebaker 1989)",
+                        "ref_id": "BIBREF55"
+                    },
+                    {
+                        "start": 554,
+                        "end": 571,
+                        "text": "(Gil et al. 2004)",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 653,
+                        "end": 678,
+                        "text": "(De Choudhury et al. 2013",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 857,
+                        "end": 877,
+                        "text": "(Jaidka et al. 2018;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 878,
+                        "end": 896,
+                        "text": "Zhong et al. 2017)",
+                        "ref_id": "BIBREF58"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "On applying the adapted stress model to the language of counties, we obtain face-valid results about the relationships between stress and ground-truth statistics about county health. Our findings clarify the association of stress with socioeconomic factors (Baum, Garofalo, and Yali 1999) , suggesting that it is the socially and economically deprived counties (Lederbogen et al. 2011) . This is an important way to differentiate the stressful events in an urban lifestyle with the trait-based stress experienced in deprived or rural counties.",
+                "cite_spans": [
+                    {
+                        "start": 257,
+                        "end": 288,
+                        "text": "(Baum, Garofalo, and Yali 1999)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 361,
+                        "end": 385,
+                        "text": "(Lederbogen et al. 2011)",
+                        "ref_id": "BIBREF24"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "While there are several advantages and merits of using social media to measure stress, one of the apparent shortcomings of linguistic analysis is that they do not offer causal insights. Our methods anticipate that the language of counties is indicative of stress. It is possible that people might stop using social media while they are stressed, which could impact the performance of our user-level model (Corrigan et al. 2001) . However, we did not find any correlation (positive or negative) between the raw number of posts and psychological stress.",
+                "cite_spans": [
+                    {
+                        "start": 405,
+                        "end": 427,
+                        "text": "(Corrigan et al. 2001)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations and Future Work",
+                "sec_num": null
+            },
+            {
+                "text": "To address such scenarios, monitoring multiple data sources such as phone-based sensors can be useful in promptly reaching out to the afflicted individuals (Singh and Agarwal 2016) . Further, it would be interesting to disentangle the language indicative of short-term stressors versus long-term chronic stress, potentially by collecting data around recent stressful events (divorce, moving house, losing job etc.). Some studies have shown preliminary findings that connect social media usage to poorer mental health, indicating that undesirable usage of social media might cause depression among its users (O'Keeffe, Clarke-Pearson, and others 2011). While we can see that social media can uncover several behavioral and psychological insights into the stressful lifestyles of people, further research is warranted to precisely determine the causality pathways.",
+                "cite_spans": [
+                    {
+                        "start": 156,
+                        "end": 180,
+                        "text": "(Singh and Agarwal 2016)",
+                        "ref_id": "BIBREF51"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations and Future Work",
+                "sec_num": null
+            },
+            {
+                "text": "While one way of representing counties is by their geographic distribution (as in the case of US counties), another way could be by their residents' occupation ('work' counties) , and students ('college' counties). Monitoring stress levels in such counties would especially be useful in devising programs or initiatives to encourage a low-stress lifestyle amongst wherever individuals are particularly vulnerable to stress. While social media (and Twitter in particular) are not representative of the real-life users, several insights have been obtained using public Twitter data in public health (Yang et al. 2018) . Further, the underlying predictive model can be applied to several online forums. For example, it could be applied to colleges across the U.S. to understand the specific chronic stressors in different college campuses (extending the recent work (Saha and De Choudhury 2017; Bagroy, Kumaraguru, and De Choudhury 2017) ). It is especially promising that such measurements can be effective while being unobtrusive. Monitoring stress using social media also offers the advantage of discovering stress associations that are otherwise not easy to get by traditional surveys (Holdeman 2009) . Moreover, such a tool could monitor stress in real time, potentially detecting unforeseen events before they happen (Reason 1995) .",
+                "cite_spans": [
+                    {
+                        "start": 160,
+                        "end": 177,
+                        "text": "('work' counties)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 597,
+                        "end": 615,
+                        "text": "(Yang et al. 2018)",
+                        "ref_id": "BIBREF57"
+                    },
+                    {
+                        "start": 863,
+                        "end": 891,
+                        "text": "(Saha and De Choudhury 2017;",
+                        "ref_id": "BIBREF44"
+                    },
+                    {
+                        "start": 892,
+                        "end": 934,
+                        "text": "Bagroy, Kumaraguru, and De Choudhury 2017)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 1186,
+                        "end": 1201,
+                        "text": "(Holdeman 2009)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 1320,
+                        "end": 1333,
+                        "text": "(Reason 1995)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations and Future Work",
+                "sec_num": null
+            },
+            {
+                "text": "On the technical front, while our application of domain adaptation bridged the gap between two social media platforms -Facebook and Twitter, we note that further work is warranted to address the challenges associated with spatially correlated terms introduced when aggregating tweets to counties. The study by (Rieman et al. 2017 ) has explored such problems and their implications for county-level predictions from language. Also, several works that focus on socio-geographical studies have used advanced autoregressive modeling techniques which could help in developing more robust models, even for counties with missing data based on their spatial neighborhood association with other counties that have data points. Further, it would be interesting to examine stress from multiple modalities (text, images and sensor data), which can potentially complementary insights (Sharma and Gedeon 2012; Guntuku, Roy, and Weisi 2015; Samani et al. 2018) , particularly transfering learning across modalities (Guntuku et al. 2019) .",
+                "cite_spans": [
+                    {
+                        "start": 310,
+                        "end": 329,
+                        "text": "(Rieman et al. 2017",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 872,
+                        "end": 896,
+                        "text": "(Sharma and Gedeon 2012;",
+                        "ref_id": "BIBREF50"
+                    },
+                    {
+                        "start": 897,
+                        "end": 926,
+                        "text": "Guntuku, Roy, and Weisi 2015;",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 927,
+                        "end": 946,
+                        "text": "Samani et al. 2018)",
+                        "ref_id": "BIBREF46"
+                    },
+                    {
+                        "start": 1001,
+                        "end": 1022,
+                        "text": "(Guntuku et al. 2019)",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations and Future Work",
+                "sec_num": null
+            },
+            {
+                "text": "Prediction performances obtained in this study indicate that psychological stress can be inferred with some accuracy from public (Twitter) or semi-public (Facebook) social media data. While the purpose of delivering social support and mental health services motivates this effort, these algorithms also raise some important privacy and ethical questions. From the perspective of privacy concerns, organizations with vested interests (e.g. insurance companies) may be motivated to infer this information automatically. As being chronically stressed can lead to stigma at multiple levels, data protection and ownership frameworks are necessary to make sure the data is not used against the users' interest (McKee 2013). Few users realize the amount of health-related information that can be inferred from their digital traces; consequently, transparency about the indicators derived and the purposes behind such inference should be part of ethical and policy discourse.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Privacy and Ethical Considerations",
+                "sec_num": null
+            },
+            {
+                "text": "Using a sample of users who have accounts on both Twitter and Facebook, we uncovered insight into the language of stress in individuals. Our results also showed that standardized linguistic dictionaries, such as LIWC, outperform engagement attributes such as user posting behavior, in predicting stress. Our results complement psychological survey data by deepening our understanding of the environment that may contribute to both individual and county-level wellbeing. Language estimates can be used to monitor stress in different social settings, to devise initiatives encouraging a low-stress lifestyle. Our model will help measure the impact of such interventions in real time. Further, language has the specific advantage of getting at the causes/stressors that counties are experiencing thereby enabling personalized interventions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": null
+            },
+            {
+                "text": "The findings shed light on the nuanced relationship of socioeconomic status with psychological stress and suggest insights for other psychological factors, such as locus of control, the degree to which people feel like being manipulated by their environment vs. perceive a sufficient level of selfcontrol and in the counties where they live and work. We believe that the potential for this technology to be used in both micro and macro scales is tremendous. Our computational techniques, while useful to monitor stress in counties, can also be used to give real-time feedback to individuals in those counties. Such feedback about individuals' social media usage along specific dimensions, can help in designing simple but effective technology-assisted interventions in cultivating mindfulness and stress control (Miller, Fletcher, and Kabat-Zinn 1995) .",
+                "cite_spans": [
+                    {
+                        "start": 812,
+                        "end": 851,
+                        "text": "(Miller, Fletcher, and Kabat-Zinn 1995)",
+                        "ref_id": "BIBREF31"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": null
+            },
+            {
+                "text": "Here, we describe the experiments detailing the language differences between Facebook and Twitter and their associations with stress.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "Usage Statistics: In terms of pure usage statistics, we find that the our 601 participants had an average of 1238 Facebook and 1649 Twitter posts. The mean number of words they wrote per post was 17.1 for Twitter and 23.8 for Facebook. This difference is expected given the 140-character limit imposed on Twitter posts. However, the median number of words per post -17 for Twitter and 18 for Facebook -is much closer, suggesting that our participants were more varied in their posting behavior, when it came to Facebook.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "N Grams: Next, we consider platform differences in expressing stress, at the word-and phrase-level. Figure 4 provides a 2D visualization of the Spearman correlations of individual words with stress on the X-axis, and with social media platform on the Y-axis. The words along the X-axis are highly correlated with stress, but less preferential towards individual social media platforms. The words at the Y-axis poles are highly correlated with platform usage but less predictive of stress. For the purpose of this plot, we have discarded words with non-significant correlations as well as \u03c1 <= 0.05. Thus, the words along the diagonals are the ones which best distinguish Twitter usage from Facebook usage for the purpose of expressing stress.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 107,
+                        "end": 108,
+                        "text": "4",
+                        "ref_id": "FIGREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "On Facebook, words and phrases such as \"me\", \"i had\", \"feel like\", \"i don't\" and \"i hate\" are significantly correlated with high stress, while words and phrases such as \"lunch\",\"a great year\" and \"to see\" are significantly correlated with low stress. On the other hand, on Twitter, words and phrases which indicate low stress are \"excited to\", \"! check\", \"fresh\", \"win\" and \"experience\".",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "The lack of words in the bottom right quadrant suggests that that language of high stress on Twitter is a subset of the language of high stress on Facebook. These findings motivate our proposal to adapt stress models trained on Facebook language, a more inclusive corpus, to Twitter language, for the purpose of county-level stress prediction.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "LIWC: From Table 8 , we observe that Twitter has some similarities with Facebook -such as the use of adverbs, and the negative correlation with the use of \"Positive Emotion\" words. Unexpectedly, on Twitter, the category most strongly correlated with stress is \"Comparisons\" and not first person singular pronouns. We anticipate that this reflects the tendency of Twitter users to drop self-referencing pronouns, as has been identified in previous work (Rouhizadeh et al. 2016) . Comparisons and differentiation could indicate lack of satisfaction with status quo, indicating possibly pessimism or expressing perceived resources to fall short of demands, or simply lower perceived satisfaction with life of those prone to stress (Linn et al. 1985) . Insecurities of those higher in stress may be what is indicated by correlations with nonfluencies (Felson, Scheff, and Retzinger 1993) . A \"focus on the past\" tends to be maladaptive and may indicate that those high in stress might find themselves stuck in what happened and in ruminative, self-deprecating thoughts. This is reinforced by the negatively correlated category \"Power\", which suggests that the individuals under stress express a lack of control and superiority over their environment (Abouserie 1994) .",
+                "cite_spans": [
+                    {
+                        "start": 452,
+                        "end": 476,
+                        "text": "(Rouhizadeh et al. 2016)",
+                        "ref_id": "BIBREF43"
+                    },
+                    {
+                        "start": 728,
+                        "end": 746,
+                        "text": "(Linn et al. 1985)",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 847,
+                        "end": 883,
+                        "text": "(Felson, Scheff, and Retzinger 1993)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 1246,
+                        "end": 1262,
+                        "text": "(Abouserie 1994)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 17,
+                        "end": 18,
+                        "text": "8",
+                        "ref_id": "TABREF8"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "Topics: Twitter topics which are positively correlated with stress (Table 9 ) comprise of words and emojis depicting negative emotions, possible sarcasm and feelings of awkwardness. We did not find any topics which are negatively correlated with stress, on Twitter when controlled for age and gender.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 74,
+                        "end": 75,
+                        "text": "9",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "TensiStrength: Pearson correlation between the mean stress values for Facebook and Twitter, was 0.28 and significant at p < 0.01. This difference is expected because the TensiStrength lexicon was developed on Twitter posts, and as such it might not generalize well to Facebook language. The finding does suggest that stress is expressed very differently on Twitter versus Facebook, and motivates our decision to adapt Facebook stress models to Twitter.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Appendix",
+                "sec_num": null
+            },
+            {
+                "text": "www.qualtrics.com/Survey-Software",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "www.countyhealthrankings.org/",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Sources and levels of stress in relation to locus of control and self esteem in university students",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Abouserie",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Educational psychology",
+                "volume": "14",
+                "issue": "3",
+                "pages": "323--330",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Abouserie, R. 1994. Sources and levels of stress in relation to locus of control and self esteem in university students. Educational psychology 14(3):323-330.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "A social media based index of mental well-being in college campuses",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bagroy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Kumaraguru",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Choudhury",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems",
+                "volume": "",
+                "issue": "",
+                "pages": "1634--1646",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bagroy, S.; Kumaraguru, P.; and De Choudhury, M. 2017. A social media based index of mental well-being in college campuses. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems, 1634-1646. ACM.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Socioeconomic status and chronic stress: does stress account for ses effects on health?",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Baum",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Garofalo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Yali",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Annals of the New York Academy of Sciences",
+                "volume": "896",
+                "issue": "1",
+                "pages": "131--144",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Baum, A.; Garofalo, J.; and Yali, A. 1999. Socioeconomic status and chronic stress: does stress account for ses effects on health? Annals of the New York Academy of Sciences 896(1):131-144.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Measuring stress: A guide for health and social scientists",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Cohen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Kessler",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "U"
+                        ],
+                        "last": "Gordon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1997,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cohen, S.; Kessler, R. C.; and Gordon, L. U. 1997. Measur- ing stress: A guide for health and social scientists. Oxford University Press on Demand.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Psychological stress and antibody response to immunization: a critical review of the human literature",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Cohen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Miller",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Rabin",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Psychosomatic medicine",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cohen, S.; Miller, G. E.; and Rabin, B. S. 2001. Psychologi- cal stress and antibody response to immunization: a critical review of the human literature. Psychosomatic medicine.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Familiarity with and social distance from people who have serious mental illness",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Corrigan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Green",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Lundin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Kubiak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Penn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Psychiatric services",
+                "volume": "52",
+                "issue": "7",
+                "pages": "953--958",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Corrigan, P. W.; Green, A.; Lundin, R.; Kubiak, M. A.; and Penn, D. L. 2001. Familiarity with and social distance from people who have serious mental illness. Psychiatric services 52(7):953-958.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Estimating county health statistics with twitter",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Culotta",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "CHI",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Culotta, A. 2014. Estimating county health statistics with twitter. In CHI. ACM.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Frustratingly easy semi-supervised domain adaptation",
+                "authors": [
+                    {
+                        "first": "Iii",
+                        "middle": [],
+                        "last": "Daum\u00e9",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Kumar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Saha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 2010 Workshop on Domain Adaptation for Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "53--59",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Daum\u00e9 III, H.; Kumar, A.; and Saha, A. 2010. Frustratingly easy semi-supervised domain adaptation. In Proceedings of the 2010 Workshop on Domain Adaptation for Natural Language Processing, 53-59. Association for Computational Linguistics.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Predicting depression via social media",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "De Choudhury",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Gamon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Counts",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Horvitz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "ICWSM",
+                "volume": "2",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "De Choudhury, M.; Gamon, M.; Counts, S.; and Horvitz, E. 2013. Predicting depression via social media. In ICWSM, 2.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Does work make you happy? evidence from the world happiness report",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "De Neve",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Ward",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Harvard Business Review",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "De Neve, J., and Ward, G. 2017. Does work make you happy? evidence from the world happiness report. Harvard Business Review.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Psychological Language on Twitter Predicts County-level Heart Disease Mortality",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Kern",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Labarthe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Merchant",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Jha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Agrawal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Dziurzynski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sap",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Weeg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Larson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ungar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Seligman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "",
+                "volume": "26",
+                "issue": "",
+                "pages": "159--169",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Eichstaedt, J. C.; Schwartz, H. A.; Kern, M. L.; Park, G.; Labarthe, D. R.; Merchant, R. M.; Jha, S.; Agrawal, M.; Dziurzynski, L. A.; Sap, M.; Weeg, C.; Larson, E. E.; Ungar, L. H.; and Seligman, M. E. 2015. Psychological Language on Twitter Predicts County-level Heart Disease Mortality. Psychological Science 26:159-169.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Linguistic markers indicating therapeutic outcomes of social media disclosures of schizophrenia",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Ernala",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Rizvi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Birnbaum",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Kane",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Choudhury",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proc ACM Hum-Comput Interact",
+                "volume": "1",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ernala, S. K.; RIZVI, A. F.; BIRNBAUM, M. L.; KANE, J. M.; and DE CHOUDHURY, M. 2017. Linguistic markers indicating therapeutic outcomes of social media disclosures of schizophrenia. Proc ACM Hum-Comput Interact 1(1):43.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Review essay: Shame, anger, and aggression",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Felson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Scheff",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Retzinger",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Felson, R. J.; Scheff, T. J.; and Retzinger, S. M. 1993. Review essay: Shame, anger, and aggression.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Daily mood and stress predict pain, health care use, and work activity in african american adults with sickle-cell disease",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Gil",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Carson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Porter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Scipio",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Bediako",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Orringer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Health Psychology",
+                "volume": "23",
+                "issue": "3",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gil, K. M.; Carson, J. W.; Porter, L. S.; Scipio, C.; Bediako, S. M.; and Orringer, E. 2004. Daily mood and stress predict pain, health care use, and work activity in african american adults with sickle-cell disease. Health Psychology 23(3):267.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "The moral dyad: A fundamental template unifying moral judgment",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Gray",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Waytz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Young",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Psychological Inquiry",
+                "volume": "23",
+                "issue": "2",
+                "pages": "206--215",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gray, K.; Waytz, A.; and Young, L. 2012. The moral dyad: A fundamental template unifying moral judgment. Psycho- logical Inquiry 23(2):206-215.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Studying personality through the content of posted and liked images on twitter",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Carpenter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Ng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ungar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Preot \u00b8iuc-Pietro",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 2017 ACM on web science conference",
+                "volume": "",
+                "issue": "",
+                "pages": "223--227",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guntuku, S. C.; Lin, W.; Carpenter, J.; Ng, W. K.; Ungar, L. H.; and Preot \u00b8iuc-Pietro, D. 2017a. Studying personality through the content of posted and liked images on twitter. In Proceedings of the 2017 ACM on web science conference, 223-227. ACM.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Language of adhd in adults on social media",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Ramsay",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Merchant",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Journal of attention disorders",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guntuku, S. C.; Ramsay, J. R.; Merchant, R. M.; and Ungar, L. H. 2017b. Language of adhd in adults on social media. Journal of attention disorders 1087054717738083.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Detecting depression and mental illness on social media: an integrative review",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Yaden",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Kern",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ungar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Current Opinion in Behavioral Sciences",
+                "volume": "18",
+                "issue": "",
+                "pages": "43--49",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guntuku, S. C.; Yaden, D. B.; Kern, M. L.; Ungar, L. H.; and Eichstaedt, J. C. 2017c. Detecting depression and mental ill- ness on social media: an integrative review. Current Opinion in Behavioral Sciences 18:43-49.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "What twitter profile and posted images reveal about depression and anxiety",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Preot \u00b8iuc-Pietro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Thirteenth International AAAI Conference on Web and Social Media",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guntuku, S. C.; Preot \u00b8iuc-Pietro, D.; Eichstaedt, J. C.; and Ungar, L. 2019. What twitter profile and posted images reveal about depression and anxiety. In Thirteenth International AAAI Conference on Web and Social Media.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Evaluating visual and textual features for predicting user likes",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Roy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Weisi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "2015 IEEE International Conference on Multimedia and Expo (ICME)",
+                "volume": "",
+                "issue": "",
+                "pages": "1--6",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guntuku, S. C.; Roy, S.; and Weisi, L. 2015. Evaluating visual and textual features for predicting user likes. In 2015 IEEE International Conference on Multimedia and Expo (ICME), 1-6. IEEE.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Invisible wounds of war: Psychological and cognitive injuries, their consequences, and services to assist recovery",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Holdeman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Psychiatric Services",
+                "volume": "60",
+                "issue": "2",
+                "pages": "273--273",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Holdeman, T. C. 2009. Invisible wounds of war: Psychologi- cal and cognitive injuries, their consequences, and services to assist recovery. Psychiatric Services 60(2):273-273.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Flourishing across europe: Application of a new conceptual framework for defining wellbeing",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Huppert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "So",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Huppert, F. A., and So, T. T. 2010. Flourishing across europe: Application of a new conceptual framework for defining well- being. Gallup.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Facebook vs. twitter: Cross-platform differences in self-disclosure and trait prediction",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Jaidka",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Buffone",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jaidka, K.; Guntuku, S. C.; Buffone, A.; Schwartz, H. A.; and Ungar, L. H. 2018. Facebook vs. twitter: Cross-platform differences in self-disclosure and trait prediction. In ICWSM.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Reduction in allostatic load in older adults is associated with lower all-cause mortality risk: Macarthur studies of successful aging",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Karlamangla",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Singer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Seeman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Psychosomatic medicine",
+                "volume": "68",
+                "issue": "3",
+                "pages": "500--507",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Karlamangla, A. S.; Singer, B. H.; and Seeman, T. E. 2006. Reduction in allostatic load in older adults is associated with lower all-cause mortality risk: Macarthur studies of success- ful aging. Psychosomatic medicine 68(3):500-507.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "City living and urban upbringing affect neural social stress processing in humans",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Lederbogen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Kirsch",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Haddad",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Streit",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Tost",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Schuch",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "W\u00fcst",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Pruessner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Rietschel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Deuschle",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Nature",
+                "volume": "474",
+                "issue": "7352",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lederbogen, F.; Kirsch, P.; Haddad, L.; Streit, F.; Tost, H.; Schuch, P.; W\u00fcst, S.; Pruessner, J. C.; Rietschel, M.; Deuschle, M.; et al. 2011. City living and urban upbring- ing affect neural social stress processing in humans. Nature 474(7352):498.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "User-level psychological stress detection from social media using deep neural network",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Jia",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Guo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Xue",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Huang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Cai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Feng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lin, H.; Jia, J.; Guo, Q.; Xue, Y.; Li, Q.; Huang, J.; Cai, L.; and Feng, L. 2014. User-level psychological stress detection from social media using deep neural network. In ACM MM.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Health status, job satisfaction, job stress, and life satisfaction among academic and clinical faculty",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Linn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Yager",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Cope",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Leake",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Jama",
+                "volume": "254",
+                "issue": "19",
+                "pages": "2775--2782",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Linn, L. S.; Yager, J.; Cope, D.; and Leake, B. 1985. Health status, job satisfaction, job stress, and life satisfaction among academic and clinical faculty. Jama 254(19):2775-2782.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Assessing behavioral stages from social media data",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Weitzman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Chunara",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "Proceedings of the 20th ACM Conference Companion on Computer Supported Cooperative work & social computing (CSCW)",
+                "volume": "2017",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Liu, J.; Weitzman, E. R.; and Chunara, R. 2017. Assessing be- havioral stages from social media data. In Proceedings of the 20th ACM Conference Companion on Computer Supported Cooperative work & social computing (CSCW), volume 2017, 1320. NIH Public Access.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Stress and the individual: mechanisms leading to disease",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Mcewen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Stellar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Archives of internal medicine",
+                "volume": "153",
+                "issue": "18",
+                "pages": "2093--2101",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McEwen, B. S., and Stellar, E. 1993. Stress and the indi- vidual: mechanisms leading to disease. Archives of internal medicine 153(18):2093-2101.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "The causal links between stress and burnout in a longitudinal study of uk doctors",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Mckee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Mcmanus",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Winder",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Gordon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "Health Policy",
+                "volume": "110",
+                "issue": "2",
+                "pages": "2089--2090",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McKee, R. 2013. Ethical issues in using social media for health and health care research. Health Policy 110(2):298- 301. McManus, I.; Winder, B.; and Gordon, D. 2002. The causal links between stress and burnout in a longitudinal study of uk doctors. The Lancet 359(9323):2089-2090.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Threeyear follow-up and clinical implications of a mindfulness meditation-based stress reduction intervention in the treatment of anxiety disorders",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Miller",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Fletcher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kabat-Zinn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "General hospital psychiatry",
+                "volume": "17",
+                "issue": "3",
+                "pages": "192--200",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Miller, J. J.; Fletcher, K.; and Kabat-Zinn, J. 1995. Three- year follow-up and clinical implications of a mindfulness meditation-based stress reduction intervention in the treat- ment of anxiety disorders. General hospital psychiatry 17(3):192-200.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Ruminative selffocus, negative life events, and negative affect",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Moberly",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Watkins",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Behaviour research and therapy",
+                "volume": "46",
+                "issue": "9",
+                "pages": "1034--1039",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Moberly, N. J., and Watkins, E. R. 2008. Ruminative self- focus, negative life events, and negative affect. Behaviour research and therapy 46(9):1034-1039.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "The impact of social media on children, adolescents, and families",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "O'keeffe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Clarke-Pearson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "",
+                "volume": "127",
+                "issue": "",
+                "pages": "800--804",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "O'Keeffe, G. S.; Clarke-Pearson, K.; et al. 2011. The im- pact of social media on children, adolescents, and families. Pediatrics 127(4):800-804.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "A survey on transfer learning",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Pan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "IEEE Transactions on knowledge and data engineering",
+                "volume": "22",
+                "issue": "10",
+                "pages": "1345--1359",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pan, S. J., and Yang, Q. 2010. A survey on transfer learn- ing. IEEE Transactions on knowledge and data engineering 22(10):1345-1359.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Language use and personality during crises: Analyses of mayor rudolph giuliani's press conferences",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Pan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Tsang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Kwok",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Ieee Tnn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Pennebaker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Lay",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Pennebaker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Booth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Francis",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "Linguistic inquiry and word count",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pan, S. J.; Tsang, I. W.; Kwok, J. T.; and Yang, Q. 2011. Domain adaptation via transfer component analysis. IEEE TNN. Pennebaker, J. W., and Lay, T. C. 2002. Language use and personality during crises: Analyses of mayor rudolph giu- liani's press conferences. Journal of Research in Personality. Pennebaker, J. W.; Booth, R. J.; and Francis, M. E. 2007. Linguistic inquiry and word count: Liwc [computer software].",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "TX: liwc. net",
+                "authors": [
+                    {
+                        "first": "Austin",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Austin, TX: liwc. net.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Trendminer: An architecture for real time analysis of social media text",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Preotiuc-Pietro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Samangooei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Cohn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Gibbins",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Niranjan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Sixth International AAAI Conference on Weblogs and Social Media",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Preotiuc-Pietro, D.; Samangooei, S.; Cohn, T.; Gibbins, N.; and Niranjan, M. 2012. Trendminer: An architecture for real time analysis of social media text. In Sixth International AAAI Conference on Weblogs and Social Media.",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "The role of personality, age and gender in tweeting about mental illnesses",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Preotiuc-Pietro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sap",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Smith",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Tobolsky",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "NAACL HLT",
+                "volume": "2015",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Preotiuc-Pietro, D.; Eichstaedt, J.; Park, G.; Sap, M.; Smith, L.; Tobolsky, V.; Schwartz, H. A.; and Ungar, L. 2015. The role of personality, age and gender in tweeting about mental illnesses. In NAACL HLT, volume 2015, 21.",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Studying the dark triad of personality through twitter behavior",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Preotiuc-Pietro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Carpenter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Giorgi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "CIKM",
+                "volume": "",
+                "issue": "",
+                "pages": "761--770",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Preotiuc-Pietro, D.; Carpenter, J.; Giorgi, S.; and Ungar, L. 2016. Studying the dark triad of personality through twitter behavior. In CIKM, 761-770. ACM.",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "Tracking gross community happiness from tweets",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Quercia",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Ellis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Capra",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Crowcroft",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 15th ACM Conference Companion on Computer Supported Cooperative work & social computing (CSCW)",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Quercia, D.; Ellis, J.; Capra, L.; and Crowcroft, J. 2012. Tracking gross community happiness from tweets. In Pro- ceedings of the 15th ACM Conference Companion on Com- puter Supported Cooperative work & social computing (CSCW). ACM.",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Understanding adverse events: human factors",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Reason",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "BMJ Quality & Safety",
+                "volume": "4",
+                "issue": "2",
+                "pages": "80--89",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Reason, J. 1995. Understanding adverse events: human factors. BMJ Quality & Safety 4(2):80-89.",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "Domain adaptation from user-level facebook models to county-level twitter predictions",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Rieman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Jaidka",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the Eighth International Joint Conference on Natural Language Processing",
+                "volume": "1",
+                "issue": "",
+                "pages": "764--773",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rieman, D.; Jaidka, K.; Schwartz, H. A.; and Ungar, L. 2017. Domain adaptation from user-level facebook mod- els to county-level twitter predictions. In Proceedings of the Eighth International Joint Conference on Natural Language Processing (Volume 1: Long Papers), volume 1, 764-773.",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "Using syntactic and semantic context to explore psychodemographic differences in self-reference",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Rouhizadeh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ungar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Buffone",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "2054--2059",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rouhizadeh, M.; Ungar, L.; Buffone, A.; and Schwartz, H. A. 2016. Using syntactic and semantic context to explore psy- chodemographic differences in self-reference. In Proceed- ings of the 2016 Conference on Empirical Methods in Natural Language Processing, 2054-2059.",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "Modeling stress with social media around incidents of gun violence on college campuses",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Saha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "De Choudhury",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the ACM on Human-Computer Interaction",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Saha, K., and De Choudhury, M. 2017. Modeling stress with social media around incidents of gun violence on college campuses. Proceedings of the ACM on Human-Computer Interaction (CSCW).",
+                "links": null
+            },
+            "BIBREF45": {
+                "ref_id": "b45",
+                "title": "Effects of physical exercise on anxiety, depression, and sensitivity to stress: a unifying theory",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Salmon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Clinical psychology review",
+                "volume": "21",
+                "issue": "1",
+                "pages": "33--61",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Salmon, P. 2001. Effects of physical exercise on anxiety, de- pression, and sensitivity to stress: a unifying theory. Clinical psychology review 21(1):33-61.",
+                "links": null
+            },
+            "BIBREF46": {
+                "ref_id": "b46",
+                "title": "Cross-platform and cross-interaction study of user personality based on images on twitter and flickr",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Samani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Moghaddam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Preot \u00b8iuc-Pietro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "PloS one",
+                "volume": "13",
+                "issue": "7",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Samani, Z. R.; Guntuku, S. C.; Moghaddam, M. E.; Preot \u00b8iuc- Pietro, D.; and Ungar, L. H. 2018. Cross-platform and cross-interaction study of user personality based on images on twitter and flickr. PloS one 13(7):e0198660.",
+                "links": null
+            },
+            "BIBREF47": {
+                "ref_id": "b47",
+                "title": "Characterizing Geographic Variation in Well-being using Tweets",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Kern",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Dziurzynski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Lucas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Agrawal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Lakshmikanth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Jha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "E P"
+                        ],
+                        "last": "Seligman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ungar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Schwartz, H. A.; Eichstaedt, J. C.; Kern, M. L.; Dziurzynski, L.; Lucas, R. E.; Agrawal, M.; Park, G. J.; Lakshmikanth, S. K.; Jha, S.; Seligman, M. E. P.; and Ungar, L. H. 2013a. Characterizing Geographic Variation in Well-being using Tweets. ICWSM.",
+                "links": null
+            },
+            "BIBREF48": {
+                "ref_id": "b48",
+                "title": "Gender, and Age in the Language of Social Media: The Openvocabulary Approach",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Kern",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Dziurzynski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Ramones",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Agrawal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Shah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Kosinski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Stillwell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Seligman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Schwartz, H. A.; Eichstaedt, J. C.; Kern, M. L.; Dziurzynski, L.; Ramones, S. M.; Agrawal, M.; Shah, A.; Kosinski, M.; Stillwell, D.; and Seligman, M. 2013b. Personality, Gen- der, and Age in the Language of Social Media: The Open- vocabulary Approach. PloS ONE.",
+                "links": null
+            },
+            "BIBREF49": {
+                "ref_id": "b49",
+                "title": "Dlatk: Differential language analysis toolkit",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schwartz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Giorgi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sap",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Crutchley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ungar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Eichstaedt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+                "volume": "",
+                "issue": "",
+                "pages": "55--60",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Schwartz, H. A.; Giorgi, S.; Sap, M.; Crutchley, P.; Ungar, L.; and Eichstaedt, J. 2017. Dlatk: Differential language analysis toolkit. In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, 55-60.",
+                "links": null
+            },
+            "BIBREF50": {
+                "ref_id": "b50",
+                "title": "Objective measures, sensors and computational techniques for stress recognition and classification: A survey",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Sharma",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Gedeon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Computer methods and programs in biomedicine",
+                "volume": "108",
+                "issue": "3",
+                "pages": "1287--1301",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sharma, N., and Gedeon, T. 2012. Objective measures, sen- sors and computational techniques for stress recognition and classification: A survey. Computer methods and programs in biomedicine 108(3):1287-1301.",
+                "links": null
+            },
+            "BIBREF51": {
+                "ref_id": "b51",
+                "title": "Cooperative phoneotypes: exploring phone-based behavioral markers of cooperation",
+                "authors": [
+                    {
+                        "first": "V",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Singh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Agarwal",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Proceedings of the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing",
+                "volume": "",
+                "issue": "",
+                "pages": "646--657",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Singh, V. K., and Agarwal, R. R. 2016. Cooperative pho- neotypes: exploring phone-based behavioral markers of co- operation. In Proceedings of the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing, 646-657. ACM.",
+                "links": null
+            },
+            "BIBREF52": {
+                "ref_id": "b52",
+                "title": "Stress, cognition, and human performance: A literature review and conceptual framework",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Staal",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Staal, M. A. 2004. Stress, cognition, and human performance: A literature review and conceptual framework.",
+                "links": null
+            },
+            "BIBREF53": {
+                "ref_id": "b53",
+                "title": "Stress, social support and health-related behavior: a study of smoking, alcohol consumption and physical exercise",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Steptoe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wardle",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Pollard",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Canaan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Davies",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Stults-Kolehmainen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Sinha",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1996,
+                "venue": "Journal of psychosomatic research",
+                "volume": "41",
+                "issue": "2",
+                "pages": "81--121",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Steptoe, A.; Wardle, J.; Pollard, T. M.; Canaan, L.; and Davies, G. J. 1996. Stress, social support and health-related behavior: a study of smoking, alcohol consumption and phys- ical exercise. Journal of psychosomatic research 41(2):171- 180. Stults-Kolehmainen, M. A., and Sinha, R. 2014. The effects of stress on physical activity and exercise. Sports medicine 44(1):81-121.",
+                "links": null
+            },
+            "BIBREF54": {
+                "ref_id": "b54",
+                "title": "Tensistrength: Stress and relaxation magnitude detection for social media texts",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Thelwall",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Thelwall, M. 2017. Tensistrength: Stress and relaxation magnitude detection for social media texts. IPM.",
+                "links": null
+            },
+            "BIBREF55": {
+                "ref_id": "b55",
+                "title": "Health complaints, stress, and distress: exploring the central role of negative affectivity",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Watson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Pennebaker",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1989,
+                "venue": "Psychological review",
+                "volume": "96",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Watson, D., and Pennebaker, J. W. 1989. Health complaints, stress, and distress: exploring the central role of negative affectivity. Psychological review 96(2):234.",
+                "links": null
+            },
+            "BIBREF56": {
+                "ref_id": "b56",
+                "title": "The impact of inequality: How to make sick societies healthier",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Wilkinson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wilkinson, R. G. 2005. The impact of inequality: How to make sick societies healthier. The New Press.",
+                "links": null
+            },
+            "BIBREF57": {
+                "ref_id": "b57",
+                "title": "To retweet or not to retweet: Understanding what features of cardiovascular tweets influence their retransmission",
+                "authors": [
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Tufts",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ungar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Guntuku",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Merchant",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Journal of health communication",
+                "volume": "",
+                "issue": "",
+                "pages": "1--10",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yang, Q.; Tufts, C.; Ungar, L.; Guntuku, S.; and Merchant, R. 2018. To retweet or not to retweet: Understanding what fea- tures of cardiovascular tweets influence their retransmission. Journal of health communication 1-10.",
+                "links": null
+            },
+            "BIBREF58": {
+                "ref_id": "b58",
+                "title": "Wearing many (social) hats: How different are your different social network personae? ICWSM",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Zhong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H.-W",
+                        "middle": [],
+                        "last": "Chan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Karamshu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Sastry",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhong, C.; Chan, H.-w.; Karamshu, D.; Lee, D.; and Sastry, N. 2017. Wearing many (social) hats: How different are your different social network personae? ICWSM.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "uris": null,
+                "text": "Figure 2: Words and phrases associated with a) high-stress users (red) and b) low-stress users (blue). The size of the word indicates the correlation strength and the color indicates frequency (darker is more frequent). Correlations are controlled for age and gender, and are significant at p < .01, two-tailed t-test Bonferroni p-correction.",
+                "fig_num": "2",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "uris": null,
+                "text": "Figure 3: Map showing stress predicted from Twitter language from US counties. Counties which had less than 100k tweets are shown white.",
+                "fig_num": "3",
+                "num": null,
+                "type_str": "figure"
+            },
+            "FIGREF2": {
+                "uris": null,
+                "text": "Figure 4: Correlations of words/phrases with Social Media platform (Facebook on the positive y-axis and Twitter on the negative y-axis) and Stress Scale. Correlations are significant, Bonferroni corrected at p < 0.01",
+                "fig_num": "4",
+                "num": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "text": "Pearson correlations (top 5)  between stress score and LIWC features extracted on Facebook, when controlling for age and gender. All features are significant at p < .01, two-tailed t-test and Bonferroni corrected.",
+                "html": null,
+                "content": "<table><tr><td>LIWC</td><td/><td/></tr><tr><td>Positively correlated</td><td>most frequent words</td><td>r</td></tr><tr><td colspan=\"2\">1st Person Singular I</td><td>.22</td></tr><tr><td>Adverbs</td><td>very, really</td><td>.17</td></tr><tr><td>Negation</td><td>no, not, never</td><td>.16</td></tr><tr><td colspan=\"2\">Negative Emotion hurt, sadness, anger</td><td>.17</td></tr><tr><td>Fillers</td><td>I mean, you know</td><td>.15</td></tr><tr><td>Negatively correlated</td><td>most frequent words</td><td>r</td></tr><tr><td colspan=\"2\">1st Person Plural we</td><td>-.18</td></tr><tr><td>Affiliation</td><td>friend, social</td><td>-.17</td></tr><tr><td colspan=\"2\">Positive Emotion love, nice, sweet</td><td>-.12</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "text": "",
+                "html": null,
+                "content": "<table><tr><td>Topics</td><td/><td/></tr><tr><td>Positively correlated</td><td>most frequent words used by high-stress people</td><td>r</td></tr><tr><td/><td>i'm, tired, hungry, bored, exhausted,</td><td/></tr><tr><td>Exhaustion</td><td>freaking, sleepy, sooooooooo, stressed,</td><td>.21</td></tr><tr><td/><td>grumpy</td><td/></tr><tr><td>Feeling hurt</td><td>i'm, sick, tired, feeling, hearing, tire, fed, bullshit, assuming, hurting, numb</td><td>.21</td></tr><tr><td/><td>don't, feel, anymore, beg, begging, hon-</td><td/></tr><tr><td>Physical Pain</td><td>estly, knees, clue, hollow, creeping, sym-</td><td>.20</td></tr><tr><td/><td>pathy</td><td/></tr><tr><td/><td>feel, sick, crap, feeling, ugh, hate, feels,</td><td/></tr><tr><td>Feeling sick</td><td>sucks, crappy, bleh, worse, miserable,</td><td>.19</td></tr><tr><td/><td>sickness, icky, =(</td><td/></tr><tr><td>Losing control</td><td>i'm, it's, i've, don't, lost, mind, quarter, wouldn't, anymore, control, reason</td><td>.19</td></tr><tr><td>Negatively correlated</td><td>most frequent words used by low-stress people</td><td>r</td></tr><tr><td/><td>great, lunch, nice, dinner, family, en-</td><td/></tr><tr><td>Family and eating</td><td>joyed, church, wonderful, afternoon, sun-day, kids, evening, shopping, meeting,</td><td>.13</td></tr><tr><td/><td>hubby</td><td/></tr><tr><td/><td>kings, delhi, leon, mumbai, rocks,</td><td/></tr><tr><td>Travel</td><td>queens, reached, rains, phew, bak, travel-</td><td>.12</td></tr><tr><td/><td>ling, royal, metro, indians, mahal</td><td/></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF4": {
+                "text": "",
+                "html": null,
+                "content": "<table><tr><td/><td>on FB</td><td>Trained on FB+Tw</td></tr><tr><td/><td>Tested on Tw</td><td>Tested on Tw</td></tr><tr><td>LIWC 2015</td><td>.23</td><td>.24</td></tr><tr><td>Topics</td><td>.15</td><td>.17</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF5": {
+                "text": "Schwartz et al. 2013a). The authors constructed this dataset by collecting a 10% sample of Twitter posts between the years 2009-15 from the TrendMiner project (Preotiuc-Pietro",
+                "html": null,
+                "content": "<table><tr><td/><td>Domain Adaptation</td><td>EasyAdapt</td><td>Transfer Component Analysis</td></tr><tr><td>LIWC 2015</td><td>.23</td><td>.23</td><td>.27</td></tr><tr><td>Topics</td><td>.15</td><td>.16</td><td>.18</td></tr><tr><td colspan=\"4\">Table 6: Domain Adaptation: Stress Prediction Performance</td></tr><tr><td colspan=\"4\">(Pearson's r) based on 5-fold cross-validation, trained on</td></tr><tr><td colspan=\"3\">Facebook and tested on Twitter.</td><td/></tr><tr><td colspan=\"4\">RQ3 Evaluating County Level</td></tr><tr><td/><td colspan=\"3\">Language-Predicted Stress</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF7": {
+                "text": "Correlation between county level health measures and stress. All correlations are significant at p < 0.01.",
+                "html": null,
+                "content": "<table/>",
+                "num": null,
+                "type_str": "table"
+            },
+            "TABREF8": {
+                "text": "Pearson correlations (top 5)  between the stress score and LIWC features extracted on Twitter, when controlling for age and gender. All features are significant at p < .01, two tailed t-test.",
+                "html": null,
+                "content": "<table><tr><td colspan=\"2\">LIWC -Twitter</td><td/></tr><tr><td colspan=\"2\">Positively correlated</td><td>most frequent words</td><td>r</td></tr><tr><td colspan=\"2\">Comparisons</td><td>greater, best, after</td><td>.164</td></tr><tr><td colspan=\"2\">Adverbs</td><td>very, really</td><td>.144</td></tr><tr><td colspan=\"2\">Nonfluencies</td><td>er, hm, umm</td><td>.136</td></tr><tr><td colspan=\"3\">Differentiation hasn't, but, else</td><td>.134</td></tr><tr><td colspan=\"3\">Focused on Past ago, did, talked</td><td>.134</td></tr><tr><td colspan=\"2\">Negatively correlated</td><td>most frequent words</td><td>r</td></tr><tr><td colspan=\"2\">Power</td><td>superior</td><td>-.159</td></tr><tr><td colspan=\"3\">Positive Emotion love, nice, sweet</td><td>-.107</td></tr><tr><td colspan=\"2\">Topics -Twitter</td><td/></tr><tr><td>Positively correlated</td><td colspan=\"3\">most frequent words used by high-stress people</td><td>r</td></tr><tr><td/><td colspan=\"3\">hate, stupid, --, &gt;.&lt;, gah, ugh, friggin,</td></tr><tr><td>Hatred</td><td colspan=\"3\">effin, sigh, grr, &gt;:, wtf, annoying, urgh,</td><td>.165</td></tr><tr><td/><td>dammit</td><td/></tr><tr><td>Sarcasm</td><td colspan=\"3\">funny, it's, thinks, people, isn't, finds, hilari-ous, ironic, entertaining, nicer, unfortunate</td><td>.159</td></tr><tr><td>Feeling awkward</td><td colspan=\"3\">feels, weird, kinda, weird, bit, strange, odd, hmm, suddenly, sort, awkward, dunno</td><td>.150</td></tr><tr><td colspan=\"4\">Table 9: Pearson correlations between the stress score and</td></tr><tr><td colspan=\"4\">Topics extracted from Twitter posts, when controlling for age</td></tr><tr><td colspan=\"4\">and gender. Topic labels are manually created. All features</td></tr><tr><td colspan=\"4\">are significant at p &lt; .01, two tailed t-test. No negative</td></tr><tr><td colspan=\"3\">correlations were found for Twitter posts</td></tr><tr><td colspan=\"4\">which are likely to face higher stress. Urban counties, with</td></tr><tr><td colspan=\"4\">pressures of work and a fast-paced routine, are less likely to</td></tr><tr><td colspan=\"3\">experience debilitating, psychological stress</td></tr></table>",
+                "num": null,
+                "type_str": "table"
+            }
+        }
+    }
+}

@@ -160,3 +160,76 @@ def extract_label(text):
             return answer
     logger.warning(f"Could not extract label from text: {text}")
     return "other"
+
+@extract_label_register.register("persuasive_pairs")
+def persuasive_pairs_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+    text = text.lower()
+    patterns = [
+        r"answer: the (\w+) argument",
+        r"answer: \[the (\w+) argument",
+        r"answer: (\w+) argument",
+    ]
+
+    prev_answer = ""
+    for pattern in patterns:
+        match = re.findall(pattern, text.lower())
+        if match:
+            answer = match[-1] if len(match) > 0 else None
+            if prev_answer == "":
+                prev_answer = answer
+            elif prev_answer != "" and answer != prev_answer:
+                return "conflict"
+
+    for pattern in patterns:
+        match = re.findall(pattern, text.lower())
+        if match:
+            answer = match[-1] if len(match) > 0 else None
+            if answer == "first":
+                return "first"
+            elif answer == "second":
+                return "second"
+            else:
+                return "other"
+    logger.warning(f"Could not extract label from text: {text}")
+    return "other"
+
+@extract_label_register.register("dreaddit")
+def dreaddit_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+    text = text.lower()
+    patterns = [
+        r"answer: (\w+) stress",
+        r"answer: \[(\w+) stress",
+    ]
+
+    prev_answer = ""
+    for pattern in patterns:
+        match = re.findall(pattern, text.lower())
+        if match:
+            answer = match[-1] if len(match) > 0 else None
+            if prev_answer == "":
+                prev_answer = answer
+            elif prev_answer != "" and answer != prev_answer:
+                return "conflict"
+
+    for pattern in patterns:
+        match = re.findall(pattern, text.lower())
+        if match:
+            answer = match[-1] if len(match) > 0 else None
+            if answer == "has":
+                return "has stress"
+            elif answer == "no":
+                return "no stress"
+            else:
+                return "other"
+    logger.warning(f"Could not extract label from text: {text}")
+    return "other"

@@ -1,0 +1,3355 @@
+{
+    "paper_id": "2406",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-09-19T13:38:05.030425Z"
+    },
+    "title": "Detecting Machine-Generated Texts: Not Just \"AI vs Humans\" and Explainability is Complicated",
+    "authors": [
+        {
+            "first": "Jiazhou",
+            "middle": [],
+            "last": "Ji",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shanghai Jiao Tong University",
+                "location": {
+                    "country": "China"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Ruizhe",
+            "middle": [],
+            "last": "Li",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Aberdeen",
+                "location": {
+                    "country": "UK"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Shujun",
+            "middle": [],
+            "last": "Li",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Kent",
+                "location": {
+                    "country": "UK"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Jie",
+            "middle": [],
+            "last": "Guo",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shanghai Jiao Tong University",
+                "location": {
+                    "country": "China"
+                }
+            },
+            "email": "guojie@sjtu.edu.cn"
+        },
+        {
+            "first": "Weidong",
+            "middle": [],
+            "last": "Qiu",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shanghai Jiao Tong University",
+                "location": {
+                    "country": "China"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Zheng",
+            "middle": [],
+            "last": "Huang",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shanghai Jiao Tong University",
+                "location": {
+                    "country": "China"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Chiyu",
+            "middle": [],
+            "last": "Chen",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shanghai Jiao Tong University",
+                "location": {
+                    "country": "China"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Xiaoyu",
+            "middle": [],
+            "last": "Jiang",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shanghai Jiao Tong University",
+                "location": {
+                    "country": "China"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Xinru",
+            "middle": [],
+            "last": "Lu",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Shanghai Jiao Tong University",
+                "location": {
+                    "country": "China"
+                }
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "As Large Language Models (LLMs) rapidly advance, increasing concerns arise regarding risks about the actual authorship of texts we see online and in the real world. The task of distinguishing LLM-authored texts is complicated by the nuanced and overlapping behaviors of both machines and humans. In this paper, we challenge the current practice of considering the LLM-generated text detection a binary classification task of differentiating human from AI. Instead, we introduce a novel ternary text classification scheme, adding an \"undecided\" category for texts that could be attributed to either source, and we show that this new category is crucial to understand how to make the detection result more explainable to lay users. This research shifts the paradigm from merely classifying to explaining machine-generated texts, emphasizing the need for detectors to provide clear and understandable explanations to users. Our study involves creating four new datasets comprised of texts from various LLMs and human authors. Based on the new datasets, we performed binary classification tests to ascertain the most effective state-of-the-art (SOTA) detection methods and identified SOTA LLMs capable of producing harder-to-detect texts. Then, we constructed a new dataset of texts generated by the two top-performing LLMs and human authors, and asked three human annotators to produce ternary labels with explanation notes. This dataset was used to investigate how three top-performing SOTA detectors behave in the new ternary classification context. Our results highlight why the \"undecided\" category is much needed from the viewpoint of explainability. Additionally, we conducted an analysis of explainability of the three best-performing detectors and the explanation notes of the human annotators, revealing insights about the complexity of explainable detection of machinegenerated texts. Finally, we propose guidelines * Equal contributions.",
+    "pdf_parse": {
+        "paper_id": "2406",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "As Large Language Models (LLMs) rapidly advance, increasing concerns arise regarding risks about the actual authorship of texts we see online and in the real world. The task of distinguishing LLM-authored texts is complicated by the nuanced and overlapping behaviors of both machines and humans. In this paper, we challenge the current practice of considering the LLM-generated text detection a binary classification task of differentiating human from AI. Instead, we introduce a novel ternary text classification scheme, adding an \"undecided\" category for texts that could be attributed to either source, and we show that this new category is crucial to understand how to make the detection result more explainable to lay users. This research shifts the paradigm from merely classifying to explaining machine-generated texts, emphasizing the need for detectors to provide clear and understandable explanations to users. Our study involves creating four new datasets comprised of texts from various LLMs and human authors. Based on the new datasets, we performed binary classification tests to ascertain the most effective state-of-the-art (SOTA) detection methods and identified SOTA LLMs capable of producing harder-to-detect texts. Then, we constructed a new dataset of texts generated by the two top-performing LLMs and human authors, and asked three human annotators to produce ternary labels with explanation notes. This dataset was used to investigate how three top-performing SOTA detectors behave in the new ternary classification context. Our results highlight why the \"undecided\" category is much needed from the viewpoint of explainability. Additionally, we conducted an analysis of explainability of the three best-performing detectors and the explanation notes of the human annotators, revealing insights about the complexity of explainable detection of machinegenerated texts. Finally, we propose guidelines * Equal contributions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "With the rapid evolution of Large Language Models (LLMs) such as ChatGPT-4 (OpenAI, 2023) , the sophistication and human-like quality of texts generated by these models have notably increased, enabling them to produce diverse content in response to specific prompts. These advancements bring not only numerous practical applications but also raise significant challenges including potential academic fraud and actual authorship. Extensive research has been undertaken to differentiate between machine-generated texts (MGTs) and human-generated texts (HGTs), primarily employing model-based approaches (Wang et al., 2023; Bhattacharjee et al., 2023) and statistical methods that analyze inherent text characteristics (Hans et al., 2024; Bao et al., 2024; Zhang et al., 2024) . Several online platforms such as GPTZero (Tian et al., 2023) and Sapling (Sapling AI Team, 2023) have also demonstrated robust capabilities in differentiating MGTs from HGTs.",
+                "cite_spans": [
+                    {
+                        "start": 65,
+                        "end": 89,
+                        "text": "ChatGPT-4 (OpenAI, 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 601,
+                        "end": 620,
+                        "text": "(Wang et al., 2023;",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 621,
+                        "end": 648,
+                        "text": "Bhattacharjee et al., 2023)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 716,
+                        "end": 735,
+                        "text": "(Hans et al., 2024;",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 736,
+                        "end": 753,
+                        "text": "Bao et al., 2024;",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 754,
+                        "end": 773,
+                        "text": "Zhang et al., 2024)",
+                        "ref_id": "BIBREF39"
+                    },
+                    {
+                        "start": 817,
+                        "end": 836,
+                        "text": "(Tian et al., 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 849,
+                        "end": 872,
+                        "text": "(Sapling AI Team, 2023)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Traditionally, the detection of MGTs has relied on a binary classification framework that discerns between MGTs and HGTs. However, the boundaries between MGTs and HGTs are increasingly ambiguous due to the rapid enhancements in LLMs, thereby complicating the effectiveness of simple binary classification systems. For instance, in statistical detection, the characteristics of a given MGT might deviate significantly from typical MGTs patterns and mirror those of HGTs, leading to a misclassification. Model-based methods often struggle with generalization as they tend to learn features that are specific to the data they are trained on (usually limited to one or more specific LLMs), which may not necessarily work as new models emerge. Moreover, many existing detection systems lack an explainability component. Although some de-tection methods attempt to consider explanatory features, their effectiveness in providing meaningful insights appears limited according to our evaluations of one such methods (an online closedsource detector) GPTZero (Tian et al., 2023) . This shortfall emphasizes a critical gap: the need for enhanced explainability in MGT detectors to improve end users' trust in such systems.",
+                "cite_spans": [
+                    {
+                        "start": 1050,
+                        "end": 1069,
+                        "text": "(Tian et al., 2023)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In order to address these limitations, our study introduces a novel ternary classification system for analyzing texts. Recognizing that some texts may simultaneously share characteristics of both MGTs and HGTs, we have added an \"undecided\" category to our classification framework. We developed a ternary classification dataset and designed experiments to test the validity of this approach. Our methodology not only includes rigorous statistical and model-based analyses, but also incorporates detailed human evaluations to provide a nuanced understanding of the new ternary text classification task and the complexity of producing humanunderstandable explanations. By comparing the explanatory power of human assessments with that of automated detectors, we highlight the current explanatory limitations faced by MGT detectors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Through some binary classification experiments based on four new datasets covering multiple state-of-the-art (SOTA) LLMs, we established that the most advanced LLMs currently available are , in terms of defeating multiple SOTA MGT detectors. The detectors that performed the best in our experiments are GPTZero (Tian et al., 2023) , Sapling (Sapling AI Team, 2023) and Binoculars (Hans et al., 2024) . Building on these findings, we crafted a ternary classification dataset using texts from the aforementioned top-performing LLMs. We organized human coders to annotate these texts, applying the ternary classification framework and providing detailed explanations for their decisions. Subsequent experiments with the top three detectors proved the limitations of binary classification so that the new \"undecided\" category should be seriously considered in future research on MGT detection. Our comparative analysis between the human-provided explanations and those offered by the detector GPTZero illuminated significant gaps in current automated explanations. While human explanations provide valuable insights, they also exhibit inherent limitations and imply the complexity and challenges behind developing more explainable MGT detectors.",
+                "cite_spans": [
+                    {
+                        "start": 311,
+                        "end": 330,
+                        "text": "(Tian et al., 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 341,
+                        "end": 364,
+                        "text": "(Sapling AI Team, 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 380,
+                        "end": 399,
+                        "text": "(Hans et al., 2024)",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In conclusion, our research not only challenges existing paradigms in MGT detection but also sets a foundation for future innovations in detector design, particularly in enhancing explainability. This work suggests new directions for the development of detection systems that are not only effective but also transparent and interpretable to users.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Zero-shot detection. This approach leverages some unique statistical properties distinguishing MGTs from HGTs. Past studies have employed various linguistic model-derived characteristics, such as entropy (He et al., 2023) , average log-probability scores (Solaiman et al., 2019) and perplexity (Wu et al., 2023) , as useful statistical properties for detection. With the evolution of LLMs that generate increasingly sophisticated texts, more recent zeroshot detection strategies (Gehrmann et al., 2019; Mitchell et al., 2023; Su et al., 2023; Wu and Xiang, 2023; Bao et al., 2024; Kumari et al., 2024) have adapted to discern high-order features of advanced text generators. Notably, the Binoculars model (Hans et al., 2024) leverages LLMs to perform next-token predictions at each text position, utilizing the log perplexity ratio compared to the baseline text as a distinguishing statistic.",
+                "cite_spans": [
+                    {
+                        "start": 204,
+                        "end": 221,
+                        "text": "(He et al., 2023)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 255,
+                        "end": 278,
+                        "text": "(Solaiman et al., 2019)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 294,
+                        "end": 311,
+                        "text": "(Wu et al., 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 479,
+                        "end": 502,
+                        "text": "(Gehrmann et al., 2019;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 503,
+                        "end": 525,
+                        "text": "Mitchell et al., 2023;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 526,
+                        "end": 542,
+                        "text": "Su et al., 2023;",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 543,
+                        "end": 562,
+                        "text": "Wu and Xiang, 2023;",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 563,
+                        "end": 580,
+                        "text": "Bao et al., 2024;",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 581,
+                        "end": 601,
+                        "text": "Kumari et al., 2024)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 705,
+                        "end": 724,
+                        "text": "(Hans et al., 2024)",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Open-Source Detectors",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Model-based detection. This approach involves adapting existing models to learn from specific datasets for MGT detection (OpenAI, 2021; He et al., 2023) . It often includes sentence-level detection and analyses different LLM outputs (Wang et al., 2023; Bhattacharjee et al., 2023; Antoun et al., 2023) . However, these methods can suffer from overfitting and generally exhibit limited effectiveness in detecting texts across various domains.",
+                "cite_spans": [
+                    {
+                        "start": 121,
+                        "end": 135,
+                        "text": "(OpenAI, 2021;",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 136,
+                        "end": 152,
+                        "text": "He et al., 2023)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 233,
+                        "end": 252,
+                        "text": "(Wang et al., 2023;",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 253,
+                        "end": 280,
+                        "text": "Bhattacharjee et al., 2023;",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 281,
+                        "end": 301,
+                        "text": "Antoun et al., 2023)",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Open-Source Detectors",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Other approaches. There are also other approaches based on watermarking, adversarial learning based training, and human assistance (Wu et al., 2024) . These approaches are more complicated and are often a mixture of different approaches, so in this paper we consider two basic approaches only to make our work more focused.",
+                "cite_spans": [
+                    {
+                        "start": 131,
+                        "end": 148,
+                        "text": "(Wu et al., 2024)",
+                        "ref_id": "BIBREF34"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Open-Source Detectors",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Despite their closed-source nature, online detectors are of significant interest in academic research (Yang et al., 2023) . For instance, GPTZero (Tian et al., 2023) integrates several analytical components that predict if a piece of text is generated by machine or human with a confidence score, together with a sentence-by-sentence analysis capability. Similarly, Sapling (Sapling AI Team, 2023 ) utilizes a transformer-based architecture akin to those found in generative AI systems. Moreover, various platforms offer an online MGT detection tool for all to use (Originality. AI, 2024; Copyleaks Technologies Ltd., 2023; Inspera, 2023; ZeroGPT.com, 2023) .",
+                "cite_spans": [
+                    {
+                        "start": 102,
+                        "end": 121,
+                        "text": "(Yang et al., 2023)",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 146,
+                        "end": 165,
+                        "text": "(Tian et al., 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 374,
+                        "end": 396,
+                        "text": "(Sapling AI Team, 2023",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 579,
+                        "end": 588,
+                        "text": "AI, 2024;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 589,
+                        "end": 623,
+                        "text": "Copyleaks Technologies Ltd., 2023;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 624,
+                        "end": 638,
+                        "text": "Inspera, 2023;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 639,
+                        "end": 657,
+                        "text": "ZeroGPT.com, 2023)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Online Close-Source Detection Systems",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "According to its official documentation (Tian et al., 2023) , GPTZero uses the following six features to achieve explainability: readability, percent SAT, simplicity, perplexity, burstiness, and average sentence length. However, it does not provide clarity on how these features influence its final judgments. Other efforts have focused on integrating explanatory modules into detectors. One study (Mitrovi\u0107 et al., 2023) implemented Shapley Additive Explanations (SHAP) (Lundberg and Lee, 2017), which assigns importance values to each feature, enhancing the interpretability of decisions in text source detection. Another investigation (Andr\u00e9 et al., 2023) computed textual attributes such as perplexity, grammar, and n-gram distributions to measure their effects on detection outcomes. Despite these advancements, the current state of detector explainability remains challenging for lay users to comprehend.",
+                "cite_spans": [
+                    {
+                        "start": 40,
+                        "end": 59,
+                        "text": "(Tian et al., 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 398,
+                        "end": 421,
+                        "text": "(Mitrovi\u0107 et al., 2023)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 638,
+                        "end": 658,
+                        "text": "(Andr\u00e9 et al., 2023)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability in Current Detectors",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "This section outlines the assessment of state-of-theart (SOTA) MGT detectors through binary classification tests on datasets containing both MGTs and HGTs. Our objective is to identify the most effective and consistently accurate detectors across various datasets and to pinpoint LLMs that exhibit the strongest generative abilities and human-like output. This process will involve binary classification trials using custom-built datasets. The selected detectors and LLMs will then be utilized in further experimental investigations.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Binary Classification Evaluation of Detectors on MGTs and HGTs",
+                "sec_num": "3"
+            },
+            {
+                "text": "We conducted our experiments using four datasets specifically constructed for this study. It is crucial to carefully select LLMs for text generation and appropriate sources of HGTs to assemble the dataset. We chose a mix of open-source and closedsource SOTA MGT detectors for evaluation and used standard performance metrics for the binary classification tests.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Design",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "LLMs. For text generation, we have opted for widely recognized models including the closedsource ChatGPT-3.5 (OpenAI, 2022) and ChatGPT-4 (OpenAI, 2023) , known for their robust performance. Additionally, we selected Google's Gemini Pro (Hassabis and the Gemini Team, 2023), renowned for its ability to produce coherent and high-quality natural language outputs. From the open-source domain, we have chosen the LLaMA series (Touvron et al., 2023) , specifically using LLaMA-13B for generating machine texts based on our computation resources.",
+                "cite_spans": [
+                    {
+                        "start": 97,
+                        "end": 123,
+                        "text": "ChatGPT-3.5 (OpenAI, 2022)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 128,
+                        "end": 152,
+                        "text": "ChatGPT-4 (OpenAI, 2023)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 424,
+                        "end": 446,
+                        "text": "(Touvron et al., 2023)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Design",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "HGT sources. To ensure a diverse and representative collection of HGTs, we included selections from public datasets such as the HC3 dataset (Guo et al., 2023) , which contains texts from four other public Q&A datasets and data crawled from Wikipedia. Notably, it includes a category of texts, similar to the ELI5 (\"Explain Like I'm Five\") format (Fan et al., 2019) , where complex issues are explained in simple terms. We also extracted short texts from the IDMGSP dataset (Abdalla et al., 2023) , which comprises titles, abstracts, introductions and conclusions of human-authored scientific papers, alongside texts manually selected from X/Twitter using tag searches to cover topics of everyday discourse. This blend of sources provides a broad spectrum of topics and writing styles in the human-generated texts within our dataset.",
+                "cite_spans": [
+                    {
+                        "start": 140,
+                        "end": 158,
+                        "text": "(Guo et al., 2023)",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 346,
+                        "end": 364,
+                        "text": "(Fan et al., 2019)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 473,
+                        "end": 495,
+                        "text": "(Abdalla et al., 2023)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Design",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "MGT Detectors. Initially, we chose GPTZero and Sapling as the leading commercial (online and closed-source) detectors from the proprietary sector. We then extended our selection to include several notable open-source detectors such as Binoculars (Hans et al., 2024) , Fast-DetectGPT (Bao et al., 2024) , MMD-MP (Zhang et al., 2024) , DEMASQ (Kumari et al., 2024) , and Detect-GPT (Mitchell et al., 2023) .",
+                "cite_spans": [
+                    {
+                        "start": 246,
+                        "end": 265,
+                        "text": "(Hans et al., 2024)",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 283,
+                        "end": 301,
+                        "text": "(Bao et al., 2024)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 311,
+                        "end": 331,
+                        "text": "(Zhang et al., 2024)",
+                        "ref_id": "BIBREF39"
+                    },
+                    {
+                        "start": 341,
+                        "end": 362,
+                        "text": "(Kumari et al., 2024)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 380,
+                        "end": 403,
+                        "text": "(Mitchell et al., 2023)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Design",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Custom-built Datasets. Four datasets were built using the selected LLMs and HGT sources, as de- respectively) , have also been used to provide a comprehensive assessment of detector performance.",
+                "cite_spans": [
+                    {
+                        "start": 96,
+                        "end": 109,
+                        "text": "respectively)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experimental Design",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "We evaluated various detectors on datasets, as detailed in Figure 1 visually compares F1 scores of all tested MGT detectors across all four datasets, confirming the superior performance of GPTZero and Sapling over local models. Among the latter, Binoculars ranks the highest, demonstrating a consistent performance across all datasets, suggesting its being less susceptible to overfitting compared to other local models. Further analysis reveals that texts generated by ChatGPT-3.5 and ChatGPT-4 are generally more challenging to classify across all detectors, compared to those generated by LLaMA-13B and Gemini Pro, implying that ChatGPT-3.5 and ChatGPT4 can produce texts that more closely resemble human writing. Based on these findings, for the further experiments and discussions about the new ternary classification framework and the com-plexity of explainability, we chose to use a mixed dataset with texts generated by ChatGPT-3.5 and ChatGPT-4, and HGTs. Similarly, on the selection of MGT detectors, we focused on three topperforming ones, GPTZero, Sapling, and Binoculars.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 66,
+                        "end": 67,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "4 Ternary Classification Tests for Selected MGT Detectors",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Following the outcomes from binary classification experiments, we compiled a new dataset containing texts from ChatGPT-4, ChatGPT-3.5, and human authors. The dataset consists of 200 texts, with 50 from ChatGPT-4, 50 from ChatGPT-3.5, and 100 from human authors. Three co-authors of this paper, who are all Computer Science undergraduate students, annotated the 200 texts to categorize each text into one of three groups: human, machine, and undecided. They also provided explanation notes to justify their annotation results. Each annotator first independently annotated the 100 texts and also indicated their level of confidence for each label. After all the three annotators finished their work, we calculated Fleiss' kappa (Fleiss, 1971) , which was 0.1377, indicating a low level of agreement among the annotators. To address the disagreements, all authors entered into a collaborative discussion on the texts with different opinions, without revealing the ground truth to the annotators, and the annotators were asked to refine their annotations. After the annotations were updated, we calculated Fleiss' kappa again, which increased to 0.9438, reflecting a near-complete consensus among all annotators. Any texts that remain to have no consensus were labeled as \"undecided\". The explanation notes of the three annotators were merged and refined to be more consistent after the first author discussed with the three annotators and other co-authors. More details of the dataset can be found in Table 3 , which shows that all human annotated MGTs and HGTs are 100% correct according to the ground truth labels. The high percentage of undecided texts itself is indicative and already shows that the traditional binary classification approaches may be problematic. More information about how the human annotators' work is given in Appendix I.",
+                "cite_spans": [
+                    {
+                        "start": 726,
+                        "end": 740,
+                        "text": "(Fleiss, 1971)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 1504,
+                        "end": 1505,
+                        "text": "3",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Manual Annotation and Explanations",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "The human annotation results revealed that, although some automated MGT detectors have achieved very good performance in predicting ground truth labels, human annotators were clearly not convinced by the cases falling into the \"undecided\" category. This can be partly explained by what an ideal machine-based text generator is supposed to do -to produce texts that are HGTs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Manual Annotation and Explanations",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Although we may argue that SOTA LLM-based generators are still far from ideal, the human annotators clearly have seen many example MGTs that are sufficiently human-like so that there is no convincing way to label them as just MGTs or HGTs, so \"undecided\" would be a better class to describe them.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Manual Annotation and Explanations",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Using the new dataset with ternary labels, we investigated how the three top-performing binary MGT detectors performed in the context of the ternary classification task. We generated 3 \u00d7 2 confusion matrices to observe how the three different types of texts, particularly those in the new \"undecided\" category, are classified by the MGT detectors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Method",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "The confusion matrices for the detectors GPTZero, Sapling, and Binoculars, detailed in Fig. 2 , reveal that, while the detection accuracy is high for clearly defined MGTs and HGTs (which was expected based on the results of the binary classification experiments reported in the previous section), challenges persist with the \"undecided\" texts. The most interesting pattern is that all three detectors are clearly biased on texts labeled as \"undecided\": they all have a clear tendency to classify such texts as MGTs. This bias is largely aligned with the biased percentage of MGTs in the \"undecided\" category as shown in Table 3 . Considering that human annotators considered such texts difficult to judge, it is likely also difficult for the MGT detectors to explain why they consider such texts generated by either machines or humans. Another interesting observation is that, both Sapling and Binoculars have a much higher error rate for HGTs than for MGTs labeled by our human annotators, implying HGTs may be generally harder to detect than MGTs for most detectors. GPTZero does not seem to suffer from this problem, but due to its closedsource nature it is unclear how it achieved such a performance.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 92,
+                        "end": 93,
+                        "text": "2",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 626,
+                        "end": 627,
+                        "text": "3",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "The results in the previous section indicate the importance for binary MGT detectors to explain their results to human users, which is particularly important for texts in the \"undecided\" category since human users may not agree on binary labels for such texts, not mentioning the results from an automated MGT detector. In this section, we report our analysis of GPTZero, the only MGT detector with an explainability element out of the three we considered in the previous section, and also our analysis of explanation notes given by the three human annotators who constructed the ternary dataset we used.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability of Detectors",
+                "sec_num": "5"
+            },
+            {
+                "text": "Different from Sapling and Binoculars, which do not provide any explanation to their results, GPTZero offers the following six concrete metrics to offer some level of explainability to their results: readability, percent SAT words, simplicity, perplexity, burstiness, and average sentence length.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of GPTZero's Explainability",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Other than giving values of the metrics, it does not clarify how they affect its decision-making process. Table 4 shows an example, comparing the six explainability metrics used by GPTZero and the explanation notes given by our human annotators. As can be seen, the metrics used by GPTZero has limited explanatory power because they are too abstract. For instance, all the six metrics are marked as \"Medium\", which does not explain why the final judgment is AI. Instead, \"Medium\" may better fit into the \"undecoded\" category of our ternary classification framework, as what the human annotators stated in their more human-understandable explanation notes.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 112,
+                        "end": 113,
+                        "text": "4",
+                        "ref_id": "TABREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Analysis of GPTZero's Explainability",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "A further empirical analysis was performed to study how the six explainability metrics claimed by GPTZero affect the final results. We constructed a dataset using texts in the datasets we used in previous sections, and used the six metrics as the input features and the GPTZero's detection results as the target class labels. We used an 80-20 trainingtesting split and applied various traditional machine learning models including logistic regression (Cox, 1958) , SVC (Cortes and Vapnik, 1995) , perceptron (Rosenblatt, 1958) , and decision tree (Breiman et al., 1984) . The results showed that two metrics, Readability and Perplexity, significantly affect the GPTZero's decision-making, while other metrics played a minor role. Yet, the accuracy rates of all models stayed below 80%, implying that GPTZero uses other features and/or mechanisms to achieve its much higher performance observed in Section 3. For a comprehensive breakdown of these results, refer to Appendix B.",
+                "cite_spans": [
+                    {
+                        "start": 451,
+                        "end": 462,
+                        "text": "(Cox, 1958)",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 469,
+                        "end": 494,
+                        "text": "(Cortes and Vapnik, 1995)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 508,
+                        "end": 526,
+                        "text": "(Rosenblatt, 1958)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 547,
+                        "end": 569,
+                        "text": "(Breiman et al., 1984)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of GPTZero's Explainability",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Our analysis of human annotators' explanation notes revealed eight primary categories, each detailed in Appendix C.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Spelling errors. These involve inaccuracies in word composition such as omissions, insertions, substitutions, transpositions, and phonetic mistakes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Human-written texts tend to include spelling errors more frequently, whereas machine-generated texts seldom display these errors. The difference may be explained by the higher likelihood for human users to misspell words especially in informal writing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Grammatical errors. These include verb conjugation mistakes, subject-verb disagreements, wrong usage of articles, and misuse or absence of punctuation marks. Such errors are more prevalent in HGTs, likely due to the same reason as spelling errors. On the other hand, it is more sensible that LLMs follow linguistic rules more rigorously, even for informal writing.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Perplexity. This metric evaluates how well a model predicts a text. Higher perplexity indicates more unpredictability and diversity, common in HGTs due to natural creativity. MGTs, on the other hand, tend to adhere to predictable patterns, resulting in lower perplexity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Logical errors. These occur when there are flaws in reasoning or the logical flow of the text. HGTs might contain occasional logical errors due to typographical oversights, while MGTs can exhibit more obvious and harder-to-explain logical inconsistencies due to limitations in processing complex logical relationships.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Unnecessary repetition. This refers to the excessive repetition of words or phrases without a clear purpose. MGTs often repeat content due to the constraints of their generation models, whereas humans use repetition strategically to emphasize points and maintain a coherent narrative flow. Human labels: undecided Human explanations: The text is free from grammatical and spelling errors. This passage elucidates the relationship between sweating and colds, maintaining an objective and rigorous tone. It encompasses both common knowledge and scientific principles.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "The structure of the text is clear, with adverbial usage enhancing the clarity and fluency of the sentences. The text avoids unnecessary repetition, making it readily comprehensible. Therefore, it should be categorized as \"undecided.\" Readability. This evaluates text clarity based on factors like sentence length and word complexity. HGTs usually score higher for readability because human writers tend to use simpler language and more straightforward sentence structures. MGTs may incorporate more complex vocabulary and sentence structures, often lowering their readability scores.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Text structure. This pertains to how texts organize content using elements like adverbs, prepositions, and bullet points. MGTs tend to use these structural elements more frequently, while HGTs often exhibit a more natural flow with less reliance on rigid structuring.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Bias. This indicates the presence of prejudicial or favoring tendencies in a text. HGTs are more likely to reflect personal or societal biases, while MGTs generally show fewer biases, though they can still mirror biases present in their training data. These categories helped our human annotators to be more certain on some HGTs and MGTs. However, texts lacking definitive features were categorized as \"undecided\" based on the absence of clear human or machine indicators.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "6 Further Discussions",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation Categories Provided by Human Annotators",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "The introduction of the \"undecided\" category has sparked a considerable debate concerning its validity. For instance, a text in Table 4 was categorized as \"undecided\" by our human annotators, whereas detection tools like GPTZero, Sapling, and Binoculars identified it as MGT -a classification that is technically correct. However, according to our human annotators, these texts were aptly placed in the \"undecided\" category, arguing that there was no definitive reason to label them strictly as MGTs, suggesting instances where LLMs might merely be mimicking human-like output. More examples of this kind can be found in Appendix G.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 134,
+                        "end": 135,
+                        "text": "4",
+                        "ref_id": "TABREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Justification for Ternary Classification",
+                "sec_num": "6.1"
+            },
+            {
+                "text": "Upon reviewing the explanation notes provided by our human annotators, we observed that characteristics of MGTs and HGTs often overlap across several categories. This overlap creates a gray area in determining the origin of the text, as the boundaries between MGT and HGT are not always clearcut. Moreover, since MGTs are trained on and derive from HGTs, they can produce texts that are indistinguishable from human writings.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Justification for Ternary Classification",
+                "sec_num": "6.1"
+            },
+            {
+                "text": "Although it is apparent that human annotators struggled with accurately distinguishing the \"undecided\" category from the other two, this ambiguity also underscores the complexity of text generation origins. Despite these challenges, the ternary classification provides a framework that can guide further refinement in identifying and differentiating these text categories. Future efforts should focus on establishing more precise criteria to discern the unique characteristics and distinctions among these three labels.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Justification for Ternary Classification",
+                "sec_num": "6.1"
+            },
+            {
+                "text": "In our recent experiments, human annotators categorized texts into three groups and provided explanation notes for their classifications. The types of explanation notes identified align with findings in past research, highlighting key factors like errors, perplexity, repetition, and readability as crucial in distinguishing between MGTs and HGTs. For instance, studies such as those by Mindner et al. (2023) and Mu\u00f1oz-Ortiz et al. ( 2023) have documented similar observations regarding language usage differences between MGTs and HGTs.",
+                "cite_spans": [
+                    {
+                        "start": 387,
+                        "end": 408,
+                        "text": "Mindner et al. (2023)",
+                        "ref_id": "BIBREF21"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability of Detectors",
+                "sec_num": "6.2"
+            },
+            {
+                "text": "Human annotators' explanation notes are predominantly qualitative, yet quantitative measures can also be applied, particularly for aspects like spelling and grammatical errors, perplexity, and readability. For instance, tools such as Grammarly can assist in evaluating spelling and grammatical errors, while NLP tools can be used to calculate text perplexity. Readability can be assessed using existing formalas such as the Flesch Reading Ease (Flesch, 1948) and Flesch-Kincaid Grade Level (Kincaid et al., 1975) . Our experiments demonstrate a gradual decline in readability and perplexity scores from texts in the \"human\" category to the \"undecided\" category, and finally to the \"machine\" category. More detailed experimental results can be found in Appendix H.",
+                "cite_spans": [
+                    {
+                        "start": 444,
+                        "end": 458,
+                        "text": "(Flesch, 1948)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 463,
+                        "end": 512,
+                        "text": "Flesch-Kincaid Grade Level (Kincaid et al., 1975)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability of Detectors",
+                "sec_num": "6.2"
+            },
+            {
+                "text": "Despite the robustness of human explanations, which are grounded in common sense and supported by the literature, discrepancies still exist. For example, Hans et al. (2024) introduced the \"capybara problem\", where both prompts and responses with high perplexity can lead to misjudgments about text origin, both by humans and automated detectors, particularly when prompt details are unknown. Addressing the \"capybara problem\" involves creating prompts that encourage LLMs to produce features typical of HGTs, as detailed by our annotators. Effective strategies for this are out-lined in Appendix D. Moreover, advancements in LLMs like the reduction of unnecessary repetition from ChatGPT-3.5 to ChatGPT-4 demonstrate ongoing improvements, as discussed in Appendix E.",
+                "cite_spans": [
+                    {
+                        "start": 154,
+                        "end": 172,
+                        "text": "Hans et al. (2024)",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability of Detectors",
+                "sec_num": "6.2"
+            },
+            {
+                "text": "Currently, detector explainability is very limited, and there are instances where provided explanations do not accurately reflect the underlying reasoning of decisions. Future research should aim to enhance the credibility and transparency of detectors by incorporating explainability modules or integrating explainable AI (XAI) components into existing and future MGT detectors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability of Detectors",
+                "sec_num": "6.2"
+            },
+            {
+                "text": "Future studies should also focus on a better understanding of the nuances between HGTs and MGTs, possibly through user studies that assess perception and comprehension. Technologically, efforts could be directed towards improving the user interfaces of MGT detectors to provide more user-friendly explanations, potentially in an interactive, personalized and contextualized manner. For example, models could indicate whether sentences are derived from what training data or newly generated, potentially using a confidence scale to differentiate between entirely new creations and slight modifications of existing data. Such transparency could greatly enhance the explainability of AI-generated content.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability of Detectors",
+                "sec_num": "6.2"
+            },
+            {
+                "text": "This paper explores the effectiveness and challenges associated with current text detection systems. We initially set up a binary classification experiment to identify the top-performing detectors and LLMs that excel in resisting such topperforming detectors. The study was then extended to include a ternary classification framework involving datasets from ChatGPT-4, ChatGPT-3.5, and human sources, where human annotators assessed and explained their classification decisions. The results affirm the relevance of our ternary classification approach, particularly as LLMs continue to advance and produce increasingly human-like texts, making traditional binary classification approaches less meaningful. Our analysis indicates that while current detectors are lacking in explainability, the insights provided by human annotators are valuable for guiding future researcher on MGT detection. These outcomes lead us to recommend enhancements for future detection systems and their explanatory components.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "7"
+            },
+            {
+                "text": "This study is subject to several limitations. First, the relatively small sample size restricts us to a primarily qualitative analysis. Second, while the human-produced explanations from our study contribute valuable perspectives, they predominantly serve as recommendations and pointers for further research on improving detection systems. Lastly, given the ongoing advancements in LLM technology, new research opportunities and directions are likely to emerge, necessitating continual updates and revisions to our approach.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations",
+                "sec_num": null
+            },
+            {
+                "text": "All experiments were conducted using publicly available LLMs and datasets. For the datasets we constructed for the work, no any personal or private information is included. All the three human annotators are co-authors, so an research ethics review was not considered necessary. More details on how we used the human annotators can be found in Appendix I.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Ethic Statements",
+                "sec_num": null
+            },
+            {
+                "text": "In the binary classification experiments, the performance of various detectors on datasets consisting of texts generated by ChatGPT-4 and humans is presented in Table 2 . Tables 5, 6 and 7 show the specific performance of different detectors on texts generated by ChatGPT-3.5, LLaMA-13B, and Gemini Pro, respectively.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 167,
+                        "end": 168,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A Detailed Results of Binary Classification Experiments",
+                "sec_num": null
+            },
+            {
+                "text": "In the explanations provided by GPTZero, six explainability metrics are identified: Readability, Percent SAT, Simplicity, Perplexity, Burstiness, and Average Sentence Length. For all texts evaluated by GPTZero and their corresponding six feature ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B More about Explanatory Power of the Six Metrics of GPTZero",
+                "sec_num": null
+            },
+            {
+                "text": "Regarding the different types of explanations provided by human annotators, here are some typical examples and analyses. These examples and analyses confirm the validity and rationality of these explanations.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "C Examples of Different Types of Explanations Given by Human Annotators",
+                "sec_num": null
+            },
+            {
+                "text": "In the text in Table 9 , the word \"pisss\" contains a spelling error and should be spelled as \"piss.\" This mistake appears to be a typographical error, likely caused by an inadvertent extra keystroke by a human, thus resembling HGT.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 21,
+                        "end": 22,
+                        "text": "9",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Grammatical errors. The text in Table 10 contains several types of grammatical errors. First, there are capitalization mistakes, as \"i\" should be capitalized in various instances (\"I agree with you\", \"I mean unless\", \"I think\" and \"Maybe I'm\"). There are also spelling errors: \"Eienstien\" should be corrected to \"Einstein\" and \"yhat's\" should be \"that's.\" Punctuation and spacing need attention too, particularly missing spaces after commas and incorrect use of quotation marks around \"homo smarticus.\" Lastly, the phrase \"much more easier\" incorrectly uses a double comparative and should be simplified to \"much easier.\"",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 38,
+                        "end": 40,
+                        "text": "10",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Perplexity. The text in Table 11 highlights the complexity of our minds, which are not monolithic but composed of multiple processes. While one part may be daydreaming about a giant cheeseburger, another part worries about being fat. This constant shift in awareness and attention illustrates high perplexity.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 30,
+                        "end": 32,
+                        "text": "11",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Logical errors. The text in Table 12 contains logical errors primarily in its misrepresentation of the relationship between processing costs and pricing: it suggests that white rice is cheaper because it undergoes more processing, but in reality, more processing generally increases production costs. Additionally, the comparison of the costs between white rice and brown rice in the analogy contradicts market trends, as brown rice is usually more expensive due to its higher nutritional content, not cheaper.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 34,
+                        "end": 36,
+                        "text": "12",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Unnecessary repetition. The text in Table 13 repeatedly uses concepts like \"persistence\", \"effort\", and \"success\" excessively. It employs synonyms and phrases such as \"keep persevering\", \"continuous effort\", and \"repeatedly put in effort\", which redundantly stress the idea that ongoing effort leads to success. This overuse of the same concept could weaken the impact of the message by not providing new information or perspectives.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 42,
+                        "end": 44,
+                        "text": "13",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Readability. This text in Table 14 exhibits high readability due to its conversational tone, use of simple language, and relatable content. It effectively communicates the speaker's opinion and personal experience with a movie featuring Keanu Reeves. The informal language, straightforward sentence structure, and personal touch make the message easy to understand and engaging. The text also includes an emotional appeal and humor, which further enhance its readability.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 32,
+                        "end": 34,
+                        "text": "14",
+                        "ref_id": "TABREF14"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Text structure. This text in Table 15 is a wellstructured overview of deepfake technology, clearly divided into sections that define the technology and outline its potential harms. Each harm is categorized under a descriptive subheading, making the content easy to follow. This response was gener-ated by an AI.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 35,
+                        "end": 37,
+                        "text": "15",
+                        "ref_id": "TABREF8"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Bias. The text in Table 16 discusses confirmation bias, where individuals tend to notice and remember information that supports their beliefs and overlook contradicting information. The last sentence, suggesting that someone might just want to engage romantically, uses a casual and potentially flippant tone, which might be seen as inappropriate in more formal or sensitive contexts. This doesn't necessarily show bias against a specific group but indicates a casual style of expression.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 24,
+                        "end": 26,
+                        "text": "16",
+                        "ref_id": "TABREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Due to the overlapping feature distributions of texts generated by humans and AI, and the increasingly blurred boundaries resulting from the rapid development of LLMs, the explanations given by human annotators are based on their understanding of past MGTs and HGTs, which may lead to situations where they cannot accurately explain the origins of text generation. This appendix provides examples and analyses that highlight the limitations of human-produced explanations and presents corresponding counterexamples.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "D Counterexamples to Explanations Provided by Human Annotators",
+                "sec_num": null
+            },
+            {
+                "text": "In the text in Table 17 , \"coking\" and \"reeding\" are spelling errors; the correct spelling should be \"cooking\" and \"reading\". Although the sentence contains spelling errors, it is machine-generated.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 21,
+                        "end": 23,
+                        "text": "17",
+                        "ref_id": "TABREF11"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Text: Listen to be honest with you it's not always ok to act happy. You need to get things off your chest once in a while. Mankind was not made to be able to sustain happiness. So, I suggest finding a way to relieve your anger, stress, slowly and not bottle it up.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Tell someone when they pisss you off, don't just let it pass and smile. Table 9 : An example of human annotators utilizing spelling errors in the interpretation of textual sources. This text is actually generated by human, and human annotators' label is \"human\".",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 78,
+                        "end": 79,
+                        "text": "9",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Text: i agree with you.since the modern man would be aware of the root of various sciences, it would be much more easier & quicker for them to find things like light & all that.but i'm not sure about the homo smarticus\"\" .i mean unless some more people like Eienstien & Newton are born ,i think we'll be in the same level as of right now.but hey,yhat's just my opinion!maybe i'm so totally wrong.Cheers!\"\" Table 10 : An example of human annotators utilizing grammatical errors in the interpretation of textual sources. This text is actually generated by human, and human annotators' label is \"human\".",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 412,
+                        "end": 414,
+                        "text": "10",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Spelling errors.",
+                "sec_num": null
+            },
+            {
+                "text": "In the text in Table 18 , there are several common English grammatical errors including verb conjugational mistakes (e.g., \"lives\" instead of \"live\" and \"goes\" instead of \"go\"), subject-verb agreement issues (\"we likes\" should be \"we like\"), and some awkward phrasing (\"I very love my family\" should be \"I love my family very much\"). Although the text contains grammatical errors, it is machine-generated.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 21,
+                        "end": 23,
+                        "text": "18",
+                        "ref_id": "TABREF12"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Perplexity. The text in Table 19 is highly perplexing due to its use of complex vocabulary like \"quantum foam\" and \"entanglement\", intricate sentence structures, and abstract concepts that blend physics and metaphysics. This complexity demands a higher level of understanding and familiarity with advanced scientific theories, thereby increasing the text's perplexity. Although highperplexity texts are more associated with HGTs, this text is machine-generated.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 30,
+                        "end": 32,
+                        "text": "19",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Logical errors. The text in Table 20 contains a logical error: it claims that the US will become the top oil producer because the price per barrel is dropping. However, lower oil prices typically lead to decreased production, as extracting oil becomes less profitable. Thus, predicting an increase in production due to falling prices is contradictory.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 34,
+                        "end": 36,
+                        "text": "20",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Unnecessary repetition. The text in Table 21 contains repetition in the final sentence, \"The result is often a flood, where water levels rise quickly and cause significant damage.\" This restates the concept already explained earlier, that floods happen when water accumulates faster than it can disperse, leading to significant consequences.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 42,
+                        "end": 44,
+                        "text": "21",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Readability. The readability of the text in Table 22 is high because it uses short, simple sentences that are easy to understand. The words cho-sen have few syllables, making them straightforward for readers of all levels, including beginners or those learning English as a second language. However, it's important to note that this text was generated by a machine, designed to specifically use simple language and clear constructions to ensure it is accessible and easy to follow.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Text structure. The text in Bias. The text in Table 24 offers a satirical portrayal of a region's sanitary conditions. Replacing this generic reference with the name of any specific region would amount to discrimination against that region. Nonetheless, it is important to note that this biased commentary was generated by a machine.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 52,
+                        "end": 54,
+                        "text": "24",
+                        "ref_id": "TABREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "E Addressing Issues in ChatGPT-3.5: Improvements in ChatGPT-4",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "ChatGPT-3.5 still exhibits some inherent machine limitations, such as potential logical errors and unnecessary repetitions. However, these issues have been effectively addressed in ChatGPT-4 to some extent. When given with the same prompt, the problems evident in the text generated by ChatGPT-3.5 have been perfectly resolved in ChatGPT-4.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Logical errors. The text in Table 12 was generated by ChatGPT-3.5, and the aforementioned analysis has identified the presence of several logical errors. For the same prompt, the text in Table 25 obtained from ChatGPT-4 show a complete absence of logical errors.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 34,
+                        "end": 36,
+                        "text": "12",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 193,
+                        "end": 195,
+                        "text": "25",
+                        "ref_id": "TABREF8"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Text: Because our minds are n't some solid monolithic thing but a collection of processes . While you 're aware of one , occupied with daydreaming about a giant cheeseburger , another part is churning away on another subject like worrying about being fat . Awareness and attention change constantly . Table 11 : An example of human annotators utilizing perplexity in the interpretation of textual sources. This text is actually generated by human, and human annotators' label is \"human\".",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 307,
+                        "end": 309,
+                        "text": "11",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Text: \"Alright, imagine rice grains are like little houses, and they have a protective outer layer called the \"\"husk.\"\" Brown rice is like a house that still has its outer walls (the husk), while white rice is like a house where the outer walls have been taken off. Now, to make white rice, you have to remove that outer layer (husk) and a few more layers inside to get to the soft part we like to eat. It's like taking off the protective walls of the house to get to the cozy The reason white rice is often cheaper is because it goes through a bit more processing to remove those outer layers, but this process also makes it last longer and gives it a softer texture. Brown rice is less processed, so it keeps more of its natural goodness, but it's also a bit tougher and has a shorter shelf life. Think of it like this: when you buy a ready-made toy, it might be more expensive because someone worked on it more. But if you buy the pieces to build your own toy, it could be cheaper even though you're doing a bit more work yourself. The same goes for rice -white rice is like the ready-made toy, and brown rice is like the pieces you put together at home.\" Table 12 : An example of human annotators utilizing logical errors in the interpretation of textual sources. This text is actually generated by machine, and human annotators' label is \"machine\".",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 1165,
+                        "end": 1167,
+                        "text": "12",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Unnecessary repetition. The text in Table 13 was generated by ChatGPT-3.5. The analysis has identified some unnecessary repetitions within it.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 42,
+                        "end": 44,
+                        "text": "13",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "For the same prompt, the text in Table 26 generated by ChatGPT-4 shows no unnecessary repetition, exhibiting clear structure and precise expression.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 39,
+                        "end": 41,
+                        "text": "26",
+                        "ref_id": "TABREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Grammatical errors.",
+                "sec_num": null
+            },
+            {
+                "text": "Regarding the test results of GPTZero versions from December 1, 2023, and May 1, 2024, the judgment outcomes for the two texts have changed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "F Examples of Changed Judgments in GPTZero Evaluations",
+                "sec_num": null
+            },
+            {
+                "text": "Both texts were machine-generated but were labeled as \"undecided\" by our human coders. Initially, GPTZero classified these texts as \"human\", but in the updated version, the classification has changed to \"AI\". The feature values of the two texts in Tables 27 and 28 remained completely consistent across both tests. However, the evaluation results were entirely opposite. This indicates that GPTZero operates with a more complex mechanism, and the explanations provided may not be highly interpretable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "F Examples of Changed Judgments in GPTZero Evaluations",
+                "sec_num": null
+            },
+            {
+                "text": "Due to space limitations in the main text, we provide additional examples here to illustrate texts categorized as \"undecided\" along with the explanation notes given by human annotators. Additional examples are provided in Table 29 and Table 30 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 228,
+                        "end": 230,
+                        "text": "29",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 235,
+                        "end": 243,
+                        "text": "Table 30",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "G Examples of \"Undecided\" and Human Annotators' Explanations",
+                "sec_num": null
+            },
+            {
+                "text": "We quantified the perplexity and readability of explanations provided by human coders. Text perplexity was computed using scripts from the Natural Language Toolkit (NLTK) with the GPT-2 model, while readability was measured using the Flesch Reading Ease and Flesch-Kincaid Grade Level formulas.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "H Quantitative Representation of Explanations from Human Annotators",
+                "sec_num": null
+            },
+            {
+                "text": "Table 31 presents the average values of these measures for texts in each category. It is evident that texts classified as \"AI\" by human coders exhibit lower perplexity and lower readability scores. Specifically, a higher Flesch-Kincaid Grade Level value indicates a higher required English proficiency level, which corresponds to a lower readability score. Texts classified as \"undecided\" fall between the \"human\" and \"AI\" categories. Thus, our annotations by human coders are validated.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 8,
+                        "text": "31",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "H Quantitative Representation of Explanations from Human Annotators",
+                "sec_num": null
+            },
+            {
+                "text": "The three human annotators we used are all coauthors of the work. We did not recruit any other human participants for the annotation task because the construction of the ternary dataset required two rounds of iterations, including a second round of discussions among all authors to help the three annotators to reach a consensus. We considered such an approach more appropriate for our study than using recruited human participants. Since some coauthors conducted the annotation work involving human participants, the work did not need to go",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I More Details about Human Annotators' Work",
+                "sec_num": null
+            },
+            {
+                "text": "Text: Success, many say, is the result of perseverance. Indeed, perseverance, or the act of persisting in an effort, is essential to success. One must keep persevering, keep persisting, and keep pushing forward. This persistence, this continuous effort, is what truly defines the pathway to success. Repeated actions, consistent efforts, and ongoing endeavors are crucial. To succeed, one must continuously and repeatedly put in effort, demonstrating persistence again and again. This idea of repeating the same persistent effort is not just a minor detail-it's central, it's critical, and it's absolutely fundamental to achieving success. Through persistent effort, persistent dedication, and persistent work, success becomes achievable. Thus, the secret to success lies heavily in the repetitive, persistent pursuit of one's goals. Table 13 : An example of human annotators utilizing unnecessary repetition in the interpretation of textual sources. This text is actually generated by machine, and human annotators' label is \"machine\". through our relevant institution's research ethics review process. We did not financially compensate the time of any of the annotators since their work is part of their technical contribution to the work.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 840,
+                        "end": 842,
+                        "text": "13",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "I More Details about Human Annotators' Work",
+                "sec_num": null
+            },
+            {
+                "text": "To ensure that we did not introduce any bias into the annotation results, the three annotators did their work independently first and then met to resolve disagreements. For the independent annotation step, we provided the annotators with the unlabeled dataset along with the detailed instructions outlined in Table 32 . For the later discussion phase, the first author of this paper was the facilitator, and he also discussed with other co-authors on some borderline cases to help inform his facilitation work with the three annotators.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 315,
+                        "end": 317,
+                        "text": "32",
+                        "ref_id": "TABREF15"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "I More Details about Human Annotators' Work",
+                "sec_num": null
+            },
+            {
+                "text": "The file in the experiment folder is a spreadsheet where we record the text, detection results, confidence measure, and explanation of detection results. Our experiment involves detecting the source of the text in the first column and providing the confidence of your judgment along with an explanation. The file consists of four columns. The first column is \"text\", which contains the text to be detected. The text sources will be divided into the following three categories: \"human\", \"machine\" and \"undecided.\" The second column is \"detection results\", where you need to fill in your judgment regarding the source of the text in the first column.The text you think to be generated by a human should be labeled as \"human.\" The text you think to be generated by machine should be labeled as \"machine.\" The text for which you cannot decide should be labeled as \"undecided.\" The third column is \"confidence measures\", where you needs to indicate your confidence level in your judgment regarding the source of the text in the first column. The confidence levels are categorized into five grades: \"very low\", \"low\", \"moderate\", \"high\" and \"very high.\" The fourth column is \"explanation\", where you should provide your reasoning for the annotation in \"detection results.\" Below is an example for illustration: Text: A fan is an electrical appliance used for cooling and air circulation. It operates by rotating blades, which create a breeze to cool down a room or space. Fans come in various types, including ceiling fans, table fans, and pedestal fans, each designed for specific needs. They are energy-efficient and provide a cost-effective way to stay cool, especially during hot weather. Fans also help in ventilating areas by moving stale air and introducing fresh air. Detection result: undecided Confidence measure: moderate Explanation: This text primarily discusses the topic of electric fans. The content is straightforward and free of grammatical or logical errors. Additionally, the text lacks any apparent emotional bias and features a relatively simple logic. The text exhibits characteristics of both human-generated and machine-generated content. Therefore, I categorize it as \"undecided.\" Due to the aforementioned reasons, my confidence level in this matter is moderate. Note: The labeled results are for academic research purposes only. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I More Details about Human Annotators' Work",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "Text: \"Deepfake Technology Overview: Definition: Deepfake technology uses artificial intelligence to create highly realistic fake videos or audio recordings, often replacing the likeness or voice of a person with someone else's. Harms of Deepfake Technology: Misinformation:** Deepfakes can be used to spread false information, leading to confusion and public distrust. Political Manipulation:** Deepfakes can be employed to create fabricated content that manipulates political narratives and influences elections. Privacy Concerns:** Individuals can become victims of malicious deepfakes, compromising personal and professional reputations. Security Risks:** Deepfakes pose a threat to national security by potentially creating fake videos of public figures or officials, causing panic or diplomatic tensions. Erosion of Trust:** The widespread use of deepfakes can erode trust in media and make it challenging to distinguish between real and fake content.\" Table 15 : An example of human annotators utilizing text structure in the interpretation of textual sources. This text is actually generated by machine, and human annotators' label is \"machine\".Text: Confirmation bias. Since it's now on your mind, every time it happens to you it starts building up as an idea in your head and you think it's always happening. Your memory starts to ignore all the times it doesn't happen and only focuses on the times it does. Think about how many people you look at every day, and how many times they actually happen to be looking at you. That, or they just want to bone you. Table 16 : An example of human annotators utilizing bias in the interpretation of textual sources. This text is actually generated by human, and human annotators' label is \"human\".Prompt: Please generate a text in which an English beginner describes his hobbies. It should exhibit some spelling errors throughout the text.AI-generated text: Hello! My name is Tom. I really enjoy coking and reeding. I like to make food from my country because it's tasty. My best dish is fried rice. Also, I love to read books, especially about history and science. I read every night to improve my English. Sorry for the mistakes in my writing. Thank you! AI-generated text: Hello! My name is Li Wei. I lives in a small family. My father he is a teacher and my mother works in a hospital. I goes to school every day. I liking to read books and playing games after school. My sister, she young and goes to kindergarten. In the weekend, we likes to go to the park. Sometimes, my father take us to eat out. I very love my family and I happy to share about them. ",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 965,
+                        "end": 967,
+                        "text": "15",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1575,
+                        "end": 1577,
+                        "text": "16",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "annex",
+                "sec_num": null
+            },
+            {
+                "text": "In the penumbra of the quantum foam, time and space convolute into a symphony of probabilities, where each note resonates with the ephemeral dance of quarks and leptons. Here, amidst the cacophony of cosmic strings vibrating through the multiverse, the observer stands, a solitary witness to the entanglement of dimensions that both exist and do not exist simultaneously. This liminal space, fraught with the enigmatic whispers of the universe's nascent murmurs, defies the pedestrian laws of physics, inviting a chorus of theoretical conundrums that ripple through the substrates of reality, challenging the very fabric of existential comprehension.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "AI-generated text:",
+                "sec_num": null
+            },
+            {
+                "text": "Human-generated text: We keep finding more and more untapped oil in the US , and are becoming less and less dependent on foreign oil . Most experts predict that within a decade , we will be the country that produces the most oil . It 's mainly because the price per barrel of oil is dropping . And yes , this price drop should stay for a * long * time .",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Table 19: An examples text generated by ChatGPT-4 demonstrating a high level of perplexity",
+                "sec_num": null
+            },
+            {
+                "text": "Human-generated text: Floods typically happen when there's more water than what the drainage (natural or man-made) can handle. Man-made being dykes or slopes to direct water, or sewer systems, natural being mostly the permeability of the rock (how fast the water can squeeze between the rocks) or natural slopes. Water does naturally want to be level, but also wants to move to low points, so if it rains a lot, the water all collects at a low point and disperses like you think, but disperses slower than it accumulates, which is why it happens only during very heavy rainfall or snowmelt. The other case is a reservoir, like a dam breaking and releasing a large amount of water. The result is often a flood, where water levels rise quickly and cause significant damage.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Table 20: An examples text generated by a human writer containing logical errors",
+                "sec_num": null
+            },
+            {
+                "text": "Prompt: Can you generate a text with short words and low amount of syllables about food? AI-generated text: Food is fun. We eat to live. We can munch on nuts, sip soup, or bite a big, red apple. We can mix eggs, milk, and flour to make a cake. A good meal can fill us up and make us feel glad. Some food is hot, some is cold. We eat with a fork, a spoon, or our hands. Every day, we pick what we want to eat. Food is good for all. Table 22 : An example text generated by ChatGPT-4 with a high readability score Prompt: Please generate a text segment on the topic of machine learning. The text structure should be informal, with minimal use of transitional phrases.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 437,
+                        "end": 439,
+                        "text": "22",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Table 21: An example text generated by a human writer containing unnecessary repetitions",
+                "sec_num": null
+            },
+            {
+                "text": "Machine learning is all about teaching computers to learn from data. Imagine a music app that gets better at recommending songs the more you use it. That's machine learning in action. It looks at what you've listened to and suggests new tunes. These systems keep getting smarter with more data. Self-driving cars, for example, start with basic road rules and improve with every drive. But there's a catch. If the data has biases, the computer might make unfair decisions. That's why developers need to keep an eye on the data and tweak things to stay fair. Table 23 : An example text generated by ChatGPT-4 containing a poor text structure.Prompt: Please generate a passage using exaggerated language to describe a region's poor sanitary conditions, to the extent that even wildlife cannot survive.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 563,
+                        "end": 565,
+                        "text": "23",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "AI-generated text:",
+                "sec_num": null
+            },
+            {
+                "text": "In this region, the sanitary conditions are so deplorable that even wildlife struggles to survive. The rampant pollution and accumulation of waste have created an environment that is inhospitable to both humans and animals. The air is thick with noxious fumes, and the waterways are choked with contaminants, leaving no safe refuge for any living creature. The degradation of the environment has reached such an extreme that even the hardiest of species find it impossible to endure the harsh conditions. Table 24 : An example text generated by ChatGPT-4 displaying bias Prompt: Why is white rice cheaper than brown rice ? I don't understand why white rice is cheaper than brown rice . Isn't there more work involved in making white rice ? AND more demand for it ? Please explain like I'm five. AI-generated text: Sure! Imagine you have two types of toys, a plain toy and a painted toy. The plain toy is like brown rice, and the painted toy is like white rice. When rice is harvested, it starts as brown rice, which has a layer of bran and germ. To make white rice, you need to remove this outer layer, which takes a bit more work, like painting a toy. So yes, it involves more processing. But here's the trick: lots of people prefer the painted toy (white rice) because they think it looks nicer and tastes better. Because so many people want the painted toy, toy makers (rice producers) make a lot of them, and when you make a lot of something, you can often do it more cheaply. Also, the bran and germ from brown rice can be sold for other uses, adding extra value. So, even though it takes more work to make white rice, the high demand and the ability to sell the parts that are removed help keep the price lower than you might expect. Table 25 : An example text generated by ChatGPT-4 that addresses logical errors present in ChatGPT-3.5.Prompt: Please generate a short discussion on the relationship between success and effort.AI-generated text: Effort and success are closely related, with sustained effort often leading to incremental improvements, skill development, and resilience, which collectively contribute to achieving success. However, success is also influenced by opportunity, talent, and luck. Access to resources and opportunities, natural ability, and chance events all play significant roles. The synergy between effort and these factors creates a powerful combination, where being prepared through consistent effort enables individuals to seize opportunities and amplify their inherent talents, leading to greater success. Table 26 : An example text generated by ChatGPT-4 that addresses unnecessary repetitions present in ChatGPT-3.5.Source: ChatGPT-4 Text: Sweating itself does not directly cause colds. Colds are caused by viruses, not by being cold or sweating. However, if you sweat and then get chilled, this might weaken your immune system temporarily, making you more susceptible to catching a cold virus. Additionally, the belief that sweating leads to colds might stem from confusing the symptoms of a cold, which can include sweating, with the cause of the cold. Text: \"Imagine sending a toy camera tied to a super long string into a deep, dark well (like a black hole). If you try to pull it back, the string would probably break because the well is so strong it can even pull light inside and not let it escape! So, the camera wouldn't come back. Also, the camera would stop working as it gets closer to the black hole because the black hole's super-strong pull (gravity) would break it. Even if the camera somehow kept working and came back, the pictures or videos it took would be all strange and stretched, not like anything we see around us. This is because black holes bend light and time in weird ways. Right now, this idea is more like a fun science fiction story because we don't have the technology to do it, and black holes are really, really far away from us.\"GPTZero result: AI GPTZero explanations: Readability: 72.3(High) Percent SAT: 1.7(Medium) Simplicity: 35.2(low) Perplexity: 45.3(Medium) Burstiness: 37.9(Medium) Average sentence length: 22.3(Medium) Table 28 : Comparison between abstract scores from GPTZero and human-readable explanations Text: Listen, I've been in your shoes before, and the best advice I can give you is to embrace change. Life is unpredictable, and sometimes we get comfortable in our routines, but growth happens when we step out of our comfort zones. Don't be afraid to take on new challenges, explore different opportunities, and learn from every experience, even if it seems daunting at first. Remember, the magic happens outside your comfort zone. So, be open to change, embrace the unknown, and trust in your ability to adapt. You'll be amazed at the personal and professional development that follows.Human explanations: The text is free from grammatical and spelling errors. It earnestly encourages others to step out of their comfort zones, with a tone that is sincere and language that is clear and fluent. As the expressions pertain to everyday discourse, the use of conjunctions is seamless, and the structure aligns with typical conversational patterns. Consistency in style is maintained throughout, without any unnecessary repetitions. Therefore, the text should be categorized as \"undecided.\"",
+                "cite_spans": [
+                    {
+                        "start": 4095,
+                        "end": 4107,
+                        "text": "22.3(Medium)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 511,
+                        "end": 513,
+                        "text": "24",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1746,
+                        "end": 1748,
+                        "text": "25",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 2553,
+                        "end": 2555,
+                        "text": "26",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 4114,
+                        "end": 4116,
+                        "text": "28",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "AI-generated text:",
+                "sec_num": null
+            },
+            {
+                "text": "Text: To conclude, we empirically show that a significant number of later layers of CNNs are robust to the absence of the spatial information, which is commonly assumed to be important for object recognition tasks. Modern CNNs are able to tolerate the loss of spatial information from the last 30% of layers at around 1% accuracy drop; and the test accuracy only decreases by less than 7% when spatial information is removed from the last half of layers on CIFAR100 and Small-ImageNet-32x32. Though depth of the network is essential for good performance, the later layers do not necessarily have to be convolutions.Human explanations: This passage contains no grammatical or spelling errors. It is a summary related to CNN (Convolutional Neural Networks), presented in a scientific and rigorous manner. The data is thoroughly and comprehensively understood, with no logical errors or unnecessary repetition. This passage could have been generated by either an experienced scholar or a machine. Therefore, it should be classified as \"undecided.\" ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Table 29: Examples of third-category texts and human annotators' explanations",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "A benchmark dataset to distinguish human-written and machine-generated scientific papers",
+                "authors": [
+                    {
+                        "first": "Mohamed",
+                        "middle": [],
+                        "last": "Hesham",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ibrahim",
+                        "middle": [],
+                        "last": "Abdalla",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Simon",
+                        "middle": [],
+                        "last": "Malberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Daryna",
+                        "middle": [],
+                        "last": "Dementieva",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Edoardo",
+                        "middle": [],
+                        "last": "Mosca",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Georg",
+                        "middle": [],
+                        "last": "Groh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Information",
+                "volume": "14",
+                "issue": "10",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.3390/info14100522"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Mohamed Hesham Ibrahim Abdalla, Simon Malberg, Daryna Dementieva, Edoardo Mosca, and Georg Groh. 2023. A benchmark dataset to distinguish human-written and machine-generated scientific pa- pers. Information, 14(10):522:1-522:33.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Detecting AI authorship: Analyzing descriptive features for AI detection",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Christopher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Andr\u00e9",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Helene",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Emil",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Eriksen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jakobsen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Luca",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Nicolai",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Mingolla",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Thomsen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Proceedings of the 7th Workshop on Natural Language for Artificial Intelligence",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christopher M. J. Andr\u00e9, Helene F. L. Eriksen, Emil J. Jakobsen, Luca C. B. Mingolla, and Nicolai B. Thom- sen. 2023. Detecting AI authorship: Analyzing de- scriptive features for AI detection. In Proceedings of the 7th Workshop on Natural Language for Artificial Intelligence (NL4AI 2023).",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "From text to source: Results in detecting large language model-generated content",
+                "authors": [
+                    {
+                        "first": "Beno\u00eet",
+                        "middle": [],
+                        "last": "Wissam Antoun",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Djam\u00e9",
+                        "middle": [],
+                        "last": "Sagot",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Seddah",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)",
+                "volume": "",
+                "issue": "",
+                "pages": "7531--7543",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wissam Antoun, Beno\u00eet Sagot, and Djam\u00e9 Seddah. 2023. From text to source: Results in detecting large language model-generated content. In Proceedings of the 2024 Joint International Conference on Compu- tational Linguistics, Language Resources and Evalu- ation (LREC-COLING 2024), pages 7531-7543.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Fast-DetectGPT: Efficient zero-shot detection of machine-generated text via conditional probability curvature",
+                "authors": [
+                    {
+                        "first": "Guangsheng",
+                        "middle": [],
+                        "last": "Bao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yanbin",
+                        "middle": [],
+                        "last": "Zhao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Zhiyang",
+                        "middle": [],
+                        "last": "Teng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Linyi",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yue",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "Proceedings of the 12th International Conference on Learning Representations",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guangsheng Bao, Yanbin Zhao, Zhiyang Teng, Linyi Yang, and Yue Zhang. 2024. Fast-DetectGPT: Effi- cient zero-shot detection of machine-generated text via conditional probability curvature. In Proceedings of the 12th International Conference on Learning Representations.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "ConDA: Contrastive domain adaptation for AI-generated text detection",
+                "authors": [
+                    {
+                        "first": "Amrita",
+                        "middle": [],
+                        "last": "Bhattacharjee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Tharindu",
+                        "middle": [],
+                        "last": "Kumarage",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Raha",
+                        "middle": [],
+                        "last": "Moraffah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Huan",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Proceedings of the 13th International Joint Conference on Natural Language Processing and the 3rd Conference of the Asia-Pacific Chapter",
+                "volume": "1",
+                "issue": "",
+                "pages": "598--610",
+                "other_ids": {
+                    "DOI": [
+                        "10.18653/v1/2023.ijcnlp-main.40"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Amrita Bhattacharjee, Tharindu Kumarage, Raha Moraffah, and Huan Liu. 2023. ConDA: Contrastive domain adaptation for AI-generated text detection. In Proceedings of the 13th International Joint Con- ference on Natural Language Processing and the 3rd Conference of the Asia-Pacific Chapter of the Associ- ation for Computational Linguistics (Volume 1: Long Papers), pages 598-610.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Classification and Regression Trees",
+                "authors": [
+                    {
+                        "first": "Leo",
+                        "middle": [],
+                        "last": "Breiman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jerome",
+                        "middle": [],
+                        "last": "Friedman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Richard",
+                        "middle": [],
+                        "last": "Olshen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Charles",
+                        "middle": [],
+                        "last": "Stone",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1984,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.1201/9781315139470"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Leo Breiman, Jerome Friedman, Richard Olshen, and Charles Stone. 1984. Classification and Regression Trees. Chapman and Hall/CRC.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "AI detector | Chat-GPT detector | AI checker -CopyLeaks",
+                "authors": [],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Copyleaks Technologies Ltd. 2023. AI detector | Chat- GPT detector | AI checker -CopyLeaks. Online.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Supportvector networks",
+                "authors": [
+                    {
+                        "first": "Corinna",
+                        "middle": [],
+                        "last": "Cortes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Vladimir",
+                        "middle": [],
+                        "last": "Vapnik",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "Machine Learning",
+                "volume": "20",
+                "issue": "3",
+                "pages": "273--297",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/BF00994018"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Corinna Cortes and Vladimir Vapnik. 1995. Support- vector networks. Machine Learning, 20(3):273-297.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "The regression analysis of binary sequences",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Cox",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1958,
+                "venue": "Journal of the Royal Statistical Society. Series B (Methodological)",
+                "volume": "20",
+                "issue": "2",
+                "pages": "215--242",
+                "other_ids": {
+                    "DOI": [
+                        "10.1111/j.2517-6161.1958.tb00292.x"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "D. R. Cox. 1958. The regression analysis of binary sequences. Journal of the Royal Statistical Society. Series B (Methodological), 20(2):215-242.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "ELI5: Long form question answering",
+                "authors": [
+                    {
+                        "first": "Angela",
+                        "middle": [],
+                        "last": "Fan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yacine",
+                        "middle": [],
+                        "last": "Jernite",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ethan",
+                        "middle": [],
+                        "last": "Perez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "David",
+                        "middle": [],
+                        "last": "Grangier",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jason",
+                        "middle": [],
+                        "last": "Weston",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [],
+                        "last": "Auli",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.1907.09190"
+                    ],
+                    "arXiv": [
+                        "arXiv:1907.09190[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Angela Fan, Yacine Jernite, Ethan Perez, David Grang- ier, Jason Weston, and Michael Auli. 2019. ELI5: Long form question answering. arXiv:1907.09190 [cs.CL].",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Measuring nominal scale agreement among many raters",
+                "authors": [
+                    {
+                        "first": "Joseph",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Fleiss",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1971,
+                "venue": "Psychological Bulletin",
+                "volume": "76",
+                "issue": "5",
+                "pages": "378--382",
+                "other_ids": {
+                    "DOI": [
+                        "10.1037/h0031619"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Joseph L. Fleiss. 1971. Measuring nominal scale agree- ment among many raters. Psychological Bulletin, 76(5):378-382.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "A new readability yardstick",
+                "authors": [
+                    {
+                        "first": "Rudolf",
+                        "middle": [],
+                        "last": "Flesch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1948,
+                "venue": "Journal of Applied Psychology",
+                "volume": "32",
+                "issue": "3",
+                "pages": "221--233",
+                "other_ids": {
+                    "DOI": [
+                        "10.1037/h0057532"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Rudolf Flesch. 1948. A new readability yardstick. Jour- nal of Applied Psychology, 32(3):221-233.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "GLTR: Statistical detection and visualization of generated text",
+                "authors": [
+                    {
+                        "first": "Sebastian",
+                        "middle": [],
+                        "last": "Gehrmann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hendrik",
+                        "middle": [],
+                        "last": "Strobelt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alexander",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Rush",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.1906.04043"
+                    ],
+                    "arXiv": [
+                        "arXiv:1906.04043[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Sebastian Gehrmann, Hendrik Strobelt, and Alexan- der M. Rush. 2019. GLTR: Statistical detection and visualization of generated text. arXiv:1906.04043 [cs.CL].",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "How close is ChatGPT to human experts? comparison corpus, evaluation, and detection",
+                "authors": [
+                    {
+                        "first": "Biyang",
+                        "middle": [],
+                        "last": "Guo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xin",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ziyuan",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Minqi",
+                        "middle": [],
+                        "last": "Jiang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jinran",
+                        "middle": [],
+                        "last": "Nie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yuxuan",
+                        "middle": [],
+                        "last": "Ding",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jianwei",
+                        "middle": [],
+                        "last": "Yue",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yupeng",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2301.07597"
+                    ],
+                    "arXiv": [
+                        "arXiv:2301.07597[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Biyang Guo, Xin Zhang, Ziyuan Wang, Minqi Jiang, Jinran Nie, Yuxuan Ding, Jianwei Yue, and Yupeng Wu. 2023. How close is ChatGPT to human ex- perts? comparison corpus, evaluation, and detection. arXiv:2301.07597 [cs.CL].",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Spotting LLMs with Binoculars: Zero-shot detection of machine-generated text",
+                "authors": [
+                    {
+                        "first": "Abhimanyu",
+                        "middle": [],
+                        "last": "Hans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Avi",
+                        "middle": [],
+                        "last": "Schwarzschild",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Valeriia",
+                        "middle": [],
+                        "last": "Cherepanova",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hamid",
+                        "middle": [],
+                        "last": "Kazemi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Aniruddha",
+                        "middle": [],
+                        "last": "Saha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Micah",
+                        "middle": [],
+                        "last": "Goldblum",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jonas",
+                        "middle": [],
+                        "last": "Geiping",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Tom",
+                        "middle": [],
+                        "last": "Goldstein",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2401.12070"
+                    ],
+                    "arXiv": [
+                        "arXiv:2401.12070[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Abhimanyu Hans, Avi Schwarzschild, Valeriia Cherepanova, Hamid Kazemi, Aniruddha Saha, Micah Goldblum, Jonas Geiping, and Tom Goldstein. 2024. Spotting LLMs with Binoculars: Zero-shot de- tection of machine-generated text. arXiv:2401.12070 [cs.CL].",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Introducing Gemini: Google's most capable AI model yet",
+                "authors": [],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Demis Hassabis and the Gemini Team. 2023. Introduc- ing Gemini: Google's most capable AI model yet. Online.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "MGTBench: Benchmarking machine-generated text detection",
+                "authors": [
+                    {
+                        "first": "Xinlei",
+                        "middle": [],
+                        "last": "He",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xinyue",
+                        "middle": [],
+                        "last": "Shen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Zeyuan",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [],
+                        "last": "Backes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yang",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2303.14822"
+                    ],
+                    "arXiv": [
+                        "arXiv:2303.14822[cs.CR"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Xinlei He, Xinyue Shen, Zeyuan Chen, Michael Backes, and Yang Zhang. 2023. MGTBench: Benchmarking machine-generated text detection. arXiv:2303.14822 [cs.CR].",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Derivation of new readability formulas (Automated Readability Index, Fog Count and Flesch Reading Ease Formula) for navy enlisted personnel",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Peter",
+                        "middle": [],
+                        "last": "Kincaid",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Robert",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Fishburne",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Richard",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Rogers",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Brad",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Chissom",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1975,
+                "venue": "Technical Report Research Branch Report",
+                "volume": "8",
+                "issue": "75",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Peter Kincaid, Robert P. Jr Fishburne, Richard L. Rogers, and Brad S. Chissom. 1975. Derivation of new readability formulas (Automated Readability In- dex, Fog Count and Flesch Reading Ease Formula) for navy enlisted personnel. Technical Report Re- search Branch Report 8-75, Naval Technical Training Command Millington TN Research Branch.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "DEMASQ: Unmasking the ChatGPT wordsmith",
+                "authors": [
+                    {
+                        "first": "Kavita",
+                        "middle": [],
+                        "last": "Kumari",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alessandro",
+                        "middle": [],
+                        "last": "Pegoraro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hossein",
+                        "middle": [],
+                        "last": "Fereidooni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ahmad-Reza",
+                        "middle": [],
+                        "last": "Sadeghi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kavita Kumari, Alessandro Pegoraro, Hossein Ferei- dooni, and Ahmad-Reza Sadeghi. 2024. DEMASQ: Unmasking the ChatGPT wordsmith.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "A unified approach to interpreting model predictions",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Scott",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Su-In",
+                        "middle": [],
+                        "last": "Lundberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Advances in Neural Information Processing Systems",
+                "volume": "30",
+                "issue": "",
+                "pages": "4768--4777",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Scott M. Lundberg and Su-In Lee. 2017. A unified ap- proach to interpreting model predictions. Advances in Neural Information Processing Systems, 30:4768- 4777.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Classification of human-and AI-generated texts: Investigating features for ChatGPT",
+                "authors": [
+                    {
+                        "first": "Lorenz",
+                        "middle": [],
+                        "last": "Mindner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Tim",
+                        "middle": [],
+                        "last": "Schlippe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Kristina",
+                        "middle": [],
+                        "last": "Schaaff",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Artificial Intelligence in Education Technologies: New Development and Innovative Practices -Proceedings of 2023 4th International Conference on Artificial Intelligence in Education Technology",
+                "volume": "",
+                "issue": "",
+                "pages": "152--170",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/978-981-99-7947-9_12"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Lorenz Mindner, Tim Schlippe, and Kristina Schaaff. 2023. Classification of human-and AI-generated texts: Investigating features for ChatGPT. In Ar- tificial Intelligence in Education Technologies: New Development and Innovative Practices -Proceedings of 2023 4th International Conference on Artificial In- telligence in Education Technology, pages 152-170. Springer.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "DetectGPT: Zero-shot machine-generated text detection using probability curvature",
+                "authors": [
+                    {
+                        "first": "Eric",
+                        "middle": [],
+                        "last": "Mitchell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yoonho",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alexander",
+                        "middle": [],
+                        "last": "Khazatsky",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Christopher",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Manning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chelsea",
+                        "middle": [],
+                        "last": "Finn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Proceedings of the 40th International Conference on Machine Learning",
+                "volume": "",
+                "issue": "",
+                "pages": "24950--24962",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Eric Mitchell, Yoonho Lee, Alexander Khazatsky, Christopher D. Manning, and Chelsea Finn. 2023. DetectGPT: Zero-shot machine-generated text detec- tion using probability curvature. In Proceedings of the 40th International Conference on Machine Learn- ing, pages 24950-24962.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "ChatGPT or human? detect and explain. explaining decisions of machine learning model for detecting short ChatGPT-generated text",
+                "authors": [
+                    {
+                        "first": "Sandra",
+                        "middle": [],
+                        "last": "Mitrovi\u0107",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Davide",
+                        "middle": [],
+                        "last": "Andreoletti",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Omran",
+                        "middle": [],
+                        "last": "Ayoub",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2301.13852"
+                    ],
+                    "arXiv": [
+                        "arXiv:2301.13852[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Sandra Mitrovi\u0107, Davide Andreoletti, and Omran Ay- oub. 2023. ChatGPT or human? detect and ex- plain. explaining decisions of machine learning model for detecting short ChatGPT-generated text. arXiv:2301.13852 [cs.CL].",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Contrasting linguistic patterns in human and LLM-generated text",
+                "authors": [
+                    {
+                        "first": "Alberto",
+                        "middle": [],
+                        "last": "Mu\u00f1oz-Ortiz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Carlos",
+                        "middle": [],
+                        "last": "G\u00f3mez-Rodr\u00edguez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "David",
+                        "middle": [],
+                        "last": "Vilares",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2308.09067"
+                    ],
+                    "arXiv": [
+                        "arXiv:2308.09067[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Alberto Mu\u00f1oz-Ortiz, Carlos G\u00f3mez-Rodr\u00edguez, and David Vilares. 2023. Contrasting linguistic patterns in human and LLM-generated text. arXiv:2308.09067 [cs.CL].",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "GPT-2 output detector demo",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Openai",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2021,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "OpenAI. 2021. GPT-2 output detector demo. Online. OpenAI. 2022. Introducing ChatGPT. Online. OpenAI. 2023. GPT-4. Online.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "The perceptron: A probabilistic model for information storage and organization in the brain",
+                "authors": [
+                    {
+                        "first": "Frank",
+                        "middle": [],
+                        "last": "Rosenblatt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1958,
+                "venue": "Psychological Review",
+                "volume": "65",
+                "issue": "6",
+                "pages": "386--408",
+                "other_ids": {
+                    "DOI": [
+                        "10.1037/h0042519"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Frank Rosenblatt. 1958. The perceptron: A probabilis- tic model for information storage and organization in the brain. Psychological Review, 65(6):386-408.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Release strategies and the social impacts of language models",
+                "authors": [
+                    {
+                        "first": "Irene",
+                        "middle": [],
+                        "last": "Solaiman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Miles",
+                        "middle": [],
+                        "last": "Brundage",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jack",
+                        "middle": [],
+                        "last": "Clark",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Amanda",
+                        "middle": [],
+                        "last": "Askell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ariel",
+                        "middle": [],
+                        "last": "Herbert-Voss",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jeff",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alec",
+                        "middle": [],
+                        "last": "Radford",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Gretchen",
+                        "middle": [],
+                        "last": "Krueger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jong",
+                        "middle": [
+                            "Wook"
+                        ],
+                        "last": "Kim",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Sarah",
+                        "middle": [],
+                        "last": "Kreps",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Miles",
+                        "middle": [],
+                        "last": "Mccain",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alex",
+                        "middle": [],
+                        "last": "Newhouse",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jason",
+                        "middle": [],
+                        "last": "Blazakis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Kris",
+                        "middle": [],
+                        "last": "Mcguffie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jasmine",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.1908.09203"
+                    ],
+                    "arXiv": [
+                        "arXiv:1908.09203[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Irene Solaiman, Miles Brundage, Jack Clark, Amanda Askell, Ariel Herbert-Voss, Jeff Wu, Alec Radford, Gretchen Krueger, Jong Wook Kim, Sarah Kreps, Miles McCain, Alex Newhouse, Jason Blazakis, Kris McGuffie, and Jasmine Wang. 2019. Release strate- gies and the social impacts of language models. arXiv:1908.09203 [cs.CL].",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "DetectLLM: Leveraging log rank information for zero-shot detection of machine-generated text",
+                "authors": [
+                    {
+                        "first": "Jinyan",
+                        "middle": [],
+                        "last": "Su",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Terry",
+                        "middle": [],
+                        "last": "Yue Zhuo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Di",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Preslav",
+                        "middle": [],
+                        "last": "Nakov",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2306.05540"
+                    ],
+                    "arXiv": [
+                        "arXiv:2306.05540[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Jinyan Su, Terry Yue Zhuo, Di Wang, and Preslav Nakov. 2023. DetectLLM: Leveraging log rank information for zero-shot detection of machine-generated text. arXiv:2306.05540 [cs.CL].",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "LLaMA: Open and efficient foundation language models",
+                "authors": [
+                    {
+                        "first": "Hugo",
+                        "middle": [],
+                        "last": "Touvron",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Thibaut",
+                        "middle": [],
+                        "last": "Lavril",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Gautier",
+                        "middle": [],
+                        "last": "Izacard",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xavier",
+                        "middle": [],
+                        "last": "Martinet",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Marie-Anne",
+                        "middle": [],
+                        "last": "Lachaux",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Timoth\u00e9e",
+                        "middle": [],
+                        "last": "Lacroix",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Baptiste",
+                        "middle": [],
+                        "last": "Rozi\u00e8re",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Naman",
+                        "middle": [],
+                        "last": "Goyal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Eric",
+                        "middle": [],
+                        "last": "Hambro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Faisal",
+                        "middle": [],
+                        "last": "Azhar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Aurelien",
+                        "middle": [],
+                        "last": "Rodriguez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Armand",
+                        "middle": [],
+                        "last": "Joulin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Edouard",
+                        "middle": [],
+                        "last": "Grave",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Guillaume",
+                        "middle": [],
+                        "last": "Lample",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2302.13971"
+                    ],
+                    "arXiv": [
+                        "arXiv:2302.13971[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timoth\u00e9e Lacroix, Baptiste Rozi\u00e8re, Naman Goyal, Eric Hambro, Faisal Azhar, Aurelien Rodriguez, Armand Joulin, Edouard Grave, and Guillaume Lample. 2023. LLaMA: Open and efficient foundation language models. arXiv:2302.13971 [cs.CL].",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "SeqXGPT: Sentencelevel AI-generated text detection",
+                "authors": [
+                    {
+                        "first": "Pengyu",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Linyang",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ke",
+                        "middle": [],
+                        "last": "Ren",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Botian",
+                        "middle": [],
+                        "last": "Jiang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Dong",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xipeng",
+                        "middle": [],
+                        "last": "Qiu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "1144--1156",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pengyu Wang, Linyang Li, Ke Ren, Botian Jiang, Dong Zhang, and Xipeng Qiu. 2023. SeqXGPT: Sentence- level AI-generated text detection. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, pages 1144-1156.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "A survey on LLM-generated text detection: Necessity, methods, and future directions",
+                "authors": [
+                    {
+                        "first": "Junchao",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Shu",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Runzhe",
+                        "middle": [],
+                        "last": "Zhan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yulin",
+                        "middle": [],
+                        "last": "Yuan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Derek",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Wong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lidia",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Chao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2310.14724"
+                    ],
+                    "arXiv": [
+                        "arXiv:2310.14724v3[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Junchao Wu, Shu Yang, Runzhe Zhan, Yulin Yuan, Derek F. Wong, and Lidia S. Chao. 2024. A sur- vey on LLM-generated text detection: Necessity, methods, and future directions. arXiv:2310.14724v3 [cs.CL].",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "LLMDet: A third party large language models generated text detection tool",
+                "authors": [
+                    {
+                        "first": "Kangxi",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Liang",
+                        "middle": [],
+                        "last": "Pang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Huawei",
+                        "middle": [],
+                        "last": "Shen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xueqi",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Tat-Seng",
+                        "middle": [],
+                        "last": "Chua",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Findings of the Association for Computational Linguistics: EMNLP 2023",
+                "volume": "",
+                "issue": "",
+                "pages": "2113--2133",
+                "other_ids": {
+                    "DOI": [
+                        "10.18653/v1/2023.findings-emnlp.139"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Kangxi Wu, Liang Pang, Huawei Shen, Xueqi Cheng, and Tat-Seng Chua. 2023. LLMDet: A third party large language models generated text detection tool. In Findings of the Association for Computational Linguistics: EMNLP 2023, pages 2113-2133.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "MFD: Multifeature detection of LLM-generated text",
+                "authors": [
+                    {
+                        "first": "Zhendong",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hui",
+                        "middle": [],
+                        "last": "Xiang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.21203/rs.3.rs-3226684/v1"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhendong Wu and Hui Xiang. 2023. MFD: Multi- feature detection of LLM-generated text.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "A survey on detection of LLMs-generated content",
+                "authors": [
+                    {
+                        "first": "Xianjun",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Liangming",
+                        "middle": [],
+                        "last": "Pan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xuandong",
+                        "middle": [],
+                        "last": "Zhao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Haifeng",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Linda",
+                        "middle": [],
+                        "last": "Petzold",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "William",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Wang",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Wei",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2310.15654"
+                    ],
+                    "arXiv": [
+                        "arXiv:2310.15654[cs.CL"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Xianjun Yang, Liangming Pan, Xuandong Zhao, Haifeng Chen, Linda Petzold, William Yang Wang, and Wei Cheng. 2023. A survey on detection of LLMs-generated content. arXiv:2310.15654 [cs.CL].",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Detecting machinegenerated texts by multi-population aware optimization for maximum mean discrepancy",
+                "authors": [
+                    {
+                        "first": "Shuhai",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yiliao",
+                        "middle": [],
+                        "last": "Song",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jiahao",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yuanqing",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bo",
+                        "middle": [],
+                        "last": "Han",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Mingkui",
+                        "middle": [],
+                        "last": "Tan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "Proceedings of The 12th International Conference on Learning Representations",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shuhai Zhang, Yiliao Song, Jiahao Yang, Yuanqing Li, Bo Han, and Mingkui Tan. 2024. Detecting machine- generated texts by multi-population aware optimiza- tion for maximum mean discrepancy. In Proceedings of The 12th International Conference on Learning Representations.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "uris": null,
+                "fig_num": "1",
+                "text": "Figure 1: Comparison of detector performance across the four datasets produced by various LLMs, with MGTs as positive samples. The x-axis represents different datasets, while different bars represent different detectors.",
+                "type_str": "figure",
+                "num": null
+            },
+            "FIGREF1": {
+                "uris": null,
+                "fig_num": null,
+                "text": "Text: \"Umm YES..it has Keanu Reeves in it..he's an awesome actor. its a very romantic and sad movie. If you like tear jerkers you'll love it..I only watched it cus I am a fan of Keanu Reeves and It was better then I thought...I hope you get to watch it soon. Hey I should get the points for being the only guy with the balls to say I like this movie.\"",
+                "type_str": "figure",
+                "num": null
+            },
+            "TABREF1": {
+                "text": "",
+                "content": "<table><tr><td>, focusing on the dataset generated</td></tr><tr><td>by ChatGPT-4. This table highlights the perfor-</td></tr><tr><td>mance of detectors using both humans and ma-</td></tr><tr><td>chines as the positive label. The results indicate</td></tr><tr><td>that online detectors, GPTZero and Sapling, sig-</td></tr><tr><td>nificantly outperform local open-source counter-</td></tr><tr><td>parts. Specifically, DEMASQ effectively identifies</td></tr><tr><td>MGTs but struggles with HGT detection. Con-</td></tr><tr><td>versely, DetectGPT shows limited capability in de-</td></tr><tr><td>tecting MGTs while performing adequately with</td></tr><tr><td>HGTs. See Appendix A for extended results for</td></tr><tr><td>other datasets.</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF3": {
+                "text": "Binary classification performance of different detectors on the dataset of ChatGPT4",
+                "content": "<table/>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF4": {
+                "text": "",
+                "content": "<table/>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF5": {
+                "text": "Confusion matrices showing how the three binary MGT detectors performed in a ternary classification setting. For GPTZero and Sapling, some texts were considered too short so no classification results were given. Sweating itself does not directly cause colds. Colds are caused by viruses, not by being cold or sweating. However, if you sweat and then get chilled, this might weaken your immune system temporarily, making you more susceptible to catching a cold virus. Additionally, the belief that sweating leads to colds might stem from confusing the symptoms of a cold, which can include sweating, with the cause of the cold.",
+                "content": "<table><tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td>%</td><td>100</td></tr><tr><td>Machine</td><td>90.5</td><td>1.2</td><td>69.1</td><td>Machine</td><td>100</td><td>12.9</td><td>80.9</td><td>Machine</td><td>95.2</td><td>22.4</td><td>86.2</td><td>80</td></tr><tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td>60</td></tr><tr><td>Human</td><td>9.5</td><td>91.8</td><td>11.7</td><td>Human</td><td>0</td><td>83.5</td><td>10.6</td><td>Human</td><td>4.8</td><td>77.6</td><td>13.8</td><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td>40</td></tr><tr><td>Unclassified</td><td>0</td><td>7.1</td><td>19.1</td><td>Unclassified</td><td>0</td><td>3.5</td><td>8.5</td><td>Unclassified</td><td>0</td><td>0</td><td>0</td><td>20</td></tr><tr><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td>0</td></tr><tr><td/><td colspan=\"3\">Machine Human Undecided</td><td/><td colspan=\"3\">Machine Human Undecided</td><td/><td colspan=\"3\">Machine Human Undecided</td><td/></tr><tr><td/><td colspan=\"2\">(a) GPTZero</td><td/><td/><td colspan=\"2\">(b) Sapling</td><td/><td/><td colspan=\"2\">(c) Binoculars</td><td/><td/></tr><tr><td colspan=\"2\">Figure 2: Source: ChatGPT-4</td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"2\">Text: GPTZero result: AI</td><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/><td/></tr><tr><td colspan=\"13\">GPTZero explanations: Readability: 72.3 (Medium) | Percent SAT: 1.7 (Medium) | Simplicity: 35.2 (Medium) | Perplexity:</td></tr><tr><td colspan=\"9\">45.3 (Medium) | Burstiness: 37.9 (Medium) | Average sentence length: 22.3 (Medium)</td><td/><td/><td/><td/></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF6": {
+                "text": "Comparison between abstract scores from GPTZero and human-readable explanations",
+                "content": "<table/>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF8": {
+                "text": "Binary classification performance of different detectors on the dataset of",
+                "content": "<table><tr><td>Models</td><td>Accuracy</td><td colspan=\"3\">Machine as Positive</td><td colspan=\"2\">Human as Positive</td><td/><td>Macro F1</td></tr><tr><td/><td/><td>Precision</td><td>Recall</td><td>F1</td><td>Precision</td><td>Recall</td><td>F1</td><td/></tr><tr><td>GPTZero</td><td>92.43%</td><td>96.55%</td><td>88.42%</td><td>92.31%</td><td>88.78%</td><td>96.67%</td><td>92.55%</td><td>92.43%</td></tr><tr><td>Sapling</td><td>90.26%</td><td>85.22%</td><td>98.00%</td><td>91.16%</td><td>97.50%</td><td>82.11%</td><td>89.14%</td><td>90.15%</td></tr><tr><td>Binoculars</td><td>85.94%</td><td>77.31%</td><td>100.00%</td><td>87.20%</td><td>100.00%</td><td>73.00%</td><td>84.39%</td><td>85.80%</td></tr><tr><td>Fast-DetectGPT</td><td>87.00%</td><td>92.05%</td><td>81.00%</td><td>86.17%</td><td>83.04%</td><td>93.00%</td><td>87.74%</td><td>86.95%</td></tr><tr><td>MMD-MP</td><td>82.00%</td><td>95.71%</td><td>67.00%</td><td>78.82%</td><td>74.62%</td><td>97.00%</td><td>84.35%</td><td>81.59%</td></tr><tr><td>DEMASQ</td><td>64.00%</td><td>58.75%</td><td>94.00%</td><td>72.31%</td><td>85.00%</td><td>34.00%</td><td>48.57%</td><td>60.44%</td></tr><tr><td>DetectGPT</td><td>65.00%</td><td>91.67%</td><td>33.00%</td><td>48.53%</td><td>59.15%</td><td>97.00%</td><td>73.48%</td><td>61.01%</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF9": {
+                "text": "Binary classification performance of different detectors on the dataset of LLaMA-13B",
+                "content": "<table><tr><td>values, we created a new dataset to analyze the</td></tr><tr><td>explainability provided by GPTZero. The ground</td></tr><tr><td>truth is based on GPTZero's evaluation results. We</td></tr><tr><td>partitioned the dataset into training and test sets</td></tr><tr><td>with an 8:2 ratio. We trained four classifiers: Lo-</td></tr><tr><td>gistic Regression, SVC, Perceptron, and Decision</td></tr><tr><td>Tree. The weights and accuracy of the different fea-</td></tr><tr><td>tures obtained from these classifiers are presented</td></tr><tr><td>in Table 8. From the weights, it is evident that</td></tr><tr><td>the two most effective metrics in GPTZero's ex-</td></tr><tr><td>plainability are perplexity and readability scores.</td></tr><tr><td>The remaining metrics contribute minimally to the</td></tr><tr><td>final results. Additionally, the trained classifier</td></tr><tr><td>exhibits relatively low accuracy, suggesting that</td></tr><tr><td>GPTZero employs more complex calculations or</td></tr><tr><td>utilizes additional sophisticated features that are</td></tr><tr><td>not disclosed.</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF11": {
+                "text": "Binary classification performance of different detectors on the dataset of Gemini Pro",
+                "content": "<table><tr><td>Classifier</td><td/><td/><td colspan=\"2\">Feature Importances</td><td/><td/><td>Accuracy (%)</td></tr><tr><td/><td colspan=\"2\">Readability PSAT</td><td colspan=\"3\">Simplicity Perplexity Burstiness</td><td>ASL</td><td/></tr><tr><td>LR</td><td>3.094</td><td>-0.857</td><td>1.821</td><td>-2.517</td><td>0.036</td><td>0.713</td><td>75.76</td></tr><tr><td>SVC</td><td>2.637</td><td>-0.671</td><td>2.677</td><td>-2.189</td><td>0.051</td><td>0.654</td><td>77.27</td></tr><tr><td>Perceptron</td><td>4.109</td><td>-0.991</td><td>8.148</td><td>-4.437</td><td>0.417</td><td>1.039</td><td>78.79</td></tr><tr><td>Decision Tree</td><td>0.289</td><td>0.016</td><td>0.199</td><td>0.205</td><td>0.183</td><td>0.109</td><td>75.76</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF12": {
+                "text": "Weights and accuracy of different classifiers using GPTZero's six explainability metrics as features. LR stands for Logistic Regression. PSAT stands for Percent SAT. ASL stands for Average Sentence Length.",
+                "content": "<table/>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF13": {
+                "text": "",
+                "content": "<table><tr><td>lacks co-</td></tr></table>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF14": {
+                "text": "An example of human annotators utilizing readability score in the interpretation of textual sources. This text is actually generated by human, and human annotators' label is \"human\".",
+                "content": "<table/>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            },
+            "TABREF15": {
+                "text": "Human Annotation Instructions",
+                "content": "<table/>",
+                "type_str": "table",
+                "html": null,
+                "num": null
+            }
+        }
+    }
+}

@@ -18,9 +18,14 @@ from hypogenic.extract_label import extract_label_register
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
 from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import LocalVllmWrapper
-from hypogenic.algorithm.summary_information import (
-    dict_to_summary_information,
+
+
+from hypogenic.algorithm.summary_information import SummaryInformation
+from hypogenic.LLM_wrapper import (
+    GPTWrapper,
+    LLMWrapper,
+    LocalVllmWrapper,
+    llm_wrapper_register,
 )
 
 from hypogenic.algorithm.generation import DefaultGeneration
@@ -45,15 +50,20 @@ def load_dict(file_path):
         data = json.load(file)
     return data
 
-
 def main():
     # set up tools
     start_time = time.time()
 
     # For detailed argument descriptions, please run `hypogenic_generation --help` or see `hypogenic_cmd/generation.py`
     task_config_path = "./data/retweet/config.yaml"
-    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
+    # model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    # model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
+    # model_type = "vllm"
+
+    model_name = "gpt-4o-mini"
+    model_path = None
+    model_type = "gpt"
+    
     max_num_hypotheses = 20
     output_folder = f"./outputs/retweet/{model_name}/hyp_{max_num_hypotheses}/"
     old_hypothesis_file = None
@@ -74,7 +84,7 @@ def main():
     seeds = [42]
 
     os.makedirs(output_folder, exist_ok=True)
-    api = LocalVllmWrapper(model_name, model_path)
+    api = llm_wrapper_register.build(model_type)(model=model_name, path_name=model_path)
 
     # If implementing a new task, you need to create a new extract_label function and pass in the Task constructor.
     # For existing tasks (shoe, hotel_reviews, retweet, headline_binary), you can use the extract_label_register.
@@ -121,7 +131,7 @@ def main():
         else:
             dict = load_dict(old_hypothesis_file)
             for hypothesis in dict:
-                hypotheses_bank[hypothesis] = dict_to_summary_information(
+                hypotheses_bank[hypothesis] = SummaryInformation.from_dict(
                     dict[hypothesis]
                 )
         for epoch in range(1):
