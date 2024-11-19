@@ -42,6 +42,45 @@ def default_extract_label(text):
     logger.warning(f"Could not extract label from text: {text}")
     return "other"
     
+@extract_label_register.register("gptgc_detect")
+def default_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+
+    text = text.lower()
+    pattern = r"final answer:\s+(ai|human)"
+
+    match = re.findall(pattern, text)
+
+    answer = match[-1] if len(match) > 0 else None
+    if answer == "ai":
+        return "AI"
+    elif answer == "human":
+        return "HUMAN"
+    logger.warning(f"Could not extract label from text: {text}")
+    return "other"
+
+@extract_label_register.register("llamagc_detect")
+def default_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+
+    text = text.lower()
+    pattern = r"final answer:\s+(ai|human)"
+
+    match = re.findall(pattern, text)
+
+    answer = match[-1] if len(match) > 0 else None
+    if answer == "ai":
+        return "AI"
+    elif answer == "human":
+        return "HUMAN"
+    logger.warning(f"Could not extract label from text: {text}")
+    return "other"
 
 @extract_label_register.register("headline_binary")
 def headline_binary_extract_label(text):
