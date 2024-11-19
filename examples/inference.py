@@ -50,7 +50,6 @@ def load_dict(file_path):
         data = json.load(file)
     return data
 
-
 def main():
     start_time = time.time()
 
@@ -63,7 +62,7 @@ def main():
     model_name = "gpt-4o-mini"
     model_path = None
     model_type = "gpt"
-    inference_type = "two_step_adaptive"
+    inference_type = "default" # options: default, filter_and_weight, one_step_adaptive, two_step_adaptive
 
     hypothesis_file = f"./outputs/retweet/{model_name}/hyp_20/hypotheses_training_sample_final_seed_42_epoch_0.json"
     adaptive_num_hypotheses = 5

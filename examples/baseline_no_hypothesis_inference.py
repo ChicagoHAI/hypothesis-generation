@@ -10,16 +10,17 @@ from typing import Union
 
 import pandas as pd
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from hypogenic.extract_label import retweet_extract_label
 
 from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper
+from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper, GPTWrapper
 from hypogenic.prompt import BasePrompt
 from hypogenic.logger_config import LoggerConfig
 
 logger = LoggerConfig.get_logger("HypoGenic")
-
 
 def compute_accuracy(results):
     labels = [result["label"] for result in results]
@@ -100,10 +101,13 @@ def main():
     start_time = time.time()
 
     seed = 42
-    task_config_path = "./data/retweet/config.yaml"
+    task_config_path = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)), f"data/retweet/config.yaml"
+    )
     task = "retweet"
-    model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-    model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
+    model_name = "gpt-4o-mini"
+    # model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    # model_path = "/net/scratch/llama/Meta-Llama-3.1-8B-Instruct"
     num_test = 100
     num_train = 100
     num_val = 100
@@ -115,7 +119,8 @@ def main():
     task = BaseTask(task_config_path, extract_label=retweet_extract_label)
 
     prompt_class = BasePrompt(task)
-    api = LocalVllmWrapper(model_name, model_path)
+    api = GPTWrapper(model_name)
+    # api = LocalVllmWrapper(model_name, model_path)
 
     train_data, test_data, _ = task.get_data(num_train, num_test, num_val, seed)
 

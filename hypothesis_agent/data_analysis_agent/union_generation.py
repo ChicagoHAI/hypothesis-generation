@@ -23,7 +23,7 @@ from hypogenic.prompt import BasePrompt
 from hypogenic.utils import set_seed
 from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper, GPTWrapper
 from hypogenic.algorithm.summary_information import (
-    dict_to_summary_information,
+    SummaryInformation,
 )
 
 from hypogenic.algorithm.generation import DefaultGeneration
@@ -170,7 +170,7 @@ def generate_original_hypogenic(
     else:
         dict = load_dict(old_hypothesis_file)
         for hypothesis in dict:
-            hypotheses_bank[hypothesis] = dict_to_summary_information(
+            hypotheses_bank[hypothesis] = SummaryInformation.from_dict(
                 dict[hypothesis]
             )
     for epoch in range(1):
@@ -255,7 +255,7 @@ def generate_init_both_multi_refine(
     else:
         dict = load_dict(old_hypothesis_file)
         for hypothesis in dict:
-            hypotheses_bank[hypothesis] = dict_to_summary_information(
+            hypotheses_bank[hypothesis] = SummaryInformation.from_dict(
                 dict[hypothesis]
             )
     for epoch in range(1):
