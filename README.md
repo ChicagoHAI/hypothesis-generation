@@ -1,3 +1,11 @@
+<a name="readme-top"></a>
+
+<div align="center">
+<img src="https://github.com/ChicagoHAI/chicagohai.github.io/blob/main/static/avatar.jpg" alt="CHAI lab Logo" width="100">
+
+[![Discord](https://img.shields.io/badge/discord-chat-green?logo=discord)](https://discord.gg/BgkfTvBdbV)
+
+</div>
 # Hypothesis Generation with Large Language Models
 
 **[Oct'24]** [Literature Meets Data: A Synergistic Approach to Hypothesis Generation](https://arxiv.org/abs/2410.17309)  
