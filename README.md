@@ -38,7 +38,7 @@ make
 
 ## Usage
 
-The datasets used in our works are at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).
+The datasets used in our works are at [HypoGeniC-datasets](https://anonymous.4open.science/r/HypoGeniC-datasets-3CC8/README.md).
 
 For replicating the results in the paper, you can follow the steps below:
 ### 1. [Optional] Start Redis server
