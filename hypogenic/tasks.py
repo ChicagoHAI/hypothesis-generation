@@ -33,6 +33,9 @@ class BaseTask(ABC):
             data = yaml.safe_load(f)
 
         self.task_name = data["task_name"]
+        # if there's a key called "label_name" in the yaml file, we set it to that
+        # otherwise, we set it to "label"
+        self.label_name = data.get("label_name", "label")
 
         # data paths
         self.train_data_path = data["train_data_path"]
@@ -46,10 +49,13 @@ class BaseTask(ABC):
         self.prompt_template = data["prompt_templates"]
 
         # task label
+        task_name_for_label = self.task_name
+        if "gptgc" in task_name_for_label or "llamagc" in task_name_for_label:
+            task_name_for_label = "aigc_detect"
         self.extract_label = (
             extract_label
             if extract_label is not None
-            else from_register.build(self.task_name)
+            else from_register.build(task_name_for_label)
         )
 
     def get_data(
@@ -72,9 +78,9 @@ class BaseTask(ABC):
                 random.seed(seed)
 
             if num is None:
-                num_samples = len(data["label"])
+                num_samples = len(data[self.label_name])
             else:
-                num_samples = min(num, len(data["label"]))
+                num_samples = min(num, len(data[self.label_name]))
 
             sampled_data = zip(
                 *random.sample(list(zip(*list(data.values()))), num_samples)

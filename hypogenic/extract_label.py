@@ -8,12 +8,13 @@ extract_label_register = Register("extract_label")
 @extract_label_register.register("default")
 def default_extract_label(text):
     logger = LoggerConfig.get_logger("extract_label")
+    logger.debug(f"Extracting label from text: {text}")
     if text is None:
         logger.warning(f"Could not extract label from text: {text}")
         return "other"
 
     text = text.lower()
-    pattern = r"final answer:\s+<begin>(.*)<end>"
+    pattern = r"final answer:\s+(.*)"
 
     match = re.findall(pattern, text)
     if len(match) > 0:
@@ -23,7 +24,7 @@ def default_extract_label(text):
         return "other"
 
 @extract_label_register.register("aigc_detect")
-def default_extract_label(text):
+def aigc_detect_extract_label(text):
     logger = LoggerConfig.get_logger("extract_label")
     if text is None:
         logger.warning(f"Could not extract label from text: {text}")
@@ -43,7 +44,7 @@ def default_extract_label(text):
     return "other"
     
 @extract_label_register.register("gptgc_detect")
-def default_extract_label(text):
+def gptgc_detect_extract_label(text):
     logger = LoggerConfig.get_logger("extract_label")
     if text is None:
         logger.warning(f"Could not extract label from text: {text}")
@@ -51,7 +52,6 @@ def default_extract_label(text):
 
     text = text.lower()
     pattern = r"final answer:\s+(ai|human)"
-
     match = re.findall(pattern, text)
 
     answer = match[-1] if len(match) > 0 else None
@@ -63,7 +63,7 @@ def default_extract_label(text):
     return "other"
 
 @extract_label_register.register("llamagc_detect")
-def default_extract_label(text):
+def llamagc_detect_extract_label(text):
     logger = LoggerConfig.get_logger("extract_label")
     if text is None:
         logger.warning(f"Could not extract label from text: {text}")

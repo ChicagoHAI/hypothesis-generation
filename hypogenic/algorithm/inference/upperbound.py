@@ -62,7 +62,7 @@ class UpperboundInference(Inference):
             **generate_kwargs,
         )
         predictions = [self.task.extract_label(response) for response in responses]
-        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        actual_labels = [data[self.task.label_name][index] for index, _ in idx_hyp_pair]
         return predictions, actual_labels
 
     def _run_inference_final(
