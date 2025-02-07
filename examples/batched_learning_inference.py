@@ -28,7 +28,7 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, cache_se
     hypothesis_dict = {hypothesis: None}
     prompt_input = [
         prompt_class.inference(hypothesis_dict, data, i)
-        for i in range(len(data["label"]))
+        for i in range(len(data[task.label_name]))
     ]
     responses = api.batched_generate(prompt_input, cache_seed=cache_seed)
     for i, response in enumerate(responses):
@@ -36,11 +36,11 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, cache_se
         logger.info(response)
         pred = task.extract_label(response)
         logger.info(f"pred: {pred}")
-        logger.info(f"label: {data['label'][i]}")
+        logger.info(f"label: {data[task.label_name][i]}")
         logger.info("*********************")
-        if pred == data["label"][i]:
+        if pred == data[task.label_name][i]:
             correct += 1
-    accuracy = correct / len(data["label"])
+    accuracy = correct / len(data[task.label_name])
     return accuracy
 
 

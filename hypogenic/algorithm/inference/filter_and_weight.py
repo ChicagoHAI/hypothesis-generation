@@ -55,7 +55,7 @@ class FilterAndWeightInference(Inference):
             [len(hyp_bank.keys()) >= 1 for _, hyp_bank in idx_hyp_pair]
         ), "Filter and weight inference requires at least one hypothesis"
 
-        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        actual_labels = [data[self.task.label_name][index] for index, _ in idx_hyp_pair]
         prompt_inputs = [
             self.prompt_class.inference({hypothesis: hyp_bank[hypothesis]}, data, index)
             for index, hyp_bank in idx_hyp_pair

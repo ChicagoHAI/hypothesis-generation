@@ -61,7 +61,7 @@ def few_shot(
     for i in range(len(test_data)):
         logger.info(f"********** Example {i} **********")
         pred = task.extract_label(responses[i])
-        label = test_data["label"][i]
+        label = test_data[task.label_name][i]
 
         # logger.info(f"Prompt: {prompt_inputs[i]}")
         logger.info(f"Response: {responses[i]}")
@@ -85,11 +85,11 @@ def preprocess(train_data, k):
 
     data = []
 
-    label_nunique = train_data["label"].nunique()
-    label_unique = train_data["label"].unique()
+    label_nunique = train_data[task.label_name].nunique()
+    label_unique = train_data[task.label_name].unique()
     for i in range(k):
         data.append(
-            train_data[train_data["label"] == label_unique[i % label_nunique]].iloc[
+            train_data[train_data[task.label_name] == label_unique[i % label_nunique]].iloc[
                 i // label_nunique
             ]
         )

@@ -61,7 +61,7 @@ class DefaultInference(Inference):
         predictions = [self.task.extract_label(response) for response in responses]
 
         # and once we get the actual labels
-        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        actual_labels = [data[self.task.label_name][index] for index, _ in idx_hyp_pair]
 
         # we can return our predictions along with the labels
         return predictions, actual_labels

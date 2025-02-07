@@ -57,7 +57,7 @@ class MultiHypDefaultInference(DefaultInference):
             max_concurrent=max_concurrent,
             **generate_kwargs,
         )
-        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        actual_labels = [data[self.task.label_name][index] for index, _ in idx_hyp_pair]
         predictions = [self.task.extract_label(responses[i]) for i in range(len(responses))]
 
         return predictions, actual_labels
@@ -166,6 +166,6 @@ class MultiHypInferenceWithRank(DefaultInference):
             idx_hyp_pair[idx] = (index, hyp_bank)
 
         predictions = [pred for pred, _ in pred_rank_pair]
-        actual_labels = [data["label"][index] for index, _ in idx_hyp_pair]
+        actual_labels = [data[self.task.label_name][index] for index, _ in idx_hyp_pair]
 
         return predictions, actual_labels, idx_hyp_pair
