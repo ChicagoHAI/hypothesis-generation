@@ -279,6 +279,6 @@ prompt_templates:
 ### 3. Write an extract_label function for your new task
 As we show in `examples/generation.py`, you can create a new task by using our `BaseTask` constructor (line 63). You need to implement the `extract_label` function for your new task. The `extract_label` function should take a string input (LLM generated inference text), and return the label extracted from the input. 
 
-**If no `extract_label` function is provided, the default version will be used, which looks for `final answer:\s+<begin>(.*)<end>` in the LLM generated text.**
+**If no `extract_label` function is provided, the default version will be used, which looks for `final answer:\s+(.*)` in the LLM generated text.**
 
 **Note: you need to make sure the extracted label are in same format with the `'label'` in your dataset, since the extracted label will be compared with the true label to check correctness of each LLM inference.**
