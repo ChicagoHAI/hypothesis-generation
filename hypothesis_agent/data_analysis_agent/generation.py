@@ -28,6 +28,10 @@ from hypothesis_agent.utils import SpecificityBooster
 import matplotlib.pyplot as plt
 import pandas as pd
 
+
+logger = LoggerConfig.get_logger("Agent")
+
+
 class OnlyPaperGeneration(DefaultGeneration):
     def __init__(
         self,
@@ -119,6 +123,56 @@ class OnlyPaperGeneration(DefaultGeneration):
         )
         return list(final_hyp_bank.keys())
 
+class ZeroShotGeneration(DefaultGeneration):
+    def __init__(
+        self,
+        api,
+        prompt_class: TestPrompt,
+        inference_class: Inference,
+        task: BaseTask,
+    ):
+        super().__init__(api, prompt_class, inference_class, task)
+
+    def batched_hyp_list_generation(
+        self,
+        example_indices: List[int],
+        num_hypotheses_generate: int,
+        cache_seed=None,
+        max_concurrent=3,
+        **generate_kwargs,
+    ) -> List[str]:
+
+        prompt_input = self.prompt_class.initialize_hypotheses_0_shot(
+            num_hypotheses_generate,
+        )
+        response = self.api.generate(
+            prompt_input,
+            cache_seed=cache_seed,
+            **generate_kwargs,
+        )
+
+        return extract_hypotheses(response, num_hypotheses_generate)
+
+    def initialize_hypotheses_0_shot(
+        self,
+        num_hypotheses_generate,
+        cache_seed=None,
+        max_concurrent=3,
+        max_tokens=4000,
+        **generate_kwargs,
+    ):
+        prompt_input = self.prompt_class.initialize_hypotheses_0_shot(
+            num_hypotheses_generate,
+        )
+        response = self.api.generate(
+            prompt_input,
+            cache_seed=cache_seed,
+            max_tokens=max_tokens,
+            **generate_kwargs,
+        )
+
+        return extract_hypotheses(response, num_hypotheses_generate)
+    
 
 class TestGeneration(DefaultGeneration):
     def __init__(
