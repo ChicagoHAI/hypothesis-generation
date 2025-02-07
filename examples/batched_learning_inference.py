@@ -36,7 +36,7 @@ def get_accuracy(api: LLMWrapper, hypothesis, data, prompt_class, task, cache_se
         logger.info(response)
         pred = task.extract_label(response)
         logger.info(f"pred: {pred}")
-        logger.info(f"label: {data['label'][i]}")
+        logger.info(f"label: {data[task.label_name][i]}")
         logger.info("*********************")
         if pred == data[task.label_name][i]:
             correct += 1
