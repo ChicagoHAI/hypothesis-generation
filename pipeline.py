@@ -45,42 +45,79 @@ from hypothesis_agent.data_analysis_agent.prompt import TestPrompt
 import argparse
 
 parser = argparse.ArgumentParser()
+
+# Required base arguments
 parser.add_argument("--model_type", type=str, required=True)
 parser.add_argument("--model_name", type=str, required=True)
 parser.add_argument("--task_name", type=str, required=True)
+# This is needed for local models
 parser.add_argument("--model_path", type=str)
 parser.add_argument("--do_train", action="store_true", default=False)
+
+# Method toggle arguments
+parser.add_argument("--run_zero_shot", action="store_true", help="Run zero-shot baseline")
+parser.add_argument("--run_few_shot", action="store_true", help="Run few-shot baseline")
+parser.add_argument("--run_zero_shot_gen", action="store_true", help="Run zero-shot generation")
+parser.add_argument("--run_only_paper", action="store_true", help="Run literature-only")
+parser.add_argument("--run_hyperwrite", action="store_true", help="Run HyperWrite")
+parser.add_argument("--run_notebooklm", action="store_true", help="Run NotebookLM")
+parser.add_argument("--run_hypogenic", action="store_true", help="Run original HypoGeniC")
+parser.add_argument("--run_hyporefine", action="store_true", help="Run HypoRefine")
+parser.add_argument("--run_union_hypo", action="store_true", help="Run Union HypoGeniC and Paper")
+parser.add_argument("--run_union_refine", action="store_true", help="Run Union HypoRefine and Paper")
+parser.add_argument("--run_cross_model", action="store_true", help="Run cross-model evaluation")
+
+# All algorithm-related arguments
+parser.add_argument("--cross_model_postfix", type=str, default="hypogenic_and_paper")
+parser.add_argument("--multihyp", action="store_true", default=True)
+parser.add_argument("--use_val", action="store_true", default=False)
+parser.add_argument("--max_num_hypotheses", type=int, default=10)
+parser.add_argument("--num_init", type=int, default=10)
+parser.add_argument("--num_train", type=int, default=20)
+parser.add_argument("--num_test", type=int, default=20)
+parser.add_argument("--num_val", type=int, default=200)
+parser.add_argument("--k", type=int, default=10)
+parser.add_argument("--alpha", type=float, default=5e-1)
+parser.add_argument("--update_batch_size", type=int, default=10)
+parser.add_argument("--num_hypotheses_to_update", type=int, default=1)
+parser.add_argument("--update_hypotheses_per_batch", type=int, default=10)
+parser.add_argument("--save_every_10_examples", type=int, default=10)
+parser.add_argument("--init_batch_size", type=int, default=10)
+parser.add_argument("--init_hypotheses_per_batch", type=int, default=10)
+parser.add_argument("--cache_seed", type=int, default=None)
+parser.add_argument("--temperature", type=float, default=1e-5)
+parser.add_argument("--max_tokens", type=int, default=8000)
+parser.add_argument("--use_refine", action="store_true", default=False)
+parser.add_argument("--max_refine", type=int, default=6)
+parser.add_argument("--seed", type=int, default=42)
+
 args = parser.parse_args()
 
-# task_name = "admission/size_5"
-cross_model_postfix = "hypogenic_and_paper"
-multihyp = True
-use_val = False
-max_num_hypotheses = 10
-num_init = 10
-num_train = 20
-num_test = 20
-num_val = 200
-k = 10
-alpha = 5e-1
-update_batch_size = 10
-num_hypotheses_to_update = 1
-update_hypotheses_per_batch = 10
-save_every_10_examples = 10
-init_batch_size = 10
-init_hypotheses_per_batch = 10
-cache_seed = None
-temperature = 1e-5
-max_tokens = 8000
-use_refine = False
-max_refine = 1
-seed = 42
-# seed = 3407
-# seed = 998244353
-# seed = 11376
-# seed = 8271
 
-SEEDS = [42]
+cross_model_postfix = args.cross_model_postfix
+multihyp = args.multihyp
+use_val = args.use_val
+max_num_hypotheses = args.max_num_hypotheses
+num_init = args.num_init
+num_train = args.num_train
+num_test = args.num_test
+num_val = args.num_val
+k = args.k
+alpha = args.alpha
+update_batch_size = args.update_batch_size
+num_hypotheses_to_update = args.num_hypotheses_to_update
+update_hypotheses_per_batch = args.update_hypotheses_per_batch
+save_every_10_examples = args.save_every_10_examples
+init_batch_size = args.init_batch_size
+init_hypotheses_per_batch = args.init_hypotheses_per_batch
+cache_seed = args.cache_seed
+temperature = args.temperature
+max_tokens = args.max_tokens
+use_refine = args.use_refine
+max_refine = args.max_refine
+seed = args.seed
+
+
 def zero_shot_hyp(task_name, api, model_name):
     output_folder = (
         f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_zero_shot/"
@@ -361,9 +398,9 @@ def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='ba
     prompt_class = TestPrompt(task)
 
     if use_refine:
-        data_hyp_file =  f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_final_seed_42_epoch_0.json"
+        data_hyp_file =  f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_final_seed_{seed}_epoch_0.json"
     else:
-        data_hyp_file =  f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_42_epoch_0.json"
+        data_hyp_file =  f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json"
 
     with open(data_hyp_file) as f:
         hyp_dict = json.load(f)
@@ -371,7 +408,7 @@ def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='ba
     for hypothesis in hyp_dict:
         data_hyp_bank[hypothesis] = SummaryInformation.from_dict(hyp_dict[hypothesis])
 
-    paper_hyp_file = f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_only_paper/hypotheses_training_sample_0_seed_42_epoch_0.json"
+    paper_hyp_file = f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_only_paper/hypotheses_training_sample_0_seed_{seed}_epoch_0.json"
     
     with open(paper_hyp_file) as f:
         hyp_dict = json.load(f)
@@ -406,10 +443,10 @@ def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='ba
     for hyp in unique_paper_hyp_bank:
         paper_dump_dict[hyp] = {"hypothesis": hyp, "acc": unique_paper_hyp_bank[hyp].acc}
 
-    with open(f"./results/{task_name}/{model_name}/dedup_data_only/hypotheses_training_sample_final_seed_42_epoch_0.json", 'w') as file:
+    with open(f"./results/{task_name}/{model_name}/dedup_data_only/hypotheses_training_sample_final_seed_{seed}_epoch_0.json", 'w') as file:
         json.dump(data_dump_dict, file)
 
-    with open(f"./results/{task_name}/{model_name}/dedup_paper_only/hypotheses_training_sample_final_seed_42_epoch_0.json", 'w') as file:
+    with open(f"./results/{task_name}/{model_name}/dedup_paper_only/hypotheses_training_sample_final_seed_{seed}_epoch_0.json", 'w') as file:
         json.dump(paper_dump_dict, file)
 
     unique_data_hyp_list = sorted(unique_data_hyp_bank, key=lambda x: unique_data_hyp_bank[x].acc, reverse=True)
@@ -445,7 +482,7 @@ def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='ba
     for hyp in union_hyp_bank:
         union_dump_dict[hyp] = {"hypothesis": hyp, "acc": union_hyp_bank[hyp].acc}
 
-    with open(f'{output_folder}/hypotheses_training_sample_final_seed_42_epoch_0.json', 'w') as file:
+    with open(f'{output_folder}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json', 'w') as file:
         json.dump(union_dump_dict, file)
 
 def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=False):
@@ -611,6 +648,61 @@ def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     return results_list
 
 
+def log_arguments(logger, args):
+    """Log all configuration parameters in an organized way."""
+    sections = {
+        "Run Configuration": [
+            ("Model Type", args.model_type),
+            ("Model Name", args.model_name),
+            ("Model Path", args.model_path),
+            ("Task Name", args.task_name),
+            ("Do Train", args.do_train)
+        ],
+        "Method Configuration": [
+            ("Run Zero Shot", args.run_zero_shot),
+            ("Run Few Shot", args.run_few_shot),
+            ("Run Zero Shot Gen", args.run_zero_shot_gen),
+            ("Run Only Paper", args.run_only_paper),
+            ("Run HyperWrite", args.run_hyperwrite),
+            ("Run NotebookLM", args.run_notebooklm),
+            ("Run HypoGeniC", args.run_hypogenic),
+            ("Run HypoRefine", args.run_hyporefine),
+            ("Run Union HypoGeniC", args.run_union_hypo),
+            ("Run Union HypoRefine", args.run_union_refine),
+            ("Run Cross Model", args.run_cross_model)
+        ],
+        "Algorithm Configuration": [
+            ("Cross Model Postfix", cross_model_postfix),
+            ("Multi Hypothesis", multihyp),
+            ("Use Validation", use_val),
+            ("Max Num Hypotheses", max_num_hypotheses),
+            ("Num Init", num_init),
+            ("Num Train", num_train),
+            ("Num Test", num_test),
+            ("Num Val", num_val),
+            ("K", k),
+            ("Alpha", alpha),
+            ("Update Batch Size", update_batch_size),
+            ("Num Hypotheses to Update", num_hypotheses_to_update),
+            ("Update Hypotheses Per Batch", update_hypotheses_per_batch),
+            ("Save Every N Examples", save_every_10_examples),
+            ("Init Batch Size", init_batch_size),
+            ("Init Hypotheses Per Batch", init_hypotheses_per_batch),
+            ("Cache Seed", cache_seed),
+            ("Temperature", temperature),
+            ("Max Tokens", max_tokens),
+            ("Use Refine", use_refine),
+            ("Max Refine", max_refine),
+            ("Seed", seed)
+        ]
+    }
+    
+    for section, params in sections.items():
+        logger.info(f"\n=== {section} ===")
+        for name, value in params:
+            logger.info(f"{name}: {value}")
+    logger.info("=====================\n")
+
 if __name__ == "__main__":
 
     model_name = args.model_name
@@ -626,145 +718,50 @@ if __name__ == "__main__":
 
     LoggerConfig.setup_logger(
         logging.INFO,
-        f"results/{task_name}/{model_name}_seed_ALL_{datetime.datetime.now().strftime('%Y-%m-%d,%H-%M-%S')}.log",
+        f"results/{task_name}/{model_name}_seed_{seed}_{datetime.datetime.now().strftime('%Y-%m-%d,%H-%M-%S')}.log",
     )
 
     logger = LoggerConfig.get_logger("Agent")
-
-
+    log_arguments(logger, args)
+    
     api = llm_wrapper_register.build(model_type)(model=model_name, path_name=model_path)
 
     logger.info(f"=-=-=-=-=-=-=-=-=-=-=-={model_name}=-=-=-=-=-=-=-=-=-=-=-=")
     logger.info(f"=-=-=-=-=-=-=-=-=-=-=-={task_name}=-=-=-=-=-=-=-=-=-=-=-=")
-    # BASELINE
-    logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot baseline, seed 42=-=-=-=-=-=-=-=-=-=-=-=")
-    logger.info(
-        baseline(
-            0,
-            task_name=task_name,
-            api=api,
-            model_name=model_name,
-            use_val=use_val,
-            seed=42,
+
+    # Modify the execution flow to use toggle arguments
+    if args.run_zero_shot:
+        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Zero-shot baseline, seed {seed}=-=-=-=-=-=-=-=-=-=-=-=")
+        logger.info(
+            baseline(
+                0,
+                task_name=task_name,
+                api=api,
+                model_name=model_name,
+                use_val=use_val,
+                seed=seed,
+            )
         )
-    )
 
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot baseline, seed 3407=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         0,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=3407,
-    #     )
-    # )
-
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot baseline, seed 998244353=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         0,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=998244353,
-    #     )
-    # )
-
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot baseline, seed 11376=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         0,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=11376,
-    #     )
-    # )
-
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot baseline, seed 8271=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         0,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=8271,
-    #     )
-    # )
-
-    logger.info("=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed 42=-=-=-=-=-=-=-=-=-=-=-=")
-    logger.info(
-        baseline(
-            3,
-            task_name=task_name,
-            api=api,
-            model_name=model_name,
-            use_val=use_val,
-            seed=42,
+    if args.run_few_shot:
+        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed {seed}=-=-=-=-=-=-=-=-=-=-=-=")
+        logger.info(
+            baseline(
+                3,
+                task_name=task_name,
+                api=api,
+                model_name=model_name,
+                use_val=use_val,
+                seed=seed,
+            )
         )
-    )
 
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed 3407=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         3,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=3407,
-    #     )
-    # )
-
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed 998244353=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         3,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=998244353,
-    #     )
-    # )
-
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed 11376=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         3,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=11376,
-    #     )
-    # )
-
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed 8271=-=-=-=-=-=-=-=-=-=-=-=")
-    # logger.info(
-    #     baseline(
-    #         3,
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         seed=8271,
-    #     )
-    # )
-
-    # ZERO SHOT
-    logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot generation=-=-=-=-=-=-=-=-=-=-=-=")
-    if DO_TRAIN:
-        zero_shot_hyp(task_name=task_name, api=api, model_name=model_name)
-    for s in SEEDS:
-        seed = s
+    if args.run_zero_shot_gen:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot generation=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            zero_shot_hyp(task_name=task_name, api=api, model_name=model_name)
         get_res(
-            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_zero_shot/hypotheses_training_sample_0_seed_42_epoch_0.json",
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_zero_shot/hypotheses_training_sample_0_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
             model_name=model_name,
@@ -772,143 +769,116 @@ if __name__ == "__main__":
             multihyp=multihyp,
         )
 
-    # # LITERATURE REVIEW ONLY PAPER
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Literature-only=-=-=-=-=-=-=-=-=-=-=-=")
-    # if DO_TRAIN:
-    #     only_paper(task_name=task_name, api=api, model_name=model_name)
-    # for s in SEEDS:
-    #     seed = s
-    #     get_res(
-    #         f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_only_paper/hypotheses_training_sample_0_seed_42_epoch_0.json",
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         multihyp=multihyp,
-    #     )
-
-    # # HyperWrite 
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=HyperWrite=-=-=-=-=-=-=-=-=-=-=-=")
-    # for s in SEEDS:
-    #     seed = s
-    #     get_res(
-    #         f"results/{task_name}/HyperWrite/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_0_seed_42_epoch_0.json",
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         multihyp=multihyp,
-    #     )
-
-    # # NotebookLM 
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=NotebookLM=-=-=-=-=-=-=-=-=-=-=-=")
-    # for s in SEEDS:
-    #     seed = s
-    #     get_res(
-    #         f"results/{task_name}/NotebookLM/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_0_seed_42_epoch_0.json",
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         multihyp=multihyp,
-    #     )
-
-    # HYPOGENIC
-    logger.info("=-=-=-=-=-=-=-=-=-=-=-=Original HypoGeniC=-=-=-=-=-=-=-=-=-=-=-=")
-    if DO_TRAIN:
-        original_hypogenic(task_name=task_name, api=api, model_name=model_name)
-
-    logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
-    get_res(
-        f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_42_epoch_0.json",
-        task_name=task_name,
-        api=api,
-        model_name=model_name,
-        use_val=use_val,
-        multihyp=multihyp,
-    )
-
-    logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
-    for s in SEEDS:
-        seed = s
+    if args.run_only_paper:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Literature-only=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            only_paper(task_name=task_name, api=api, model_name=model_name)
         get_res(
-        f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_42_epoch_0.json",
-        task_name=task_name,
-        api=api,
-        model_name=model_name,
-        use_val=use_val,
-        multihyp=multihyp,
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_only_paper/hypotheses_training_sample_0_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
         )
 
-    # # LITERATURE REVIEW
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=HypoRefine=-=-=-=-=-=-=-=-=-=-=-=")
-    # if DO_TRAIN:
-    #     with_paper(task_name=task_name, api=api, model_name=model_name)
-    
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
-    # get_res(
-    #     f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_10_seed_42_epoch_0.json",
-    #     task_name=task_name,
-    #     api=api,
-    #     model_name=model_name,
-    #     use_val=use_val,
-    #     multihyp=multihyp,
-    # )
-    
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
-    # for s in SEEDS:
-    #     seed = s    
-    #     get_res(
-    #         f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_final_seed_42_epoch_0.json",
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         multihyp=multihyp,
-    #     )
+    if args.run_hypogenic:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Original HypoGeniC=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            original_hypogenic(task_name=task_name, api=api, model_name=model_name)
+        
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
 
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoGeniC and Paper=-=-=-=-=-=-=-=-=-=-=-=")
-    # if DO_TRAIN:
-    #     union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=False, prioritize='balanced')
-    # union_postfix = "hypogenic_and_paper"
-    # for s in SEEDS:
-    #     seed = s
-    #     get_res(
-    #         f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_42_epoch_0.json",
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         multihyp=multihyp,
-    #     )
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
 
-    # logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoRefine and Paper=-=-=-=-=-=-=-=-=-=-=-=")
-    # if DO_TRAIN:
-    #     union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=True, prioritize='balanced')
-    # union_postfix = "refine_and_paper"
-    # for s in SEEDS:
-    #     seed = s
-    #     get_res(
-    #         f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_42_epoch_0.json",
-    #         task_name=task_name,
-    #         api=api,
-    #         model_name=model_name,
-    #         use_val=use_val,
-    #         multihyp=multihyp,
-    #     )
+    if args.run_hyporefine:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=HypoRefine=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            with_paper(task_name=task_name, api=api, model_name=model_name)
+        
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
 
-    # if "gpt" in model_type:
-    #     cross_model_name = "meta-llama/Meta-Llama-3.1-70B-Instruct"
-    # else:
-    #     cross_model_name = "gpt-4o-mini"
+    if args.run_union_hypo:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoGeniC and Paper=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=False, prioritize='balanced')
+        union_postfix = "hypogenic_and_paper"
+        get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
 
-    # task_name = "llamagc_detect"
-    # logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
-    # get_res(
-    #     f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_42_epoch_0.json",
-    #     task_name=task_name,
-    #     api=api,
-    #     model_name=model_name,
-    #     use_val=use_val,
-    #     multihyp=multihyp,
-    # )
+    if args.run_union_refine:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoRefine and Paper=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=True, prioritize='balanced')
+        union_postfix = "refine_and_paper"
+        get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+
+    if args.run_cross_model and "gpt" in model_type:
+        cross_model_name = "meta-llama/Meta-Llama-3.1-70B-Instruct"
+        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
+        get_res(
+            f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+    elif args.run_cross_model:
+        cross_model_name = "gpt-4o-mini"
+        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
+        get_res(
+            f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
