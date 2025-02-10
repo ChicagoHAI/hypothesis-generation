@@ -27,11 +27,10 @@ Our work highlights the capability of LLMs to assist and innovate in the hypothe
 ## Table of Contents
 - [Install environment](#install-environment)
 - [Optional: set up Redis server for caching LLM responses](#optional-set-up-redis-server-for-caching-llm-responses)
+- [Quickstart](#quickstart)
 - [Usage](#usage)
   - [Optional: Start Redis server](#optional-start-redis-server)
-  - [Hypothesis Generation](#hypogenic-generation)
-  <!-- - [**HypoRefine** Hypothesis Generation](#hyporefine-generation)
-  - [Union Methods Hypothesis Generation](#union-generation) -->
+  - [Hypothesis Generation](#hypothesis-generation)
   - [Hypothesis Inference](#hypothesis-inference)
 - [Use HypoGeniC in your code](#use-hypogenic-in-your-code)
 - [Add a new task or dataset](#add-a-new-task-or-dataset)
@@ -74,7 +73,33 @@ cd redis-stable
 make
 ```
 
-## Usage
+## Quickstart
+
+1. Clone the repository and install dependencies:
+```bash
+git clone https://github.com/ChicagoHAI/hypothesis-generation.git
+cd hypothesis-generation
+
+conda create --name hypogenic python=3.10
+conda activate hypogenic
+
+pip install -r requirements.txt
+pip install -e .
+```
+
+2. Copy the dataset folders to `~/hypothesis-generation/data/`:
+```bash
+cp -r /path/to/dataset/folders ~/hypothesis-generation/data/
+```
+
+3. Run the pipeline:
+```bash
+conda activate hypogenic
+cd hypothesis-generation/
+./run_pipeline.sh
+```
+
+## Detailed Usage
 
 The datasets used in our works are at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).
 

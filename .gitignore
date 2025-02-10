@@ -14,4 +14,5 @@ dump.rdb
 hypogenic.egg-info
 ./data
 playgrounds/*
+results/*
 *.log
