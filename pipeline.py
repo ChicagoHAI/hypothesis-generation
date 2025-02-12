@@ -379,6 +379,68 @@ def original_hypogenic(task_name, api, model_name):
             epoch=epoch,
         )
 
+def qiu_iterative_refinement(task_name, api, model_name):
+    output_folder = f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/"
+
+    os.makedirs(output_folder, exist_ok=True)
+
+    task = BaseTask(
+        config_path=f"./data/{task_name}/config.yaml",
+        from_register=extract_label_register,
+    )
+
+    set_seed(seed)
+    train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
+    prompt_class = BasePrompt(task)
+    inference_class = DefaultInference(api, prompt_class, train_data, task)
+    generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
+
+    update_class = DefaultUpdate(
+        generation_class=generation_class,
+        inference_class=inference_class,
+        replace_class=DefaultReplace(max_num_hypotheses),
+        save_path=output_folder,
+        num_init=num_init,
+        k=k,
+        alpha=alpha,
+        update_batch_size=update_batch_size,
+        num_hypotheses_to_update=num_hypotheses_to_update,
+        save_every_n_examples=save_every_10_examples,
+    )
+
+    hypotheses_bank = {}
+    hypotheses_bank = update_class.batched_initialize_hypotheses(
+        num_init,
+        init_batch_size=init_batch_size,
+        init_hypotheses_per_batch=init_hypotheses_per_batch,
+        cache_seed=cache_seed,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        max_concurrent=64,
+    )
+    update_class.save_to_json(
+        hypotheses_bank,
+        sample=num_init,
+        seed=seed,
+        epoch=0,
+    )
+    for epoch in range(1):
+        hypotheses_bank = update_class.update(
+            current_epoch=epoch,
+            hypotheses_bank=hypotheses_bank,
+            current_seed=seed,
+            cache_seed=cache_seed,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            max_concurrent=64,
+        )
+        update_class.save_to_json(
+            hypotheses_bank,
+            sample="final",
+            seed=seed,
+            epoch=epoch,
+        )
+
 def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='balanced'):
 
     union_postfix = "refine_and_paper" if use_refine else "hypogenic_and_paper"
