@@ -30,36 +30,35 @@ class IOPrompt(BasePrompt):
         self.task = task
 
     def refine_with_feedback(self, 
-                             hypotheses_dict: Dict[str, SummaryInformation],
                              train_data, 
-                             num_hypotheses):
+                             num_hypotheses,
+                             hypotheses_dict: Dict[str, SummaryInformation]):
         """
         Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
         """
             
         substitute_dict = {"num_hypotheses": num_hypotheses}
-        
-        sorted_hyp_bank = dict(
-            sorted(
-                hypotheses_dict.items(), key=lambda item: item[1].acc, reverse=True
-            )
-        )
-        top_hypothesis = list(sorted_hyp_bank.keys())[0]
-        top_hypothesis_correct_examples = sorted_hyp_bank[top_hypothesis].correct_examples
 
-        multi_sub_dicts = {"feedbacks": []}
-        for example_idx in range(len(train_data)):
-            if example_idx in top_hypothesis_correct_examples:
-                continue
-            # if the top hypothesis predicted wrong
-            multi_sub_dicts["feedbacks"].append(
-                self._get_substitute_dict(train_data, example_idx)
-            )
+        if len(hypotheses_dict) > 0:
+            hypothesis_text = list(hypotheses_dict.keys())[0]
+            top_hypothesis_correct_examples = hypotheses_dict[hypothesis_text].correct_examples
+
+            multi_sub_dicts = {"feedbacks": []}
+            for example_idx in range(len(train_data)):
+                if example_idx in top_hypothesis_correct_examples:
+                    continue
+                # if the top hypothesis predicted wrong
+                multi_sub_dicts["feedbacks"].append(
+                    self._get_substitute_dict(train_data, example_idx)
+                )
+        else:
+            multi_sub_dicts = {"feedbacks": []}
         substitute_dict = self._fill_multi_in_sub_dict(
-            substitute_dict, multi_sub_dicts, "batched_generation"
+            substitute_dict, multi_sub_dicts, "IO_refine_with_feedback"
         )
 
-        prompt = self._information_prompt(substitute_dict, "batched_generation")
+        prompt = self._information_prompt(substitute_dict, "IO_refine_with_feedback")
 
+        print(prompt)
         return prompt
 

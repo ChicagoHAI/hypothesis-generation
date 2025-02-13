@@ -42,6 +42,11 @@ from hypothesis_agent.literature_review_agent.literature_processor.summarize imp
 from hypothesis_agent.data_analysis_agent.utils import multiple_hypotheses_remove_repetition
 from hypothesis_agent.data_analysis_agent.prompt import TestPrompt
 
+
+from IO_prompting.prompt import IOPrompt
+from IO_prompting.update import IOUpdate
+from IO_prompting.generation import IOGeneration
+
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -66,6 +71,7 @@ parser.add_argument("--run_hyporefine", action="store_true", help="Run HypoRefin
 parser.add_argument("--run_union_hypo", action="store_true", help="Run Union HypoGeniC and Paper")
 parser.add_argument("--run_union_refine", action="store_true", help="Run Union HypoRefine and Paper")
 parser.add_argument("--run_cross_model", action="store_true", help="Run cross-model evaluation")
+parser.add_argument("--run_io_refine", action="store_true", help="Run IO iterative refinement")
 
 # All algorithm-related arguments
 parser.add_argument("--cross_model_postfix", type=str, default="hypogenic_and_paper")
@@ -379,8 +385,8 @@ def original_hypogenic(task_name, api, model_name):
             epoch=epoch,
         )
 
-def qiu_iterative_refinement(task_name, api, model_name):
-    output_folder = f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/"
+def IO_iterative_refinement(task_name, api, model_name):
+    output_folder = f"./results/{task_name}/{model_name}/IO_refinement/"
 
     os.makedirs(output_folder, exist_ok=True)
 
@@ -390,17 +396,17 @@ def qiu_iterative_refinement(task_name, api, model_name):
     )
 
     set_seed(seed)
-    train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
-    prompt_class = BasePrompt(task)
+    train_data, _, _ = task.get_data(10, num_test, num_val, seed)
+    prompt_class = IOPrompt(task)
     inference_class = DefaultInference(api, prompt_class, train_data, task)
-    generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
+    generation_class = IOGeneration(api, prompt_class, inference_class, task)
 
-    update_class = DefaultUpdate(
+    update_class = IOUpdate(
         generation_class=generation_class,
         inference_class=inference_class,
         replace_class=DefaultReplace(max_num_hypotheses),
         save_path=output_folder,
-        num_init=num_init,
+        num_init=10,
         k=k,
         alpha=alpha,
         update_batch_size=update_batch_size,
@@ -409,22 +415,40 @@ def qiu_iterative_refinement(task_name, api, model_name):
     )
 
     hypotheses_bank = {}
+    # Use the Qiu et al. 2024 paper hyperparameters
     hypotheses_bank = update_class.batched_initialize_hypotheses(
-        num_init,
-        init_batch_size=init_batch_size,
-        init_hypotheses_per_batch=init_hypotheses_per_batch,
+        num_init=10,
+        init_batch_size=num_init,
+        init_hypotheses_per_batch=5,
         cache_seed=cache_seed,
-        temperature=temperature,
+        temperature=0.7,
         max_tokens=max_tokens,
         max_concurrent=64,
     )
+    # only keep the hypothesis with the highest accuracy
+    sorted_hypotheses = sorted(
+        hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
+    )
+    hypotheses_bank = {
+        sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
+    }
     update_class.save_to_json(
         hypotheses_bank,
-        sample=num_init,
+        sample=10,
         seed=seed,
         epoch=0,
     )
-    for epoch in range(1):
+    for epoch in range(3):
+        # if there exist a hypothesis with accuracy 1.0, stop the training
+        if any(hypotheses_bank[h].acc == 1.0 for h in hypotheses_bank):
+            update_class.save_to_json(
+                hypotheses_bank,
+                sample="final",
+                seed=seed,
+                epoch=2,
+            )
+            break
+        # Else, iteratively refine
         hypotheses_bank = update_class.update(
             current_epoch=epoch,
             hypotheses_bank=hypotheses_bank,
@@ -433,6 +457,9 @@ def qiu_iterative_refinement(task_name, api, model_name):
             temperature=temperature,
             max_tokens=max_tokens,
             max_concurrent=64,
+        )
+        hypotheses_bank = sorted(
+            hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
         )
         update_class.save_to_json(
             hypotheses_bank,
@@ -731,7 +758,8 @@ def log_arguments(logger, args):
             ("Run HypoRefine", args.run_hyporefine),
             ("Run Union HypoGeniC", args.run_union_hypo),
             ("Run Union HypoRefine", args.run_union_refine),
-            ("Run Cross Model", args.run_cross_model)
+            ("Run Cross Model", args.run_cross_model),
+            ("Run IO Refine", args.run_io_refine)
         ],
         "Algorithm Configuration": [
             ("Cross Model Postfix", cross_model_postfix),
@@ -943,4 +971,17 @@ if __name__ == "__main__":
             model_name=model_name,
             use_val=use_val,
             multihyp=multihyp,
+        )
+
+    if args.run_io_refine:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative Refinement=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            IO_iterative_refinement(task_name=task_name, api=api, model_name=model_name)
+        get_res(
+            f"results/{task_name}/{model_name}/IO_refinement/hypotheses_training_sample_final_seed_{seed}_epoch_2.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=False,
         )
