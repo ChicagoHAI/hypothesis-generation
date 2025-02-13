@@ -106,7 +106,7 @@ class IOUpdate(DefaultUpdate):
         if self.sample_num_to_restart_from >= 0:
             start_sample = self.sample_num_to_restart_from
         else:
-            start_sample = self.num_init
+            start_sample = 0
 
         # This is to check if we are running more epochs than the starting epoch, if so, start at sample 0
         # basically, if we've completed the starting epoch, we want to start the next one
@@ -183,7 +183,7 @@ class IOUpdate(DefaultUpdate):
                     **generate_kwargs,
                 )
             )
-
+        new_hyp_bank.update(new_hypotheses)
         # Use the new hypothesis bank
         hypotheses_bank = new_hyp_bank
 

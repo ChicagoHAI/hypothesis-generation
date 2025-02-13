@@ -36,29 +36,33 @@ class IOPrompt(BasePrompt):
         """
         Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
         """
-            
-        substitute_dict = {"num_hypotheses": num_hypotheses}
+        
+        hypothesis_text = list(hypotheses_dict.keys())[0]
+        top_hypothesis_correct_examples = [x[0] for x in hypotheses_dict[hypothesis_text].correct_examples]
 
-        if len(hypotheses_dict) > 0:
-            hypothesis_text = list(hypotheses_dict.keys())[0]
-            top_hypothesis_correct_examples = hypotheses_dict[hypothesis_text].correct_examples
+        substitute_dict = {
+            "num_hypotheses": num_hypotheses,
+            "hypothesis_text": hypothesis_text}
 
-            multi_sub_dicts = {"feedbacks": []}
-            for example_idx in range(len(train_data)):
-                if example_idx in top_hypothesis_correct_examples:
-                    continue
-                # if the top hypothesis predicted wrong
-                multi_sub_dicts["feedbacks"].append(
-                    self._get_substitute_dict(train_data, example_idx)
-                )
-        else:
-            multi_sub_dicts = {"feedbacks": []}
+        multi_sub_dicts = {"observations": []}
+
+        for example_idx in range(len(train_data)):
+            # Skip the correctly predicted examples
+            if example_idx in top_hypothesis_correct_examples:
+                continue
+            # If the top hypothesis predicted wrong
+            multi_sub_dicts["observations"].append(
+                self._get_substitute_dict(train_data, example_idx)
+            )
+        
         substitute_dict = self._fill_multi_in_sub_dict(
             substitute_dict, multi_sub_dicts, "IO_refine_with_feedback"
         )
 
         prompt = self._information_prompt(substitute_dict, "IO_refine_with_feedback")
+        logger.debug(f"System prompt: {prompt[0]['content']}")
+        logger.debug(f"User prompt: {prompt[1]['content']}")
 
-        print(prompt)
         return prompt
+
 

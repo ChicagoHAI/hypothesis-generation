@@ -434,7 +434,7 @@ def IO_iterative_refinement(task_name, api, model_name):
     }
     update_class.save_to_json(
         hypotheses_bank,
-        sample=10,
+        sample="init",
         seed=seed,
         epoch=0,
     )
@@ -458,9 +458,12 @@ def IO_iterative_refinement(task_name, api, model_name):
             max_tokens=max_tokens,
             max_concurrent=64,
         )
-        hypotheses_bank = sorted(
+        sorted_hypotheses = sorted(
             hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
         )
+        hypotheses_bank = {
+            sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
+        }
         update_class.save_to_json(
             hypotheses_bank,
             sample="final",
