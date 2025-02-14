@@ -175,7 +175,8 @@ bash ./modules/setup_grobid.sh
 ```
    Then:
 ```bash
-python ./examples/pdf_preprocess.py --task_name YOUR_TASK_NAME
+cd examples
+python pdf_preprocess.py --task_name YOUR_TASK_NAME
 ```
 (We will support automated literature search in a later release.)
 
