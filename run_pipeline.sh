@@ -3,7 +3,7 @@
 # Model settings
 MODEL_TYPE="gpt"  
 MODEL_NAME="gpt-4o-mini" 
-TASK_NAME="admission/level_1/base" 
+TASK_NAME="admission/level_2/size_5" 
 MODEL_PATH=""  # only needed for local models
 
 # Algorithm settings
@@ -27,13 +27,17 @@ if [ "${MODEL_TYPE}" = "vllm" ]; then
 fi
 
 # Default methods to run in pipeline
-CMD="${CMD} \
-    --run_zero_shot \
-    --run_few_shot \
-    --run_zero_shot_gen \
-    --run_hypogenic \
-    --do_train"
+# CMD="${CMD} \
+#     --run_zero_shot \
+#     --run_few_shot \
+#     --run_zero_shot_gen \
+#     --run_hypogenic \
+#     --do_train"
 
+
+CMD="${CMD} \
+    --run_io_refine
+    --do_train"
 # Additional methods
 # Uncomment if needed
 # --run_only_paper \
@@ -42,6 +46,7 @@ CMD="${CMD} \
 # --run_hyporefine \
 # --run_union_hypo \
 # --run_union_refine \
+# --run_io_refine \
 # --run_cross_model \
 # --use_val \
 # --multihyp \
