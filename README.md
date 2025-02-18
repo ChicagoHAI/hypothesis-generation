@@ -308,3 +308,25 @@ As we show in `examples/generation.py`, you can create a new task by using our `
 **If no `extract_label` function is provided, the default version will be used, which looks for `final answer:\s+(.*)` in the LLM generated text.**
 
 **Note: you need to make sure the extracted label are in same format with the `'label'` in your dataset, since the extracted label will be compared with the true label to check correctness of each LLM inference.**
+
+## BibTeX
+If you used this package, please consider citing the following works.
+```
+@misc{liu2024literaturemeetsdatasynergistic,
+      title={Literature Meets Data: A Synergistic Approach to Hypothesis Generation}, 
+      author={Haokun Liu and Yangqiaoyu Zhou and Mingxuan Li and Chenfei Yuan and Chenhao Tan},
+      year={2024},
+      eprint={2410.17309},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2410.17309}, 
+}
+    
+@inproceedings{zhou2024hypothesisgenerationlargelanguage,
+      title={Hypothesis Generation with Large Language Models}, 
+      author={Yangqiaoyu Zhou and Haokun Liu and Tejes Srivastava and Hongyuan Mei and Chenhao Tan},
+      booktitle = {Proceedings of EMNLP Workshop of NLP for Science},
+      year={2024},
+      url={https://aclanthology.org/2024.nlp4science-1.10/},
+}
+```
