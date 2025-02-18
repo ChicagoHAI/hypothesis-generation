@@ -8,7 +8,7 @@ import os
 import numpy as np
 import random
 import openai
-
+import json
 import vllm
 import asyncio
 import tqdm
@@ -25,6 +25,9 @@ from transformers import (
     AutoTokenizer,
     pipeline,
 )
+
+from hypogenic.algorithm.summary_information import SummaryInformation
+
 from pprint import pprint
 
 from .LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
@@ -64,3 +67,12 @@ def adjust_label(preds, labels):
             preds_out.append(preds[i])
 
     return preds_out
+
+def load_hypotheses(filename: str) -> Dict[str, SummaryInformation]:
+    """Load hypotheses from a JSON file."""
+    with open(filename) as f:
+        hyp_dict = json.load(f)
+    hyp_bank = {}
+    for hypothesis in hyp_dict:
+        hyp_bank[hypothesis] = SummaryInformation.from_dict(hyp_dict[hypothesis])
+    return hyp_bank

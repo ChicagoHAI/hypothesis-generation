@@ -14,7 +14,7 @@
 
 <!-- ![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg) -->
 
-![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/mingxuanl-dev/hypothesis-agent_figure1_large_font.jpg)
+![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/haokun_dev/hypothesis-agent_figure1_large_font.png)
 
 <!-- **Do we keep the figure1 for hypogenic here or what?** -->
 
