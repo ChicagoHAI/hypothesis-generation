@@ -1,0 +1,1569 @@
+{
+    "paper_id": "A_comprehensive_analysis_of_tweet_content_and_its_impact_on_popularity",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-02T20:48:35.011967Z"
+    },
+    "title": "A Comprehensive Analysis of Tweet Content and Its Impact on Popularity",
+    "authors": [
+        {
+            "first": "Mohammad",
+            "middle": [],
+            "last": "Mahdavi",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Tehran",
+                "location": {}
+            },
+            "email": "moh.mahdavi@ut.ac.ir"
+        },
+        {
+            "first": "Masoud",
+            "middle": [],
+            "last": "Asadpour",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Tehran",
+                "location": {}
+            },
+            "email": "asadpour@ut.ac.ir"
+        },
+        {
+            "first": "Seyed",
+            "middle": [
+                "Morteza"
+            ],
+            "last": "Ghavami",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Tehran",
+                "location": {}
+            },
+            "email": "m.ghavami@ut.ac.ir"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "By the appearance of the online social networks, ordinary people have gained more chance to make and publish content. However, for audiences, as the number of these shared contents grows, the importance of detecting important and related ones increases. So, a significant question is how much would a shared content become popular among audiences, regardless of the source of content?\nIn this paper, we investigate this question by performing a comprehensive analysis of tweet content and studying its impact on popularity of tweet. Here, the number of retweets of tweet is used as a popularity measure. We show that tweets with \"social\" content, have in general more chance of popularity due to their attraction for society. In contrast, tweets with \"individual\" content, have little chance to get popular. We collect a fair data set of tweets. In order to do more detailed investigation and access the semantic features, we set an annotation and labeling process. We analyze the informativeness of content-based features and use them to train predictive models. The results clearly show the importance of content-based features. They specifically support this idea that specifying whether a tweet is speaking about an individual or social subject, is the most informative content-based feature to predict the popularity i.e. the number of retweets.",
+    "pdf_parse": {
+        "paper_id": "A_comprehensive_analysis_of_tweet_content_and_its_impact_on_popularity",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "By the appearance of the online social networks, ordinary people have gained more chance to make and publish content. However, for audiences, as the number of these shared contents grows, the importance of detecting important and related ones increases. So, a significant question is how much would a shared content become popular among audiences, regardless of the source of content?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "In this paper, we investigate this question by performing a comprehensive analysis of tweet content and studying its impact on popularity of tweet. Here, the number of retweets of tweet is used as a popularity measure. We show that tweets with \"social\" content, have in general more chance of popularity due to their attraction for society. In contrast, tweets with \"individual\" content, have little chance to get popular. We collect a fair data set of tweets. In order to do more detailed investigation and access the semantic features, we set an annotation and labeling process. We analyze the informativeness of content-based features and use them to train predictive models. The results clearly show the importance of content-based features. They specifically support this idea that specifying whether a tweet is speaking about an individual or social subject, is the most informative content-based feature to predict the popularity i.e. the number of retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Since the dawn of Web 2.0 and its prominent consequence, the online social networks, ordinary people have found more chance to generate and share content. But like the real world, in this virtual environment, a minority gain most of others' attention. Actually, because of the \"preferential attachment\" nature of the social networks, celebrities have more opportunities to be heard [1] .",
+                "cite_spans": [
+                    {
+                        "start": 382,
+                        "end": 385,
+                        "text": "[1]",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "In this situation, what chance do ordinary people have to express their opinions in the social networks? They lose the battle of popularity to celebrities but they still have something to prove themselves: the content! Every user, regardless of his/her fame and reputation can generate content in the social networks. If the published contents are rich enough (e.g. interesting, well-written, mentioning an important subject), they would perhaps become popular.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "However, what is a good content for popularity? Goodness is an ambiguous concept but in the context of social networks, popularity of content can be quantified by quantitative measures e.g. the number of times a content is shared among users. When a content is shared by a user, that simply means the user has found it important for some reasons [2] . Therefore, this count can be a good measure of content popularity among the society members.",
+                "cite_spans": [
+                    {
+                        "start": 346,
+                        "end": 349,
+                        "text": "[2]",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "In this paper we address this question by doing a comprehensive analysis of tweet content. We believe that in Twitter content is very important and regardless of the person who has generated it, content can still help predict popularity. Our main contribution in this paper is that we show tweets containing society's concerns (which we call them social contents), have more attention of other users. On the other hand, tweets with individual's concerns (which we call them individual contents), have less chance to get popular among other users.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "We have collected a fair sample of tweets from Twitter as an evidence. With the help of volunteer annotators, we have labeled these tweets. The results of experiments on this data set clearly show the importance of content-based features for popularity prediction. The results support the idea that the social contents are more popular and in contrast, the individual contents are not attractive for the society. We have used the content-based features to train predictive models for predicting popularity classes of tweets. The results of these classification tasks show feasibility of the approach and the importance of content by itself.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "The rest of this paper is organized as follows: in section II we look at previous works in this area. In section III we describe the procedure of data collection and annotation. The extracted features are introduced in section IV. In section V we look at results of the experiments and discuss about them. And finally, in section VI we conclude the paper.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "I. INTRODUCTION",
+                "sec_num": null
+            },
+            {
+                "text": "Since we aim at predicting popularity and our measure is the number of retweets, previous works on two subjects are reviewed: popularity detection and retweet prediction.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "II. RELATED WORK",
+                "sec_num": null
+            },
+            {
+                "text": "This task deals with the problem of detecting popular new tweets at the first hours of publishing. In this task the popularity measure is not necessarily the number of retweets. Some of the studies have used features like content, source user, category, subjectivity in the language, and named entities to predict popularity of new tweets [3] . According to the results, although these features are not sufficient, they are effective in predicting popularity.",
+                "cite_spans": [
+                    {
+                        "start": 339,
+                        "end": 342,
+                        "text": "[3]",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Popularity Detection",
+                "sec_num": null
+            },
+            {
+                "text": "On the other hand, there are other works that have used more specific approaches for this task like using a threelayer graph to rank tweets according to their trustworthiness and content popularity [4] , calculating topics of tweets to evaluate significance of a given topic at each time point [5] , or using a variation of HITS algorithm to detect valuable tweets [6] . According to their results, these approaches can improve precision of Twitter ranking scheme and have a better performance in detecting valuable tweets.",
+                "cite_spans": [
+                    {
+                        "start": 198,
+                        "end": 201,
+                        "text": "[4]",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 294,
+                        "end": 297,
+                        "text": "[5]",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 365,
+                        "end": 368,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Popularity Detection",
+                "sec_num": null
+            },
+            {
+                "text": "The aim of this task is predicting the number of retweets that a tweet would achieve in future. This problem is usually formulated as a classification or regression task but in both cases, some features that have correlation with the number of retweets should be extracted. Some works on this category have focused on contentbased features [7] , [8] . According to their results prediction of retweet count only by pure content-based features is possible.",
+                "cite_spans": [
+                    {
+                        "start": 340,
+                        "end": 343,
+                        "text": "[7]",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 346,
+                        "end": 349,
+                        "text": "[8]",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Retweet Prediction",
+                "sec_num": null
+            },
+            {
+                "text": "However, the majority of works have considered both content and contextual features [9] , [1] , [10] . Despite, there is no agreement on the most informative features. Some works have mentioned that content-based features such as topics of tweets and availability of supplementary information have more impacts on predicting depth of deliberation of tweets [11] . In contrast, some other works have reported that userrelated features are more important than those features that are related to content [12] , [1] . Going beyond comparing type of features, some works have reported features like URLs, hashtags, number of followers, number of followees, and age of author's account as the most important features to predict retweet rate [13] . But obviously, as mentioned in [14] , a combination of structural, content-based, and sentimental features is needed to perform this task effectively. Some other works have used features of users who retweet the tweets in addition to content and contextual features [15] . The similarity of original tweet and users' previously retweeted tweets is an effective feature for predicting retweet action [16] .",
+                "cite_spans": [
+                    {
+                        "start": 84,
+                        "end": 87,
+                        "text": "[9]",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 90,
+                        "end": 93,
+                        "text": "[1]",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 96,
+                        "end": 100,
+                        "text": "[10]",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 357,
+                        "end": 361,
+                        "text": "[11]",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 501,
+                        "end": 505,
+                        "text": "[12]",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 508,
+                        "end": 511,
+                        "text": "[1]",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 735,
+                        "end": 739,
+                        "text": "[13]",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 773,
+                        "end": 777,
+                        "text": "[14]",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 1008,
+                        "end": 1012,
+                        "text": "[15]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1141,
+                        "end": 1145,
+                        "text": "[16]",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Retweet Prediction",
+                "sec_num": null
+            },
+            {
+                "text": "There are also some works that have designed some innovative methods like considering initial spread of cascades [17] , using image-based features of media links in tweets [18] , and proposing a two-phase model that first classifies tweets and then tries to predict retweet count by regression [19] . Besides all of these works, the questions of \"what is a good content?\" and \"regardless of author, how much a good content can achieve popularity?\" deserve more researches. In this paper, we focus on content and its lexical and semantic features to address these questions.",
+                "cite_spans": [
+                    {
+                        "start": 113,
+                        "end": 117,
+                        "text": "[17]",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 172,
+                        "end": 176,
+                        "text": "[18]",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 294,
+                        "end": 298,
+                        "text": "[19]",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Retweet Prediction",
+                "sec_num": null
+            },
+            {
+                "text": "We have collected a data set among the Persian speaking users of Twitter. Creating our data set has been done in two phases: (1) data collection and (2) tweet annotation. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "III. DATA SET",
+                "sec_num": null
+            },
+            {
+                "text": "One of the our most important concerns was that tweets collected from Twitter should be a vast and fair sample with minimum bias. For this reason, we collected 15181525 tweets from Twitter for time period of February 2007 to August 2014 among original tweets (no retweet, reply, etc.) published by Persian speaking users. For all of these tweets, we also collected the number of favorites and the number of retweets as target features for measuring popularity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Data Collection",
+                "sec_num": null
+            },
+            {
+                "text": "After collecting tweets, we drew the histogram of number of retweets. As Figure 1 shows, it is a power law distribution. To choose around 10000 sample in a fair manner from the collected tweets, we calculated the average number of retweets:",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 80,
+                        "end": 81,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A. Data Collection",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "M R>0 = 1 |R(t) > 0| R(t)>0 R(t)",
+                        "eq_num": "(1)"
+                    }
+                ],
+                "section": "A. Data Collection",
+                "sec_num": null
+            },
+            {
+                "text": "where R(t) is the number of retweets of tweet t and M R>0 is the mean of retweet count of those tweets that have at least one retweet. It was 2.28 on the collected tweets. So, we rounded this average up. Then, we divided the tweets into three parts based on the number of retweets: no rewteets, from 1 to 3 retweets ( M R>0 = 3), and bigger than 3 retweets. We selected 3350 tweets randomly from each category summing up to 10050 tweets. Table I shows the details of data set.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 444,
+                        "end": 445,
+                        "text": "I",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A. Data Collection",
+                "sec_num": null
+            },
+            {
+                "text": "After sampling, we tried to label these tweets with the help of 77 volunteer annotators. In the labeling process, volunteers were asked to answer five questions related to semantic features of each tweet: Funniness. How much funny is the tweet? Individualness. How much does the tweet speak about individual issues and private life of the author? Socialness. How much related is the tweet to public issues and society problems? Positive Sentiment. How much positive sentiment does the tweet have?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Tweet Annotation",
+                "sec_num": null
+            },
+            {
+                "text": "Negative Sentiment. How much negative sentiment does the tweet have?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Tweet Annotation",
+                "sec_num": null
+            },
+            {
+                "text": "The answer could be selected among four options: nothing (= 0), low (= 1), mediocre (= 2), and much (= 3).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Tweet Annotation",
+                "sec_num": null
+            },
+            {
+                "text": "We extracted some features from the content of annotated tweets and prepared the final training set. For each tweet we extracted 42 features. Table II shows the feature vector and description of each feature.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 148,
+                        "end": 150,
+                        "text": "II",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "First part of the feature vector belongs to features that are related to characters of the tweet. We calculated the number of characters in the original tweet. Then, we removed all components of the tweet except the words in order to calculate the number of characters that had appeared in those words. We also discretized it into 4 levels. Frequency of appearance of the most frequent characters in the tweet is another feature. We also calculated the number of punctuations and numbers that had appeared in the tweet.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "Next part of the feature vector consists of features that depend on words. We calculated the number of words and stop words in the tweet. We also counted the number of words that are found in dictionary. We smoothed it by dividing it to the number of words. We also calculated the number and fraction of long words that have more characters than a threshold. Average length of words was calculated too.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "Next subset of features belongs to those that are related somehow to the social network around users e.g. the number of hashtags and number of general hashtags in tweet. General hashtags are those tags that had appeared more than a threshold in the whole data set. Number of mentions, number of hyperlinks that point to a text file, number of hyperlinks that point to a media file, and number of all type of hyperlinks that had appeared in the tweet were calculated as well.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "Next part of the feature vector consists of features that are related to emoticons appeared in the tweet. We counted the number of positive, negative, neutral emoticons, and the total number of emoticons.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "As mentioned in section III, the values of funniness, individualness, socialness, positive sentiment and negative sentiment of each tweet were calculated by annotation. These features form the next part of the feature vector.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "We also calculated the five semantic features for any words or hashtags that had appeared in tweets. For example, funniness of a word based on the funniness of tweets containing it, is calculated as:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "F (w) = 1 |T w | t\u2208T w F (t)",
+                        "eq_num": "(2)"
+                    }
+                ],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "where T w is set of tweets that have the word w and |T w | is its cardinality i.e. the total number of tweets that have w. In a quite similar manner, funniness of hashtag h based on the funniness of tweets containing it, is calculated as:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "F (h) = 1 |T h | t\u2208T h F (t)",
+                        "eq_num": "(3)"
+                    }
+                ],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "Based on the funniness of words that have appeared in a tweet t, average funniness score of words of t could be calculated as:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "F w (t) = 1 |w \u2208 t| w\u2208t F (w)",
+                        "eq_num": "(4)"
+                    }
+                ],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "where w \u2208 t refers to all words w in tweet t. In a quite similar manner, average funniness score of hashtags of t could be calculated as:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "F h (t) = 1 |h \u2208 t| h\u2208t F (h)",
+                        "eq_num": "(5)"
+                    }
+                ],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "Other four semantic features can be calculated in a similar way for words and hashtags.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "On the other hand, popularity of words and hashtags in terms of their frequency of appearance in the tweets can be a good feature that might be useful in predicting whether a tweet could ultimately get popular or not. So, a feature to measure average frequency of tweet's words is introduced this way:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "Qw (t) = 1 |w \u2208 t| w\u2208t log |T w |",
+                        "eq_num": "(6)"
+                    }
+                ],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "Instead of the frequency itself, we use its log for smoothing the effect of words with big frequencies. Average frequency of tweet's hashtags is similar to Qw (t), but it is summed over all hashtags:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "Qh (t) = 1 |h \u2208 t| h\u2208t log |T h |",
+                        "eq_num": "(7)"
+                    }
+                ],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "Last two features of the feature vector are the number of favorites and the number of retweets. As mentioned in section III, they have been collected from Twitter in the data collection phase.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "IV. FEATURE VECTOR",
+                "sec_num": null
+            },
+            {
+                "text": "In order to evaluate informativeness of the extracted features and their impacts on popularity of tweets, we use the Pearson correlation coefficient that shows how much linearly related are two variables:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "\u03c1 XY = c XY \u03c3 X \u03c3 Y",
+                        "eq_num": "(8)"
+                    }
+                ],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "where \u03c3 X and \u03c3 Y are population standard deviation and c XY is population covariance of variables X and Y . The first variable could be logarithm of the number of either favorites or retweets. The second variable could be one of the features listed in Table II .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 259,
+                        "end": 261,
+                        "text": "II",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "Table III shows the Pearson correlation coefficient of the features and logarithm of favorite count. The most correlated feature with the logarithm of favorite count is the logarithm of retweet count. It can be interpreted as a good upper bound for informativeness of the content-based features.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 9,
+                        "text": "III",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "The next most correlated features are the number of hyperlinks of any type and the number of hyperlinks to web pages. Those have negative correlation with the number of favorites. It seems tendency of people to rapidly skim the tweets and postpone opening hyperlinks and reading long texts to future is the cause of these results. Users of Twitter have actually got used to read short texts. They might spend their time on reading large text articles but they need social evidences i.e. recommendation of other users through retweet or favorite.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "The next correlated features are the average funniness score of tweet's words and the funniness of tweet. Not surprisingly, when a tweet has higher funniness score it would receive more favorites. So, according to the feature definition, words that appear more in funny tweets, have more funniness scores too and both of these features have almost the same effects. Other lexical and semantic features have less correlation with the logarithm of favorite count.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "Table IV shows the Pearson correlation coefficient of the features and the logarithm of retweet count. Aside from the logarithm of favorite count that is the most correlated feature, the socialness of tweet is the most correlated feature with the logarithm of retweet count. This clearly confirms the idea that when a tweet has social content, it is more attractive for users and gets more retweets.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 8,
+                        "text": "IV",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "The next most correlated features are three features all related to hashtags. Hashtags perform an important role in diffusion of information because they are traceable. Tweets that have popular hashtags can be searched by users and thus have more chance to be seen by other users and gain more retweets. Again between hashtag-related features, the average socialness score of hashtags has larger correlation with the logarithm of retweet count.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "Even after these features, the average socialness score of tweet's words, also connected to the socialness of tweets, has a large correlation. The average frequency of tweet's hashtags is the next correlated feature. It indicates that common hashtags get more retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "However, negative correlation of the individualness of tweet and the logarithm of retweet count supports the other idea that tweets with individual content are less interesting for society. Even the average individualness score of tweet's words as the next most correlated feature confirms this phenomena.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "The average negative and positive sentiment score of tweet's hashtags are the next most correlated features. They show that embedding sentiments in hashtags is a good tactic to achieve more retweets. Other lexical and semantic features have less correlation with the logarithm of retweet count.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "A. Features Evaluation",
+                "sec_num": null
+            },
+            {
+                "text": "As mentioned in section III, we have three popularity classes based on the number of retweets of samples in our data set. We defined three classification tasks based on these class labels. In the classification task 1, we aim to predict the original class labels that were defined in section III. In the classification task 2, we attempt to classify samples into two classes: those that have at least one retweet and those with no retweets. Finally, in the classification task 3, we classify samples into two classes: those that have more than average retweets i.e. M R>0 and those that have less than equal to average retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Prediction of Popularity Class",
+                "sec_num": null
+            },
+            {
+                "text": "Before classification, we performed the Principal Component Analysis (PCA) and Linear Discriminant Analysis (LDA) transformation on the data set in order to minimize correlation of the features and maximize their separability power in classifying different classes. We train four classifiers and evaluate them by 10-fold cross validation. As a baseline, we use a Naive Bayes classifier trained only with features that are independent of annotations. Obviously, we do not use the number of favorites and retweets in the classification tasks.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "B. Prediction of Popularity Class",
+                "sec_num": null
+            },
+            {
+                "text": "Table V shows the results of classification tasks. According to the results, popularity classes of tweets can be predicted to some extents using only the content-based features. However, the semantic features that we introduced could improve the performance of models. It is worth mentioning that the purpose of using only the content-based features is to find out how much content-based features can contribute to the prediction of popularity classes of tweets. It is obvious that considering only the content-based features are not sufficient for predicting the number of retweets.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "V",
+                        "ref_id": "TABREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "B. Prediction of Popularity Class",
+                "sec_num": null
+            },
+            {
+                "text": "We also found that correlations between the number of positive, negative, and neutral emoticons in the tweets and the actual positive and negative sentiments of the tweets obtained by annotation process are not significant. Table VI shows the Pearson correlation coefficient between these features. According to the results, emoticons are too noisy and using them for labeling sentiment of tweets is not a suitable approach. ",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 230,
+                        "end": 232,
+                        "text": "VI",
+                        "ref_id": "TABREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "C. Sentiment Features",
+                "sec_num": null
+            },
+            {
+                "text": "In this paper, we performed a comprehensive analysis of the lexical and semantic features of tweet content and their impacts on popularity of tweet. We collected a fair sample of tweets from Twitter and chose the number of retweets of tweets as popularity measure. Then, we defined five semantic features including funniness, individualness, socialness, positive sentiment, and negative sentiment and extracted them from tweets through annotation process. In order to evaluate the extracted features, we used the Pearson correlation coefficient. We also trained predictive models to predict retweet class by only the content-based features.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "VI. CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "We showed that tweets with social content are more popular among users. In contrast, tweets with individual content have very little chance to gain users' attention. In addition, the results of the classification tasks showed predicting popularity classes of tweets by only the content-based features is possible. We also found that correlation between emoticons and the actual sentiments of tweets is not significant and emoticons are too noisy to be used as a gold standard for sentiment analysis.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "VI. CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "There are plenty of works that can be done in future. To name a few, extracting comprehensive features from authors of the tweets, adding contextual and structural features to improve predictive models, and designing a method for extracting the semantic features in an automated manner could be done in future.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "VI. CONCLUSION",
+                "sec_num": null
+            },
+            {
+                "text": "Authorized licensed use limited to: UNIV OF CHICAGO LIBRARY. Downloaded on October 02,2024 at 22:59:09 UTC from IEEE Xplore. Restrictions apply.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Rt to win! predicting message propagation in twitter",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Petrovic",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Osborne",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Lavrenko",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Petrovic, M. Osborne, and V. Lavrenko, \"Rt to win! predicting message propagation in twitter.\" in ICWSM, 2011.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Why do social network site users share information on facebook and twitter?",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Syn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Oh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Journal of Information Science",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Y. Syn and S. Oh, \"Why do social network site users share information on facebook and twitter?\" Journal of Information Science, p. 0165551515585717, 2015.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "The pulse of news in social media: Forecasting popularity",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Bandari",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Asur",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Huberman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Bandari, S. Asur, and B. A. Huberman, \"The pulse of news in social media: Forecasting popularity,\" CoRR, vol. abs/1202.0332, 2012. [Online]. Available: http://arxiv.org/abs/1202.0332",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Ranking tweets considering trust and relevance",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Ravikumar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Balakrishnan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Kambhampati",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "CoRR",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Ravikumar, R. Balakrishnan, and S. Kambhampati, \"Ranking tweets considering trust and relevance,\" CoRR, vol. abs/1204.0156, 2012. [Online]. Available: http://arxiv.org/abs/1204.0156",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Leveraging microblogging big data with a modified density-based clustering approach for event awareness and topic ranking",
+                "authors": [
+                    {
+                        "first": "C.-H",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T.-F",
+                        "middle": [],
+                        "last": "Chien",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Journal of Information Science",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C.-H. Lee and T.-F. Chien, \"Leveraging microblogging big data with a modified density-based clustering approach for event awareness and topic ranking,\" Journal of Information Science, p. 0165551513478738, 2013.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Finding interesting posts in twitter based on retweet graph analysis",
+                "authors": [
+                    {
+                        "first": "M.-C",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J.-T",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S.-W",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H.-C",
+                        "middle": [],
+                        "last": "Rim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 35th International ACM SIGIR Conference on Research and Development in Information Retrieval, ser. SIGIR '12",
+                "volume": "",
+                "issue": "",
+                "pages": "1073--1074",
+                "other_ids": {
+                    "DOI": [
+                        "10.1145/2348283.2348475"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "M.-C. Yang, J.-T. Lee, S.-W. Lee, and H.-C. Rim, \"Finding interesting posts in twitter based on retweet graph analysis,\" in Proceedings of the 35th International ACM SIGIR Conference on Research and Development in Information Retrieval, ser. SIGIR '12. New York, NY, USA: ACM, 2012, pp. 1073-1074. [Online]. Available: http://doi.acm.org/10.1145/2348283.2348475",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Bad news travel fast: A content-based analysis of interestingness on twitter",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Naveed",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Gottron",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kunegis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Alhadi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the 3rd International Web Science Conference, ser. WebSci '11",
+                "volume": "8",
+                "issue": "",
+                "pages": "1--8",
+                "other_ids": {
+                    "DOI": [
+                        "10.1145/2527031.2527052"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "N. Naveed, T. Gottron, J. Kunegis, and A. C. Alhadi, \"Bad news travel fast: A content-based analysis of interestingness on twitter,\" in Proceedings of the 3rd International Web Science Conference, ser. WebSci '11. New York, NY, USA: ACM, 2011, pp. 8:1-8:7. [Online]. Available: http://doi.acm.org/10.1145/2527031.2527052",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Adding twitterspecific features to stylistic features for classifying tweets by user type and number of retweets",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Arakawa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kameda",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Aizawa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Suzuki",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Journal of the Association for Information Science and Technology",
+                "volume": "65",
+                "issue": "7",
+                "pages": "1416--1423",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Y. Arakawa, A. Kameda, A. Aizawa, and T. Suzuki, \"Adding twitter- specific features to stylistic features for classifying tweets by user type and number of retweets,\" Journal of the Association for Information Science and Technology, vol. 65, no. 7, pp. 1416-1423, 2014.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Temporal prediction of retweet count",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Palovics",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Daroczy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Benczur",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Cognitive Infocommunications (CogInfoCom), 2013 IEEE 4th International Conference on",
+                "volume": "",
+                "issue": "",
+                "pages": "267--270",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Palovics, B. Daroczy, and A. Benczur, \"Temporal prediction of retweet count,\" in Cognitive Infocommunications (CogInfoCom), 2013 IEEE 4th International Conference on, Dec 2013, pp. 267-270.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Predicting popular messages in twitter",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Hong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Dan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Davison",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the 20th International Conference Companion on World Wide Web, ser. WWW '11",
+                "volume": "",
+                "issue": "",
+                "pages": "57--58",
+                "other_ids": {
+                    "DOI": [
+                        "10.1145/1963192.1963222"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "L. Hong, O. Dan, and B. D. Davison, \"Predicting popular messages in twitter,\" in Proceedings of the 20th International Conference Companion on World Wide Web, ser. WWW '11. New York, NY, USA: ACM, 2011, pp. 57-58. [Online]. Available: http://doi.acm.org/10.1145/1963192.1963222",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Content or context: Which carries more weight in predicting popularity of tweets in china",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Peng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 65th Annual Conference",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L. Zhang, T. Peng, Y. Zhang, and X. Wang, \"Content or context: Which carries more weight in predicting popularity of tweets in china,\" in Proceedings of the 65th Annual Conference of World Association for Public Opinion Research, 2012.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Analyzing user retweet behavior on twitter",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 2012 International Conference on Advances in Social Networks Analysis and Mining (ASONAM 2012), ser. ASONAM '12",
+                "volume": "",
+                "issue": "",
+                "pages": "46--50",
+                "other_ids": {
+                    "DOI": [
+                        "10.1109/ASONAM.2012.18"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Z. Xu and Q. Yang, \"Analyzing user retweet behavior on twitter,\" in Proceedings of the 2012 International Conference on Advances in Social Networks Analysis and Mining (ASONAM 2012), ser. ASONAM '12. Washington, DC, USA: IEEE Computer Society, 2012, pp. 46-50. [Online]. Available: http://dx.doi.org/10.1109/ASONAM.2012.18",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Want to be retweeted? large scale analytics on factors impacting retweet in twitter network",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Suh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Hong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Pirolli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Chi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Social Computing (SocialCom), 2010 IEEE Second International Conference on",
+                "volume": "",
+                "issue": "",
+                "pages": "177--184",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "B. Suh, L. Hong, P. Pirolli, and E. H. Chi, \"Want to be retweeted? large scale analytics on factors impacting retweet in twitter network,\" in Social Computing (SocialCom), 2010 IEEE Second International Conference on, Aug 2010, pp. 177-184.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Analyzing and predicting viral tweets",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Jenders",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Kasneci",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Naumann",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 22Nd International Conference on World Wide Web Companion, ser. WWW '13 Companion. Republic and Canton of",
+                "volume": "",
+                "issue": "",
+                "pages": "657--664",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M. Jenders, G. Kasneci, and F. Naumann, \"Analyzing and predicting viral tweets,\" in Proceedings of the 22Nd International Conference on World Wide Web Companion, ser. WWW '13 Companion. Republic and Canton of Geneva, Switzerland: International World Wide Web Conferences Steering Committee, 2013, pp. 657-664. [Online]. Available: http://dl.acm.org/citation.cfm?id=2487788.2488017 [15] Predicting Information Spreading in Twit- ter, December 2010. [Online]. Available: http://research.microsoft.com/apps/pubs/default.aspx?id=141866",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Who will retweet me?: finding retweeters in twitter",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Luo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Osborne",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Tang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of the 36th international ACM SIGIR conference on Research and development in information retrieval",
+                "volume": "",
+                "issue": "",
+                "pages": "869--872",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Z. Luo, M. Osborne, J. Tang, and T. Wang, \"Who will retweet me?: finding retweeters in twitter,\" in Proceedings of the 36th international ACM SIGIR conference on Research and development in information retrieval. ACM, 2013, pp. 869-872.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Prediction of retweet cascade size over time",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kupavskii",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Ostroumova",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Umnov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Usachev",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Serdyukov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Gusev",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kustarev",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 21st ACM International Conference on Information and Knowledge Management, ser. CIKM '12",
+                "volume": "",
+                "issue": "",
+                "pages": "2335--2338",
+                "other_ids": {
+                    "DOI": [
+                        "10.1145/2396761.2398634"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Kupavskii, L. Ostroumova, A. Umnov, S. Usachev, P. Serdyukov, G. Gusev, and A. Kustarev, \"Prediction of retweet cascade size over time,\" in Proceedings of the 21st ACM International Conference on Information and Knowledge Management, ser. CIKM '12. New York, NY, USA: ACM, 2012, pp. 2335-2338. [Online]. Available: http://doi.acm.org/10.1145/2396761.2398634",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Predicting retweet count using visual cues",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Can",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Oktay",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Manmatha",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of the 22nd ACM international conference on Conference on information &#38; knowledge management, ser. CIKM '13",
+                "volume": "",
+                "issue": "",
+                "pages": "1481--1484",
+                "other_ids": {
+                    "DOI": [
+                        "10.1145/2505515.2507824"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "E. F. Can, H. Oktay, and R. Manmatha, \"Predicting retweet count using visual cues,\" in Proceedings of the 22nd ACM international conference on Conference on information &#38; knowledge management, ser. CIKM '13. New York, NY, USA: ACM, 2013, pp. 1481-1484. [Online]. Available: http://doi.acm.org/10.1145/2505515.2507824",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "A two-phase model for retweet number prediction",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Shi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Qi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "in Web-Age Information Management, ser. Lecture Notes in Computer Science",
+                "volume": "8485",
+                "issue": "",
+                "pages": "781--792",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/978-3-319-08010-984"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "G. Liu, C. Shi, Q. Chen, B. Wu, and J. Qi, \"A two-phase model for retweet number prediction,\" in Web-Age Information Management, ser. Lecture Notes in Computer Science, F. Li, G. Li, S.-w. Hwang, B. Yao, and Z. Zhang, Eds. Springer International Publishing, 2014, vol. 8485, pp. 781-792. [Online]. Available: http://dx.doi.org/10.1007/978-3-319-08010-9 84",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": "61",
+                "num": null,
+                "text": "Fig. 1: Retweet distribution of collected tweets",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "TABREF1": {
+                "num": null,
+                "content": "<table><tr><td>Class</td><td>Number of Samples</td><td>Number of Retweets</td></tr><tr><td>Class 1</td><td>3350</td><td>= 0</td></tr><tr><td>Class 2</td><td>3350</td><td>\u2208 {1, 2, 3}</td></tr><tr><td>Class 3</td><td>3350</td><td>&gt; 3</td></tr></table>",
+                "html": null,
+                "text": "Data set details",
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "num": null,
+                "content": "<table><tr><td>Feature Name</td><td>Description</td></tr><tr><td>N C (t)</td><td>Number of characters of tweet</td></tr><tr><td>N W C (t)</td><td>Number of word-only characters of tweet</td></tr><tr><td>N DW C (t)</td><td/></tr><tr><td/><td>Number of punctuations in tweet</td></tr><tr><td>N N (t)</td><td>Number of numbers in tweet</td></tr><tr><td>N W (t)</td><td>Number of words in tweet</td></tr><tr><td>N SW (t)</td><td>Number of stop words in tweet</td></tr><tr><td>N DW (t)</td><td>Number of dictionary words in tweet</td></tr><tr><td>D DW (t)</td><td>Fraction of dictionary words in tweet</td></tr><tr><td>N LW (t)</td><td>Number of words in tweet that have more than \u03b8 LW = 6 characters</td></tr><tr><td>D LW (t)</td><td>Fraction of words in tweet that have more than \u03b8 LW = 6 characters</td></tr><tr><td>LW (t)</td><td>Average length of words in tweet</td></tr><tr><td>N H (t)</td><td>Number of hashtags in tweet</td></tr><tr><td>N GH (t)</td><td>Number of general hashtags appeared more than \u03b8 GH = 4 times in the whole data set</td></tr><tr><td>N M (t)</td><td>Number of mentions in tweet</td></tr><tr><td>N L (t)</td><td>Number of all hyperlinks in tweet</td></tr><tr><td>N T L (t)</td><td>Number of hyperlinks in tweets that point to a text file</td></tr><tr><td>N M L (t)</td><td>Number of hyperlinks in tweet that point to a media file</td></tr><tr><td>N E (t)</td><td>Number of all emoticons in tweet</td></tr><tr><td>N +E (t)</td><td>Number of positive emoticons in tweet</td></tr><tr><td>N -E (t)</td><td>Number of negative emoticons in tweet</td></tr><tr><td>N N E (t)</td><td>Number of neutral emoticons in tweet</td></tr><tr><td>F (t)</td><td>Funniness of tweet</td></tr><tr><td>I(t)</td><td>Individualness of tweet</td></tr><tr><td>S(t)</td><td>Socialness of tweet</td></tr><tr><td>P+(t)</td><td>Positive sentiment of tweet</td></tr><tr><td>P-(t)</td><td>Negative sentiment of tweet</td></tr><tr><td>F w (t)</td><td>Average funniness score of tweet's words</td></tr><tr><td>\u00cew (t)</td><td>Average individualness score of tweet's words</td></tr><tr><td>\u015cw (t)</td><td>Average socialness score of tweet's words</td></tr><tr><td>P w + (t) P w -(t)</td><td>Average positive sentiment score of tweet's words Average negative sentiment score of tweet's words</td></tr><tr><td>F h (t)</td><td>Average funniness score of tweet's hashtags</td></tr><tr><td>\u00ceh (t)</td><td>Average individualness score of tweet's hashtags</td></tr><tr><td>\u015ch (t)</td><td>Average socialness score of tweet's hashtags</td></tr><tr><td>P h + (t) P h -(t)</td><td>Average positive sentiment score of tweet's hashtags Average negative sentiment score of tweet's hashtags</td></tr><tr><td>Qw (t)</td><td>Average frequency of tweet's words</td></tr><tr><td>Qh (t)</td><td>Average frequency of tweet's hashtags</td></tr><tr><td>V (t)</td><td>Number of favorites of tweet</td></tr><tr><td>R(t)</td><td>Number of retweets of tweet</td></tr></table>",
+                "html": null,
+                "text": "Feature vector calculated for each tweet Number of word-only characters of tweet discretized in \u03b8 DW C = 4 categories of equal sizeQ M F C (t)Frequency of appearance of the \u03b8 M F C = 2 most frequent characters in tweet N P (t)",
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "num": null,
+                "content": "<table><tr><td>Feature Name</td><td>Pearson Correlation Coefficient</td><td>P-Value</td></tr><tr><td>R</td><td>0.692</td><td>0</td></tr><tr><td>N L</td><td>-0.307</td><td>6.03E -221</td></tr><tr><td>N T L</td><td>-0.291</td><td>5.86E -198</td></tr><tr><td>F w</td><td>0.238</td><td>2.16E -130</td></tr><tr><td>F</td><td>0.205</td><td>4.84E -97</td></tr><tr><td>N C</td><td>-0.157</td><td>2.31E -57</td></tr><tr><td>N SW</td><td>0.137</td><td>1.27E -43</td></tr><tr><td>N W C</td><td>0.103</td><td>3.80E -25</td></tr><tr><td>Qh</td><td>-0.1</td><td>7.11E -24</td></tr><tr><td>N DW C</td><td>0.098</td><td>7.07E -23</td></tr><tr><td>N M L</td><td>-0.097</td><td>9.43E -23</td></tr><tr><td>N W</td><td>0.093</td><td>9.75E -21</td></tr><tr><td>Q M F C</td><td>0.093</td><td>9.76E -21</td></tr><tr><td>P w -</td><td>0.092</td><td>2.31E -20</td></tr><tr><td>N GH</td><td>-0.089</td><td>2.13E -19</td></tr><tr><td>N N</td><td>-0.079</td><td>1.47E -15</td></tr><tr><td>\u00cew</td><td>0.068</td><td>8.99E -12</td></tr><tr><td>N DW</td><td>0.062</td><td>3.02E -10</td></tr><tr><td>P-</td><td>0.057</td><td>7.49E -09</td></tr><tr><td>F h</td><td>0.056</td><td>1.35E -08</td></tr><tr><td>N M</td><td>-0.055</td><td>3.46E -08</td></tr><tr><td>D LW</td><td>-0.054</td><td>6.69E -08</td></tr><tr><td>S</td><td>0.053</td><td>7.88E -08</td></tr><tr><td>N P</td><td>-0.052</td><td>1.72E -07</td></tr><tr><td>D DW</td><td>-0.052</td><td>1.85E -07</td></tr><tr><td>N H</td><td>-0.051</td><td>3.38E -07</td></tr><tr><td>P h -P h + \u015ch</td><td>-0.046 0.042 -0.04</td><td>3.11E -06 2.76E -05 5.05E -05</td></tr><tr><td>P w +</td><td>0.038</td><td>1.11E -04</td></tr><tr><td>P+</td><td>0.037</td><td>1.73E -04</td></tr><tr><td>\u00ceh</td><td>0.032</td><td>1.39E -03</td></tr><tr><td>\u015cw</td><td>-0.031</td><td>1.67E -03</td></tr><tr><td>N E</td><td>0.027</td><td>6.25E -03</td></tr><tr><td>N +E</td><td>0.022</td><td>2.50E -02</td></tr><tr><td>I</td><td>-0.021</td><td>3.13E -02</td></tr><tr><td>N N E</td><td>0.02</td><td>4.41E -02</td></tr><tr><td>LW</td><td>0.012</td><td>2.30E -01</td></tr><tr><td>N LW</td><td>-0.009</td><td>3.83E -01</td></tr><tr><td>N -E</td><td>-0.002</td><td>8.63E -01</td></tr><tr><td>Qw</td><td>-0.001</td><td>9.02E -01</td></tr></table>",
+                "html": null,
+                "text": "Pearson correlation coefficient between all of the features and logarithm of favorite count",
+                "type_str": "table"
+            },
+            "TABREF4": {
+                "num": null,
+                "content": "<table><tr><td>Feature Name</td><td>Pearson Correlation Coefficient</td><td>P-Value</td></tr><tr><td>V</td><td>0.692</td><td>0</td></tr><tr><td>S</td><td>0.243</td><td>3.00E -136</td></tr><tr><td>\u015ch</td><td>0.233</td><td>1.91E -125</td></tr><tr><td>N H</td><td>0.229</td><td>2.06E -120</td></tr><tr><td>N GH</td><td>0.224</td><td>8.22E -116</td></tr><tr><td>\u015cw</td><td>0.224</td><td>2.20E -115</td></tr><tr><td>Qh</td><td>0.211</td><td>4.32E -102</td></tr><tr><td>I</td><td>-0.2</td><td>4.10E -92</td></tr><tr><td>\u00cew</td><td>-0.191</td><td>8.59E -84</td></tr><tr><td>P h -</td><td>0.163</td><td>5.01E -61</td></tr><tr><td>N M L</td><td>0.138</td><td>3.48E -44</td></tr><tr><td>P h +</td><td>0.133</td><td>3.16E -41</td></tr><tr><td>N T L</td><td>-0.126</td><td>3.53E -37</td></tr><tr><td>N W</td><td>0.124</td><td>2.44E -36</td></tr><tr><td>N W C</td><td>0.121</td><td>1.76E -34</td></tr><tr><td>N DW C</td><td>0.119</td><td>1.65E -33</td></tr><tr><td>N DW</td><td>0.117</td><td>3.20E -32</td></tr><tr><td>Q M F C</td><td>0.11</td><td>1.08E -28</td></tr><tr><td>N LW</td><td>0.084</td><td>2.35E -17</td></tr><tr><td>N SW</td><td>0.072</td><td>3.46E -13</td></tr><tr><td>Qw</td><td>0.069</td><td>4.69E -12</td></tr><tr><td>F h</td><td>0.059</td><td>3.36E -09</td></tr><tr><td>F</td><td>0.057</td><td>7.72E -09</td></tr><tr><td>\u00ceh</td><td>0.053</td><td>1.10E -07</td></tr><tr><td>P-</td><td>0.049</td><td>7.66E -07</td></tr><tr><td>N C</td><td>0.048</td><td>1.64E -06</td></tr><tr><td>P w -</td><td>0.046</td><td>3.08E -06</td></tr><tr><td>N E</td><td>-0.045</td><td>5.51E -06</td></tr><tr><td>N +E</td><td>-0.039</td><td>9.15E -05</td></tr><tr><td>N -E</td><td>-0.02</td><td>4.46E -02</td></tr><tr><td>N N</td><td>0.019</td><td>5.56E -02</td></tr><tr><td>D LW</td><td>0.019</td><td>5.61E -02</td></tr><tr><td>N N E</td><td>-0.017</td><td>8.68E -02</td></tr><tr><td>P w +</td><td>-0.016</td><td>1.05E -01</td></tr><tr><td>D DW</td><td>0.015</td><td>1.30E -01</td></tr><tr><td>N L</td><td>-0.012</td><td>2.27E -01</td></tr><tr><td>LW</td><td>-0.012</td><td>2.32E -01</td></tr><tr><td>F w</td><td>0.009</td><td>3.53E -01</td></tr><tr><td>N M</td><td>-0.005</td><td>6.38E -01</td></tr><tr><td>N P</td><td>-0.002</td><td>8.59E -01</td></tr><tr><td>P+</td><td>0</td><td>9.98E -01</td></tr></table>",
+                "html": null,
+                "text": "Pearson correlation coefficient between all of the features and logarithm of retweet count",
+                "type_str": "table"
+            },
+            "TABREF5": {
+                "num": null,
+                "content": "<table><tr><td>Classifier</td><td>Task 1</td><td>Task 2</td><td>Task 3</td></tr><tr><td>Baseline</td><td>0.443</td><td>0.702</td><td>0.684</td></tr><tr><td>KNN</td><td>0.480</td><td>0.706</td><td>0.687</td></tr><tr><td>Binary Decision Tree</td><td>0.413</td><td>0.635</td><td>0.617</td></tr><tr><td>Naive Bayes</td><td>0.486</td><td>0.711</td><td>0.694</td></tr><tr><td>SVM</td><td>0.484</td><td>0.528</td><td>0.681</td></tr></table>",
+                "html": null,
+                "text": "Accuracy of the classifiers in different classification tasks",
+                "type_str": "table"
+            },
+            "TABREF6": {
+                "num": null,
+                "content": "<table><tr><td>Number of Emoticons</td><td>Actual Positive Sentiment</td><td>Actual Negative Sentiment</td></tr><tr><td>Number of Positive</td><td>0.304 (3.54E -19)</td><td>-0.480 (3.41E -49)</td></tr><tr><td>Emoticons</td><td/><td/></tr><tr><td>Number of Negative</td><td>-0.136 (8.76E -05)</td><td>0.258 (4.46E -14)</td></tr><tr><td>Emoticons</td><td/><td/></tr><tr><td>Number of Neutral</td><td>-0.224 (6.89E -11)</td><td>0.347 (5.78E -25)</td></tr><tr><td>Emoticons</td><td/><td/></tr></table>",
+                "html": null,
+                "text": "Pearson correlation coefficient of the sentiment features",
+                "type_str": "table"
+            }
+        }
+    }
+}

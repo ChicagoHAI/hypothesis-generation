@@ -1,0 +1,2613 @@
+{
+    "paper_id": "SadoskiGoetzRodriguez2000",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-09-10T13:28:31.720013Z"
+    },
+    "title": "Engaging Texts: Effects of Concreteness on Comprehensibility, Interest, and Recall in Four Text Types",
+    "authors": [
+        {
+            "first": "Mark",
+            "middle": [],
+            "last": "Sadoski",
+            "suffix": "",
+            "affiliation": {},
+            "email": "msadoski@tamu.edu"
+        },
+        {
+            "first": "Ernest",
+            "middle": [
+                "T"
+            ],
+            "last": "Goetz",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Maximo",
+            "middle": [],
+            "last": "Rodriguez",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Concreteness was investigated as a text feature that engaged readers' comprehension, interest, and learning in 4 text types: persuasion, exposition, literary stories, and narratives. Three concrete and 3 abstract texts were selected in each text type. Concrete and abstract titles served as recall cues and to investigate title concreteness effects. In 2 experiments, undergraduates read the texts and either provided written recalls or rated them for familiarity, concreteness, interestingness, and comprehensibility. Concrete texts were recalled better than abstract texts, although the magnitude of the advantage varied across text types. Concreteness was overwhelmingly the best predictor of overall comprehensibility, interest, and recall. Effects of title concreteness varied across text types. Results extend the findings of M. Sadoski, E. T Goetz, and J. B. Fritz (1993a B. Fritz ( , 1993b) ) and are consistent with dual coding theory.\nThe characteristics of text that best elicit engagement, comprehension, and memory are central to designers of text materials, content area teachers, and researchers interested in finding common theoretical principles in reading comprehension. Many characteristics have received attention, including the readability of the text (Klare, 1984) , the familiarity of the content (e.g., readers* prior knowledge; Anderson, 1994) , the interestingness of the text (e.g., Hidi & Baird, 1988; Wade & Adams, 1990) , and the concreteness of the text (e.g., Sadoski, Goetz, & Fritz, 1993a , 1993b) , among others (Sawyer, 1991) . The motivational state that these variables produce in readers has been referred to as engagement (Alvermann & Guthrie, 1993) , involvement (Reed & Schallert, 1993) , absorption (Nell, 1988) , and the reader's transaction (Rosenblatt, 1994) , among other terms. Various lines of research have produced rich sets of findings that have enlivened the scene of reading research in both basic and applied ways.\nA challenge confronting researchers in this area is finding a theory that will draw these results together under a set of psychological principles that are explanatory, are empirically adequate, and have broad, practical application. Dual coding theory, a general theory of cognition, has compared favorably on these grounds with other general theories of cognition in reading, such as schema theory and other common code theories (Sadoski & Paivio, 1994; Sadoski, Paivio, & Goetz, 1991) . This study used dual coding theory as a theoretical base for investigating the effects of concreteness, familiarity, and interestingness on reader engagement.",
+    "pdf_parse": {
+        "paper_id": "SadoskiGoetzRodriguez2000",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Concreteness was investigated as a text feature that engaged readers' comprehension, interest, and learning in 4 text types: persuasion, exposition, literary stories, and narratives. Three concrete and 3 abstract texts were selected in each text type. Concrete and abstract titles served as recall cues and to investigate title concreteness effects. In 2 experiments, undergraduates read the texts and either provided written recalls or rated them for familiarity, concreteness, interestingness, and comprehensibility. Concrete texts were recalled better than abstract texts, although the magnitude of the advantage varied across text types. Concreteness was overwhelmingly the best predictor of overall comprehensibility, interest, and recall. Effects of title concreteness varied across text types. Results extend the findings of M. Sadoski, E. T Goetz, and J. B. Fritz (1993a B. Fritz ( , 1993b) ) and are consistent with dual coding theory.",
+                "cite_spans": [
+                    {
+                        "start": 879,
+                        "end": 900,
+                        "text": "B. Fritz ( , 1993b) )",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "The characteristics of text that best elicit engagement, comprehension, and memory are central to designers of text materials, content area teachers, and researchers interested in finding common theoretical principles in reading comprehension. Many characteristics have received attention, including the readability of the text (Klare, 1984) , the familiarity of the content (e.g., readers* prior knowledge; Anderson, 1994) , the interestingness of the text (e.g., Hidi & Baird, 1988; Wade & Adams, 1990) , and the concreteness of the text (e.g., Sadoski, Goetz, & Fritz, 1993a , 1993b) , among others (Sawyer, 1991) . The motivational state that these variables produce in readers has been referred to as engagement (Alvermann & Guthrie, 1993) , involvement (Reed & Schallert, 1993) , absorption (Nell, 1988) , and the reader's transaction (Rosenblatt, 1994) , among other terms. Various lines of research have produced rich sets of findings that have enlivened the scene of reading research in both basic and applied ways.",
+                "cite_spans": [
+                    {
+                        "start": 328,
+                        "end": 341,
+                        "text": "(Klare, 1984)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 408,
+                        "end": 423,
+                        "text": "Anderson, 1994)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 465,
+                        "end": 484,
+                        "text": "Hidi & Baird, 1988;",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 485,
+                        "end": 504,
+                        "text": "Wade & Adams, 1990)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 578,
+                        "end": 586,
+                        "text": ", 1993b)",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 602,
+                        "end": 616,
+                        "text": "(Sawyer, 1991)",
+                        "ref_id": "BIBREF39"
+                    },
+                    {
+                        "start": 717,
+                        "end": 744,
+                        "text": "(Alvermann & Guthrie, 1993)",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 759,
+                        "end": 783,
+                        "text": "(Reed & Schallert, 1993)",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 797,
+                        "end": 809,
+                        "text": "(Nell, 1988)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 841,
+                        "end": 859,
+                        "text": "(Rosenblatt, 1994)",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            },
+            {
+                "text": "A challenge confronting researchers in this area is finding a theory that will draw these results together under a set of psychological principles that are explanatory, are empirically adequate, and have broad, practical application. Dual coding theory, a general theory of cognition, has compared favorably on these grounds with other general theories of cognition in reading, such as schema theory and other common code theories (Sadoski & Paivio, 1994; Sadoski, Paivio, & Goetz, 1991) . This study used dual coding theory as a theoretical base for investigating the effects of concreteness, familiarity, and interestingness on reader engagement.",
+                "cite_spans": [
+                    {
+                        "start": 431,
+                        "end": 455,
+                        "text": "(Sadoski & Paivio, 1994;",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 456,
+                        "end": 487,
+                        "text": "Sadoski, Paivio, & Goetz, 1991)",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Dual coding theory assumes that all cognition is composed of the activity of two mental codes: a verbal code specialized for language and a nonverbal or imagery code specialized for dealing with nonverbal objects and events (for a full treatment of the theory, see Paivio, 1971 Paivio, /1979 Paivio, , 1986 Paivio, ,1991)) . According to dual coding theory, there are three levels of processing or meaning. The representational level involves perception and recognition in either code (e.g., written words activating mental representations in the verbal code, printed pictures activating mental representations in the nonverbal code). Familiarity is an important text variable at the representational level. Hie associative level involves connections within a code, as when language is defined or meaningfully elaborated through its association with other language (e.g., an abstract word such as knowledge being understood by its association with related words like experience, concept, memory, facts, beliefs, etc.) . Context is an important text variable at the associative level. Reader engagement may be elicited at the associative level, as when we try to resolve the proper meaning of a word from its context, or when imagery elicited by related words is integrated into an imaginal episode. The referential level involves connections between codes. For example, a concrete phrase such as juicy hot dog may activate visual and perhaps taste images of frankfurters in buns, perhaps covered with condiments. Such images may be engaging, as in stimulating appetite. Language concreteness is an important text variable at the referential level.",
+                "cite_spans": [
+                    {
+                        "start": 265,
+                        "end": 277,
+                        "text": "Paivio, 1971",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 278,
+                        "end": 291,
+                        "text": "Paivio, /1979",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 292,
+                        "end": 306,
+                        "text": "Paivio, , 1986",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 307,
+                        "end": 322,
+                        "text": "Paivio, ,1991))",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 967,
+                        "end": 1017,
+                        "text": "experience, concept, memory, facts, beliefs, etc.)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "A basic assumption of dual coding theory is that the effects of the two codes are additive, so that memory is increased when both verbal and nonverbal codes are activated, other things being equal. For example, numerous experimental studies have shown that concrete phrases like white horse are remembered better than matched abstract phrases like basic truth (Begg, 1972) . Another assumption of dual coding theory is that affective and emotional reactions, being nonverbal by definition, must be identified theoretically with the nonverbal system and would therefore be expected to accompany imagery (Paivio, 1986) .",
+                "cite_spans": [
+                    {
+                        "start": 360,
+                        "end": 372,
+                        "text": "(Begg, 1972)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 602,
+                        "end": 616,
+                        "text": "(Paivio, 1986)",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The central purpose of the present study was to use dual coding theory as a theoretical basis to investigate the effects of concreteness on comprehensibility, interestingness, and memorability (i.e., engagement) in four common text types: persuasion, exposition, literary stories, and narrative. Some previous studies have suggested that concrete, imageryevoking text is related to comprehensibility, interestingness, and memorability in various ways in several of these text types.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "A few studies have investigated several text types together, although not to the extent that the present study does. Brewer (1988) investigated the imagery reports of college students reading brief texts in three different text types: description, narration, and concrete and abstract exposition. He found that imagery was reported when reading all text types, but far less imagery was reported for the abstract expository text than for any of the others. This study helped establish evidence for the spontaneous use of imagery in engagement across various text types, although it did not deal with comprehension, interest, or memory. Long, Winograd, and Bridge (1989) investigated the think-aloud reports of fifth graders reading complete poetic, narrative, and expository texts and found that imagery was reported consistently in all the text types and that spontaneous imagery was related to interest and engagement in reading.",
+                "cite_spans": [
+                    {
+                        "start": 117,
+                        "end": 130,
+                        "text": "Brewer (1988)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 635,
+                        "end": 668,
+                        "text": "Long, Winograd, and Bridge (1989)",
+                        "ref_id": "BIBREF16"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Several studies have concentrated on imagery effects in literary texts. Sadoski (1983 Sadoski ( , 1985) ) had third-, fourth-, and fifth-grade students read a complete story and then perform several comprehension and recall tasks, including a selfreport of any images they spontaneously experienced. Imagery of a key event in the story, its climax, was related to understanding the story's plot and theme, suggesting that story engagement, through the sensuous realization of key episodes in imagery, was related to deeper levels of understanding and memory. Sadoski and Goetz (1985) and Sadoski, Goetz, and Kangiser (1988) found with university students that reports of imagery and affective response followed a typical plot outline of story episodes and had a persistent correlation, even when the effect of the importance of the episode in the plot was statistically controlled (cf. Miall, 1988) . Sadoski, Goetz, Olivarez, Lee, and Roberts (1990) had community college students read a literary story and provide self-reports of their mental images and verbal recalls immediately and after a delay. They found that whereas verbal recall declined after the delay, imagery reports did not. A factor analysis of several imagery and recall variables produced factors dominated by imagery variables, suggesting that the experience of reading the story was a largely imaginal one. In a secondary analysis of some of these data, Goetz, Sadoski, and Olivarez (1991) demonstrated that the imagery ratings of one group predicted the imagery reports and recall of a second, independent group of readers, establishing convergent construct validity to these measures and findings.",
+                "cite_spans": [
+                    {
+                        "start": 72,
+                        "end": 85,
+                        "text": "Sadoski (1983",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 86,
+                        "end": 105,
+                        "text": "Sadoski ( , 1985) )",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 559,
+                        "end": 583,
+                        "text": "Sadoski and Goetz (1985)",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 588,
+                        "end": 623,
+                        "text": "Sadoski, Goetz, and Kangiser (1988)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 886,
+                        "end": 898,
+                        "text": "Miall, 1988)",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 901,
+                        "end": 950,
+                        "text": "Sadoski, Goetz, Olivarez, Lee, and Roberts (1990)",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 1425,
+                        "end": 1460,
+                        "text": "Goetz, Sadoski, and Olivarez (1991)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Some studies have produced results involving concreteness and engagement in expository (e.g., science) text. For example, Hidi and Baird (1988) investigated the effects of interest and importance on immediate and delayed recall in expository text. They modified a school science-biography text to promote interest for fourth-and sixth-grade students. The students recalled more of the modified text, both immediately and after a delay, than did students in earlier, comparable studies of standard science and social studies texts. The students tended to recall concrete, active, personally engaging material better than abstract material that was rated as more important because it expressed main ideas. However, when concrete elaboration was added to main idea sentences, the students recalled some of these sentences better.",
+                "cite_spans": [
+                    {
+                        "start": 122,
+                        "end": 143,
+                        "text": "Hidi and Baird (1988)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Most studies in this area have investigated concreteness and imagery effects in narrative text. For example, O'Neill and Paivio (1978) randomly exchanged words between matched concrete and abstract narrative sentences. They found that the comprehensibility of the concrete sentences was more disrupted than the comprehensibility of the abstract sentences, but they also found that concrete sentences were recalled better than abstract sentences even when disrupted. They concluded that there is an inherent vagueness in abstract language that makes it more difficult to comprehend and remember. Wharton (1980) modified narrative passages from history textbooks to make them more concrete and image evoking, while holding readability constant. Undergraduates scored significantly higher on comprehension questions on the revised passages than on the original ones and also found them significantly more interesting and image evoking. Recall was not investigated. Sadoski and Quast (1990) had undergraduates read feature journalism articles from Newsweek, Sports Illustrated, and National Geographic and rate each paragraph for the imagery it evoked, the affective response that it evoked, or its importance to the text. They found that most paragraphs received moderate to high ratings, consistent with a journalistic style that strives for continuous engagement. However, in a delayed recall test, the most recalled paragraphs were those with higher imagery and affect ratings, but not higher importance ratings. They concluded that the aspects of the text that engaged readers' imagery and interest or emotion were remembered better than the aspects that were seen as objectively important.",
+                "cite_spans": [
+                    {
+                        "start": 121,
+                        "end": 134,
+                        "text": "Paivio (1978)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 595,
+                        "end": 609,
+                        "text": "Wharton (1980)",
+                        "ref_id": "BIBREF42"
+                    },
+                    {
+                        "start": 962,
+                        "end": 986,
+                        "text": "Sadoski and Quast (1990)",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Wade and Adams (1990) conducted a study in which undergraduates rated or recalled the sentences of a biography article on Horatio Nelson from an encyclopedia. They found that information rated as interesting was better recalled, both immediately and after a delay, than information rated as important, regardless of the reading ability of the students. Information rated as interesting was generally vivid and personally engaging. In a subsequent study using a version of the same passage, Wade, Schraw, Buxton, and Hayes (1993) replicated these findings with immediate recall and strategy reports.",
+                "cite_spans": [
+                    {
+                        "start": 490,
+                        "end": 528,
+                        "text": "Wade, Schraw, Buxton, and Hayes (1993)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "A provocative series of studies used history textbook passages on Vietnam and Korea, rewritten by expert author teams, to increase comprehension and recall (Britton, Van Dusen, Gulgoz, & Glynn, 1989; Duffy et al., 1989; Graves et al., 1991; Graves et al., 1988) . In a replication and general synthesis of the studies, Graves et al. (1991) concluded that text revisions that added interest, concreteness, novelty, character identification, and other engaging content best promoted comprehension and recall over the original versions.",
+                "cite_spans": [
+                    {
+                        "start": 156,
+                        "end": 199,
+                        "text": "(Britton, Van Dusen, Gulgoz, & Glynn, 1989;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 200,
+                        "end": 219,
+                        "text": "Duffy et al., 1989;",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 220,
+                        "end": 240,
+                        "text": "Graves et al., 1991;",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 241,
+                        "end": 261,
+                        "text": "Graves et al., 1988)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 319,
+                        "end": 339,
+                        "text": "Graves et al. (1991)",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "In another study that used historical narratives, Sadoski et al. (1993b) investigated the effects of concreteness on the familiarity, comprehensibility, interestingness, and immediate and delayed recall of long sentences and paragraphs of varying length. The texts were drawn from textbooks and historical articles and dealt with historical figures who varied in familiarity. These texts were selected to be concrete or abstract in their language and content, and modifications were made to enhance this distinction (i.e., concrete texts were made relatively more concrete, and abstract texts were made more abstract). Results indicated that with readability controlled, concrete text was rated as more interesting and more comprehensible than abstract text. Recall overwhelmingly favored the concrete texts over the abstract texts by a ratio of more than 2 to 1 in both immediate and delayed conditions.",
+                "cite_spans": [
+                    {
+                        "start": 50,
+                        "end": 72,
+                        "text": "Sadoski et al. (1993b)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "In an extended analysis of the sentence data from the previous study, Sadoski et al. (1993a) constructed a path model to test causal assumptions regarding the effects of familiarity and concreteness on comprehensibility, the effects of those three variables on interestingness, and the effects of all four variables on immediate and delayed recall. Concreteness had by far the strongest effects on comprehensibility and recall, and both concreteness and familiarity affected interestingness.",
+                "cite_spans": [
+                    {
+                        "start": 70,
+                        "end": 92,
+                        "text": "Sadoski et al. (1993a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "In a related correlational study, Goetz, Sadoski, Fatemi, and Bush (1994) had college students read articles from the international section of the New York Times and rate them for familiarity, importance, interest, imagery, emotional response, comprehension, and writing quality. Factor analyses of the ratings revealed that the ratings for interest, imagery, emotional response, comprehension, and writing quality loaded together on one factor, whereas familiarity and importance loaded together on another factor that also received moderate loadings from the interest ratings. They concluded that imagery, interest, emotion, and comprehension (i.e., engagement) are consistently interrelated but are not necessarily related to familiarity or importance; they also concluded that interest may have a moderate relationship to familiarity and importance. Recall was not investigated.",
+                "cite_spans": [
+                    {
+                        "start": 34,
+                        "end": 73,
+                        "text": "Goetz, Sadoski, Fatemi, and Bush (1994)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "In summary, studies with various age groups using several text types but mainly narratives have shown that concrete text tends to be more comprehensible, interesting, and memorable than abstract text, even when other relevant variables are controlled. These results can be explained by the dual coding theory assumptions of the referential connection between concrete language and mental imagery, and the related interest and affective engagement engendered by images that make the content seem to come to life.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The present research specifically advances the findings of Sadoski et al. (1993a Sadoski et al. ( , 1993b)) . The approach taken here was to investigate brief texts selected from four common text types: persuasion, exposition (science and mathematics), literary stories, and narratives (history and social studies). Within each text type, texts were selected and modified to differ in concreteness (i.e., concrete or abstract), while controlling for readability. Ratings of each text's familiarity, concreteness, interestingness, and comprehensibility were assessed, and relationships between the ratings were investigated. Cued recall of the texts was measured, and differences in recall of concrete and abstract texts in each text type were determined. Overall predictors of recall were investigated through causal modeling. The findings were designed to contribute to our theoretical and practical understanding of those variables or combinations of variables that are associated with more comprehensible, interesting, and memorable reading across text types.",
+                "cite_spans": [
+                    {
+                        "start": 59,
+                        "end": 80,
+                        "text": "Sadoski et al. (1993a",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 81,
+                        "end": 107,
+                        "text": "Sadoski et al. ( , 1993b))",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Another aspect of this study was the effect of concreteness on titles used as recall cues. In a recent review of the research on the effect of titles on reading, Filippatou and Pumfrey (1996) found that titles had limited effects on reading comprehension and typically had little effect on recall. Titles used before the text (rather than after) and thematic, integrative titles tended to have the most effect on recall. In the present study, two titles for each text were composed. One title was designed to be more concrete, and the other more abstract. Within a set of matching constraints, attempts were made to produce thematically related titles. Titles were presented before the texts. Differences in title effects on recall were investigated.",
+                "cite_spans": [
+                    {
+                        "start": 162,
+                        "end": 191,
+                        "text": "Filippatou and Pumfrey (1996)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Two experiments were conducted. The first experiment was designed to investigate differences between ratings fenconcrete and abstract text sets for each text type and their titles as well as to investigate relationships between the ratings. The second experiment investigated recall of the texts, the effects of titles as cues for recall, and the predictive values of the ratings for texts and titles on recall.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The participants in this experiment were 80 upperclass undergraduate students enrolled in a large reading education class at Texas A&M University. They were predominantly women in a teacher-training program. They received extra credit points for participating.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Method Participants",
+                "sec_num": null
+            },
+            {
+                "text": "Text selection. Brief texts from four text types were used in this study. The text types were persuasion, exposition (science and math), literary stories, and narratives (history and social studies). Six texts were selected from educational and trade publications to represent each text type; three dealt with more abstract topics and used more abstract language, and three dealt with more concrete topics and used more concrete language.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Persuasive texts were drawn from a monthly feature in Reader's Digest magazine titled \"Points to Ponder.\" These brief texts contained the simple persuasive structure of a thesis and supporting arguments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Expository (science and math) texts were drawn from student science encyclopedias, textbooks, and student review guides. They were primarily complete paragraphs that provided definitions and facts about specific science topics, math terms, or procedures.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Literary stories came from a book titled The World's Shortest Stories (Moss, 1995) . The book is a collection of the best short stories submitted to a writers' contest in an arts and entertainment magazine. The rules of the contest specified that the stories had to be complete with a setting, characters, conflict, and resolution, and could be no more than 55 words long.",
+                "cite_spans": [
+                    {
+                        "start": 70,
+                        "end": 82,
+                        "text": "(Moss, 1995)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "History and social studies narratives came from many sources, including commercial textbooks and student study guides, and magazines such as National Geographic. They were primarily complete paragraphs that gave an orderly description of a current or historical event or topic.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Text modifications. Although the texts were selected to be relatively more abstract or concrete, small modifications were made in some texts to enhance their abstractness or concreteness for experimental purposes. This usually involved replacing several content words with more abstract or concrete synonyms that preserved the original meaning. Using the 55-word length of the literary stories as a guide, all texts were expanded or reduced to approximately 56 words (range, 54-58 words; M -55.96, SD = 0.98). This usually involved little editing due to the initial selection of brief texts. Readabilities (i.e., grade-level estimates using the Flesch-Kincaid formula cited in Klare, 1984) were adjusted by replacing content words with synonyms that had more or fewer syllables and adjusting sentence lengths; this was performed in conjunction with the modifications for concreteness.",
+                "cite_spans": [
+                    {
+                        "start": 677,
+                        "end": 689,
+                        "text": "Klare, 1984)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Because each text type tended toward a mean readability that was different from other text types, readability for the abstract and concrete text sets was equated only within each text type. In this way, the original text was least altered. The following values denote mean grade-level readabilities for the respective text sets within a text type: persuasive-abstract = 8.67 (SD = 2.00), concrete -8.87 (SD = 2.97); expository-abstract = 11.46 (SD = 0.88), concrete = 11.13 (SD = 1.44); literary-abstract = 8.92 (50=1.99), concrete = 9.15 (SD = 1.68); narrativeabstract = 12.59 (SD = 2.42), concrete = 12.50 (SD = 2.53). These readabilities suggested little reading problem for the upperclass undergraduate participants. Examples of concrete and abstract texts for each text type are given in the Appendix.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Titles. To serve as recall cues, two titles were composed for each text, one more abstract and one more concrete. Efforts were made to match both titles in number of words and syllables and to make both titles thematically relevant to the text. For example, one persuasive text dealt with the odd variety of objects people save and how this supports the thesis that the mind has an irrepressible propensity to discriminate and select. The titles were Preferred Items (abstract) and Favorite Junk (concrete). Other examples of concrete and abstract titles are given in the Appendix. Overall, the mean number of words and syllables per title was virtually identical for the abstract and concrete title sets (words in abstract titles, M = 2.54, SD -0.87; words in concrete titles, M = 2.54, 5D = 0.76; syllables in abstract titles, M = 4.42, SD = 1.19; syllables in concrete titles, M = 4.50, SD = 0.96). This similarity was consistent across text types.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Two other experimental constraints were imposed on the titles: (a) Content words used in a text could not be used in its titles, and (b) a content word used in one title could not be used in any other title for any text. These conditions ensured that no title enjoyed the advantage of a specific content word association link to its brief text, and the possibility of confusion between titles on the basis of word redundancy was eliminated.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Text ratings. Forty participants were presented with the 24 texts (3 concrete and 3 abstract, in each of the 4 text types), each on a separate sheet of paper, without titles, and in an individually randomized order. After reading each text, they were asked to rate it for four qualities on 7-point bipolar scales (Sadoski et al., 1993b) . The qualities, with their scale anchors, were (a) content familiarity, 1 (not familiar to me in content) to 7 (very familiar to me in content); (b) concreteness, 1 (very abstract, hard for me to form mental images of this) to 7 (very concrete, easy for me to form mental images of this); interestingness, 1 (not interesting to me) to 7 (very interesting to me); and (d) comprehensibility, 1 (very hard for me to understand) to 7 (very easy for me to understand). Title ratings. Forty other participants from the same class were presented with the 48 titles (an abstract title and a concrete title for each of the 24 texts), each on a separate sheet of paper, without texts, and in an individually randomized order. After reading each title, they were asked to rate it on the same four scales used for the texts.",
+                "cite_spans": [
+                    {
+                        "start": 313,
+                        "end": 336,
+                        "text": "(Sadoski et al., 1993b)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Procedure",
+                "sec_num": null
+            },
+            {
+                "text": "The reliabilities of the ratings were assessed first. Alpha reliability coefficients for the ratings were familiarity = .90, concreteness = .87, interestingness = .87, and comprehensibility = .87. Next, the ratings were averaged across abstract and concrete text sets within each text type for statistical comparison. Means and standard deviations are shown in Table 1 . An overall 2 (text concreteness: abstract or concrete) X 4 (text type: persuasive, expository, literary, narrative) within-participants multivariate analysis of variance (MANOVA) was performed with the four ratings as dependent variables. Significant main effects were found for text concreteness, F(4, 36) = 34.14, p < .0001, and text type, F(12, 302) = 9.75, p < .0001. The interaction was also significant, F(12, 302) = 8.37, p < .0001. Each text type was investigated separately because readability was controlled within each text type but not between text types; therefore, readability could have contributed to the text type effect. The results of paired samples t tests for each rating by text type are shown in Table 1 . Due to the number of separate t tests ( 16), the significance level for these tests was adjusted to p < .003 (i.e., p < .05 for all 16 tests). For the concreteness rating, concrete texts were rated significantly higher than abstract texts in each text type. Other differences were mixed, but most favored the concrete texts.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 367,
+                        "end": 368,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    },
+                    {
+                        "start": 1096,
+                        "end": 1097,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Text Ratings",
+                "sec_num": null
+            },
+            {
+                "text": "Correlations between the ratings were computed for the 24 texts, with ratings averaged across raters. Significant correlations (p < .0001) were found between each set of ratings, with the highest correlation between concreteness and comprehensibility, r = .96. The other correlations were concreteness and interestingness, r = .85; interestingness and comprehensibility, r = .85; familiarity and comprehensibility, r = .81; familiarity and concreteness, r = .11; and familiarity and interestingness, r= .71.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Text Ratings",
+                "sec_num": null
+            },
+            {
+                "text": "The reliabilities of the ratings were assessed. Alpha reliability coefficients for the ratings were familiarity = .97, concTeteness = .92, interestingness = .93, and comprehensibility = .97. Next, the ratings for the 24 abstract and 24 concrete titles were averaged for each participant and statistically compared. Text type distinctions were not used because most of the brief titles (two to three words) did not reflect a text type. Means, standard deviations, and the results of paired samples t tests for each of the four ratings are shown in Table 2 . The significance level of the t tests was adjusted to p < .013 (i.e., p < .05 for all four tests). Concrete titles were rated as significantly more concrete than abstract titles. The concrete titles were also rated as significantly more comprehensible and interesting but not as more familiar.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 553,
+                        "end": 554,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Title Ratings",
+                "sec_num": null
+            },
+            {
+                "text": "Correlations between the ratings were computed for the 48 titles, with ratings averaged across raters. The highest correlation was between familiarity and comprehensibility, r -.92, p < .0001. The only other statistically significant correlations were interestingness and comprehensibility, r -.78, p < .0001, and familiarity and interest, r = .72, p < .0001.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Title Ratings",
+                "sec_num": null
+            },
+            {
+                "text": "The abstract and concrete texts selected from the four text types for this experiment were equated for length and readability within text types and modified slightly to enhance their concreteness or abstractness for experimental purposes. Beyond that, the texts were like those read daily in magazines, textbooks, and student reference books. It is noteworthy that the abstract text sets all had average concreteness ratings greater than 4, the median point on the 1 to 7 scale; that is, they were not artificially abstract, only less concrete. The major experimental control was successful: The concrete texts were rated as significantly more concrete in every text type. Concreteness and comprehensibility were highly correlated, a consistent finding over decades (e.g., Anderson, Goetz, Pichert, & Halff, 1977; Paivio, 1965; Sadoski et al., 1993b) .",
+                "cite_spans": [
+                    {
+                        "start": 773,
+                        "end": 813,
+                        "text": "Anderson, Goetz, Pichert, & Halff, 1977;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 814,
+                        "end": 827,
+                        "text": "Paivio, 1965;",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 828,
+                        "end": 850,
+                        "text": "Sadoski et al., 1993b)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Two titles for each text, one abstract and one concrete, were composed to serve as recall cues and were matched for readability. As with the texts, the abstract tides were rated above the median of the concreteness scale. The experimental manipulation for the titles was also successful; the concrete titles were rated as significantly more concrete. They were also rated as significantly more comprehensible and interesting. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Experiment 2",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Participants",
+                "sec_num": null
+            },
+            {
+                "text": "The participants in this experiment were 80 upperclass undergraduate students enrolled in a large reading education class at Texas A&M University (the same class that was used in Experiment 1, but different students). They received extra credit points on one test for participating.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Method",
+                "sec_num": null
+            },
+            {
+                "text": "The texts and titles from Experiment 1 were used. For scoring recall, we used Sadoski et al.'s (1993b) system to analyze the texts into idea units. This system operationally defined idea units as independent clause kernels or instances of content modification of those kernels. For example, in the independent clause Smoke is unhurried carbon, two idea units are identified: smoke is carbon and unturned (i.e., the carbon is unburned). The abstract and concrete text sets had approximately equal numbers of idea units (abstract set, M= 15.75, SD = 2.80; concrete set, M = 16.33, SD = 3.22). Differences within text types were similar.",
+                "cite_spans": [
+                    {
+                        "start": 78,
+                        "end": 102,
+                        "text": "Sadoski et al.'s (1993b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Materials",
+                "sec_num": null
+            },
+            {
+                "text": "Participants were presented with a packet containing two booklets. The first booklet had a cover page with the following directions:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Procedure",
+                "sec_num": null
+            },
+            {
+                "text": "Each of the following pages has a short text with a title. There are many different types of texts about many different things. Please read each page completely and carefully. You will be asked to recall what you have read later.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Procedure",
+                "sec_num": null
+            },
+            {
+                "text": "Each of the 24 texts was presented on a separate page in an individually randomized order. One title was presented above each text; a participant received either all concrete titles or all abstract titles. When they were finished reading, participants were directed to put the first booklet back in the packet and to take out the second booklet, where they found on the cover page the following directions:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Procedure",
+                "sec_num": null
+            },
+            {
+                "text": "The title of a text that you just read is given on the next page. Write everything you can remember from that text as completely and accurately as possible. Then go on to each following page and do the same.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Procedure",
+                "sec_num": null
+            },
+            {
+                "text": "Titles were used as recall cues on otherwise blank, separate pages in the original presentation order for each participant. This order was retained in an effort to equate across participants the time between reading and recalling a text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Procedure",
+                "sec_num": null
+            },
+            {
+                "text": "Recall was scored by idea units and coded as either gist, elaboration, or distortion. Two independent raters, one naive to the purposes of the study, coded for reliability a randomly selected 15% of the protocols. Interrater agreement for the occurrence of gist recall was 92%. Elaboration and distortion each accounted for less than 1.5% of the data and were dropped from subsequent analyses due to floor effects.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": null
+            },
+            {
+                "text": "Scores for the percentage of gist recall were averaged for the abstract and concrete text sets by abstract or concrete titles in each text type. Table 3 shows the means and standard deviations. An overall 2 (text concreteness: abstract or concrete) X 2 (title concreteness: abstract or concrete) X 4 (text type: persuasive, expository, literary, or narrative) mixed analysis of variance (ANOVA) was performed with title concreteness as a between-participants factor, and the other factors as within-participants factors. Significant main effects were found for text concreteness, F(\\, 78) = 101.65, p < .0001, and text type, F(3, 76) = 46.99, p < .0001. Significant interactions were found between text concreteness and text type, F(3, 76) = 9.79, p < .0001, and title concreteness and text type, F(3, 76) = 3.70, p < .015. No other main effects or interactions reached significance. To investigate the interaction of text concreteness and text type, follow-up t tests comparing the differences in recall between concrete and abstract texts for the four text types were performed (i.e., difference equals recall for concrete texts minus recall for abstract texts, averaged across the 80 participants for each text type). For the six resulting comparisons, the alpha level was set at p < .008 (i.e., p < .05, for all six comparisons). The advantage of concreteness in recall was significantly greater for persuasive over expository, t(19) = 3.39, p < .001, persuasive over literary, r(79) = 5.36, p < .0001, and narrative over literary, f(79) = 3.36, p < .001. However, because readability differed by text type and therefore could have contributed to the text type effect and the interactions, a separate 2 (text concreteness: abstract or concrete) X 2 (title concreteness: abstract or concrete) mixed ANOVA was also performed for each text type, with text concreteness as a within-participants factor, and title concreteness as a between-participants factor.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 151,
+                        "end": 152,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Analysis of Variance",
+                "sec_num": null
+            },
+            {
+                "text": "Persuasive text. A significant main effect for text concreteness was found, F(l, 78) = 104.51, p < .0001. Concrete persuasion was recalled 1.97 times as much as abstract persuasion (effect size, ES, determined by dividing the difference between means by the pooled standard deviation, equals 1.43). The main effect for title concreteness and the interaction were not significant.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of Variance",
+                "sec_num": null
+            },
+            {
+                "text": "Expository (science and math) text. A significant main effect for text concreteness was found, F(l, 78) = 13.57, p < .0001. Concrete exposition was recalled 1.35 times as much as abstract exposition (ES = .51). The main effect for title concreteness and the interaction were not significant. Literary stories. Significant main effects were found for text concreteness, F(l, 78) = 4.20, p < .044, and title concreteness, F(l, 78) = 8.88, p < .004. Concrete literary stories were recalled 1.14 times as much as abstract literary stories (ES = .27). Stories with concrete titles were recalled better than stories with abstract titles (ES = .57). The interaction was not significant.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of Variance",
+                "sec_num": null
+            },
+            {
+                "text": "Narrative (history and social studies) text. A significant main effect was found for text concreteness, F(l, 78) = 56.90, p < .0001. Concrete narratives were recalled 2.21 times as much as abstract narratives (ES = 1.00). The main effect for title concreteness was not significant, but the interaction was significant, F(l, 78) = 4.19, p < .044. Table 3 shows that the interaction can be completely accounted for by the effect of title concreteness on concrete texts; that is, concrete narrative texts with concrete titles were recalled more than concrete narrative texts with abstract titles, but recall was the same for abstract narrative texts, regardless of title.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 352,
+                        "end": 353,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Analysis of Variance",
+                "sec_num": null
+            },
+            {
+                "text": "Correlations were computed separately for the title ratings and the text ratings from Experiment 1 (i.e., familiarity, concreteness, interestingness, and comprehensibility) and gist recall in this experiment. Correlations between title ratings and recall were computed using the mean ratings for the 48 titles averaged across raters, and the mean percentage of gist recall for the respective texts averaged across recall participants (i.e., n = 48). No significant correlations were found between any of the title ratings and recall; the highest correlation was between title concreteness and gist recall (r = .20, p < .18). Correlations between text ratings and recall were subjected to causal modeling.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Correlational Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "The text ratings from Experiment 1 were used as predictors of recall in a causal model. This analysis replicated a previous causal modeling analysis done on long sentences of historical narrative (Sadoski et al., 1993a) . That analysis involved three steps. In the first step, familiarity and concreteness were cast as predictors of comprehensibility. In the second step, familiarity, concreteness, and comprehensibility were cast as predictors of interest. In the third step, all of the foregoing variables were cast as predictors of recall. No causal relationship between familiarity and concreteness was assumed. The various theoretical assumptions of the causal model were elaborated in Sadoski et al. (1993a) and are briefly summarized from a dual coding theory perspective here.",
+                "cite_spans": [
+                    {
+                        "start": 196,
+                        "end": 219,
+                        "text": "(Sadoski et al., 1993a)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 691,
+                        "end": 713,
+                        "text": "Sadoski et al. (1993a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Correlational Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "As noted in the introduction, familiarity in dual coding theory is seen as an indicator of an initial level of processing or meaning. A degree of familiarity is assumed for comprehension; obscure texts are less comprehensible, whereas familiar texts may be more comprehensible (i.e., the familiar is not always meaningful). Concreteness and imagery are seen as indicators of another level of processing or meaning; concreteness invites dual coding of text in both verbal and nonverbal forms and consequent elaboration and improved comprehension. Therefore, familiarity and concreteness were cast as predictors of comprehensibility. Comprehensibility precedes interestingness in the causal chain because some degree of comprehension in reading previously unseen texts would assumedly occur before readers could have nonverbal reactions such as interest. Recall of texts after reading is the last step and may be variously affected by the four text qualities in the model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Correlational Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "Path analysis procedures using least-squares multiple regression and beta weights as path coefficients were carried out as specified in Pedhazur (1982) . The model with its resulting path coefficients and zero-order correlations is shown in Figure 1 . Zero-order correlations greater than .40 are statistically significant (p < .05). In the first step, for the regression of comprehensibility on familiarity and concreteness, R = .97, p < .0001. In the second step, for the regression of interestingness on familiarity, concreteness, and comprehensibility, R = .86,/? < .0001. In Step 3, for the regression of recall on all four ratings, R = .66, p < .023. The multiple regression coefficients at the respective steps in Sadoski et al. (1993a) were .91, .76, and .68. In path analysis, direct effects are indicated by the path coefficients, and indirect effects are indicated by the products of the path coefficients comprising the indirect paths. The sum of the direct and indirect effects is the effect coefficient (Pedhazur, 1982) . For example, the direct effect of concreteness on interestingness is .44. However, concreteness also exerts an indirect effect on interestingness through comprehensibility. This indirect effect is calculated by multiplying the direct effect of concreteness on comprehensibility (.81) by the direct effect of comprehensibility on interestingness (.37). Thus, .81 X .37 = .30. The sum of the direct effect (.44) plus the indirect effect (.30) is the effect coefficient (.44 + .30 = .74). Both direct effects and effect coefficients are useful in comparing the relative influence of variables.",
+                "cite_spans": [
+                    {
+                        "start": 136,
+                        "end": 151,
+                        "text": "Pedhazur (1982)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 721,
+                        "end": 767,
+                        "text": "Sadoski et al. (1993a) were .91, .76, and .68.",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 1017,
+                        "end": 1033,
+                        "text": "(Pedhazur, 1982)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 248,
+                        "end": 249,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Correlational Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "In Step 1, concreteness had 4'/ 2 times the effect of familiarity on comprehensibility. Its direct effect was .81, versus a direct effect of. 18 for familiarity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Correlational Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "In Step 2, concreteness, as demonstrated above, had a direct effect of .44 and an effect coefficient of .74 on interestingness. Familiarity had a direct effect of .07 and an effect coefficient of .14. Comprehensibility had a direct effect of .37, with no indirect paths in this model. Therefore, concreteness had over 5 times as much total effect on interestingness as familiarity and twice as much as comprehensibility.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Correlational Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "In Step 3, concreteness had an effect coefficient of .88 on recall, mostly accounted for by its direct effect. Familiarity had an effect coefficient of -.43, mostly accounted for by its direct effect. Note that although the path coefficient from familiarity to recall is negative, its simple correlation is positive; such effects can occur when there is multicollinearity between predictor variables (Pedhazur, 1982) . Comprehensibility had an effect coefficient of .18, almost all of which was its direct effect. Interestingness had a direct effect of .41 with no indirect paths in this model. Thus, concreteness had the largest effect in explaining recall, more than twice that of interestingness, the next most effective predictor. ",
+                "cite_spans": [
+                    {
+                        "start": 400,
+                        "end": 416,
+                        "text": "(Pedhazur, 1982)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Correlational Analysis",
+                "sec_num": null
+            },
+            {
+                "text": "Gist recall was greater for concrete texts than for abstract texts in each of the four text types. However, this difference was not equivalent in each text type. The effect of concreteness was greater for persuasive and narrative texts and less for literary texts as indicated by both follow-up tests and effect sizes. Readability differences do not appear to account for this distinction: Persuasive and narrative texts had overall readabilities of 8.8 and 12.5, respectively, whereas literary and expository texts had overall readabilities of 9.0 and 11.3, respectively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "A more compelling explanation of these differences may be found in the different ways concreteness manifests itself mentally in these text types. The literary stories all involved characters in settings undergoing conflict and resolution. Even when the language used was much more abstract (e.g., vaguely described settings and characters), the readers may have spontaneously elaborated the story through mental imagery, thus making recall similar. In persuasion and narration, however, even small increases in concreteness appeared to have gone a long way toward promoting recall.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "In expository text dealing with science and math, on the other hand, increased concreteness did not promote as much difference in recall as it did for persuasion. This may have been due to the fact that the expository texts, even when dealing with concrete topics (e.g., physics), often dealt with abstract principles as well (e.g., principles of aerodynamics). However, this explanation is somewhat compromised by the fact that the persuasive and literary texts dealt with abstract principles and themes as well (e.g., the concrete persuasive text that dealt with the mind's irrepressible propensity to discriminate and select; the concrete text in the Appendix that makes the case that increased convenience does not necessarily increase quality of life). The way concreteness exerts its effect in various text types appears to be complex and well deserving of further research.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Title concreteness had differential effects in text types as well. Concrete titles facilitated the recall of literary stories and concrete narrative texts only. This suggests that tide concreteness may have some cuing effect, but concreteaess by itself may not be enough. The titles in this study, though thematically related to their texts, were not necessarily integrative (e.g., stating the main idea), nor did they contain any of the content words in the text. It may be that more direct verbal-associative connections between title and text or more integrative titles may prove useful along with concreteness. This deserves further research. However, these results may be idiosyncratic to this study: Experimental controls for readability and content word redundancy constrain any claims of generalizability of the title results. In any case, none of the title ratings were significantly correlated with overall recall.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Concreteness was by far the most effective predictor of the comprehensibility, interestingness, and recall of these 56-word texts in the causal analysis. These results have considerable generalizability because they involve typical texts from four common text types over a range of naturally occurring readabilities. The results here can be compared with Sadoski et al. (1993a) , where 24-word sentences of historical narrative in a restricted readability range were submitted to an identical causal analysis. In that study, concreteness was also by far the most effective predictor of comprehensibility and recall but was about equally effective with familiarity and comprehensibility in predicting interest-ingness. The findings for concreteness are stronger in the present study, but the comparison suggests the possibility of some variations across text types. The major difference in the results of the Sadoski et al. (1993a) causal analysis with sentences from one text type and the present study with paragraphs from four text types is that concreteness and familiarity were more highly correlated in the present study. This had the effect of increasing the predictive value of concreteness on interestingness and recall and reducing the predictive value of familiarity on interestingness and recall.",
+                "cite_spans": [
+                    {
+                        "start": 355,
+                        "end": 377,
+                        "text": "Sadoski et al. (1993a)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 908,
+                        "end": 930,
+                        "text": "Sadoski et al. (1993a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "This study was a theoretically based investigation of text-based factors that promote reader engagement in four common text types. The findings have both theoretical and practical significance.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Theoretically, the findings provide further strong support for dual coding theory as an explanation of reading phenomena. Dual coding theory assumes that concrete language promotes referential processing, the evocation of mental images related to that language. The consequent dual encoding of language in verbal and imaginal forms promotes elaboration, comprehension, and memory. Concreteness effects are not well explained by other general theories of cognition that have been applied to reading. In this study, concreteness was found to be nearly identical to the construct of comprehensibility; the more concrete the text was rated, the more comprehensible the text was rated in a near-perfect relationship. Overall, concrete texts were recalled overwhelmingly better than abstract texts matched for length, readability, and idea units. On average, concrete text was recalled 1.7 times better than abstract text, exhibiting the general additive effect suggested by dual coding theory. Two text types, literary stories and exposition (science and math), were on the low side of this average, possibly because readers spontaneously image to stories, regardless of the concreteness of the language, and because concrete science and math concepts can still evoke highly abstract principles. The causal analysis found concreteness to be overwhelmingly the best predictor of comprehensibility, interestingness, and recall (i.e., engagement). These findings replicate previous findings (e.g., Sadoski & Quast, 1990 ) in this area with more extended texts that were not experimentally manipulated.",
+                "cite_spans": [
+                    {
+                        "start": 1490,
+                        "end": 1511,
+                        "text": "Sadoski & Quast, 1990",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Practically, the results suggest models for text design to promote engagement. As a broad generalization, using more concrete language and content should have positive effects in making sentences and paragraphs of text more comprehensible, interesting, and memorable, where other factors such as readability are equal and representative of the text type. This generalization should not be taken to mean that concreteness norms for words should be applied mechanically and without judgment, like the worst examples of the application of readability formulas. Fortunately, intuition and judgment serve fairly well in selecting and modifying text for concreteness. The interrater reliability of untrained raters is quite high in discriminating more concrete from more abstract text. Nor should this generalization be taken to mean that all text can be rendered concrete or that abstract text should be eradicated from educational materials. Learners can and must learn to deal with abstraction. However, perhaps relatively few abstract concepts cannot be elaborated through concrete referents such as examples, metaphors, or educational demonstrations.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Content area teachers might find these results useful in everyday situations. As noted above, the elaboration of abstract language through concrete examples, metaphors, analogies, demonstrations, graphic organizers, multimedia presentations, and other referents may be a useful addition to discussions of abstract text to improve engagement and learning. In written composition, research has shown that using concrete information produces better definitions of concepts (Hillocks, Kahn, & Johannessen, J983; Sadoski, Kealy, Goetz, & Paivio, 1997) . Much good content area teaching has always connected the abstract principle or concept with the engaging, concrete, relevant example that gives it life.",
+                "cite_spans": [
+                    {
+                        "start": 470,
+                        "end": 507,
+                        "text": "(Hillocks, Kahn, & Johannessen, J983;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 508,
+                        "end": 546,
+                        "text": "Sadoski, Kealy, Goetz, & Paivio, 1997)",
+                        "ref_id": "BIBREF35"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "The limitations of these findings also deserve discussion. We used brief texts representing four text types. Studying engagement and text type with brief texts poses interesting challenges. On the one hand, longer texts may produce more extensive reader engagement and may exhibit a broader range of text type characteristics (e.g., pro and con sides of an argument). Still, brief texts can produce intense reader response (e.g., epigrams, jokes) and can be the most crystallized form of a text type (e.g., haiku, which is 17 syllables long by definition). For practical reasons, researchers are often left studying engagement and text type with few longer texts or many shorter texts. The present study was of the latter type, but the results of the present study compare with those of the former type. For example, the variables most predictive of recall here bear similarity to those in Sadoski and Quast (1990) , where three full-length works of feature journalism were used. Goetz et al. (1991) investigated the prediction of the text ratings of one group of readers on the text recall of another group of readers for a complete literary story and found similar results. Continued research to investigate convergent results using several methodologies is warranted in this area.",
+                "cite_spans": [
+                    {
+                        "start": 890,
+                        "end": 914,
+                        "text": "Sadoski and Quast (1990)",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 980,
+                        "end": 999,
+                        "text": "Goetz et al. (1991)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "General Discussion",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "Forming Our Natures (A)Steering Our Courses (C)Character cannot be summoned in a crisis if it has been squandered by years of compromise and excuses. The only testing ground for the heroic is the mundane. There is only one preparation for that great decision that can change a life. It is those hundreds of half conscious, self defining, seemingly insignificant decisions made in private.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract Text",
+                "sec_num": null
+            },
+            {
+                "text": "Domestic Devices (A) Countertop Gadgets (C) Think twice before buying another \"convenience.\" Grandmother's kitchen had a pan, spoon, and a knife. It produced a Sunday dinner of roast chicken, potatoes, salad, vegetables, and apple pie. The kitchen of the 1990s contains a food processor, blender, laser-cut knife system, and a 20-piece cookware set that produces a Sunday dinner of microwave pizza.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Concrete Text",
+                "sec_num": null
+            },
+            {
+                "text": "The Laws of Lift (A) How a Plane Flies (C)There are three general principles that form the basis of aerodynamics. First, moving air will push up against a surface placed at an angle to the airflow. Secondly, the force of the air under a moving object will propel it upward; and finally, the surfaces of an object will move toward a rapidly moving airstream above it.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract Text",
+                "sec_num": null
+            },
+            {
+                "text": "Force Transfer (A) Buffeting Jolts (C) Acceleration is the rate at which the velocity of an object changes. As a runner sprints off, his speed accelerates; when an airplane blasts down the runway and passengers lurch backward in their seats, the speed of the plane is accelerating. Acceleration may be negative, as in an automobile when the driver suddenly jams on the brakes.Literary*",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Concrete Text",
+                "sec_num": null
+            },
+            {
+                "text": "Mortal Justice (A) Death Penalty (C) \"I think it's easy to see, my students, that by careful study of these former inhabitants, of their behavior patterns, their simple pointless lifestyles, the things they held of import, and of the complete and utter corruption of their selves and their environment, that Earth deserved no better than Galactic extermination. Therefore, us. Any questions?\"",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract Text",
+                "sec_num": null
+            },
+            {
+                "text": "Vacant Place (A) Empty Nest (C)Trapped by laundry room walls, she stuffed load after load into the insatiable washer, hating every minute lost. Wet diapers, mismatched socks. Batman pajamas, pink leotards, grass-stained soccer uniforms, knee-socks, blue jeans, sweatshirts, skirts, and corduroy trousers. Now, near the end, she washes one small load a week, and wonders why the days are so long.Narrative (History and Social Studies)* 1",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Concrete Text",
+                "sec_num": null
+            },
+            {
+                "text": "Foul Regard (A) Poison Passion (C)Close media attention to the lives of public people may be leading some disturbed persons to make celebrities the center of delusions that can find unfit expression. One need not be among the great to be the object of such fixations. Local fame or simply being of a higher social status may be enough.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract Text",
+                "sec_num": null
+            },
+            {
+                "text": "A Science Find (A) Jungles in Ice (C)Flying over Axel Heiberg Island in the frozen Arctic Ocean, a geological survey team was recently amazed to see a hillside dotted with large stumps. Scientists have since dated the fossil forest at 45 million years old and have excavated alligator bones, evidence that the Arctic climate was once similar to the steamy Florida Everglades today.a The persuasive text type is based on \"Points to Ponder\" (1996a, 1996b).b The expository (science and math) text type is based on entries for \"Aerodynamics\" (p. 28) and \"Acceleration\" (p. 17) from the Young People's Science Encyclopedia (1985) . c The literary text type is adapted from The World's Shortest Stories (pp. 163, 229) by S. Moss, 1995, San Luis Obispo, CA: New Times Press, and Santa Barbara, CA: John Daniel and Company. Copyright 1995 by Steve Moss. Adapted with permission.d The narrative (history and social studies) text type is based on Goleman (1991) and \"Yukon and the Northwest Territories\" (1997).",
+                "cite_spans": [
+                    {
+                        "start": 619,
+                        "end": 625,
+                        "text": "(1985)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 938,
+                        "end": 952,
+                        "text": "Goleman (1991)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Concrete Text",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Themes and directions for the National Reading Research Center",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Alvermann",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Guthrie",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Perspectives in Reading Research",
+                "volume": "",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Alvermann, D. E., & Guthrie, J. T. (1993). Themes and directions for the National Reading Research Center (Perspectives in Reading Research No. 1). Athens, GA: National Reading Research Center.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Role of the reader's schema in comprehension, learning, and memory",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Anderson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Theoretical models and processes of reading",
+                "volume": "",
+                "issue": "",
+                "pages": "469--482",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Anderson, R. C. (1994). Role of the reader's schema in comprehen- sion, learning, and memory. In R. B. Ruddell, M. R. Ruddell, & H. Singer (Eds.), Theoretical models and processes of reading (4th ed., pp. 469-482). Newark, DE: International Reading Association.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Two faces of the conceptual peg hypothesis",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Anderson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Pichert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Halff",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1977,
+                "venue": "Journal of Experimental Psychology: Human Learning and Memory",
+                "volume": "3",
+                "issue": "",
+                "pages": "142--149",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Anderson, R. C, Goetz, E. T, Pichert, H. M., & Halff, H. M. (1977). Two faces of the conceptual peg hypothesis. Journal of Experimental Psychology: Human Learning and Memory, 3, 142-149.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Recall of meaningful phrases",
+                "authors": [
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Begg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1972,
+                "venue": "Journal of Verbal Learning and Verbal Behavior",
+                "volume": "11",
+                "issue": "",
+                "pages": "176--181",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Begg, I. (1972). Recall of meaningful phrases. Journal of Verbal Learning and Verbal Behavior, 11, 176-181.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Postscript: Imagery and text genre",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Brewer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Text",
+                "volume": "8",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Brewer, W. F. (1988). Postscript: Imagery and text genre. Text, 8, 431^38.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Instructional texts rewritten by five expert teams: Revisions and retention improvements",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Britton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Van Dusen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Gulgoz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Glynn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1989,
+                "venue": "Journal of Educational Psychology",
+                "volume": "81",
+                "issue": "",
+                "pages": "226--239",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Britton, B. K., Van Dusen, L., Gulgoz, S., & Glynn, S. M. (1989). Instructional texts rewritten by five expert teams: Revisions and retention improvements. Journal of Educational Psychology, 81, 226-239.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Models for design of instructional text",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Duffy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Higgins",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Mehlenbacher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Cochran",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Wallace",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Hill",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Haugen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Mccaffrey",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Burnett",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Sloane",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Smith",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1989,
+                "venue": "Reading Research Quarterly",
+                "volume": "24",
+                "issue": "",
+                "pages": "434--457",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Duffy, T. M., Higgins, L., Mehlenbacher, B., Cochran, C, Wallace, D., Hill, C, Haugen, D., McCaffrey, M., Burnett, R., Sloane, S., & Smith, S. (1989). Models for design of instructional text. Reading Research Quarterly, 24, 434-457.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Pictures, titles, reading accuracy, and reading comprehension: A research review",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Filippatou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Pumfrey",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1996,
+                "venue": "Educational Research",
+                "volume": "38",
+                "issue": "",
+                "pages": "259--291",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Filippatou, D., & Pumfrey, P. D. (1996). Pictures, titles, reading accuracy, and reading comprehension: A research review. Educa- tional Research, 38, 259-291.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "That's news to me: Readers' responses to brief newspaper articles",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Fatemi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Bush",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Journal of Reading Behavior",
+                "volume": "26",
+                "issue": "",
+                "pages": "125--138",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Goetz, E. T, Sadoski, M., Fatemi, Z., & Bush, R. (1994). That's news to me: Readers' responses to brief newspaper articles. Journal of Reading Behavior, 26, 125-138.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Getting a reading on reader response: Relationships between imagery, affect, and importance ratings, recall, and imagery reports",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Olivarez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jr",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "Reading Psychology",
+                "volume": "12",
+                "issue": "",
+                "pages": "13--26",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Goetz, E. T., Sadoski, M., & Olivarez, A., Jr. (1991). Getting a reading on reader response: Relationships between imagery, affect, and importance ratings, recall, and imagery reports. Reading Psychology, 12, 13-26.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Dangerous delusions",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Goleman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "Science annual",
+                "volume": "",
+                "issue": "",
+                "pages": "51--55",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Goleman, D. (1991). Dangerous delusions. In Science annual (pp. 51-55). Danbury, CT: Grolier Enterprises.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Improving instructional text: Some lessons learned",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Graves",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Prenn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Earle",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Thompson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Johnson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Slater",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "Reading Research Quarterly",
+                "volume": "26",
+                "issue": "",
+                "pages": "110--122",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Graves, M. F, Prenn, M. C, Earle, J., Thompson, M., Johnson, V., & Slater, W. H. (1991). Improving instructional text: Some lessons learned. Reading Research Quarterly, 26, 110-122.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Some characteristics of memorable writing: Effects of rewrites by text linguists, composition instructors, and popular magazine writers",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Graves",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Slater",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Roen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Redd-Boyd",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Duin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Furniss",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Hazeltine",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "",
+                "volume": "22",
+                "issue": "",
+                "pages": "242--265",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Graves, M. F., Slater, W. H., Roen, D., Redd-Boyd, T., Duin, A. H., Furniss, D. W., & Hazeltine, P. (1988). Some characteristics of memorable writing: Effects of rewrites by text linguists, compo- sition instructors, and popular magazine writers. Research in the Teaching of English, 22, 242-265.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Strategies for increasing text-based interest and students' recall of expository texts",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Hidi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Baird",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Reading Research Quarterly",
+                "volume": "23",
+                "issue": "",
+                "pages": "465--483",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hidi, S., & Baird, W. H. (1988). Strategies for increasing text-based interest and students' recall of expository texts. Reading Re- search Quarterly, 23, 465-483.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Teaching denning strategies as a mode of inquiry: Some effects on student writing",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Hillocks",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Kahn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Johannessen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "Research in the Teaching of English",
+                "volume": "17",
+                "issue": "",
+                "pages": "275--284",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hillocks, G., Jr., Kahn, E. A., & Johannessen, L. R. (1983). Teaching denning strategies as a mode of inquiry: Some effects on student writing. Research in the Teaching of English, 17, 275-284.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Readability",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Klare",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1984,
+                "venue": "Handbook of reading research",
+                "volume": "",
+                "issue": "",
+                "pages": "681--744",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Klare, G. R. (1984). Readability. In P. D. Pearson (Ed.), Handbook of reading research (pp. 681-744). New York: Longman.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "The effects of reader and text characteristics on reports of imagery during and after reading",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Long",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Winograd",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Bridge",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1989,
+                "venue": "Reading Research Quarterly",
+                "volume": "24",
+                "issue": "",
+                "pages": "353--372",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Long, S. A., Winograd, P. A., & Bridge, C. A. (1989). The effects of reader and text characteristics on reports of imagery during and after reading. Reading Research Quarterly, 24, 353-372.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Affect and narrative: A model of response to stories",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Miall",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Poetics",
+                "volume": "17",
+                "issue": "",
+                "pages": "259--272",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Miall, D. S. (1988). Affect and narrative: A model of response to stories. Poetics, 17, 259-272.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "The worlds shortest stories",
+                "authors": [],
+                "year": 1995,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Moss, S. (Ed.)-(1995). The worlds shortest stories. San Luis Obispo, CA: New Times Press; Santa Barbara, CA: John Daniel and Company.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "The psychology of reading for pleasure: Needs and gratifications",
+                "authors": [
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Nell",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Reading Research Quarterly",
+                "volume": "23",
+                "issue": "",
+                "pages": "6--50",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Nell, V. (1988). The psychology of reading for pleasure: Needs and gratifications. Reading Research Quarterly, 23, 6-50.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Semantic constraints in encoding judgments and free recall of concrete and abstract sentences",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "O'neill",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1978,
+                "venue": "Canadian Journal of Psychology",
+                "volume": "32",
+                "issue": "",
+                "pages": "3--18",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "O'Neill, B. J., & Paivio, A. (1978). Semantic constraints in encoding judgments and free recall of concrete and abstract sentences. Canadian Journal of Psychology, 32, 3-18.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Abstractness, imagery, and meaningful ness in paired-associate learning",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1965,
+                "venue": "Journal of Verbal Learning and Verbal Behavior",
+                "volume": "4",
+                "issue": "",
+                "pages": "32--38",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Paivio, A. (1965). Abstractness, imagery, and meaningful ness in paired-associate learning. Journal of Verbal Learning and Verbal Behavior, 4, 32-38.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Imagery and verbal processes",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1971,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Paivio, A. (1979). Imagery and verbal processes. Hillsdale, NJ: Erlbaum. (Original work published 1971)",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Mental representations: A dual coding approach",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1986,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Paivio, A. (1986). Mental representations: A dual coding approach. New York: Oxford University Press.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Dual coding theory: Retrospect and current status",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "Canadian Journal of Psychology",
+                "volume": "45",
+                "issue": "",
+                "pages": "255--287",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Paivio, A. (1991). Dual coding theory: Retrospect and current status. Canadian Journal of Psychology, 45, 255-287.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Points to ponder",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Pedhazur",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1982,
+                "venue": "Multiple regression in behavioral research",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pedhazur, E. (1982). Multiple regression in behavioral research (2nd ed.). New York: Holt, Rinehart & Winston. Points to ponder. (1996a, June). Reader's Digest, p. 252. Points to ponder. (1996b, November). Reader's Digest, p. 90.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "The nature of involvement in academic discourse tasks",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Reed",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Schallert",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Journal of Educational Psychology",
+                "volume": "85",
+                "issue": "",
+                "pages": "253--266",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Reed, J. H., & Schallert, D. L. (1993). The nature of involvement in academic discourse tasks. Journal of Educational Psychology, 85, 253-266.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "The transactional theory of reading and writing",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Rosenblatt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Theoretical models and processes of reading",
+                "volume": "",
+                "issue": "",
+                "pages": "1057--1092",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rosenblatt, L. M. (1994). The transactional theory of reading and writing. In R. B. Ruddell, M. R. Ruddell, & H. Singer (Eds.), Theoretical models and processes of reading (4th ed., pp. 1057-1092). Newark, DE: International Reading Association.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "An exploratory study of the relationships between reported imagery and the comprehension and recall of a story",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1983,
+                "venue": "Reading Research Quarterly",
+                "volume": "19",
+                "issue": "",
+                "pages": "110--123",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M. (1983). An exploratory study of the relationships between reported imagery and the comprehension and recall of a story. Reading Research Quarterly, 19, 110-123.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "The natural use of imagery in story comprehension and recall: Replication and extension",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Reading Research Quarterly",
+                "volume": "20",
+                "issue": "",
+                "pages": "658--667",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M. (1985). The natural use of imagery in story comprehen- sion and recall: Replication and extension. Reading Research Quarterly, 20, 658-667.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Relationships between affect, imagery, and importance ratings for segments of a story",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Issues in literacy: A research perspective. Thirty-fourth yearbook of the National Reading Conference",
+                "volume": "",
+                "issue": "",
+                "pages": "180--185",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., & Goetz, E. T. (1985). Relationships between affect, imagery, and importance ratings for segments of a story. In J. A. Niles & R. Lalik (Eds.), Issues in literacy: A research perspec- tive. Thirty-fourth yearbook of the National Reading Conference (pp. 180-185). Washington, DC: National Reading Conference.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "A causal model of sentence recall: Effects of familiarity, concreteness, comprehensibility, and interestingness",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Fritz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Journal of Reading Behavior",
+                "volume": "25",
+                "issue": "",
+                "pages": "5--16",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., Goetz, E. T., & Fritz, J. B. (1993a). A causal model of sentence recall: Effects of familiarity, concreteness, comprehen- sibility, and interestingness. Journal of Reading Behavior, 25, 5-16.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Impact of concreteness on comprehensibility, interest, and memory for text: Implications for dual coding theory and text design",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Fritz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Journal of Educational Psychology",
+                "volume": "85",
+                "issue": "",
+                "pages": "291--304",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., Goetz, E. T., & Fritz, J. B. (1993b). Impact of concreteness on comprehensibility, interest, and memory for text: Implications for dual coding theory and text design. Journal of Educational Psychology, 85. 291-304.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Imagination in story response: Relationships between imagery, affect, and structural importance",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Kangiser",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1988,
+                "venue": "Reading Research Quarterly",
+                "volume": "23",
+                "issue": "",
+                "pages": "320--336",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., Goetz, E. T., & Kangiser, S. (1988). Imagination in story response: Relationships between imagery, affect, and structural importance. Reading Research Quarterly 23, 320- 336.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Imagination in story reading: The role of imagery, verbal recall, story analysis, and processing levels",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Olivarez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Jr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Roberts",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "Journal of Reading Behavior",
+                "volume": "22",
+                "issue": "",
+                "pages": "55--70",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., Goetz, E. T, Olivarez, A., Jr., Lee, S., & Roberts, N. M. (1990). Imagination in story reading: The role of imagery, verbal recall, story analysis, and processing levels. Journal of Reading Behavior, 22, 55-70.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Concreteness and imagery effects in the written composition of definitions",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Kealy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1997,
+                "venue": "Journal of Educational Psychology",
+                "volume": "89",
+                "issue": "",
+                "pages": "518--526",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., Kealy, W. A., Goetz, E. T., & Paivio, A. (1997). Concreteness and imagery effects in the written composition of definitions. Journal of Educational Psychology, 89, 518-526.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "A dual coding view of imagery and verbal processes in reading comprehension",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Theoretical models and processes of reading",
+                "volume": "",
+                "issue": "",
+                "pages": "582--601",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., & Paivio, A. (1994). A dual coding view of imagery and verbal processes in reading comprehension. In R. B. Ruddell, M. R. Ruddell, & H. Singer (Eds.), Theoretical models and processes of reading (4th ed., pp. 582-601). Newark, DE: International Reading Association.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Acritique of schema theory in reading and a dual coding alternative",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Paivio",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Goetz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "Reading Research Quarterly",
+                "volume": "26",
+                "issue": "",
+                "pages": "463--484",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., Paivio, A., & Goetz, E. T. (1991). Acritique of schema theory in reading and a dual coding alternative. Reading Research Quarterly. 26, 463-484.",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Reader recall and long term recall for journalistic text: The roles of imagery, affect, and importance",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Sadoski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Quast",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "Reading Research Quarterly",
+                "volume": "25",
+                "issue": "",
+                "pages": "256--272",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sadoski, M., & Quast, Z. (1990). Reader recall and long term recall for journalistic text: The roles of imagery, affect, and impor- tance. Reading Research Quarterly, 25, 256-272.",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "A review of research on revising instructional text",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Sawyer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "Journal of Reading Behavior",
+                "volume": "23",
+                "issue": "",
+                "pages": "307--333",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sawyer, M. H. (1991). A review of research on revising instruc- tional text. Journal of Reading Behavior, 23, 307-333.",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "Effects of importance and interest on recall of biographical text",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Wade",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Adams",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1990,
+                "venue": "Journal of Reading Behavior",
+                "volume": "22",
+                "issue": "",
+                "pages": "331--353",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wade, S. E., & Adams, R. B. (1990). Effects of importance and interest on recall of biographical text. Journal of Reading Behavior, 22, 331-353.",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Seduction of the strategic reader: Effects of interest on strategies and recall",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Wade",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Schraw",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Buxton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Hayes",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "Reading Research Quarterly",
+                "volume": "28",
+                "issue": "",
+                "pages": "92--114",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wade, S. E., Schraw, G., Buxton, W. M., & Hayes, M. T. (1993). Seduction of the strategic reader: Effects of interest on strategies and recall. Reading Research Quarterly, 28, 92-114.",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "High imagery and the readability of college history texts",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Wharton",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1980,
+                "venue": "Journal of Mental Imagery",
+                "volume": "4",
+                "issue": "",
+                "pages": "129--147",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wharton, W. P. (1980). High imagery and the readability of college history texts. Journal of Mental Imagery, 4, 129-147.",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "Young people's science encyclopedia",
+                "authors": [],
+                "year": 1985,
+                "venue": "",
+                "volume": "1",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Young people's science encyclopedia (Vol. 1). (1985). Chicago: Children's Press.",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "Yukon and the northwest territories",
+                "authors": [],
+                "year": 1997,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yukon and the northwest territories. (1997, September). National Geographic [insert from a map supplement].",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "num": null,
+                "type_str": "figure",
+                "uris": null,
+                "text": "Figure 1. Path analysis of text ratings and recall. Numbers in parentheses are zero-order correlations; other numbers are path coefficients.",
+                "fig_num": "1"
+            },
+            "TABREF0": {
+                "num": null,
+                "type_str": "table",
+                "html": null,
+                "content": "<table><tr><td/><td colspan=\"2\">Abstract text</td><td colspan=\"2\">Concrete text</td><td/><td/></tr><tr><td>Ratings for each text type</td><td>M</td><td>SD</td><td>M</td><td>SD</td><td>'(39)</td><td>P&lt;</td></tr><tr><td>Persuasion</td><td/><td/><td/><td/><td/><td/></tr><tr><td>Familiarity</td><td>4.79</td><td>1.40</td><td>5.72</td><td>1.00</td><td>-5.57</td><td>.0001</td></tr><tr><td>Concreteness</td><td>4.66</td><td>1.29</td><td>6.22</td><td>0.86</td><td>-9.11</td><td>.0001</td></tr><tr><td>Interestingness</td><td>4.82</td><td>1.41</td><td>5.38</td><td>1.13</td><td>-2.62</td><td>.013</td></tr><tr><td>Comprehensibility</td><td>5.21</td><td>1.22</td><td>6.22</td><td>0.86</td><td>-7.20</td><td>.0001</td></tr><tr><td>Exposition</td><td/><td/><td/><td/><td/><td/></tr><tr><td>Familiarity</td><td>4.64</td><td>1.26</td><td>5.21</td><td>1.25</td><td>-2.97</td><td>.005</td></tr><tr><td>Concreteness</td><td>4.42</td><td>1.40</td><td>5.80</td><td>0.92</td><td>-6.80</td><td>.0001</td></tr><tr><td>Interestingness</td><td>3.36</td><td>1.47</td><td>4.51</td><td>1.21</td><td>-6.42</td><td>.0001</td></tr><tr><td>Comprehensibility Literary</td><td>4.71</td><td>1.24</td><td>5.98</td><td>0.73</td><td>-6.94</td><td>.0001</td></tr><tr><td>Familiarity</td><td>3.63</td><td>1.47</td><td>5.28</td><td>1.27</td><td>-7.90</td><td>.0001</td></tr><tr><td>Concreteness</td><td>4.37</td><td>1.29</td><td>6.12</td><td>0.89</td><td>-10.40</td><td>.0001</td></tr><tr><td>Interestingness</td><td>3.61</td><td>1.44</td><td>5.24</td><td>1.06</td><td>-7.64</td><td>.0001</td></tr><tr><td>Comprehensibility</td><td>4.67</td><td>1.41</td><td>6.00</td><td>1.04</td><td>-5.42</td><td>.0001</td></tr><tr><td>n&lt;ui ttu v c Familiarity Concreteness</td><td>4.92 4.77</td><td>1.15 1.32</td><td>4.15 5.52</td><td>1.29 0.99</td><td>3.69 -4.28</td><td>.001 .0001</td></tr><tr><td>Interestingness</td><td>4.03</td><td>1.24</td><td>4.50</td><td>1.39</td><td>-2.10</td><td>.043</td></tr><tr><td>Comprehensibility</td><td>5.32</td><td>1.18</td><td>5.75</td><td>0.93</td><td>-2.60</td><td>.013</td></tr><tr><td colspan=\"2\">Note. Range for ratings = 1-7.</td><td/><td/><td/><td/><td/></tr></table>",
+                "text": "Means, Standard Deviations, and t Tests of Text Ratings by Text Type"
+            },
+            "TABREF1": {
+                "num": null,
+                "type_str": "table",
+                "html": null,
+                "content": "<table><tr><td/><td colspan=\"2\">Abstract title</td><td colspan=\"2\">Concrete title</td><td/><td/></tr><tr><td>Rating</td><td>M</td><td>SD</td><td>M</td><td>SD</td><td>'(39)</td><td>P&lt;</td></tr><tr><td>Familiarity Concreteness Interestingness Comprehensibility</td><td>6.01 4.69 3.99 5.24</td><td>0.93 0.87 0.95 1.05</td><td>6.13 5.29 4.49 5.61</td><td>0.80 0.60 0.76 0.84</td><td>-2.50 -8.38 -6.51 -6.81</td><td>.017 .0001 .0001 .0001</td></tr></table>",
+                "text": "Means, Standard Deviations, and t Tests of Title Ratings"
+            },
+            "TABREF2": {
+                "num": null,
+                "type_str": "table",
+                "html": null,
+                "content": "<table><tr><td/><td/><td/><td colspan=\"2\">Abstract text</td><td/><td/><td/><td/><td colspan=\"2\">Concrete text</td><td/><td/></tr><tr><td/><td colspan=\"2\">Abstract title</td><td colspan=\"2\">Concrete title</td><td colspan=\"2\">Total</td><td colspan=\"2\">Abstract title</td><td colspan=\"2\">Concrete title</td><td colspan=\"2\">Total</td></tr><tr><td>Text type</td><td>M</td><td>SD</td><td>M</td><td>SD</td><td>M</td><td>SD</td><td>M</td><td>SD</td><td>M</td><td>SD</td><td>M</td><td>SD</td></tr><tr><td>Persuasion Exposition Literary Narrative</td><td>15.33 20.11 23.51 10.32</td><td>12.15 16.89 15.64 8.64</td><td>18.50 22.71 34.15 10.29</td><td>13.46 17.17 13.84 11.03</td><td>16.92 21.41 28.83 10.31</td><td>12.84 16.97 15.62 9.84</td><td>33.38 24.80 28.77 19.44</td><td>15.19 15.76 18.97 17.48</td><td>33.40 33.00 36.75 26.20</td><td>13.42 18.50 16.68 18.47</td><td>33.39 28.90 32.76 22.82</td><td>14.24 17.57 18.20 18.19</td></tr></table>",
+                "text": "Means and Standard Deviations for Percentage of Gist Recall by Title and Text Type"
+            }
+        }
+    }
+}

@@ -1,0 +1,2583 @@
+{
+    "paper_id": "1405",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-02T20:48:17.033856Z"
+    },
+    "title": "The effect of wording on message propagation: Topic-and author-controlled natural experiments on Twitter",
+    "authors": [
+        {
+            "first": "Chenhao",
+            "middle": [],
+            "last": "Tan",
+            "suffix": "",
+            "affiliation": {},
+            "email": "chenhao@cs.cornell.edu"
+        },
+        {
+            "first": "Lillian",
+            "middle": [],
+            "last": "Lee",
+            "suffix": "",
+            "affiliation": {},
+            "email": "llee@cs.cornell.edu"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Consider a person trying to spread an important message on a social network. He/she can spend hours trying to craft the message. Does it actually matter? While there has been extensive prior work looking into predicting popularity of socialmedia content, the effect of wording per se has rarely been studied since it is often confounded with the popularity of the author and the topic. To control for these confounding factors, we take advantage of the surprising fact that there are many pairs of tweets containing the same url and written by the same user but employing different wording. Given such pairs, we ask: which version attracts more retweets? This turns out to be a more difficult task than predicting popular topics. Still, humans can answer this question better than chance (but far from perfectly), and the computational methods we develop can do better than both an average human and a strong competing method trained on noncontrolled data.",
+    "pdf_parse": {
+        "paper_id": "1405",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Consider a person trying to spread an important message on a social network. He/she can spend hours trying to craft the message. Does it actually matter? While there has been extensive prior work looking into predicting popularity of socialmedia content, the effect of wording per se has rarely been studied since it is often confounded with the popularity of the author and the topic. To control for these confounding factors, we take advantage of the surprising fact that there are many pairs of tweets containing the same url and written by the same user but employing different wording. Given such pairs, we ask: which version attracts more retweets? This turns out to be a more difficult task than predicting popular topics. Still, humans can answer this question better than chance (but far from perfectly), and the computational methods we develop can do better than both an average human and a strong competing method trained on noncontrolled data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "How does one make a message \"successful\"? This question is of interest to many entities, including political parties trying to frame an issue (Chong and Druckman, 2007) , and individuals attempting to make a point in a group meeting. In the first case, an important type of success is achieved if the national conversation adopts the rhetoric of the party; in the latter case, if other group members repeat the originating individual's point.",
+                "cite_spans": [
+                    {
+                        "start": 142,
+                        "end": 168,
+                        "text": "(Chong and Druckman, 2007)",
+                        "ref_id": "BIBREF6"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The massive availability of online messages, such as posts to social media, now affords researchers new means to investigate at a very large scale the factors affecting message propagation, also known as adoption, sharing, spread, or virality. According to prior research, important features include characteristics of the originating author (e.g., verified Twitter user or not, author's messages' past success rate), the author's social network (e.g., number of followers), message timing, and message content or topic (Artzi et al., 2012; Bakshy et al., 2011; Borghol et al., 2012; Guerini et al., 2011; Guerini et al., 2012; Hansen et al., 2011; Hong et al., 2011; Lakkaraju et al., 2013; Milkman and Berger, 2012; Ma et al., 2012; Petrovi\u0107 et al., 2011; Romero et al., 2013; Suh et al., 2010; Sun et al., 2013; Tsur and Rappoport, 2012) . Indeed, it's not surprising that one of the most retweeted tweets of all time was from user BarackObama, with 40M followers, on November 6, 2012: \"Four more years. [link to photo]\".",
+                "cite_spans": [
+                    {
+                        "start": 520,
+                        "end": 540,
+                        "text": "(Artzi et al., 2012;",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 541,
+                        "end": 561,
+                        "text": "Bakshy et al., 2011;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 562,
+                        "end": 583,
+                        "text": "Borghol et al., 2012;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 584,
+                        "end": 605,
+                        "text": "Guerini et al., 2011;",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 606,
+                        "end": 627,
+                        "text": "Guerini et al., 2012;",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 628,
+                        "end": 648,
+                        "text": "Hansen et al., 2011;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 649,
+                        "end": 667,
+                        "text": "Hong et al., 2011;",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 668,
+                        "end": 691,
+                        "text": "Lakkaraju et al., 2013;",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 692,
+                        "end": 717,
+                        "text": "Milkman and Berger, 2012;",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 718,
+                        "end": 734,
+                        "text": "Ma et al., 2012;",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 735,
+                        "end": 757,
+                        "text": "Petrovi\u0107 et al., 2011;",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 758,
+                        "end": 778,
+                        "text": "Romero et al., 2013;",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 779,
+                        "end": 796,
+                        "text": "Suh et al., 2010;",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 797,
+                        "end": 814,
+                        "text": "Sun et al., 2013;",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 815,
+                        "end": 840,
+                        "text": "Tsur and Rappoport, 2012)",
+                        "ref_id": "BIBREF36"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Our interest in this paper is the effect of alternative message wording, meaning how the message is said, rather than what the message is about. In contrast to the identity/social/timing/topic features mentioned above, wording is one of the few factors directly under an author's control when he or she seeks to convey a fixed piece of content. For example, consider a speaker at the ACL business meeting who has been tasked with proposing that Paris be the next ACL location. This person cannot on the spot become ACL president, change the shape of his/her social network, wait until the next morning to speak, or campaign for Rome instead; but he/she can craft the message to be more humorous, more informative, emphasize certain aspects instead of others, and so on. In other words, we investigate whether a different choice of words affects message propagation, controlling for user and topic: would user BarackObama have gotten significantly more (or fewer) retweets if he had used some alternate wording to announce his reelection?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Although we cannot create a parallel universe arXiv:1405.1438v1 [cs.SI] 6 May 2014 in which BarackObama tweeted something else 1 , fortunately, a surprising characteristic of Twitter allows us to run a fairly analogous natural experiment: external forces serendipitously provide an environment that resembles the desired controlled setting (DiNardo, 2008) . Specifically, it turns out to be unexpectedly common for the same user to post different tweets regarding the same URLa good proxy for fine-grained topic 2 -within a relatively short period of time. 3 Some example pairs are shown in Table 1 ; we see that the paired tweets may differ dramatically, going far beyond word-for-word substitutions, so that quite interesting changes can be studied.",
+                "cite_spans": [
+                    {
+                        "start": 340,
+                        "end": 355,
+                        "text": "(DiNardo, 2008)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 597,
+                        "end": 598,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Looking at these examples, can one in fact tell from the wording which tweet in a topic-and author-controlled pair will be more successful? The answer may not be a priori clear. For example, for the first pair in the table, one person we asked found t 1 's invocation of a \"scandal\" to be more attention-grabbing; but another person preferred t 2 because it is more informative about the URL's content and includes \"fight media portrayal\". In an Amazon Mechanical Turk (AMT) experiment ( \u00a74), we found that humans achieved an average accuracy of 61.3%: not that high, but better than chance, indicating that it is somewhat possible for humans to predict greater message spread from different deliveries of the same information.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Buoyed by the evidence of our AMT study that wording effects exist, we then performed a battery of experiments to seek generally-applicable, non-1 Cf. the Music Lab \"multiple universes\" experiment to test the randomness of popularity (Salganik et al., 2006) .",
+                "cite_spans": [
+                    {
+                        "start": 234,
+                        "end": 257,
+                        "text": "(Salganik et al., 2006)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "2 Although hashtags have been used as coarse-grained topic labels in prior work, for our purposes, we have no assurance that two tweets both using, say, \"#Tahrir\" would be attempting to express the same message but in different words. In contrast, see the same-URL examples in Table 1 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 283,
+                        "end": 284,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "3 Moreover, Twitter presents tweets to a reader in strict chronological order, so that there are no algorithmic-ranking effects to compensate for in determining whether readers saw a tweet. And, Twitter accumulates retweet counts for the entire retweet cascade and displays them for the original tweet at the root of the propagation tree, so we can directly use Twitter's retweet counts to compare the entire reach of the different versions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Twitter-specific features of more successful phrasings. \u00a75.1 applies hypothesis testing (with Bonferroni correction to ameliorate issues with multiple comparisons) to investigate the utility of features like informativeness, resemblance to headlines, and conformity to the community norm in language use. \u00a75.2 further validates our findings via prediction experiments, including on completely fresh held-out data, used only once and after an array of standard cross-validation experiments. 4 We achieved 66.5% cross-validation accuracy and 65.6% held-out accuracy with a combination of our custom features and bag-of-words. Our classifier fared significantly better than a number of baselines, including a strong classifier trained on the most-and least-retweeted tweets that was even granted access to author and timing metadata.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The idea of using carefully controlled experiments to study effective communication strategies dates back at least to Hovland et al. (1953) . Recent studies range from examining what characteristics of New York Times articles correlate with high re-sharing rates (Milkman and Berger, 2012) to looking at how differences in description affect the spread of content-controlled videos or images (Borghol et al., 2012; Lakkaraju et al., 2013) . Simmons et al. (2011) examined the variation of quotes from different sources to examine how textual memes mutate as people pass them along, but did not control for author. Predicting the \"success\" of various texts such as novels and movie quotes has been the aim of additional prior work not already mentioned in \u00a71 (Ashok et al., 2013; Louis and Nenkova, 2013; Danescu-Niculescu-Mizil et al., 2012; Pitler and Nenkova, 2008; McIntyre and Lapata, 2009) . To our knowledge, there have been no large-scale studies exploring wording effects in a both topic-and author-controlled setting. Employing such controls, we find that predicting the more effective alternative wording is much harder than the previously well-studied problem of pre-dicting popular content when author or topic can freely vary.",
+                "cite_spans": [
+                    {
+                        "start": 118,
+                        "end": 139,
+                        "text": "Hovland et al. (1953)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 263,
+                        "end": 289,
+                        "text": "(Milkman and Berger, 2012)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 392,
+                        "end": 414,
+                        "text": "(Borghol et al., 2012;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 415,
+                        "end": 438,
+                        "text": "Lakkaraju et al., 2013)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 441,
+                        "end": 462,
+                        "text": "Simmons et al. (2011)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 758,
+                        "end": 778,
+                        "text": "(Ashok et al., 2013;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 779,
+                        "end": 803,
+                        "text": "Louis and Nenkova, 2013;",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 804,
+                        "end": 841,
+                        "text": "Danescu-Niculescu-Mizil et al., 2012;",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 842,
+                        "end": 867,
+                        "text": "Pitler and Nenkova, 2008;",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 868,
+                        "end": 894,
+                        "text": "McIntyre and Lapata, 2009)",
+                        "ref_id": "BIBREF26"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Related work regarding the features we considered is deferred to \u00a75.1 (features description).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "2"
+            },
+            {
+                "text": "Our main dataset was constructed by first gathering 1.77M topic-and author-controlled (henceforth TAC) tweet pairs 5 differing in more than just spacing. 6 We accomplished this by crawling timelines of 236K user ids that appear in prior work (Kwak et al., 2010; Yang and Leskovec, 2011) via the Twitter API. This crawling process also yielded 632K TAC pairs whose only difference was spacing, and an additional 558M \"unpaired\" tweets; as shown later in this paper, we used these extra corpora for computing language models and other auxiliary information. We applied nonobvious but important filtering -described later in this section -to control for other external factors and to reduce ambiguous cases. This brought us to a set of 11,404 pairs, with the gold-standard labels determined by which tweet in each pair was the one that received more retweets according to the Twitter API. We then did a second crawl to get an additional 1,770 pairs to serve as a held-out dataset. The corresponding tweet IDs are available online at http://chenhaot.com/pages/ wording-for-propagation.html. (Twitter's terms of service prohibit sharing the actual tweets.)",
+                "cite_spans": [
+                    {
+                        "start": 242,
+                        "end": 261,
+                        "text": "(Kwak et al., 2010;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 262,
+                        "end": 286,
+                        "text": "Yang and Leskovec, 2011)",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "3"
+            },
+            {
+                "text": "Throughout, we refer to the textual content of the earlier tweet within a TAC pair as t 1 , and of the later one as t 2 . We denote the number of retweets received by each tweet by n 1 and n 2 , respectively. We refer to the tweet with higher (lower) n i as the \"better (worse)\" tweet.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "3"
+            },
+            {
+                "text": "Using \"identical\" pairs to determine how to compensate for follower-count and timing effects. In an ideal setting, differences between n 1 and n 2 would be determined solely by differences in wording. But even with a TAC pair, retweets might exhibit a temporal bias because of the chronological order of tweet presentation (t 1 might enjoy a first-mover advantage (Borghol et al., 2012) because it is the \"original\"; alternatively, 5 No data collection/processing was conducted at Google. 6 The total excludes: tweets containing multiple URLs; tweets from users posting about the same URL more than five times (since such users might be spammers); the third, fourth, or fifth version for users posting between three and five tweets for the same URL; retweets (as identified by Twitter's API or by beginning with \"RT @\"); non-English tweets. The ideal case where n 2 \" n 1 when t 1 \" t 2 is best approximated when t 2 occurs within 12 hours of t 1 and the author has at least 10,000 or 5,000 followers. (b): in our chosen setting (blue circles), n 2 indeed tends to track n 1 , whereas otherwise (black squares), there's a bias towards retweeting t 1 . t 2 might be preferred because retweeters consider t 1 to be \"stale\"). Also, the number of followers an author has can have complicated indirect effects on which tweets are read (space limits preclude discussion).",
+                "cite_spans": [
+                    {
+                        "start": 364,
+                        "end": 386,
+                        "text": "(Borghol et al., 2012)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "3"
+            },
+            {
+                "text": "We use the 632K TAC pairs wherein t 1 and t 2 are identical7 to check for such confounding effects: we see how much n 2 deviates from n 1 in such settings, since if wording were the only explanatory factor, the retweet rates for identical tweets ought to be equal. Figure 1 (a) plots how the time lag between t 1 and t 2 and the author's follower-count affect the following deviation estimate:",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 272,
+                        "end": 273,
+                        "text": "1",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "3"
+            },
+            {
+                "text": "D \" \u00ff 0\u010fn 1 \u010310 | p Epn 2 |n 1 q \u00b4n1 |,",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "3"
+            },
+            {
+                "text": "where p Epn 2 |n 1 q is the average value of n 2 over pairs whose t 1 is retweeted n 1 times. (Note that the number of pairs whose t 1 is retweeted n 1 times decays exponentially with n 1 ; hence, we condition on n 1 to keep the estimate from being dominated by pairs with n 1 \" 0, and do not consider n 1 \u011b 10 because there are too few such pairs to estimate p",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "3"
+            },
+            {
+                "text": "Epn 2 |n 1 q reliably.) Figure 1 (a) shows that the setting where we (i) minimize the confounding effects of time lag and author's follower-count and (ii) maximize the amount of data to work with is: when t 2 occurs within 12 hours after t 1 and the author has more than 5,000 followers. Figure 1 (b) confirms that for identical TAC pairs, our chosen setting indeed results in n 2 being on average close to n 1 , which corresponds to the desired setting where wording is the dominant differentiating factor. 8 Focus on meaningful and general changes. Even after follower-count and time-lapse filtering, we still want to focus on TAC pairs that (i) exhibit significant/interesting textual changes (as exemplified in Table 1 , and as opposed to typo corrections and the like), and (ii) have n 2 and n 1 sufficiently different so that we are confident in which t i is better at attracting retweets. To take care of (i), we discarded the 50% of pairs whose similarity was above the median, where similarity was tf-based cosine. 9 For (ii), we sorted the remaining pairs by n 2 \u00b4n1 and retained only the top and bottom 5%. 10 Moreover, to ensure that we do not overfit to the idiosyncrasies of particular authors, we cap the number of pairs contributed by each author to 50 before we deal with (ii).",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 31,
+                        "end": 32,
+                        "text": "1",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 295,
+                        "end": 296,
+                        "text": "1",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 721,
+                        "end": 722,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "3"
+            },
+            {
+                "text": "We first ran a pilot study on Amazon Mechanical Turk (AMT) to determine whether humans can identify, based on wording differences alone, which of two topic-and author-controlled tweets is spread more widely. Each of our 5 AMT tasks involved a disjoint set of 20 randomly-sampled TAC pairs (with t 1 and t 2 randomly reordered); subjects indicated \"which tweet would other people be more likely to retweet?\", provided a short justification for their binary response, and clicked a checkbox if they found that their choice was a \"close call\". We received 39 judgments per pair in aggregate from 106 subjects total (9 people completed all 5 tasks). The subjects' justifications were of very high quality, convincing us that they all did the task in good faith 11 . Two examples for 8 We also computed the Pearson correlation between n1 and n2, even though it can be dominated by pairs with smaller n1. The correlation is 0.853 for \"\u0105 5K f'ers, \u010312hrs\", clearly higher than the 0.305 correlation for \"otherwise\". 9 Idf weighting was not employed because changes to frequent words are of potential interest. Urls, hashtags, @mentions and numbers were normalized to [url], [hashtag],",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human accuracy on TAC pairs",
+                "sec_num": "4"
+            },
+            {
+                "text": "[at], and [num] before computing similarity. 10 For our data, this meant n2 \u00b4n1 \u011b 10 or \u010f \u00b415. Cf. our median number of retweets: 30. 11 We also note that the feedback we got was quite positive, including: \"...It's fun to make choices between close tweets and use our subjective opinion. Thanks and best of the third TAC pair in Table 1 were: \"[t 1 makes] the cause relate-able to some people, therefore showing more of an appeal as to why should they click the link and support\" and, expressing the opposite view, \"I like [t 2 ] more because [t 1 ] starts out with a generalization that doesn't affect me and try to make me look like I had that experience before\".",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 335,
+                        "end": 336,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Human accuracy on TAC pairs",
+                "sec_num": "4"
+            },
+            {
+                "text": "If we view the set of 3900 binary judgments for our 100-TAC-pair sample as constituting independent responses, then the accuracy for this set is 62.4% (rising to 63.8% if we exclude the 587 judgments deemed \"close calls\"). However, if we evaluate the accuracy of the majority response among the 39 judgments per pair, the number rises to 73%. The accuracy of the majority response generally increases with the dominance of the majority, going above 90% when at least 80% of the judgments agree (although less than a third of the pairs satisfied this criterion).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human accuracy on TAC pairs",
+                "sec_num": "4"
+            },
+            {
+                "text": "Alternatively, we can consider the average accuracy of the 106 subjects: 61.3%, which is better than chance but far from 100%. (Variance was high: one subject achieved 85% accuracy out of 20 pairs, but eight scored below 50%.) This result is noticeably lower than the 73.8%-81.2% reported by Petrovi\u0107 et al. (2011) , who ran a similar experiment involving two subjects and 202 tweet pairs, but where the pairs were not topic-or author-controlled. 12 We conclude that even though propagation prediction becomes more challenging when topic and author controls are applied, humans can still to some degree tell which wording attracts more retweets. Interested readers can try this out themselves at http://chenhaot.com/ retweetedmore/quiz.",
+                "cite_spans": [
+                    {
+                        "start": 292,
+                        "end": 314,
+                        "text": "Petrovi\u0107 et al. (2011)",
+                        "ref_id": "BIBREF28"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human accuracy on TAC pairs",
+                "sec_num": "4"
+            },
+            {
+                "text": "We now investigate computationally what wording features correspond to messages achieving a broader reach. We start ( \u00a75.1) by introducing a set of generally-applicable and (mostly) non-Twitterspecific features to capture our intuitions about what might be better ways to phrase a message. We then use hypothesis testing ( \u00a75.1) to evaluate the importance of each feature for message propluck with your research\" and \"This was very interesting and really made me think about how I word my own tweets. Great job on this survey!\". We only had to exclude one person (not counted among the 106 subjects), doing so because he or she gave the same uninformative justification for all pairs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "5"
+            },
+            {
+                "text": "12 The accuracy range stems from whether author's social features were supplied and which subject was considered. One-sided binomial test for feature increase (Do authors prefer to 'raise' the feature in t 2 ?) YES : t 2 has a higher feature score than t 1 , \u03b1 \" .05 NO : t 2 has a lower feature score than t 1 , \u03b1 \" .05 (x%): %pf 2 \u0105 f 1 q, if sig. larger or smaller than 50% agation and the extent to which authors employ it, followed by experiments on a prediction task ( \u00a75.2) to further examine the utility of these features.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "5"
+            },
+            {
+                "text": "What kind of phrasing helps message propagation? Does it work to explicitly ask people to share the message? Is it better to be short and concise or long and informative? We define an array of features to capture these and other messaging aspects. We then examine (i) how effective each feature is for attracting more retweets; and (ii) whether authors prefer applying a given feature when issuing a second version of a tweet.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "First, for each feature, we use a one-sided paired t-test to test whether, on our 11K TAC pairs, our score function for that feature is larger in the better tweet versions than in the worse tweet versions, for significance levels \u03b1 \" .05, .01, .001, 1e-20. Given that we did 39 tests in total, there is a risk of obtaining false positives due to multiple testing (Dunn, 1961; Benjamini and Hochberg, 1995) . To account for this, we also report significance results for the conservatively Bonferroni-corrected (\"BC\") significance level \u03b1 = 0.05/39=1.28e-3.",
+                "cite_spans": [
+                    {
+                        "start": 363,
+                        "end": 375,
+                        "text": "(Dunn, 1961;",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 376,
+                        "end": 405,
+                        "text": "Benjamini and Hochberg, 1995)",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Second, we examine author preference for applying a feature. We do so because one (but by no means the only) reason authors post t 2 after having already advertised the same URL in t 1 is that these authors were dissatisfied with the amount of attention t 1 got; in such cases, the changes may have been specifically intended to attract more retweets. We measure author preference for a feature by the percentage of our TAC pairs13 where t 2 has more \"occurrences\" of the feature than t 1 , which we denote by \"%pf 2 \u0105 f 1 q\". We use the one-sided binomial test to see whether %pf 2 \u0105 f 1 q is significantly larger (or smaller) than 50%. Not surprisingly, it helps to ask people to share. (See Table 3 ; the notation for all tables is explained in Table 2 .) The basic sanity check we performed here was to take as features the number of occurrences of the verbs 'rt', 'retweet', 'please', 'spread', 'pls', and 'plz' to capture explicit requests (e.g. \"please retweet\").",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 700,
+                        "end": 701,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    },
+                    {
+                        "start": 754,
+                        "end": 755,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Informativeness helps. (Table 4 ) Messages that are more informative have increased social exchange value (Homans, 1958) , and so may be more worth propagating. One crude approximation of informativeness is length, and we see that length helps. 14 In contrast, Simmons et al. ( 2011) found that shorter versions of memes are more likely to be popular. The difference may result from TAC-pair changes being more drastic than the variations that memes undergo. A more refined informativeness measure is counts of the parts of speech that correspond to content. Our POS results, gathered using a Twitter-specific tagger (Gimpel et al., 2011) , echo those of Ashok et al. ( 2013) who looked at predict- Keeping in mind that the authors in our data have at least 5000 followers , we consider two types of language-conformity constraints an author might try to satisfy: to be similar to what is normal in the Twitter community, and to be similar to what his or her followers expect. We measure a tweet's similarity to expectations by its score according to the relevant language model,",
+                "cite_spans": [
+                    {
+                        "start": 106,
+                        "end": 120,
+                        "text": "(Homans, 1958)",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 617,
+                        "end": 638,
+                        "text": "(Gimpel et al., 2011)",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 30,
+                        "end": 31,
+                        "text": "4",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "1 |T | \u0159",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "xPT logpppxqq, where T refers to either all the unigrams (unigram model) or all and only bigrams (bigram model). 16 We trained a Twittercommunity language model from our 558M unpaired tweets, and personal language models from each author's tweet history. Imitate headlines. (Table 6 ) News headlines are often intentionally written to be both informative and attention-getting, so we introduce the idea of scoring by a language model built from New York Times headlines.17 ",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 281,
+                        "end": 282,
+                        "text": "6",
+                        "ref_id": "TABREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Use words associated with (non-paired) retweeted tweets. (Table 7 ) We expect that provocative or sensationalistic tweets are likely to make people react. We found it difficult to model provocativeness directly. As a rough approximation, we check whether the changes in t 2 with respect to t 1 (which share the same topic and author) involve words or parts-of-speech that are associated with high retweet rate in a very large separate sample of unpaired tweets (retweets and replies discarded). Specifically, for each word w that appears more than 10 times, we compute the probability that tweets containing w are retweeted more than once, denoted by rspwq. We define the rt score of a tweet as max wPT rspwq, where T is all the words in the tweet, and the rt score of a particular POS tag z in a tweet as max wPT &tagpwq\"z rspwq.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 64,
+                        "end": 65,
+                        "text": "7",
+                        "ref_id": "TABREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Include positive and/or negative words. (Table 8 ) Prior work has found that including positive or negative sentiment increases message propagation (Milkman and Berger, 2012; Godes et al., 2005; Heath et al., 2001; Hansen et al., 2011) . We measured the occurrence of positive and negative words as determined by the connotation lexicon of Feng et al. (2013) (better coverage than LIWC).",
+                "cite_spans": [
+                    {
+                        "start": 148,
+                        "end": 174,
+                        "text": "(Milkman and Berger, 2012;",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 175,
+                        "end": 194,
+                        "text": "Godes et al., 2005;",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 195,
+                        "end": 214,
+                        "text": "Heath et al., 2001;",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 215,
+                        "end": 235,
+                        "text": "Hansen et al., 2011)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 340,
+                        "end": 358,
+                        "text": "Feng et al. (2013)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 47,
+                        "end": 48,
+                        "text": "8",
+                        "ref_id": "TABREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Measuring the occurrence of both simultaneously was inspired by Riloff et al. (2013) .",
+                "cite_spans": [
+                    {
+                        "start": 64,
+                        "end": 84,
+                        "text": "Riloff et al. (2013)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Refer to other people (but not your audience).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "(Table 9 ) First-person has been found useful for success before, but in the different domains of scientific abstracts (Guerini et al., 2012) and books (Ashok et al., 2013) . Generality helps. (Table 10 ) DCKL'12 posited that movie quotes are more shared in the culture when they are general enough to be used in multiple contexts. We hence measured the presence of indefinite articles vs. definite articles.",
+                "cite_spans": [
+                    {
+                        "start": 119,
+                        "end": 141,
+                        "text": "(Guerini et al., 2012)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 152,
+                        "end": 172,
+                        "text": "(Ashok et al., 2013)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "9",
+                        "ref_id": "TABREF8"
+                    },
+                    {
+                        "start": 200,
+                        "end": 202,
+                        "text": "10",
+                        "ref_id": "TABREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "The easier to read, the better. (Table 11 ) We measure readability by using Flesch reading ease (Flesch, 1948) and Flesch-Kincaid grade level (Kincaid et al., 1975) , though they are not designed for short texts. We use negative grade level so that a larger value indicates easier texts to read.",
+                "cite_spans": [
+                    {
+                        "start": 96,
+                        "end": 110,
+                        "text": "(Flesch, 1948)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 142,
+                        "end": 164,
+                        "text": "(Kincaid et al., 1975)",
+                        "ref_id": "BIBREF21"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 39,
+                        "end": 41,
+                        "text": "11",
+                        "ref_id": "TABREF10"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Final question: Do authors prefer to do what is effective? Recall that we use binomial tests to determine author preference for applying a feature more in t 2 . Our preference statistics show that author preferences in many cases are aligned with feature efficacy. But there are several notable exceptions: for example, authors tend to increase the use of @-mentions and 2nd person pronouns even though they are ineffective. On the other hand, they did not increase the use of effective ones like proper nouns and numbers; nor did they tend to increase their rate of sentiment-bearing words.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Bearing in mind that changes in t 2 may not always be intended as an effort to improve t 1 , it is still interesting to observe that there are some contrasts between feature efficacy and author preferences.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Features: efficacy and author preference",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Here, we further examine the collective efficacy of the features introduced in \u00a75.1 via their performance on a binary prediction task: given a TAC pair (t 1 , t 2 ), did t 2 receive more retweets?",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Our approach. We group the features introduced in \u00a75.1 into 16 lexicon-based features (Table 3 , 8, 9, 10), 9 informativeness features (Table 4 ), 6 language model features (Table 5, 6 ), 6 rt score features (Table 7 ), and 2 readability features (Table 11). We refer to all 39 of them together as custom features. We also consider tagged bag-ofwords (\"BOW\") features, which includes all the unigram (word:POS pair) and bigram features that appear more than 10 times in the cross-validation data. This yields 3,568 unigram features and 4,095 bigram features, for a total of 7,663 so-called 1,2-gram features. Values for each feature are normalized by linear transformation across all tweets in the training data to lie in the range r0, 1s.18 For a given TAC pair, we construct its feature vector as follows. For each feature being considered, we compute its normalized value for each tweet in the pair and take the difference as the feature value for this pair. We use L2-regularized logistic regression as our classifier, with parameters chosen by cross validation on the training data. (We also experimented with SVMs. The performance was very close, but mostly slightly lower.)",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 93,
+                        "end": 94,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    },
+                    {
+                        "start": 142,
+                        "end": 143,
+                        "text": "4",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 180,
+                        "end": 182,
+                        "text": "5,",
+                        "ref_id": "TABREF4"
+                    },
+                    {
+                        "start": 183,
+                        "end": 184,
+                        "text": "6",
+                        "ref_id": "TABREF5"
+                    },
+                    {
+                        "start": 215,
+                        "end": 216,
+                        "text": "7",
+                        "ref_id": "TABREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "A strong non-TAC alternative, with social information and timing thrown in. One baseline result we would like to establish is whether the topic and author controls we have argued for, while intuitively compelling for the purposes of trying to determine the best way for a given author to present some fixed content, are really necessary in practice. To test this, we consider an alternative binary L2-regularized logistic-regression classifier that is trained on unpaired data, specifically, on the collection of 10,000 most retweeted tweets (gold-standard label: positive) plus the 10,000 least retweeted tweets (gold-standard label: negative) that are neither retweets nor replies. Note that this alternative thus is granted, by design, roughly twice the training instances that our classifiers have, as a result of having roughly the same number of tweets, since our instances are pairs. Moreover, we additionally include the tweet author's follower count, and the day and hour of posting, as features. We refer to this alternative classifier as TAC+ff+time. (Mnemonic: \"ff\" is used in bibliographic contexts as an abbreviation for \"and the following\".) We apply it to a tweet pair by computing whether it gives a higher score to t 2 or not.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Baselines. To sanity-check whether our classifier provides any improvement over the simplest methods one could try, we also report the performance of the majority baseline, our request-for-sharing features, and our character-length feature.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Performance comparison. We compare the accuracy (percentage of pairs whose labels were correctly predicted) of our approach against the competing methods. We report 5-fold cross validation results on our balanced set of 11,404 TAC pairs and on our completely disjoint heldout data 19 of 1,770 TAC pairs; this set was never examined during development, and there are no authors in common between the two testing sets. Figure 2 (a) summarizes the main results. While TAC+ff+time outperforms the majority baseline, using all the features we proposed beats TAC+ff+time by more than 10% in both crossvalidation (66.5% vs 55.9%) and heldout validation (65.6% vs 55.3%). We outperform the average human accuracy of 61% reported in our Amazon Mechanical Turk experiments (for a different data sample); TAC+ff+time fails to do so.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 424,
+                        "end": 425,
+                        "text": "2",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "The importance of topic and author control can be seen by further investigation of TAC+ff+time's performance. First, note that 19 To construct this data, we used the same criteria as in \u00a73: written by authors with more than 5000 followers, posted within 12 hours, n2 \u00b4n1 \u011b 10 or \u010f \u00b415, and cosine similarity threshold value the same as in \u00a73, cap of 50 on number of pairs from any individual author.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "it yields an accuracy of around 55% on our alternate-version-selection task, 20 even though its cross-validation accuracy on the larger most-and least-retweeted unpaired tweets averages out to a high 98.8%. Furthermore, note the superior performance of unigrams trained on TAC data vs TAC+ff+time -which is similar to our unigrams but trained on a larger but non-TAC dataset that included metadata. Thus, TAC pairs are a useful data source even for non-custom features. (We also include individual feature comparisons later.)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Informativeness is the best-performing custom feature group when run in isolation, and outperforms all baselines, as well as TAC+ff+time; and we can see from Figure 2 (a) that this is not due just to length. The combination of all our 39 custom features yields approximately 63% accuracy in both testing settings, significantly outperforming informativeness alone (p\u01030.001 in both cases). Again, this is higher than our estimate of average human performance.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 165,
+                        "end": 166,
+                        "text": "2",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Not surprisingly, the TAC-trained BOW features (unigram and 1,2-gram) show impressive predictive power in this task: many of our custom features can be captured by bag-of-word features, in a way. Still, the best performance is achieved 20 One might suspect that the problem is that TAC+ff+time learns from its training data to overrely on follower-count, since that is presumably a good feature for non-TAC tweets, and for this reason suffers when run on TAC data where follower-counts are by construction non-informative. But in fact, we found that removing the follower-count feature from TAC+ff+time and re-training did not lead to improved performance. Hence, it seems that it is the non-controlled nature of the alternate training data that explains the drop in performance. by combining our custom and 1,2-gram features together, to a degree statistically significantly better than using 1,2-gram features alone.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Finally, we remark on our Bonferroni correction. Recall that the intent of applying it is to avoid false positives. However, in our case, Figure 2(a) shows that our potentially \"false\" positives -features whose effectiveness did not pass the Bonferroni correction test -actually do raise performance in our prediction tests.",
+                "cite_spans": [
+                    {
+                        "start": 138,
+                        "end": 149,
+                        "text": "Figure 2(a)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Size of training data. Another interesting observation is how performance varies with data size. For n \" 1000, 2000, . . . , 10000, we randomly sampled n pairs from our 11,404 pairs, and computed the average cross-validation accuracy on the sampled data. Figure 2 (b) shows the averages over 50 runs of the aforementioned procedure. Our custom features can achieve good performance with little data, in the sense that for sample size 1000, they outperform BOW features; on the other hand, BOW features quickly surpass them. Across the board, the custom+1,2-gram features are consistently better than the 1,2-gram features alone.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 262,
+                        "end": 263,
+                        "text": "2",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Top features. Finally, we examine some of the top-weighted individual features from our approach and from the competing TAC+ff+time classifier. The top three rows of Table 12 show the best custom and best and worst unigram features for our method; the bottom two rows show the best and worst unigrams for TAC+ff+time. Among custom features, we see that community and personal language models, informativeness, retweet scores, sentiment, and generality are represented. As for unigram features, not surprisingly, \"rt\" and \"retweet\" are top features for both our approach and TAC+ff+time. However, the other unigrams for the two methods seem to be a bit different in spirit. Some of the unigrams determined to be most poor only by our method appear to be both surprising and yet plausible in retrospect: \"icymi\" (abbreviation for \"in case you missed it\") tends to indicate a direct repetition of older information, so people might prefer to retweet the earlier version; \"thanks\" and \"sorry\" could correspond to personal thank-yous and apologies not meant to be shared with a broader audience, and similarly @-mentioning another user may indicate a tweet intended only for that person. The appearance of [hashtag] in the best TAC+ff+time unigrams is consistent with prior research in non-TAC settings (Suh et al., 2010; Petrovi\u0107 et al., 2011) . is, win, never, ., people, need, official, officially, are, please, november, world, girl, !!!, god, new worst 20 unigrams :, [at], icymi, also, comments, half, ?, earlier, thanks, sorry, highlights, bit, point, update, last, helping, peek, what, haven't, debate TAC+ff+time best 20 unigrams",
+                "cite_spans": [
+                    {
+                        "start": 1298,
+                        "end": 1316,
+                        "text": "(Suh et al., 2010;",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 1317,
+                        "end": 1339,
+                        "text": "Petrovi\u0107 et al., 2011)",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 1342,
+                        "end": 1604,
+                        "text": "is, win, never, ., people, need, official, officially, are, please, november, world, girl, !!!, god, new worst 20 unigrams :, [at], icymi, also, comments, half, ?, earlier, thanks, sorry, highlights, bit, point, update, last, helping, peek, what, haven't, debate",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 172,
+                        "end": 174,
+                        "text": "12",
+                        "ref_id": "TABREF11"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "[hashtag], teen, fans, retweet, sale, usa, women, butt, caught, visit, background, upcoming, rt, this, bieber, these, each, chat, houston, book worst 20 unigrams :, ..., boss, foundation, ?, \", others, john, roll, ride, appreciate, page, drive, correct, full, ', looks, @ (not as [at]), sales, hurts",
+                "cite_spans": [
+                    {
+                        "start": 38,
+                        "end": 143,
+                        "text": "usa, women, butt, caught, visit, background, upcoming, rt, this, bieber, these, each, chat, houston, book",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predicting the \"better\" wording",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "In this work, we conducted the first large-scale topic-and author-controlled experiment to study the effects of wording on information propagation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            },
+            {
+                "text": "The features we developed to choose the better of two alternative wordings posted better performance than that of all our comparison algorithms, including one given access to author and timing features but trained on non-TAC data, and also bested our estimate of average human performance. According to our hypothesis tests, helpful wording heuristics include adding more information, making one's language align with both community norms and with one's prior messages, and mimicking news headlines. Readers may try out their own alternate phrasings at http: //chenhaot.com/retweetedmore/ to see what a simplified version of our classifier predicts.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            },
+            {
+                "text": "In future work, it will be interesting to examine how these features generalize to longer and more extensive arguments. Moreover, understanding the underlying psychological and cultural mechanisms that establish the effectiveness of these features is a fundamental problem of interest.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            },
+            {
+                "text": "Identical up to spacing: Twitter prevents exact copies by the same author appearing within a short amount of time, but some authors work around this by inserting spaces.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "For our preference experiments, we added in pairs where n2 \u00b4n1 was not in the top or bottom 5% (cf. \u00a73, meaningful changes), since to measure author preference it's not necessary that the retweet counts differ significantly.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "Of course, simply inserting garbage isn't going to lead to more retweets, but adding more information generally involves longer text.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "This is not an artificial restriction on our set of authors; a large follower count means (in principle) that our results draw on a large sample of decisions whether to retweet or not.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The tokens [at], [hashtag],[url] were ignored in the unigram-model case to prevent their undue influence, but retained in the bigram model to capture longer-range usage (\"combination\") patterns.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "To test whether the results stem from similarity to news rather than headlines per se, we constructed a NYT-text LM, which proved less effective. We also tried using Gawker headlines (often said to be attention-getting) but pilot studies revealed insufficient vocabulary overlap with our TAC pairs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "We also tried normalization by whitening, but it did not lead to further improvements.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "Acknowledgments. We thank C. Callison-Burch, C. Danescu-Niculescu-Mizil, J. Kleinberg, P. Mahdabi, S. Mullainathan, F. Pereira, K. Raman, A. Swaminathan, the Cornell NLP seminar participants and the reviewers for their comments; J. Leskovec for providing some initial data; and the anonymous annotators for all their labeling help. This work was supported in part by NSF grant IIS-0910664 and a Google Research Grant.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "acknowledgement",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Predicting responses to microblog posts",
+                "authors": [
+                    {
+                        "first": "Yoav",
+                        "middle": [],
+                        "last": "Artzi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Patrick",
+                        "middle": [],
+                        "last": "Pantel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [],
+                        "last": "Gamon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of NAACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yoav Artzi, Patrick Pantel, and Michael Gamon. 2012. Predicting responses to microblog posts. In Pro- ceedings of NAACL (short paper).",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Success with style: Using writing style to predict the success of novels",
+                "authors": [
+                    {
+                        "first": "Song",
+                        "middle": [],
+                        "last": "Vikas Ganjigunte Ashok",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yejin",
+                        "middle": [],
+                        "last": "Feng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Choi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of EMNLP",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Vikas Ganjigunte Ashok, Song Feng, and Yejin Choi. 2013. Success with style: Using writing style to predict the success of novels. In Proceedings of EMNLP.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Everyone's an influencer: Quantifying influence on twitter",
+                "authors": [
+                    {
+                        "first": "Eitan",
+                        "middle": [],
+                        "last": "Bakshy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jake",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Hofman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Winter",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Mason",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Duncan",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Watts",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of WSDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Eitan Bakshy, Jake M. Hofman, Winter A. Mason, and Duncan J. Watts. 2011. Everyone's an influencer: Quantifying influence on twitter. In Proceedings of WSDM.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "The independent components of natural scenes are edge filters",
+                "authors": [
+                    {
+                        "first": "Anthony",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Bell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Terrence",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Sejnowski",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1997,
+                "venue": "Vision research",
+                "volume": "37",
+                "issue": "23",
+                "pages": "3327--3338",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Anthony J. Bell and Terrence J. Sejnowski. 1997. The independent components of natural scenes are edge filters. Vision research, 37(23):3327-3338.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Controlling the false discovery rate: A practical and powerful approach to multiple testing",
+                "authors": [
+                    {
+                        "first": "Yoav",
+                        "middle": [],
+                        "last": "Benjamini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yosef",
+                        "middle": [],
+                        "last": "Hochberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "Journal of the Royal Statistical Society. Series B (Methodological)",
+                "volume": "",
+                "issue": "",
+                "pages": "289--300",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Yoav Benjamini and Yosef Hochberg. 1995. Control- ling the false discovery rate: A practical and pow- erful approach to multiple testing. Journal of the Royal Statistical Society. Series B (Methodological), pages 289-300.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "The untold story of the clones: Content-agnostic factors that impact YouTube video popularity",
+                "authors": [
+                    {
+                        "first": "Youmna",
+                        "middle": [],
+                        "last": "Borghol",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Sebastien",
+                        "middle": [],
+                        "last": "Ardon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Niklas",
+                        "middle": [],
+                        "last": "Carlsson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Derek",
+                        "middle": [],
+                        "last": "Eager",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Anirban",
+                        "middle": [],
+                        "last": "Mahanti",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of KDD",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Youmna Borghol, Sebastien Ardon, Niklas Carlsson, Derek Eager, and Anirban Mahanti. 2012. The untold story of the clones: Content-agnostic factors that impact YouTube video popularity. In Proceed- ings of KDD.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Framing theory",
+                "authors": [
+                    {
+                        "first": "Dennis",
+                        "middle": [],
+                        "last": "Chong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "James",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Druckman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "",
+                "volume": "10",
+                "issue": "",
+                "pages": "103--126",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dennis Chong and James N. Druckman. 2007. Fram- ing theory. Annual Review of Political Science, 10:103-126.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "You had me at hello: How phrasing affects memorability",
+                "authors": [
+                    {
+                        "first": "Cristian",
+                        "middle": [],
+                        "last": "Danescu-Niculescu-Mizil",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Justin",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jon",
+                        "middle": [],
+                        "last": "Kleinberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lillian",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of ACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cristian Danescu-Niculescu-Mizil, Justin Cheng, Jon Kleinberg, and Lillian Lee. 2012. You had me at hello: How phrasing affects memorability. In Pro- ceedings of ACL.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Natural experiments and quasinatural experiments",
+                "authors": [
+                    {
+                        "first": "John",
+                        "middle": [],
+                        "last": "Dinardo",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "The New Palgrave Dictionary of Economics",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "John DiNardo. 2008. Natural experiments and quasi- natural experiments. In The New Palgrave Dictio- nary of Economics. Palgrave Macmillan.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Multiple comparisons among means",
+                "authors": [
+                    {
+                        "first": "Olive",
+                        "middle": [],
+                        "last": "Jean Dunn",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1961,
+                "venue": "Journal of the American Statistical Association",
+                "volume": "56",
+                "issue": "293",
+                "pages": "52--64",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Olive Jean Dunn. 1961. Multiple comparisons among means. Journal of the American Statistical Associa- tion, 56(293):52-64.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Connotation lexicon: A dash of sentiment beneath the surface meaning",
+                "authors": [
+                    {
+                        "first": "Song",
+                        "middle": [],
+                        "last": "Feng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Seok",
+                        "middle": [],
+                        "last": "Jun",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Polina",
+                        "middle": [],
+                        "last": "Kang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yejin",
+                        "middle": [],
+                        "last": "Kuznetsova",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Choi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of ACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Song Feng, Jun Seok Kang, Polina Kuznetsova, and Yejin Choi. 2013. Connotation lexicon: A dash of sentiment beneath the surface meaning. In Proceed- ings of ACL.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "A new readability yardstick",
+                "authors": [
+                    {
+                        "first": "Rudolph",
+                        "middle": [],
+                        "last": "Flesch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1948,
+                "venue": "Journal of applied psychology",
+                "volume": "32",
+                "issue": "3",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rudolph Flesch. 1948. A new readability yardstick. Journal of applied psychology, 32(3):221.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Part-of-speech Tagging for Twitter: Annotation, Features, and Experiments",
+                "authors": [
+                    {
+                        "first": "Kevin",
+                        "middle": [],
+                        "last": "Gimpel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Nathan",
+                        "middle": [],
+                        "last": "Schneider",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Brendan O'",
+                        "middle": [],
+                        "last": "Connor",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Dipanjan",
+                        "middle": [],
+                        "last": "Das",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Daniel",
+                        "middle": [],
+                        "last": "Mills",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jacob",
+                        "middle": [],
+                        "last": "Eisenstein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [],
+                        "last": "Heilman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Dani",
+                        "middle": [],
+                        "last": "Yogatama",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jeffrey",
+                        "middle": [],
+                        "last": "Flanigan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Noah",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Smith",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of NAACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kevin Gimpel, Nathan Schneider, Brendan O'Connor, Dipanjan Das, Daniel Mills, Jacob Eisenstein, Michael Heilman, Dani Yogatama, Jeffrey Flanigan, and Noah A. Smith. 2011. Part-of-speech Tagging for Twitter: Annotation, Features, and Experiments. In Proceedings of NAACL (short paper).",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "The firm's management of social interactions",
+                "authors": [
+                    {
+                        "first": "David",
+                        "middle": [],
+                        "last": "Godes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Dina",
+                        "middle": [],
+                        "last": "Mayzlin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yubo",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Sanjiv",
+                        "middle": [],
+                        "last": "Das",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chrysanthos",
+                        "middle": [],
+                        "last": "Dellarocas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bruce",
+                        "middle": [],
+                        "last": "Pfeiffer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Barak",
+                        "middle": [],
+                        "last": "Libai",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Subrata",
+                        "middle": [],
+                        "last": "Sen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Mengze",
+                        "middle": [],
+                        "last": "Shi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Peeter",
+                        "middle": [],
+                        "last": "Verlegh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Marketing Letters",
+                "volume": "16",
+                "issue": "3-4",
+                "pages": "415--428",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "David Godes, Dina Mayzlin, Yubo Chen, Sanjiv Das, Chrysanthos Dellarocas, Bruce Pfeiffer, Barak Libai, Subrata Sen, Mengze Shi, and Peeter Verlegh. 2005. The firm's management of social interactions. Marketing Letters, 16(3-4):415-428.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Exploring text virality in social networks",
+                "authors": [
+                    {
+                        "first": "Marco",
+                        "middle": [],
+                        "last": "Guerini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Carlo",
+                        "middle": [],
+                        "last": "Strapparava",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G\u00f6zde",
+                        "middle": [],
+                        "last": "\u00d6zbal",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of ICWSM (poster)",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Marco Guerini, Carlo Strapparava, and G\u00f6zde \u00d6zbal. 2011. Exploring text virality in social networks. In Proceedings of ICWSM (poster).",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Do linguistic style and readability of scientific abstracts affect their virality?",
+                "authors": [
+                    {
+                        "first": "Marco",
+                        "middle": [],
+                        "last": "Guerini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Alberto",
+                        "middle": [],
+                        "last": "Pepe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bruno",
+                        "middle": [],
+                        "last": "Lepri",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of ICWSM (poster)",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Marco Guerini, Alberto Pepe, and Bruno Lepri. 2012. Do linguistic style and readability of scientific ab- stracts affect their virality? In Proceedings of ICWSM (poster).",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Good friends, bad news-affect and virality in Twitter",
+                "authors": [
+                    {
+                        "first": "Lars",
+                        "middle": [],
+                        "last": "Kai Hansen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Adam",
+                        "middle": [],
+                        "last": "Arvidsson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Elanor",
+                        "middle": [],
+                        "last": "Finn \u00c5rup Nielsen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [],
+                        "last": "Colleoni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Etter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Communications in Computer and Information Science",
+                "volume": "185",
+                "issue": "",
+                "pages": "34--43",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lars Kai Hansen, Adam Arvidsson, Finn \u00c5rup Nielsen, Elanor Colleoni, and Michael Etter. 2011. Good friends, bad news-affect and virality in Twitter. Communications in Computer and Information Sci- ence, 185:34-43.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Emotional selection in memes: The case of urban legends",
+                "authors": [
+                    {
+                        "first": "Chip",
+                        "middle": [],
+                        "last": "Heath",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chris",
+                        "middle": [],
+                        "last": "Bell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Emily",
+                        "middle": [],
+                        "last": "Sternberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Journal of personality and social psychology",
+                "volume": "81",
+                "issue": "6",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chip Heath, Chris Bell, and Emily Sternberg. 2001. Emotional selection in memes: The case of urban legends. Journal of personality and social psychol- ogy, 81(6):1028.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Social Behavior as Exchange",
+                "authors": [
+                    {
+                        "first": "George",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Homans",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1958,
+                "venue": "American Journal of Sociology",
+                "volume": "63",
+                "issue": "6",
+                "pages": "597--606",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "George C. Homans. 1958. Social Behavior as Ex- change. American Journal of Sociology, 63(6):597- 606.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Predicting popular messages in Twitter",
+                "authors": [
+                    {
+                        "first": "Liangjie",
+                        "middle": [],
+                        "last": "Hong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ovidiu",
+                        "middle": [],
+                        "last": "Dan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Brian",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Davison",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of WWW",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Liangjie Hong, Ovidiu Dan, and Brian D. Davison. 2011. Predicting popular messages in Twitter. In Proceedings of WWW.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Communication and Persuasion: Psychological Studies of Opinion Change",
+                "authors": [
+                    {
+                        "first": "Carl",
+                        "middle": [
+                            "I"
+                        ],
+                        "last": "Hovland",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Irving",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Janis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Harold",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Kelley",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1953,
+                "venue": "",
+                "volume": "19",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Carl I. Hovland, Irving L. Janis, and Harold H. Kelley. 1953. Communication and Persuasion: Psycholog- ical Studies of Opinion Change, volume 19. Yale University Press.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Derivation of new readability formulas (automated readability index, fog count and flesch reading ease formula) for navy enlisted personnel",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Peter",
+                        "middle": [],
+                        "last": "Kincaid",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Robert",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Fishburne",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Richard",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Brad",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Rogers",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Chissom",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1975,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Peter Kincaid, Robert P. Fishburne Jr., Richard L. Rogers, and Brad S. Chissom. 1975. Derivation of new readability formulas (automated readability index, fog count and flesch reading ease formula) for navy enlisted personnel. Technical report, DTIC Document.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "What is Twitter, a social network or a news media?",
+                "authors": [
+                    {
+                        "first": "Haewoon",
+                        "middle": [],
+                        "last": "Kwak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Changhyun",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hosung",
+                        "middle": [],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Sue",
+                        "middle": [],
+                        "last": "Moon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of WWW",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Haewoon Kwak, Changhyun Lee, Hosung Park, and Sue Moon. 2010. What is Twitter, a social network or a news media? In Proceedings of WWW.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "What's in a name? Understanding the interplay between titles, content, and communities in social media",
+                "authors": [
+                    {
+                        "first": "Himabindu",
+                        "middle": [],
+                        "last": "Lakkaraju",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Julian",
+                        "middle": [],
+                        "last": "Mcauley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jure",
+                        "middle": [],
+                        "last": "Leskovec",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Himabindu Lakkaraju, Julian McAuley, and Jure Leskovec. 2013. What's in a name? Understanding the interplay between titles, content, and communi- ties in social media. In Proceedings of ICWSM.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "What makes writing great? First experiments on article quality prediction in the science journalism domain",
+                "authors": [
+                    {
+                        "first": "Annie",
+                        "middle": [],
+                        "last": "Louis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ani",
+                        "middle": [],
+                        "last": "Nenkova",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Transactions of ACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Annie Louis and Ani Nenkova. 2013. What makes writing great? First experiments on article quality prediction in the science journalism domain. Trans- actions of ACL.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Will this #hashtag be popular tomorrow?",
+                "authors": [
+                    {
+                        "first": "Zongyang",
+                        "middle": [],
+                        "last": "Ma",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Aixin",
+                        "middle": [],
+                        "last": "Sun",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Gao",
+                        "middle": [],
+                        "last": "Cong",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of SIGIR",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zongyang Ma, Aixin Sun, and Gao Cong. 2012. Will this #hashtag be popular tomorrow? In Proceedings of SIGIR.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Learning to tell tales: A data-driven approach to story generation",
+                "authors": [
+                    {
+                        "first": "Neil",
+                        "middle": [],
+                        "last": "Mcintyre",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Mirella",
+                        "middle": [],
+                        "last": "Lapata",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proceedings of ACL-IJCNLP",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Neil McIntyre and Mirella Lapata. 2009. Learning to tell tales: A data-driven approach to story genera- tion. In Proceedings of ACL-IJCNLP.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "What makes online content viral",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Katherine",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jonah",
+                        "middle": [],
+                        "last": "Milkman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Berger",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Journal of Marketing Research",
+                "volume": "49",
+                "issue": "2",
+                "pages": "192--205",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Katherine L Milkman and Jonah Berger. 2012. What makes online content viral? Journal of Marketing Research, 49(2):192-205.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "RT to win! Predicting message propagation in Twitter",
+                "authors": [
+                    {
+                        "first": "Sa\u0161a",
+                        "middle": [],
+                        "last": "Petrovi\u0107",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Miles",
+                        "middle": [],
+                        "last": "Osborne",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Victor",
+                        "middle": [],
+                        "last": "Lavrenko",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sa\u0161a Petrovi\u0107, Miles Osborne, and Victor Lavrenko. 2011. RT to win! Predicting message propagation in Twitter. In Proceedings of ICWSM.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Revisiting readability: A unified framework for predicting text quality",
+                "authors": [
+                    {
+                        "first": "Emily",
+                        "middle": [],
+                        "last": "Pitler",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ani",
+                        "middle": [],
+                        "last": "Nenkova",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Proceedings of EMNLP",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Emily Pitler and Ani Nenkova. 2008. Revisiting readability: A unified framework for predicting text quality. In Proceedings of EMNLP.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Sarcasm as contrast between a positive sentiment and negative situation",
+                "authors": [
+                    {
+                        "first": "Ellen",
+                        "middle": [],
+                        "last": "Riloff",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ashequl",
+                        "middle": [],
+                        "last": "Qadir",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Prafulla",
+                        "middle": [],
+                        "last": "Surve",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lalindra",
+                        "middle": [
+                            "De"
+                        ],
+                        "last": "Silva",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Nathan",
+                        "middle": [],
+                        "last": "Gilbert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ruihong",
+                        "middle": [],
+                        "last": "Huang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of EMNLP",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ellen Riloff, Ashequl Qadir, Prafulla Surve, Lalin- dra De Silva, Nathan Gilbert, and Ruihong Huang. 2013. Sarcasm as contrast between a positive sen- timent and negative situation. In Proceedings of EMNLP.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "On the interplay between social and topical structure",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Daniel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chenhao",
+                        "middle": [],
+                        "last": "Romero",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Johan",
+                        "middle": [],
+                        "last": "Tan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Ugander",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Daniel M. Romero, Chenhao Tan, and Johan Ugander. 2013. On the interplay between social and topical structure. In Proceedings of ICWSM.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Experimental study of inequality and unpredictability in an artificial cultural market",
+                "authors": [
+                    {
+                        "first": "Matthew",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Salganik",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Peter",
+                        "middle": [],
+                        "last": "Sheridan Dodds",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Duncan",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Watts",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Science",
+                "volume": "311",
+                "issue": "5762",
+                "pages": "854--856",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Matthew J. Salganik, Peter Sheridan Dodds, and Dun- can J. Watts. 2006. Experimental study of inequal- ity and unpredictability in an artificial cultural mar- ket. Science, 311(5762):854-856.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Memes online: Extracted, subtracted, injected, and recollected",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Matthew",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lada",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Simmons",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Eytan",
+                        "middle": [],
+                        "last": "Adamic",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Adar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Matthew P. Simmons, Lada A Adamic, and Eytan Adar. 2011. Memes online: Extracted, subtracted, in- jected, and recollected. In Proceedings of ICWSM.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Want to be retweeted? Large scale analytics on factors impacting retweet in Twitter network",
+                "authors": [
+                    {
+                        "first": "Bongwon",
+                        "middle": [],
+                        "last": "Suh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Lichan",
+                        "middle": [],
+                        "last": "Hong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Peter",
+                        "middle": [],
+                        "last": "Pirolli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ed",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Chi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of SocialCom",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bongwon Suh, Lichan Hong, Peter Pirolli, and Ed H. Chi. 2010. Want to be retweeted? Large scale an- alytics on factors impacting retweet in Twitter net- work. In Proceedings of SocialCom.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Unexpected relevance: An empirical study of serendipity in retweets",
+                "authors": [
+                    {
+                        "first": "Tao",
+                        "middle": [],
+                        "last": "Sun",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ming",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Qiaozhu",
+                        "middle": [],
+                        "last": "Mei",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Proceedings of ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tao Sun, Ming Zhang, and Qiaozhu Mei. 2013. Unex- pected relevance: An empirical study of serendipity in retweets. In Proceedings of ICWSM.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "What's in a hashtag?: Content based prediction of the spread of ideas in microblogging communities",
+                "authors": [
+                    {
+                        "first": "Oren",
+                        "middle": [],
+                        "last": "Tsur",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Ari",
+                        "middle": [],
+                        "last": "Rappoport",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of WSDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Oren Tsur and Ari Rappoport. 2012. What's in a hash- tag?: Content based prediction of the spread of ideas in microblogging communities. In Proceedings of WSDM.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Patterns of temporal variation in online media",
+                "authors": [
+                    {
+                        "first": "Jaewon",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jure",
+                        "middle": [],
+                        "last": "Leskovec",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of WSDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jaewon Yang and Jure Leskovec. 2011. Patterns of temporal variation in online media. In Proceedings of WSDM.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": null,
+                "num": null,
+                "text": "For identical TAC pairs, retweet-count deviation vs. time lag between t1 and t2, for the author followercounts given in the legend. Avg. n2 vs. n1 for identical TAC pairs, highlighting our chosen time-lag and follower thresholds. Bars: standard error. Diagonal line:p Epn2|n1q \" n1.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "fig_num": "1",
+                "num": null,
+                "text": "Figure1: (a): The ideal case where n 2 \" n 1 when t 1 \" t 2 is best approximated when t 2 occurs within 12 hours of t 1 and the author has at least 10,000 or 5,000 followers. (b): in our chosen setting (blue circles), n 2 indeed tends to track n 1 , whereas otherwise (black squares), there's a bias towards retweeting t 1 .",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF2": {
+                "fig_num": null,
+                "num": null,
+                "text": "(a) Cross-validation and heldout accuracy for various feature sets. Blue lines inside bars: performance when custom features are restricted to those that pass our Bonferroni correction (no line for readability because no readability features passed). Dashed vertical line: TAC+ff+time performance.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF3": {
+                "fig_num": null,
+                "num": null,
+                "text": "Cross-validation accuracy vs data size. Human performance was estimated from a disjoint set of 100 pairs (see \u00a74).",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF4": {
+                "fig_num": "2",
+                "num": null,
+                "text": "Figure 2: Accuracy results. Pertinent significance results are as follows.In cross-validation, custom+1,2gram is significantly better than TAC+ff+time (p=0) and 1,2-gram (p=3.8e-7). In heldout validation, custom+1,2-gram is significantly better than TAC+ff+time (p=3.4e-12) and 1,2-gram (p=0.01) but not unigram (p=0.08), perhaps due to the small size of the heldout set.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "num": null,
+                "content": "<table><tr><td>author</td><td>tweets</td></tr></table>",
+                "html": null,
+                "text": "Topic-and author-controlled (TAC)  pairs. Topic control = inclusion of the same URL. FIRST ON CNN: After Petraeus scandal, Paula Broadwell looks to recapture 'normal life.' http://t.co/qy7GGuYW n1 = 5 t2: First on CNN: Broadwell photos shared with Security Clearance as she and her family fight media portrayal of her [same URL] n2 = 29 ABC t1: Workers, families take stand against Thanksgiving hours: http://t.co/J9mQHiIEqv n1 = 46 t2: Staples, Medieval Times Workers Say Opening Thanksgiving Day Crosses the Line [same URL] n2 = 27 cactus music t1: I know at some point you've have been saved from hunger by our rolling food trucks friends. Let's help support them!",
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "num": null,
+                "content": "<table><tr><td>\u00d2\u00d2 : p\u01030.01</td><td>\u00d3\u00d3 : p\u01050.99</td></tr><tr><td>\u00d2 : p\u01030.05</td><td>\u00d3 : p\u01050.95</td></tr><tr><td colspan=\"2\">\u02da: passes our Bonferroni correction</td></tr></table>",
+                "html": null,
+                "text": "Notational conventions for tables in \u00a75.1. One-sided paired t-test for feature efficacy \u00d2\u00d2\u00d2\u00d2: p\u01031e-20 \u00d3\u00d3\u00d3\u00d3: p\u01051-1e-20 \u00d2\u00d2\u00d2 : p\u01030.001 \u00d3\u00d3\u00d3 : p\u01050.999",
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td>rt</td><td>\u00d2\u00d2\u00d2\u00d2 *</td><td>--</td></tr><tr><td colspan=\"2\">retweet \u00d2\u00d2\u00d2\u00d2 *</td><td>YES (59%)</td></tr><tr><td>spread</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>YES (56%)</td></tr><tr><td>please</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>--</td></tr><tr><td>pls</td><td>\u00d2 \u00d2\u00d2\u00d2</td><td>--</td></tr><tr><td>plz</td><td>\u00d2\u00d2 \u00d2\u00d2</td><td>--</td></tr></table>",
+                "html": null,
+                "text": "Explicit requests for sharing (where only occurrences POS-tagged as verbs count, according to theGimpel et al. (2011) tagger).",
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td colspan=\"2\">length (chars) \u00d2\u00d2\u00d2\u00d2 *</td><td>YES (54%)</td></tr><tr><td>verb</td><td>\u00d2\u00d2\u00d2\u00d2 *</td><td>YES (56%)</td></tr><tr><td>noun</td><td>\u00d2\u00d2\u00d2\u00d2 *</td><td>--</td></tr><tr><td>adjective</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>YES (51%)</td></tr><tr><td>adverb</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>YES (55%)</td></tr><tr><td>proper noun</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>NO-(45%)</td></tr><tr><td>number</td><td>\u00d2\u00d2\u00d2\u00d2 *</td><td>NO-(48%)</td></tr><tr><td>hashtag</td><td>\u00d2 \u00d2\u00d2\u00d2</td><td>--</td></tr><tr><td>@-mention</td><td>\u00d3\u00d3\u00d3 \u00d3 *</td><td>YES (53%)</td></tr></table>",
+                "html": null,
+                "text": "Informativeness.",
+                "type_str": "table"
+            },
+            "TABREF4": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td>twitter unigram</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>YES (54%)</td></tr><tr><td>twitter bigram</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>YES (52%)</td></tr><tr><td colspan=\"2\">personal unigram \u00d2\u00d2\u00d2 \u00d2 *</td><td>YES (52%)</td></tr><tr><td>personal bigram</td><td>---</td><td>NO-(48%)</td></tr><tr><td colspan=\"3\">ing the success of books. The diminished effect of</td></tr><tr><td colspan=\"3\">hashtag inclusion with respect to what has been re-</td></tr><tr><td colspan=\"3\">ported previously (Suh et al., 2010; Petrovi\u0107 et al.,</td></tr><tr><td colspan=\"3\">2011) presumably stems from our topic and author</td></tr><tr><td>controls.</td><td/><td/></tr><tr><td colspan=\"3\">Be like the community, and be true to yourself</td></tr><tr><td colspan=\"3\">(in the words you pick, but not necessarily in</td></tr><tr><td colspan=\"3\">how you combine them). (Table 5) Although dis-</td></tr><tr><td colspan=\"3\">tinctive messages may attract attention, messages</td></tr><tr><td colspan=\"3\">that conform to expectations might be more eas-</td></tr><tr><td colspan=\"3\">ily accepted and therefore shared. Prior work has</td></tr><tr><td colspan=\"3\">explored this tension: Lakkaraju et al. (2013), in a</td></tr><tr><td colspan=\"3\">content-controlled study, found that the more up-</td></tr><tr><td colspan=\"3\">voted Reddit image titles balance novelty and fa-</td></tr><tr><td colspan=\"3\">miliarity; Danescu-Niculescu-Mizil et al. (2012)</td></tr><tr><td colspan=\"3\">(henceforth DCKL'12) showed that the memora-</td></tr><tr><td colspan=\"3\">bility of movie quotes corresponds to higher lexi-</td></tr><tr><td colspan=\"3\">cal distinctiveness but lower POS distinctiveness;</td></tr><tr><td colspan=\"3\">and Sun et al. (2013) observed that deviating from</td></tr><tr><td colspan=\"3\">one's own past language patterns correlates with</td></tr><tr><td>more retweets.</td><td/><td/></tr></table>",
+                "html": null,
+                "text": "Conformity to the community and one's own past, measured via scores assigned by various language models.",
+                "type_str": "table"
+            },
+            "TABREF5": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td colspan=\"2\">headline unigram \u00d2\u00d2 \u00d2\u00d2</td><td>YES (53%)</td></tr><tr><td>headline bigram</td><td>\u00d2\u00d2\u00d2\u00d2 *</td><td>YES (52%)</td></tr></table>",
+                "html": null,
+                "text": "LM-based resemblance to headlines.",
+                "type_str": "table"
+            },
+            "TABREF6": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td>rt score</td><td>\u00d2\u00d2 \u00d2\u00d2 *</td><td>NO-(49%)</td></tr><tr><td>verb rt score</td><td>\u00d2\u00d2\u00d2\u00d2 *</td><td>--</td></tr><tr><td>noun rt score</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>--</td></tr><tr><td>adjective rt score</td><td>\u00d2 \u00d2\u00d2\u00d2</td><td>YES (50%)</td></tr><tr><td>adverb rt score</td><td>\u00d2 \u00d2\u00d2\u00d2</td><td>YES (51%)</td></tr><tr><td colspan=\"2\">proper noun rt score ---</td><td>NO-(48%)</td></tr></table>",
+                "html": null,
+                "text": "Retweet score.",
+                "type_str": "table"
+            },
+            "TABREF7": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td>positive</td><td>\u00d2\u00d2\u00d2 \u00d2 *</td><td>--</td></tr><tr><td colspan=\"2\">negative \u00d2\u00d2\u00d2 \u00d2 *</td><td>--</td></tr><tr><td colspan=\"2\">contrast \u00d2\u00d2\u00d2 \u00d2 *</td><td>--</td></tr></table>",
+                "html": null,
+                "text": "Sentiment (contrast is measured by presence of both positive and negative sentiments).",
+                "type_str": "table"
+            },
+            "TABREF8": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td colspan=\"2\">1st person singular ---</td><td>YES (51%)</td></tr><tr><td>1st person plural</td><td>---</td><td>YES (52%)</td></tr><tr><td>2nd person</td><td>---</td><td>YES (57%)</td></tr><tr><td colspan=\"2\">3rd person singular \u00d2\u00d2 \u00d2\u00d2</td><td>YES (55%)</td></tr><tr><td>3rd person plural</td><td>\u00d2 \u00d2\u00d2\u00d2</td><td>YES (58%)</td></tr></table>",
+                "html": null,
+                "text": "Pronouns.",
+                "type_str": "table"
+            },
+            "TABREF9": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td colspan=\"2\">indefinite articles (a,an) \u00d2\u00d2\u00d2 \u00d2 *</td><td>--</td></tr><tr><td>definite articles (the)</td><td>---</td><td>YES (52%)</td></tr></table>",
+                "html": null,
+                "text": "Generality.",
+                "type_str": "table"
+            },
+            "TABREF10": {
+                "num": null,
+                "content": "<table><tr><td/><td colspan=\"2\">effective? author-preferred?</td></tr><tr><td>reading ease</td><td>\u00d2\u00d2 \u00d2\u00d2</td><td>YES (52%)</td></tr><tr><td colspan=\"2\">negative grade level \u00d2 \u00d2\u00d2\u00d2</td><td>YES (52%)</td></tr></table>",
+                "html": null,
+                "text": "Readability.",
+                "type_str": "table"
+            },
+            "TABREF11": {
+                "num": null,
+                "content": "<table><tr><td>Our</td></tr></table>",
+                "html": null,
+                "text": "Features with largest coefficients, delimited by commas. POS tags omitted for clarity. approach best 15 custom twitter bigram, length (chars), rt (the word), retweet (the word), verb, verb retweet score, personal unigram, proper noun, number, noun, positive words, please (the word), proper noun retweet score, indefinite articles (a,an), adjective best 20 unigrams rt, retweet, [num], breaking,",
+                "type_str": "table"
+            }
+        }
+    }
+}

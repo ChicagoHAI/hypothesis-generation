@@ -1,0 +1,2453 @@
+{
+    "paper_id": "j",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-02T20:48:27.760202Z"
+    },
+    "title": "Analyzing and predicting news popularity on Twitter",
+    "authors": [
+        {
+            "first": "Bo",
+            "middle": [],
+            "last": "Wu",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Clemson University",
+                "location": {
+                    "country": "United States"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Haiying",
+            "middle": [],
+            "last": "Shen",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Clemson University",
+                "location": {
+                    "country": "United States"
+                }
+            },
+            "email": "shenh@clemson.edu"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Twitter is not only a social network, but also an increasingly important news media. In Twitter, retweeting is the most important information propagation mechanism, and supernodes (news medias) that have many followers are the most important information sources. Therefore, it is important to understand the news retweet propagation from supernodes and predict news popularity quickly at the very first few seconds upon publishing. Such understanding and prediction will benefit many applications such as social media management, advertisement and interaction optimization between news medias and followers. In this paper, we identify the characteristics of news propagation from supernodes from the trace data we crawled from Twitter. Based on the characteristics, we build a news popularity prediction model that can predict the final number of retweets of a news tweet very quickly. Through trace-driven experiments, we then validate our prediction model by comparing our predicted popularity and real popularity, and show its superior performance in comparison with the regression prediction model. From the study, we found that the average interaction frequency between the retweeters and the news source is correlated with news popularity. Also, the negative sentiment of news has some correlations with retweet popularity while the positive sentiment of news does not have such obvious correlation.",
+    "pdf_parse": {
+        "paper_id": "j",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Twitter is not only a social network, but also an increasingly important news media. In Twitter, retweeting is the most important information propagation mechanism, and supernodes (news medias) that have many followers are the most important information sources. Therefore, it is important to understand the news retweet propagation from supernodes and predict news popularity quickly at the very first few seconds upon publishing. Such understanding and prediction will benefit many applications such as social media management, advertisement and interaction optimization between news medias and followers. In this paper, we identify the characteristics of news propagation from supernodes from the trace data we crawled from Twitter. Based on the characteristics, we build a news popularity prediction model that can predict the final number of retweets of a news tweet very quickly. Through trace-driven experiments, we then validate our prediction model by comparing our predicted popularity and real popularity, and show its superior performance in comparison with the regression prediction model. From the study, we found that the average interaction frequency between the retweeters and the news source is correlated with news popularity. Also, the negative sentiment of news has some correlations with retweet popularity while the positive sentiment of news does not have such obvious correlation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Predicting news popularity on Twitter is critically important from many aspects. There are many different news agencies on Twitter such as CNN and BBC. Each news agency publishes dozens of news tweets every day and it takes a long time to read all of them. Many of the news portal websites already have the mechanism to recommend the most popular news to users based on the pageviews. However, these recommendation mechanisms are based on the pageviews that have already occurred, so the recommendations are not timely, especially when we consider the time effectiveness of news. Also, it benefits advertisement. Since each news tweet is followed by a URL pointing to a web page, more popular news means more pageviews in the future and a higher value for advertisement. The news popularity prediction enables the companies to maximize revenue through differential pricing for access to contents with different popularity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Instead of obtaining followers by friendship, many supernodes in Twitter obtained many followers contributed by their influence. The most influential Twitter accounts belong to the news agencies. For example, CNNBRK has 8,867,029 followers on September 29th, 2012. 50 percent of the retweets are from supernodes (Shaomei, Jake, Winter, & Duncan, 2011) , while previous works paid little attention on it. Thus, in this work, we focus on the top news agencies accounts on Twitter. We study Twitter's news propagation characteristics, based on which, we develop a Twitter news popularity prediction model. Our work makes three main contributions: (1) We collected data from Twitter and analyzed the propagation characteristics of news from both macro-and micro-level perspectives. We propose an algorithm to find the parents of retweeters of a tweet, which are used to reconstruct retweet propagation topology. Here, the parents of retweeters of a tweet are the nodes which retweeters retweet the tweet from. For example, user A retweeted a tweet a generated by user B. User C is A's follower. C saw the tweet from A and then, retweeted the tweet A. Then A is the parent of C of tweet A. We study the distribution of retweets of a tweet over time. We also found that the tweet popularity is correlated with the interaction frequency between the retweeters and the supernode. Further, we discovered that the negative sentiment of news has some correlation with tweet popularity while the positive sentiment of news does not have such obvious correlation; (2) Based on our observed characteristics of retweets, we propose a news popularity prediction model based on news propagation process. The model can predict a news tweet's popularity based on the number of its retweets soon after being published. It can predict (i) the total number of retweets of a tweet only from a supernode, (ii) the number of retweets of a tweet at a certain time after it is published, (iii) the total number of retweets in a certain hop distance from a supernode, and (iv) the final total number of retweets; (3) We evaluated our popularity prediction model based on the real trace data from Twitter. We found our prediction model is accurate and its predicted results conform with the observed popularity, and it outperforms the regression prediction model in terms of prediction accuracy.",
+                "cite_spans": [
+                    {
+                        "start": 312,
+                        "end": 351,
+                        "text": "(Shaomei, Jake, Winter, & Duncan, 2011)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The rest of this paper is organized as follows. Section 2 briefly describes the related work. Section 3 describes our analysis on news propagation characteristics based on real trace. Section 4 presents the design of news popularity prediction model. Section 5 evaluates our model based on the real trace. Finally, Section 6 summarizes the paper with remarks on future work.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Previous study has shown that Twitter is not only a popular social network, but also a popular news media (Kwak, Lee, Park, & Moon, 2010) . Previous studies on information propagation on online social networks can be mainly classified to two categories: macro-level and micro-level.",
+                "cite_spans": [
+                    {
+                        "start": 106,
+                        "end": 137,
+                        "text": "(Kwak, Lee, Park, & Moon, 2010)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "2."
+            },
+            {
+                "text": "The works in the macro-level category mainly involve the information propagation model and the virus spreading model. Evans and Cheng (2009) measured the characteristics of twitters based on the data from the Sysomos business intelligence company. Cha, Kwak, Rodriguez, Ahn, and Moon (2007) and Cheng, Dale, and Liu (2007) measured the characteristics of YouTube videos. Leskovec, Backstrom, and Kleinberg (2009) developed a framework for tracking popular, short and distinctive phrases online. Wallsten (2008) found strong evidence that the relationship between variables (e.g., audience size, blog discussion) is multidirectional in influencing viral video popularity. Broxton, Interian, Vaver, and Wattenhofer (2011) studied the influence of social networks on the propagation of YouTube videos in different categories. Sakaki, Okazaki, and Matsuo (2010) considered each Twitter user as a sensor and used machine learning method to predict the location of an earthquake. Cha, Haddadi, Benevenuto, and Gummadi (2010) presented an indepth comparison of influence of three measures (indegree of users, retweets, and mentions) of Twitter users on information propagation. Jansen, Zhang, Sobel, and Chowdury (2009) reported research results investigating Twitter as a form of electronic information propagation platform for sharing consumer opinions concerning brands by analyzing more than 150,000 tweets containing branding comments, sentiments and opinions. Krishnamurthy, Gill, and Arlitt (2008) gathered and identified distinct classes of Twitter users and their behaviors, geographic growth patterns and current size of the network.",
+                "cite_spans": [
+                    {
+                        "start": 118,
+                        "end": 140,
+                        "text": "Evans and Cheng (2009)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 248,
+                        "end": 290,
+                        "text": "Cha, Kwak, Rodriguez, Ahn, and Moon (2007)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 295,
+                        "end": 322,
+                        "text": "Cheng, Dale, and Liu (2007)",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 371,
+                        "end": 412,
+                        "text": "Leskovec, Backstrom, and Kleinberg (2009)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 495,
+                        "end": 510,
+                        "text": "Wallsten (2008)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 671,
+                        "end": 719,
+                        "text": "Broxton, Interian, Vaver, and Wattenhofer (2011)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 823,
+                        "end": 857,
+                        "text": "Sakaki, Okazaki, and Matsuo (2010)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 974,
+                        "end": 1018,
+                        "text": "Cha, Haddadi, Benevenuto, and Gummadi (2010)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 1171,
+                        "end": 1212,
+                        "text": "Jansen, Zhang, Sobel, and Chowdury (2009)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 1459,
+                        "end": 1497,
+                        "text": "Krishnamurthy, Gill, and Arlitt (2008)",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "2."
+            },
+            {
+                "text": "Some previous works have discussed the information propagation mechanism from a micro-level. Zou, Towsley, and Gong (2004) provided an email virus propagation model. Weng, Flammini, Vespignani, and Menczer (2012) studied the competition of information diffusion of different tweets by building an agent-based model. Hodas and Lerman (2013) found that position of exposing messages on the user-interface strongly affects social contagion and used this observation to improve the prediction of the temporal dynamics of user behavior. Szabo and Huberman (2008) used Digg and YouTube to model the increasing of votes on and views of content to predict the dynamics of individual submissions from initial data. Lerman and Hogg (2010) and Lerman and Ghosh (2010) further improved the model to predict the popularity of news on Digg, which is most similar to our work. However, their study did not pay attention to the topology reconstruction and inference of network diffusion which we will study in our paper. Sun, Rosenn, Marlow, and Lento (2009) presented an analysis of information diffusion chains in Facebook. Gargi, Lu, Mirrokni, and Yoon (2011) studied large-scale community detection over a real-world graph composed of millions of YouTube videos. Bakshy, Hofman, Mason, and Watts (2011) reconstructed a cascade in Twitter and discussed the influence of users. Unlike these works that paid little attention on the media characteristics of an online social network and equally treat every piece of information, we particularly study the popularity of news from supernodes on Twitter.",
+                "cite_spans": [
+                    {
+                        "start": 93,
+                        "end": 122,
+                        "text": "Zou, Towsley, and Gong (2004)",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 166,
+                        "end": 212,
+                        "text": "Weng, Flammini, Vespignani, and Menczer (2012)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 316,
+                        "end": 339,
+                        "text": "Hodas and Lerman (2013)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 532,
+                        "end": 557,
+                        "text": "Szabo and Huberman (2008)",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 706,
+                        "end": 728,
+                        "text": "Lerman and Hogg (2010)",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 733,
+                        "end": 756,
+                        "text": "Lerman and Ghosh (2010)",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 1005,
+                        "end": 1042,
+                        "text": "Sun, Rosenn, Marlow, and Lento (2009)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 1110,
+                        "end": 1146,
+                        "text": "Gargi, Lu, Mirrokni, and Yoon (2011)",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 1251,
+                        "end": 1290,
+                        "text": "Bakshy, Hofman, Mason, and Watts (2011)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "2."
+            },
+            {
+                "text": "Most of the top news agencies such as CNN, BBC and New York Times have their own Twitter accounts and millions of followers. For example, CNN has several different kinds of Twitter accounts including CNN, CNN Breaking News, CNN Live and so on. After a user logs into Twitter, the user's timeline shows the new tweets since (s)he logged out last time, and then reminds the user the number of new tweets every 90 s on the top of the timeline. The update time is different from user to user since different users log in at different time. The user can click the top icon to obtain the new tweets. Fig. 1 shows a screenshot of a user's timeline from Twitter. The timeline includes both news from news agencies and non-news tweets from their friends. Each tweet indicates its initial publisher with its head-icon on the left. The tweets in a timeline are ordered by their publishing (i.e., creating) time. The more recent published tweet on the top of a timeline has the highest probability to be seen by users according to the normal behaviors of users.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 599,
+                        "end": 600,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Users can forward any tweets they received to their followers. This behavior is called retweeting. The tweets received by their followers are called retweets and this user is called the retweeter of this tweet. A user's followers can see the retweet's initial publisher by the head-icon and their parent retweeter. However, they cannot see the previous parent retweeters beyond their own parent retweeter.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "We collected our trace data with the Twitter API. Firstly, we manually identified 33 top news agencies with the most followers in Twitter as listed in Table 1 . A news agency's page in Twitter always shows related news agencies. Thus, we started from CNN and used breadth-first search to find almost all news agencies in Twitter and the numbers of their followers. Finally, we sorted the news agencies in descending order of the number of followers and selected the top 33. Then, we used Twitter stream API to trace their retweets immediately (i.e., catching the publishing time and retweeting time) and recorded the IDs of users who retweeted the news, news content, publishing time of the news and the retweeting time of the users. In this way, we collected our data from January 20th, 2012 to April 20th, 2012 and obtained about 10 4 pieces of original news and more than 10 6 retweets in which CNNBreaking (with 1071 tweets and more than 87,500 retweets) has the most tweets and retweets. Finally, we used Twitter REST API to retrieve the friends list and most recent 20 retweets of each user ID.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 157,
+                        "end": 158,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "To study the popularity of news from supernodes, we need to build the retweet propagation topology for a piece of news, where nodes are connected by retweeting paths. However, as mentioned previously, Twitter API does not provide the previous parent retweeters of a user's retweeter, so it is difficult to identify the entire retweeting path of a retweet.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "For example, in Fig. 2 , user D receives the news from user C. User C can receive the news from user A, from B, or from both. Then, it is difficult to determine whether the retweet that user D received from user C is originally from A or B. Thus, it is a challenge to determine where the retweet is from for each retweeter for each tweet in our trace. We then build the retweet propagation topology indirectly with two assumptions without the loss of generality listed below.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 21,
+                        "end": 22,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "1. A user retweets a piece of news only when (s)he sees the news at the first time. 2. There is a time delay between when a user sees a piece of news and when the news was created/published.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "The users that a user A follows are called user A's friends. For a given tweet, suppose V is a set of retweet nodes sorted by the retweeting time for a tweet, v 0 is the source node (i.e., supernode) of the news, F v i is the set of friends of v i and L v i is the set of retweet nodes retweeted before node v i . t v i is the time that v i retweeted the news since the publish time t 0 . We can get the values of all the aforementioned parameters from our crawled data. We use \u00c2 to denote the users' response delay, defined as the time elapsed after a user sees a tweet and before (s)he retweets the tweet. We assume that the retweeter of a user is the user's friend, which is true in most cases.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "In order to find the retweet topology relationship for the topology construction of a given tweet, for each retweeter v i for the tweet, we need to find v i 's parent retweeter in the topology that retweets to v i . Based on the above assumptions, we develop the following algorithm for this purpose:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "1. For each v i , if L v i F v i = \u2205",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": ", v i retweeted the news from v 0 because none of v i 's friends retweeted the news. Recall our trace data includes all retweeters for a tweet, by finding each retweeter's parent using this algorithm, we can finally construct the retweet propagation topology of this tweet. In this model, the user's response delay \u00c2 is the main factor that might lead to an imprecise topology since the users' response delay may change in a relatively large range due to various reasons. Since the latest retweeting happens much earlier than their children's retweeting time in most situations, \u00c2 is very relatively small and negligible. Therefore, this algorithm can help find precise retweeting path in most situations.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Based on the above algorithm, Fig. 3 plots news retweet propagation topologies of 4 randomly selected news tweets from the 400 news tweets from CNN. We can discover that the news spreads in a cascade model and only a small fraction of the news receivers tend to retweet the news. Most of the retweets are propagated to one hop and very few retweets are propagated through 3-4 hops. Also, some retweeters have many followers who retweet the news while most of the retweeters do not have any followers who retweet the news. For instance, in the fifth topology which is for the news \"Former Penn State football coach Joe Paterno has died\", besides the source node, the node with the most retweeting followers is Dr. Sanjay Gupta who is the CNN Chief Medical Correspondent. Since this news tweet is related to medical treatment and he is the opinion leader in this field, his followers may be more interested in his professional opinion on this tweet and like to retweet this tweet.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 35,
+                        "end": 36,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "In the retweeting paths from a supernode, we call retweeters m hop away from the supernode m-hop retweeters. Table 2 shows the fraction of retweets retweeted by l-hop retweeters (l = 1, 2, 3, > 3) of 8 news tweets. We can see from the statistic data that the number of retweets decreases exponentially (e.g., with a rate about 0.23 for tweet1).",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 115,
+                        "end": 116,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "The \"small-world\" principle in a normal social network indicates that a person can use only a few steps to reach any other person in a social network (Newman, Albert-L\u00e1szl\u00f3, & Duncan, 2006) . From Fig. 3 and Table 2 , we discover that rather than fanning out widely (i.e., reaching many people in very few steps) following this principle, the width of the news propagation from a supernode in Twitter decays exponentially as the propagation hop distance increases and most of the propagation branches end in three hops. This phenomenon indicates that only a very small fraction of the followers who received the news tend to retweet it.",
+                "cite_spans": [
+                    {
+                        "start": 150,
+                        "end": 189,
+                        "text": "(Newman, Albert-L\u00e1szl\u00f3, & Duncan, 2006)",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 202,
+                        "end": 203,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    },
+                    {
+                        "start": 214,
+                        "end": 215,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Fig. 4 shows the distribution of the percentage of the number of retweets generated in each hour over 24 h in a day. We can clearly observe that retweets are concentrated at noon and night, i.e., 7 am-12 am and 7 pm-11 pm. It indicates the retweeting time and hence the usual tweet viewing behavior habits of Twitter users. This observation makes sense since people tend to read news as when they are taking breaks at noon and after work.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 6,
+                        "text": "4",
+                        "ref_id": "FIGREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "When a tweet is published by a supernode, it accrues retweets from the followers of the supernode, and then accrues retweets from the followers of these first-hop retweeters, and so on. In order to analyze the retweeting behavior (i.e., popularity) over time explicitly, we group the retweets of a tweet into two groups: (1) the direct retweets from the followers of the supernode; and (2) the indirect retweets from the other retweeters in the propagation topology. Fig. 3 and Table 2 indicate that the second group contributes little to news popularity, thus we firstly focus on the first group.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 472,
+                        "end": 473,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    },
+                    {
+                        "start": 484,
+                        "end": 485,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Fig. 5 (a) shows the probability distributed function (PDF) of the number of retweets from direct followers of 4 randomly chosen tweets every second since the tweet is published. We can observe that there is a sharp increase at the very first beginning. We conjecture that this is because there is a delay after the news is published and before users see the news due to the 90 s update cycle of user timeline. Also we observed that the number of retweets of each tweet decreases exponentially after the sharp increase. Perhaps, this is because as the time goes on, the popularity and visibility (on the top of the timeline) of the news decrease and fewer people retweet it. We checked other randomly selected 8 tweets and found they also follow this phenomenon. In order to test whether it is an universal phenomenon, we chose 2231 news tweets; each having more than 200 retweets to measure the aggregate statistics. We find that the average time when the number of retweets reaches the top points is 87.31 s after publishing, which confirms our conjecture. Intuitively, the distribution of the number of retweets with the time may have two options: an exponential or power law distribution. In order to verify which option is correct, we draw Fig. 6 to see a real sample comparing with its most fitted exponential and power law distribution. As shown in Fig. 6 , the PDF and cumulative distributed function (CDF) of number of retweets is more fitted into an exponential distribution than a power law distribution obviously. Actually, if the number of retweets after 90 s follows a power law distribution, then the number of retweets will tend to be infinite as the time goes. As a fact, the older tweets tend to have larger number of retweets, which is not true, and the number of retweets tends to converge after a certain time. Therefore, we guess that the number of retweets does not follow a power law distribution. Furthermore, we used Kolmogorov-Smirnov test to verify whether the distribution of the number of retweets after 90 s follows an exponential distribution. The average Kolmogorov-Smirnov statistic for the 2231 news tweets is 0.0264. That is, the hypothesis that it follows exponential distribution has an approximate significance level of 0.2. Thus, it approximately satisfies exponential distribution.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 6,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    },
+                    {
+                        "start": 1250,
+                        "end": 1251,
+                        "text": "6",
+                        "ref_id": "FIGREF5"
+                    },
+                    {
+                        "start": 1361,
+                        "end": 1362,
+                        "text": "6",
+                        "ref_id": "FIGREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Fig. 5 (b) shows the cumulative distribution function (CDF) of the number of retweets from the direct followers of the randomly selected 12 tweets. As each tweet ages, the accumulation of new retweets slows down and saturates finally. We find that the number of retweets of each tweet tends to saturate after about 8000 s. We measured that over 95% of all the retweets in our dataset were created within 8000 s after their tweets are published. The life spans of different tweets of direct retweeters are similar, which confirms that it is mainly determined by the visibility (Lerman & Hogg, 2010) rather than the importance of the tweets. Users usually only view a number of tweets from the top of timelines. A tweet's visibility decreases over time as it moves towards the bottom of the timeline and new tweets occupy the top space.",
+                "cite_spans": [
+                    {
+                        "start": 576,
+                        "end": 597,
+                        "text": "(Lerman & Hogg, 2010)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 6,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "We then chose the four supernodes with the most retweets from our trace. For each supernode, we grouped all the original tweets based on the total number of each tweet's retweets 12 h after publishing. Fig. 7 shows the distribution of tweets based on this number of retweets. We see that the news popularity at 12 h after publishing varies widely from news to news. A handful of news become extremely popular, accumulating thousands of retweets, while most others obtain about hundreds of retweets. Taking CNNBRK as an example, about one third of tweets have 0-100 retweets, and around 34.7% of tweets have 100-400 retweets. A small percent of tweets have retweets more than 400 and 0.6% tweets have more than 1600 retweets. Such a distribution is characterized by \"inequality of popularity\". One reason for this characteristic is news contents. However, it is difficult to predict the news popularity based on new contents automatically given the wide inequality of popularity as shown in Fig. 7 . Fortunately, Fig. 5 shows similar twitting (i.e., popularity gaining) pattern for each news, which facilitates popularity prediction based on the popularity gained initially in a very short time after publishing. Granovetter (1973) indicated the strength of weak ties in information propagation, which can be used to define the strength of two nodes' relationship. Bakshy, Rosenn, Marlow, and Adamic (2012) found that weak ties are influential in the information propagation in Facebook. Next, we analyze the strength of weak ties on news propagation. The strength of ties can be measured in many different ways. We measured it by the interaction frequency between users and the news agency. Specifically, given a tweet from news source A, we get all users that retweeted the tweet. Then, for each of these users, we used the Twitter REST API to get the user's latest 20 retweets. The ratio of tweets created by source A in the 20 retweets is defined as the interaction frequency of the user with news source A for this tweet. The average interaction frequency of these users is defined as the interaction frequency of this tweet with news source A.",
+                "cite_spans": [
+                    {
+                        "start": 1212,
+                        "end": 1230,
+                        "text": "Granovetter (1973)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 1364,
+                        "end": 1405,
+                        "text": "Bakshy, Rosenn, Marlow, and Adamic (2012)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 207,
+                        "end": 208,
+                        "text": "7",
+                        "ref_id": "FIGREF6"
+                    },
+                    {
+                        "start": 995,
+                        "end": 996,
+                        "text": "7",
+                        "ref_id": "FIGREF6"
+                    },
+                    {
+                        "start": 1017,
+                        "end": 1018,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Fig. 8 plots the average final number of retweets of news tweets versus the interaction frequency of a tweet with the supernode. We see that the number of retweets decreases as the interaction frequency increases. The correlation between the interaction frequency and the final number of retweets is -0.21, which significantly deviates from zero. Thus, a tweet retweeted by users having low interaction frequency with the supernode tends to receive more retweets finally and hence gain higher popularity. Our conjecture of the reason of this observation is that the users with low interaction with a supernode tend to only retweet important news tweets from the supernode, while users with high interaction with the supernode tend to retweet every news tweets. Therefore, if the news tweet is retweeted by more users with low interaction with the news source, then it is a sign that the news tweet may be more important. Therefore, the news tweet may receive more retweets finally. Here, we define the two end nodes of a tie can be people or news sources. A weak tie denotes a tie that the two end nodes do not interact frequently. This result verifies the weak tie theory (Bakshy et al., 2012; Granovetter, 1973) that people tend to receive important information from weak ties rather than from strong ties.",
+                "cite_spans": [
+                    {
+                        "start": 1173,
+                        "end": 1194,
+                        "text": "(Bakshy et al., 2012;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 1195,
+                        "end": 1213,
+                        "text": "Granovetter, 1973)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 6,
+                        "text": "8",
+                        "ref_id": "FIGREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "We then show the distribution of the number of the followers of Twitter accounts. We got the data from Evans and Cheng ( 2009) that provides 11.5 million Twitter accounts collected during 2009. Fig. 9 shows the distribution of these Twitter accounts. We see that it follows power law distribution and that 93.6% of the users have less than 100 followers, while 98% of the users have less than 400 followers. Meanwhile, 1.35% of users have more 500 followers and only 0.68% of more than 1000 followers. This figure implies that a small percent of users are supernodes that own many followers. Non-supernodes constitute the majority users and they have similar number of followers. This observation helps us determine the average number of followers of non-supernodes needed in the prediction model.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 199,
+                        "end": 200,
+                        "text": "9",
+                        "ref_id": "FIGREF8"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Further, we analyze the relationship between the news sentiment and the popularity of news. We chose the AFINN (Pevzner & Tesler, 2011) sentiment database to calculate the sentiment of news on Twitter because AFINN was initially built to analyze Twitter sentiment. Each word in AFINN has a positive sentiment value which presents the positive sentiment or a negative sentiment value which presents the negative sentiment. We define the sentiment value of a tweet as the sum of all the values of the words in the tweet. We classified all tweets to two groups: group 1 contains all tweets with negative values and group 2 contains all tweets with positive values. We plot two figures to show the number of retweets versus the positive sentiment value of group 1 and versus the negative sentiment value of group 2, respectively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Fig. 10 (a) shows the average number of retweets of each group of tweets that have the same positive sentiment value. We see that there are no obvious relationship between news popularity and the positive sentiment value. Fig. 10(b) shows the average number of retweets of each group of tweets that have the same negative sentiment value. We observe that generally the average number of retweets decreases as the negative sentiment value increases. The correlation between negative sentiment value and the average retweets number is 0.38, which indicates that bad news tend to become more popular. For example, the news of \"Former Penn State football coach Joe Paterno has died, his family confirms. He was 85.\" has finally gained 2534 retweets.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 7,
+                        "text": "10",
+                        "ref_id": "FIGREF9"
+                    },
+                    {
+                        "start": 227,
+                        "end": 232,
+                        "text": "10(b)",
+                        "ref_id": "FIGREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Measurement and observation",
+                "sec_num": "3."
+            },
+            {
+                "text": "Though it is difficult to predict if and when an individual user will retweet a tweet, it is possible to find the retweeting probability of each tweet from many users and the retweeting time distribution (i.e., how many retweets occurs at each second). Based on our analysis in Section 3, we propose a general stochastic process-based approach to model user retweeting behavior from an aggregate of human activity and the Twitter user interface information (such as the news update rate and the arrangement of timelines). Our popularity prediction model mimics user retweeting behaviors from both micro-and macro-level perspectives:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Popularity prediction model",
+                "sec_num": "4."
+            },
+            {
+                "text": "1. Micro-level. It describes the tweet propagation model from a source node to its one-hop direct followers. This model can predict the total number of retweets only from the source node and the number of retweets at a certain time after being published. 2. Macro-level. It describes the cascade model of the whole network for retweet propagation so that we can understand the news propagation process from one node to other nodes, which helps predict the total number of retweets in a certain hop distance from a supernode and the final total number of retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Popularity prediction model",
+                "sec_num": "4."
+            },
+            {
+                "text": "Table 3 lists all notations we use in modeling.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Popularity prediction model",
+                "sec_num": "4."
+            },
+            {
+                "text": "Recall that in Fig. 5 (a), the number of retweets exhibits a sharp increase at the very beginning due to the timeline update cycle followed by an exponential distribution. This observation is different from many of the previous works (Changchun, Towsley, & Weibo, 2003; Liben-Nowell & Kleinberg, 2008 ) which observed that user response time follows an exponential distribution but neglects the initial peak.",
+                "cite_spans": [
+                    {
+                        "start": 234,
+                        "end": 269,
+                        "text": "(Changchun, Towsley, & Weibo, 2003;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 270,
+                        "end": 300,
+                        "text": "Liben-Nowell & Kleinberg, 2008",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 20,
+                        "end": 21,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Firstly, we consider the sharp increasing at the very beginning in Fig. 5(a) . Suppose the timeline update cycle is T, the creation time of the original news is t 0 . We use t 1 to denote the time spot when the news is received by a set of one-hop users and t 2 to denote a time spot after t 1 . Then, the probability that one user receives the update of the news at time spot t 1 after it is published follows uniform distribution:",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 72,
+                        "end": 76,
+                        "text": "5(a)",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "p(t 1 ) = 1 T , t 1 \u2208 [0, T)",
+                        "eq_num": "(1)"
+                    }
+                ],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "We use N to denote the number of currently online direct followers at time t 0 , and n r (t 1 ) to denote the number of direct followers who have received the update during the time period [t 0 , t 1 ], and Nn r (t 1 ) users received the update during the time period (t 1 , T].",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Then, n r (t 1 ) equals:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "n r (t 1 ) = \u23a7 \u23a8 \u23a9 t 1 N T , t 1 \u2208 [0, T) N, t 1 \u2208 [T, +\u221e)",
+                        "eq_num": "(2)"
+                    }
+                ],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "We define response time (denoted by T) as the time from receiving a tweet to reviewing the tweet. After a user receives an update, there exists a response time for the user to view the new update. From Fig. 5 (a), which reflects the users' response time distribution, we see if the [t 0 , t 1 ] is large enough, the response time distribution approximately follows an exponential distribution as discovered in Changchun et al. (2003) . Accordingly, we consider the user's response time as an exponential distribution with parameter as below: g(t; ) = e -t , t \u2265 0, 0, t < 0.",
+                "cite_spans": [
+                    {
+                        "start": 410,
+                        "end": 433,
+                        "text": "Changchun et al. (2003)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 207,
+                        "end": 208,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "(3)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "We get the fraction of the set of one-hop direct users who retweet the news during the time interval [t 1 , t 2 ] (denoted by f 2 (t 2 )) by cumulating Formula (3) from time t 1 to t 2 :",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "f 2 (t 2 ) = 1 -e -(t 2 -t 1 ) , t 2 \u2208 [t 1 , +\u221e)",
+                        "eq_num": "(4)"
+                    }
+                ],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Based on Formulas (1) and ( 3), we can obtain the total number of online followers who have viewed the news during the time interval [t 0 , t 2 ], denoted by n v (t 2 ). It is the product of the number of users that have received the tweet by t 1 (n r (t 1 )) and the probability that a receiver views (responds) to the tweet by t 2 (f 2 (t 2 )).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "n v (t 2 ) = \u23a7 \u23aa \u23aa \u23a8 \u23aa \u23aa \u23a9 t 2 0 p(t 1 )dt 1 t 2 t 1 g(t; )dt, t 2 \u2208 [0, T) T 0 p(t 1 )dt 1 t 2 t 1 g(t; )dt, t 2 \u2208 [T, +\u221e)",
+                        "eq_num": "(5)"
+                    }
+                ],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "In addition to the existing online direct users, we also need to consider the users that log in during [t 0 , t 2 ] in order to calculate the total number of direct users who have viewed a news tweet from a source node during [t 0 , t 2 ]. We call these users upcoming users. In our model, we consider that the retweeting behavior happens independently. This is reasonable because Twitter is a sparse social network (i.e., most of a node's friends and followers do not know each other) especially for the social network topologies of the supernodes. Unlike the social network topologies of normal users that connect with each other through friendship, most of a supernode's followers do not know each other and the retweeters beyond 1-hop distance are not indicated in the timelines. Thus, we could ignore the influence of a retweeter on his/her friends' retweeting behavior.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Suppose that the average number of users who log in per second equals n u . We use M(t 2 ) to denote the total number of direct retweets from one certain node. M(t 2 ) equals the sum of the retweets from existing online users and the retweets from the upcoming users. We use q to denote the average retweeting probability (the ratio of followers that retweet the tweet) of a certain news tweet. Since the upcoming users will check the news once they log in, the number of retweets of a newly received tweet can be calculated by q \u2022 n u t 2 . Finally, based on Formula (5), we get:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "M(t 2 ) = q \u2022 n v (t 2 ) + q \u2022 n u t 2 = \u23a7 \u23aa \u23aa \u23a8 \u23aa \u23aa \u23a9 q t 2 0 p(t 1 )dt 1 t 2 t 1 g(t; )dt + qn u t 2 , t 2 \u2208 [0, T) q T 0 p(t 1 )dt 1 t 2 t 1 g(t; )dt + qn u t 2 , t 2 \u2208 [T, +\u221e) (6)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "From Formula (6), we derive Formula (7) based on Formulas (2), (3), ( 4), (5).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "M(t2) = \u23a7 \u23a8 \u23a9 q(N - Nq(1 -e -t 2 (1 + t2)) T + nut2), t2 \u2208 [0, T) q(N - Ne -t 2 (e T -1) T + nut2), t 2 \u2208 [T, +\u221e) = qMt 2 (7)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "where",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "M t 2 = \u23a7 \u23aa \u23a8 \u23aa \u23a9 N - Nq(1 -e -t 2 (1 + t 2 )) T + n u t 2 , t 2 \u2208 [0, T) N - Ne -t 2 (e T -1) T + n u t 2 , t 2 \u2208 [T, +\u221e)",
+                        "eq_num": "(8)"
+                    }
+                ],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Predicting the number of retweets from a supernode (M s ). Based on Formula ( 7), then M s = M(t 2 \u2192 + \u221e) is the number of retweeters of the source node. The parameters of t 2 , q, T, N, , N and n u are needed in Formula (7). Recall that Fig. 5(b) shows that the number of retweets of each tweet tends to saturate after about 8000 s after publishing. We also verified this observation using all tweets in our trace data. Thus, we can use t 2 = 8000 when conducting M s prediction. q is determined based on the number of retweets until the Nth second after news publishing, that is, it is determined at the initial stage of propagation. T, N, , N and n u are determined offline based on trace data. In Section 4.3, we will introduce how to determine these parameters. Then, M s can be directly calculated based on Formula (7) at Nth second after news publishing. The prediction of M s also helps us estimate the final number of retweets of a news tweet in Section 4.2.",
+                "cite_spans": [
+                    {
+                        "start": 238,
+                        "end": 247,
+                        "text": "Fig. 5(b)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Predicting the number of retweets at a certain time after publishing. We can also use Formula ( 7) to predict the total number of retweets of a given tweet at each second after it is published. Below, we present the details for this prediction. At second 1 after the tweet is published, t 2 in Formula ( 7) equals 1. Using t 2 , q, N values and other parameters listed in Table 3 , we can calculate the number of retweets at second 1 using Formula (7), denoted by M 1 = M(t 2 = 1). As the tweet is retweeted in a cascading manner, we then recursively calculate the number of retweets generated at each subsequent second regarding the retweeting node as a root node. The number of retweets at second 2 equals M 2 = M 1 \u2022 M(t 2 = 1), the number of retweets at second 3 equals",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 378,
+                        "end": 379,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "M 3 = M 1 \u2022 M(t 2 = 2) + M 2 \u2022 M(t 2 = 1), the number of retweets at second i equals M i = M 1 \u2022 M(t 2 = i -1) + M 2 \u2022 M(t 2 = i -2) \u2022 \u2022 \u2022 M i-1 \u2022 M(t 2 = 1).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Micro-scope popularity prediction",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "In the previous section, we introduced a model to predict the number of retweets for a news tweet from a certain node. That is, the number of children of the node in the retweet propagation topology of the tweet. In this section, we present a model to predict the total number of retweets at each hop distance from the source node in the retweet propagation topology, and the total number of nodes in the retweet propagation topology (i.e., popularity).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "When a news tweet is retweeted by one node, all of its followers see the news. A retweeting tree consists of a supernode that initially creates a tweet and non-supernodes that receive the tweet and retweet it. The basic retweeting process from these non-supernodes is the same as the process from the supernode except that the numbers of followers of these non-supernodes are different from each other while the number of followers of the single supernode is fixed. Based on the observation from Fig. 9 , the retweeting probabilities of all nodes except the supernode's followers are stochastically the same considering the user aggregate retweet behavior from a macro-level. That is, given a set of the followers of a non-supernode, when the size of the sample from the set is large enough, the retweeting probabilities of the nodes in the sample are stochastically the same.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 501,
+                        "end": 502,
+                        "text": "9",
+                        "ref_id": "FIGREF8"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Based on the above analysis, we build a model to simulate the news retweet propagation with the assumptions below:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "1. The retweeting probabilities of all nodes except the supernode's followers are stochastically the same (denoted by p 1 ). 2. The number of the followers of a random user in the stochastic model equals the average number of followers per node in Twitter (denoted by N).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "In the previous work (Shaomei et al., 2011) , the authors measured that the average number of the followers of randomly sampled users is 34. We then directly set N = 34. Then, the propagation process for a news tweet published by a supernode is as below:",
+                "cite_spans": [
+                    {
+                        "start": 21,
+                        "end": 43,
+                        "text": "(Shaomei et al., 2011)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "1. A news tweet is published by a supernode. 2. The followers of the supernode receive the update and the news is retweeted with a certain probability. 3. The retweet behavior happened recursively as step 2 with a certain probability on the retweeters' followers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "We can deduct from the propagation process that the number of retweets from each hop tends to be a geometric progression based on the assumptions. We present the process of the deduction below. Recall that M s denotes the number of retweets from the supernode, and l \u2192 +\u221e be the number of hops that the tweet is retweeted. The final number of retweets M total equals:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "M total = M s + M s Np 1 + M s N 2 p 2 1 + \u2022 \u2022 \u2022 + M s N l-1 p l-1 1 = M s (1 -N l p l 1 ) 1 -Np 1 (9)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Assume that Np 1 is larger than 1, then M total tends to be infinite, which means it tends to approach the total number of nodes in Twitter. This is against our observation that the retweets of a tweet do not cover the entire Twitter social network. Therefore, Np 1 should be no larger than 1. In this case, the total number of retweets M total equals:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "M total = M s 1 -Np 1",
+                        "eq_num": "(10)"
+                    }
+                ],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "from which we derive",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "Np 1 = 1 - M s M total",
+                        "eq_num": "(11)"
+                    }
+                ],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Predicting the final number of retweets. Previously, we introduced M s prediction using Formula (7). Based on the observed data Np 1 from trace and N = 34, we can determine p 1 . For simplicity, we can use q as p 1 since both denote the retweeting probability of a node's followers. Then, based on Formula (10), we can calculate the total final number of retweets of a tweet M total at the initial stage of propagation.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Predicting the number of retweets in a certain hop distance from a supernode. From Formula (9), we can calculate the number of retweets at each hop distance from the supernode given N, p 1 and M s . The number of retweets at two-hop distance equals M s Np 1 , that at three-hop distance equals M s N 2 p 2 1 , and so on. This prediction method can be verified using the example of tweet 1 in Table 2 . Based on Formula (11), we get that Np 1 = 1 -77.1%. Then, based on Formula (9), the fraction of the number of retweets in two-hop distance equals 77.1% \u00d7 (1-77.1%) = 17.8%, the fraction of the number of retweets in three-hop distance equals 77.1% \u00d7 (1-77.1%) 2 = 3.7%, the fraction of the number of retweets in four-hop distance equals 77.1% \u00d7 (1-77.1%) 3 = 1.4% and so on. These prediction values match the real values in the first row of Table 2 , which verifies the rationality of our prediction model.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 398,
+                        "end": 399,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    },
+                    {
+                        "start": 848,
+                        "end": 849,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Macro-scope popularity prediction",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "In this section, we introduce how we determine the parameters needed in popularity prediction (q, T, N, , N, n u listed in the bottom part of Table 3 ). Fig. 4 shows that the retweeting activity of users varies over time. We then discuss the parameter N at different times, which can directly influence the retweeting activity. Since the number of online followers of a news agency cannot be obtained directly, we need to estimate it indirectly. We consider the followers of news agency are distributed among different communities (i.e., students, employers) uniformly in the Twitter social network since the news agencies have little obvious characteristics that attract particular communities. Therefore, we could use the distribution of the number of online users per hour in a day of all users on Twitter as the distribution of the number of online followers per hour in a day of a certain supernode. The former distribution can be approximated by the distribution of the average number of all tweets and retweets published per hour in a day in Twitter as shown in Fig. 11 . It is plotted based on data analysis results for a continually long time period from the Sysomos business intelligence company (Evans & Cheng, 2009) . Based on this distribution, we can calculate the number of online followers of a supernode at a certain time. For example, if the total number of a supernode's unique online followers in a day is N, then the number of its online followers at the hour 12 is N = r t N = 5%N, where r t denotes the fraction of all tweets and retweets at time T.",
+                "cite_spans": [
+                    {
+                        "start": 1206,
+                        "end": 1227,
+                        "text": "(Evans & Cheng, 2009)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 148,
+                        "end": 149,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    },
+                    {
+                        "start": 158,
+                        "end": 159,
+                        "text": "4",
+                        "ref_id": "FIGREF3"
+                    },
+                    {
+                        "start": 1074,
+                        "end": 1076,
+                        "text": "11",
+                        "ref_id": "FIGREF10"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "Next, we introduce the determination of q used in Formula (7). In order to more accurately determine q to optimize the prediction we estimate q by minimizing the root-mean-square-error (RMSE) difference between the number of retweets during the first N seconds and the predicted numbers. Based on Formula (7), this can be expressed by:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "min n i=1 [q \u2022 M i -x i ] 2 (12)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "where x i is the observed number of retweets until the ith second after news publishing. When the formula gets the minimum value, q equals:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "q = n i=1 (M i -x i ) n i=1 M 2 i (",
+                        "eq_num": "13"
+                    }
+                ],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "Based on Formula (13), to calculate the value of q, we need to calculate M i and x i at each second. x i can be directly retrieved from the initial stage of propagation. To calculate M i based on Formula (8), we need to know the other parameters of N, , n u listed in Table 3 . We can directly observe the parameter from the trace data. From Fig. 5 , we observed that the response time distribution matches an exponential distribution with a parameter . The mean of the distribution equals 1/ . Then, we calculated the mean of the response time of all tweets and finally get = 0.12.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 274,
+                        "end": 275,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    },
+                    {
+                        "start": 347,
+                        "end": 348,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "It is difficult to measure the number of total online followers at a certain hour (N) and the number of upcoming users (n u ), we adopted a machine learning method to determine the parameters based on prediction performance. Let us use t i to denote the publishing time of news i, then N = r t i N where r t i is determined by referring to Fig. 11 . Specifically, we use the parameters N and n u to form the following objective function: where m is the number of tweets published by a supernode in our trace data, M(r t i N, , n u ) and x i are the predicted and observed number of the retweets of news i, respectively. We use a gradient descent algorithm to solve the optimization problem in Formula ( 14). The algorithm loops over all the observations and updates the parameters and finally finds the optimal values of N and n u that achieve the objective. In a nutshell, T, N, , N, n u are determined offline. After a very short time since news publishing, q is determined using Formula (13). Then, using all these parameters, we can conduct news popularity prediction.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 345,
+                        "end": 347,
+                        "text": "11",
+                        "ref_id": "FIGREF10"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "min m i=1 [M(r t i N, , n u ) -x i ] 2 ,",
+                        "eq_num": "(14)"
+                    }
+                ],
+                "section": "Parameter determination",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "Based on our prediction model introduced in Section 4, parameter q is needed to simulate the retweeting process of a tweet. We use the retweet trace of the first 100 second of each tweet to estimate q of each tweet based on Formula (13). We then use the method introduced in Section 4.1 to predict the number of generated retweets in each second after a tweet's publishing. In the test, we assume p 1 has the same value as q for simplicity. In fact, the direct retweet probability from the followers of the source (q) should be different from the indirected retweet probability (p 1 ) since the followers of the initial author should be more interested in the retweets from the author. Calculating p 1 offline before prediction would improve the prediction accuracy in our presented prediction results below.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Model-based prediction",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "Fig. 12 shows the PDF and CDF of the observed and predicted number of retweets of randomly chosen 2 tweets from the 12 tweets in Fig. 5 (b) at each second over time. Both figures show that the predicted results are consistent with the observed actual results. This result verifies that our prediction model can accurately predict the popularity of the tweet over time and our previous assumptions are reasonable.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 5,
+                        "end": 7,
+                        "text": "12",
+                        "ref_id": "FIGREF11"
+                    },
+                    {
+                        "start": 134,
+                        "end": 135,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Model-based prediction",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "Next, we verify the correctness of the prediction on the final number of retweets of a tweet. We use the method introduced in Section 4.2 for this prediction. Fig. 13 shows the predicted results and observed results for all news published by 4 news agencies in Fig. 7 . We measured that the predicted number of retweets have around 89% correlation with the observed numbers of retweets. Table 4 shows the correlation between prediction and observation and the slopes of the best fit lines shown in Fig. 13 for the 33 Section 4.3 introduced a method to determine the value of q. Using popularity observation from a longer time since news publishing will lead to more accurate estimation of q but longer delay, and vice versa. A more accurate estimation of q in turn leads to more accurate prediction of news popularity. We then test the effects of the length of time period used to determine q on the final prediction correlation with the observed data. Once a tweet is published, we used the observed data from the first 100 s, 200 s and so on until 2000 s to conduction prediction. We conducted prediction on all news of CNNBRK, and then calculate the prediction correlation with the observed data. The results are reported in Fig. 14 . The figure shows that the observations from a longer time period for q prediction lead to prediction correlation closer to 1, as more information generates more accurate q prediction. Thus, we should balance the prediction accuracy and the delay in prediction in order to guarantee the timely and precise prediction.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 164,
+                        "end": 166,
+                        "text": "13",
+                        "ref_id": "FIGREF12"
+                    },
+                    {
+                        "start": 266,
+                        "end": 267,
+                        "text": "7",
+                        "ref_id": "FIGREF6"
+                    },
+                    {
+                        "start": 393,
+                        "end": 394,
+                        "text": "4",
+                        "ref_id": "TABREF3"
+                    },
+                    {
+                        "start": 503,
+                        "end": 505,
+                        "text": "13",
+                        "ref_id": "FIGREF12"
+                    },
+                    {
+                        "start": 1233,
+                        "end": 1235,
+                        "text": "14",
+                        "ref_id": "FIGREF13"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Model-based prediction",
+                "sec_num": "5.1."
+            },
+            {
+                "text": "Based on the previous analysis in Fig. 5 , it can be clearly observed that the number of retweets tends to decrease to zero over time, and the decreasing tendency approximately fits an exponential distribution (Changchun et al., 2003; Liben-Nowell & Kleinberg, 2008) . Therefore, we choose exponential regression prediction model and use its standard exponential regression function for popularity prediction:",
+                "cite_spans": [
+                    {
+                        "start": 210,
+                        "end": 234,
+                        "text": "(Changchun et al., 2003;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 235,
+                        "end": 266,
+                        "text": "Liben-Nowell & Kleinberg, 2008)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 39,
+                        "end": 40,
+                        "text": "5",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparison to regression prediction model",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "y = ae bt (",
+                        "eq_num": "15"
+                    }
+                ],
+                "section": "Comparison to regression prediction model",
+                "sec_num": "5.2."
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Comparison to regression prediction model",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "where t denotes the time period since the news is published, y denotes the number of retweets generated during time (t -1, t), and A and B are the regression parameters. We determine the parameters of A and B using the retweet data during 200 s after publishing, and then use the regression prediction model to predict the final number of retweets of each news tweet. We use time period twice longer for parameter estimation than in our model because the retweeting peak in the first 90 s does not satisfy an exponential distribution and we need a longer time period to more accurately determine the parameters. Table 4 shows the comparison results of our prediction model and the regression model, where S m2 and C m2 denote the slope and correlation of the regression model, respectively. We see that S m1 and C m1 are much closer to 1 than S m2 and C m2 , respectively. The average correlation and average slope of the regression model are 0.7400 and 0.6206, which are much lower than those of our model (0.9420 and 0.8613). These results show that our model predicts news Twitter popularity more accurately than the regression model, even though it only uses half time to determine the parameters.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 618,
+                        "end": 619,
+                        "text": "4",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Comparison to regression prediction model",
+                "sec_num": "5.2."
+            },
+            {
+                "text": "We selected ten news tweets with the biggest prediction errors in our trace data and calculated their retweeting rate distributions. We noticed that the retweeting rate decreases over time. Fig. 15 shows the retweet rate distribution of one see that the retweeting rate decreases sharply during a short time after news publishing, which is abnormal. This may be caused by the reason that our model does not consider the decreasing visibility caused If tweet B is the subsequent tweet after tweet A, and B appears x time period after tweet A's appearance, we call x as tweet A's time interval before its subsequent tweet. We found that the average time interval between the publishing time of these ten news tweets and their subsequent news is 43 min, which is much shorter than our observed average time interval (i.e., 114 min) between the publishing time of news. Also, we noticed that their retweeting rate decreases sharply after their subsequent news was published. The early appearance of the subsequent tweets should be the reason for the retweeting rate decrease. We then analyze the real trace to verify our conjecture. We classified the 400 tweets based on their time interval before subsequent tweets and then calculated the average number of final retweets of each group. Fig. 16 shows the average number of final retweets of each group versus each group's time interval before the subsequent news publishing. We see that the average final number of retweets increases as the time interval increases. The result illustrates that followers tend to retweet the latest published news. This result verifies our conjecture that the time interval before the subsequent news publishing affects the final number of retweets and retweeting rate of a tweet. In our future work, we will consider the decreasing visibility of tweets over time into our prediction model.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 195,
+                        "end": 197,
+                        "text": "15",
+                        "ref_id": "FIGREF14"
+                    },
+                    {
+                        "start": 1289,
+                        "end": 1291,
+                        "text": "16",
+                        "ref_id": "FIGREF15"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Outliers analysis",
+                "sec_num": "5.3."
+            },
+            {
+                "text": "Twitter is not only an online social network, but also an increasingly important news media. Retweeting is a most important information propagation mechanism on Twitter. Supernodes are critical information source on Twitter. Therefore, understanding the news retweeting propagation from supernodes is very important for many purposes such as information management, advertisement, and social media management. In this paper, we first measured the news propagation characteristics on supernodes. Based on the characteristics, we built a news tweet popularity prediction model from both stochastic micro-level and macro-level perspectives. It can predict the total number of retweets of a tweet (i) only from a supernode, (ii) at a certain time after it is published, (iii) in a certain hop distance from a supernode, and (iv) when it saturates finally. Our trace-driven experimental results verify the high prediction accuracy of our prediction model and its superior performance in comparison with a regression prediction model. In addition, we also show the reasons for outliers in prediction. In the future, we will incorporate the news visibility consideration into the prediction model, and explore a method to more quickly estimate p 1 . Also, we will evaluate and consider the influence of different factors (e.g., the time in a day, interval between tweets, sentiment, tweet length) on the tweet popularity, and analyze the retweet robot behaviors.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6."
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This research was supported in part by U.S. NSF grants NSF-1404981, IIS-1354123, CNS-1254006, CNS-1249603, Microsoft Research Faculty Fellowship 8300751. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgements",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Everyone's an influencer: Quantifying influence on Twitter",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Bakshy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Hofman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Mason",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Watts",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proc. of WSDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bakshy, E., Hofman, J. M., Mason, W. A., & Watts, D. J. (2011). Everyone's an influencer: Quantifying influence on Twitter. In Proc. of WSDM.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "The role of social networks in information diffusion",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Bakshy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Rosenn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Marlow",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Adamic",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proc. of WWW",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bakshy, E., Rosenn, I., Marlow, C., & Adamic, L. (2012). The role of social networks in information diffusion. In Proc. of WWW. ACM.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Catching a viral video",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Broxton",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Interian",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Vaver",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Wattenhofer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "JIIS",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Broxton, T., Interian, Y., Vaver, J., & Wattenhofer, M. (2011). Catching a viral video. JIIS.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Measuring user influence in Twitter: The million follower fallacy",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Cha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Haddadi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Benevenuto",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Gummadi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proc. of AAAI",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cha, M., Haddadi, H., Benevenuto, F., & Gummadi, K. P. (2010). Measuring user influ- ence in Twitter: The million follower fallacy. In Proc. of AAAI.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "I tube, you tube, everybody tubes: Analyzing the world's larges user generated content video system",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Cha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Kwak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Rodriguez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Ahn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Moon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Proc. of IMC",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cha, M., Kwak, H., Rodriguez, P., Ahn, Y., & Moon, S. B. (2007). I tube, you tube, everybody tubes: Analyzing the world's larges user generated content video system. In Proc. of IMC.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Email virus propagation modeling and analysis",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Changchun",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Towsley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Weibo",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Changchun, Z., Towsley, D., & Weibo, G. (2003). Email virus propagation modeling and analysis. Technical report TR-CSE-03-04.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Understanding the characteristics of internet short video sharing: YouTube as a case study",
+                "authors": [
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Dale",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Proc. of SIGCOMM Conference on Internet Measurement",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cheng, X., Dale, C., & Liu, J. (2007). Understanding the characteristics of internet short video sharing: YouTube as a case study. In Proc. of SIGCOMM Conference on Internet Measurement (p. 28).",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "An in-depth look inside the Twitter world",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Evans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Evans, M., & Cheng, A. (2009). An in-depth look inside the Twitter world. Sysmos.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Large-scale community detection on YouTube for Topic Discovery and Exploration",
+                "authors": [
+                    {
+                        "first": "U",
+                        "middle": [],
+                        "last": "Gargi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Lu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Mirrokni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Yoon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proc. of AAAI Conference on Weblogs and Social Media",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gargi, U., Lu, W., Mirrokni, V., & Yoon, S. (2011). Large-scale community detection on YouTube for Topic Discovery and Exploration. In Proc. of AAAI Conference on Weblogs and Social Media.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "The strength of weak ties",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Granovetter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1973,
+                "venue": "The American Journal of Sociology",
+                "volume": "78",
+                "issue": "6",
+                "pages": "1360--1380",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Granovetter, M. S. (1973). The strength of weak ties. The American Journal of Sociology, 78(6), 1360-1380.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "The simple rules of social contagion",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [
+                            "O"
+                        ],
+                        "last": "Hodas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Lerman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hodas, N. O., & Lerman, K. (2013). The simple rules of social contagion. CoRR., abs/1308.5015.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Twitter power: Tweets as electronic word of mouth",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Jansen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sobel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Chowdury",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Journal of the American Society for Information Science and Technology",
+                "volume": "60",
+                "issue": "11",
+                "pages": "2169--2188",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jansen, B. J., Zhang, M., Sobel, K., & Chowdury, A. (2009). Twitter power: Tweets as electronic word of mouth. Journal of the American Society for Information Science and Technology, 60(11), 2169-2188.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "A few chirps about Twitter",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Krishnamurthy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Gill",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Arlitt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "WOSP'08: Proceedings of the first workshop on online social networks",
+                "volume": "",
+                "issue": "",
+                "pages": "19--24",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Krishnamurthy, B., Gill, P., & Arlitt, M. (2008). A few chirps about Twitter. In WOSP'08: Proceedings of the first workshop on online social networks (pp. 19-24). ACM.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "What is Twitter, a social network or a news media?",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Kwak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Moon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proc. of WWW",
+                "volume": "",
+                "issue": "",
+                "pages": "591--600",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kwak, H., Lee, C., Park, H., & Moon, S. (2010). What is Twitter, a social network or a news media? In Proc. of WWW (pp. 591-600). ACM.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Information contagion: An empirical study of the spread of news on Digg and Twitter social networks",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Lerman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Ghosh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lerman, K., & Ghosh, R. (2010). Information contagion: An empirical study of the spread of news on Digg and Twitter social networks. CoRR., abs/1003.2664.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Using a model of social dynamics to predict popularity of news",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Lerman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Hogg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lerman, K., & Hogg, T. (2010). Using a model of social dynamics to predict popularity of news. CoRR., abs/1004.5354.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Meme-tracking and the dynamics of the news cycle",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Leskovec",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Backstrom",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kleinberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proc. of KDD",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Leskovec, J., Backstrom, L., & Kleinberg, J. (2009). Meme-tracking and the dynamics of the news cycle. In Proc. of KDD.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Tracing information flow on a global scale using internet chain-letter data",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Liben-Nowell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kleinberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "PNAS",
+                "volume": "105",
+                "issue": "12",
+                "pages": "4633--4638",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Liben-Nowell, D., & Kleinberg, J. (2008). Tracing information flow on a global scale using internet chain-letter data. PNAS, 105(12), 4633-4638.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "The structure and dynamics of networks",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Newman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Albert-L\u00e1szl\u00f3",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Duncan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Newman, M., Albert-L\u00e1szl\u00f3, B., & Duncan, J. W. (2006). The structure and dynamics of networks. NJ: Princeton University Press.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "AFFIN. Informatics and Mathematical Modelling",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Pevzner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Tesler",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pevzner, P., & Tesler, G. (2011). AFFIN. Informatics and Mathematical Modelling.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Earthquake shakes Twitter users: Real-time event detection by social sensors",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Sakaki",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Okazaki",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Matsuo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Acm",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Shaomei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Jake",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Winter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Duncan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proc. of WWW",
+                "volume": "",
+                "issue": "",
+                "pages": "705--714",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sakaki, T., Okazaki, M., & Matsuo, Y. (2010). Earthquake shakes Twitter users: Real-time event detection by social sensors. In Proc. of WWW (pp. 851-860). ACM. Shaomei, W., Jake, M. H., Winter, A. M., & Duncan, J. W. (2011). Who says what to whom on Twitter. In Proc. of WWW (pp. 705-714). ACM.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Gesundheit! Modeling contagion through Facebook news feed",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Sun",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Rosenn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Marlow",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Lento",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Proc. of ISWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sun, E., Rosenn, I., Marlow, C., & Lento, T. (2009). Gesundheit! Modeling contagion through Facebook news feed. In Proc. of ISWSM.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Predicting the popularity of online content",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Szabo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Huberman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Szabo, G., & Huberman, B. A. (2008). Predicting the popularity of online content. CoRR., abs/0811.0405.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Yes we can: How online viewership, blog discussion and mainstream media coverage produced a viral video phenomenon",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Wallsten",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Presented to the annual meeting of the American Political Science Association",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wallsten, K. (2008). Yes we can: How online viewership, blog discussion and main- stream media coverage produced a viral video phenomenon. In Presented to the annual meeting of the American Political Science Association Boston, MA.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Competition among memes in a world with limited attention",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Weng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Flammini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Vespignani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Menczer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Scientific Reports",
+                "volume": "2",
+                "issue": "335",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Weng, L., Flammini, A., Vespignani, A., & Menczer, F. (2012). Competi- tion among memes in a world with limited attention. Scientific Reports, 2(335).",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Email virus propagation modeling and analysis",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Zou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Towsley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Gong",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zou, C. C., Towsley, D., & Gong, W. (2004). Email virus propagation modeling and analysis. Technical report.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": "1",
+                "num": null,
+                "text": "Fig. 1. Screenshot of a user's timeline.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "fig_num": "2",
+                "num": null,
+                "text": "Fig. 2. Retweeting paths.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF2": {
+                "fig_num": "3",
+                "num": null,
+                "text": "Fig. 3. Retweet propagation topologies for different tweets.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF3": {
+                "fig_num": "4",
+                "num": null,
+                "text": "Fig. 4. Distribution of retweets in 24 h.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF4": {
+                "fig_num": "5",
+                "num": null,
+                "text": "Fig. 5. PDF and CDF of the number of retweets after news publishing.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF5": {
+                "fig_num": "6",
+                "num": null,
+                "text": "Fig. 6. The real sample comparing with exponential and power law.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF6": {
+                "fig_num": "7",
+                "num": null,
+                "text": "Fig. 7. Retweeting rate distribution after news publishing of 4 news agencies.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF7": {
+                "fig_num": "8",
+                "num": null,
+                "text": "Fig. 8. Number of retweets versus interaction frequency.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF8": {
+                "fig_num": "9",
+                "num": null,
+                "text": "Fig. 9. Distribution of the number of users' followers.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF9": {
+                "fig_num": "10",
+                "num": null,
+                "text": "Fig. 10. Relationship between sentiment and final number of retweets (i.e., popularity).",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF10": {
+                "fig_num": "11",
+                "num": null,
+                "text": "Fig. 11. Tweet activity percentage by hour.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF11": {
+                "fig_num": "12",
+                "num": null,
+                "text": "Fig. 12. The consistency between the predicted number of retweets and the actual number of retweets.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF12": {
+                "fig_num": "13",
+                "num": null,
+                "text": "Fig. 13. The prediction of 4 news agencies with most retweets.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF13": {
+                "fig_num": "14",
+                "num": null,
+                "text": "Fig. 14. Time used estimate q versus prediction correlation.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF14": {
+                "fig_num": "15",
+                "num": null,
+                "text": "Fig. 15. The retweeting rate of an outlier.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF15": {
+                "fig_num": "16",
+                "num": null,
+                "text": "Fig. 16. Popularity versus publishing",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "num": null,
+                "content": "<table><tr><td>BBCBreaking</td><td>BreakingNews</td><td>nytimes</td></tr><tr><td>NationNow</td><td>thenation</td><td>ABC</td></tr><tr><td>TIME</td><td>BBCWorld</td><td>HuffingtonPost</td></tr><tr><td>Reuters</td><td>AP</td><td>WSJ</td></tr><tr><td>latimes</td><td>politico</td><td>NewYorker</td></tr><tr><td>USATODAY</td><td>AmericanExpress</td><td>GMA</td></tr><tr><td>AJEnglish</td><td>NBCNews</td><td>NewsHour</td></tr><tr><td>Guardiannews</td><td>usnews</td><td>Slate</td></tr><tr><td>759251</td><td>nytimesgloba</td><td>CBSNewsl</td></tr><tr><td>msnbcl</td><td>washingtonpost</td><td>thedailybeast</td></tr><tr><td>428333</td><td>cnni</td><td>FoxNews</td></tr></table>",
+                "html": null,
+                "text": "News agencies in our trace data.",
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "num": null,
+                "content": "<table><tr><td colspan=\"2\">Distance in hops</td><td>1</td><td>2</td><td>3</td><td>&gt; 3</td></tr><tr><td>tweet1</td><td/><td>77.1%</td><td>17.8%</td><td/><td>3.7%</td><td>1.4%</td></tr><tr><td>tweet2</td><td/><td>94.1%</td><td>4.5%</td><td/><td>0.1%</td><td>0%</td></tr><tr><td>tweet3</td><td/><td>98.3%</td><td>1.6%</td><td/><td>0%</td><td>0.1%</td></tr><tr><td>tweet4</td><td/><td>90.5%</td><td>11.8%</td><td/><td>1.7%</td><td>6%</td></tr><tr><td>tweet5</td><td/><td>96.2%</td><td>3.1%</td><td/><td>0%</td><td>0.7%</td></tr><tr><td>tweet6</td><td/><td>87.1%</td><td>10.6%</td><td/><td>1.1%</td><td>1.1%</td></tr><tr><td>tweet7</td><td/><td>94.7%</td><td>4.9%</td><td/><td>0.3%</td><td>0.1%</td></tr><tr><td>tweet8</td><td/><td>89.7%</td><td>8.9%</td><td/><td>0.8%</td><td>0.6%</td></tr><tr><td>2. If L v i</td><td colspan=\"3\">F v i / = \u2205, we sort the subset L v i</td><td>F v i</td><td>v 0 by retweeting</td></tr><tr><td colspan=\"6\">time and select the node with the latest retweeting time that is</td></tr><tr><td colspan=\"5\">smaller than t v i -\u00c2 as the parent of node v i .</td></tr></table>",
+                "html": null,
+                "text": "Fraction of the # of retweets at each hop distance.",
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "num": null,
+                "content": "<table><tr><td/><td>Meaning</td></tr><tr><td>t0</td><td>The creation time of the original news</td></tr><tr><td>t1</td><td>The time when some one-hop followers receive news</td></tr><tr><td>t2</td><td>A time spot after t1</td></tr><tr><td>nr(t1)</td><td># of direct followers receiving update during [t0, t1]</td></tr><tr><td>nv(t2)</td><td># of online followers viewed the news during [t0, t2]</td></tr><tr><td>f2(t2)</td><td>Fraction of one-hop retweeters during [t1, t2]</td></tr><tr><td>M(t2)</td><td>Total # of direct retweets from a certain node</td></tr><tr><td>p1</td><td>Retweeting probability of non-supernodes' followers</td></tr><tr><td>l</td><td># of hops that a tweet is retweeted</td></tr><tr><td>Ms</td><td># of retweets from a supernode</td></tr><tr><td>M total</td><td>Final # of retweets (i.e., popularity)</td></tr><tr><td>N</td><td>Total # of online followers of a supernode in a day</td></tr><tr><td/><td>Parameters in Eq. (8)</td></tr><tr><td>q</td><td>Retweeting probability of supernodes' followers</td></tr><tr><td>T = 90 s</td><td>Tweet update cycle in timelines</td></tr><tr><td>N = 34</td><td>The average number of followers of a user</td></tr><tr><td>N</td><td># of a supernode's online followers at a certain time</td></tr><tr><td/><td>A parameter in the distribution of user response time</td></tr><tr><td>nu</td><td>Average # of upcoming users per second</td></tr></table>",
+                "html": null,
+                "text": "Parameters used in modeling.",
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "num": null,
+                "content": "<table><tr><td>News medias</td><td>Sm1</td><td>Cm1</td><td>Sm2</td><td>Cm2</td></tr><tr><td>BBCBreaking</td><td>0.9143</td><td>0.9711</td><td>0.6415</td><td>0.7439</td></tr><tr><td>BreakingNews</td><td>0.8977</td><td>0.9641</td><td>0.5937</td><td>0.7223</td></tr><tr><td>nytimes</td><td>0.8721</td><td>0.9377</td><td>0.6371</td><td>0.6975</td></tr><tr><td>NationNow</td><td>0.9605</td><td>0.9713</td><td>0.5820</td><td>0.7064</td></tr><tr><td>thenation</td><td>0.8276</td><td>0.9440</td><td>0.6161</td><td>0.7501</td></tr><tr><td>ABC</td><td>0.8572</td><td>0.9227</td><td>0.5950</td><td>0.6982</td></tr><tr><td>TIME</td><td>0.9040</td><td>0.9512</td><td>0.5811</td><td>0.9805</td></tr><tr><td>BBCWorld</td><td>0.8939</td><td>0.9737</td><td>0.6412</td><td>0.7744</td></tr><tr><td>HuffingtonPost</td><td>0.7441</td><td>0.9427</td><td>0.6113</td><td>0.6802</td></tr><tr><td>Reuters</td><td>0.8280</td><td>0.9766</td><td>0.5607</td><td>0.7162</td></tr><tr><td>AP</td><td>0.9422</td><td>0.9586</td><td>0.5975</td><td>0.7139</td></tr><tr><td>WSJ</td><td>0.9318</td><td>0.9309</td><td>0.6779</td><td>0.7338</td></tr><tr><td>latimes</td><td>0.8516</td><td>0.9145</td><td>0.5607</td><td>0.7184</td></tr><tr><td>politico</td><td>0.9196</td><td>0.9273</td><td>0.6517</td><td>0.6990</td></tr><tr><td>New Yorker</td><td>0.8684</td><td>0.9793</td><td>0.5674</td><td>0.6837</td></tr><tr><td>USATODAY</td><td>0.9054</td><td>0.9481</td><td>0.6312</td><td>0.7328</td></tr><tr><td>AmericanExpress</td><td>0.8277</td><td>0.9051</td><td>0.5929</td><td>0.6564</td></tr><tr><td>GMA</td><td>0.8313</td><td>0.9619</td><td>0.6024</td><td>0.6993</td></tr><tr><td>AJEnglish</td><td>0.8493</td><td>0.9718</td><td>0.7155</td><td>0.8986</td></tr><tr><td>NBCNews</td><td>0.7522</td><td>0.8728</td><td>0.5552</td><td>0.7188</td></tr><tr><td>NewsHour</td><td>0.7325</td><td>0.9167</td><td>0.5744</td><td>0.7434</td></tr><tr><td>Guardiannews</td><td>0.8521</td><td>0.9795</td><td>0.8359</td><td>0.8987</td></tr><tr><td>usnews</td><td>0.8981</td><td>0.9756</td><td>0.6046</td><td>0.7020</td></tr><tr><td>Slate</td><td>0.7747</td><td>0.9194</td><td>0.6275</td><td>0.7505</td></tr><tr><td>CNN</td><td>0.9127</td><td>0.9753</td><td>0.5886</td><td>0.6991</td></tr><tr><td>nytimesglobal</td><td>0.9150</td><td>0.9645</td><td>0.6272</td><td>0.7252</td></tr><tr><td>CBSNewsl</td><td>0.8864</td><td>0.9562</td><td>0.6027</td><td>0.7124</td></tr><tr><td>msnbc</td><td>0.6552</td><td>0.8070</td><td>0.5646</td><td>0.6788</td></tr><tr><td>washingtonpost</td><td>0.8643</td><td>0.9530</td><td>0.6250</td><td>0.7397</td></tr><tr><td>thedailybeast</td><td>0.9416</td><td>0.9209</td><td>0.8111</td><td>0.9334</td></tr><tr><td>cnnbrk</td><td>0.9106</td><td>0.9735</td><td>0.5858</td><td>0.6633</td></tr><tr><td>cnni</td><td>0.8730</td><td>0.8649</td><td>0.6324</td><td>0.7477</td></tr><tr><td>FoxNews</td><td>0.8285</td><td>0.9533</td><td>0.5902</td><td>0.7030</td></tr><tr><td>Average</td><td>0.8613</td><td>0.9419</td><td>0.6206</td><td>0.7400</td></tr><tr><td colspan=\"5\">news medias in our dataset. S m1 denotes the slope and C m1 denotes</td></tr><tr><td colspan=\"5\">the correlation of our prediction model. Both correlation and slope</td></tr><tr><td colspan=\"5\">reflect the prediction accuracy and range from -1 to 1. A value</td></tr><tr><td colspan=\"5\">closer to 1 means a higher prediction accuracy. We see that both</td></tr><tr><td colspan=\"5\">C m1 and S m1 values are very close to 1, with the average values</td></tr><tr><td colspan=\"5\">equal to 0.9420 and 0.8613, respectively. The results indicate that</td></tr><tr><td colspan=\"5\">our prediction model can use the very early popularity observa-</td></tr><tr><td colspan=\"5\">tions to provide an approximately accurate prediction of the final</td></tr><tr><td colspan=\"3\">number of retweets for a news tweet.</td><td/><td/></tr></table>",
+                "html": null,
+                "text": "Comparison of the two prediction models.",
+                "type_str": "table"
+            }
+        }
+    }
+}

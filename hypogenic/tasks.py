@@ -21,6 +21,7 @@ class BaseTask(ABC):
         config_path: str,
         extract_label: Union[Callable[[str], str], None] = None,
         from_register: Union[Register, None] = None,
+        use_ood: bool = False,
     ):
         if from_register is None and extract_label is None:
             raise ValueError("Either from_register or extract_label should be provided")
@@ -42,8 +43,9 @@ class BaseTask(ABC):
         self.test_data_path = data["test_data_path"]
         self.val_data_path = data["val_data_path"]
 
-        if "ood_test_data_path" in data:
-            self.ood_test_data_path = data["ood_test_data_path"]
+        if use_ood:
+            self.test_data_path = data["ood_data_path"]
+            self.val_data_path = data["ood_data_path"]
 
         # getting omrpt templates from yaml file
         self.prompt_template = data["prompt_templates"]

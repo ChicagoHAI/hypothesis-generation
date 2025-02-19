@@ -1,0 +1,3113 @@
+{
+    "paper_id": "Retweet_Wars_Tweet_Popularity_Prediction_via_Dynamic_Multimodal_Regression",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-02T20:48:38.254422Z"
+    },
+    "title": "Retweet Wars: Tweet Popularity Prediction via Dynamic Multimodal Regression",
+    "authors": [
+        {
+            "first": "Ke",
+            "middle": [],
+            "last": "Wang",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of North Carolina Chapel Hill",
+                "location": {}
+            },
+            "email": "kewang@cs.unc.edu"
+        },
+        {
+            "first": "Mohit",
+            "middle": [],
+            "last": "Bansal",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of North Carolina Chapel Hill",
+                "location": {}
+            },
+            "email": "mbansal@cs.unc.edu"
+        },
+        {
+            "first": "Jan-Michael",
+            "middle": [],
+            "last": "Frahm",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of North Carolina Chapel Hill",
+                "location": {}
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "If a picture is worth a thousand words, then images should be utilized together with other available data modalities when predicting the virality of online posts, such as tweets. In this paper, we re-visit the tweet popularity prediction problem by considering all data modalities: tweet language semantics, embedded images, author' social relationships, and the diffusion process of tweets. To model the content of tweets, we propose a joint-embedding neural network that combines visual, textual, and social cues together. Such content features can be either used for prediction directly, or for pre-conditioning a 'dynamics RNN', which models the message propagation process. A novel Poisson regression loss is optimized to train the network. We demonstrate that content based features can be used to improve upon social features and dynamics features via our joint-embedding regression model. Our model outperforms the state-of-the-art on multiple large-scale real-world datasets collected from Twitter.",
+    "pdf_parse": {
+        "paper_id": "Retweet_Wars_Tweet_Popularity_Prediction_via_Dynamic_Multimodal_Regression",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "If a picture is worth a thousand words, then images should be utilized together with other available data modalities when predicting the virality of online posts, such as tweets. In this paper, we re-visit the tweet popularity prediction problem by considering all data modalities: tweet language semantics, embedded images, author' social relationships, and the diffusion process of tweets. To model the content of tweets, we propose a joint-embedding neural network that combines visual, textual, and social cues together. Such content features can be either used for prediction directly, or for pre-conditioning a 'dynamics RNN', which models the message propagation process. A novel Poisson regression loss is optimized to train the network. We demonstrate that content based features can be used to improve upon social features and dynamics features via our joint-embedding regression model. Our model outperforms the state-of-the-art on multiple large-scale real-world datasets collected from Twitter.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "The world is better connected than ever before. On social networks, users are connected to every other user by an average separation of 3.57 1 . Short communication distance and ease of access make online social media an increasingly popular venue for information sharing. However, convenience comes with a cost. Both individuals and organizations can be easily overwhelmed by the sheer volume of online posts or misled by wide-spread rumors. Therefore, the ability to predict which post has a high popularity potential in its early stage can help individuals improve their communication efficiency and also allow organizations sufficient time for remedial actions. Reliable forecasting of online content popularity is thus a vital need.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Popularity prediction has long interested various research communities [34] . Previous methods approach this Figure 1 : We demonstrate our method on the 2016 US presidential election tweets. We collected tweets containing relevant keywords (\"president\", \"vote\", \"election\", \"Clinton\", \"Trump\") from October 8, 2016 to November 14, 2016. Retweets (solid blue line) on the presidential campaign were exponentially increasing before the election day (the orange vertical line). Our proposed method (dotted yellow line) accurately predicted such a trend. For visualization, the tweets are grouped into bins of one hour width based on their post time.",
+                "cite_spans": [
+                    {
+                        "start": 71,
+                        "end": 75,
+                        "text": "[34]",
+                        "ref_id": "BIBREF33"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 116,
+                        "end": 117,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "problem by analyzing the author's influence on the social network [40] , or the early dismantling behaviors of posts [41] . Social features and cascading process modeling are the dominant foundations for popularity predictions. Recently, deep learning based methods have revolutionized many vision and language tasks, providing new ways to analyze visual and textual content in online posts. Hence, the question arises whether such visual and textual content can help improve upon the popularity prediction accuracy? In this paper, we study the role of content for the popularity prediction task in both the static setting, where only the post is known, and the dynamic scenario, where the early retweeting process is also known. We found that by carefully blending the different content modalities together, improvement can be brought to the virality prediction task. Subsequently combining jointly embedded content features with social cues and temporal cascading processes, we show that, in addition to who you are, what you say and what you show are also important indicators of the breadth of message's reach.",
+                "cite_spans": [
+                    {
+                        "start": 66,
+                        "end": 70,
+                        "text": "[40]",
+                        "ref_id": "BIBREF39"
+                    },
+                    {
+                        "start": 117,
+                        "end": 121,
+                        "text": "[41]",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "We present the virality prediction problem on the Twitter domain. For the static prediction scenario, we propose a multimodal regression model that jointly considers the vi-sual and textual data as well as the authors' social features to predict the potential influence of tweets, as measured by their retweet counts. We adopt the Inception-ResNet CNNs [36] and LSTM-RNNs [16] to model the visual and textual features, respectively. We use in-domain word embeddings specifically trained on tweet-style language as input to the LSTM-RNNs. We also explicitly model the shared semantic relationships between the tweet text and embedded images using a joint embedding model trained under a bidirectional ranking loss. Deeply learned features, together with user-specific social features, are then used to learn a Poisson regression model which predicts the potential influence of the given tweet. We propose to use recurrent neural networks to predict the final retweet count for a given dynamic sequence of retweeting actions. The static content based features are used as pre-conditioning for the recurrent network.",
+                "cite_spans": [
+                    {
+                        "start": 353,
+                        "end": 357,
+                        "text": "[36]",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 372,
+                        "end": 376,
+                        "text": "[16]",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "To evaluate our proposed model, we use both existing as well as our novel large-scale multimodal Twitter datasets. We collect and present two datasets: one from the year 2015 with 14 million tweets containing over 3 million images, and one from the next year (2016) with 10 million tweets containing 2 million images. The latter is used to test the generalization of our methods. On both our datasets and on the existing MBI-1M dataset [6] , our method outperforms state-of-the-art multimodal methods. We also assembled a temporal dataset that records the propagation process of tweets, which we used to study the performance of our dynamic prediction models.",
+                "cite_spans": [
+                    {
+                        "start": 436,
+                        "end": 439,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "To summarize, our main contributions are: 1. A multi-modal neural network model that harnesses all available Twitter data modalities: visual, textual, social, and temporal cues; 2. A joint embedding model, trained under bidirectional ranking constraints, that explicitly captures the shared semantic relationships between visual and textual data; 3. A novel Poisson regression model for predicting retweet count based on all available data modalities; 4. Demonstrated the role of content for popularity prediction in both static and dynamic scenarios; 5. Ablation and attribute analysis to explain model component and modality contributions, as well as what visual and textual features the model is learning. The remainder of this paper is structured as follows. Section 2 briefly reviews the related literature. We describe the problem formulation and our network architecture in Section 3. Section 4 covers experimental results and discussion. Finally, Section 5 concludes the paper.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Our work studies the problem of tweet popularity predictions. We draw inspirations from multiple disciplines.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2."
+            },
+            {
+                "text": "Social networks Compared with other social media, Twitter has particularly distinctive features. As pointed out in [18] and [22] , Twitter is not only a social network but also a news medium. Information spreads on Twitter at astonishing speeds, providing the possibility for event detection [5] , sentiment classification [14] , popularity prediction [6] , and tweet-based language processing [10] . We not only train a Twitter-specific word embedding and language model to learn the Twitter language, but also fine-tune pretrained CNN models on Twitter images. Content-based popularity prediction Popularity prediction for online social networks is a fairly well-studied problem. Content based prediction infers the popularity using textual and/or visual features. For example, [25] utilized textual, visual, and social cues to predict the image popularity on Flickr. [19] used contextual and deeply-learned visual features to explore the factors influencing an online photo's popularity. [40] combined visual, textual, and social features to predict popularity in the fashion domain but only use tag-based text and no joint embedding models. [11] showed that mid-level image features trained on deep networks improved the performance of image virality prediction. [37] showed that carefully crafted wording of the message can help propagate the tweets better. Although some of the previous works incorporate multimodal information, only simple direct feature fusion is used [19, 40] , whereas our work explicitly exploits the inter-domain relationships via joint embedding. We find that this joint embedding approach is crucial to achieve complementary performance improvements.",
+                "cite_spans": [
+                    {
+                        "start": 115,
+                        "end": 119,
+                        "text": "[18]",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 124,
+                        "end": 128,
+                        "text": "[22]",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 292,
+                        "end": 295,
+                        "text": "[5]",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 323,
+                        "end": 327,
+                        "text": "[14]",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 352,
+                        "end": 355,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 394,
+                        "end": 398,
+                        "text": "[10]",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 780,
+                        "end": 784,
+                        "text": "[25]",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 870,
+                        "end": 874,
+                        "text": "[19]",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 991,
+                        "end": 995,
+                        "text": "[40]",
+                        "ref_id": "BIBREF39"
+                    },
+                    {
+                        "start": 1145,
+                        "end": 1149,
+                        "text": "[11]",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 1267,
+                        "end": 1271,
+                        "text": "[37]",
+                        "ref_id": "BIBREF36"
+                    },
+                    {
+                        "start": 1477,
+                        "end": 1481,
+                        "text": "[19,",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 1482,
+                        "end": 1485,
+                        "text": "40]",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2."
+            },
+            {
+                "text": "Diffusion-based popularity prediction A complementary line of popularity prediction methods do not rely on the content but instead use social features such as user influences, combined with real-time monitoring of the diffusion process to make predictions. [17] showed social-oriented features were the best performer to predict image popularity on Twitter. [42] utilized image features extracted from CNNs and social-oriented features for popularity prediction. [1] used temporal evolution patterns to predict the popularity of online user-generated content. [7] used temporal and structural features to predict cascades of photo shares on Facebook. [41] model the retweeting cascades as a self-exciting point process. Similarity, our work also uses a recurrent neural network to model the temporal diffusion of the retweet process. In contrast to the above, our dynamics RNN is explicitly pre-conditioned on the content features and the social features.",
+                "cite_spans": [
+                    {
+                        "start": 257,
+                        "end": 261,
+                        "text": "[17]",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 358,
+                        "end": 362,
+                        "text": "[42]",
+                        "ref_id": "BIBREF41"
+                    },
+                    {
+                        "start": 463,
+                        "end": 466,
+                        "text": "[1]",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 560,
+                        "end": 563,
+                        "text": "[7]",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 651,
+                        "end": 655,
+                        "text": "[41]",
+                        "ref_id": "BIBREF40"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2."
+            },
+            {
+                "text": "Deep learning Deep neural networks empower computational models to learn rich feature representations at multiple levels of abstraction. Computer vision has benefited greatly from convolutional neural networks (CNNs), for classification [15] , semantic segmentation [29] , and object detection [23] . Deep-learning-based methods have also influenced natural language processing (NLP), from word embeddings [26] and language modeling with recurrent neural networks (RNNs) [27] to syntactic parsing [32] and machine translation [8, 35] . Our work is built upon stateof-the-art CNN networks to extract rich visual features for Twitter-style images, and LSTM-RNN models to extract Twitter-style language semantics.",
+                "cite_spans": [
+                    {
+                        "start": 237,
+                        "end": 241,
+                        "text": "[15]",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 266,
+                        "end": 270,
+                        "text": "[29]",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 294,
+                        "end": 298,
+                        "text": "[23]",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 406,
+                        "end": 410,
+                        "text": "[26]",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 471,
+                        "end": 475,
+                        "text": "[27]",
+                        "ref_id": "BIBREF26"
+                    },
+                    {
+                        "start": 497,
+                        "end": 501,
+                        "text": "[32]",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 526,
+                        "end": 529,
+                        "text": "[8,",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 530,
+                        "end": 533,
+                        "text": "35]",
+                        "ref_id": "BIBREF34"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2."
+            },
+            {
+                "text": "Multimodal deep learning Multimodal machine learning integrates and models multiple communicative modalities, such as linguistic, acoustic and visual messages. For example, [28] used deep autoencoder models to learn multimodal features for audio-visual speech classification tasks. [33] propose to use deep Boltzmann machines to learn generative models from multimodal data. Recent advances in computer vision and natural language processing have piqued a common interest in applications connecting visual information and textual descriptions, such as image captioning [31, 38] and visual question answering [3, 13] . [2] proposed a deep learning based extension to canonical correlation analysis (CCA). [12] used ranking losses to learn the linear transformations on visual and textual features. In our work, we follow the lead of [39] in using a bi-directional ranking loss to learn non-linear transformations that correlate tweet text and images such that they are in a joint, shared space and allow easier feature learning for the regression model, leading to stronger improvements for our task.",
+                "cite_spans": [
+                    {
+                        "start": 173,
+                        "end": 177,
+                        "text": "[28]",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 282,
+                        "end": 286,
+                        "text": "[33]",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 569,
+                        "end": 573,
+                        "text": "[31,",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 574,
+                        "end": 577,
+                        "text": "38]",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 608,
+                        "end": 611,
+                        "text": "[3,",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 612,
+                        "end": 615,
+                        "text": "13]",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 618,
+                        "end": 621,
+                        "text": "[2]",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 704,
+                        "end": 708,
+                        "text": "[12]",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 832,
+                        "end": 836,
+                        "text": "[39]",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "2."
+            },
+            {
+                "text": "We consider the problem of predicting tweet popularity, that is the number of times a tweet will be retweeted. A tweet T containing an image I and language descriptions L is first issued by its author U . At time t i the tweet of interest accumulates r i retweets. Such dismantling process is recorded as D = {(t 0 , r 0 ), (t 1 , r 1 ), . . . , (t N , r N )}. Note that D may only record the early stage of the dismantling process. The maximum retweet count during the data collection period is used as the ground-truth retweet count r gt . As a discrete probability model, the Poisson distribution characterizes the probability of a given number of events occurring during some time period. Therefore, the retweet count r of a tweet T (I, L, U, D) follows a Poisson distribution:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "P (R = r|\u03bb) = e -\u03bb \u03bb -r r! (1)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "where the latent variable \u03bb \u2208 R + defines the mean and variance of the underlying Poisson distribution. For a static scenario, where the propagation information D is not available, the dynamics RNN module in Figure 2 is removed and only (I, L, U ) are used in the Poisson regression model.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 215,
+                        "end": 216,
+                        "text": "2",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "We propose a neural network model that directly maximizes the probability of the retweet count r given the tweet information (namely the image I, the tweet text L, the user profile U , and the early stage propagation information D):",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "\u03b8 * = arg max \u03b8 (T,r) P (R = r|T ; \u03b8) (2)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "where \u03b8 are the neural network parameters. Our proposed network combines multi-modal information from the unseen tweet T to predict the Poisson parameter \u03bb for its latent Poisson distribution P (R). The retweet count prediction r for t can then be easily inferred by maximizing P (R; \u03bb):",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "r = max \u03bb -1, \u03bb",
+                        "eq_num": "(3)"
+                    }
+                ],
+                "section": "Methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "Figure 2 gives an overview of our overall network architecture. Our proposed model consists of two stages: a feature extraction network and a dynamic RNN network. The feature extraction network processes image I, language L, as well as user profile U . The output features are used to pre-condition the dynamic RNN network. The preconditioned dynamics RNN then processes the propagation process data D to estimate the hidden Poisson parameter \u03bb.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "2",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "In the feature network, a convolutional neural network (CNN) transforms I into a fixed length feature vector f CNN (I). A long short-term memory recurrent neural network together with tweet-trained word embeddings encodes the variable length tweet language L into a fixed dimensional feature vector f LST M (L). We employ an extra joint embedding network to map the different modality features f CNN (I) and f LST M (L) into a common space.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Visual CNN We adopted the state-of-the-art Inception-Resnet architecture [36] to extract a rich feature representation from the Twitter images I. We chose such architecture because: 1) the Inception-Resnet architecture can produce high quality visual features from images, as shown by its leading performance on ImageNet challenge [9] ; 2) using weights trained on another dataset to initialize our model can greatly reduce the risk of overfitting. We then finetune the Inception-Resnet model on Twitter images. In our model, we use the feature map before the final softmax layer as the image representation f CNN (I).",
+                "cite_spans": [
+                    {
+                        "start": 73,
+                        "end": 77,
+                        "text": "[36]",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 331,
+                        "end": 334,
+                        "text": "[9]",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Textual LSTM-RNN The character limitation and the lightweight retweet operation noticeably differentiate the Twitter language to be very different from daily languages. Users tend to use abbreviations, Internet slang, emojis, and hashtags to emphasize their emotions (see Table 1 for an example). Thus, we need a powerful language model to characterize and understand the semantics of the tweeted text. Long-short term memory based recurrent neural networks (LSTM-RNNs) have recently demonstrated major success in different natural language processing tasks [35] . As a form of memory-based recurrent networks, it is natural for an LSTM-RNN to model variable length sequences such as tweet text. Individual words are first mapped to an embedding space by a word embedding layer. The sequence of embedding vectors are then fed through LSTM to extract textual features. We randomly initialize the word embedding layer and train it from scratch using only Twitter data to better model the Twitter specific language. We take the final output from the LSTM-RNN as the textual feature f LST M (L) for tweet T .",
+                "cite_spans": [
+                    {
+                        "start": 558,
+                        "end": 562,
+                        "text": "[35]",
+                        "ref_id": "BIBREF34"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 278,
+                        "end": 279,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Joint Embedding Language L and image I within a given tweet T are often related to each other. Standard CNN and LSTM models can extract rich feature representations from the photo I and language L separately, but they are not designed to discover and utilize the underlying cross-semantic relationships. Hence, if we just concatenate the extracted image and text feature vectors (similar to [19, 40] ), they will belong to different embedding spaces and hence will not be very effective for popularity prediction. Therefore, we propose a nonlinear joint embedding network (see Figure 3 ) that maps the image feature f CNN (I) and the textual feature f LST M (L) into a shared latent feature space where the two different data modalities are well correlated. As shown in Figure 3 , our proposed nonlinear joint embedding network consists of two branches. Each branch processes the input feature vector sequentially using a fullyconnected layer, a Rectified Linear Unit (ReLU) activation layer, a second fully-connected layer, a batch normalization layer, and an L 2 normalization layer. The two branches are independently initialized and trained. For a tweet T (I, L, U ) with visual features f CNN (I) and language features f LST M (L), the joint embedding network g(f ) maps them to a common latent feature space as h(L) = g (f LST M (L)) and h(I) = g (f CNN (I)). h(L) and h(I) are L 2 normalized and are of the same dimensions. The two feature vectors h(L) and h(I) are concatenated and fed through two additional fully-connected layers to produce the joint content feature representation F d (L, I).",
+                "cite_spans": [
+                    {
+                        "start": 391,
+                        "end": 395,
+                        "text": "[19,",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 396,
+                        "end": 399,
+                        "text": "40]",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 584,
+                        "end": 585,
+                        "text": "3",
+                        "ref_id": "FIGREF1"
+                    },
+                    {
+                        "start": 777,
+                        "end": 778,
+                        "text": "3",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "F d (L, I) = \u03c3(W 2 \u2022 (\u03c3(W 1 \u2022 [h(L); h(I)] + b 1 )) + b 2 )",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "(4) Given a training tweet T i (I i , L i , U i ), the joint embedding network will map the visual and textual features in a shared latent space (H(I i ) and H(L i ), respectively). Since the output of the embedding network is L 2 normalized, the Euclidean distance d(I i , L i ) is used to measure the similarity between image I i and sentence L i in the latent space. To discover and utilize the semantic relationships between the language domain and the image domain, we enforce a bidirectional distance constraint on the joint space. Similar to [39] , we want the distance between an image I i and its associated text L i to be smaller than the distance between the image I i and non-related text L j by some enforced margin m:",
+                "cite_spans": [
+                    {
+                        "start": 549,
+                        "end": 553,
+                        "text": "[39]",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "d(I i , L i ) + m < d(I i , L j ), \u2200j = i (5)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Similarly, we would like to enforce that the distance between a sentence L j and its associated image I j is less than the distance between the sentence L j and a nonrelated image I k by the same margin m:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "d(I j , L j ) + m < d(I k , L j ), \u2200k = j (6)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "We combine the bidirectional constraints into a loss function using the hinge loss:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "L JE = 1 M i,j,k {max [0, m + d(I i , L i ) -d(I i , L j )] + \u03b1 max [0, m + d(I i , L i ) -d(I k , L i )]}",
+                        "eq_num": "(7)"
+                    }
+                ],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "where m is a predefined margin, \u03b1 is a predefined weighting scalar, and M is the total number of triplets. We set m = 0.05 and \u03b1 = 1 for all our experiments.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Multimodal Feature Network",
+                "sec_num": "3.1."
+            },
+            {
+                "text": "Tweets are spread over Twitter by its users' retweet operations. The content quality of a tweet and the characteristics of its author can significantly affect its potential reach. Influential and active users can spread the word much faster and broader on the network than less wellconnected users. Thus, it's natural to consider the authors' characteristics and potential influences on the network when predicting the popularity of a new tweet. We can directly extract social features from the author's profile U : account age, friend count, follower count, total tweet count, favorited tweet count. Together with the cross-product transformation features \u03c6(U ) = {u i \u2022 u j |u i \u2208 U, u j \u2208 U, i < j}, we have the following social feature:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Social Features",
+                "sec_num": "3.2."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "F s (U ) = [U ; \u03c6(U )]",
+                        "eq_num": "(8)"
+                    }
+                ],
+                "section": "Social Features",
+                "sec_num": "3.2."
+            },
+            {
+                "text": "Compared with the textual and the visual features, the F c (U ) features are of much lower dimensions and are much easier to interpret. The social features are used together with the content features to predict the retweet count.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Social Features",
+                "sec_num": "3.2."
+            },
+            {
+                "text": "Temporal diffusion information are widely used for popularity prediction. Instead of using a reinforced Poisson process [30] or Hawkes Process [21] , we employ a simple but effective recurrent neural network to learn the temporal propagation pattern. Compared with other diffusion based models [21, 30] , our dynamics RNN can easily integrate content and social features.",
+                "cite_spans": [
+                    {
+                        "start": 120,
+                        "end": 124,
+                        "text": "[30]",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 143,
+                        "end": 147,
+                        "text": "[21]",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 294,
+                        "end": 298,
+                        "text": "[21,",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 299,
+                        "end": 302,
+                        "text": "30]",
+                        "ref_id": "BIBREF29"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dynamics RNN",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "Given a tweet T (I, L, U, D), due to data collection limitations, the propagation data D is not uniformly sampled in the temporal domain. We first use linear interpolation to uniformly resample the propagation process D in the temporal domain using a fixed time interval. At each time step i, the dynamics RNN updates its hidden state h i and computes an output prediction \u03bbi by iterating the following relations: ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dynamics RNN",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "c =W hc [F c (L, I), F s (U )] h i =tanh(W hr r i-1 + W hh h t-1 + b h + c I[i = 0]) ln(\u03bb i ) =W oh h i + b o (9)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dynamics RNN",
+                "sec_num": "3.3."
+            },
+            {
+                "text": "We train our model to maximize the Poisson likelihood given a collection of N training tuples of tweets T i and their retweet counts r gt,i :",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Poisson Regression",
+                "sec_num": "3.4."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "\u03b8 * = arg min \u03b8 1 N N i=1 {r gt,i ln \u03bb(T i ) + \u03bb(T i )}",
+                        "eq_num": "(10)"
+                    }
+                ],
+                "section": "Poisson Regression",
+                "sec_num": "3.4."
+            },
+            {
+                "text": "where \u03b8 contains all parameters of our proposed model. The loss function can be denoted as:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Poisson Regression",
+                "sec_num": "3.4."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "L P oisson = 1 N N i=1 {r gt,i ln \u03bb(T i ) + \u03bb(T i )}",
+                        "eq_num": "(11)"
+                    }
+                ],
+                "section": "Poisson Regression",
+                "sec_num": "3.4."
+            },
+            {
+                "text": "We study the contributions of each data modality, and each network component on multiple datasets. We compare our model against several state-of-the-art methods. Please refer to the supplementary materials for more details on preprocessing, filtering, visualization, etc.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "4."
+            },
+            {
+                "text": "Network configuration We detail the architecture and configuration of our proposed model in Table 2 . Our overall network contains multiple components. It's challenging to train the entire model from scratch in an end-to-end fashion. Therefore, we first train each individual component separately. After each component has reached a stable state, the entire model can be trained jointly.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 98,
+                        "end": 99,
+                        "text": "2",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Warm-up language model We start by training the twitter language model, i.e, the word embedding layer and the LSTM network. Both word embedding and LSTM are randomly initialized. A generalized linear model is used to predict the Poisson parameter \u03bb from the LSTM output vector.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "ln (\u03bb(T )) = w \u2022 f LST M (L) + b (",
+                        "eq_num": "12"
+                    }
+                ],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": ")",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "where linear weight w and bias b are learnable parameters.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "We then train the LSTM network to directly predict the hidden variable \u03bb based on Equation ( 12) with the negative log-likelihood loss function in Equation (11) . The gradient magnitude is clipped to 5 during back-propagation to avoid the gradient explosion problem. We train the LSTM with Poisson loss for 100k iterations.",
+                "cite_spans": [
+                    {
+                        "start": 156,
+                        "end": 160,
+                        "text": "(11)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Fine-tune the CNN We then fine-tune the CNN weights on Twitter images. Similar to Equation ( 12), we use a generalized linear model to predict the hidden Poisson parameter from the CNN feature output f CNN (I). The Poisson loss (Equation ( 11)) is used as the objective for fine-tuning.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Learn joint embedding We use the pre-trained CNN feature concatenated with the warmed-up LSTM output as the input to train the joint embedding network. The joint embedding network is also randomly initialized. During this initial training phase, both the CNN and the LSTM network are fixed. Only the joint embedding network is trainable. Unlike [39] , we only adopt the bi-directional constraints and relax the structural constraints, since only one sentence/image pair exists within each tweet.",
+                "cite_spans": [
+                    {
+                        "start": 345,
+                        "end": 349,
+                        "text": "[39]",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "We randomly initialize all the layers of the joint embedding network and optimize them wrt L JE . Triplets containing an associated image/sentence pair (I i , L i ), a nonrelating image I j , and a non-relating sentence L k are used to optimize the loss function L JE . However, it is computationally prohibitive to optimize the loss function L JE over all possible triplets in the dataset. Thus we follow a similar approach to [39] to sample triplets within each mini-batch of the training dataset during optimization. We first compute the similarity distance d(I i , L i ) for all tweets within the batch. For each tweet (a ground-truth image/text pair), we then find the top K non-relating images and the top K non-relating sentences violating the bi-directional constraint. We use K = 20 in all the experiments. We then train the joint embedding network with the CNN and LSTM being fixed.",
+                "cite_spans": [
+                    {
+                        "start": 428,
+                        "end": 432,
+                        "text": "[39]",
+                        "ref_id": "BIBREF38"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Warm-up dynamics RNN We randomly initialize the dynamics RNN. The dynamics RNN is designed to predict the hidden Poisson parameter \u03bb from past observations. Thus we train the dynamics RNN using the Poisson loss Equation (11) . We fix the CNN, language LSTM, and the joint embedding network during the warm-up phase of the dynamics RNN and train it for for 100k iterations. The gradient magnitude is clipped to 5 during training.",
+                "cite_spans": [
+                    {
+                        "start": 220,
+                        "end": 224,
+                        "text": "(11)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Preventing overfitting Real-world Twitter data can be very noisy. We adopted multiple techniques, to avoid overfitting the noisy training data. Similar to [38] , initializing the CNN using pre-trained weights greatly helps to prevent overfitting. We also use dropout layers in the LSTM network. Each fully-connected layer in the joint embedding model is also followed by a dropout layer. The keep probability of all dropout layers is 0.7. Additionally, L 2 regular-ization is applied during training.",
+                "cite_spans": [
+                    {
+                        "start": 155,
+                        "end": 159,
+                        "text": "[38]",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Optimization We initialize and warm up each component of our network separately as discussed above. Then we combine the negative log-likelihood L P oisson (Equation ( 11)), the joint embedding loss L JE (Equation ( 7)), and the weight \u03b8 regularization as the joint loss function:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "L = L P oisson + \u03ba 1 L JE + \u03ba 2 \u03b8 2",
+                        "eq_num": "(13)"
+                    }
+                ],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Weight parameters \u03ba 1 = 0.5, \u03ba 2 = 0.05 are selected via cross-validation. We train the network end-to-end by minimizing the above loss function (Equation ( 13)).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "Our model,implemented in TensorFlow, is optimized using Adam [20] on three nVidia K20 GPUs. We use a learning rate of 10 -5 . The learning rate decays every 100k iterations with an exponential rate of 0.9.",
+                "cite_spans": [
+                    {
+                        "start": 61,
+                        "end": 65,
+                        "text": "[20]",
+                        "ref_id": "BIBREF19"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Network Architecture and Training",
+                "sec_num": "4.1."
+            },
+            {
+                "text": "We train our model and evaluate their prediction accuracy on multiple Twitter datasets collected from real-world Twitter streams across different time periods.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Datasets",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Our model employed an LSTM network to learn an underlying language model for tweets. In principle, it would require a dedicated LSTM network for each language used on Twitter. Without loss of generality, we only studied the popularity prediction problem for English tweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Datasets",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "MBI-1M The MicroBlog-Images (MBI-1M) dataset [6] collected in 2013 contains 1 million tweets. Retweet counts and favorite counts for the contained tweets were collected later in 2014. Only English tweets containing images from the MBI-1M dataset are used in our experiments. We follow [6] to split the English tweets from the MBI-1M dataset into 70% training, 10% validation, and 20% test sets respectively.",
+                "cite_spans": [
+                    {
+                        "start": 45,
+                        "end": 48,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 285,
+                        "end": 288,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Datasets",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Twitter2015 We also collected over 40 million tweets from Nov. 2015 to Apr. 2016 using the Twitter API. The Twitter streaming API returns a small random set of all public tweets (up to 1%). Similarly, we only used tweets that are written in English and contain at least one image. We randomly split the Twitter2015 dataset into 80% training, 10% validation, and 10% testing sets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Datasets",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "Twitter2016 Topics on Twitter change rapidly and continuously over time. Machine learning based approaches must have good generalization capabilities to deal with such rapid topic drift. To evaluate the generalization capabilities, we collected another dataset using the Twitter public API in Oct. 2016. This dataset contains 9 million English tweets. We reserve this entire dataset for testing purposes only. The maximum retweet count encountered when the data collection ends is used as the ground-truth retweet value for Twit-ter2015 and Twitter2016 dataset. Detailed statistics for the three datasets can be found in the supplementary materials.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Datasets",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "TemporalTwitter2015 Due to the limited sampling ratio of the Twitter public API. we can only collect partial propagation data. During the Twitter2015 collection period, we recorded tweets with over 50 retweeted sampling points and assemble them into a new TemporalTwitter2015 dataset. Tweets propagating longer than 72 hours are discarded. The TemporalTwitter2015 contains 12,187 valid tweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Datasets",
+                "sec_num": "4.2."
+            },
+            {
+                "text": "We resize the images to 299\u00d7299 pixels to be compatible with the Inception-Resnet model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset Preprocessing",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "Messages on Twitter usually contain informal language. Accordingly, we preprocess the text to reduce irregularities to lessen the burden on the later LSTM network. We first reduce the irrelevant information in tweet text by simplifying hashtags, numbers, usernames, etc. Please refer to Table 1 for detailed pre-processing rules. URLs embedded in tweets usually point to external resources. According to [4] , URLs elicited more positive feelings or rated more interesting were more likely to spread. Hence instead of using a single symbolic word <URL>, we expanded and parsed the hashed/shortened URL within tweets. Only domain names are recorded as words. After the text is pre-processed, we tokenize the pre-processed text string into words and build a Twitter vocabulary. Rare words appearing no more than 10 times in the corpus are replaced by a symbolic word <unknown> in the vocabulary. Our vocabulary contains over 500k distinct words.",
+                "cite_spans": [
+                    {
+                        "start": 404,
+                        "end": 407,
+                        "text": "[4]",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Dataset Preprocessing",
+                "sec_num": "4.3."
+            },
+            {
+                "text": "Evaluation metric We evaluate our proposed method on the aforementioned datasets and compare our results against multiple state-of-the-art methods [6, 24, 25, 19] . The Spearman's ranking correlation and mean absolute percentage error (MAPE) are adopted as the evaluation metric.",
+                "cite_spans": [
+                    {
+                        "start": 147,
+                        "end": 150,
+                        "text": "[6,",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 151,
+                        "end": 154,
+                        "text": "24,",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 155,
+                        "end": 158,
+                        "text": "25,",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 159,
+                        "end": 162,
+                        "text": "19]",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Popularity Prediction Evaluation",
+                "sec_num": "4.4."
+            },
+            {
+                "text": "Static Setting Evaluation We first evaluate our multimodal regression method in the static setting. We compare our multi-modal model with state-of-the-art content-based methods [6, 24, 25, 19] . For fair comparison, we discard the dynamics RNN and only use Poisson regression on the joint content and social features. More formally ln(\u03bb) = W [F c (L, I), F s (U )] + b is used for prediction.",
+                "cite_spans": [
+                    {
+                        "start": 177,
+                        "end": 180,
+                        "text": "[6,",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 181,
+                        "end": 184,
+                        "text": "24,",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 185,
+                        "end": 188,
+                        "text": "25,",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 189,
+                        "end": 192,
+                        "text": "19]",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Popularity Prediction Evaluation",
+                "sec_num": "4.4."
+            },
+            {
+                "text": "Table 4 demonstrates that our proposed joint model has superior performance compared to other content-based methods. Compared with our model, [25] only use simple visual features such as scene categories, the number of human faces, and color information. [6] and [19] were originally proposed to predict online photo popularities. Neglecting textual information hinders its performance in tweet popularity prediction tasks. [24] utilized visual, textual, and social cues to predict brand-related popularities, thus outperforming the other three baseline methods. Compared to the baseline content-based methods, our model not only utilizes more advanced feature representations, but also a joint embedding model to maximize the correlation across modalities, which helped us outperform the state-ofthe-art.",
+                "cite_spans": [
+                    {
+                        "start": 142,
+                        "end": 146,
+                        "text": "[25]",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 255,
+                        "end": 258,
+                        "text": "[6]",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 263,
+                        "end": 267,
+                        "text": "[19]",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 424,
+                        "end": 428,
+                        "text": "[24]",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "4",
+                        "ref_id": "TABREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Popularity Prediction Evaluation",
+                "sec_num": "4.4."
+            },
+            {
+                "text": "Dynamic Setting Evaluation We evaluate our dynamic-RNN model on the TemporalTwitter2015 datasets against the state-of-the-art TiDeH method [21] . For a tweet, the retweet count at 72 hours after its issue is predicted. See Table 6 for quantitative results.",
+                "cite_spans": [
+                    {
+                        "start": 139,
+                        "end": 143,
+                        "text": "[21]",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 229,
+                        "end": 230,
+                        "text": "6",
+                        "ref_id": "TABREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Popularity Prediction Evaluation",
+                "sec_num": "4.4."
+            },
+            {
+                "text": "Using propagation data alone, the simple RNN model demonstrated slightly inferior performance compared to the baseline method. However, by properly combining content features and social cues, our model can achieve slightly better prediction accuracy than baseline methods. Utilizing all available data modalities (image I, text L, social cue S, and propagation information D), as well as the proper Poisson loss, contributed to the performance improvement.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Popularity Prediction Evaluation",
+                "sec_num": "4.4."
+            },
+            {
+                "text": "We thoroughly studied the prediction performance with different loss functions and different joint modeling methods. Detailed statistics can be found in Table 5 and Table 6 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 159,
+                        "end": 160,
+                        "text": "5",
+                        "ref_id": "TABREF4"
+                    },
+                    {
+                        "start": 171,
+                        "end": 172,
+                        "text": "6",
+                        "ref_id": "TABREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Ablation Studies",
+                "sec_num": "4.5."
+            },
+            {
+                "text": "Compared with simple linear loss, Poisson loss can improve prediction performance on different data modalities. Poisson distribution is more suitable to model discrete data distributions, thus outperforming the simple linear loss.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Ablation Studies",
+                "sec_num": "4.5."
+            },
+            {
+                "text": "Social features generally outperform visual and textural features when used in isolation. Our observation agrees with the literature [40] . However, naively concatenating features from different modalities does not significantly improve the performance over simple social features or dynamics features. However, our Poisson regression model and our joint embedding are key to our performance improvement. By explicitly aligning different modality features in the common space, the regression model can pay more attention to the common salient features, and neglects the differences between the image and text description. Table 5 shows that combining textual or visual features with social cues can outperform all single modality. Thus, both visual and textual features can benefit social cues when predicting the popularities.",
+                "cite_spans": [
+                    {
+                        "start": 133,
+                        "end": 137,
+                        "text": "[40]",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 628,
+                        "end": 629,
+                        "text": "5",
+                        "ref_id": "TABREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Ablation Studies",
+                "sec_num": "4.5."
+            },
+            {
+                "text": "On the TemporalTwitter2015 dataset, the dynamics feature when used alone, outperforms both visual and textual features. When properly combined with content based features, we achieve the best performance on the evaluation dataset. Diffusion based methods require a sequence of early retweeting/propagation observations to predict future message outreach. Compared with content based methods, such early observations are hard or sensitive to acquire, limiting the practical applicability of diffusion based methods. Being able to make the prediction based on content alone, or combining content into the diffusion models, is of great practical importance. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Ablation Studies",
+                "sec_num": "4.5."
+            },
+            {
+                "text": "To gain more insights on the influencing factors leading to the popularity of tweets, we analyze the common attributes of highly retweeted posts. We first manually labeled images and sentences with an attribute set. The common attributes of the highly scoring tweets are then analyzed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attributes Analysis",
+                "sec_num": "4.6."
+            },
+            {
+                "text": "For visual features, the following attributes are manually collected on 5K images: dynamic GIF, animal, human, beautiful, not beautiful, sexual, containing text, synthetically generated. We notice the following attributes to be highly correlated with the virality of tweets: animal, not beautiful, sexual, containing text, synthetically generated. Especially, images containing text are quite popular. Users For textual attributes, we labeled 5K sentences with the following attributes: political, religious, emotional, having emoji, having Twitter slang, having URL. We found political and URL to be influential. Emoji expressions and slangs are \"ubiquitous\" on Twitter, thus not providing extra information for popularity prediction. URLs may contain extra information that leads to users' retweet actions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Attributes Analysis",
+                "sec_num": "4.6."
+            },
+            {
+                "text": "In this paper, we studied the problem of predicting tweet popularity. Our method estimates the potential reach of a tweet based on its image, language, author relationships, and propagating behaviors. We show that naively combining multimodal features does not improve upon social features but via a joint embedding model, our Poisson regression approach not only shows complementary improvements, but also achieves state-of-the-art results on multiple datasets. We evaluated our model on Twitter data but our proposed method is also applicable to other social networks.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "5."
+            },
+            {
+                "text": "Authorized licensed use limited to: UNIV OF CHICAGO LIBRARY. Downloaded on October 02,2024 at 22:59:20 UTC from IEEE Xplore. Restrictions apply.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "Acknowledgements: Supported in part by the NSF No. IIS-1349074, No. CNS-1405847.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "acknowledgement",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "A peek into the future: Predicting the evolution of popularity in user generated content",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Ahmed",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Spagna",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Huici",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Niccolini",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "WSDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M. Ahmed, S. Spagna, F. Huici, and S. Niccolini. A peek into the future: Predicting the evolution of popularity in user generated content. In WSDM, 2013. 2",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Deep canonical correlation analysis",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Andrew",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Arora",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Bilmes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Livescu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "ICML",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "G. Andrew, R. Arora, J. Bilmes, and K. Livescu. Deep canonical correlation analysis. In ICML, 2013. 3",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Vqa: Visual question answering",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Antol",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Agrawal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Lu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Mitchell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Batra",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "Lawrence"
+                        ],
+                        "last": "Zitnick",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Parikh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "ICCV",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Antol, A. Agrawal, J. Lu, M. Mitchell, D. Batra, C. Lawrence Zitnick, and D. Parikh. Vqa: Visual question answering. In ICCV, 2015. 3",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Everyone's an influencer: Quantifying influence on twitter",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Bakshy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Hofman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Mason",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Watts",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "WSDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "E. Bakshy, J. M. Hofman, W. A. Mason, and D. J. Watts. Everyone's an influencer: Quantifying influence on twitter. In WSDM, 2011. 7",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Beyond trending topics: Real-world event identification on twitter",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Becker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Naaman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Gravano",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "ICWSM",
+                "volume": "",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "H. Becker, M. Naaman, and L. Gravano. Beyond trending topics: Real-world event identification on twitter. ICWSM, 2011. 2",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Latent factors of visual popularity prediction",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Cappallo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Mensink",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Snoek",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "International Conference on Multimedia Retrieval",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Cappallo, T. Mensink, and C. G. Snoek. Latent factors of visual popularity prediction. In International Conference on Multimedia Retrieval, 2015. 2, 6, 7, 8",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Can cascades be predicted",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Adamic",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Dow",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Kleinberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Leskovec",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "WWW",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Cheng, L. Adamic, P. A. Dow, J. M. Kleinberg, and J. Leskovec. Can cascades be predicted? In WWW, 2014. 2",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Empirical evaluation of gated recurrent neural networks on sequence modeling",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Chung",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Gulcehre",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Cho",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Bengio",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Chung, C. Gulcehre, K. Cho, and Y. Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv 1412.3555, 2014. 3",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Imagenet: A large-scale hierarchical image database",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Deng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Dong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Socher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L.-J",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Fei-Fei",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Computer Vision and Pattern Recognition",
+                "volume": "",
+                "issue": "",
+                "pages": "248--255",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei- Fei. Imagenet: A large-scale hierarchical image database. In Computer Vision and Pattern Recognition, 2009. CVPR 2009. IEEE Conference on, pages 248-255. IEEE, 2009. 3",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Twitter part-of-speech tagging for all: Overcoming sparse and noisy data",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Derczynski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Ritter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Clark",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Bontcheva",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "RANLP",
+                "volume": "",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L. Derczynski, A. Ritter, S. Clark, and K. Bontcheva. Twitter part-of-speech tagging for all: Overcoming sparse and noisy data. In RANLP, 2013. 2",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Understanding image virality",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Deza",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Parikh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "CVPR",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Deza and D. Parikh. Understanding image virality. In CVPR, 2015. 2",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Devise: A deep visual-semantic embedding model",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Frome",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Corrado",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Shlens",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bengio",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Dean",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Ranzato",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Mikolov",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "NIPS",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Frome, G. S. Corrado, J. Shlens, S. Bengio, J. Dean, M. A. Ranzato, and T. Mikolov. Devise: A deep visual-semantic embedding model. In NIPS, 2013. 3",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Are you talking to a machine? dataset and methods for multilingual image question answering",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Gao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Mao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Huang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "NIPS",
+                "volume": "",
+                "issue": "3",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "H. Gao, J. Mao, J. Zhou, Z. Huang, L. Wang, and W. Xu. Are you talking to a machine? dataset and methods for mul- tilingual image question answering. In NIPS, 2015. 3",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Twitter sentiment classification using distant supervision",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Go",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Bhayani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Huang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "CS",
+                "volume": "224",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Go, R. Bhayani, and L. Huang. Twitter sentiment classi- fication using distant supervision. CS224N Project Report, Stanford, 2009. 2",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Deep residual learning for image recognition",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "He",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Ren",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Sun",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "CVPR",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In CVPR, 2016. 2",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Long short-term memory",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Hochreiter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Schmidhuber",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1997,
+                "venue": "Neural Computation",
+                "volume": "",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Computation, 1997. 2",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Towards automatic image understanding and mining via social curation",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Ishiguro",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kimura",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Takeuchi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "ICDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "K. Ishiguro, A. Kimura, and K. Takeuchi. Towards auto- matic image understanding and mining via social curation. In ICDM, 2012. 2",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Why we twitter: Understanding microblogging usage and communities",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Java",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Song",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Finin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Tseng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Proceedings of the 9th WebKDD and 1st SNA-KDD 2007 Workshop on Web Mining and Social Network Analysis",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Java, X. Song, T. Finin, and B. Tseng. Why we twit- ter: Understanding microblogging usage and communities. In Proceedings of the 9th WebKDD and 1st SNA-KDD 2007 Workshop on Web Mining and Social Network Analysis, 2007. 2",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "What makes an image popular",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Khosla",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "Das"
+                        ],
+                        "last": "Sarma",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Hamid",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "WWW",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "A. Khosla, A. Das Sarma, and R. Hamid. What makes an image popular? In WWW, 2014. 2, 4, 7",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "A method for stochastic optimization",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Kingma",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Ba",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Adam",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "D. Kingma and J. Ba. Adam: A method for stochastic opti- mization. arXiv, 2014. 6",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Tideh: Timedependent hawkes process for predicting retweet dynamics",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Kobayashi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Lambiotte",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "5",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:1603.09449"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Kobayashi and R. Lambiotte. Tideh: Time- dependent hawkes process for predicting retweet dynamics. arXiv:1603.09449, 2016. 5, 7",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "What is twitter, a social network or a news media?",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Kwak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Moon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "WWW",
+                "volume": "",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "H. Kwak, C. Lee, H. Park, and S. Moon. What is twitter, a social network or a news media? In WWW, 2010. 2",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Ssd: Single shot multibox detector",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Anguelov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Erhan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Szegedy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Reed",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C.-Y",
+                        "middle": [],
+                        "last": "Fu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Berg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "ECCV",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.-Y. Fu, and A. C. Berg. Ssd: Single shot multibox detector. In ECCV, 2016. 2",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Multimodal popularity prediction of brandrelated social media posts",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Mazloom",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Rietveld",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Rudinac",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Worring",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Van Dolen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "ACM MM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "M. Mazloom, R. Rietveld, S. Rudinac, M. Worring, and W. van Dolen. Multimodal popularity prediction of brand- related social media posts. In ACM MM, 2016. 7",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "nobody comes here anymore, it's too crowded\"; predicting image popularity on flickr",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Mcparlane",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Moshfeghi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Jose",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "ICMR",
+                "volume": "2",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "P. J. McParlane, Y. Moshfeghi, and J. M. Jose. \"nobody comes here anymore, it's too crowded\"; predicting image popularity on flickr. In ICMR, 2014. 2, 7",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Efficient estimation of word representations in vector space",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Mikolov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Corrado",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Dean",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "T. Mikolov, K. Chen, G. Corrado, and J. Dean. Efficient estimation of word representations in vector space. arXiv 1301.3781, 2013. 3",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Recurrent neural network based language model. Interspeech",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Mikolov",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Karafi\u00e1t",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Burget",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Cernock\u00fd",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Khudanpur",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "T. Mikolov, M. Karafi\u00e1t, L. Burget, J. Cernock\u00fd, and S. Khu- danpur. Recurrent neural network based language model. Interspeech, 2010. 3",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Multimodal deep learning",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Ngiam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Khosla",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Kim",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Nam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "ICML",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Ngiam, A. Khosla, M. Kim, J. Nam, H. Lee, and A. Y. Ng. Multimodal deep learning. In ICML, 2011. 3",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Fully convolutional networks for semantic segmentation",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Shelhamer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Long",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Darrell",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "IEEE TPAMI",
+                "volume": "",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "E. Shelhamer, J. Long, and T. Darrell. Fully convolutional networks for semantic segmentation. IEEE TPAMI, 2016. 2",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Modeling and predicting popularity dynamics via reinforced poisson processes",
+                "authors": [
+                    {
+                        "first": "H.-W",
+                        "middle": [],
+                        "last": "Shen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Song",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A.-L",
+                        "middle": [],
+                        "last": "Barab\u00e1si",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:1401.0778"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "H.-W. Shen, D. Wang, C. Song, and A.-L. Barab\u00e1si. Model- ing and predicting popularity dynamics via reinforced pois- son processes. arXiv:1401.0778, 2014. 5",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Grounded compositional semantics for finding and describing images with sentences",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Socher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Karpathy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [
+                            "V"
+                        ],
+                        "last": "Le",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Manning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "TACL",
+                "volume": "",
+                "issue": "3",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Socher, A. Karpathy, Q. V. Le, C. D. Manning, and A. Y. Ng. Grounded compositional semantics for finding and de- scribing images with sentences. TACL, 2013. 3",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Parsing natural scenes and natural language with recursive neural networks",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Socher",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Manning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "ICML",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "R. Socher, C. C. Lin, C. Manning, and A. Y. Ng. Parsing nat- ural scenes and natural language with recursive neural net- works. In ICML, 2011. 3",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Multimodal learning with deep boltzmann machines",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Srivastava",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Salakhutdinov",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "NIPS",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "N. Srivastava and R. R. Salakhutdinov. Multimodal learning with deep boltzmann machines. In NIPS. Curran Associates, Inc., 2012. 3",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Want to be retweeted? large scale analytics on factors impacting retweet in twitter network",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Suh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Hong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Pirolli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Chi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "IEEE Second International Conference on Social Computing (SocialCom)",
+                "volume": "",
+                "issue": "1",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "B. Suh, L. Hong, P. Pirolli, and E. H. Chi. Want to be retweeted? large scale analytics on factors impacting retweet in twitter network. In 2010 IEEE Second International Con- ference on Social Computing (SocialCom), 2010. 1",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Sequence to sequence learning with neural networks",
+                "authors": [
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Sutskever",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Vinyals",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [
+                            "V"
+                        ],
+                        "last": "Le",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "NIPS",
+                "volume": "3",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "I. Sutskever, O. Vinyals, and Q. V. Le. Sequence to sequence learning with neural networks. In NIPS, 2014. 3, 4",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Inceptionv4, inception-resnet and the impact of residual connections on learning",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Szegedy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Ioffe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Vanhoucke",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Alemi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "2",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "arXiv": [
+                        "arXiv:1602.07261"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Szegedy, S. Ioffe, V. Vanhoucke, and A. Alemi. Inception- v4, inception-resnet and the impact of residual connections on learning. arXiv:1602.07261, 2016. 2, 3",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "The effect of wording on message propagation: Topic-and author-controlled natural experiments on twitter",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Tan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Pang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "ACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Tan, L. Lee, and B. Pang. The effect of wording on mes- sage propagation: Topic-and author-controlled natural ex- periments on twitter. In ACL, 2014. 2",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Show and tell: Lessons learned from the 2015 mscoco image captioning challenge",
+                "authors": [
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Vinyals",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Toshev",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bengio",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Erhan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "IEEE TPAMI",
+                "volume": "3",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "O. Vinyals, A. Toshev, S. Bengio, and D. Erhan. Show and tell: Lessons learned from the 2015 mscoco image caption- ing challenge. IEEE TPAMI, 2016. 3, 6",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Learning deep structurepreserving image-text embeddings",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Lazebnik",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "CVPR",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L. Wang, Y. Li, and S. Lazebnik. Learning deep structure- preserving image-text embeddings. In CVPR, 2016. 3, 4, 6",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "Chic or social: Visual popularity analysis in online fashion networks",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Yamaguchi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Berg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Ortiz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "ACM MM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "K. Yamaguchi, T. L. Berg, and L. E. Ortiz. Chic or social: Vi- sual popularity analysis in online fashion networks. In ACM MM, 2014. 1, 2, 4, 7",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "Seismic: A self-exciting point process model for predicting tweet popularity",
+                "authors": [
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Zhao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Erdogdu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "He",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Rajaraman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Leskovec",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "KDD",
+                "volume": "1",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Q. Zhao, M. A. Erdogdu, H. Y. He, A. Rajaraman, and J. Leskovec. Seismic: A self-exciting point process model for predicting tweet popularity. In KDD, 2015. 1, 2",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "Predicting pinterest: Automating a distributed human computation",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Zhong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Karamshuk",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Sastry",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "WWW",
+                "volume": "",
+                "issue": "2",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "C. Zhong, D. Karamshuk, and N. Sastry. Predicting pinter- est: Automating a distributed human computation. In WWW, 2015. 2",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": "2",
+                "num": null,
+                "text": "Figure 2: Our proposed multi-modal model to predict tweet popularity. A state-of-the-art Inception-Resnet CNN model is used to extract visual features and an LSTM is used to extract textural features. Visual and textual representations are then mapped to a common space by a joint embedding network. For static scenario, the joint content feature together with social cues are used as input to the Poisson regression model. For dynamic settings, jointly embedded content features and social features are used to precondition the dynamics RNN, which predicts the Poisson model by looking at early stage propagation data.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "fig_num": "3",
+                "num": null,
+                "text": "Figure 3: Joint embedding network: the two branches of the network do not share weights. CNN output f CNN and LSTM output f LST M are fed into separate branches. The output of the two branches is L 2 -normalized and have the same dimensions.",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "num": null,
+                "content": "<table><tr><td>Category</td><td>Before</td><td>After</td></tr><tr><td>URL</td><td>t.co/abc</td><td>abc.xyz</td></tr><tr><td>Hashtag</td><td colspan=\"2\">#love &lt;hashtag&gt; love</td></tr><tr><td>Numbers</td><td>3.1415926</td><td>&lt;number&gt;</td></tr><tr><td>Emoticon</td><td colspan=\"2\">:) &lt;smiley face&gt;</td></tr><tr><td>Username</td><td>@POTUS</td><td>&lt;username&gt;</td></tr><tr><td colspan=\"3\">Long words greeeeeeat great &lt;elong&gt;</td></tr><tr><td>Retweet Tag</td><td>RT:</td><td>Removed</td></tr><tr><td>Capitalization</td><td colspan=\"2\">SAD &lt;allcaps&gt; sad</td></tr></table>",
+                "html": null,
+                "text": "Tweet text pre-processing rules.",
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "num": null,
+                "content": "<table><tr><td>Component</td><td>Layer</td><td>Dimension/Units</td></tr><tr><td>CNN</td><td>Output</td><td>1792</td></tr><tr><td>LSTM</td><td>WE Hidden</td><td>512 512</td></tr><tr><td/><td>FC(W1)</td><td>768</td></tr><tr><td>Joint Embedding</td><td>FC(W2) FC(V1)</td><td>256 512</td></tr><tr><td/><td>FC(V2)</td><td>256</td></tr><tr><td/><td>Concat</td><td>512</td></tr><tr><td/><td>FC</td><td>256</td></tr><tr><td/><td>FC</td><td>128</td></tr><tr><td>Social Features</td><td>-</td><td>25</td></tr><tr><td>Dynamics RNN</td><td>Hidden</td><td>256</td></tr><tr><td>Weights W</td><td/><td/></tr></table>",
+                "html": null,
+                "text": "Detailed configurations of our proposed network. hc , W hr , W hh , W oh and biases b h , b o are learnable parameters. I is an indicator function. We found that conditioning the dynamics RNN at its first step works better than conditioning it at every time step i.",
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "num": null,
+                "content": "<table><tr><td>Dataset</td><td>Collection Time</td><td>Total</td><td colspan=\"4\">English English + Image Unique Tweets Unique Users</td></tr><tr><td>MBI1M [6]</td><td>2013</td><td>1,007,197</td><td>347,865</td><td>347,865</td><td>347,865</td><td>318,591</td></tr><tr><td>Twitter2015</td><td colspan=\"3\">2015 40,467,493 13,651,796</td><td>3,104,566</td><td>1,886,498</td><td>475,291</td></tr><tr><td>Twitter2016</td><td colspan=\"2\">2016 32,173,022</td><td>9,655,915</td><td>1,923,507</td><td>1,076,958</td><td>350,519</td></tr></table>",
+                "html": null,
+                "text": "Dataset statistics. For all the three datasets, we first filter for English tweets (the English column). Then we discard tweets without visual images (English+Image column). If we capture multiple retweets of the same tweet, we group them as one tweet and record its maximum retweet number (the Unique Tweets column). Such filters help us remove redundancies in the datasets and make training time manageable.",
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "num": null,
+                "content": "<table><tr><td>Method</td><td>Spearman MBI1M T2015 T2016 MBI1M T2015 T2016 MAPE</td></tr><tr><td colspan=\"2\">McParlane et al 0.188 0.269 0.257 0.093 0.121 0.137</td></tr><tr><td>Khosla et al</td><td>0.185 0.273 0.254 0.097 0.103 0.124</td></tr><tr><td colspan=\"2\">Cappallo et al 0.189 0.265 0.258 0.089 0.095 0.119</td></tr><tr><td colspan=\"2\">Mazloom et al 0.190 0.287 0.262 0.073 0.097 0.117</td></tr><tr><td>Ours</td><td>0.229 0.358 0.350 0.057 0.084 0.103</td></tr></table>",
+                "html": null,
+                "text": "Comparison against state-of-the-art baseline methods. By using advanced CNN and LSTM models and joint embedding, our method outperform previous approaches. Spearman: higher is better. MAPE: lower is better.",
+                "type_str": "table"
+            },
+            "TABREF4": {
+                "num": null,
+                "content": "<table><tr><td colspan=\"6\">Feature V FC L 0.149 Loss MBI1M T2015 T2016 MBI1M T2015 T2016 Spearman MAPE Model 0.248 0.232 0.147 0.152 0.157</td></tr><tr><td>T FC L 0.157</td><td>0.267</td><td>0.248</td><td>0.132</td><td>0.140</td><td>0.145</td></tr><tr><td>S FC L 0.175</td><td>0.281</td><td>0.269</td><td>0.113</td><td>0.128</td><td>0.130</td></tr><tr><td>V FC P 0.163</td><td>0.278</td><td>0.261</td><td>0.135</td><td>0.149</td><td>0.153</td></tr><tr><td>T FC P 0.172</td><td>0.283</td><td>0.275</td><td>0.129</td><td>0.138</td><td>0.142</td></tr><tr><td>S FC P 0.181</td><td>0.301</td><td>0.289</td><td>0.103</td><td>0.125</td><td>0.129</td></tr><tr><td>TS FC P 0.198</td><td>0.325</td><td>0.319</td><td>0.090</td><td>0.109</td><td>0.116</td></tr><tr><td>VS FC P 0.193</td><td>0.321</td><td>0.313</td><td>0.092</td><td>0.111</td><td>0.118</td></tr><tr><td>VTS FC L 0.188</td><td>0.311</td><td>0.294</td><td>0.097</td><td>0.112</td><td>0.119</td></tr><tr><td>VTS FC P 0.212</td><td>0.341</td><td>0.327</td><td>0.083</td><td>0.103</td><td>0.115</td></tr><tr><td>VTSJoint L 0.207</td><td>0.339</td><td>0.325</td><td>0.071</td><td>0.097</td><td>0.112</td></tr><tr><td>VTSJoint P 0.229</td><td>0.358</td><td>0.350</td><td>0.057</td><td>0.084</td><td>0.103</td></tr></table>",
+                "html": null,
+                "text": "",
+                "type_str": "table"
+            },
+            "TABREF5": {
+                "num": null,
+                "content": "<table><tr><td colspan=\"5\">Feature Loss Model Spearman MAPE</td></tr><tr><td>V</td><td>L</td><td>FC</td><td>0.217</td><td>0.152</td></tr><tr><td>T</td><td>L</td><td>FC</td><td>0.223</td><td>0.147</td></tr><tr><td>S</td><td>L</td><td>FC</td><td>0.247</td><td>0.139</td></tr><tr><td>D</td><td>L</td><td>FC</td><td>0.290</td><td>0.109</td></tr><tr><td>V</td><td>P</td><td>FC</td><td>0.232</td><td>0.142</td></tr><tr><td>T</td><td>P</td><td>FC</td><td>0.241</td><td>0.129</td></tr><tr><td>S</td><td>P</td><td>FC</td><td>0.260</td><td>0.120</td></tr><tr><td>D</td><td>P</td><td>FC</td><td>0.297</td><td>0.097</td></tr><tr><td>TD</td><td>P</td><td>FC</td><td>0.317</td><td>0.096</td></tr><tr><td>VD</td><td>P</td><td>FC</td><td>0.320</td><td>0.097</td></tr><tr><td>SD</td><td>P</td><td>FC</td><td>0.339</td><td>0.095</td></tr><tr><td>VTSD</td><td>L</td><td>FC</td><td>0.310</td><td>0.095</td></tr><tr><td>VTSD</td><td>P</td><td>FC</td><td>0.349</td><td>0.091</td></tr><tr><td>VTSD</td><td>L</td><td>Joint</td><td>0.357</td><td>0.089</td></tr><tr><td>VTSD</td><td>P</td><td>Joint</td><td>0.366</td><td>0.085</td></tr><tr><td>TiDeH</td><td>-</td><td>-</td><td>0.364</td><td>0.087</td></tr></table>",
+                "html": null,
+                "text": "Quantitative evaluation of dynamic propagation features. 'V': visual, 'T': textual, 'S': social features, 'D': dynamic features. 'L' = linear loss, 'P' = Poisson loss. 'FC' = fully-connected layers without joint embedding, 'Joint' = joint embedding model. Spearman: higher is better. MAPE: lower is better. like to generate images by composing multiple images, or adding textual descriptions in the image. Such synthetic generated or augmented images are likely to go viral.",
+                "type_str": "table"
+            }
+        }
+    }
+}

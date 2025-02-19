@@ -1,0 +1,2394 @@
+{
+    "paper_id": "14979-Article Text-18498-1-2-20201228",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-09-10T13:12:18.177432Z"
+    },
+    "title": "The Impact of News Values and Linguistic Style on the Popularity of Headlines on Twitter and Facebook",
+    "authors": [
+        {
+            "first": "Alicja",
+            "middle": [],
+            "last": "Piotrkowicz",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Leeds",
+                "location": {
+                    "country": "UK"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Vania",
+            "middle": [],
+            "last": "Dimitrova",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Leeds",
+                "location": {
+                    "country": "UK"
+                }
+            },
+            "email": "v.g.dimitrova@leeds.ac.uk"
+        },
+        {
+            "first": "Jahna",
+            "middle": [],
+            "last": "Otterbacher",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Cyprus",
+                "location": {}
+            },
+            "email": "jahna.otterbacher@ouc.ac.cy"
+        },
+        {
+            "first": "Katja",
+            "middle": [],
+            "last": "Markert",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Heidelberg University",
+                "location": {
+                    "country": "Germany"
+                }
+            },
+            "email": "markert@cl.uni-heidelberg.de"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "A large proportion of audiences read news online, often accessing news articles through social media like Facebook or Twitter. A distinguishing characteristic of news on social media is that the most prominent (and often the only visible) part of the news article is the headline. We investigate the impact of headline characteristics, including journalistic concepts of news values and linguistic style, on the article's social media popularity. Using a large corpus of headlines from The Guardian and New York Times we derive these features automatically and correlate with social media popularity on Twitter and Facebook. We found most of them to have a significant effect and that their impact differs between the two social media and between news outlets. Further investigation with a crowdsourced study confirms that news values and style influence the audiences' decisions to click on a headline.",
+    "pdf_parse": {
+        "paper_id": "14979-Article Text-18498-1-2-20201228",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "A large proportion of audiences read news online, often accessing news articles through social media like Facebook or Twitter. A distinguishing characteristic of news on social media is that the most prominent (and often the only visible) part of the news article is the headline. We investigate the impact of headline characteristics, including journalistic concepts of news values and linguistic style, on the article's social media popularity. Using a large corpus of headlines from The Guardian and New York Times we derive these features automatically and correlate with social media popularity on Twitter and Facebook. We found most of them to have a significant effect and that their impact differs between the two social media and between news outlets. Further investigation with a crowdsourced study confirms that news values and style influence the audiences' decisions to click on a headline.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "A vast amount of digital content, ranging from news (92,000 articles published online daily 1 ), blogs (nearly 70 million Wordpress posts published each month 2 ), forum posts (over 73 million Reddit submissions in 2015 3 ), and videos (300 hours of video uploaded every minute on YouTube 4 ) features a headline (i.e. a title). Titles play a vital role in attracting audiences' attention to online artefacts, which is crucial when the artefacts are accessed via social media.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "In this paper, we focus on news article headlines to investigate whether headline characteristics have impact on the popularity of news items shared via social media. We have selected popular broadsheet news outlets, whose presence in the social arena is vital given the growing importance of social media as a source of news and the increasing appearance of fake news in the social space. Social media sites, such as Facebook and Twitter, are becoming the main medium for news consumption. According to the latest report by Pew Research Center, 62% of the Americans get news on social media 5 . BBC reports that social media is young people's main source of news6 , which makes social media crucial to reach that demographic.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "In this paper we investigate the impact of two types of automatically extracted headline features on social media popularity of news articles. Firstly, we draw insights from journalism literature, which postulates the existence of news values -aspects of an event that determine whether and to what extent it is reported in news outlets. Secondly, we investigate the impact of linguistic style (i.e. phrasing) on news article popularity in considerably more depth than previously done in computational models of news articles.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "The approach presented in this paper can be used by computational journalism researchers to derive insights about news audiences and news consumption. The investigation of style features can also be very informative for headline generation research.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": null
+            },
+            {
+                "text": "Headlines hold a special place in news discourse. Researchers have looked at their functions (Althaus, Edy, and Phalen 2001 ) and the role their play for information processing (Dor 2003) . Considerable attention has been paid to the language of headlines, in particular what sets them apart from other text types, e.g. passive transformation and nominalisation (Fowler 1991, p.77-79) , deliberate ambiguity (Br\u00f4ne and Coulson 2010) , and untensed verbs (Chovanec 2014) . Some researchers worked on identifying how higher level concepts, such as sensationalism (Molek-Kozakowska 2013), or click-bait (Blom and Hansen 2015) , are captured in the headline language. In our work we analyse the headline language directly (style features) and the linguistic expression of higher level concepts (news values features).",
+                "cite_spans": [
+                    {
+                        "start": 93,
+                        "end": 123,
+                        "text": "(Althaus, Edy, and Phalen 2001",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 177,
+                        "end": 187,
+                        "text": "(Dor 2003)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 362,
+                        "end": 384,
+                        "text": "(Fowler 1991, p.77-79)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 408,
+                        "end": 432,
+                        "text": "(Br\u00f4ne and Coulson 2010)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 454,
+                        "end": 469,
+                        "text": "(Chovanec 2014)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 600,
+                        "end": 622,
+                        "text": "(Blom and Hansen 2015)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": null
+            },
+            {
+                "text": "For the news values features we take inspiration from the news selection literature. The seminal work in this area is by Galtung and Ruge (1965) who propose a set of so-called news values as event properties which determine the space afforded to an event by news outlets. Other empirical work in the journalism community, using manual content analysis, confirmed the importance of news values for news selection (Kepplinger and Ehmig 2006) . In contrast, our aim is to explore the impact of news values on social media reception. A variety of news values taxonomies have been proposed, including: Gans (1979) , Bell (1991) , Harcup and O'Neill (2001) , and Bednarek and Caple (2012) . There is, however, considerable agreement between these taxonomies (Caple and Bednarek 2013) , allowing us to concentrate on the news values which are most frequently mentioned.",
+                "cite_spans": [
+                    {
+                        "start": 121,
+                        "end": 144,
+                        "text": "Galtung and Ruge (1965)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 412,
+                        "end": 439,
+                        "text": "(Kepplinger and Ehmig 2006)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 597,
+                        "end": 608,
+                        "text": "Gans (1979)",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 611,
+                        "end": 622,
+                        "text": "Bell (1991)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 625,
+                        "end": 650,
+                        "text": "Harcup and O'Neill (2001)",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 657,
+                        "end": 682,
+                        "text": "Bednarek and Caple (2012)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 752,
+                        "end": 777,
+                        "text": "(Caple and Bednarek 2013)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": null
+            },
+            {
+                "text": "The second feature group -linguistic style -refers to wording and is largely topic-independent. Linguistic style has been previously used to model the popularity of short texts, such as Reddit image titles (Lakkaraju, McAuley, and Leskovec 2013) and tweets (Tan, Lee, and Pang 2014) . Some commonly used features include: ratios for various parts of speech, sentiment, and similarity to a language model. Headline text is a similar phenomenon, which brings its unique challenges. For example, since headlines offer limited context, word-level sentiment rather than contextsensitive state-of-the-art methods is often used (Tan, Lee, and Pang 2014; Gatti et al. 2016; Szymanski, Orellana-Rodriguez, and Keane 2016) . We adapt these frequently used features to work with headlines. We also draw from the news domain to implement features which were not explored for this task before. This includes syntactic and lexical simplicity (mentioned in news selection literature, e.g. Bell (1995) ) and implemented using features drawn from NLP research on readability (Pitler and Nenkova 2008; Feng et al. 2010; Kate et al. 2010) . Following advice on writing headlines from news style guides (e.g. The Guardian's style guide 7 ) we use punctuation and ambiguity.",
+                "cite_spans": [
+                    {
+                        "start": 206,
+                        "end": 245,
+                        "text": "(Lakkaraju, McAuley, and Leskovec 2013)",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 257,
+                        "end": 282,
+                        "text": "(Tan, Lee, and Pang 2014)",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 621,
+                        "end": 646,
+                        "text": "(Tan, Lee, and Pang 2014;",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 647,
+                        "end": 665,
+                        "text": "Gatti et al. 2016;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 666,
+                        "end": 712,
+                        "text": "Szymanski, Orellana-Rodriguez, and Keane 2016)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 974,
+                        "end": 985,
+                        "text": "Bell (1995)",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 1058,
+                        "end": 1083,
+                        "text": "(Pitler and Nenkova 2008;",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 1084,
+                        "end": 1101,
+                        "text": "Feng et al. 2010;",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 1102,
+                        "end": 1119,
+                        "text": "Kate et al. 2010)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": null
+            },
+            {
+                "text": "Our datasets consist of headlines from two news outlets and their social media popularity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data Collection",
+                "sec_num": null
+            },
+            {
+                "text": "We collected headlines from two major broadsheet newspapers -The Guardian (Guardian) and New York Times (NYT). We downloaded all headlines with their associated metadata published during 1 includes some example headlines and their social media popularity.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 187,
+                        "end": 188,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "News Corpora",
+                "sec_num": null
+            },
+            {
+                "text": "Preprocessing. All headlines were part-of-speech tagged (Stanford POS Tagger (Toutanova et al. 2003) ) and parsed (Stanford Parser (Klein and Manning 2003) ). We used wikification (a method of linking keywords in text to relevant Wikipedia pages) to identify a broad range of entities. Headlines were wikified using the TagMe API 9 , a tool meant for short texts, making it suitable for headlines.",
+                "cite_spans": [
+                    {
+                        "start": 77,
+                        "end": 100,
+                        "text": "(Toutanova et al. 2003)",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 131,
+                        "end": 155,
+                        "text": "(Klein and Manning 2003)",
+                        "ref_id": "BIBREF26"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "News Corpora",
+                "sec_num": null
+            },
+            {
+                "text": "We define the popularity of a news article as the number of times it is cited on Facebook and Twitter. We adopt metrics used in earlier research. Number of tweets (Twitter) has been previously used to predict the popularity of news articles (Bandari, Asur, and Huberman 2012) , and political parties (Tumasjan et al. 2010) ; and number of likes (Facebook) has been used to measure popularity of brand pages (De Vries, Gensler, and Leeflang 2012).",
+                "cite_spans": [
+                    {
+                        "start": 241,
+                        "end": 275,
+                        "text": "(Bandari, Asur, and Huberman 2012)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 300,
+                        "end": 322,
+                        "text": "(Tumasjan et al. 2010)",
+                        "ref_id": "BIBREF36"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Social Media Popularity",
+                "sec_num": null
+            },
+            {
+                "text": "Collection and validation. The article URL was used as the search query for the Twitter Search API10 to obtain the number of tweets and retweets. We queried the Twitter API one, three, and seven days after the article's publication. The process was repeated for Facebook likes and shares using the Facebook FQL API. 11 Because the APIs return a sample of all results, we checked the correlations for 100 articles between the citations we collected via the API and the number of citations that appear on The Guardian article website12 . The correlation is over 0.95 for all measures.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Social Media Popularity",
+                "sec_num": null
+            },
+            {
+                "text": "Popularity measures. Tweets and retweets, as well as shares and likes, are combined into two metrics: Twitter and Facebook popularity. It has been previously suggested that it takes approximately four days for a message to propagate through social media (Leskovec, Backstrom, and Kleinberg 2009) . We found that in our datasets Twitter and Facebook popularity after three and seven days did not differ significantly, and so throughout the paper we report popularity after three days, yielding two social media popularity measures: T = Twitter popularity after three days, and F = Facebook popularity after three days. Considering both direct (tweets, shares) and indirect (retweets, likes) citations allows to investigate the overall social media popularity.",
+                "cite_spans": [
+                    {
+                        "start": 254,
+                        "end": 295,
+                        "text": "(Leskovec, Backstrom, and Kleinberg 2009)",
+                        "ref_id": "BIBREF28"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Social Media Popularity",
+                "sec_num": null
+            },
+            {
+                "text": "We developed a novel approach to analysing headlines using automatically extracted news values and style features. We present (i) summaries of feature implementations, and (ii) results of an exploratory study that investigates how the extracted features correlate with news articles' Twitter and Facebook popularity (Table 2 ). For numeric features we used Kendall's \u03c4 correlation. For binary features using the Wilcoxon signed rank test we compared whether the feature median is significantly higher or lower than the overall median for that social media popularity measure.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 323,
+                        "end": 324,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Headline Features: Implementation and Correlations with Popularity",
+                "sec_num": null
+            },
+            {
+                "text": "We use six news values which have been frequently included in taxonomies (cf. Related Work). These have been previously implemented and validated in Piotrkowicz, Dimitrova, and Markert (2017) . When looking at the impact of news values on popularity, we consider two conditions: 'hard news' (the genre for which news values have originally been theorised) and all genres (to test whether news values work across all article genres).",
+                "cite_spans": [
+                    {
+                        "start": 149,
+                        "end": 191,
+                        "text": "Piotrkowicz, Dimitrova, and Markert (2017)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "News Values",
+                "sec_num": null
+            },
+            {
+                "text": "Prominence: Mention entities that are popular. Reference to prominent entities is one of the key news values. Prominence can be viewed as importance or recognisability.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "News Values",
+                "sec_num": null
+            },
+            {
+                "text": "Table 1 : Examples of most and least popular headlines.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "News Values",
+                "sec_num": null
+            },
+            {
+                "text": "Most popular \"Nobel winner Gabriel Garc\u00eda M\u00e1rquez hospitalised in Mexico City\" (T=299, F=38566)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "\"From a Rwandan Dump to the Halls of Harvard\" (T=3442, F=69285) \"Facebook app revealed to be cause of iPhone battery woes\" (T=923, F=5657) \"Malala Yousafzai, Youngest Nobel Peace Prize Winner, Adds to Her Achievements and Expectations\" (T=245, F=21755)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Least \"What's next after the iGeneration?\" (T=0, F=0) \"The Risina Bean Is Worth the Hunt\" (T=0, F=1) popular \"Tunnel vision on rail competition\" (T=7, F=0) \"Home Sales Around the Region\" (T=0, F=17)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. We approximate Prominence as the amount of online attention an entity gets and implement six features. We extend previous work by using wikification for obtaining entities, which ensures a wide variety of entity types. The first feature is the number of entities identified in a headline. To gauge the online attention that an entity gets we consider two sources: entity mentions in headlines and Wikipedia page views. The news recent prominence feature is the number of entity mentions in headline of the relevant news outlet (The Guardian or New York Times). Since we are using wikification an entity corresponds to a Wikipedia page title. Using Wikipedia pageviews we look at long-term prominence (the median number of daily page views over a year for an entity) and day-before prominence (number of page views for an entity the day before a given headline was published). Finally, we consider how some entities have a bursty, i.e. non-steady, prominence. An entity is defined as being in a burst if its moving average of Wikipedia page views in a given time frame is above a predefined cut-off point (the burst detection algorithm we use has been adapted from Vlachos et al. (2004) ). We implement two featuresthe size of the current burst (how much above the cutoff point are an entity's page views) and burstiness (how many times over a year an entity has been in a burst). Since a given headline may feature multiple entities, all prominence measures are aggregated via summation over all entities.",
+                "cite_spans": [
+                    {
+                        "start": 1180,
+                        "end": 1201,
+                        "text": "Vlachos et al. (2004)",
+                        "ref_id": "BIBREF37"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Most Prominence features are positively correlated with popularity on Twitter and Facebook. Number of entities is positively correlated for Guardian, but negatively for NYT. Entities prominence in headlines is more highly correlated for Twitter, but in case of Facebook it is higher for NYT than for Guardian. Wikipedia longterm and day-before prominence are among the best correlated features -especially for Twitter and when looking at all genres. Current burst size is only significantly correlated for NYT, whereas burstiness is more highly correlated for Twitter measures. Overall, Prominence features have higher correlations with Twitter measures than with Facebook; and for features using Wikipedia they are higher for all genres setting, rather than the news subset.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Sentiment: More negative and biased vocabulary helps. Sentiment-charged language has been highlighted for news discourse (Bednarek and Caple 2012) . Features relating to sentiment and emotionality have been shown to influence a news article's virality (Berger and Milkman 2012) . The effect of sentiment on headline popularity has been studied by Reis et al. (2015) .",
+                "cite_spans": [
+                    {
+                        "start": 121,
+                        "end": 146,
+                        "text": "(Bednarek and Caple 2012)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 252,
+                        "end": 277,
+                        "text": "(Berger and Milkman 2012)",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 347,
+                        "end": 365,
+                        "text": "Reis et al. (2015)",
+                        "ref_id": "BIBREF32"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. Since headlines offer limited context, sentiment analysis carried out on word-level is frequently used (cf. Tan, Lee, and Pang (2014), Gatti et al. (2016) , Szymanski, Orellana-Rodriguez, and Keane ( 2016)). We use SentiWordNet (Baccianella, Esuli, and Sebastiani 2010) positivity and negativity scores of a headline's content words to combine them into sentiment and polarity scores (Kucuktunc et al. 2012) . We also look at indirect sentiment expressed via connotations and biased words. For example, a word may be in itself objective, but carry a negative connotation (e.g. scream). Using a connotations lexicon (Feng et al. 2013) we calculate the proportion of connotated words (positive or negative) to all content words. Secondly, using a bias lexicon (Recasens, Danescu-Niculescu-Mizil, and Jurafsky 2013) we calculate the percentage of biased content words. For example, the same political organisation can be described as far-right, nationalist, or fascist, each of these words indicating a bias towards a certain reading.",
+                "cite_spans": [
+                    {
+                        "start": 151,
+                        "end": 170,
+                        "text": "Gatti et al. (2016)",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 244,
+                        "end": 285,
+                        "text": "(Baccianella, Esuli, and Sebastiani 2010)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 400,
+                        "end": 423,
+                        "text": "(Kucuktunc et al. 2012)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 631,
+                        "end": 649,
+                        "text": "(Feng et al. 2013)",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. The sentiment is only significant for all genres in Guardian dataset. The negative correlation means that headlines with higher negativity are more popular which follows the news values literature (Galtung and Ruge 1965) . Polarity (here, sentiment-charged language overall) is positively correlated across all measures, and the highest for NYT all genres. The connotations feature is significantly correlated for most measures (excluding NYT news subset), while bias is significantly correlated in all cases, but is slightly higher for NYT. Overall, sentimentcharged and biased language in headlines has a positive impact on social media popularity, which is in line with previous research (Louis and Nenkova 2013; Lakkaraju, McAuley, and Leskovec 2013; Tan, Lee, and Pang 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 219,
+                        "end": 242,
+                        "text": "(Galtung and Ruge 1965)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 738,
+                        "end": 776,
+                        "text": "Lakkaraju, McAuley, and Leskovec 2013;",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 777,
+                        "end": 801,
+                        "text": "Tan, Lee, and Pang 2014)",
+                        "ref_id": "BIBREF34"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Magnitude: Enhance or diminish the events you're describing. The size, magnitude, or impact of the event (Johnson-Cartee 2005; Harcup and O'Neill 2001) is considered to influence news selection.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. To ensure that the feature implementation remains topic-independent, we focus on explicit linguistic indicators of event size: comparatives and superlatives (indicated by part-of-speech tags), and amplifiers (intensifiers and downtoners). We obtain wordlists of 248 intensifiers and 39 downtoners by combining the lists given in Quirk et al. (1985) and Biber (1991) . Counts of these features are averaged using the number of words in a headline.",
+                "cite_spans": [
+                    {
+                        "start": 345,
+                        "end": 364,
+                        "text": "Quirk et al. (1985)",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 369,
+                        "end": 381,
+                        "text": "Biber (1991)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. The Magnitude features are significantly correlated with most measures (excepting NYT news subset). The highest correlations in this feature group are Table 2: Feature correlations (Guardian = The Guardian, NYT = New York Times, News = news subset, All = all genres). Numeric features: Kendall's \u03c4 (* p<0.05, \u02c6p<0.01); binary features: feature median is higher/lower (\u2191 / \u2193 p<0.05) than the overall median (in brackets in column headings) using Wilcoxon signed rank test.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "The Guardian New York Times",
+                "sec_num": null
+            },
+            {
+                "text": "Guardian-All NYT-News NYT-All Feature name T (57) F ( 83) T ( 41) F ( 42) T ( 117) F ( 200) T ( 102 for the Guardian news subset. It is interesting to note that relatively infrequent lexical items such as intensifiers and downtoners have an impact on the popularity of headlines.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "In particular, it is somewhat surprising that the presence of downtoners, which function to diminish the words they describe, also correlates positively with popularity. Proximity: Mentioning entities geographically close to the news source is not crucial. Both geographical (Johnson-Cartee 2005, p.128) and cultural proximity (Galtung and Ruge 1965; Gans 1979) has been considered. Proximity has been linked to relevance; the justification being that news events which are geographically or culturally close to the reader are more newsworthy. We assume that readers from the same country as the news outlet constitute a large part of its readership, and so we look only at geographic proximity to the news source.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. A binary feature indicates whether a headline mentions an entity that is geographically close to the news source. We manually create two wordlists by combining names for the country, regions/states, capital city and arrive at 17 UK-related terms for The Guardian, and 61 USrelated terms for New York Times). We match the keywords from the wordlists against both headline text (e.g. \"London smog warning as Saharan sand sweeps southern England\") and the names of Wikipedia categories of each entity supplied in the TagMe output (e.g. category POSTAL SYS- TEM OF THE UNITED KINGDOM for headline \"Undervaluing Royal Mail shares cost taxpayers 750m in one day\").",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Headlines which include a reference to location relevant to a given news outlet's country of origin have a significantly lower median popularity for nearly all measures. This might be due to readers being more oriented towards global news in general, or to our implementation of proximity in relation to the news source rather than the user. This latter will be addressed in our future work.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Surprise: A surprising phrasing sometimes helps. Events which involve \"surprise and/or contrast\" (Harcup and O'Neill 2001) make news.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. We focus on surprising phrasing in headlines (e.g. \"Beekeeper creates coat of living bees\"). We measure it by calculating the commonness of phrases in a headline with reference to a large Wikipedia corpus 13 . We first extract syntactic chunks of following types: SUBJ-V, V-OBJ, ADV-V, ADJ-N, N-N; and then obtain a count from the corpus for the phrase as well as its inflected forms (e.g. man drinks: man drinks, man drank, etc.). We then sum the counts for each phrase and calculate its log-likelihood (LL). Since we are looking for the most surprising phrase, the feature value is given as the lowest LL in the headline.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Surprising word combinations (i.e. those with lower log-likelihood) have a significant correlation for Guardian datasets, but not for New York Times. (Louis and Nenkova 2013), who used a similar approach to find 'creative language', also found that uncommon word combinations positively influence popularity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Uniqueness: Similarity to headlines from recent past usually has negative impact. News has to be new -\"any 13 http://www.nlp.cs.nyu.edu/wikipedia-data new comment or circumstance [. . . ] adds to the debate\" (Conley and Lamble 2006 ). An analysis of several storylines in our dataset showed that of two very similar headlines, the latter tends to be less popular.",
+                "cite_spans": [
+                    {
+                        "start": 179,
+                        "end": 187,
+                        "text": "[. . . ]",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 208,
+                        "end": 231,
+                        "text": "(Conley and Lamble 2006",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. For a given headline we select past headlines from 72 hours before its publication and which have at least one TagMe entity overlapping or neither has any entities. Entity overlap helps with finding headlines that are part of the same storyline, whereas including headlines with no entities ensures better coverage. For a pair of headline and past headline vectors (created using a tf-idf weighted Gigaword corpus) we calculate cosine similarity. The highest cosine similarity is assigned as the feature value.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. This feature significantly correlates with all Guardian measures, but not with NYT. The significant correlations are negative, which means that if there's a very similar headline in recent past, then the current headline will be less popular. This was also found to be the case for titles on Reddit (Lakkaraju, McAuley, and Leskovec 2013) .",
+                "cite_spans": [
+                    {
+                        "start": 321,
+                        "end": 360,
+                        "text": "(Lakkaraju, McAuley, and Leskovec 2013)",
+                        "ref_id": "BIBREF28"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Guardian-News",
+                "sec_num": null
+            },
+            {
+                "text": "We identified several stylistic aspects often highlighted in news selection literature and also investigated linguistic recommendations from news outlet style guides. We found that many aspects of phrasing investigated in the NLP community, which we include here, fall under one of the terms used in the journalism literature.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Brevity: Longer text is better. Traditionally for newspapers, space is of the essence (Bell 1995) . This has also been suggested for headlines (Dor 2003) . We implement Brevity as the number of tokens and the number of characters.",
+                "cite_spans": [
+                    {
+                        "start": 86,
+                        "end": 97,
+                        "text": "(Bell 1995)",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 143,
+                        "end": 153,
+                        "text": "(Dor 2003)",
+                        "ref_id": "BIBREF16"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Both features are positively correlated with popularity, which goes against the suggestions in literature. The correlation is particularly strong for New York Times, especially Twitter. This might be partly due to genre effect, where genres like hard news and opinion have longer headlines that describe events, whereas regular features (crosswords, corrections, TV listings) tend to be brief.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Simplicity: Use simple vocabulary, but more complex syntax. One of the objectives of news writing is \"ease of comprehension\" (Cotter 2010) . This can be related to vocabulary and syntax (Bednarek and Caple 2012) .",
+                "cite_spans": [
+                    {
+                        "start": 125,
+                        "end": 138,
+                        "text": "(Cotter 2010)",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 186,
+                        "end": 211,
+                        "text": "(Bednarek and Caple 2012)",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. We measure syntactic complexity with parse tree height and number of non-terminal tree nodes. To measure lexical complexity we implement four features. The first two -entropy and proportion of difficult wordsare obtained from a trigram language model. 14 We define a difficult word as any word not occurring among the 5000 most common words in the language model. The third lexical complexity feature is median word frequency, obtained using the unlemmatised word frequency lists. 15 The final feature is median information content calculated for nouns and verbs on British National Corpus.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Most of the simplicity features are significantly correlated. The syntactic complexity features have relatively high correlations for Twitter in both news sources, and NYT correlations are slightly higher than those for Guardian. Surprisingly, syntactically more complex headlines seem to be preferred. Although some NLP research on readability (Pitler and Nenkova 2008) found that text length and parse tree height are negatively correlated with readability, in case of headlines it makes sense that these features (along with proportions of verbs and VPs) would be positively correlated, as longer headlines with full sentences instead of 'headlinese' would be easier to understand. Lexical features have slightly higher correlations for Guardian, the negative correlation follows literature (headlines with simpler vocabulary tend to be more popular).",
+                "cite_spans": [
+                    {
+                        "start": 367,
+                        "end": 392,
+                        "text": "(Pitler and Nenkova 2008)",
+                        "ref_id": "BIBREF31"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Unambiguity: Avoid multiple meanings and modal events. News writing is expected to be unambiguous (Galtung and Ruge 1965). We focus on how ambiguity can be realised through lexical and syntactic means.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Implementation. We calculated the median number of senses per word from WordNet -more senses per word indicate a higher chance for ambiguity. We used the TARSQI toolkit 16 to indicate if there is a modal event (should) or a modal relation between events (\"Gove promises to abolish illiteracy [. . . ]\") in the headline.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Number of senses is not significant for most measures, but is weakly positively correlated for three Guardian measures. Headlines with modal events tend to have a lower median popularity for most measures, however in case of all genres in the Guardian modality has a higher median popularity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Punctuation: Avoid ! ? \"\" in most cases. The Guardian's style guide for headlines 17 cautions against using quote, question, and exclamation marks. We implement binary features which check for their presence.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. In most cases the presence of these punctuation marks results in a significantly lower median popularity. However, there are some cases where it seems to have a positive effect -namely, Guardian all genres for question and quote marks. Presence of quote marks can indicate bias (e.g. \"Spanish celebrate 'conquest' of French politics\"), which is consistent with the positive correlation of the bias feature for that data subset. Question marks can indicate event uncertainty (e.g. \"Is the 'cost of living crisis' over?\"), which follows the results for the modality feature (where the feature median was also significantly higher).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Nouns: Avoid consecutive nouns, but proper nouns are fine. The Guardian's style guide discourages using too many successive nouns (so-called 'headlinese', e.g. \"New York assault weapons ban\"). As aspects of 'headlinese', we consider the number of consecutive nouns and the overall proportion of nouns to all words. The Yahoo guidelines for headlines (Barr 2010 ) recommend usage of proper names. We implement this as the proportion of proper names to all nouns.",
+                "cite_spans": [
+                    {
+                        "start": 350,
+                        "end": 360,
+                        "text": "(Barr 2010",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Both the presence of three or more consecutive nouns (indicating 'headlinese') and the 16 http://www.timeml.org/site/tarsqi/toolkit/index.html 17 http://www.theguardian.com/guardian-observer-style-guide-h NP count show quite strong negative correlations (slightly lower for NYT). Surprisingly, the proportions of nouns and proper nouns seem to be positively correlated in most cases. Proper nouns indicate entities and since prominence seems to play an important role, then the positive correlation for the proportion of proper nouns could be attributed to that.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Verbs: Using verbs helps. The usage of verbs is encouraged in headlines in The Guardian's style guide. We implement two features: the number of verb phrases and the proportion of verbs to all words.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Both features are positively correlated for all measures. In the Guardian dataset, correlations with Twitter are slightly higher.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Adverbs: Using adverbs helps. Adverbs, especially adverbs of manner, appear often in headlines (Bednarek and Caple 2012) . We use the proportion of adverbs as a feature.",
+                "cite_spans": [
+                    {
+                        "start": 95,
+                        "end": 120,
+                        "text": "(Bednarek and Caple 2012)",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Impact on popularity. Higher proportion of adverbs has a positive impact on popularity, in particular for the Guardian news subset.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Style",
+                "sec_num": null
+            },
+            {
+                "text": "Overall, we found that each of the extracted features is significantly correlated with at least one of the measures. This shows that headline content influences the popularity of news articles on social media.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Differences between Twitter and Facebook. The correlations with social media popularity for Twitter are slightly stronger than for Facebook. When taking into account news sources as well, in The Guardian dataset correlations are higher for Twitter compared to Facebook, however in New York Times Facebook usually has higher correlations. This variation aligns with reports which describe differences in demographics of news readers on these two websites18 . This calls for further work which considers user demographics.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Differences between news sources. When comparing feature correlations between The Guardian and New York Times, we found that there are some features which play a particularly significant role. For example, most news values and verb-related features were more strongly correlated for Guardian; whereas for NYT it was some Sentiment features, Brevity and syntactic Simplicity. Running correlations on headlines corpora from other broadsheets would determine which news values and style features generalise across the broadsheet genre and which have a particularly significant effect only for certain news outlets. Similarly, corpora consisting of headlines from other types of news outlets (e.g. tabloids) would enable a cross-genre comparison.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "Scope. Our approach is limited to features extracted directly from headline text. We do not take into consideration any external factors like visual presentation (e.g. whether the headline was displayed on the top of the page), or social effects (e.g. whether the headline tweeted by a highprofile celebrity). These confounding factors might explain the relatively low correlations. However, we believe that our features would enrich any approach which models the popularity of headlines. Future work will address such hybrid approaches, which combine content (headline text) and context (presentation, social graph) features.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": null
+            },
+            {
+                "text": "In order for a headline to gain popularity on social media, it first needs to attract the readers' attention. To investigate whether news readers themselves think these factors influence them when choosing headlines, we conducted a survey using CrowdFlower19 . The survey presented 12 headline features (cf. Table 2 ; we excluded Uniqueness since that would require presenting participants with past headlines for comparison), each with a short definition and examples drawn from out datasets. For each headline feature participants were asked \"I personally consider this feature when clicking on headlines\" and given five Likert scale responses. (cf. Figure 1 ).",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 314,
+                        "end": 315,
+                        "text": "2",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 659,
+                        "end": 660,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Human Judgement about Headline Features",
+                "sec_num": null
+            },
+            {
+                "text": "We collected nearly 200 responses. As quality control, we removed any responses where more than 75% of answers were neutral, as well as responses where time to complete was in the bottom quartile (to ensure that participants had taken time to understand the concepts). After the quality control measures, 141 responses were selected: 92 participants were 34 or younger and 49 were 35 or older; 30 were female, 111 were male; 44 were native English speakers and 97 were non-native English speakers; 96 participants read news daily, 45 weekly.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Human Judgement about Headline Features",
+                "sec_num": null
+            },
+            {
+                "text": "Results of the survey are presented in Figure 1 . Most features had a positive response, with news values of Proximity (78%), Prominence (76%), and Sentiment (72%) receiving the highest proportions of positive responses. On the other hand, some style features like Nouns and Verbs had most of the responses as neutral or negative.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 46,
+                        "end": 47,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Human Judgement about Headline Features",
+                "sec_num": null
+            },
+            {
+                "text": "There are some interesting observations when comparing what headline aspects people say they consider compared to our experimental results in Table 2 . Prominence, Sentiment, and Simplicity were both positively judged in the survey and had relatively high significant correlations. However, some of the style features that had high correlations with social media popularity (e.g. Brevity, Nouns) had many neutral or negative responses in the survey. Conversely, Proximity which was associated with significantly lower social media popularity, had the highest proportion of positive responses. What could explain the differences in how news values and style are judged versus how they objectively influence popularity is that higher level concepts like Prominence or Proximity are more salient to readers than relatively technical concepts like nouns or adverbs. While style might not be perceived by readers to influence their choice of headlines (since headlines in news outlets should already be grammatical), it has a significant effect on social media popularity nonetheless. Furthermore, these differences might be due to a difference in the engagement with the headlinethe survey asked about clicking on a headline (private engagement), whereas the correlations target explicit social behaviour such as likes or retweets. Overall, both the survey and the experimental results confirm that news values and style influence a headline's popularity.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 148,
+                        "end": 149,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Human Judgement about Headline Features",
+                "sec_num": null
+            },
+            {
+                "text": "Headlines play a very important role in digital news spaces, especially on social media. In this paper we investigated two types of automatically extracted headline characteristicsnews values and linguistic style -and their impact on article popularity on Twitter and Facebook. The news value of Prominence and style features of Brevity and Simplicity have proven to be especially well-correlated. Prominence, Proximity, and Sentiment were also judged as having a very positive effect when choosing to click on a headline by respondents in a crowdsourced survey. The methods outlined in this paper can be adopted by computational journalism researchers to further investigate the effect of headline features on popularity across different news sources and genres.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": null
+            },
+            {
+                "text": "Our current and future work includes building a prediction model which uses news values and style features to predict the popularity of news values on Twitter and Facebook, and further developing the Prominence and Proximity features to take into account user location.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": null
+            },
+            {
+                "text": "http://www.bbc.com/news/uk-36528256 The Workshops of the Eleventh International AAAI Conference on Web and Social Media AAAI Technical Report WS-17-17: News and Public Opinion",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "https://dev.twitter.com/docs/api/1.1/get/search/tweets",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "https://developers.facebook.com/docs/technical-guides/fql/",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "New York Times does not provide this data for their articles.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "The language model was built using the CMU-Cambridge Toolkit(Clarkson and Rosenfeld 1997) on the New York Times section of the Gigaword corpus(Graff et al. 2003).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "15 http://www.wordfrequency.info/; British National Corpus for Guardian, Corpus of Contemporary American English for NYT.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "http://pewrsr.ch/27TOfhz",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "http://www.crowdflower.com",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This work was supported by a Doctoral Training Grant from the Engineering and Physical Sciences Research Council, UK. Data collection and storage comply with EP-SRC data management policies. The dataset is available at https://doi.org/10.5518/174.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgments",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Using substitutes for full-text news stories in content analysis: Which text is best?",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Althaus",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Edy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Phalen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "American Journal of Political Science",
+                "volume": "45",
+                "issue": "3",
+                "pages": "707--723",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Althaus, S. L.; Edy, J. A.; and Phalen, P. F. 2001. Using substi- tutes for full-text news stories in content analysis: Which text is best? American Journal of Political Science 45(3):pp. 707-723.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Sentiwordnet 3.0: An enhanced lexical resource for sentiment analysis and opinion mining",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Baccianella",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Esuli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Sebastiani",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "LREC",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Baccianella, S.; Esuli, A.; and Sebastiani, F. 2010. Sentiword- net 3.0: An enhanced lexical resource for sentiment analysis and opinion mining. In LREC.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "The pulse of news in social media: Forecasting popularity",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Bandari",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Asur",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Huberman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bandari, R.; Asur, S.; and Huberman, B. A. 2012. The pulse of news in social media: Forecasting popularity. In ICWSM.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "The Yahoo! style guide: the ultimate sourcebook for writing, editing, and creating content for the digital world",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Barr",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Barr, C., ed. 2010. The Yahoo! style guide: the ultimate source- book for writing, editing, and creating content for the digital world. Macmillan.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "News Discourse. Continuum. Bell, A. 1991. The language of news media",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Bednarek",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Caple",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bednarek, M., and Caple, H. 2012. News Discourse. Contin- uum. Bell, A. 1991. The language of news media. Blackwell Oxford.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "News time",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Bell",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "Time & Society",
+                "volume": "4",
+                "issue": "3",
+                "pages": "305--328",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bell, A. 1995. News time. Time & Society 4(3):305-328.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "What makes online content viral",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Berger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "L"
+                        ],
+                        "last": "Milkman",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Journal of Marketing Research",
+                "volume": "49",
+                "issue": "2",
+                "pages": "192--205",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Berger, J., and Milkman, K. L. 2012. What makes online con- tent viral? Journal of Marketing Research 49(2):192-205.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Variation across speech and writing",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Biber",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Biber, D. 1991. Variation across speech and writing. Cam- bridge University Press.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Click bait: Forwardreference as lure in online news headlines",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "N"
+                        ],
+                        "last": "Blom",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Hansen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Journal of Pragmatics",
+                "volume": "76",
+                "issue": "",
+                "pages": "87--100",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Blom, J. N., and Hansen, K. R. 2015. Click bait: Forward- reference as lure in online news headlines. Journal of Pragmat- ics 76:87-100.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Processing deliberate ambiguity in newspaper headlines: Double grounding",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Br\u00f4ne",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Coulson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Discourse Processes",
+                "volume": "47",
+                "issue": "3",
+                "pages": "212--236",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Br\u00f4ne, G., and Coulson, S. 2010. Processing deliberate am- biguity in newspaper headlines: Double grounding. Discourse Processes 47(3):212-236.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Delving into the discourse: Approaches to news values in journalism studies and beyond",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Caple",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Bednarek",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Caple, H., and Bednarek, M. 2013. Delving into the discourse: Approaches to news values in journalism studies and beyond. Reuters Institute for the Study of Journalism.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Pragmatics of Tense and Time in News: From canonical headlines to online news texts. Pragmatics & Beyond New Series",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Chovanec",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chovanec, J. 2014. Pragmatics of Tense and Time in News: From canonical headlines to online news texts. Pragmatics & Beyond New Series. John Benjamins Publishing Company.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Statistical language modeling using the CMU-Cambridge toolkit",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Clarkson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Rosenfeld",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1997,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Clarkson, P., and Rosenfeld, R. 1997. Statistical language mod- eling using the CMU-Cambridge toolkit. In Eurospeech.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "The Daily Miracle: An Introduction to Journalism",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Conley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Lamble",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Conley, D., and Lamble, S. 2006. The Daily Miracle: An Intro- duction to Journalism. Oxford University Press.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "News talk: Investigating the language of journalism",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Cotter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cotter, C. 2010. News talk: Investigating the language of jour- nalism. Cambridge University Press.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Popularity of brand posts on brand fan pages: an investigation of the effects of social media marketing",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "De Vries",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Gensler",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Leeflang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Journal of Interactive Marketing",
+                "volume": "26",
+                "issue": "2",
+                "pages": "83--91",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "De Vries, L.; Gensler, S.; and Leeflang, P. S. 2012. Popularity of brand posts on brand fan pages: an investigation of the effects of social media marketing. Journal of Interactive Marketing 26(2):83-91.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "On newspaper headlines as relevance optimizers",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Dor",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Journal of Pragmatics",
+                "volume": "35",
+                "issue": "5",
+                "pages": "695--721",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dor, D. 2003. On newspaper headlines as relevance optimizers. Journal of Pragmatics 35(5):695-721.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "A comparison of features for automatic readability assessment",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Feng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Jansche",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Huenerfauth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Elhadad",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Coling",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Feng, L.; Jansche, M.; Huenerfauth, M.; and Elhadad, N. 2010. A comparison of features for automatic readability assessment. In Coling.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Connotation lexicon: A dash of sentiment beneath the surface meaning",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Feng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Kang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Kuznetsova",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Choi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "ACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Feng, S.; Kang, J. S.; Kuznetsova, P.; and Choi, Y. 2013. Con- notation lexicon: A dash of sentiment beneath the surface mean- ing. In ACL.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Language in the News",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Fowler",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1991,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fowler, R. 1991. Language in the News. Routeldge.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "The structure of foreign news the presentation of the Congo, Cuba and Cyprus Crises in four Norwegian newspapers",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Galtung",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Ruge",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1965,
+                "venue": "Journal of Peace Research",
+                "volume": "2",
+                "issue": "1",
+                "pages": "64--90",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Galtung, J., and Ruge, M. H. 1965. The structure of foreign news the presentation of the Congo, Cuba and Cyprus Crises in four Norwegian newspapers. Journal of Peace Research 2(1):64-90.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "Deciding what's news: A study of CBS evening news, NBC nightly news, Newsweek, and Time",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Gans",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1979,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gans, H. J. 1979. Deciding what's news: A study of CBS evening news, NBC nightly news, Newsweek, and Time. North- western University Press.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Automatic creation of flexible catchy headlines",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Gatti",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "\u00d6zdal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Guerini",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Stock",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Strapparava",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Graff",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Maeda",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Natural Language Processing meets Journalism Workshop. IJ-CAI",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gatti, L.; \u00d6zdal, G.; Guerini, M.; Stock, O.; and Strapparava, C. 2016. Automatic creation of flexible catchy headlines. In Natural Language Processing meets Journalism Workshop. IJ- CAI. Graff, D.; Kong, J.; Chen, K.; and Maeda, K. 2003. English Gigaword. Linguistic Data Consortium.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "What is news? Galtung and Ruge revisited",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Harcup",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Neill",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "",
+                "volume": "2",
+                "issue": "",
+                "pages": "261--280",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Harcup, T., and O'Neill, D. 2001. What is news? Galtung and Ruge revisited. Journalism Studies 2(2):261-280.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "News narratives and news framing: Constructing political reality",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Johnson-Cartee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Johnson-Cartee, K. S. 2005. News narratives and news fram- ing: Constructing political reality. Rowman & Littlefield Pub- lishers.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Predicting news decisions. An empirical test of the two-component theory of news selection",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Kate",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Luo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Patwardhan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Franz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Florian",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Mooney",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Roukos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Welty",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Communications",
+                "volume": "31",
+                "issue": "1",
+                "pages": "25--43",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kate, R. J.; Luo, X.; Patwardhan, S.; Franz, M.; Florian, R.; Mooney, R. J.; Roukos, S.; and Welty, C. 2010. Learning to predict readability using diverse linguistic features. In Coling. Kepplinger, H. M., and Ehmig, S. C. 2006. Predicting news decisions. An empirical test of the two-component theory of news selection. Communications 31(1):25-43.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Accurate unlexicalized parsing",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Klein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Manning",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "ACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Klein, D., and Manning, C. D. 2003. Accurate unlexicalized parsing. In ACL.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "A large-scale sentiment analysis for Yahoo! answers",
+                "authors": [
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Kucuktunc",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Cambazoglu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Weber",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Ferhatosmanoglu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "WSDM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kucuktunc, O.; Cambazoglu, B. B.; Weber, I.; and Ferhatos- manoglu, H. 2012. A large-scale sentiment analysis for Yahoo! answers. In WSDM.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "What's in a Name? Understanding the Interplay between Titles, Content, and Communities in Social Media",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Lakkaraju",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Mcauley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Leskovec",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Icwsm",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Leskovec",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Backstrom",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Kleinberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lakkaraju, H.; McAuley, J. J.; and Leskovec, J. 2013. What's in a Name? Understanding the Interplay between Titles, Content, and Communities in Social Media. In ICWSM. Leskovec, J.; Backstrom, L.; and Kleinberg, J. 2009. Meme- tracking and the dynamics of the news cycle. In SIGKDD. Louis, A., and Nenkova, A. 2013. What Makes Writing Great? First Experiments on Article Quality Prediction in the Science Journalism Domain. TACL.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Towards a pragma-linguistic framework for the study of sensationalism in news headlines",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Molek-Kozakowska",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Discourse & Communication",
+                "volume": "7",
+                "issue": "2",
+                "pages": "173--197",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Molek-Kozakowska, K. 2013. Towards a pragma-linguistic framework for the study of sensationalism in news headlines. Discourse & Communication 7(2):173-197.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Automatic extraction of news values from headline text",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Piotrkowicz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Dimitrova",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Markert",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Proceedings of the EACL 2017 Student Research Workshop",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Piotrkowicz, A.; Dimitrova, V. G.; and Markert, K. 2017. Au- tomatic extraction of news values from headline text. In Pro- ceedings of the EACL 2017 Student Research Workshop.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Revisiting readability: A unified framework for predicting text quality",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Pitler",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Nenkova",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Quirk",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Greenbaum",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Leech",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Svartvik",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Danescu-Niculescu-Mizil",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Jurafsky",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "EMNLP",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pitler, E., and Nenkova, A. 2008. Revisiting readability: A unified framework for predicting text quality. In EMNLP. Quirk, R.; Greenbaum, S.; Leech, G.; and Svartvik, J. 1985. A comprehensive grammar of the English language. Longman. Recasens, M.; Danescu-Niculescu-Mizil, C.; and Jurafsky, D. 2013. Linguistic models for analyzing and detecting biased lan- guage. In ACL.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Breaking the news: First impressions matter on online news",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Reis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Benevenuto",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Olmo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Prates",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Kwak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "An",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "ICWSM",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Reis, J.; Benevenuto, F.; Olmo, P.; Prates, R.; Kwak, H.; and An, J. 2015. Breaking the news: First impressions matter on online news. In ICWSM.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "Helping news editors write better headlines: A recommender to improve the keyword contents and shareability of news headlines",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Szymanski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Orellana-Rodriguez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Keane",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Natural Language Processing meets Journalism Workshop. IJCAI",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Szymanski, T.; Orellana-Rodriguez, C.; and Keane, M. T. 2016. Helping news editors write better headlines: A recommender to improve the keyword contents and shareability of news head- lines. In Natural Language Processing meets Journalism Work- shop. IJCAI.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "The effect of wording on message propagation: Topic-and author-controlled natural experiments on Twitter",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Tan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Pang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "ACL",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tan, C.; Lee, L.; and Pang, B. 2014. The effect of wording on message propagation: Topic-and author-controlled natural experiments on Twitter. In ACL.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Feature-rich part-of-speech tagging with a cyclic dependency network",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Toutanova",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Klein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Manning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Singer",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "NAACL-HLT",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Toutanova, K.; Klein, D.; Manning, C. D.; and Singer, Y. 2003. Feature-rich part-of-speech tagging with a cyclic dependency network. In NAACL-HLT.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Predicting Elections with Twitter: What 140 Characters Reveal about Political Sentiment",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Tumasjan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Sprenger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Sandner",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Welpe",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tumasjan, A.; Sprenger, T.; Sandner, P.; and Welpe, I. 2010. Predicting Elections with Twitter: What 140 Characters Reveal about Political Sentiment. ICWSM 178-185.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Identifying similarities, periodicities and bursts for online search queries",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Vlachos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Meek",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Vagena",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Gunopulos",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "SIGMOD",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Vlachos, M.; Meek, C.; Vagena, Z.; and Gunopulos, D. 2004. Identifying similarities, periodicities and bursts for online search queries. In SIGMOD.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "num": null,
+                "type_str": "figure",
+                "uris": null,
+                "text": "Figure 1: Survey results to the question \"I personally consider this feature when clicking on headlines\" (N=141). Percentages show the aggregated results for positive, neutral, and negative responses.",
+                "fig_num": "1"
+            }
+        }
+    }
+}

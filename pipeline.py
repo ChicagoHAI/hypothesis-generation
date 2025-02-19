@@ -96,6 +96,7 @@ parser.add_argument("--max_tokens", type=int, default=8000)
 parser.add_argument("--use_refine", action="store_true", default=False)
 parser.add_argument("--max_refine", type=int, default=6)
 parser.add_argument("--seed", type=int, default=42)
+parser.add_argument("--use_ood", action="store_true", default=False, help="Use out-of-distribution data for testing")
 
 args = parser.parse_args()
 
@@ -103,6 +104,7 @@ args = parser.parse_args()
 cross_model_postfix = args.cross_model_postfix
 multihyp = args.multihyp
 use_val = args.use_val
+use_ood = args.use_ood
 max_num_hypotheses = args.max_num_hypotheses
 num_init = args.num_init
 num_train = args.num_train
@@ -134,6 +136,7 @@ def zero_shot_hyp(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
 
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed=seed)
@@ -183,6 +186,7 @@ def only_paper(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
 
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed=seed)
@@ -248,6 +252,7 @@ def with_paper(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
 
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed=seed)
@@ -331,6 +336,7 @@ def original_hypogenic(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
 
     set_seed(seed)
@@ -393,6 +399,7 @@ def IO_iterative_refinement(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
 
     set_seed(seed)
@@ -484,6 +491,7 @@ def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='ba
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
 
     set_seed(seed)
@@ -585,6 +593,7 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
 
     train_data, test_data, val_data = task.get_data(num_train, num_test, num_val, seed)
@@ -716,6 +725,7 @@ def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
+        use_ood=use_ood
     )
     prompt_class = BasePrompt(task)
     results_list = []
@@ -748,7 +758,8 @@ def log_arguments(logger, args):
             ("Model Name", args.model_name),
             ("Model Path", args.model_path),
             ("Task Name", args.task_name),
-            ("Do Train", args.do_train)
+            ("Do Train", args.do_train),
+            ("Use OOD", args.use_ood)
         ],
         "Method Configuration": [
             ("Run Zero Shot", args.run_zero_shot),
@@ -980,6 +991,17 @@ if __name__ == "__main__":
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative Refinement=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             IO_iterative_refinement(task_name=task_name, api=api, model_name=model_name)
+
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Prompting=-=-=-=-=-=-=-=-=-=-=-=")
+        get_res(
+            f"results/{task_name}/{model_name}/IO_refinement/hypotheses_training_sample_init_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=False,
+        )
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative refinement=-=-=-=-=-=-=-=-=-=-=-=")
         get_res(
             f"results/{task_name}/{model_name}/IO_refinement/hypotheses_training_sample_final_seed_{seed}_epoch_2.json",
             task_name=task_name,
