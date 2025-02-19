@@ -64,9 +64,12 @@ for TASK_NAME in "${TASKS[@]}"; do
         CMD="${CMD} --run_${METHOD}"
     done
     CMD="${CMD} 
-    --use_ood
+    --do_train
     "
 
+    # --use_ood
+
+    
     # Additional methods
     # Uncomment if needed
     # --run_only_paper \
