@@ -1,0 +1,3821 @@
+{
+    "paper_id": "Retweet-or-like",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2024-10-02T20:48:32.055705Z"
+    },
+    "title": "Retweet or like? That is the question",
+    "authors": [
+        {
+            "first": "Eva",
+            "middle": [],
+            "last": "Lahuerta-Otero",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Salamanca",
+                "location": {
+                    "settlement": "Salamanca",
+                    "country": "Spain"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Rebeca",
+            "middle": [],
+            "last": "Cordero-Guti\u00e9rrez",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Pontifical University",
+                "location": {
+                    "settlement": "Salamanca",
+                    "country": "Spain"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Fernando",
+            "middle": [],
+            "last": "De La Prieta-Pintado",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "University of Salamanca",
+                "location": {
+                    "settlement": "Salamanca",
+                    "country": "Spain"
+                }
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Purpose -Due to the size and importance of social media, user-generated content analysis is becoming a key factor for companies and brands across the world. By using Twitter messages' content, the purpose of this paper is to identify which elements of the messages enable tweet diffusion and facilitate eWOM. Design/methodology/approach -In total, 30,082 tweets collected from 10,120 Twitter users were classified based on four assorted brands. By comparing with multiple regression techniques high vs low purchase involvement and hedonic vs utilitarian products and using the theory of heuristic-systematic processing of information, the authors examine the causes of tweet diffusion. Findings -The authors illustrate how the elements of a tweet (hashtags, mentions, links, sentiment or tweet length) influence its diffusion and popularity. Research limitations/implications -This study validated the use of information processing theories in the social media field. The study showed a picture on how different Twitter elements influence eWOM and message diffusion under several purchase involvement situations. Practical implications -The results of this study can help social media brand community managers of all types of companies on how to write their Twitter messages to obtain greater dissemination and popularity. Originality/value -The study offers a unique deep brand analysis which helps brands and companies to understand their social media popularity in detail. Depending on product category, companies can achieve maximum social impact on Twitter by focusing on the interactivity items that will work best for their products or brands.",
+    "pdf_parse": {
+        "paper_id": "Retweet-or-like",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Purpose -Due to the size and importance of social media, user-generated content analysis is becoming a key factor for companies and brands across the world. By using Twitter messages' content, the purpose of this paper is to identify which elements of the messages enable tweet diffusion and facilitate eWOM. Design/methodology/approach -In total, 30,082 tweets collected from 10,120 Twitter users were classified based on four assorted brands. By comparing with multiple regression techniques high vs low purchase involvement and hedonic vs utilitarian products and using the theory of heuristic-systematic processing of information, the authors examine the causes of tweet diffusion. Findings -The authors illustrate how the elements of a tweet (hashtags, mentions, links, sentiment or tweet length) influence its diffusion and popularity. Research limitations/implications -This study validated the use of information processing theories in the social media field. The study showed a picture on how different Twitter elements influence eWOM and message diffusion under several purchase involvement situations. Practical implications -The results of this study can help social media brand community managers of all types of companies on how to write their Twitter messages to obtain greater dissemination and popularity. Originality/value -The study offers a unique deep brand analysis which helps brands and companies to understand their social media popularity in detail. Depending on product category, companies can achieve maximum social impact on Twitter by focusing on the interactivity items that will work best for their products or brands.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "The current society 2.0 lives, communicates, reports and interacts through social media. The importance of virtual communities grew to such an extent that a communication's plan cannot be credibly if it only focuses on traditional marketing strategies and does not include the latest digital marketing advances.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Not only that, but penetration in access to social networks through the mobile phone will reach 81.9 percent in 2017 (eMarketer, 2016) . Brands, companies and organizations which are aware of the power and potential of the content generated by social network users, will use diverse 2.0 platforms to approach their target audience. Since many individuals share their opinions, tastes, interests and preferences daily, new information systems need to mine enormous amount of data to extract knowledge from it (L\u00f3pez S\u00e1nchez et al., 2016; L\u00f3pez et al., 2016) .",
+                "cite_spans": [
+                    {
+                        "start": 117,
+                        "end": 134,
+                        "text": "(eMarketer, 2016)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 508,
+                        "end": 536,
+                        "text": "(L\u00f3pez S\u00e1nchez et al., 2016;",
+                        "ref_id": "BIBREF37"
+                    },
+                    {
+                        "start": 537,
+                        "end": 556,
+                        "text": "L\u00f3pez et al., 2016)",
+                        "ref_id": "BIBREF36"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Twitter is a microblogging platform par excellence with 313m active monthly users, out of which 82 percent access it from their mobile device (Twitter, 2016a) . According to the latest statistics (Internet Live Stats, 2016 ) users send 7,443 tweets per second, which means that on this social network more than 643,075,200 messages are generated daily. It is therefore not surprising that microblogging platforms have a prominent role in information sharing, whether it be news, travel, brands or other sectors ( Jansen et al., 2009; Parra-L\u00f3pez et al., 2011) . Microblogging networks allow users to access information and empower them to participate in their dissemination (Steyn et al., 2011) , with the minimal effort of a single mouse click. Given the full adoption of these technologies, Twitter turns out to be a valid source of information in the matters of social exchange and public opinion, moreover, it keeps readers informed on current worldwide issues (Hoeber et al., 2016) .",
+                "cite_spans": [
+                    {
+                        "start": 142,
+                        "end": 158,
+                        "text": "(Twitter, 2016a)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 196,
+                        "end": 222,
+                        "text": "(Internet Live Stats, 2016",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 511,
+                        "end": 533,
+                        "text": "( Jansen et al., 2009;",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 534,
+                        "end": 559,
+                        "text": "Parra-L\u00f3pez et al., 2011)",
+                        "ref_id": "BIBREF43"
+                    },
+                    {
+                        "start": 674,
+                        "end": 694,
+                        "text": "(Steyn et al., 2011)",
+                        "ref_id": "BIBREF53"
+                    },
+                    {
+                        "start": 965,
+                        "end": 986,
+                        "text": "(Hoeber et al., 2016)",
+                        "ref_id": "BIBREF22"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Since Twitter users can receive information without having to follow others, an essential aspect is knowing what makes a message attractive and what makes it stand out from the rest, as suggested in the literature the diffusion of a message varies with its content (Zhang et al., 2017) . A common notion that persists among the virtual community of this network is that only users with specific qualities can propagate their ideas with success. However, the messages of these members must include some definite elements that help them become more widespread. Given that very few empirical researches, using data mining techniques had been conducted in this field (Ikeda et al., 2013) , the focus of our study is to find out what elements and characteristics of tweets make their propagation and diffusion successful. The conclusions that will arise from this study will be of benefit to brands, companies and users; brands and companies will be able to approach their target audiences more effectively and users will spread their messages more easily, by employing additional elements (hashtags, mentions, links, etc.) on tweets.",
+                "cite_spans": [
+                    {
+                        "start": 265,
+                        "end": 285,
+                        "text": "(Zhang et al., 2017)",
+                        "ref_id": "BIBREF67"
+                    },
+                    {
+                        "start": 663,
+                        "end": 683,
+                        "text": "(Ikeda et al., 2013)",
+                        "ref_id": "BIBREF23"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The structure of this work is as follows: the first part is a review of the literature based on the heuristic-systematic information processing model. In Section 2, we present the study variables that make up the theoretical model and its associated hypotheses. Methodology is found in Section 3 and finally, in the discussions and conclusions sections we specify the theoretical and commercial implications of this work and possible future lines of research.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "The number of tweets sent in a single second is overwhelming and users face hundreds of thousands of messages containing complex information to process. For this reason, additional elements in a tweet network will reduce uncertainty and help network users process information with a minimal effort but in a valid and credible way. The term diffusion is understood as a process of communication in which the information (news, an advertising message, a brand tweet, etc.) is spread over time through certain channels, by members of a social system (such as Twitter whose users form a virtual community) (Rogers, 1995, p. 5) .",
+                "cite_spans": [
+                    {
+                        "start": 602,
+                        "end": 622,
+                        "text": "(Rogers, 1995, p. 5)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backgrounds and prior literature",
+                "sec_num": "2."
+            },
+            {
+                "text": "Microblogging networks allow brands and companies to communicate with users in a much more personal way than traditional means of communication. The simplicity of following a user or being followed ( following and follower) on the social platform makes it easier to construct broadcast networks (Chu and Kim, 2011) through which information can be propagated quickly and effectively. In recent research conducted by (Liu et al., 2012; Xu and Yang, 2012; Zhang, Peng, Zhang; Wang and Zhu, 2014, Zhang and Watts, 2008) , a heuristic-systematic model of information processing (Chaiken, 1980) , HSM from now on, is used to explain why some posts are more popular than others, reaching higher diffusion and popularity rates (understood as having more retweets or likes). When a user retweets a message, they give it veracity; this shows that after having processed the information they make a conscious decision to share it (Liu et al., 2012) . The model argues that there are two different types of information processing which are not exclusive, on the contrary they can complement each other and act simultaneously. The first one is the systematic model of information processing in which the message plays a fundamental role in forming a critical judgment. Users who use a systematic strategy to process information will make behavioral decisions (retweet, comment or like it) based on their assessment of the quality of information received (Zhang and Watts, 2008) , which is based on message content (Metzger et al., 2010) . Therefore, users should analyze each of the messages they receive and must have sufficient motivation, ability and cognitive resources to process the information (Zhang and Watts, 2008; Liu et al., 2012) . Compared with heuristic processing described below, systematic information processing requires more effort and more resources (Eagly and Chaiken, 1993) .",
+                "cite_spans": [
+                    {
+                        "start": 295,
+                        "end": 314,
+                        "text": "(Chu and Kim, 2011)",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 416,
+                        "end": 434,
+                        "text": "(Liu et al., 2012;",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 435,
+                        "end": 453,
+                        "text": "Xu and Yang, 2012;",
+                        "ref_id": "BIBREF61"
+                    },
+                    {
+                        "start": 454,
+                        "end": 473,
+                        "text": "Zhang, Peng, Zhang;",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 474,
+                        "end": 482,
+                        "text": "Wang and",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 483,
+                        "end": 503,
+                        "text": "Zhu, 2014, Zhang and",
+                        "ref_id": "BIBREF65"
+                    },
+                    {
+                        "start": 504,
+                        "end": 516,
+                        "text": "Watts, 2008)",
+                        "ref_id": "BIBREF66"
+                    },
+                    {
+                        "start": 574,
+                        "end": 589,
+                        "text": "(Chaiken, 1980)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 920,
+                        "end": 938,
+                        "text": "(Liu et al., 2012)",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 1442,
+                        "end": 1465,
+                        "text": "(Zhang and Watts, 2008)",
+                        "ref_id": "BIBREF66"
+                    },
+                    {
+                        "start": 1502,
+                        "end": 1524,
+                        "text": "(Metzger et al., 2010)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 1689,
+                        "end": 1712,
+                        "text": "(Zhang and Watts, 2008;",
+                        "ref_id": "BIBREF66"
+                    },
+                    {
+                        "start": 1713,
+                        "end": 1730,
+                        "text": "Liu et al., 2012)",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 1859,
+                        "end": 1884,
+                        "text": "(Eagly and Chaiken, 1993)",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backgrounds and prior literature",
+                "sec_num": "2."
+            },
+            {
+                "text": "Users of microblogging networks tend to use a number of cognitive heuristic strategies to process information effectively. They will, therefore, process the messages by evaluating their contextual elements (their characteristics) (Chaiken, 1987; Zhang and Watts, 2008) . These contextual factors (heuristic cues) are used to judge the validity of a message without having to process its content in detail (Chaiken, 1987) . Some of these heuristic cues include, for example, the attributes of the authors of posts: their popularity within the network, their level of commitment, their level of activity, etc. (Metzger et al., 2010; Kwak et al., 2010) . Those characteristics project a sense of credibility giving trustworthiness to the content of the message without having to process it in a systematic way. Among heuristic cues, we also find the characteristics of the message itself (not its content), which help to process the tweet and dictate its informational capacity.",
+                "cite_spans": [
+                    {
+                        "start": 230,
+                        "end": 245,
+                        "text": "(Chaiken, 1987;",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 246,
+                        "end": 268,
+                        "text": "Zhang and Watts, 2008)",
+                        "ref_id": "BIBREF66"
+                    },
+                    {
+                        "start": 405,
+                        "end": 420,
+                        "text": "(Chaiken, 1987)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 608,
+                        "end": 630,
+                        "text": "(Metzger et al., 2010;",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 631,
+                        "end": 649,
+                        "text": "Kwak et al., 2010)",
+                        "ref_id": "BIBREF31"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Backgrounds and prior literature",
+                "sec_num": "2."
+            },
+            {
+                "text": "With the development of the internet consumers have begun to substitute the traditional search for information for an internet-based searches (Klein and Ford, 2003) . This information search has become prominent with time (So et al., 2005) as consumers increasingly look for information on products and services that fulfill their requirements and meet certain standards (Gursoy and Chen, 2000) , facilitating their purchase decision-process (Cho, 2008; Overby and Lee, 2006) .",
+                "cite_spans": [
+                    {
+                        "start": 142,
+                        "end": 164,
+                        "text": "(Klein and Ford, 2003)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 222,
+                        "end": 239,
+                        "text": "(So et al., 2005)",
+                        "ref_id": "BIBREF51"
+                    },
+                    {
+                        "start": 371,
+                        "end": 394,
+                        "text": "(Gursoy and Chen, 2000)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 442,
+                        "end": 453,
+                        "text": "(Cho, 2008;",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 454,
+                        "end": 475,
+                        "text": "Overby and Lee, 2006)",
+                        "ref_id": "BIBREF41"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purchase involvement",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Consumers are becoming more dependent on information technologies when searching for information. Involvement is one of the main reasons why consumers try to mitigate uncertainty and perceived purchase risk (Shang et al., 2006) . Highly-involved information seekers will need concrete and instrumental features (systematic cues) to process messages accordingly (Sanchez-Franco and Rondan-Catalu\u00f1a, 2010), whereas less involved seekers will rely more on affective features (Petty and Cacioppo, 1981) or simple decision rules to take decisions (heuristic cues).",
+                "cite_spans": [
+                    {
+                        "start": 207,
+                        "end": 227,
+                        "text": "(Shang et al., 2006)",
+                        "ref_id": "BIBREF50"
+                    },
+                    {
+                        "start": 472,
+                        "end": 498,
+                        "text": "(Petty and Cacioppo, 1981)",
+                        "ref_id": "BIBREF44"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purchase involvement",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Previous research works suggest that consumers face a dilemma between necessities (utilitarian products) and luxuries (hedonic goods) (Kivetz and Simonson, 2002; Lu et al., 2016) this is because utilitarian products provide practical utilities, whereas luxury products usually provide pleasant experiences (Voss et al., 2003) . Still, the preferences for utilitarian or hedonic products may vary.",
+                "cite_spans": [
+                    {
+                        "start": 134,
+                        "end": 161,
+                        "text": "(Kivetz and Simonson, 2002;",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 162,
+                        "end": 178,
+                        "text": "Lu et al., 2016)",
+                        "ref_id": "BIBREF38"
+                    },
+                    {
+                        "start": 306,
+                        "end": 325,
+                        "text": "(Voss et al., 2003)",
+                        "ref_id": "BIBREF57"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purchase involvement",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "In the literature, it is explained that spending money on hedonic products creates conflict in users, because it implies spending money on non-necessary items (Kivetz and Zheng, 2016) . Consequently, users do not need to process messages exhaustively, as they can rely on a number of simple decision rules (heuristic cues) which will help make a decision. However, spending money on utilitarian products seems more natural, since they are essential in users' lives. Therefore, we could argue that utilitarian products require more information, this would imply a systematic processing of the messages received.",
+                "cite_spans": [
+                    {
+                        "start": 159,
+                        "end": 183,
+                        "text": "(Kivetz and Zheng, 2016)",
+                        "ref_id": "BIBREF28"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purchase involvement",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Social media provide users with an eWOM, through which they can find information on products and services that triggers their hedonic motivations (Lin and Rauschnabel, 2016) . Past research has found that these affective reactions to messages, cause by hedonic feelings, can influence product evaluations (Adaval, 2001) , leading to hedonic consumption (Arnold and Reynolds, 2012) .",
+                "cite_spans": [
+                    {
+                        "start": 146,
+                        "end": 173,
+                        "text": "(Lin and Rauschnabel, 2016)",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 305,
+                        "end": 319,
+                        "text": "(Adaval, 2001)",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 353,
+                        "end": 380,
+                        "text": "(Arnold and Reynolds, 2012)",
+                        "ref_id": "BIBREF2"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purchase involvement",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "In contrast, consumers driven by utilitarian motivations will try to focus and be more attentive to messages in order to make a purchase decision with greater efficiency (Lin and Rauschnabel, 2016) . Social media can also provide detailed (systematic cues) and varied types of information (text, video, audio, images, etc.) that help consumers reduce uncertainty and take better shopping decisions.",
+                "cite_spans": [
+                    {
+                        "start": 170,
+                        "end": 197,
+                        "text": "(Lin and Rauschnabel, 2016)",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 289,
+                        "end": 323,
+                        "text": "(text, video, audio, images, etc.)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purchase involvement",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Consequently, microblogging sites, like other types of social media, offer a perfect mixture of both utilitarian and hedonic attributes of information (Kolsaker and Drakatos, 2009) so marketers can tailor wheir writing according to consumers' needs, using systematic or heuristic cues (or a combination of both) when posting tweets.",
+                "cite_spans": [
+                    {
+                        "start": 151,
+                        "end": 180,
+                        "text": "(Kolsaker and Drakatos, 2009)",
+                        "ref_id": "BIBREF30"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Purchase involvement",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Information processing theories, such as the HSM, state that social media users utilize diverse strategies to minimize search and to process information quickly (Metzger et al., 2010) . According to the least information principle, users would prefer to process messages heuristically as they prefer to do less cognitive effort unless it is necessary (Zhang, Zhao, Cheung and Lee, 2014) .",
+                "cite_spans": [
+                    {
+                        "start": 161,
+                        "end": 183,
+                        "text": "(Metzger et al., 2010)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 351,
+                        "end": 386,
+                        "text": "(Zhang, Zhao, Cheung and Lee, 2014)",
+                        "ref_id": "BIBREF63"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "In the absence of content or when users prefer not to spend too much effort on processing a message, users can rely on additional elements to assess its credibility, such as style or design, which may not directly relate with content (Castillo et al., 2011) .",
+                "cite_spans": [
+                    {
+                        "start": 234,
+                        "end": 257,
+                        "text": "(Castillo et al., 2011)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "These cognitive cues consist of \"useful mental shortcuts, rules-of thumb or guidelines\" that help decision making (Metzger et al., 2010) . Thus, internet users employ heuristic cues (rather than systematic) to cope with uncertainty and information overload in web environments (Gigerenzer and Todd, 1999; Metzger et al., 2010; Pirolli, 2005; Sundar, 2008; Wirth et al., 2007) . When heuristic processing occurs, individuals put less effort and fewer resources into assessing the validity of a message and therefore accept the information more quickly (Zhao et al., 2015) .",
+                "cite_spans": [
+                    {
+                        "start": 114,
+                        "end": 136,
+                        "text": "(Metzger et al., 2010)",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 277,
+                        "end": 304,
+                        "text": "(Gigerenzer and Todd, 1999;",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 305,
+                        "end": 326,
+                        "text": "Metzger et al., 2010;",
+                        "ref_id": "BIBREF40"
+                    },
+                    {
+                        "start": 327,
+                        "end": 341,
+                        "text": "Pirolli, 2005;",
+                        "ref_id": "BIBREF45"
+                    },
+                    {
+                        "start": 342,
+                        "end": 355,
+                        "text": "Sundar, 2008;",
+                        "ref_id": "BIBREF54"
+                    },
+                    {
+                        "start": 356,
+                        "end": 375,
+                        "text": "Wirth et al., 2007)",
+                        "ref_id": "BIBREF59"
+                    },
+                    {
+                        "start": 551,
+                        "end": 570,
+                        "text": "(Zhao et al., 2015)",
+                        "ref_id": "BIBREF68"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Although the content generated on Twitter can spread rapidly through the eWOM ( Jansen et al., 2009; Wolny and Mueller, 2013) , some of the generated content receives no attention and cannot be diffused (Alboqami et al., 2015) . Consequently, marketers and companies need to have an understanding of the elements that enable diffusion on microblogging social sites.",
+                "cite_spans": [
+                    {
+                        "start": 78,
+                        "end": 100,
+                        "text": "( Jansen et al., 2009;",
+                        "ref_id": "BIBREF25"
+                    },
+                    {
+                        "start": 101,
+                        "end": 125,
+                        "text": "Wolny and Mueller, 2013)",
+                        "ref_id": "BIBREF60"
+                    },
+                    {
+                        "start": 203,
+                        "end": 226,
+                        "text": "(Alboqami et al., 2015)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Several research works try to explain the influence of certain tweet elements (such as hashtags, mentions, number of words or links) on their diffusion and propagation among the virtual community (Hao et al., 2016; Xu and Yang, 2012) . As previously mentioned, this study will use of the numbers of likes and retweets as measures of popularity and dissemination capabilities, in line with previous studies (Alboqami et al., 2015; Xu and Yang, 2012; Zhang, Peng, Zhang, Wang and Zhu, 2014; Zhang and Peng, 2015; Zhang and Watts, 2008) .",
+                "cite_spans": [
+                    {
+                        "start": 196,
+                        "end": 214,
+                        "text": "(Hao et al., 2016;",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 215,
+                        "end": 233,
+                        "text": "Xu and Yang, 2012)",
+                        "ref_id": "BIBREF61"
+                    },
+                    {
+                        "start": 406,
+                        "end": 429,
+                        "text": "(Alboqami et al., 2015;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 430,
+                        "end": 448,
+                        "text": "Xu and Yang, 2012;",
+                        "ref_id": "BIBREF61"
+                    },
+                    {
+                        "start": 449,
+                        "end": 488,
+                        "text": "Zhang, Peng, Zhang, Wang and Zhu, 2014;",
+                        "ref_id": "BIBREF65"
+                    },
+                    {
+                        "start": 489,
+                        "end": 510,
+                        "text": "Zhang and Peng, 2015;",
+                        "ref_id": "BIBREF64"
+                    },
+                    {
+                        "start": 511,
+                        "end": 533,
+                        "text": "Zhang and Watts, 2008)",
+                        "ref_id": "BIBREF66"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Tweet length. First, the length of the tweet, given the 140-character constraint imposed by the platform, is one of the fundamental elements of information processing since all content that is not provided in the message must be added by means of external links (heuristic cue). Although in the future the platform will not take into account the number of characters of the media files in the count of the 140 characters, they are still considered an element that is part of the message, so they diminish the writing space. Several researches such as Castillo et al. (2011) or Xu and Yang (2012) include tweet length (number of words, number of characters or average words per tweet) as independent variables when considering diffusion. Thus, Bennet (2014) found that the ideal length of a post is between 70 and 100 characters. Lee (2015) in his empirical study showed that the ideal length of a tweet is between the maximum 120 and 140 characters allowed by the platform. Enge (2014) also states that the longer the tweet is, the greater its engagement possibilities (in the form of retweets and likes). Chen et al. (2012) believe that longer tweets get more attention and are more attractive, since they are likely to be more informative than shorter ones. Zhang, Peng, Zhang, Wang and Zhu (2014) and Zhang and Peng (2015) also found similar results in their researches. Therefore, in accordance to previous studies, we propose the following hypotheses:",
+                "cite_spans": [
+                    {
+                        "start": 551,
+                        "end": 573,
+                        "text": "Castillo et al. (2011)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 577,
+                        "end": 595,
+                        "text": "Xu and Yang (2012)",
+                        "ref_id": "BIBREF61"
+                    },
+                    {
+                        "start": 743,
+                        "end": 756,
+                        "text": "Bennet (2014)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 829,
+                        "end": 839,
+                        "text": "Lee (2015)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 1106,
+                        "end": 1124,
+                        "text": "Chen et al. (2012)",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 1260,
+                        "end": 1299,
+                        "text": "Zhang, Peng, Zhang, Wang and Zhu (2014)",
+                        "ref_id": "BIBREF65"
+                    },
+                    {
+                        "start": 1304,
+                        "end": 1325,
+                        "text": "Zhang and Peng (2015)",
+                        "ref_id": "BIBREF64"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H1a. Users writing lengthy tweets obtain retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H1b. Users writing lengthy tweets obtain likes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Sentiment. It is difficult to measure the feeling and emotional involvement of tweets in only 140 characters but several authors have verified in the literature the importance of emotiveness in messages and how this has influenced message diffusion on microblogging networks in a positive way (Hansen et al., 2011; Lahuerta-Otero and Cordero-Guti\u00e9rrez, 2016; Zhang and Peng, 2015) . Using different algorithms, lexical dictionaries and sentiment classifications, there are several empirical researches which demonstrate that the message's power of propagation lies in the author being personally involved in a tweet (Boyd et al., 2010; Jansen et al., 2009) .",
+                "cite_spans": [
+                    {
+                        "start": 293,
+                        "end": 314,
+                        "text": "(Hansen et al., 2011;",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 315,
+                        "end": 358,
+                        "text": "Lahuerta-Otero and Cordero-Guti\u00e9rrez, 2016;",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 359,
+                        "end": 380,
+                        "text": "Zhang and Peng, 2015)",
+                        "ref_id": "BIBREF64"
+                    },
+                    {
+                        "start": 616,
+                        "end": 635,
+                        "text": "(Boyd et al., 2010;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 636,
+                        "end": 656,
+                        "text": "Jansen et al., 2009)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Sentiment analysis is being used in almost all social domains, this is because our beliefs and expectations are conditioned on how others see and evaluate the world. Social media users search for the opinion of others to reduce their uncertainty. Since Twitter users expect their message to be first spread among their network of contacts and then diffused beyond that, they need to convince and engage their audience. One way to do this is by expressing feelings (whether positive; praise, gratitude, etc., or negative; criticism, dissatisfaction or denunciation) (Brooke et al., 2009; Pang and Ng, 2016) making it easier for their followers to process messages and make value judgments with less effort. One way in which users indicate that they agree with the content is by liking or retweeting the message, what contributes to its dissemination.",
+                "cite_spans": [
+                    {
+                        "start": 565,
+                        "end": 586,
+                        "text": "(Brooke et al., 2009;",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 587,
+                        "end": 605,
+                        "text": "Pang and Ng, 2016)",
+                        "ref_id": "BIBREF42"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Therefore, we propose the following hypotheses:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H2a. Users writing with a strong sentiment (either positive or negative) obtain retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H2b. Users writing with a strong sentiment (either positive or negative) obtain likes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Links. Because of the platform's 140-character restriction, this microblogging network relies heavily on completing the provided information with internal resources. However, if the user has to leave the platform to open an external link, they may find that they have to put more effort into processing the information. These links are sometimes seen as a heuristic cue that can distract the user (Liu et al., 2012) , so authors, such as Lee (2015) or Ross (2014) consider that they do not encourage tweet diffusion. However, several authors affirm that the use of links positively affects message dissemination on Twitter (Xu and Yang, 2012) , this is because the user can see that the information comes from a relevant source; the ability to view it increases veracity (Bongwon et al., 2010; Boyd et al., 2010; Zarrella, 2009; Zhang, Peng, Zhang, Wang and Zhu, 2014; Zhang and Peng, 2015) . In this research, the authors assume that the 140-character limit on a tweet can often make the message incomplete; the use of external links which provide additional information helps make a message more complete.",
+                "cite_spans": [
+                    {
+                        "start": 397,
+                        "end": 415,
+                        "text": "(Liu et al., 2012)",
+                        "ref_id": "BIBREF35"
+                    },
+                    {
+                        "start": 438,
+                        "end": 448,
+                        "text": "Lee (2015)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 623,
+                        "end": 642,
+                        "text": "(Xu and Yang, 2012)",
+                        "ref_id": "BIBREF61"
+                    },
+                    {
+                        "start": 771,
+                        "end": 793,
+                        "text": "(Bongwon et al., 2010;",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 794,
+                        "end": 812,
+                        "text": "Boyd et al., 2010;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 813,
+                        "end": 828,
+                        "text": "Zarrella, 2009;",
+                        "ref_id": "BIBREF62"
+                    },
+                    {
+                        "start": 829,
+                        "end": 868,
+                        "text": "Zhang, Peng, Zhang, Wang and Zhu, 2014;",
+                        "ref_id": "BIBREF65"
+                    },
+                    {
+                        "start": 869,
+                        "end": 890,
+                        "text": "Zhang and Peng, 2015)",
+                        "ref_id": "BIBREF64"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "In this sense, the use of external links can help to complement a message (which can be considered as a heuristic cue) that a user must process, mitigating possible information deficiency (Sabate et al., 2014) , we propose the following hypotheses:",
+                "cite_spans": [
+                    {
+                        "start": 188,
+                        "end": 209,
+                        "text": "(Sabate et al., 2014)",
+                        "ref_id": "BIBREF48"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H3a. Users writing links get retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H3b. Users writing links get likes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Mentions. Interactivity is a key aspect of any social network. When a user wants to communicate directly with another follower on this microblogging platform, he/she can make a mention (by typing the \"@\" symbol in front of their username). In this way, the follower receives a direct notice in their mention tab that someone has mentioned them in a message to which they can reply, once processed, the user can reply through a retweet, mentioning the previous user or by liking the message. There are several researches in the literature (Enge, 2014; Lahuerta-Otero and Cordero-Guti\u00e9rrez, 2016; Xu and Yang, 2012; Zhang and Peng, 2015) that indicate the positive effect of mentions on the dissemination of messages. When users form a community, the group often shows mutual signs of support. This theory is based on the rule of reciprocity (Goulder, 1960) according to which individuals in virtual communities help each other by providing support and information. When a user wants to show support to another or agree with them on an issue, they can share the content, often in the form of a retweet, or if they find it easier they can do it by liking another user's posts. For this reason, retweeting (or liking) a message can be conceived as a form of social defense (Malhotra et al., 2012) . Consequently, since the use of mentions may favor the diffusion of a tweet and increase the social influence of an individual, brand or company (Lahuerta-Otero and Cordero-Guti\u00e9rrez, 2016), we formulate the following hypotheses:",
+                "cite_spans": [
+                    {
+                        "start": 538,
+                        "end": 550,
+                        "text": "(Enge, 2014;",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 551,
+                        "end": 594,
+                        "text": "Lahuerta-Otero and Cordero-Guti\u00e9rrez, 2016;",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 595,
+                        "end": 613,
+                        "text": "Xu and Yang, 2012;",
+                        "ref_id": "BIBREF61"
+                    },
+                    {
+                        "start": 614,
+                        "end": 635,
+                        "text": "Zhang and Peng, 2015)",
+                        "ref_id": "BIBREF64"
+                    },
+                    {
+                        "start": 840,
+                        "end": 855,
+                        "text": "(Goulder, 1960)",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 1269,
+                        "end": 1292,
+                        "text": "(Malhotra et al., 2012)",
+                        "ref_id": "BIBREF39"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H4a. Users writing mentions get retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H4b. Users writing mentions get likes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Hashtag. The use of hashtags is also a part of message interactivity options. Using the \"#\" symbol before a keyword allows users to categorize the tweets and group them into themes. In this way, users interested in conversations on a particular topic can find all the tweets with elements related to that category cluster. The most commented topics on the platform are highlighted in the form of trending topics allowing users to follow the latest news easily. As a result, they contribute to relevance because they help readers with contextual inferences to process information more easily (Gul et al., 2016) . Therefore, if a tweet is intended to have the maximum possible diffusion, it should contain hashtags for the fast sorting and processing of information (heuristic cue). With a proper combination of hashtags, users can achieve information flow to increase public attention (Wang et al., 2016) . As a result, it will not be necessary to analyze the message in depth in order to know what topic the tweet refers to.",
+                "cite_spans": [
+                    {
+                        "start": 591,
+                        "end": 609,
+                        "text": "(Gul et al., 2016)",
+                        "ref_id": "BIBREF18"
+                    },
+                    {
+                        "start": 884,
+                        "end": 903,
+                        "text": "(Wang et al., 2016)",
+                        "ref_id": "BIBREF58"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "The use of hashtags contributes to an increase in tweet diffusion as evidenced by several empirical studies: Enge (2014), Lahuerta-Otero and Cordero-Guti\u00e9rrez, 2016 or Xu and Yang (2012) . Therefore, and in line with the above, we propose the following hypotheses:",
+                "cite_spans": [
+                    {
+                        "start": 168,
+                        "end": 186,
+                        "text": "Xu and Yang (2012)",
+                        "ref_id": "BIBREF61"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H5a. Users writing hashtags get retweets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "H5b. Users writing hashtags get likes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Control variable: followers. Due to the features of this platform, it is not necessary that two users follow each other in order to receive each other's information. However, this network creates virtual communities in which the majority of users with a greater capacity to disseminate information have a larger number of followers. In this way, they find it much easier to popularize the content of a message and to propagate information (Zhang, Peng, Zhang, Wang and Zhu, 2014) . In this sense, Bongwon et al. (2010) found a positive correlation between the number of followers and retweets. In addition, the reputation of a user with many followers makes them process the messages more quickly, since they are conceived as a reliable source of information. The number of followers is a proxy measure of the size of the direct audience of a user on this social network (Cha et al., 2010) , this is why we introduce it into the model as a control variable.",
+                "cite_spans": [
+                    {
+                        "start": 439,
+                        "end": 479,
+                        "text": "(Zhang, Peng, Zhang, Wang and Zhu, 2014)",
+                        "ref_id": "BIBREF65"
+                    },
+                    {
+                        "start": 497,
+                        "end": 518,
+                        "text": "Bongwon et al. (2010)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 871,
+                        "end": 889,
+                        "text": "(Cha et al., 2010)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Recent research on microblogging addresses information exchange empirically. However, we aim to provide further insights on the factors that increase the diffusion of the tweets by contrasting the following regression equations:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Lik i \u00bc b 0 \u00feb 1 TL i \u00fe b 2 PS i \u00fe b 3 NS i \u00feb 4 L i \u00feb 5 M i \u00feb 6 H i \u00feb 7 F i \u00fee i ; Ret i \u00bc b 0 \u00feb 1 TL i \u00fe b 2 PS i \u00feb 3 NS i \u00feb 4 L i \u00feb 5 M i \u00feb 6 H i \u00feb 7 F i \u00fee i :",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Characteristics of the message",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "Twitter, a popular microblogging network, was used in this study to obtain the necessary information which then became the object of our analysis. We have chosen this network in particular due to its popularity and privacy features, which enabled us to collect tweets without having to ask for additional permissions; only Twitter API was required. The PIAR tool, developed by the BISITE research group of the University of Salamanca, was used for collection tasks. This tool allowed us to collect all the tweets chronologically, including information associated with a keyword and the users that publish them (sentiment, structure and replies to the tweets or information about influence or activity of the user, among others).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Research methodology",
+                "sec_num": "3."
+            },
+            {
+                "text": "In the present study, we analyzed data related to well-known brands of high and low involvement and of a prominent utilitarian or hedonic character (see Table I ). In this way, the study has four different sub samples to test the model in different contexts.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 159,
+                        "end": 160,
+                        "text": "I",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Selection of the sample",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "These brands have been selected for their importance, their names are also clearly linked to the brand (they have no double meaning); this is important since the data was collected by a tool and in this way, we avoided any confusion with the names.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Selection of the sample",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "All the tweets of Spanish-speaking users that included the keywords \"BMW,\" \"Nissan,\" \"Lego\" or \"Nivea,\" were collected together with user information, the post did not need to include the # (symbol which determines a hashtag) to outline the word.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Selection of the sample",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "In addition, the chosen low-and high-involvement brands belong to the same sector to avoid the possible influence of other macroeconomic variables outside the scope of this study.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Selection of the sample",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "In total, 33,082 tweets were gathered from 10,120 users. We collected tweets on each brand during 12 days ( from July 13 until July 25, 2016 for Nissan and BMW and from July 6 until July 18, 2017 for Nivea and Lego). After reviewing and refining the initially obtained information, a proper analysis was performed with 30,587 tweets of 9,341 users, distributed over the four brands, as shown in Table I .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 401,
+                        "end": 402,
+                        "text": "I",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Selection of the sample",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "The measures used in this study are described below:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "(1) Popularity of tweet (dependent variables):",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 Likes (Lik): this variable reflects whether Twitter users liked the post.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 Retweets (Ret): this variable reflects if a tweet was shared with other users.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "(2) Content of the tweets (independent variables):",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 Tweet length (TL): the number of characters in a tweet. It is a more adequate measure than the number of words since the tweet length restriction itself is measured in characters.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 Sentiment of tweet: variable that collects positive, negative or neutral feelings. Two dummy variables are generated for their analysis (Positive_sentiment -PS and Negative_sentiment -NS). The three possible polarities of the variable are thus considered. \u2022 Mentions (M): a dichotomous variable categorizing the tweet into those that contained mentions and those that did not.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 Hashtags (H): a dichotomous variable stating the presence or the absence of hashtags in the text. The Links, Mentions, and Hashtags variables were measured as dichotomous variables because of platforms restriction to 140 characters, a Twitter user cannot choose the maximum that he/she wants to use. The only decision users can make is whether or not to use these three elements and adapt them according to the existing space constraints. It is for this reason that a dichotomous decision may be more appropriate since it reflects the desire or not to use these heuristic cues, which are the object of study in this work.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "\u2022 Followers (F) (control variable): the number of followers that receives the tweets of a user.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Measurements",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "Analysis of the data obtained was performed through several multiple regressions using the stepwise method. To test all the hypotheses, regressions were made for the four brands, both for the analysis of the number of likes and retweets. In each of the cases, two models were carried out, the first one being a control model with the Followers variable (M0) and another with the explanatory variables mentioned above (M1). The results of these regressions are presented in Table II .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 479,
+                        "end": 481,
+                        "text": "II",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": "4."
+            },
+            {
+                "text": "Lego: for this brand category, retweet is the measure of popularity and diffusion with the greatest explanatory power, 23.9 percent R 2 ( p o0.001). In this case, the structure of a tweet is decisive, additional elements (heuristic cues) such mentions, encourage users to retweet and therefore increase the diffusion contents, thus providing support for H4a ( \u03b2 \u00bc 0.190; p o0.001). In the same way, those tweets that express sentiment (both positive and negative) make the individual more willing to share this information through a retweet, in accordance with H2a. Finally, the tweets that contain a greater number of characters obtain retweets as stated in H1a ( \u03b2 \u00bc 0.001; p o0.001). There is no support for the other hypotheses, in the case of retweets for a hedonic, low-involvement brand.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hedonic brand of low involvement",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "In the case of the Likes variable, Lego obtains inferior results, because only 8.3 percent ( p o 0.01) of the variability of the like variable is explained by the variables of our study. Thus, the first thing we can observe is that many more components are needed to obtain a lower explanatory value. In addition, in this case, we find two elements that are counterproductive to get a like, as are the case of mentions and links so we do not find support for the H3b ( \u03b2 \u00bc 0.051; p o0.001) and H4b ( \u03b2 \u00bc -0.057; p o0.001). We also observe that sentiment plays an essential role in this case (either positive or negative). A longer tweet length favors the receiving of likes, confirming H1b ( \u03b2 \u00bc 0.0000001; p o0.01). And we also observe that the control variable ( followers) also has a positive effect when getting a tweet to become a highlighted message for a user.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Hedonic brand of low involvement",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Nivea: In comparison to Lego, this brand obtained high explanatory power (high R 2 values; 29.5 percent) for retweets. In this type of brand, in order to spread the tweets related to Nivea, a large number of followers is required. Additional elements in a tweet (hashtags and mentions) ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Utilitarian brand of low involvement",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Table II .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 8,
+                        "text": "II",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Utilitarian brand of low involvement",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Regressions for the dependent variables retweet and likes 570 OIR 42,5 also encourage diffusion as postulated in H4a ( \u03b2 \u00bc 0.107; po0.01) and H5a ( \u03b2 \u00bc 0.241; po0.001). In this case, it is counterproductive to add links to posts (H3a; \u03b2 \u00bc -0.126; po0.001), probably because external links take the user out of the Twitter platform so if they want to get informed they have to leave the external web page and re-enter the microblogging network. Another essential aspect that has an influence on getting a tweet retweeted, is when the message expresses some kind of sentiment, reinforcing H2a. We also find evidence to support H1a (a lengthy tweet obtains retweets, diffusing the message on Twitter).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Utilitarian brand of low involvement",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "With regards to a tweet getting likes, the sentiment variable is essential, both in its positive and negative polarities, confirming H2b. In addition, using mentions and the fact that the tweet is marked as favorite (H5b; \u03b2 \u00bc 0.00007079; p o0.001) contributes to explain the variance of the dependent variable likes; the same happens with the case of the Followers variable (control variable). It should be noted that the like variable has a much lower explanatory power (8 percent) for the Nivea brand.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Utilitarian brand of low involvement",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "4.3 Hedonic brand of high involvement BMW: Good results have been obtained in this category where popularity is determined by a retweet (R 2 \u00bc 38.3 percent; p o0.001). In the tweets of this brand type the inclusion of different elements is necessary for diffusion action. We have to keep in mind that buying a product or a service from a high involvement brand means a high capital value. For this II .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 398,
+                        "end": 400,
+                        "text": "II",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Utilitarian brand of low involvement",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "reason, mentions are a significant element in these tweets since they enable other users and brands to find more information on a product or a service in a simple way, this is in accordance with what was proposed in H4a ( \u03b2 \u00bc 0.512; po 0.001). In addition, the brand's own characteristics make it necessary to add more information to the tweet (a greater number of characters, thus supporting H1a ( \u03b2 \u00bc 0.002; p o0.001)), however, no information should be included that would take the individual out of the social network environment (a dissuasive heuristic cue, which in this case would be an external link). Also, the tweets that contribute a negative sentiment will be more popular, as pointed out in the previous argument, users' value this type of messages more and they feel more engaged in them since they have to be for or against an opinion (H2a). As mentioned before, having to make costly payments for a high involvement product, such as a BMW, makes negative news have much more impact on users and they are more likely to share that information. Talking about a brand of high involvement can be very interesting to followers, whose numbers increase the chances of tweets being retweeted and viewed by a greater audience. However, the tweets on this brand are more likely to get likes if no additional elements are added to them, contrary to the statements in H3b, H4b and H5b. This is so because liking a tweet is a special action on the part of the user (content that they wish to save for the future or a message that they agree with implicitly) but that does not necessarily imply that it is shared with others. This fact supposes that users find an important content because of the message, so they prefer not to use additional elements in order to leave space to include in the message information about the brand.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Utilitarian brand of low involvement",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "Nissan: This brand obtains better results than the other regressions analyzed for the dependent, retweet variable (R 2 \u00bc 48.4 percent; p o 0.001). Tweets that had been diffused (retweet) are the ones that included additional elements which favor their diffusion, such as mentions (H4a; \u03b2 \u00bc 0.632; p o 0.001) and links (H3a; \u03b2 \u00bc 0.098; p o0.001); however, the use of hashtags is counterproductive which means that for this brand H5a ( \u03b2 \u00bc -0.062; p o0.001) is not true. Tweets that include positive sentiment are disseminated more easily (H2a is true for this brand), content associated with love of the brand, the achievement of good results or satisfaction with the purchase, making it easier to propagate the message and spread it through the eWOM. In addition, the length of the tweet is important in this case as users need to be provided with more information that will give a clear understanding of the product, any additional services or the brands itself, reducing any uncertainties (H1a; \u03b2 \u00bc 0.001; p o0.001).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Utilitarian brand of high involvement",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "When considering the likes that a tweet on this brand gets, the explanatory power of the independent variables is low (R 2 \u00bc 1.9 percent; p o0.001). In this case, elements such as links or hashtag are elements that reduce the possibility of a tweet getting a like, since they decrease the content that is important to the user, having the opposite effect to that established in H3b ( \u03b2 \u00bc -0.058; p o0.001) and H5b ( \u03b2 \u00bc -0.021; p o0.01), respectively. The number of followers is significant for the increase of the number of likes.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Utilitarian brand of high involvement",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Comments on brands generated by users affect them and the businesses and companies linked to these brands. From the current study, we can conclude that getting a like on a tweet is a complicated task. This is understandable if we think of Twitter's game rules, where the essential thing is to create and disseminate information to other users in an open, fast and collaborative way.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion and conclusion",
+                "sec_num": "5."
+            },
+            {
+                "text": "From the tweets collected for the analysis, we can observe that there are more publications on high involvement brands, this is probably due to the high cost and complexity involved in the purchase of their products. We can also conclude that there is no common pattern for all the brands analyzed. Depending on the characteristics of each brand, the tweets published should include specific elements that will help increase their popularity.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion and conclusion",
+                "sec_num": "5."
+            },
+            {
+                "text": "Regarding hashtags, this element appears to have a negative influence on the popularity of tweets in high involvement brands Hashtags reduce the number of characters in a tweet, which means that less information is provided. Since keyword tracking on Twitter does not require the prior symbol #, if the user considers that they are not suitable they may even delete them when publishing (or retweeting) to get extra characters available.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion and conclusion",
+                "sec_num": "5."
+            },
+            {
+                "text": "We also discovered that sentiment in tweets is an important variable in most brands, so regardless of whether a tweet is written in an informative way or in a tone of praise or a complaint against the brand, these tweets can be equally popular.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion and conclusion",
+                "sec_num": "5."
+            },
+            {
+                "text": "The importance of the number of characters in the tweets for brands of high and low involvement should also be emphasized. Longer messages are disseminated by users much more than the shorter ones, this is because they provide more information about the brand. This result agrees with what Tao et al. (2012) said, but contradicts other studies such as the Social Media Examiner (2014) which recommends the use of less than 110 characters in a tweet to improve engagement.",
+                "cite_spans": [
+                    {
+                        "start": 290,
+                        "end": 307,
+                        "text": "Tao et al. (2012)",
+                        "ref_id": "BIBREF55"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion and conclusion",
+                "sec_num": "5."
+            },
+            {
+                "text": "This study focuses on information dissemination theories (such as the HSM) and how the use of heuristic cues contribute to message popularity in the social media field. Even more important is the finding that the effect of the heuristic cues varies according to product categories so Twitter messages should be written accordingly. This research then adds literature to a research line little explored so far on information processing theories applied to the social media in different product categories. The results of these study fit in a broad field of application so researchers can extend on each category better adapt writing strategies.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Managerial implications",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "This work contributes to research in the field of microblogging, the results obtained in this study can help us increase the popularity of messages on networks, such as Twitter. First, by proposing and testing an empirical model including different elements of a tweet (length, sentiment, hashtags, links, mentions) on several type of product categories (high vs low involvement and hedonic vs utilitarian products), we aim to bring value to both researchers and practitioners. We hope that this study helps future research that aims to understand the causes of message diffusion on microblogging social sites. Second, we hope that this study helps managers of different types of brands to better understand the diversity of Twitter users and their needs. Consequently, they can appeal to them more efficiently. The findings also allow companies or followers of the brand to delve into nuances of the product being marketed or disseminated.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Managerial implications",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "We should emphasize that there is a great difference between the generation of information in brands of high and low involvement. This is a logical difference since products of high involvement entail high costs and complexity in their purchase, provoking the users to have stronger opinions and comments on the brands, whether positive or negative.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Managerial implications",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "We observed that the results can vary greatly, depending on the brand analyzed as well as the variable tested. From the results obtained in determining a dependent variable, we can conclude that they are more positive for the retweet variable than for the like variable (between 5 and 48.4 percent for the retweets and between one 0.1 and 8.3 percent for likes). These results are logical within the framework of the Twitter network. When an individual considers a tweet to be important or interesting, they are more likely to share it with their peers and followers as a form of solidarity and generation of information flows ( Jin and Phua, 2014) . However, just liking a post does not imply its diffusion to other users.",
+                "cite_spans": [
+                    {
+                        "start": 627,
+                        "end": 648,
+                        "text": "( Jin and Phua, 2014)",
+                        "ref_id": "BIBREF26"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Managerial implications",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "Consequenty, and in order to facilitate tweet diffusion and enabling eWOM, marketers, social media managers, online brand managers and practitioners should vary their writing styles according to product category. First, the use of links is not recommended except for utilitarian, high involvement brands. The reason is that the inclusion of a hyperlink reduces valuable space for information. Companies should be as informative as possible in their messages with the space provided to gain popularity and effective dissemination. On the other hand, a central result of this study is that enabling Twitter dialogue through the use of mentions is a factor that increases retweeting for all types of brands, but it is not adequate to generate likes. This is a logical results since Twitter users' natural behavior is to retweet popular messages instead of like them (liking behaviors are more common in other types of social networks, such as Facebook or Instagram).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Managerial implications",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "By using the results of this research, all types of companies that value eWOM and data sharing can use these elements when writing tweets in order to create a virtuous cycle of reciprocity with their social community and increase their online popularity. This means that not only large, well-established firms but also small companies and SMEs can benefit from these actions. More importantly, they can increase their visibility without the use of paid marketing techniques as Twitter is a simple and fast social media tool, so that any user can write effective messages using the most accurate heuristic cues depending on product category.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Managerial implications",
+                "sec_num": "5.1"
+            },
+            {
+                "text": "We have to recognize the limitations of this study, the biggest one of them being the number of brands evaluated; we only analyzed two brands for each of the categories with the selected variables. More tweet content variable analysis could also be added to obtain more elaborate results.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations and suggestions for future research",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "With the intention of correcting some of these limitations, we will carry out a more in-depth analysis by including a greater number of brands in each of the categories, allowing us to extrapolate the results. We will also extend the period of data collection to obtain a greater number of tweets with more robust data in the empirical model of analysis.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations and suggestions for future research",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Finally, other variables such as user influence and tweet theme will be added to examine their impact on the popularity of the tweets published about brands, and finding whether the published content encourages actions such as retweeting or liking.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Limitations and suggestions for future research",
+                "sec_num": "5.2"
+            },
+            {
+                "text": "Downloaded by University of Sunderland At 07:29 28 August 2018 (PT)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This work was supported by the Ministry of Industry, Energy and Tourism Strategic actions of economy and society 2015. SOGESCLOUD-M\u00e1quina social auto-adaptativa para la gesti\u00f3n corporativa en la nube (grant number TSI-100104-2015-007) and Programa Estatal de Investigaci\u00f3n, Desarrollo e Innovaci\u00f3n Orientada a los Retos de la Sociedad 2013-2016. An\u00e1lisis de innovaciones clave en la distribuci\u00f3n comercial minorista: sus determinantes y sus consecuencias en los h\u00e1bitos de compra (ECO2014-53060-R).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgments",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Sometimes it just feels right: the differential weighting of affect-consistent and affect-inconsistent product information",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Adaval",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2001,
+                "venue": "Journal of Consumer Research",
+                "volume": "28",
+                "issue": "1",
+                "pages": "1--17",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Adaval, R. (2001), \"Sometimes it just feels right: the differential weighting of affect-consistent and affect-inconsistent product information\", Journal of Consumer Research, Vol. 28 No. 1, pp. 1-17.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Electronic word of mouth in social media: the common characteristics of retweeted and favourited marketer-generated content posted on Twitter",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Alboqami",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Al-Karaghouli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Baeshen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Erkan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Evans",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Ghoneim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "International Journal of Internet Marketing and Advertising",
+                "volume": "9",
+                "issue": "4",
+                "pages": "338--358",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Alboqami, H., Al-Karaghouli, W., Baeshen, Y., Erkan, I., Evans, C. and Ghoneim, A. (2015), \"Electronic word of mouth in social media: the common characteristics of retweeted and favourited marketer-generated content posted on Twitter\", International Journal of Internet Marketing and Advertising, Vol. 9 No. 4, pp. 338-358.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Approach and avoidance motivation: investigating hedonic consumption in a retail setting",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Arnold",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Reynolds",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Journal of Retailing",
+                "volume": "88",
+                "issue": "3",
+                "pages": "399--411",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Arnold, M.J. and Reynolds, K.E. (2012), \"Approach and avoidance motivation: investigating hedonic consumption in a retail setting\", Journal of Retailing, Vol. 88 No. 3, pp. 399-411.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "The optimal length of a tweet, hashtag, podcast, slideshare and (almost) everything online",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bennet",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bennet, S. (2014), \"The optimal length of a tweet, hashtag, podcast, slideshare and (almost) everything online\", available at: www.adweek.com/digital/ideal-length-social-media-podcast-blog/ (accessed March 2, 2016).",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Want to be retweeted? Large scale analytics on factors impacting retweet in twitter network",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Bongwon",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Lichan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Peter",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Chi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "IEEE International Conference on Privacy, Security, Risk and Trust",
+                "volume": "",
+                "issue": "",
+                "pages": "177--184",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Bongwon, S., Lichan, H., Peter, P. and Chi, E.H. (2010), \"Want to be retweeted? Large scale analytics on factors impacting retweet in twitter network\", IEEE International Conference on Privacy, Security, Risk and Trust, pp. 177-184.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Tweet, tweet, retweet: conversational aspects of retweeting on twitter",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Boyd",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Golder",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Lotan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "43rd IEEE Hawaii International Conference on System Sciences",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Boyd, D., Golder, S. and Lotan, G. (2010), \"Tweet, tweet, retweet: conversational aspects of retweeting on twitter\", 43rd IEEE Hawaii International Conference on System Sciences, HI, August 29, 2014.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Cross-linguistic sentiment analysis: from english to Spanish",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Brooke",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Tofiloski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Taboada",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Recent Advances in Natural Language Processing",
+                "volume": "",
+                "issue": "",
+                "pages": "50--54",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Brooke, J., Tofiloski, M. and Taboada, M. (2009), \"Cross-linguistic sentiment analysis: from english to Spanish\", Recent Advances in Natural Language Processing, pp. 50-54.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Information credibility on twitter",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Castillo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Mendoza",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Poblete",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the 20th International Conference on World Wide Web",
+                "volume": "",
+                "issue": "",
+                "pages": "675--684",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Castillo, C., Mendoza, M. and Poblete, B. (2011), \"Information credibility on twitter\", Proceedings of the 20th International Conference on World Wide Web, pp. 675-684.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Measuring user influence in twitter: the million follower fallacy",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Cha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Haddadi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Benevenuto",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Gummadi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the Fourth International Conference on Weblogs and Social Media",
+                "volume": "",
+                "issue": "",
+                "pages": "10--17",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cha, M., Haddadi, H., Benevenuto, F. and Gummadi, P.K. (2010), \"Measuring user influence in twitter: the million follower fallacy\", Proceedings of the Fourth International Conference on Weblogs and Social Media, Washington, DC, pp. 10-17.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Heuristic versus systematic information processing and the use of source versus message cues in persuasion",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Chaiken",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1980,
+                "venue": "Journal of Personality and Social Psychology",
+                "volume": "39",
+                "issue": "5",
+                "pages": "752--766",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chaiken, S. (1980), \"Heuristic versus systematic information processing and the use of source versus message cues in persuasion\", Journal of Personality and Social Psychology, Vol. 39 No. 5, pp. 752-766.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "The heuristic model of persuasion",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Chaiken",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1987,
+                "venue": "Social Influence: The Ontario Symposium",
+                "volume": "5",
+                "issue": "",
+                "pages": "3--39",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chaiken, S. (1987), \"The heuristic model of persuasion\", In Social Influence: The Ontario Symposium, Vol. 5. pp. 3-39.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Collaborative personalized tweet recommendation",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Zheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Jin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Yao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Yu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 35th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+                "volume": "",
+                "issue": "",
+                "pages": "661--670",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chen, K., Chen, T., Zheng, G., Jin, O., Yao, E. and Yu, Y. (2012), \"Collaborative personalized tweet recommendation\", Proceedings of the 35th International ACM SIGIR Conference on Research and Development in Information Retrieval, pp. 661-670.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Information value structure for vacation travel",
+                "authors": [
+                    {
+                        "first": "M.-H",
+                        "middle": [],
+                        "last": "Cho",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Journal of Travel Research",
+                "volume": "47",
+                "issue": "1",
+                "pages": "72--83",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cho, M.-H. (2008), \"Information value structure for vacation travel\", Journal of Travel Research, Vol. 47 No. 1, pp. 72-83.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Determinants of consumer engagement in electronic word-of-mouth (eWOM) in social networking sites",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Chu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Kim",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "International Journal of Advertising",
+                "volume": "30",
+                "issue": "1",
+                "pages": "47--75",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chu, S.C. and Kim, Y. (2011), \"Determinants of consumer engagement in electronic word-of-mouth (eWOM) in social networking sites\", International Journal of Advertising, Vol. 30 No. 1, pp. 47-75.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Nearly one-third of the world will use social networks regularly this year",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Eagly",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Chaiken",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1993,
+                "venue": "www.emarketer.com/Article/Nearly-One-Third-of-World-Will-Use-Social-Networks-Regularly",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Eagly, A.H. and Chaiken, S. (1993), The Psychology of Attitude, Harcourt Brace, Fort Worth, TX. eMarketer (2016), \"Nearly one-third of the world will use social networks regularly this year\", available at: www.emarketer.com/Article/Nearly-One-Third-of-World-Will-Use-Social-Networks- Regularly-This-Year/1014157 (accessed July 10, 2016).",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Twitter engagement unmasked: a study of more than 4M tweets",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Enge",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Enge, E. (2014), \"Twitter engagement unmasked: a study of more than 4M tweets\", available at: www. stonetemple.com/twitter-engagement-umasked/ (accessed March 10, 2016).",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Simple Heuristics That Make Us Smart",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Gigerenzer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Todd",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gigerenzer, G. and Todd, P.M. (1999), Simple Heuristics That Make Us Smart, Oxford University Press, New York, NY.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "The norm of reciprocity: a preliminary statement",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Goulder",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1960,
+                "venue": "American Sociological Review",
+                "volume": "25",
+                "issue": "2",
+                "pages": "161--178",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Goulder, A.W. (1960), \"The norm of reciprocity: a preliminary statement\", American Sociological Review, Vol. 25 No. 2, pp. 161-178.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Tweets speak louder than leaders and masses: an analysis of tweets about the Jammu and Kashmir elections 2014",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Gul",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Mahajan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Tun Nisa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Ahmad Shah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Jan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Ahmad",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Online Information Review",
+                "volume": "40",
+                "issue": "7",
+                "pages": "900--912",
+                "other_ids": {
+                    "DOI": [
+                        "10.1108/OIR-10-2015-0330"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Gul, S., Mahajan, I., Tun Nisa, N., Ahmad Shah, T., Jan, A. and Ahmad, S. (2016), \"Tweets speak louder than leaders and masses: an analysis of tweets about the Jammu and Kashmir elections 2014\", Online Information Review, Vol. 40 No. 7, pp. 900-912, doi: 10.1108/OIR-10-2015-0330.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Competitive analysis of cross cultural information search behaviour",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Gursoy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Chen",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2000,
+                "venue": "Tourism Management",
+                "volume": "21",
+                "issue": "6",
+                "pages": "583--590",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gursoy, D. and Chen, J.S. (2000), \"Competitive analysis of cross cultural information search behaviour\", Tourism Management, Vol. 21 No. 6, pp. 583-590.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Good friends, bad news affect and virality in twitter",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Hansen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Arvidsson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Nielsen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Colleoni",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Etter",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Future Information Technology",
+                "volume": "",
+                "issue": "",
+                "pages": "34--43",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hansen, L.K., Arvidsson, A., Nielsen, F.A., Colleoni, E. and Etter, M. (2011), \"Good friends, bad news affect and virality in twitter\", in Park, J.J., Yang, L.T. and Lee, C. (Eds), Future Information Technology, Springer, Berlin and Heidelberg, pp. 34-43.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "How to strengthen the social media interactivity of E-government: evidence from China",
+                "authors": [
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Hao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Zheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Zeng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Fan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Online Information Review",
+                "volume": "40",
+                "issue": "1",
+                "pages": "79--96",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hao, X., Zheng, D., Zeng, Q. and Fan, W. (2016), \"How to strengthen the social media interactivity of E-government: evidence from China\", Online Information Review, Vol. 40 No. 1, pp. 79-96.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Visual twitter analytics (Vista): temporally changing sentiment and the discovery of emergent themes within sport event tweets",
+                "authors": [
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Hoeber",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Hoeber",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "El Meseery",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Odoh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Gopi",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Online Information Review",
+                "volume": "40",
+                "issue": "1",
+                "pages": "25--41",
+                "other_ids": {
+                    "DOI": [
+                        "10.1108/OIR-02-2015-0067"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Hoeber, O., Hoeber, L., El Meseery, M., Odoh, K. and Gopi, R. (2016), \"Visual twitter analytics (Vista): temporally changing sentiment and the discovery of emergent themes within sport event tweets\", Online Information Review, Vol. 40 No. 1, pp. 25-41, doi: 10.1108/OIR-02-2015-0067.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Twitter user profiling based on text and community mining for market analysis",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Ikeda",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [
+                            "G"
+                        ],
+                        "last": "Hattori",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Ono",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Asoh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Higashino",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Knowledge-Based Systems",
+                "volume": "51",
+                "issue": "",
+                "pages": "35--47",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ikeda, K., Hattori, I.G., Ono, C., Asoh, H. and Higashino, T. (2013), \"Twitter user profiling based on text and community mining for market analysis\", Knowledge-Based Systems, Vol. 51, October, pp. 35-47.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "Number of tweets sent in one second",
+                "authors": [
+                    {
+                        "first": "Internet",
+                        "middle": [],
+                        "last": "Live",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Stats",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Internet Live Stats (2016), \"Number of tweets sent in one second\", available at: www.internetlivestats. com/one-second/ (accessed July 15, 2016).",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Twitter power: tweets as electronic word of mouth",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Jansen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Sobel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Chowdury",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Journal of the American Society for Information Science and Technology",
+                "volume": "60",
+                "issue": "9",
+                "pages": "1--20",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jansen, B.J., Zhang, M., Sobel, K. and Chowdury, A. (2009), \"Twitter power: tweets as electronic word of mouth\", Journal of the American Society for Information Science and Technology, Vol. 60 No. 9, pp. 1-20.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Following celebrities' tweets about brands: the impact of twitter-based electronic word-of-mouth on consumers' source credibility perception, buying intention, and social identification with celebrities",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "A A"
+                        ],
+                        "last": "Jin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Phua",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Journal of Advertising",
+                "volume": "43",
+                "issue": "2",
+                "pages": "181--195",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jin, S.A.A. and Phua, J. (2014), \"Following celebrities' tweets about brands: the impact of twitter-based electronic word-of-mouth on consumers' source credibility perception, buying intention, and social identification with celebrities\", Journal of Advertising, Vol. 43 No. 2, pp. 181-195.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Self-control for the righteous: towards a theory of pre-commitment to indulgence",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Kivetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Simonson",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2002,
+                "venue": "Journal of Consumer Research",
+                "volume": "29",
+                "issue": "2",
+                "pages": "199--217",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kivetz, R. and Simonson, I. (2002), \"Self-control for the righteous: towards a theory of pre-commitment to indulgence\", Journal of Consumer Research, Vol. 29 No. 2, pp. 199-217.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "The effects of promotions on hedonic versus utilitarian purchases",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Kivetz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Zheng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Journal of Consumer Psychology",
+                "volume": "27",
+                "issue": "1",
+                "pages": "59--68",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kivetz, R. and Zheng, Y. (2016), \"The effects of promotions on hedonic versus utilitarian purchases\", Journal of Consumer Psychology, Vol. 27 No. 1, pp. 59-68.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "Consumer search for information in the digital age: an empirical study of prepurchase search for automobiles",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Klein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Ford",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Journal of Interactive Marketing",
+                "volume": "17",
+                "issue": "3",
+                "pages": "21--49",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Klein, L.R. and Ford, G.T. (2003), \"Consumer search for information in the digital age: an empirical study of prepurchase search for automobiles\", Journal of Interactive Marketing, Vol. 17 No. 3, pp. 21-49.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "Mobile advertising: the influence of emotional attachment to mobile devices on consumer receptiveness",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Kolsaker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Drakatos",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "Journal of Marketing Communications",
+                "volume": "15",
+                "issue": "4",
+                "pages": "267--280",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kolsaker, A. and Drakatos, N. (2009), \"Mobile advertising: the influence of emotional attachment to mobile devices on consumer receptiveness\", Journal of Marketing Communications, Vol. 15 No. 4, pp. 267-280.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "What is twitter, a social network or a news media?",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Kwak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Park",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Moon",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Proceedings of the 19th International Conference on World Wide Web",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Kwak, H., Lee, C., Park, H. and Moon, S. (2010), \"What is twitter, a social network or a news media?\", paper presented at the Proceedings of the 19th International Conference on World Wide Web, NC, April 26-30.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "Looking for the perfect tweet: the use of data mining techniques to find influencers on twitter",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Lahuerta-Otero",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Cordero-Guti\u00e9rrez",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Computers in Human Behavior",
+                "volume": "64",
+                "issue": "",
+                "pages": "575--583",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lahuerta-Otero, E. and Cordero-Guti\u00e9rrez, R. (2016), \"Looking for the perfect tweet: the use of data mining techniques to find influencers on twitter\", Computers in Human Behavior, Vol. 64 November, pp. 575-583.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "What analyzing 1 million tweets taught us",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lee, K. (2015), \"What analyzing 1 million tweets taught us\", available at: https://thenextweb.com/ socialmedia/2015/11/03/what-analyzing-1-million-tweets-taught-us/#.tnw_UuEubCkS (accessed July 10, 2016).",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Social media marketing: psychological insights, managerial implications, and future research directions",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Rauschnabel",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Encyclopedia of E-Commerce Development, Implementation, and Management",
+                "volume": "",
+                "issue": "",
+                "pages": "2144--2158",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lin, C.A. and Rauschnabel, P.A. (2016), \"Social media marketing: psychological insights, managerial implications, and future research directions\", in Lee (Ed.), Encyclopedia of E-Commerce Development, Implementation, and Management, IGI Global, Western Illinois University, pp. 2144-2158.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Determinants of information retweeting in microblogging",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Internet Research",
+                "volume": "22",
+                "issue": "4",
+                "pages": "443--466",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Liu, Z., Liu, L. and Li, H. (2012), \"Determinants of information retweeting in microblogging\", Internet Research, Vol. 22 No. 4, pp. 443-466.",
+                "links": null
+            },
+            "BIBREF36": {
+                "ref_id": "b36",
+                "title": "Twitter user clustering based on their preferences and the Louvain algorithm",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "L\u00f3pez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Revuelta",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "De La Prieta",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Gil-Gonz\u00e1lez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Dang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [
+                            "D L"
+                        ],
+                        "last": "Escalona",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Corchuelo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Mathieu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Vale",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Campbell",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Rossi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Adam",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Jim\u00e9nez-L\u00f3pez",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Trends in Practical Applications of Scalable Multi-Agent Systems, the PAAMS Collection",
+                "volume": "",
+                "issue": "",
+                "pages": "349--356",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L\u00f3pez, D., Revuelta, J., De la Prieta, F., Gil-Gonz\u00e1lez, A.B. and Dang, C. (2016), \"Twitter user clustering based on their preferences and the Louvain algorithm\", in Prieta, F.D.L., Escalona, M.J., Corchuelo, R., Mathieu, P., Vale, Z., Campbell, A.T., Rossi, S., Adam, E., Jim\u00e9nez-L\u00f3pez, M.D., Navarro, E.M. and Moreno, M.N. (Eds), Trends in Practical Applications of Scalable Multi-Agent Systems, the PAAMS Collection, Springer, Cham, pp. 349-356.",
+                "links": null
+            },
+            "BIBREF37": {
+                "ref_id": "b37",
+                "title": "Analysis and visualization of social user communities",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "L\u00f3pez S\u00e1nchez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Revuelta",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "De La Prieta Pintado",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Dang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "ADCAIJ: Advances in Distributed Computing and Artificial Intelligence Journal",
+                "volume": "4",
+                "issue": "3",
+                "pages": "11--18",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "L\u00f3pez S\u00e1nchez, D., Revuelta, J., de la Prieta Pintado, F. and Dang, C. (2016), \"Analysis and visualization of social user communities\", ADCAIJ: Advances in Distributed Computing and Artificial Intelligence Journal, Vol. 4 No. 3, pp. 11-18.",
+                "links": null
+            },
+            "BIBREF38": {
+                "ref_id": "b38",
+                "title": "Hedonic products for you, utilitarian products for me",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Lu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Fang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Judgment and Decision Making",
+                "volume": "11",
+                "issue": "4",
+                "pages": "332--341",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lu, J., Liu, Z. and Fang, Z. (2016), \"Hedonic products for you, utilitarian products for me\", Judgment and Decision Making, Vol. 11 No. 4, pp. 332-341.",
+                "links": null
+            },
+            "BIBREF39": {
+                "ref_id": "b39",
+                "title": "How to get your messages retweeted",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Malhotra",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Malhotra",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "See",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "MIT Sloan Management Review",
+                "volume": "53",
+                "issue": "2",
+                "pages": "61--66",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Malhotra, A., Malhotra, C.K. and See, A. (2012), \"How to get your messages retweeted\", MIT Sloan Management Review, Vol. 53 No. 2, pp. 61-66.",
+                "links": null
+            },
+            "BIBREF40": {
+                "ref_id": "b40",
+                "title": "Social and heuristic approaches to credibility evaluation online",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Metzger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Flanagin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Medders",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Journal of Communication",
+                "volume": "60",
+                "issue": "3",
+                "pages": "413--439",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Metzger, M.J., Flanagin, A.J. and Medders, R.B. (2010), \"Social and heuristic approaches to credibility evaluation online\", Journal of Communication, Vol. 60 No. 3, pp. 413-439.",
+                "links": null
+            },
+            "BIBREF41": {
+                "ref_id": "b41",
+                "title": "The effects of utilitarian and hedonic online shopping value on consumer preference and intentions",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Overby",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E.-J",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Journal of Business Research",
+                "volume": "59",
+                "issue": "11",
+                "pages": "1160--1166",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Overby, J.W. and Lee, E.-J. (2006), \"The effects of utilitarian and hedonic online shopping value on consumer preference and intentions\", Journal of Business Research, Vol. 59 Nos 10-11, pp. 1160-1166.",
+                "links": null
+            },
+            "BIBREF42": {
+                "ref_id": "b42",
+                "title": "Twittering the little India riot: audience responses, information behavior and the use of emotive cues",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Pang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Ng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Computers in Human Behavior",
+                "volume": "54",
+                "issue": "",
+                "pages": "607--619",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pang, N. and Ng, J. (2016), \"Twittering the little India riot: audience responses, information behavior and the use of emotive cues\", Computers in Human Behavior, Vol. 54, January, pp. 607-619.",
+                "links": null
+            },
+            "BIBREF43": {
+                "ref_id": "b43",
+                "title": "Intentions to use social media in organizing and taking vacation trips",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Parra-L\u00f3pez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Bulchand-Gidumal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Guti\u00e9rrez-Tano",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "D\u00edaz-Armas",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Computers in Human Behavior",
+                "volume": "27",
+                "issue": "2",
+                "pages": "640--654",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Parra-L\u00f3pez, E., Bulchand-Gidumal, J., Guti\u00e9rrez-Tano, D. and D\u00edaz-Armas, R. (2011), \"Intentions to use social media in organizing and taking vacation trips\", Computers in Human Behavior, Vol. 27 No. 2, pp. 640-654.",
+                "links": null
+            },
+            "BIBREF44": {
+                "ref_id": "b44",
+                "title": "Issue involvement as a moderator of the effects on attitude of advertising content and context",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Petty",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Cacioppo",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1981,
+                "venue": "Advances in Consumer Research",
+                "volume": "8",
+                "issue": "10",
+                "pages": "20--24",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Petty, R.E. and Cacioppo, J.T. (1981), \"Issue involvement as a moderator of the effects on attitude of advertising content and context\", Advances in Consumer Research, Vol. 8 No. 10, pp. 20-24.",
+                "links": null
+            },
+            "BIBREF45": {
+                "ref_id": "b45",
+                "title": "Rational analyses of information foraging on the Web",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Pirolli",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Cognitive Science",
+                "volume": "29",
+                "issue": "3",
+                "pages": "343--373",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pirolli, P. (2005), \"Rational analyses of information foraging on the Web\", Cognitive Science, Vol. 29 No. 3, pp. 343-373.",
+                "links": null
+            },
+            "BIBREF46": {
+                "ref_id": "b46",
+                "title": "Diffusion of Innovations",
+                "authors": [
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Rogers",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1995,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rogers, E. (1995), Diffusion of Innovations, Free Press, New York, NY.",
+                "links": null
+            },
+            "BIBREF47": {
+                "ref_id": "b47",
+                "title": "Photos get the most engagement on twitter",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Ross",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ross, P. (2014), \"Photos get the most engagement on twitter\", available at: www.socialbakers.com/ blog/2306-photos-get-the-most-engagement-on-twitter (accessed July 14, 2016).",
+                "links": null
+            },
+            "BIBREF48": {
+                "ref_id": "b48",
+                "title": "Factors influencing popularity of branded content in facebook fan pages",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Sabate",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Berbegal-Mirabent",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Ca\u00f1abate",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Lebherz",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "European Management Journal",
+                "volume": "32",
+                "issue": "6",
+                "pages": "1001--1011",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sabate, F., Berbegal-Mirabent, J., Ca\u00f1abate, A. and Lebherz, P.R. (2014), \"Factors influencing popularity of branded content in facebook fan pages\", European Management Journal, Vol. 32 No. 6, pp. 1001-1011.",
+                "links": null
+            },
+            "BIBREF49": {
+                "ref_id": "b49",
+                "title": "Virtual travel communities and customer loyalty: customer purchase involvement and web site design",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Sanchez-Franco",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Rondan-Catalu\u00f1a",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2010,
+                "venue": "Electronic Commerce Research and Applications",
+                "volume": "9",
+                "issue": "2",
+                "pages": "171--182",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sanchez-Franco, M.J. and Rondan-Catalu\u00f1a, F.J. (2010), \"Virtual travel communities and customer loyalty: customer purchase involvement and web site design\", Electronic Commerce Research and Applications, Vol. 9 No. 2, pp. 171-182.",
+                "links": null
+            },
+            "BIBREF50": {
+                "ref_id": "b50",
+                "title": "The value of participation in virtual consumer communities on brand loyalty",
+                "authors": [
+                    {
+                        "first": "R.-A",
+                        "middle": [],
+                        "last": "Shang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y.-Ch And",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H.-J",
+                        "middle": [],
+                        "last": "Liao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "Internet Research",
+                "volume": "16",
+                "issue": "4",
+                "pages": "398--418",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shang, R.-A., Chen, Y.-Ch and Liao, H.-J. (2006), \"The value of participation in virtual consumer communities on brand loyalty\", Internet Research, Vol. 16 No. 4, pp. 398-418.",
+                "links": null
+            },
+            "BIBREF51": {
+                "ref_id": "b51",
+                "title": "Factors affecting intentions to purchase via the Internet",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [
+                            "C M"
+                        ],
+                        "last": "So",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "N D"
+                        ],
+                        "last": "Wong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Sculli",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "Industrial Management & Data Systems",
+                "volume": "105",
+                "issue": "9",
+                "pages": "1225--1244",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "So, W.C.M., Wong, T.N.D. and Sculli, D. (2005), \"Factors affecting intentions to purchase via the Internet\", Industrial Management & Data Systems, Vol. 105 No. 9, pp. 1225-1244.",
+                "links": null
+            },
+            "BIBREF52": {
+                "ref_id": "b52",
+                "title": "10 twitter tactics to increase your engagement",
+                "authors": [],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Social Media Examiner (2014), \"10 twitter tactics to increase your engagement\", available at: www. socialmediaexaminer.com/twitter-tactics-to-increase-engagement/ (accessed July 10, 2016).",
+                "links": null
+            },
+            "BIBREF53": {
+                "ref_id": "b53",
+                "title": "From whence it came: understanding source effects in consumer generated advertising",
+                "authors": [
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Steyn",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Ewing",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Van Heerden",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Pitt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Windisch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "International Journal of Advertising",
+                "volume": "30",
+                "issue": "1",
+                "pages": "133--160",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Steyn, P., Ewing, M.T., van Heerden, G., Pitt, L.F. and Windisch, L. (2011), \"From whence it came: understanding source effects in consumer generated advertising\", International Journal of Advertising, Vol. 30 No. 1, pp. 133-160.",
+                "links": null
+            },
+            "BIBREF54": {
+                "ref_id": "b54",
+                "title": "The main model: a heuristic approach to understanding technology effects on credibility",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Sundar",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Digital Media, Youth, and Credibility",
+                "volume": "",
+                "issue": "",
+                "pages": "73--100",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sundar, S. (2008), \"The main model: a heuristic approach to understanding technology effects on credibility\", in Metzger, M. and Flanagin, A. (Eds), Digital Media, Youth, and Credibility, MIT Press, Cambridge, MA, pp. 73-100.",
+                "links": null
+            },
+            "BIBREF55": {
+                "ref_id": "b55",
+                "title": "What makes a tweet relevant for a topic?",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Tao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Abel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Hauff",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Houben",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tao, K., Abel, F., Hauff, C. and Houben, G.J. (2012), \"What makes a tweet relevant for a topic?\", 2nd workshop on Making Sense of Microposts procceding, Lyon.",
+                "links": null
+            },
+            "BIBREF57": {
+                "ref_id": "b57",
+                "title": "Measuring the hedonic and utilitarian dimensions of consumer attitude",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Voss",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Spangenberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Grohmann",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Journal of Marketing Research",
+                "volume": "40",
+                "issue": "3",
+                "pages": "310--320",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Voss, K.E., Spangenberg, E.R. and Grohmann, B. (2003), \"Measuring the hedonic and utilitarian dimensions of consumer attitude\", Journal of Marketing Research, Vol. 40 No. 3, pp. 310-320.",
+                "links": null
+            },
+            "BIBREF58": {
+                "ref_id": "b58",
+                "title": "Hashtags and information virality in networked social movement: examining hashtag co-occurrence patterns",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Gao",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Online Information Review",
+                "volume": "40",
+                "issue": "7",
+                "pages": "850--866",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wang, R., Liu, W. and Gao, S. (2016), \"Hashtags and information virality in networked social movement: examining hashtag co-occurrence patterns\", Online Information Review, Vol. 40 No. 7, pp. 850-866.",
+                "links": null
+            },
+            "BIBREF59": {
+                "ref_id": "b59",
+                "title": "Heuristic and systematic use of search engines",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Wirth",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Bocking",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Karnowski",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Pape",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Journal of Computer-Mediated Communication",
+                "volume": "12",
+                "issue": "3",
+                "pages": "778--800",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wirth, W., Bocking, T., Karnowski, V. and von Pape, T. (2007), \"Heuristic and systematic use of search engines\", Journal of Computer-Mediated Communication, Vol. 12 No. 3, pp. 778-800.",
+                "links": null
+            },
+            "BIBREF60": {
+                "ref_id": "b60",
+                "title": "Analysis of fashion consumers' motives to engage in electronic word-of-mouth communication through social media platforms",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wolny",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Mueller",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Journal of Marketing Management",
+                "volume": "29",
+                "issue": "6",
+                "pages": "562--583",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wolny, J. and Mueller, C. (2013), \"Analysis of fashion consumers' motives to engage in electronic word-of-mouth communication through social media platforms\", Journal of Marketing Management, Vol. 29 Nos 5/6, pp. 562-583.",
+                "links": null
+            },
+            "BIBREF61": {
+                "ref_id": "b61",
+                "title": "Analyzing user retweet behavior on twitter",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Xu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2012,
+                "venue": "Proceedings of the 2012 International Conference on Advances in Social Networks Analysis and Mining",
+                "volume": "",
+                "issue": "",
+                "pages": "46--50",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xu, Z. and Yang, Q. (2012), \"Analyzing user retweet behavior on twitter\", Proceedings of the 2012 International Conference on Advances in Social Networks Analysis and Mining, pp. 46-50.",
+                "links": null
+            },
+            "BIBREF62": {
+                "ref_id": "b62",
+                "title": "Science of retweets",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Zarrella",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2009,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zarrella, D. (2009), \"Science of retweets\", available at: http://danzarrella.com/science-of-retweets.pdf (accessed November 12, 2016).",
+                "links": null
+            },
+            "BIBREF63": {
+                "ref_id": "b63",
+                "title": "Examining the influence of online reviews on consumers' decision-making: a heuristic-systematic model",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [
+                            "Z"
+                        ],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Zhao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Cheung",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "K"
+                        ],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Decision Support Systems",
+                "volume": "67",
+                "issue": "",
+                "pages": "78--89",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhang, K.Z., Zhao, S.J., Cheung, C.M. and Lee, M.K. (2014), \"Examining the influence of online reviews on consumers' decision-making: a heuristic-systematic model\", Decision Support Systems, Vol. 67, November, pp. 78-89.",
+                "links": null
+            },
+            "BIBREF64": {
+                "ref_id": "b64",
+                "title": "Breadth, depth, and speed: diffusion of advertising messages on microblogging sites",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "Q"
+                        ],
+                        "last": "Peng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Internet Research",
+                "volume": "25",
+                "issue": "3",
+                "pages": "453--470",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhang, L. and Peng, T.Q. (2015), \"Breadth, depth, and speed: diffusion of advertising messages on microblogging sites\", Internet Research, Vol. 25 No. 3, pp. 453-470.",
+                "links": null
+            },
+            "BIBREF65": {
+                "ref_id": "b65",
+                "title": "Content or context: which matters more in information processing on microblogging sites",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "Q"
+                        ],
+                        "last": "Peng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [
+                            "H"
+                        ],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Zhu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Computers in Human Behavior",
+                "volume": "31",
+                "issue": "",
+                "pages": "242--249",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhang, L., Peng, T.Q., Zhang, Y.P., Wang, X.H. and Zhu, J.J. (2014), \"Content or context: which matters more in information processing on microblogging sites\", Computers in Human Behavior, Vol. 31, February, pp. 242-249.",
+                "links": null
+            },
+            "BIBREF66": {
+                "ref_id": "b66",
+                "title": "Capitalizing on content: information adoption in two online communities",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Watts",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Journal of the Association for Information Systems",
+                "volume": "9",
+                "issue": "2",
+                "pages": "73--95",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhang, W. and Watts, S.A. (2008), \"Capitalizing on content: information adoption in two online communities\", Journal of the Association for Information Systems, Vol. 9 No. 2, pp. 73-95.",
+                "links": null
+            },
+            "BIBREF67": {
+                "ref_id": "b67",
+                "title": "Modeling the role of message content and influencers in social media rebroadcasting",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "W",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Moe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Schweidel",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "International Journal of Research in Marketing",
+                "volume": "34",
+                "issue": "1",
+                "pages": "100--119",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhang, Y., Moe, W.W. and Schweidel, D.A. (2017), \"Modeling the role of message content and influencers in social media rebroadcasting\", International Journal of Research in Marketing, Vol. 34 No. 1, pp. 100-119.",
+                "links": null
+            },
+            "BIBREF68": {
+                "ref_id": "b68",
+                "title": "About the authors Eva Lahuerta-Otero works as Assistant Professor in the Marketing Department, University of Salamanca, where she teaches Electronic Commerce, Basics of Marketing, Sectorial marketing and International Marketing among other subjects. She is also Director and teacher in several courses, seminars and subjects of masters degrees related with e-commerce and social media. She writes and presents widely on topics related to social media, online advertising, click-and-mortar companies, online banking and cultural issues related with management and is the author of several publications in that areas. She is author and coauthor of various papers published in international and national journals and books. Eva Lahuerta-Otero is the corresponding author and can be contacted at: eva.lahuerta@usal.es Rebeca Cordero-Guti\u00e9rrez is Associate Professor in the Faculty of Computer Science, Pontifical University of Salamanca, Spain. She has given lectures in courses, such as marketing, human resources and management among others in Bachelor degree and is teacher in Master in Social Media at the University of Salamanca. She is Director and teacher in various seminars and courses in the field of online marketing. She is currently writing the PhD Thesis in Horizontal Social Networks as management tools in the Doctoral Program of the University of Salamanca. She has published several papers in international and national journals and book chapters and she have numerous lectures in several countries. Fernando De la Prieta-Pintado is Assistant Professor in the Department of Computer Science and Automation, the University of Salamanca. At the research level, he has been published in around 30 articles in journals and more than 80 articles in books and at recognized international conferences. He has worked on 50 research projects and around 20 research contracts. As a result of his work, more than 30 intellectual properties have been registered",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Zhao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Zhao",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Risk Management",
+                "volume": "17",
+                "issue": "4",
+                "pages": "205--225",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhao, M., Zhao, D., Wei, J. and Wang, F. (2015), \"The effects of firm action messages on the information processing and risk perception of customers\", Risk Management, Vol. 17 No. 4, pp. 205-225. About the authors Eva Lahuerta-Otero works as Assistant Professor in the Marketing Department, University of Salamanca, where she teaches Electronic Commerce, Basics of Marketing, Sectorial marketing and International Marketing among other subjects. She is also Director and teacher in several courses, seminars and subjects of masters degrees related with e-commerce and social media. She writes and presents widely on topics related to social media, online advertising, click-and-mortar companies, online banking and cultural issues related with management and is the author of several publications in that areas. She is author and coauthor of various papers published in international and national journals and books. Eva Lahuerta-Otero is the corresponding author and can be contacted at: eva.lahuerta@usal.es Rebeca Cordero-Guti\u00e9rrez is Associate Professor in the Faculty of Computer Science, Pontifical University of Salamanca, Spain. She has given lectures in courses, such as marketing, human resources and management among others in Bachelor degree and is teacher in Master in Social Media at the University of Salamanca. She is Director and teacher in various seminars and courses in the field of online marketing. She is currently writing the PhD Thesis in Horizontal Social Networks as management tools in the Doctoral Program of the University of Salamanca. She has published several papers in international and national journals and book chapters and she have numerous lectures in several countries. Fernando De la Prieta-Pintado is Assistant Professor in the Department of Computer Science and Automation, the University of Salamanca. At the research level, he has been published in around 30 articles in journals and more than 80 articles in books and at recognized international conferences. He has worked on 50 research projects and around 20 research contracts. As a result of his work, more than 30 intellectual properties have been registered. He is currently member of the BISITE Research Group, the Research Institute of Digital Animation and the Biomedical Research Institute of Salamanca. For instructions on how to order reprints of this article, please visit our website: www.emeraldgrouppublishing.com/licensing/reprints.htm Or contact us for further details: permissions@emeraldinsight.com",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "fig_num": null,
+                "num": null,
+                "text": "p o0.05; **p o 0.01; ***p o 0.001; ****po0.10 Table",
+                "uris": null,
+                "type_str": "figure"
+            }
+        }
+    }
+}
