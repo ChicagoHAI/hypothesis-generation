@@ -1010,3 +1010,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=False,
         )
+
+        # Log total cost of the run
+        if model_type == 'gpt':
+            logger.info(f"Total cost: {api.get_cost()}")

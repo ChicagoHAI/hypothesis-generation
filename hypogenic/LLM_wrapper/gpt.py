@@ -33,7 +33,25 @@ from .rate_limiter import RateLimiter
 from ..LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from ..tasks import BaseTask
 
+MODEL_COSTS = {
+    'gpt-4o-mini': {
+        'input': 0.15,
+        'output': 0.6
+    },
+    'gpt-4o': {
+        'input': 2.5,
+        'output': 10
+    },
+    'o1': {
+        'input': 15,
+        'output': 60
+    },
+    'o3-mini': {
+        'input': 1.1,
+        'output': 4.4
+    }
 
+}
 @llm_wrapper_register.register("gpt")
 class GPTWrapper(LLMWrapper):
     exceptions_to_catch = (
@@ -64,7 +82,14 @@ class GPTWrapper(LLMWrapper):
         self.api_with_cache = OpenAIAPICache(port=port, **redis_kwargs)
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
+        self.total_cost = 0
 
+    def get_cost(self):
+        return self.total_cost
+    
+    def reset_cost(self):
+        self.total_cost = 0
+        
     def _batched_generate(
         self,
         messages: List[List[Dict[str, str]]],
@@ -112,6 +137,12 @@ class GPTWrapper(LLMWrapper):
         ]
         loop = asyncio.get_event_loop()
         resp = loop.run_until_complete(asyncio.gather(*tasks))
+        
+        for r in resp:
+            input_cost = r.usage.prompt_tokens * MODEL_COSTS[model]['input'] / 1000000
+            output_cost = r.usage.completion_tokens * MODEL_COSTS[model]['output'] / 1000000
+            self.total_cost += input_cost + output_cost
+            
         return [r.choices[0].message.content for r in resp]
 
     def _generate(
@@ -135,6 +166,9 @@ class GPTWrapper(LLMWrapper):
                     timeout=self.timeout,
                     **kwargs,
                 )
+                input_cost = resp.usage.prompt_tokens * MODEL_COSTS[model]['input'] / 1000000
+                output_cost = resp.usage.completion_tokens * MODEL_COSTS[model]['output'] / 1000000
+                self.total_cost += input_cost + output_cost
                 return resp.choices[0].message.content
             except self.exceptions_to_catch as e:
                 self.rate_limiter.backoff(e)
