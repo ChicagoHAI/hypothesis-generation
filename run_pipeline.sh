@@ -17,12 +17,6 @@ TASKS=(
 )
 
 # Define methods to run
-# METHODS=(
-#     "zero_shot"
-#     "few_shot"
-#     "zero_shot_gen"
-#     "hypogenic"
-# )
 
 METHODS=(
     "zero_shot"
@@ -37,8 +31,8 @@ METHODS=(
 )
 
 # Algorithm settings
-MAX_NUM_HYPOTHESES=10
-NUM_TRAIN=20
+MAX_NUM_HYPOTHESES=20
+NUM_TRAIN=200
 NUM_TEST=300
 SEED=42
 
