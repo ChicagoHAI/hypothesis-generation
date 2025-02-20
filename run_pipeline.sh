@@ -7,28 +7,32 @@ MODEL_PATH=""  # only needed for local models
 
 # Define list of tasks to run
 TASKS=(
-    "deceptive_reviews"
-    "llamagc_detect"
-    "gptgc_detect"
-    "persuasive_pairs"
-    "dreaddit"
+    # "deceptive_reviews"
+    # "llamagc_detect"
+    # "gptgc_detect"
+    # "persuasive_pairs"
+    # "dreaddit"
+    "headline_binary"
+    "retweet"
 )
 
 # Define methods to run
-# METHODS=(
-#     "zero_shot"
-#     "few_shot"
-#     "zero_shot_gen"
-#     "hypogenic"
-# )
 
 METHODS=(
+    "zero_shot"
+    "few_shot"
+    "zero_shot_gen"
+    "only_paper"
+    "hypogenic"
+    "hyporefine"
+    "union_hypo"
+    "union_refine"
     "io_refine"
 )
 
 # Algorithm settings
-MAX_NUM_HYPOTHESES=10
-NUM_TRAIN=20
+MAX_NUM_HYPOTHESES=20
+NUM_TRAIN=200
 NUM_TEST=300
 SEED=42
 
