@@ -818,8 +818,13 @@ if __name__ == "__main__":
     task_folder = (
         f"./results/{task_name}/"
     )
-    os.makedirs(task_folder, exist_ok=True)
+    model_folder = (
+        f"./results/{task_name}/{model_name}/"
+    )
 
+    os.makedirs(task_folder, exist_ok=True)
+    os.makedirs(model_folder, exist_ok=True)
+    
     LoggerConfig.setup_logger(
         logging.INFO,
         f"results/{task_name}/{model_name}_seed_{seed}_{datetime.datetime.now().strftime('%Y-%m-%d,%H-%M-%S')}.log",
