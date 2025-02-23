@@ -16,3 +16,4 @@ hypogenic.egg-info
 playgrounds/*
 results/*
 *.log
+scripts/*

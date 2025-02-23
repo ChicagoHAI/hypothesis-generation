@@ -102,7 +102,7 @@ def headline_binary_extract_label(text):
     return "other"
 
 
-@extract_label_register.register("hotel_reviews")
+@extract_label_register.register("deceptive_reviews")
 def hotel_reviews_extract_label(text):
     logger = LoggerConfig.get_logger("extract_label")
     if text is None:
