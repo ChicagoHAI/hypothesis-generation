@@ -433,12 +433,12 @@ def IO_iterative_refinement(task_name, api, model_name):
         max_concurrent=64,
     )
     # only keep the hypothesis with the highest accuracy
-    sorted_hypotheses = sorted(
-        hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
-    )
-    hypotheses_bank = {
-        sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
-    }
+    # sorted_hypotheses = sorted(
+    #     hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
+    # )
+    # hypotheses_bank = {
+    #     sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
+    # }
     update_class.save_to_json(
         hypotheses_bank,
         sample="init",
@@ -465,12 +465,12 @@ def IO_iterative_refinement(task_name, api, model_name):
             max_tokens=max_tokens,
             max_concurrent=64,
         )
-        sorted_hypotheses = sorted(
-            hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
-        )
-        hypotheses_bank = {
-            sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
-        }
+        # sorted_hypotheses = sorted(
+        #     hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
+        # )
+        # hypotheses_bank = {
+        #     sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
+        # }
         update_class.save_to_json(
             hypotheses_bank,
             sample="final",
