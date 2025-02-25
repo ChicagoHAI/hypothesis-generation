@@ -160,6 +160,40 @@ def extract_label(text):
             return answer
     logger.warning(f"Could not extract label from text: {text}")
     return "other"
+    
+@extract_label_register.register("shoe_two_level/simple")
+def extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+
+    pattern = r"final answer:\s+(white|red|orange|green|blue|black)"
+
+    match = re.findall(pattern, text.lower())
+    if match:
+        answer = match[-1] if len(match) > 0 else None
+        if answer in ["white", "red", "orange", "green", "blue", "black"]:
+            return answer
+    logger.warning(f"Could not extract label from text: {text}")
+    return "other"
+
+@extract_label_register.register("shoe_two_level/hard")
+def extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+
+    pattern = r"final answer:\s+(white|red|orange|green|blue|black)"
+
+    match = re.findall(pattern, text.lower())
+    if match:
+        answer = match[-1] if len(match) > 0 else None
+        if answer in ["white", "red", "orange", "green", "blue", "black"]:
+            return answer
+    logger.warning(f"Could not extract label from text: {text}")
+    return "other"
 
 @extract_label_register.register("persuasive_pairs")
 def persuasive_pairs_extract_label(text):
