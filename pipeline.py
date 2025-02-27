@@ -651,8 +651,9 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
         logger_str = "Results:\n"
         for idx, (hyp, acc, f1) in enumerate(hyp_list):
             logger_str += f"{idx + 1}. {hyp}\n"
-            logger_str += f"Accuracy: {acc}\n"
-            logger_str += f"F1: {f1}\n\n"
+            logger_str += f"Train Accuracy: {hyp_bank[hyp].acc}\n"
+            logger_str += f"Test Accuracy: {acc}\n"
+            logger_str += f"Test F1: {f1}\n\n"
         logger.info(logger_str)
 
         return hyp_list
