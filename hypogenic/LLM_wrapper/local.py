@@ -34,7 +34,9 @@ from . import llm_wrapper_register
 from .base import LLMWrapper
 from ..LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from ..tasks import BaseTask
-
+from .wrapper_utils import (
+    _process_deepseek_messages,
+)
 
 class LocalModelWrapper(LLMWrapper):
     exceptions_to_catch = (
@@ -135,6 +137,10 @@ class LocalHFWrapper(LocalModelWrapper):
             return []
         if self.api is None:
             self.api = pipeline(**self.api_kwargs)
+
+        if "DeepSeek-R1" in self.model:
+            messages = _process_deepseek_messages(messages)
+
         output = self.api(
             messages,
             max_new_tokens=max_tokens,
@@ -193,6 +199,10 @@ class LocalVllmWrapper(LocalModelWrapper):
             else:
                 self.lora = None
             self.api = vllm.LLM(**self.api_kwargs)
+
+        if "DeepSeek-R1" in self.model:
+            messages = _process_deepseek_messages(messages)
+            
         tokenizer = self.api.get_tokenizer()
         formatted_prompts = [
             tokenizer.apply_chat_template(m, tokenize=False, add_generation_prompt=True)
