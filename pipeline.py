@@ -433,12 +433,12 @@ def IO_iterative_refinement(task_name, api, model_name):
         max_concurrent=64,
     )
     # only keep the hypothesis with the highest accuracy
-    sorted_hypotheses = sorted(
-        hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
-    )
-    hypotheses_bank = {
-        sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
-    }
+    # sorted_hypotheses = sorted(
+    #     hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
+    # )
+    # hypotheses_bank = {
+    #     sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
+    # }
     update_class.save_to_json(
         hypotheses_bank,
         sample="init",
@@ -465,12 +465,12 @@ def IO_iterative_refinement(task_name, api, model_name):
             max_tokens=max_tokens,
             max_concurrent=64,
         )
-        sorted_hypotheses = sorted(
-            hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
-        )
-        hypotheses_bank = {
-            sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
-        }
+        # sorted_hypotheses = sorted(
+        #     hypotheses_bank, key=lambda x: hypotheses_bank[x].acc, reverse=True
+        # )
+        # hypotheses_bank = {
+        #     sorted_hypotheses[0]: hypotheses_bank[sorted_hypotheses[0]]
+        # }
         update_class.save_to_json(
             hypotheses_bank,
             sample="final",
@@ -629,6 +629,7 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
         logger_str += f"Accuracy: {acc}\n"
         logger_str += f"F1: {f1}\n\n"
         logger.info(logger_str)
+        return results_dict  # Return results dictionary
     else:
         inference_class = DefaultInference(api, prompt_class, train_data, task)
 
@@ -651,11 +652,28 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
         logger_str = "Results:\n"
         for idx, (hyp, acc, f1) in enumerate(hyp_list):
             logger_str += f"{idx + 1}. {hyp}\n"
-            logger_str += f"Accuracy: {acc}\n"
-            logger_str += f"F1: {f1}\n\n"
+            logger_str += f"Train Accuracy: {hyp_bank[hyp].acc}\n"
+            logger_str += f"Test Accuracy: {acc}\n"
+            logger_str += f"Test F1: {f1}\n\n"
         logger.info(logger_str)
 
-        return hyp_list
+        # Format results in a more structured way
+        formatted_results = {
+            "hypotheses": [
+                {
+                    "hypothesis": hyp,
+                    "train_accuracy": hyp_bank[hyp].acc,
+                    "test_accuracy": acc,
+                    "test_f1": f1
+                } for hyp, acc, f1 in hyp_list
+            ],
+            "best": {
+                "hypothesis": hyp_list[0][0],
+                "test_accuracy": hyp_list[0][1],
+                "test_f1": hyp_list[0][2]
+            } if hyp_list else {}
+        }
+        return formatted_results
 
 def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     def few_shot(
@@ -747,8 +765,84 @@ def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
 
     results_dict = get_results(preds, labels)
     results_list.append((None, results_dict["accuracy"], results_dict["f1"]))
-    return results_list
+    
+    # Format results in a structured way
+    formatted_results = {
+        "few_shot_k": few_shot_k,
+        "accuracy": results_dict["accuracy"],
+        "f1": results_dict["f1"],
+        "precision": results_dict.get("precision", None),
+        "recall": results_dict.get("recall", None)
+    }
+    
+    return formatted_results
 
+def save_method_results(method_name, results, task_name, model_name, seed=42, timestamp=None):
+    """Save results for a specific evaluation method to a JSON file."""
+    # Create results directory if it doesn't exist
+    results_dir = f"./results/{task_name}/{model_name}/evaluation_results"
+    os.makedirs(results_dir, exist_ok=True)
+    
+    filename = f"{results_dir}/{method_name}_seed_{seed}.json"
+    current_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    
+    result_data = {
+        "method": method_name,
+        "task": task_name,
+        "model": model_name,
+        "seed": seed,
+        "timestamp": current_timestamp, 
+        "results": results
+    }
+    
+    with open(filename, 'w') as f:
+        json.dump(result_data, f, indent=2)
+    
+    return filename
+
+def combine_results(task_name, model_name, methods_run=None, seed=42):
+    """Combine all evaluation results into a single summary file."""
+    results_dir = f"./results/{task_name}/{model_name}/evaluation_results"
+    if not os.path.exists(results_dir):
+        return None
+    
+    result_files = [f for f in os.listdir(results_dir) if f.endswith('.json')]
+    
+    if methods_run is not None:
+        method_files = []
+        for method in methods_run:
+            method_file = f"{method}_seed_{seed}.json"
+            if method_file in result_files:
+                method_files.append(method_file)
+        result_files = method_files
+    else:
+        # Filter by seed
+        result_files = [f for f in result_files if f'seed_{seed}' in f]
+    
+    if not result_files:
+        return None
+    
+    # Combine results
+    combined_results = {
+        "task": task_name,
+        "model": model_name,
+        "seed": seed,
+        "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
+        "methods": {}
+    }
+    
+    for filename in result_files:
+        with open(os.path.join(results_dir, filename), 'r') as f:
+            data = json.load(f)
+            method_name = data["method"]
+            combined_results["methods"][method_name] = data["results"]
+    
+    # Save combined results
+    combined_file = f"./results/{task_name}/{model_name}/combined_results_seed_{seed}.json"
+    with open(combined_file, 'w') as f:
+        json.dump(combined_results, f, indent=2)
+    
+    return combined_file
 
 def log_arguments(logger, args):
     """Log all configuration parameters in an organized way."""
@@ -834,42 +928,49 @@ if __name__ == "__main__":
     log_arguments(logger, args)
     
     api = llm_wrapper_register.build(model_type)(model=model_name, path_name=model_path)
-
+    methods_run = []  # Track which methods were executed
+    
     logger.info(f"=-=-=-=-=-=-=-=-=-=-=-={model_name}=-=-=-=-=-=-=-=-=-=-=-=")
     logger.info(f"=-=-=-=-=-=-=-=-=-=-=-={task_name}=-=-=-=-=-=-=-=-=-=-=-=")
 
-    # Modify the execution flow to use toggle arguments
+    # Modify the execution flow to use toggle arguments and save results
     if args.run_zero_shot:
+        method_name = "zero_shot_baseline"
+        methods_run.append(method_name)
         logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Zero-shot baseline, seed {seed}=-=-=-=-=-=-=-=-=-=-=-=")
-        logger.info(
-            baseline(
-                0,
-                task_name=task_name,
-                api=api,
-                model_name=model_name,
-                use_val=use_val,
-                seed=seed,
-            )
+        results = baseline(
+            0,
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            seed=seed,
         )
+        logger.info(results)
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_few_shot:
+        method_name = "few_shot_baseline"
+        methods_run.append(method_name)
         logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed {seed}=-=-=-=-=-=-=-=-=-=-=-=")
-        logger.info(
-            baseline(
-                3,
-                task_name=task_name,
-                api=api,
-                model_name=model_name,
-                use_val=use_val,
-                seed=seed,
-            )
+        results = baseline(
+            3,
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            seed=seed,
         )
+        logger.info(results)
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_zero_shot_gen:
+        method_name = "zero_shot_gen"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot generation=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             zero_shot_hyp(task_name=task_name, api=api, model_name=model_name)
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_zero_shot/hypotheses_training_sample_0_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -877,12 +978,15 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_only_paper:
+        method_name = "literature_only"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=Literature-only=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             only_paper(task_name=task_name, api=api, model_name=model_name)
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_only_paper/hypotheses_training_sample_0_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -890,14 +994,17 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_hypogenic:
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=Original HypoGeniC=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             original_hypogenic(task_name=task_name, api=api, model_name=model_name)
         
+        method_name = "hypogenic_no_update"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -905,9 +1012,12 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
+        method_name = "hypogenic"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -915,14 +1025,17 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_hyporefine:
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=HypoRefine=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             with_paper(task_name=task_name, api=api, model_name=model_name)
         
+        method_name = "hyporefine_no_update"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -930,9 +1043,12 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
         
+        method_name = "hyporefine"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -940,13 +1056,16 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_union_hypo:
+        method_name = "union_hypogenic_paper"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoGeniC and Paper=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=False, prioritize='balanced')
         union_postfix = "hypogenic_and_paper"
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -954,13 +1073,16 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_union_refine:
+        method_name = "union_hyporefine_paper"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoRefine and Paper=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=True, prioritize='balanced')
         union_postfix = "refine_and_paper"
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -968,11 +1090,14 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_cross_model and "gpt" in model_type:
+        method_name = "cross_model_llama"
+        methods_run.append(method_name)
         cross_model_name = "meta-llama/Meta-Llama-3.1-70B-Instruct"
         logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -980,10 +1105,13 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
     elif args.run_cross_model:
+        method_name = "cross_model_gpt"
+        methods_run.append(method_name)
         cross_model_name = "gpt-4o-mini"
         logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -991,14 +1119,17 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
     if args.run_io_refine:
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative Refinement=-=-=-=-=-=-=-=-=-=-=-=")
         if DO_TRAIN:
             IO_iterative_refinement(task_name=task_name, api=api, model_name=model_name)
 
+        method_name = "io_prompting"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Prompting=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/IO_refinement/hypotheses_training_sample_init_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
@@ -1006,8 +1137,12 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=False,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
+        
+        method_name = "io_refinement"
+        methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative refinement=-=-=-=-=-=-=-=-=-=-=-=")
-        get_res(
+        results = get_res(
             f"results/{task_name}/{model_name}/IO_refinement/hypotheses_training_sample_final_seed_{seed}_epoch_2.json",
             task_name=task_name,
             api=api,
@@ -1015,7 +1150,27 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=False,
         )
+        save_method_results(method_name, results, task_name, model_name, seed)
 
-        # Log total cost of the run
-        if model_type == 'gpt':
-            logger.info(f"Total cost: {api.get_cost()}")
+    # Combine all results into a single summary file
+    if methods_run:
+        combined_file = combine_results(task_name, model_name, methods_run, seed)
+        if combined_file:
+            logger.info(f"Combined results saved to: {combined_file}")
+
+    # Log total cost of the run
+    if model_type == 'gpt':
+        total_cost = api.get_cost()
+        logger.info(f"Total cost: {total_cost}")
+        
+        # Save cost information to a separate file, using seed instead of timestamp
+        cost_file = f"./results/{task_name}/{model_name}/cost_seed_{seed}.json"
+        with open(cost_file, 'w') as f:
+            json.dump({
+                "model": model_name,
+                "task": task_name,
+                "seed": seed,
+                "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
+                "total_cost_usd": total_cost
+            }, f, indent=2)
+
