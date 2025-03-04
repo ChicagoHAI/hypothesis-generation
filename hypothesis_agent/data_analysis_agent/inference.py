@@ -62,13 +62,13 @@ class MultiHypDefaultInference(DefaultInference):
 
         return predictions, actual_labels
 
-    def multiple_hypotheses_run_inference_final(
+    def run_inference_final(
         self,
         data,
         hyp_bank,
         cache_seed=None,
         max_concurrent=3,
-        generate_kwargs={},
+        **generate_kwargs,
     ):
 
         num_samples = len(data)
