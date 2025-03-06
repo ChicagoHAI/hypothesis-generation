@@ -2,7 +2,7 @@ import datetime
 import json
 import logging
 import os
-from hypogenic.utils import set_seed, get_results, adjust_label
+from hypogenic.utils import set_seed, get_results
 from hypogenic.tasks import BaseTask
 from hypogenic.extract_label import extract_label_register
 from hypogenic.LLM_wrapper import (
@@ -621,7 +621,6 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
                 max_tokens=max_tokens,
             )
         
-        pred_list = adjust_label(pred_list, label_list)
         results_dict = get_results(pred_list, label_list)
         f1 = results_dict["f1"]
         acc = results_dict["accuracy"]
@@ -644,7 +643,6 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
-            pred_list = adjust_label(pred_list, label_list)
             results_dict = get_results(pred_list, label_list)
             hyp_list.append((hyp, results_dict["accuracy"], results_dict["f1"]))
 
@@ -760,8 +758,6 @@ def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
 
     labels = [result["label"] for result in results]
     preds = [result["pred"] for result in results]
-
-    preds = adjust_label(preds, labels)
 
     results_dict = get_results(preds, labels)
     results_list.append((None, results_dict["accuracy"], results_dict["f1"]))

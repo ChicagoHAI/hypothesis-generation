@@ -14,11 +14,11 @@ def default_extract_label(text):
         return "other"
 
     text = text.lower()
-    pattern = r"final answer:\s+(.*)"
+    pattern = r"final answer:\s+([^\.!\?;,]+)"
 
     match = re.findall(pattern, text)
     if len(match) > 0:
-        return match[-1]
+        return match[-1].strip()
     else:
         logger.warning(f"Could not extract label from text: {text}")
         return "other"
