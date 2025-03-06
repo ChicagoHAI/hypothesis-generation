@@ -40,11 +40,18 @@ logger_name = "HypoGenic - utils"
 def get_results(pred_list, label_list):
     """
     Compute accuracy and F1 score for multi-class classification
-    """
-    valid_labels = set(label_list)
-    accuracy = accuracy_score(label_list, pred_list, labels=list(valid_labels))
-    f1 = f1_score(label_list, pred_list, average="macro")
     
+    Automatically ignores case differences when labels are strings.
+    """
+    # Check if labels are strings and convert to lowercase if they are
+    if all(isinstance(label, str) for label in label_list + pred_list):
+        pred_list = [pred.lower() for pred in pred_list]
+        label_list = [label.lower() for label in label_list]
+    
+    valid_labels = set(label_list)
+    accuracy = accuracy_score(label_list, pred_list)
+    f1 = f1_score(label_list, pred_list, average="macro", labels=list(valid_labels))
+
     return {"accuracy": accuracy, "f1": f1}
 
 def set_seed(seed):

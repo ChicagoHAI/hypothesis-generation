@@ -101,7 +101,6 @@ def headline_binary_extract_label(text):
     logger.warning(f"Could not extract label from text: {text}")
     return "other"
 
-
 @extract_label_register.register("deceptive_reviews")
 def hotel_reviews_extract_label(text):
     logger = LoggerConfig.get_logger("extract_label")
@@ -284,3 +283,54 @@ def dreaddit_extract_label(text):
                 return "other"
     logger.warning(f"Could not extract label from text: {text}")
     return "other"
+
+@extract_label_register.register("election")
+def election_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+
+    text = text.lower()
+    pattern = r"final answer:\s+(democratic voter|third-party/abstain voter|republican voter)"
+
+    match = re.findall(pattern, text)
+    if len(match) > 0:
+        return f"likely {match[-1]}"
+    else:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+    
+@extract_label_register.register("preference")
+def preference_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+
+    text = text.lower()
+    pattern = r"final answer:\s+(outdoor enthusiast|tech-savvy consumer|health-conscious eater)"
+
+    match = re.findall(pattern, text)
+    if len(match) > 0:
+        return match[-1]
+    else:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"    
+
+@extract_label_register.register("admission")
+def admission_extract_label(text):
+    logger = LoggerConfig.get_logger("extract_label")
+    if text is None:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"
+
+    text = text.lower()
+    pattern = r"final answer:\s+(admitted|rejected)"
+
+    match = re.findall(pattern, text)
+    if len(match) > 0:
+        return match[-1]
+    else:
+        logger.warning(f"Could not extract label from text: {text}")
+        return "other"    
