@@ -292,11 +292,11 @@ def election_extract_label(text):
         return "other"
 
     text = text.lower()
-    pattern = r"final answer:\s+(democratic voter|third-party/abstain voter|republican voter)"
+    pattern = r"final answer:\s+(likely democratic voter|likely third-party/abstain voter|likely republican voter)"
 
     match = re.findall(pattern, text)
     if len(match) > 0:
-        return f"likely {match[-1]}"
+        return match[-1]
     else:
         logger.warning(f"Could not extract label from text: {text}")
         return "other"
