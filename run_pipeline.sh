@@ -1,17 +1,28 @@
 #!/bin/bash
 
 # Model settings
-MODEL_TYPE="gpt"  
-MODEL_NAME="gpt-4o-mini" 
-MODEL_PATH=""  # only needed for local models
+# MODEL_TYPE="gpt"
+# MODEL_NAME="gpt-4o-mini"
+
+MODEL_TYPE="vllm"  
+MODEL_NAME="meta-llama/Meta-Llama-3.1-70B-Instruct" 
+MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for local models
+
+# MODEL_TYPE="vllm"  
+# MODEL_NAME="Qwen/Qwen2.5-72B-Instruct" 
+# MODEL_PATH="/net/projects/chai-lab/shared_models/Qwen2.5-72B-Instruct"  # only needed for local models
+
+# MODEL_TYPE="vllm-dpskr1"  
+# MODEL_NAME="DeepSeek/DeepSeek-R1-Distill-Llama-70B-local" 
+# MODEL_PATH="/net/projects/chai-lab/shared_models/DeepSeek-R1-Distill-Llama-70B-local"  # only needed for local models
 
 # Define list of tasks to run
 TASKS=(
-    # "deceptive_reviews"
-    # "llamagc_detect"
-    # "gptgc_detect"
-    # "persuasive_pairs"
-    # "dreaddit"
+    "deceptive_reviews"
+    "llamagc_detect"
+    "gptgc_detect"
+    "persuasive_pairs"
+    "dreaddit"
     "headline_binary"
     "retweet"
 )
@@ -67,12 +78,15 @@ for TASK_NAME in "${TASKS[@]}"; do
     for METHOD in "${METHODS[@]}"; do
         CMD="${CMD} --run_${METHOD}"
     done
+    # IND setup
     CMD="${CMD} 
     --do_train
     "
 
+    # OOD setup
+    # CMD="${CMD} 
     # --use_ood
-
+    # "
     
     # Additional methods
     # Uncomment if needed

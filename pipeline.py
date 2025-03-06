@@ -777,19 +777,22 @@ def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     
     return formatted_results
 
-def save_method_results(method_name, results, task_name, model_name, seed=42, timestamp=None):
+def save_method_results(method_name, results, task_name, model_name, seed=42, timestamp=None, use_ood=False):
     """Save results for a specific evaluation method to a JSON file."""
     # Create results directory if it doesn't exist
     results_dir = f"./results/{task_name}/{model_name}/evaluation_results"
     os.makedirs(results_dir, exist_ok=True)
     
-    filename = f"{results_dir}/{method_name}_seed_{seed}.json"
+    # Add OOD suffix if using out-of-distribution data
+    data_type = "OOD" if use_ood else "IND"
+    filename = f"{results_dir}/{method_name}_{data_type}_seed_{seed}.json"
     current_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     
     result_data = {
         "method": method_name,
         "task": task_name,
         "model": model_name,
+        "data_type": data_type,
         "seed": seed,
         "timestamp": current_timestamp, 
         "results": results
@@ -800,24 +803,25 @@ def save_method_results(method_name, results, task_name, model_name, seed=42, ti
     
     return filename
 
-def combine_results(task_name, model_name, methods_run=None, seed=42):
+def combine_results(task_name, model_name, methods_run=None, seed=42, use_ood=False):
     """Combine all evaluation results into a single summary file."""
     results_dir = f"./results/{task_name}/{model_name}/evaluation_results"
     if not os.path.exists(results_dir):
         return None
     
-    result_files = [f for f in os.listdir(results_dir) if f.endswith('.json')]
+    data_type = "OOD" if use_ood else "IND"
+    result_files = [f for f in os.listdir(results_dir) if f.endswith('.json') and data_type in f]
     
     if methods_run is not None:
         method_files = []
         for method in methods_run:
-            method_file = f"{method}_seed_{seed}.json"
+            method_file = f"{method}_{data_type}_seed_{seed}.json"
             if method_file in result_files:
                 method_files.append(method_file)
         result_files = method_files
     else:
-        # Filter by seed
-        result_files = [f for f in result_files if f'seed_{seed}' in f]
+        # Filter by seed and data type
+        result_files = [f for f in result_files if f'seed_{seed}' in f and data_type in f]
     
     if not result_files:
         return None
@@ -826,6 +830,7 @@ def combine_results(task_name, model_name, methods_run=None, seed=42):
     combined_results = {
         "task": task_name,
         "model": model_name,
+        "data_type": data_type,
         "seed": seed,
         "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
         "methods": {}
@@ -838,7 +843,7 @@ def combine_results(task_name, model_name, methods_run=None, seed=42):
             combined_results["methods"][method_name] = data["results"]
     
     # Save combined results
-    combined_file = f"./results/{task_name}/{model_name}/combined_results_seed_{seed}.json"
+    combined_file = f"./results/{task_name}/{model_name}/combined_results_{data_type}_seed_{seed}.json"
     with open(combined_file, 'w') as f:
         json.dump(combined_results, f, indent=2)
     
@@ -947,7 +952,7 @@ if __name__ == "__main__":
             seed=seed,
         )
         logger.info(results)
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_few_shot:
         method_name = "few_shot_baseline"
@@ -962,7 +967,7 @@ if __name__ == "__main__":
             seed=seed,
         )
         logger.info(results)
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_zero_shot_gen:
         method_name = "zero_shot_gen"
@@ -978,7 +983,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_only_paper:
         method_name = "literature_only"
@@ -994,7 +999,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_hypogenic:
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=Original HypoGeniC=-=-=-=-=-=-=-=-=-=-=-=")
@@ -1012,7 +1017,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
         method_name = "hypogenic"
         methods_run.append(method_name)
@@ -1025,7 +1030,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_hyporefine:
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=HypoRefine=-=-=-=-=-=-=-=-=-=-=-=")
@@ -1043,7 +1048,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
         
         method_name = "hyporefine"
         methods_run.append(method_name)
@@ -1056,7 +1061,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_union_hypo:
         method_name = "union_hypogenic_paper"
@@ -1073,7 +1078,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_union_refine:
         method_name = "union_hyporefine_paper"
@@ -1090,7 +1095,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_cross_model and "gpt" in model_type:
         method_name = "cross_model_llama"
@@ -1105,7 +1110,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
     elif args.run_cross_model:
         method_name = "cross_model_gpt"
         methods_run.append(method_name)
@@ -1119,7 +1124,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=multihyp,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     if args.run_io_refine:
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative Refinement=-=-=-=-=-=-=-=-=-=-=-=")
@@ -1137,7 +1142,7 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=False,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
         
         method_name = "io_refinement"
         methods_run.append(method_name)
@@ -1150,11 +1155,11 @@ if __name__ == "__main__":
             use_val=use_val,
             multihyp=False,
         )
-        save_method_results(method_name, results, task_name, model_name, seed)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
     # Combine all results into a single summary file
     if methods_run:
-        combined_file = combine_results(task_name, model_name, methods_run, seed)
+        combined_file = combine_results(task_name, model_name, methods_run, seed, use_ood=use_ood)
         if combined_file:
             logger.info(f"Combined results saved to: {combined_file}")
 
@@ -1163,12 +1168,14 @@ if __name__ == "__main__":
         total_cost = api.get_cost()
         logger.info(f"Total cost: {total_cost}")
         
-        # Save cost information to a separate file, using seed instead of timestamp
-        cost_file = f"./results/{task_name}/{model_name}/cost_seed_{seed}.json"
+        # Save cost information to a separate file, using seed and data type
+        data_type = "OOD" if use_ood else "IND"
+        cost_file = f"./results/{task_name}/{model_name}/cost_{data_type}_seed_{seed}.json"
         with open(cost_file, 'w') as f:
             json.dump({
                 "model": model_name,
                 "task": task_name,
+                "data_type": data_type,
                 "seed": seed,
                 "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
                 "total_cost_usd": total_cost
