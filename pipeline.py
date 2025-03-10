@@ -166,7 +166,7 @@ def zero_shot_hyp(task_name, api, model_name):
     )
 
     hypotheses_bank = generation_class.initialize_hypotheses_0_shot(
-        num_hypotheses_generate=init_hypotheses_per_batch,
+        num_hypotheses_generate=max_num_hypotheses,
         cache_seed=cache_seed,
         temperature=temperature,
         max_tokens=max_tokens,
