@@ -12,7 +12,7 @@ MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for l
 # MODEL_NAME="Qwen/Qwen2.5-72B-Instruct" 
 # MODEL_PATH="/net/projects/chai-lab/shared_models/Qwen2.5-72B-Instruct"  # only needed for local models
 
-# MODEL_TYPE="vllm-dpskr1"  
+# MODEL_TYPE="vllm"  
 # MODEL_NAME="DeepSeek/DeepSeek-R1-Distill-Llama-70B-local" 
 # MODEL_PATH="/net/projects/chai-lab/shared_models/DeepSeek-R1-Distill-Llama-70B-local"  # only needed for local models
 
