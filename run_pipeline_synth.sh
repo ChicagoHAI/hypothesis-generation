@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Model settings
+# Model settings
 MODEL_TYPE="gpt"
 MODEL_NAME="gpt-4o-mini"
 
@@ -36,8 +36,11 @@ TASKS=(
     # "admission/level_2/distractor_3"
     # "admission/level_2/noise_10"
     # "admission/level_2/size_5"
-    "synthetic_election/level_1"
+    # "synthetic_election/level_1"
     # "synthetic_preference/level_1"
+    "shoe"
+    "shoe_two_level/simple"
+    "shoe_two_level/hard"
 )
 
 # Define methods to run
@@ -55,9 +58,9 @@ METHODS=(
 )
 
 # Algorithm settings
-MAX_NUM_HYPOTHESES=5
-NUM_TRAIN=20
-NUM_TEST=20
+MAX_NUM_HYPOTHESES=20
+NUM_TRAIN=200
+NUM_TEST=300
 SEED=42
 
 # Iterate through each task
