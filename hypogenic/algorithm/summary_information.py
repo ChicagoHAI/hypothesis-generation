@@ -66,6 +66,16 @@ class SummaryInformation:
         self.num_visits += 1
         self.update_reward(alpha, current_example)
 
+    def update_info_continuous(self, current_example, alpha, diff_value):
+        if self.acc != 0:
+            loss = (1.0 / self.acc) - 1.0
+            new_loss = (loss * self.num_visits + (diff_value ** 2)) / (self.num_visits + 1)
+        else:
+            new_loss = diff_value ** 2
+        self.acc = 1.0 / (1.0 + new_loss)
+        self.num_visits += 1
+        self.update_reward(alpha, current_example)
+
     def __reduce__(self):
         return (self.__class__, (-1, self.acc, self.reward, self.num_visits))
 
