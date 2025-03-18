@@ -244,6 +244,8 @@ class DefaultUpdateContinuous(Update):
         only_best_hypothesis=False,
         save_every_n_examples=100,
         wrong_value_threshold=0.5,
+        reward_a=1,
+        reward_b=0.0625,
     ):
         super().__init__(
             generation_class,
@@ -264,6 +266,8 @@ class DefaultUpdateContinuous(Update):
             save_every_n_examples,
         )
         self.wrong_value_threshold = wrong_value_threshold
+        self.reward_a = reward_a
+        self.reward_b = reward_b
 
     def update(
         self,
@@ -352,11 +356,11 @@ class DefaultUpdateContinuous(Update):
                 if abs(pred - label) > self.wrong_value_threshold:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_continuous(
-                        current_sample, self.alpha, abs(pred - label)
+                        current_sample, self.alpha, abs(pred - label), self.reward_a, self.reward_b,
                     )  # let the bank know it got one wrong
                 else:
                     hypotheses_bank[hypothesis].update_info_continuous(
-                        current_sample, self.alpha, abs(pred - label)
+                        current_sample, self.alpha, abs(pred - label), self.reward_a, self.reward_b,
                     )  # let the bank know it got one right
 
                     # keeping track of good examples as we do in generation

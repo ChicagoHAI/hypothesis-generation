@@ -166,6 +166,8 @@ class DefaultGenerationContinuous(Generation):
     def __init__(
         self,
         api,
+        reward_a,
+        reward_b,
         prompt_class: BasePrompt,
         inference_class: Inference,
         task: BaseTask,
@@ -178,6 +180,8 @@ class DefaultGenerationContinuous(Generation):
             task: determines the goal to accomplish
         """
         super().__init__(api, prompt_class, inference_class, task)
+        self.reward_a = reward_a
+        self.reward_b = reward_b
 
     # ------------------------------------------------------------------------ #
     #                                                                          #
@@ -315,7 +319,25 @@ class DefaultGenerationContinuous(Generation):
             correct = 0
             ex = []
 
-            loss = 0.0
+            # loss = 0.0
+            # for index in example_indices:
+            #     prediction, actual_label = preds.pop(-1), labels.pop(-1)
+            #     if isinstance(prediction, str):
+            #         if prediction == "other":
+            #             prediction = -1
+            #         else:
+            #             prediction = float(prediction)
+            #     if isinstance(actual_label, str):
+            #         actual_label = float(actual_label)
+            #     loss += (prediction - actual_label) ** 2
+            # loss = loss / len(example_indices)
+            # acc = 1.0 / (1.0 + loss)
+
+            # =======================================================
+            # acc = \frac{1}{n} \sum_{i=1}^n (reward_a - reward_b * (y - \hat{y})^2)
+            # =======================================================
+
+            acc = 0.0
             for index in example_indices:
                 prediction, actual_label = preds.pop(-1), labels.pop(-1)
                 if isinstance(prediction, str):
@@ -325,9 +347,8 @@ class DefaultGenerationContinuous(Generation):
                         prediction = float(prediction)
                 if isinstance(actual_label, str):
                     actual_label = float(actual_label)
-                loss += (prediction - actual_label) ** 2
-            loss = loss / len(example_indices)
-            acc = 1.0 / (1.0 + loss)
+                acc += float(self.reward_a - self.reward_b * ((actual_label - prediction) ** 2))
+            acc = acc / len(example_indices)
 
             # print(f"acc = {acc} for hypothesis: {hyp}")
 
