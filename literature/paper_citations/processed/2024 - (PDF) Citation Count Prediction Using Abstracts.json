@@ -1,0 +1,1201 @@
+{
+    "paper_id": "2024 - (PDF) Citation Count Prediction Using Abstracts",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2025-03-23T23:36:41.834740Z"
+    },
+    "title": "Citation Count Prediction using Abstracts",
+    "authors": [
+        {
+            "first": "Takahiro",
+            "middle": [],
+            "last": "Baba",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Kyushu University",
+                "location": {
+                    "postCode": "819-0395",
+                    "settlement": "Fukuoka",
+                    "country": "Japan"
+                }
+            },
+            "email": "baba.takahiro.414@m.kyushu-u.ac.jp"
+        },
+        {
+            "first": "",
+            "middle": [],
+            "last": "Kensuke Baba",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "Fujitsu Laboratories",
+                "institution": "",
+                "location": {
+                    "postCode": "211-8588",
+                    "settlement": "Kawasaki",
+                    "country": "Japan"
+                }
+            },
+            "email": ""
+        },
+        {
+            "first": "Daisuke",
+            "middle": [],
+            "last": "Ikeda",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Kyushu University",
+                "location": {
+                    "postCode": "819-0395",
+                    "settlement": "Fukuoka",
+                    "country": "Japan"
+                }
+            },
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Researchers are expected to find previous literature that is related to their research and potentially has a scientific impact from among a large number of publications. This paper addresses the problem of predicting the citation count of each research paper, that is, the number of citations from other papers to that paper. Previous literature related to the problem claims that the textual data of papers do not deeply affect the prediction compared with data about the authors and venues of publication. In contrast, the authors of this paper detected the citation counts of papers using only the paper abstracts. Additionally, they investigated the effect of technical terms used in the abstracts on the detection. They classified abstracts of papers with high and low citation counts and applied the classification to the abstracts modified by hiding the technical terms used in them. The results of their experiments indicate that the high and low of citation counts of research papers can be detected using their abstracts, and the effective features used in the prediction are related to the trend of research topics.",
+    "pdf_parse": {
+        "paper_id": "2024 - (PDF) Citation Count Prediction Using Abstracts",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Researchers are expected to find previous literature that is related to their research and potentially has a scientific impact from among a large number of publications. This paper addresses the problem of predicting the citation count of each research paper, that is, the number of citations from other papers to that paper. Previous literature related to the problem claims that the textual data of papers do not deeply affect the prediction compared with data about the authors and venues of publication. In contrast, the authors of this paper detected the citation counts of papers using only the paper abstracts. Additionally, they investigated the effect of technical terms used in the abstracts on the detection. They classified abstracts of papers with high and low citation counts and applied the classification to the abstracts modified by hiding the technical terms used in them. The results of their experiments indicate that the high and low of citation counts of research papers can be detected using their abstracts, and the effective features used in the prediction are related to the trend of research topics.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Researchers are required to efficiently determine previous literature that is related to their research and has scientific impact from among a large number of publications. The number of research papers available online is rapidly increasing. Ideally, researchers should survey all possible publications for their research, but it is difficult to read the main text of all paper carefully. Therefore, researchers are expected to choose papers relevant to their research from a huge amount of data, and papers with high impact should be chosen before papers with low impact.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "We address the problem of predicting the scientific impact of research papers. The measure of this impact is the citation count of each paper, that is, the number of citations from other papers to that paper. Predicting citation count enables us to screen papers to determine papers that potentially have high impact. Citation count is a reasonable feature for formalizing scientific impact. The impact factor [10] , which is often referred as a quality measure of journal titles, is defined for a journal using the citation counts of the articles published in that journal. The h-index [11] , which is a measure of the contribution of a researcher to the society concerned, is also based on the citation counts of papers written by that researcher. Citation count will increase as time elapses, and hence is not appropriate for measuring the impact of brand-new papers. Therefore, we need to predict the potential citation count of a paper using features that can be directly extracted from it.",
+                "cite_spans": [
+                    {
+                        "start": 410,
+                        "end": 414,
+                        "text": "[10]",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 587,
+                        "end": 591,
+                        "text": "[11]",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In this study, we predict the citation counts of research papers using only their abstracts. A variety of features can be used for solving the problem of citation count prediction [14] . Previous literature on this problem claims that the textual data of a paper do not deeply affect the prediction compared with data about authors and venue of publication (see Section 5) . However, textual data, especially abstracts, are worth analysing in detail for the following reason. Textual data should be directly related to the contents of a paper. In particular, abstracts are usually available as the metadata of respective papers. The other metadata, including authors, authors' institutions, and journal (or conference) titles can be features of multiple papers, while an abstract corresponds to the paper concerned. In the previous literature, we identified two common limitations in using only abstracts for prediction:",
+                "cite_spans": [
+                    {
+                        "start": 180,
+                        "end": 184,
+                        "text": "[14]",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 362,
+                        "end": 372,
+                        "text": "Section 5)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "(1) The prediction accuracy is not high and detailed analyses are not conducted;",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "(2) The prediction is explained in terms of trivial findings regarding the trends in research topics.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "For the first limitation, we address a binary classification of abstracts into high and low citation counts abstracts as the target task, instead of a regression which is addressed in most previous literature. We tackle an easier task to analyze the effects of abstracts on citation counts in detail.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "As for the second limitation, we investigate the effect of the technical terms that appear in abstracts on the prediction. We investigated several types of classification of research paper abstracts to predict citation count. Our aim is to clarify the effects of (1) the abstracts of papers and (2) the technical and non-technical terms used in abstracts rather than to achieve high accuracy. We applied a standard classification method based on the bag-of-words model [13] to a set of abstracts of papers with high and low citation counts and investigated the accuracy and distinctive phrases. We obtained abstracts with citation counts from a database of research papers. Then, we defined the set of high and low citation counts by selecting top \u03b8% and bottom \u03b8% papers in order of citation count in the obtained abstracts. We also applied the same classification method to another set of modified abstracts in which the technical terms were replaced with a meaningless symbol. Additionally, we conducted a classification using only the technical terms that appear in the abstracts for comparison. Our previous work [4] reported that citation counts can be predicted using only the non-technical terms used in abstracts. This paper performs a strict detection of technical terms. The non-technical terms used in the previous work include some technical terms; hence, the result can be affected by the technical terms. Additionally, this paper compares our prediction method with other methods that use the contiguous occurrences of words and those that use only technical terms to clarify the effects of technical terms on prediction accuracy.",
+                "cite_spans": [
+                    {
+                        "start": 469,
+                        "end": 473,
+                        "text": "[13]",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 1118,
+                        "end": 1121,
+                        "text": "[4]",
+                        "ref_id": "BIBREF6"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The results of our experiments indicate that the scientific impact of a research paper can be roughly predicted using only its abstract, and the effective features in the prediction are related to the trend of research topics. Papers with high and low citation counts can be accurately classified using their abstracts. However, the same classification of the modified abstracts with hidden technical terms had low accuracy. The accuracy of the classification using only technical terms was better than that of the modified abstracts.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The rest of this paper is organized as follows. Section 2 formalizes the target problem as a classification of documents, and describes the experimental methods. Section 3 reports the experimental results. Section 4 discusses the results and future directions of our study. Section 5 describes related work and clarifies the novelty of our work.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "This section formalizes the prediction of the future impact of a research paper as a problem of document classification, and describes the experimental methods.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": "2"
+            },
+            {
+                "text": "We formalized the problem of an approximate citation count prediction as binary classification instead of regression. The positive and negative data were generated from a set of papers using a threshold for the number of citation counts. Figure 1 shows the distribution of papers by citation count and the ratio of the accumulated number of papers to the number of the total papers we used in our experiments. For example, using a threshold of 10%, positive samples are defined as the abstracts of papers whose citation counts are more than 150. For the data sets described below, we conducted three classifications using a standard method using the occurrences of the total words, technical terms, or non-technical terms.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 245,
+                        "end": 246,
+                        "text": "1",
+                        "ref_id": "FIGREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Document Classification",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "We used the abstracts and citation counts of papers published in the Proceedings of the National Academy of Sciences (PNAS) [3] for our experiments. PNAS is appropriate for our experiments for the reason that we can obtain a sufficient number of papers published in a single journal title and have citation counts. The scope of PNAS includes any research area in general science. We obtained the metadata, which includes the abstract and citation count, from Europe PubMed Central (Europe PMC) [1] .",
+                "cite_spans": [
+                    {
+                        "start": 124,
+                        "end": 127,
+                        "text": "[3]",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 494,
+                        "end": 497,
+                        "text": "[1]",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "We conducted a preliminary experiment and selected the data of papers published in PNAS from 1981 to 2003 (and available from Europe PMC) according to the result of the experiment as follows. Figure 2 shows the annual numbers of papers published from 1915 to 2017 and the average citation counts, where the citation counts are the values as of June 2017. As shown in the figure, the average citation count rapidly decreases after 2004, which indicates that the citation counts of papers published after 2004 could be potentially larger in the future. Therefore, we used the data of papers published before 2004. Additionally, there are two peaks in the graph of average citation counts in the 1970s, which can be attributed to some exceptional factors. Therefore, we used the data of papers published after 1980. Additionally, we used abstracts between 100 and 400 words in length. The number of abstracts in this normal data set is 49,171.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 199,
+                        "end": 200,
+                        "text": "2",
+                        "ref_id": "FIGREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "We also generated a modified data set of abstracts to clarify the effect of the occurrences of technical terms on the citation counts. As the corpus for defining technical terms, we used Medical Subject Headings (MeSH) [2] , which is a medical thesaurus published by the National Library of Medicine. The indexes of MeSH includes a subject heading \"Descriptor\", a subheading \"Qualifier\", and a supplementary concept record \"Concept\". We used all the Descriptors, Qualifiers, and Concepts defined in the latest version as of February 2018 of MeSH as the technical terms for our experiment. The scope of MeSH is considered to be restricted to the life sciences while that of PNAS includes general science. The effect of this difference on the experimental results is examined in Section 4. In addition to the terms, we regarded phrases obtained by dividing the terms using commas as technical terms. We also used combinations of phrases divided by brackets in the terms as technical terms. For a technical term \"A (B) C\" for phrases A, B, and C, we used the phrases \"A B C\", \"A C\", \"B C\", A, B, and C as technical terms. The number of obtained technical terms is 187,573. Then, all technical terms appearing in the abstracts were replaced with a symbol \"X\". For example, the abstract of the paper [7] :",
+                "cite_spans": [
+                    {
+                        "start": 219,
+                        "end": 222,
+                        "text": "[2]",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 1295,
+                        "end": 1298,
+                        "text": "[7]",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "The genomic RNA of human rhinovirus type 14 was cloned in Escherichia coli and the complete nucleotide sequence was determined. The RNA genome is 7212 nucleotides long. A single large open reading frame of 6536 nucleotides was identified, which starts at nucleotide 678 and ends 47 nucleotides from the 3' end of the RNA genome. Comparisons of the specified proteins with those of other picornaviruses showed a striking homology (44-65%) between rhinovirus and poliovirus. The rhinovirus genomic RNA is rich in adenosine (32.1%) and strongly favors an adenosine or uridine in the third position of codons. The predicted map locations of all the rhinovirus structural and non-structural proteins and their proposed proteolytic cleavage sites are described.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "was modified by replacing technical terms with \"X\" as follows:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "The X X of X X X 14 was cloned in X and the X X was determined. The X X is 7212 X X. A X X X of 6536 X was identified, which X at X 678 and ends 47 X from the 3' X of the X X. X of the specified X with those of other X showed a striking X (44-65%) between X and X. The X X X is rich in X (32.1%) and strongly favors an X or X in the X X of X. The predicted X X of X the X X and X and their proposed proteolytic X X are described.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "All the abstracts in the normal data set included at least one technical term; hence, the size of the modified data set is equal to that of the normal data set.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "We predicted citation counts using the data sets defined in Section 2.2. We conducted 5-fold cross-validation. For training and test data in each validation, we selected the top and bottom \u03b8% papers in the order of citation counts as positive and negative samples, respectively, after normalizing the citation count of each paper by dividing the number by the average citation count of its publishing year. The threshold \u03b8 was set to be 2 i for 0 \u2264 i \u2264 5 and 50. Therefore, the size of the experimental data for each classification is 2\u03b8% of the total data, because each data set is defined using the top \u03b8% and the bottom \u03b8% of the original data.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "We conducted five classifications with the normal and modified data sets. We applied the support vector machine (SVM) with a linear kernel to the multisets of the words appearing in the abstracts in the two data sets. We also applied the SVM to the multiset of the word-level 1-, 2-, and 3-grams of the abstracts, where an n-gram of a given sequence is a sequence of contiguous n elements of the sequence. We ignored all the single-character words except for the \"X\" used for technical terms, and did not use phrases that appeared in more than 50% of the training data for classification. Then, we predicted a positive or negative class using vectors obtained from the multisets. Additionally, we applied the SVM to the sets of technical terms appearing in the abstracts of the normal data set. Finally, we obtained the five data sets:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "\u2022 Normal: the set of the multiset of the words appearing in each abstract in the normal data set; \u2022 Normal 1-3: the set of the multiset of the word-level 1-, 2-, and 3-grams of each abstract in the normal data set; \u2022 Modified : the set of the multiset of the words appearing in each abstract in the modified data set; \u2022 Modified 1-3: the set of the multiset of the word-level 1-, 2-, and 3-grams of each abstract in the modified data set; \u2022 Technical terms: the set of the technical terms appearing in each abstract in the normal data set.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "The accuracy is defined to be the ratio of the number of correct predictions to the number of total predictions examined in a test. The precision and the recall are defined, for each class, to be the ratio of the number of correct predictions for a class to the number of all predictions for that class, and the ratio of the number of the correct predictions for a class to the actual number of samples of that class, respectively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "For comparison, we conducted a linear regression using the same data sets and features used in the binary classification. We investigated the coefficient of determination as a measure of accuracy for five regressions which correspond to the five classifications. The coefficient of determination for predicted values y i and the corresponding true",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "values \u0177i for 1 \u2264 i \u2264 n is defined to be 1 - n i=1 (y i -\u0177i ) 2 n i=1 (y i -\u0233i ) 2 , where \u0233 = 1 n n i=1 y i .",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Experiments",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "Figure 3 shows the accuracy of the five classifications against threshold \u03b8 for generating positive and negative samples. Figure 4 shows the dimensionality of the vectors, that is, the number of the phrases, used in the classification for the cases. The confusion matrices of the classifications are shown in Appendix A.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 7,
+                        "end": 8,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    },
+                    {
+                        "start": 129,
+                        "end": 130,
+                        "text": "4",
+                        "ref_id": "FIGREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": "3"
+            },
+            {
+                "text": "Table 1 shows the coefficient of determination for the five regressions that correspond to the five classifications. By the definition, a minus value of the coefficient means that the prediction is almost meaningless. Tables 2 3 4 show distinctive phrases of the abstracts of papers with high and low citation counts. The listed phrases correspond to the top and bottom five elements of the separating hyperplane used in the classifier in the order of the coefficients, for the five classifications. Therefore, these phrases should be roughly distinctive of the positive or negative data. ",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    },
+                    {
+                        "start": 225,
+                        "end": 226,
+                        "text": "2",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 227,
+                        "end": 228,
+                        "text": "3",
+                        "ref_id": "TABREF1"
+                    },
+                    {
+                        "start": 229,
+                        "end": 230,
+                        "text": "4",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Results",
+                "sec_num": "3"
+            },
+            {
+                "text": "This section exams the experimental results.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4"
+            },
+            {
+                "text": "We found that papers with high and low citation counts could be classified using only their abstracts. As shown in Figure 3 , the accuracy of the five classifications using abstracts were better than the expected value 50% of that of random predictions. Therefore, by using this metrics, we can analyze the effects of contiguous occurrences of words or technical terms on the classification, while the linear regression with the abstracts predicted meaningless values as shown in Table 1 . Additionally, the accuracy increases in opposition to \u03b8. In case where \u03b8 = 50, which corresponds to the naive binary classification with the total data, the prediction accuracy is low for the five data sets. By using only restricted papers we can clarify the difference between papers with high and low citation counts.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 122,
+                        "end": 123,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    },
+                    {
+                        "start": 486,
+                        "end": 487,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Main Findings",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "The effect of contiguous occurrences of words on the classification is small. As shown in Figure 3 , the classification accuracy generated by the two classifications using the 1-, 2-, and 3-grams were almost the same as that by the corresponding classifications using the 1-grams, although the dimensionalities of the vector spaces increased by more than ten times by using (1,3)-grams as shown in Figure 4 . Additionally, Tables 2 and 3 show that using (1,3)-grams does not find any phrase which represents a writing style or an idiom, while our similar experiment of classification for native language identification can find such phrases [5] . Therefore, we suppose that the effect of the information obtained from textual data including the writing style and idioms is little on predicting high impact papers.",
+                "cite_spans": [
+                    {
+                        "start": 641,
+                        "end": 644,
+                        "text": "[5]",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 97,
+                        "end": 98,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    },
+                    {
+                        "start": 405,
+                        "end": 406,
+                        "text": "4",
+                        "ref_id": "FIGREF3"
+                    },
+                    {
+                        "start": 430,
+                        "end": 431,
+                        "text": "2",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 436,
+                        "end": 437,
+                        "text": "3",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Main Findings",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "The effect of technical terms on the classification is large. The decrease in classification accuracy caused by using only technical terms from the normal one was smaller than that caused by hiding technical terms as shown in Figure 3 . As mentioned in Section 2.2, some technical terms used in the papers of PNAS are not included in the set of the technical terms defined using MeSH. The effect of technical terms was shown even using the insufficient set. As shown in Figure 4 , the dimensionality of the vector space was small even compared with that of the classifications using the 1-grams. Therefore, we can estimate that most effective factors used in the classification were included in the set of technical terms.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 233,
+                        "end": 234,
+                        "text": "3",
+                        "ref_id": "FIGREF2"
+                    },
+                    {
+                        "start": 477,
+                        "end": 478,
+                        "text": "4",
+                        "ref_id": "FIGREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Main Findings",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "We can conclude that the effect of technical terms on the prediction is large, also from the distinctive phrases used in the classification. As shown in Tables 2 and 4 , most distinctive phrases of positive samples in the classification with the normal data set are included in the technical terms. Additionally, most distinctive phrases of positive data in the classification with the modified data set using (1-3)-grams contain the symbol which means technical terms as shown in Table 3 . Therefore, the effect of technical terms on the prediction is considered to be large. In the case of the modified data set, using the generalized technical term finds how technical terms are used in abstracts instead of what the terms are.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 160,
+                        "end": 161,
+                        "text": "2",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 166,
+                        "end": 167,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 487,
+                        "end": 488,
+                        "text": "3",
+                        "ref_id": "TABREF1"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Key Findings",
+                "sec_num": "4.2"
+            },
+            {
+                "text": "The novelty of our work is that we clarified the following:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "5"
+            },
+            {
+                "text": "\u2022 the effect of research paper abstracts on citation count prediction;",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "5"
+            },
+            {
+                "text": "\u2022 the effect of the technical terms that appear in an abstract on the prediction.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "5"
+            },
+            {
+                "text": "Existing studies have concluded that textual data of papers (including abstracts) are not effective for citation count prediction when compared with data related to authors and publication venues. Additionally, the textual data are treated as topics extracted from raw text in existing work. Therefore, non-topic information included in the textual data, such as the writing style, has not been considered as a feature for prediction. Yan et al. [14] treated textual data as topics and concluded that their effect on prediction is small. They formalized the problem of citation count prediction. They applied four kinds of regression to three types of features of each paper (content, author, and venue). The content feature category includes the topics, which were obtained using latent Dirichlet allocation [6] from the textual data of the papers. The categories of author and venue include attributes related to the authors of each paper and the conference or journal at which each paper was published, respectively. The results of their experiments indicate that the features in the content category have little effect on prediction accuracy.",
+                "cite_spans": [
+                    {
+                        "start": 446,
+                        "end": 450,
+                        "text": "[14]",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 809,
+                        "end": 812,
+                        "text": "[6]",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "5"
+            },
+            {
+                "text": "Chen and Zhang [8] also treated textual data as topics, but their standalone effect on prediction is not clear. They predicted citation count using regression for features related to the contents and authors of papers. They conclude that the features included in the content category are more effective than the author category. However, the effect of the textual data on the prediction was not clear, because both categories include topic information obtained from textual data using latent Dirichlet allocation, and the content category includes the information of past citation counts in addition to the topic information.",
+                "cite_spans": [
+                    {
+                        "start": 15,
+                        "end": 18,
+                        "text": "[8]",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "5"
+            },
+            {
+                "text": "Li et al. [12] did not use textual data for prediction. They used the change in citation count over time for the prediction. Their method estimates this change using some paper features, but these features do not include textual data.",
+                "cite_spans": [
+                    {
+                        "start": 10,
+                        "end": 14,
+                        "text": "[12]",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "5"
+            },
+            {
+                "text": "Dong et al. [9] treated textual data as topics for another type of prediction and concluded that their effect is small. They predicted h-index instead of citation count and investigated the effects of several features. They concluded that the relationship of the main author to the research topic and the venue are more effective for prediction than the trend in research topics and the co-authors. Textual data are used as topics for the prediction, and their standalone effect is small. Yogatama et al. [15] used textual data as the main feature for prediction, but they treated them as topics. They used the change in topics over time for citation count prediction, which can be treated as research topics trends.",
+                "cite_spans": [
+                    {
+                        "start": 12,
+                        "end": 15,
+                        "text": "[9]",
+                        "ref_id": "BIBREF11"
+                    },
+                    {
+                        "start": 505,
+                        "end": 509,
+                        "text": "[15]",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related Work",
+                "sec_num": "5"
+            },
+            {
+                "text": "The future impact of a research paper can be roughly predicted using only its abstract, but most factors used in the prediction are related to the trend in research subjects rather than the abstract's writing style. We classified the abstracts of papers with high and low citation counts using word occurrences, and compared the result with the cases in which we hid technical terms or we used only technical terms. Using abstracts affected the accuracy of binary classification of papers into those with high and low citations. The decrease in accuracy by hiding technical terms was larger than the decrease caused by using only technical terms. Therefore, we conclude that the citation counts of papers are highly related to the technical terms that appear in their abstracts.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            },
+            {
+                "text": "One of our future work is improving the classifier for citation count prediction. We used the simple SVM with a linear kernel which straightforwardly define distinctive phrases of each class on the basis of the weights used in the classifier. We can apply other machine learning methods to the classification to improve the accuracy, but we need to explain the mechanism of classification as the finding of distinctive phrases. Another direction is extending the analysis of distinctive phrases. We listed several phrases with large or small weights in the classifier, but the vocabulary size, that is, the dimensionality of the vector space for each classification was extremely large. Therefore, we need a method to investigate a large number of phrases efficiently. Additionally, we are planning to apply our results to actual problems. The results of the experiments is expected to be used for an automatic proofreading of research papers; the scores put on phrases can suggest a better phrase expected to lead high impact. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "We thank Kimberly Moravec, PhD, from Edanz Group (www.edanzedi ting.com/ac) for editing a draft of this manuscript. This work was supported by JSPS KAKENHI Grant Number 19K12133.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Acknowledgments",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "X including; that X X 2 in X X; that X; in X and; X including; by X 4 in X X; that X; in X and; identified; hcv 8 in X and; that X; identified; cloned; required 16 in X and; cloned; the X and; isolates; of X and 32 cloned; in X and",
+                "authors": [
+                    {
+                        "first": "X X; That X; X",
+                        "middle": [],
+                        "last": "By",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "in X X; that X; X by: X including; that X X 2 in X X; that X; in X and; X including; by X 4 in X X; that X; in X and; identified; hcv 8 in X and; that X; identified; cloned; required 16 in X and; cloned; the X and; isolates; of X and 32 cloned; in X and; of X that; tasks; hcv 50 of X that; ebna; are X of; thus X X; trx Small 1 when; ca; atoms; if; gt 2 na; if; hr; phosphorylated; scale 4 yacs; phosphorylated; much; terms; na 8 14c; repertoire; revertants; terms; authentic 16 enzyme; interfere; arbitrary; pe; polymerase 32 cd2; agrees; preincubated; carboxylase; reinitiation 50 ria; exclusion; phosphatidylcholine; instructive;",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": ")-gram 1 on; on the; ca; atoms; when 2 on",
+                "authors": [],
+                "year": null,
+                "venue": "Small",
+                "volume": "14",
+                "issue": "1-3",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Small, (1-3)-gram 1 on; on the; ca; atoms; when 2 on; that the; if; na; on the 4 on; na; mm; at the; phosphorylated 8 mm; from the; by the; 14c",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Europe PMC: Europe PubMed Central",
+                "authors": [],
+                "year": 2018,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Europe PMC: Europe PubMed Central. https://europepmc.org/. Accessed Feb. 5, 2018.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "MeSH: Medical Subject Headings",
+                "authors": [],
+                "year": 2018,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "MeSH: Medical Subject Headings. https://www.nlm.nih.gov/ mesh/. Accessed Feb. 5, 2018.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Proceedings of the National Academy of Sciences",
+                "authors": [],
+                "year": 2018,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "PNAS: Proceedings of the National Academy of Sciences. http://www.pnas.org/. Accessed Feb. 5, 2018.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Citation count prediction using non-technical terms in abstracts",
+                "authors": [
+                    {
+                        "first": "Takahiro",
+                        "middle": [],
+                        "last": "Baba",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Kensuke",
+                        "middle": [],
+                        "last": "Baba",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Computational Science and Its Applications -ICCSA 2018",
+                "volume": "",
+                "issue": "",
+                "pages": "366--375",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Takahiro Baba and Kensuke Baba. Citation count prediction using non-technical terms in abstracts. In Computational Science and Its Applications -ICCSA 2018, pages 366-375. Springer International Publishing, 2018.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "Predicting author's native language using abstracts of scholarly papers",
+                "authors": [
+                    {
+                        "first": "Takahiro",
+                        "middle": [],
+                        "last": "Baba",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Kensuke",
+                        "middle": [],
+                        "last": "Baba",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Daisuke",
+                        "middle": [],
+                        "last": "Ikeda",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Foundations of Intelligent Systems",
+                "volume": "",
+                "issue": "",
+                "pages": "448--453",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Takahiro Baba, Kensuke Baba, and Daisuke Ikeda. Predicting author's native language using abstracts of scholarly papers. In Foundations of Intelligent Systems, pages 448-453. Springer International Publishing, 2018.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Latent dirichlet allocation",
+                "authors": [
+                    {
+                        "first": "David",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Blei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Andrew",
+                        "middle": [
+                            "Y"
+                        ],
+                        "last": "Ng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [
+                            "I"
+                        ],
+                        "last": "Jordan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "J. Mach. Learn. Res",
+                "volume": "3",
+                "issue": "",
+                "pages": "993--1022",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "David M. Blei, Andrew Y. Ng, and Michael I. Jordan. Latent dirichlet allocation. J. Mach. Learn. Res., 3:993-1022, 2003.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Molecular cloning and complete sequence determination of rna genome of human rhinovirus type 14",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "P L Callahan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R J",
+                        "middle": [],
+                        "last": "Mizutani",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Colonno",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1985,
+                "venue": "Proceedings of the National Academy of Sciences",
+                "volume": "82",
+                "issue": "",
+                "pages": "732--736",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "P L Callahan, S Mizutani, and R J Colonno. Molecular cloning and complete sequence determination of rna genome of human rhinovirus type 14. Proceedings of the National Academy of Sciences, 82:732-736, 1985.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Predicting citation counts of papers",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "IEEE 14th International Conference on Cognitive Informatics Cognitive Computing (ICCI*CC)",
+                "volume": "",
+                "issue": "",
+                "pages": "434--440",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. Chen and C. Zhang. Predicting citation counts of papers. In 2015 IEEE 14th International Conference on Cognitive Informatics Cognitive Computing (ICCI*CC), pages 434-440, July 2015.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Can scientific impact be predicted?",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Dong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Johnson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [
+                            "V"
+                        ],
+                        "last": "Chawla",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "IEEE Transactions on Big Data",
+                "volume": "2",
+                "issue": "1",
+                "pages": "18--30",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Y. Dong, R. A. Johnson, and N. V. Chawla. Can scientific impact be predicted? IEEE Transactions on Big Data, 2(1):18-30, March 2016.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "The history and meaning of the journal impact factor",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Garfield",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2006,
+                "venue": "JAMA",
+                "volume": "295",
+                "issue": "1",
+                "pages": "90--93",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "E Garfield. The history and meaning of the journal impact factor. JAMA, 295(1):90-93, 2006.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "An index to quantify an individual's scientific research output",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Hirsch",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2005,
+                "venue": "PNAS",
+                "volume": "102",
+                "issue": "46",
+                "pages": "16569--16572",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "J. E. Hirsch.An index to quantify an individual's scientific research output. PNAS, 102(46):16569-16572, November 2005.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Trendbased citation count prediction for research articles",
+                "authors": [
+                    {
+                        "first": "Cheng-Te",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Yu-Jen",
+                        "middle": [],
+                        "last": "Lin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Rui",
+                        "middle": [],
+                        "last": "Yan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Mi-Yen",
+                        "middle": [],
+                        "last": "Yeh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Advances in Knowledge Discovery and Data Mining",
+                "volume": "",
+                "issue": "",
+                "pages": "659--671",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cheng-Te Li, Yu-Jen Lin, Rui Yan, and Mi-Yen Yeh. Trend- based citation count prediction for research articles. In Tru Cao, Ee-Peng Lim, Zhi-Hua Zhou, Tu-Bao Ho, David Cheung, and Hiroshi Motoda, editors, Advances in Knowledge Discovery and Data Mining, pages 659-671, Cham, 2015. Springer International Publishing.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Introduction to information retrieval",
+                "authors": [
+                    {
+                        "first": "Prabhakar",
+                        "middle": [],
+                        "last": "Christopher D Manning",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Hinrich",
+                        "middle": [],
+                        "last": "Raghavan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Sch\u00fctze",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Christopher D Manning, Prabhakar Raghavan, and Hinrich Sch\u00fctze. Introduction to information retrieval. Cambridge Uni- versity Press, 2008.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Citation count prediction: Learning to estimate future citations for literature",
+                "authors": [
+                    {
+                        "first": "Rui",
+                        "middle": [],
+                        "last": "Yan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Jie",
+                        "middle": [],
+                        "last": "Tang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xiaobing",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Dongdong",
+                        "middle": [],
+                        "last": "Shan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Xiaoming",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the 20th ACM International Conference on Information and Knowledge Management, CIKM '11",
+                "volume": "",
+                "issue": "",
+                "pages": "1247--1252",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rui Yan, Jie Tang, Xiaobing Liu, Dongdong Shan, and Xiaoming Li. Citation count prediction: Learning to estimate future citations for literature. In Proceedings of the 20th ACM International Con- ference on Information and Knowledge Management, CIKM '11, pages 1247-1252, New York, NY, USA, 2011. ACM.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Predicting a scientific community's response to an article",
+                "authors": [
+                    {
+                        "first": "Dani",
+                        "middle": [],
+                        "last": "Yogatama",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Michael",
+                        "middle": [],
+                        "last": "Heilman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Brendan O'",
+                        "middle": [],
+                        "last": "Connor",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Chris",
+                        "middle": [],
+                        "last": "Dyer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Bryan",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Routledge",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Noah",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Smith",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Proceedings of the Conference on Empirical Methods in Natural Language Processing, EMNLP '11",
+                "volume": "",
+                "issue": "",
+                "pages": "594--604",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dani Yogatama, Michael Heilman, Brendan O'Connor, Chris Dyer, Bryan R. Routledge, and Noah A. Smith. Predicting a scientific community's response to an article. In Proceedings of the Conference on Empirical Methods in Natural Language Process- ing, EMNLP '11, pages 594-604. Association for Computational Linguistics, 2011.",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "num": null,
+                "text": "Figure 1 Distribution of the numbers of papers with a citation count.",
+                "fig_num": "1",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "num": null,
+                "text": "Figure 2 Annual number papers published in PNAS and available from Europe PMC as of June 2017, and their average citation counts.",
+                "fig_num": "2",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF2": {
+                "num": null,
+                "text": "Figure 3 Classification accuracy of research papers with high and low citation counts.",
+                "fig_num": "3",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF3": {
+                "num": null,
+                "text": "Figure 4 Dimensionality of the vectors used for classifications.",
+                "fig_num": "4",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "num": null,
+                "text": "Coefficients of determination in five regressions",
+                "html": null,
+                "content": "<table><tr><td/><td>Coefficient of Determination</td></tr><tr><td>Normal</td><td>-3.18</td></tr><tr><td>Normal 1-3</td><td>0.03</td></tr><tr><td>Modified</td><td>-5.80</td></tr><tr><td>Modified 1-3</td><td>-0.04</td></tr><tr><td>Technical term</td><td>-14.51</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF1": {
+                "num": null,
+                "text": "Phrases with large and small coefficients in classification of the modified",
+                "html": null,
+                "content": "<table><tr><td>data set</td><td/></tr><tr><td/><td>\u03b8</td><td>Phrases</td></tr><tr><td>Large</td><td colspan=\"2\">1 including; within; we; among; thus</td></tr><tr><td/><td colspan=\"2\">2 including; within; thus; identify; known</td></tr><tr><td/><td colspan=\"2\">4 encodes; including; known; base; amplified</td></tr><tr><td/><td colspan=\"2\">8 required; pathogenesis; potent; cloned; includes</td></tr><tr><td/><td colspan=\"2\">16 tasks; pathogenesis; here; cloned; glutamylcysteine</td></tr><tr><td/><td colspan=\"2\">32 constituent; glutamylcysteine; bpv; oxidatively;</td></tr><tr><td/><td/><td>amyloid</td></tr><tr><td/><td colspan=\"2\">50 homopyrimidine; oxidatively; augment; pipet;</td></tr><tr><td/><td/><td>suboptimal</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "num": null,
+                "text": "Confusion matrices generated by classifications of the normal data set",
+                "html": null,
+                "content": "<table><tr><td>using technical terms</td><td/><td/><td/><td/></tr><tr><td/><td/><td colspan=\"3\">Positive Negative Precision</td></tr><tr><td>\u03b8 = 1</td><td>Positive</td><td>435</td><td>96</td><td>0.82</td></tr><tr><td/><td>Negative</td><td>55</td><td>394</td><td>0.88</td></tr><tr><td/><td>Recall</td><td>0.89</td><td>0.8</td><td/></tr><tr><td>\u03b8 = 2</td><td>Positive</td><td>824</td><td>198</td><td>0.81</td></tr><tr><td/><td>Negative</td><td>156</td><td>782</td><td>0.83</td></tr><tr><td/><td>Recall</td><td>0.84</td><td>0.8</td><td/></tr><tr><td>\u03b8 = 4</td><td>Positive</td><td>1570</td><td>430</td><td>0.78</td></tr><tr><td/><td>Negative</td><td>395</td><td>1535</td><td>0.8</td></tr><tr><td/><td>Recall</td><td>0.8</td><td>0.78</td><td/></tr><tr><td>\u03b8 = 8</td><td>Positive</td><td>2987</td><td>950</td><td>0.76</td></tr><tr><td/><td>Negative</td><td>943</td><td>2980</td><td>0.76</td></tr><tr><td/><td>Recall</td><td>0.76</td><td>0.76</td><td/></tr><tr><td colspan=\"2\">\u03b8 = 16 Positive</td><td>5741</td><td>2196</td><td>0.72</td></tr><tr><td/><td>Negative</td><td>2124</td><td>5669</td><td>0.73</td></tr><tr><td/><td>Recall</td><td>0.73</td><td>0.72</td><td/></tr><tr><td colspan=\"2\">\u03b8 = 32 Positive</td><td>10494</td><td>5254</td><td>0.67</td></tr><tr><td/><td>Negative</td><td>5236</td><td>10476</td><td>0.67</td></tr><tr><td/><td>Recall</td><td>0.67</td><td>0.67</td><td/></tr><tr><td colspan=\"2\">\u03b8 = 50 Positive</td><td>15009</td><td>9599</td><td>0.61</td></tr><tr><td/><td>Negative</td><td>9576</td><td>14986</td><td>0.61</td></tr><tr><td/><td>Recall</td><td>0.61</td><td>0.61</td><td/></tr></table>",
+                "type_str": "table"
+            }
+        }
+    }
+}
