@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Model settings
-# MODEL_TYPE="gpt"
-# MODEL_NAME="gpt-4o-mini"
+MODEL_TYPE="gpt"
+MODEL_NAME="gpt-4o-mini"
 
-MODEL_TYPE="vllm"  
-MODEL_NAME="meta-llama/Meta-Llama-3.1-70B-Instruct" 
-MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for local models
+# MODEL_TYPE="vllm"  
+# MODEL_NAME="meta-llama/Meta-Llama-3.1-70B-Instruct" 
+# MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for local models
 
 # MODEL_TYPE="vllm"  
 # MODEL_NAME="Qwen/Qwen2.5-72B-Instruct" 
@@ -18,13 +18,22 @@ MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for l
 
 # Define list of tasks to run
 TASKS=(
-    "deceptive_reviews"
-    "llamagc_detect"
-    "gptgc_detect"
-    "persuasive_pairs"
-    "dreaddit"
-    "headline_binary"
-    "retweet"
+    # "deceptive_reviews"
+    # "llamagc_detect"
+    # "gptgc_detect"
+    # "persuasive_pairs"
+    # "dreaddit"
+    # "headline_binary"
+    # "retweet"
+    "journal_same/same_journal_health"
+    "journal_same/same_journal_nips"
+    "journal_same/same_journal_radiology"
+    # "journal_cross/cross_journal_health_nips"
+    # "journal_cross/cross_journal_health_radiology"
+    # "journal_cross/cross_journal_nips_health"
+    # "journal_cross/cross_journal_nips_radiology"
+    # "journal_cross/cross_journal_radiology_health"
+    # "journal_cross/cross_journal_radiology_nips"
 )
 
 # Define methods to run
@@ -78,12 +87,18 @@ for TASK_NAME in "${TASKS[@]}"; do
     for METHOD in "${METHODS[@]}"; do
         CMD="${CMD} --run_${METHOD}"
     done
+
+    # Check if TASK_NAME contains "journal" and add argument
+    if [[ "${TASK_NAME}" == *"journal"* ]]; then
+        CMD="${CMD} --literature_folder=\"paper_citations\""
+    fi
+
     # IND setup
     CMD="${CMD} 
     --do_train
     "
 
-    # OOD setup
+    # # OOD setup
     # CMD="${CMD} 
     # --use_ood
     # "

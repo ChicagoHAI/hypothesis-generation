@@ -55,6 +55,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--model_type", type=str, required=True)
 parser.add_argument("--model_name", type=str, required=True)
 parser.add_argument("--task_name", type=str, required=True)
+parser.add_argument("--literature_folder", type=str)
+
 # This is needed for local models
 parser.add_argument("--model_path", type=str)
 parser.add_argument("--do_train", action="store_true", default=False)
@@ -125,6 +127,10 @@ use_refine = args.use_refine
 max_refine = args.max_refine
 seed = args.seed
 
+if args.literature_folder is None:
+    literature_folder = args.task_name
+else:
+    literature_folder = args.literature_folder
 
 def zero_shot_hyp(task_name, api, model_name):
     output_folder = (
@@ -203,7 +209,7 @@ def only_paper(task_name, api, model_name):
         summizer=summarize_class,
     )
     literature_agent.summarize_papers(
-        data_file=f"./literature/{task_name}/processed",
+        data_file=f"./literature/{literature_folder}/processed",
         cache_seed=cache_seed,
         max_tokens=max_tokens,
         temperature=temperature,
@@ -269,7 +275,7 @@ def with_paper(task_name, api, model_name):
         summizer=summarize_class,
     )
     literature_agent.summarize_papers(
-        data_file=f"./literature/{task_name}/processed",
+        data_file=f"./literature/{literature_folder}/processed",
         cache_seed=cache_seed,
         max_tokens=max_tokens,
         temperature=temperature,
