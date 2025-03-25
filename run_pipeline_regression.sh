@@ -53,7 +53,8 @@ for TASK_NAME in "${TASKS[@]}"; do
         --seed ${SEED} \
         --max_num_hypotheses ${MAX_NUM_HYPOTHESES} \
         --num_train ${NUM_TRAIN} \
-        --num_test ${NUM_TEST}"
+        --num_test ${NUM_TEST} \
+        --regression"
 
     if [ "${MODEL_TYPE}" = "vllm" ]; then
         CMD="${CMD} --model_path ${MODEL_PATH}"
