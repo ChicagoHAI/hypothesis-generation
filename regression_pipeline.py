@@ -18,10 +18,20 @@ from hypogenic.tasks import BaseTask
 from hypogenic.logger_config import LoggerConfig
 from hypogenic.algorithm.summary_information import SummaryInformation
 
-from hypogenic.algorithm.update import DefaultUpdate
+from hypogenic.algorithm.update import (
+    DefaultUpdate,
+    DefaultUpdateContinuous,
+    update_register,
+)
 from hypogenic.algorithm.replace import DefaultReplace
-from hypogenic.algorithm.inference import DefaultInference
-from hypogenic.algorithm.generation import DefaultGeneration
+from hypogenic.algorithm.inference import (
+    DefaultInference,
+)
+from hypogenic.algorithm.generation import (
+    DefaultGeneration,
+    DefaultGenerationContinuous,
+    generation_register,
+)
 from hypogenic.algorithm.summary_information import SummaryInformation
 
 from hypothesis_agent.data_analysis_agent.generation import (
@@ -349,9 +359,13 @@ def original_hypogenic(task_name, api, model_name):
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
     prompt_class = BasePrompt(task)
     inference_class = DefaultInference(api, prompt_class, train_data, task)
-    generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
 
-    update_class = DefaultUpdate(
+    class_build = "default"
+    if regression:
+        class_build = "default_continuous"
+    generation_class = generation_register.build(class_build)(api, prompt_class, inference_class, task)
+
+    update_class = update_register.build(class_build)(
         generation_class=generation_class,
         inference_class=inference_class,
         replace_class=DefaultReplace(max_num_hypotheses),
