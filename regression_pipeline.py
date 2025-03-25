@@ -5,15 +5,18 @@ import os
 import argparse
 import pandas as pd
 
-from hypogenic.logger_config import LoggerConfig
 from hypogenic.LLM_wrapper import (
+    GPTWrapper,
     LLMWrapper,
+    LocalVllmWrapper,
     llm_wrapper_register,
 )
-from hypogenic.prompt import BasePrompt
-from hypogenic.utils import set_seed, get_results_regression
-from hypogenic.tasks import BaseTask
 from hypogenic.extract_label import extract_label_register
+from hypogenic.utils import set_seed, get_results_regression
+from hypogenic.prompt import BasePrompt
+from hypogenic.tasks import BaseTask
+from hypogenic.logger_config import LoggerConfig
+from hypogenic.algorithm.summary_information import SummaryInformation
 
 from hypogenic.algorithm.update import DefaultUpdate
 from hypogenic.algorithm.replace import DefaultReplace
@@ -44,6 +47,7 @@ from hypothesis_agent.data_analysis_agent.prompt import TestPrompt
 from IO_prompting.prompt import IOPrompt
 from IO_prompting.update import IOUpdate
 from IO_prompting.generation import IOGeneration
+
 
 parser = argparse.ArgumentParser()
 
@@ -93,6 +97,7 @@ parser.add_argument("--use_refine", action="store_true", default=False)
 parser.add_argument("--max_refine", type=int, default=6)
 parser.add_argument("--seed", type=int, default=42)
 parser.add_argument("--use_ood", action="store_true", default=False, help="Use out-of-distribution data for testing")
+parser.add_argument("--regression", action="store_true", default=False, help="Use regression task")
 
 args = parser.parse_args()
 
@@ -101,6 +106,7 @@ cross_model_postfix = args.cross_model_postfix
 multihyp = args.multihyp
 use_val = args.use_val
 use_ood = args.use_ood
+regression = args.regression
 max_num_hypotheses = args.max_num_hypotheses
 num_init = args.num_init
 num_train = args.num_train
@@ -132,7 +138,8 @@ def zero_shot_hyp(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
 
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed=seed)
@@ -182,7 +189,8 @@ def only_paper(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
 
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed=seed)
@@ -248,7 +256,8 @@ def with_paper(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
 
     train_data, _, _ = task.get_data(num_train, num_test, num_val, seed=seed)
@@ -332,7 +341,8 @@ def original_hypogenic(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
 
     set_seed(seed)
@@ -387,6 +397,7 @@ def original_hypogenic(task_name, api, model_name):
             epoch=epoch,
         )
 
+
 def IO_iterative_refinement(task_name, api, model_name):
     output_folder = f"./results/{task_name}/{model_name}/IO_refinement/"
 
@@ -395,7 +406,8 @@ def IO_iterative_refinement(task_name, api, model_name):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
 
     set_seed(seed)
@@ -474,6 +486,7 @@ def IO_iterative_refinement(task_name, api, model_name):
             epoch=epoch,
         )
 
+
 def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='balanced'):
 
     union_postfix = "refine_and_paper" if use_refine else "hypogenic_and_paper"
@@ -487,7 +500,8 @@ def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='ba
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
 
     set_seed(seed)
@@ -581,6 +595,7 @@ def union_hypotheses(task_name, api, model_name, use_refine=True, prioritize='ba
     with open(f'{output_folder}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json', 'w') as file:
         json.dump(union_dump_dict, file)
 
+
 def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=False):
     logger = LoggerConfig.get_logger("Agent - get_res")
 
@@ -589,7 +604,8 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
 
     train_data, test_data, val_data = task.get_data(num_train, num_test, num_val, seed)
@@ -617,12 +633,14 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
                 max_tokens=max_tokens,
             )
         
-        results_dict = get_results(pred_list, label_list)
-        f1 = results_dict["f1"]
-        acc = results_dict["accuracy"]
+        results_dict = get_results_regression(pred_list, label_list)
+        # f1 = results_dict["f1"]
+        # acc = results_dict["accuracy"]
+        mse = results_dict["mse"]
         logger_str = "Results:\n"
-        logger_str += f"Accuracy: {acc}\n"
-        logger_str += f"F1: {f1}\n\n"
+        # logger_str += f"Accuracy: {acc}\n"
+        # logger_str += f"F1: {f1}\n\n"
+        logger_str += f"MSE: {mse}\n\n"
         logger.info(logger_str)
         return results_dict  # Return results dictionary
     else:
@@ -639,35 +657,55 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
-            results_dict = get_results(pred_list, label_list)
-            hyp_list.append((hyp, results_dict["accuracy"], results_dict["f1"]))
+            results_dict = get_results_regression(pred_list, label_list)
+            # hyp_list.append((hyp, results_dict["accuracy"], results_dict["f1"]))
+            hyp_list.append((hyp, results_dict["mse"]))
 
-        hyp_list = sorted(hyp_list, key=lambda x: x[2], reverse=True)
+        # hyp_list = sorted(hyp_list, key=lambda x: x[2], reverse=True)
+        hyp_list = sorted(hyp_list, key=lambda x: x[1])
         logger_str = "Results:\n"
-        for idx, (hyp, acc, f1) in enumerate(hyp_list):
+        # for idx, (hyp, acc, f1) in enumerate(hyp_list):
+        #     logger_str += f"{idx + 1}. {hyp}\n"
+        #     logger_str += f"Train Accuracy: {hyp_bank[hyp].acc}\n"
+        #     logger_str += f"Test Accuracy: {acc}\n"
+        #     logger_str += f"Test F1: {f1}\n\n"
+        for idx, (hyp, mse) in enumerate(hyp_list):
             logger_str += f"{idx + 1}. {hyp}\n"
-            logger_str += f"Train Accuracy: {hyp_bank[hyp].acc}\n"
-            logger_str += f"Test Accuracy: {acc}\n"
-            logger_str += f"Test F1: {f1}\n\n"
+            logger_str += f"Train Exploitation (=-MSE): {hyp_bank[hyp].acc}\n"
+            logger_str += f"Test MSE: {mse}\n\n"
         logger.info(logger_str)
 
         # Format results in a more structured way
+        # formatted_results = {
+        #     "hypotheses": [
+        #         {
+        #             "hypothesis": hyp,
+        #             "train_accuracy": hyp_bank[hyp].acc,
+        #             "test_accuracy": acc,
+        #             "test_f1": f1
+        #         } for hyp, acc, f1 in hyp_list
+        #     ],
+        #     "best": {
+        #         "hypothesis": hyp_list[0][0],
+        #         "test_accuracy": hyp_list[0][1],
+        #         "test_f1": hyp_list[0][2]
+        #     } if hyp_list else {}
+        # }
         formatted_results = {
             "hypotheses": [
                 {
                     "hypothesis": hyp,
-                    "train_accuracy": hyp_bank[hyp].acc,
-                    "test_accuracy": acc,
-                    "test_f1": f1
-                } for hyp, acc, f1 in hyp_list
+                    "train_exploitation": hyp_bank[hyp].acc,
+                    "test_mse": mse
+                } for hyp, mse in hyp_list
             ],
             "best": {
                 "hypothesis": hyp_list[0][0],
-                "test_accuracy": hyp_list[0][1],
-                "test_f1": hyp_list[0][2]
+                "test_mse": hyp_list[0][1]
             } if hyp_list else {}
         }
         return formatted_results
+
 
 def save_method_results(method_name, results, task_name, model_name, seed=42, timestamp=None, use_ood=False):
     """Save results for a specific evaluation method to a JSON file."""
@@ -686,8 +724,9 @@ def save_method_results(method_name, results, task_name, model_name, seed=42, ti
         "model": model_name,
         "data_type": data_type,
         "seed": seed,
-        "timestamp": current_timestamp, 
-        "results": results
+        "timestamp": current_timestamp,
+        "results": results,
+        "regression": True # Hardcoded for now
     }
     
     with open(filename, 'w') as f:
@@ -726,7 +765,8 @@ def combine_results(task_name, model_name, methods_run=None, seed=42, use_ood=Fa
         "data_type": data_type,
         "seed": seed,
         "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
-        "methods": {}
+        "methods": {},
+        "regression": True # Hardcoded for now
     }
     
     for filename in result_files:
@@ -752,7 +792,8 @@ def log_arguments(logger, args):
             ("Model Path", args.model_path),
             ("Task Name", args.task_name),
             ("Do Train", args.do_train),
-            ("Use OOD", args.use_ood)
+            ("Use OOD", args.use_ood),
+            ("Regression", args.regression)
         ],
         "Method Configuration": [
             ("Run Zero Shot", args.run_zero_shot),
@@ -869,7 +910,8 @@ def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     task = BaseTask(
         config_path=f"./data/{task_name}/config.yaml",
         from_register=extract_label_register,
-        use_ood=use_ood
+        use_ood=use_ood,
+        regression=regression
     )
     prompt_class = BasePrompt(task)
     results_list = []
@@ -888,11 +930,16 @@ def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     preds = [result["pred"] for result in results]
 
     results_dict = get_results_regression(preds, labels)
+    # results_list.append((None, results_dict["accuracy"], results_dict["f1"]))
     results_list.append((None, results_dict["mse"]))
     
     # Format results in a structured way
     formatted_results = {
         "few_shot_k": few_shot_k,
+        # "accuracy": results_dict["accuracy"],
+        # "f1": results_dict["f1"],
+        # "precision": results_dict.get("precision", None),
+        # "recall": results_dict.get("recall", None)
         "mse": results_dict["mse"],
     }
     
@@ -945,3 +992,231 @@ if __name__ == "__main__":
         )
         logger.info(results)
         save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_few_shot:
+        method_name = "few_shot_baseline"
+        methods_run.append(method_name)
+        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Few-shot baseline, seed {seed}=-=-=-=-=-=-=-=-=-=-=-=")
+        results = baseline(
+            3,
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            seed=seed,
+        )
+        logger.info(results)
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_zero_shot_gen:
+        method_name = "zero_shot_gen"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Zero-shot generation=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            zero_shot_hyp(task_name=task_name, api=api, model_name=model_name)
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_zero_shot/hypotheses_training_sample_0_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_only_paper:
+        method_name = "literature_only"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Literature-only=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            only_paper(task_name=task_name, api=api, model_name=model_name)
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_only_paper/hypotheses_training_sample_0_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_hypogenic:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Original HypoGeniC=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            original_hypogenic(task_name=task_name, api=api, model_name=model_name)
+        
+        method_name = "hypogenic_no_update"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+        method_name = "hypogenic"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_hyporefine:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=HypoRefine=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            with_paper(task_name=task_name, api=api, model_name=model_name)
+        
+        method_name = "hyporefine_no_update"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+        
+        method_name = "hyporefine"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_union_hypo:
+        method_name = "union_hypogenic_paper"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoGeniC and Paper=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=False, prioritize='balanced')
+        union_postfix = "hypogenic_and_paper"
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_union_refine:
+        method_name = "union_hyporefine_paper"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Union HypoRefine and Paper=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            union_hypotheses(task_name=task_name, api=api, model_name=model_name, use_refine=True, prioritize='balanced')
+        union_postfix = "refine_and_paper"
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_{union_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_cross_model and "gpt" in model_type:
+        method_name = "cross_model_llama"
+        methods_run.append(method_name)
+        cross_model_name = "meta-llama/Meta-Llama-3.1-70B-Instruct"
+        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+    elif args.run_cross_model:
+        method_name = "cross_model_gpt"
+        methods_run.append(method_name)
+        cross_model_name = "gpt-4o-mini"
+        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_io_refine:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative Refinement=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            IO_iterative_refinement(task_name=task_name, api=api, model_name=model_name)
+
+        method_name = "io_prompting"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Prompting=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/IO_refinement/hypotheses_training_sample_init_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=False,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+        
+        method_name = "io_refinement"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative refinement=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/IO_refinement/hypotheses_training_sample_final_seed_{seed}_epoch_2.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=False,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    # Combine all results into a single summary file
+    if methods_run:
+        combined_file = combine_results(task_name, model_name, methods_run, seed, use_ood=use_ood)
+        if combined_file:
+            logger.info(f"Combined results saved to: {combined_file}")
+
+    # Log total cost of the run
+    if model_type == 'gpt':
+        total_cost = api.get_cost()
+        logger.info(f"Total cost: {total_cost}")
+        
+        # Save cost information to a separate file, using seed and data type
+        data_type = "OOD" if use_ood else "IND"
+        cost_file = f"./results/{task_name}/{model_name}/cost_{data_type}_seed_{seed}.json"
+        with open(cost_file, 'w') as f:
+            json.dump({
+                "model": model_name,
+                "task": task_name,
+                "data_type": data_type,
+                "seed": seed,
+                "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
+                "total_cost_usd": total_cost
+            }, f, indent=2)
+

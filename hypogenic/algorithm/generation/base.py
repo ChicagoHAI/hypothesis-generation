@@ -189,6 +189,7 @@ class Generation(ABC):
 
         return new_generated_hypotheses
 
+'''
     def make_hypotheses_bank_continuous(
         self,
         example_indices,
@@ -275,3 +276,4 @@ class Generation(ABC):
             new_generated_hypotheses[hyp].set_example(ex)
 
         return new_generated_hypotheses
+'''
