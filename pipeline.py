@@ -74,9 +74,10 @@ parser.add_argument("--run_union_hypo", action="store_true", help="Run Union Hyp
 parser.add_argument("--run_union_refine", action="store_true", help="Run Union HypoRefine and Paper")
 parser.add_argument("--run_cross_model", action="store_true", help="Run cross-model evaluation")
 parser.add_argument("--run_io_refine", action="store_true", help="Run IO iterative refinement")
+parser.add_argument("--cross_model_name", type=str, help="Name of the cross model")
+parser.add_argument("--cross_hyp_folder", type=str, help="Folder containing cross model hypotheses")
 
 # All algorithm-related arguments
-parser.add_argument("--cross_model_postfix", type=str, default="hypogenic_and_paper")
 parser.add_argument("--multihyp", action="store_true", default=True)
 parser.add_argument("--use_val", action="store_true", default=False)
 parser.add_argument("--max_num_hypotheses", type=int, default=10)
@@ -102,8 +103,6 @@ parser.add_argument("--use_ood", action="store_true", default=False, help="Use o
 
 args = parser.parse_args()
 
-
-cross_model_postfix = args.cross_model_postfix
 multihyp = args.multihyp
 use_val = args.use_val
 use_ood = args.use_ood
@@ -805,51 +804,53 @@ def save_method_results(method_name, results, task_name, model_name, seed=42, ti
     
     return filename
 
-def combine_results(task_name, model_name, methods_run=None, seed=42, use_ood=False):
-    """Combine all evaluation results into a single summary file."""
+def combine_results(task_name, model_name, seed=42):
+    """Combine all evaluation results into aggregated IND and OOD summary files."""
     results_dir = f"./results/{task_name}/{model_name}/evaluation_results"
     if not os.path.exists(results_dir):
         return None
-    
-    data_type = "OOD" if use_ood else "IND"
-    result_files = [f for f in os.listdir(results_dir) if f.endswith('.json') and data_type in f]
-    
-    if methods_run is not None:
-        method_files = []
-        for method in methods_run:
-            method_file = f"{method}_{data_type}_seed_{seed}.json"
-            if method_file in result_files:
-                method_files.append(method_file)
-        result_files = method_files
-    else:
-        # Filter by seed and data type
-        result_files = [f for f in result_files if f'seed_{seed}' in f and data_type in f]
-    
-    if not result_files:
-        return None
-    
-    # Combine results
+
+    # Initialize combined results for IND and OOD
     combined_results = {
-        "task": task_name,
-        "model": model_name,
-        "data_type": data_type,
-        "seed": seed,
-        "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
-        "methods": {}
+        "IND": {
+            "task": task_name,
+            "model": model_name,
+            "data_type": "IND",
+            "seed": seed,
+            "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
+            "methods": {}
+        },
+        "OOD": {
+            "task": task_name,
+            "model": model_name,
+            "data_type": "OOD",
+            "seed": seed,
+            "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
+            "methods": {}
+        }
     }
-    
+
+    # Scan for all result files in the directory
+    result_files = [f for f in os.listdir(results_dir) if f.endswith('.json')]
+
     for filename in result_files:
         with open(os.path.join(results_dir, filename), 'r') as f:
             data = json.load(f)
             method_name = data["method"]
-            combined_results["methods"][method_name] = data["results"]
-    
-    # Save combined results
-    combined_file = f"./results/{task_name}/{model_name}/combined_results_{data_type}_seed_{seed}.json"
-    with open(combined_file, 'w') as f:
-        json.dump(combined_results, f, indent=2)
-    
-    return combined_file
+            data_type = data["data_type"]  # Either "IND" or "OOD"
+            combined_results[data_type]["methods"][method_name] = data["results"]
+
+    # Save combined IND results
+    ind_file = f"./results/{task_name}/{model_name}/combined_results_IND_seed_{seed}.json"
+    with open(ind_file, 'w') as f:
+        json.dump(combined_results["IND"], f, indent=2)
+
+    # Save combined OOD results
+    ood_file = f"./results/{task_name}/{model_name}/combined_results_OOD_seed_{seed}.json"
+    with open(ood_file, 'w') as f:
+        json.dump(combined_results["OOD"], f, indent=2)
+
+    return ind_file, ood_file
 
 def log_arguments(logger, args):
     """Log all configuration parameters in an organized way."""
@@ -877,7 +878,6 @@ def log_arguments(logger, args):
             ("Run IO Refine", args.run_io_refine)
         ],
         "Algorithm Configuration": [
-            ("Cross Model Postfix", cross_model_postfix),
             ("Multi Hypothesis", multihyp),
             ("Use Validation", use_val),
             ("Max Num Hypotheses", max_num_hypotheses),
@@ -1099,34 +1099,28 @@ if __name__ == "__main__":
         )
         save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
-    if args.run_cross_model and "gpt" in model_type:
-        method_name = "cross_model_llama"
+    if args.run_cross_model:
+        cross_model_name = args.cross_model_name
+        cross_hyp_folder = args.cross_hyp_folder
+        cross_model_prefix = cross_model_name.split('/')[0]
+        method_name = f"{cross_model_prefix}_gen_{model_name}_inf"
         methods_run.append(method_name)
-        cross_model_name = "meta-llama/Meta-Llama-3.1-70B-Instruct"
-        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
-        results = get_res(
-            f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
-            task_name=task_name,
-            api=api,
-            model_name=model_name,
-            use_val=use_val,
-            multihyp=multihyp,
-        )
-        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
-    elif args.run_cross_model:
-        method_name = "cross_model_gpt"
-        methods_run.append(method_name)
-        cross_model_name = "gpt-4o-mini"
-        logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
-        results = get_res(
-            f"results/{task_name}/{cross_model_name}/hyp_{max_num_hypotheses}_{cross_model_postfix}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
-            task_name=task_name,
-            api=api,
-            model_name=model_name,
-            use_val=use_val,
-            multihyp=multihyp,
-        )
-        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+         
+        if cross_model_name and cross_hyp_folder:
+            logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Cross model {task_name}=-=-=-=-=-=-=-=-=-=-=-=")
+            logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Generation model {cross_model_name}=-=-=-=-=-=-=-=-=-=-=-=")
+            logger.info(f"=-=-=-=-=-=-=-=-=-=-=-=Inference model {model_name}=-=-=-=-=-=-=-=-=-=-=-=")
+            results = get_res(
+                f"results/{task_name}/{cross_model_name}/{cross_hyp_folder}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+                task_name=task_name,
+                api=api,
+                model_name=model_name,
+                use_val=use_val,
+                multihyp=multihyp,
+            )
+            save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+        else:
+            logger.warning("Cross model name or hypothesis folder not provided. Skipping cross model evaluation.")
 
     if args.run_io_refine:
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=IO Iterative Refinement=-=-=-=-=-=-=-=-=-=-=-=")
@@ -1161,9 +1155,10 @@ if __name__ == "__main__":
 
     # Combine all results into a single summary file
     if methods_run:
-        combined_file = combine_results(task_name, model_name, methods_run, seed, use_ood=use_ood)
-        if combined_file:
-            logger.info(f"Combined results saved to: {combined_file}")
+        combined_files = combine_results(task_name, model_name, seed)
+        if combined_files:
+            logger.info(f"Combined IND results saved to: {combined_files[0]}")
+            logger.info(f"Combined OOD results saved to: {combined_files[1]}")
 
     # Log total cost of the run
     if model_type == 'gpt':

@@ -25,15 +25,15 @@ TASKS=(
     # "dreaddit"
     # "headline_binary"
     # "retweet"
-    "journal_same/same_journal_health"
-    "journal_same/same_journal_nips"
-    "journal_same/same_journal_radiology"
-    # "journal_cross/cross_journal_health_nips"
-    # "journal_cross/cross_journal_health_radiology"
-    # "journal_cross/cross_journal_nips_health"
-    # "journal_cross/cross_journal_nips_radiology"
-    # "journal_cross/cross_journal_radiology_health"
-    # "journal_cross/cross_journal_radiology_nips"
+    # "journal_same/same_journal_health"
+    # "journal_same/same_journal_nips"
+    # "journal_same/same_journal_radiology"
+    "journal_cross/cross_journal_health_nips"
+    "journal_cross/cross_journal_health_radiology"
+    "journal_cross/cross_journal_nips_health"
+    "journal_cross/cross_journal_nips_radiology"
+    "journal_cross/cross_journal_radiology_health"
+    "journal_cross/cross_journal_radiology_nips"
 )
 
 # Define methods to run
@@ -94,14 +94,14 @@ for TASK_NAME in "${TASKS[@]}"; do
     fi
 
     # IND setup
-    CMD="${CMD} 
-    --do_train
-    "
-
-    # # OOD setup
     # CMD="${CMD} 
-    # --use_ood
+    # --do_train
     # "
+
+    # OOD setup
+    CMD="${CMD} 
+    --use_ood
+    "
     
     # Additional methods
     # Uncomment if needed

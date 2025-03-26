@@ -36,11 +36,59 @@ TASKS=(
     # "admission/level_2/distractor_3"
     # "admission/level_2/noise_10"
     # "admission/level_2/size_5"
-    # "synthetic_election/level_1"
-    # "synthetic_preference/level_1"
-    "shoe"
-    "shoe_two_level/simple"
-    "shoe_two_level/hard"
+    # "shoe"
+    # "shoe_two_level/simple"
+    # "shoe_two_level/hard"
+    # "election/level0"
+    # "preference/level0"
+    # "election/level1"
+    # "preference/level1"
+    # "election/level2"
+    # "preference/level2"
+    # "election/level3"
+    # "preference/level3"
+    # "election/level4"
+    # "preference/level4"
+    # "election/level5"
+    # "preference/level5"
+    # "election/level0_nosubtlety"
+    # "preference/level0_nosubtlety"
+    # "election/level1_nosubtlety"
+    # "preference/level1_nosubtlety"
+    # "election/level2_nosubtlety"
+    # "preference/level2_nosubtlety"
+    # "election/level3_nosubtlety"
+    # "preference/level3_nosubtlety"
+    # "election/level4_nosubtlety"
+    # "preference/level4_nosubtlety"
+    # "election/level5_nosubtlety"
+    # "preference/level5_nosubtlety"
+    # 'election_controlled/5_0_0'
+    # 'election_controlled/10_0_0'
+    # 'election_controlled/15_0_0'
+    # 'election_controlled/20_0_0'
+    # 'election_controlled/20_0.1_0'
+    # 'election_controlled/20_0.2_0'
+    # 'election_controlled/20_0.3_0'
+    # 'election_controlled/20_0_0.1'
+    # 'election_controlled/20_0_0.2'
+    # 'election_controlled/20_0_0.3'
+    # 'election_controlled/20_0.1_0.1'
+    # 'election_controlled/20_0.2_0.2'
+    # 'election_controlled/20_0.3_0.3'
+    'preference_controlled/5_0_0',
+    'preference_controlled/10_0_0'
+    'preference_controlled/15_0_0'
+    'preference_controlled/20_0_0'
+    'preference_controlled/20_0.1_0'
+    'preference_controlled/20_0.2_0'
+    'preference_controlled/20_0.3_0'
+    'preference_controlled/20_0_0.1'
+    'preference_controlled/20_0_0.2'
+    'preference_controlled/20_0_0.3'
+    'preference_controlled/20_0.1_0.1'
+    'preference_controlled/20_0.2_0.2'
+    'preference_controlled/20_0.3_0.3'
 )
 
 # Define methods to run
