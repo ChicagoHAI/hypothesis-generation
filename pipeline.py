@@ -1103,7 +1103,8 @@ if __name__ == "__main__":
         cross_model_name = args.cross_model_name
         cross_hyp_folder = args.cross_hyp_folder
         cross_model_prefix = cross_model_name.split('/')[0]
-        method_name = f"{cross_model_prefix}_gen_{model_name}_inf"
+        inf_model_prefix = model_name.split('/')[0]
+        method_name = f"{cross_model_prefix}_gen_{inf_model_prefix}_inf"
         methods_run.append(method_name)
          
         if cross_model_name and cross_hyp_folder:
