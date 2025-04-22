@@ -1,0 +1,2151 @@
+{
+    "paper_id": "Balek et al",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2025-03-23T23:37:00.606262Z"
+    },
+    "title": "LLM-based feature generation from text for interpretable machine learning",
+    "authors": [
+        {
+            "first": "Vojt\u011bch",
+            "middle": [],
+            "last": "Balek",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Luk\u00e1\u0161",
+            "middle": [],
+            "last": "S\u00fdkora",
+            "suffix": "",
+            "affiliation": {},
+            "email": "lukas.sykora@vse.cz"
+        },
+        {
+            "first": "Vil\u00e9m",
+            "middle": [],
+            "last": "Sklen\u00e1k",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Prague University of Economics and Business",
+                "location": {
+                    "addrLine": "nam W Churchilla 4",
+                    "postCode": "13067",
+                    "settlement": "Prague",
+                    "country": "Czech Republic"
+                }
+            },
+            "email": "vilem.sklenak@vse.cz"
+        },
+        {
+            "first": "Tom\u00e1\u0161",
+            "middle": [],
+            "last": "Kliegr",
+            "suffix": "",
+            "affiliation": {
+                "laboratory": "",
+                "institution": "Prague University of Economics",
+                "location": {}
+            },
+            "email": "tomas.kliegr@vse.cz"
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Existing text representations such as embeddings and bag-of-words are not suitable for rule learning due to their high dimensionality and absent or questionable feature-level interpretability. This article explores whether large language models (LLMs) could address this by extracting a small number of interpretable features from text. We demonstrate this process on two datasets (CORD-19 and M17+) containing several thousand scientific articles from multiple disciplines and a target being a proxy for research impact. An evaluation based on testing for the statistically significant correlation with research impact has shown that LLama 2-generated features are semantically meaningful. We consequently used these generated features in text classification to predict the binary target variable representing the citation rate for the CORD-19 dataset and the ordinal 5-class target representing an expert-awarded grade in the M17+ dataset. Machine-learning models trained on the LLM-generated features provided similar predictive performance to the state-of-the-art embedding model SciBERT for scientific text. The LLM used only 62 features compared to 768 features in SciBERT embeddings, and these features were directly interpretable, corresponding to notions such as article methodological rigor, novelty, or grammatical correctness. As the final step, we extract a small number of well-interpretable action rules. Consistently competitive results obtained with the same LLM feature set across both thematically diverse datasets show that this approach generalizes across domains.",
+    "pdf_parse": {
+        "paper_id": "Balek et al",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Existing text representations such as embeddings and bag-of-words are not suitable for rule learning due to their high dimensionality and absent or questionable feature-level interpretability. This article explores whether large language models (LLMs) could address this by extracting a small number of interpretable features from text. We demonstrate this process on two datasets (CORD-19 and M17+) containing several thousand scientific articles from multiple disciplines and a target being a proxy for research impact. An evaluation based on testing for the statistically significant correlation with research impact has shown that LLama 2-generated features are semantically meaningful. We consequently used these generated features in text classification to predict the binary target variable representing the citation rate for the CORD-19 dataset and the ordinal 5-class target representing an expert-awarded grade in the M17+ dataset. Machine-learning models trained on the LLM-generated features provided similar predictive performance to the state-of-the-art embedding model SciBERT for scientific text. The LLM used only 62 features compared to 768 features in SciBERT embeddings, and these features were directly interpretable, corresponding to notions such as article methodological rigor, novelty, or grammatical correctness. As the final step, we extract a small number of well-interpretable action rules. Consistently competitive results obtained with the same LLM feature set across both thematically diverse datasets show that this approach generalizes across domains.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "Traditional text representations, such as bag of words (BoW) and embeddings, have posed significant challenges for \"white-box\" machine learning models. Using rule learning as an example, the use of BoW representation results in many features tied to specific words, leading to rules that are difficult to interpret and over-specific. On the other hand, embeddings make it practically impossible to derive any rules due to their complex, dense representations. The use of text in machine learning thus typically requires an explanation algorithm, while direct learning of an interpretable model is preferred (Atzmueller, F\u00fcrnkranz, Kliegr, & Schmid, 2024) .",
+                "cite_spans": [
+                    {
+                        "start": 607,
+                        "end": 654,
+                        "text": "(Atzmueller, F\u00fcrnkranz, Kliegr, & Schmid, 2024)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Large language models (LLMs) have seen a significant increase in use in academic and commercial spheres alike, and the wide availability of open-weight models such as LLama2 (Touvron et al., 2023) makes LLMs suitable for use as a component in machine learning workflows. These models are commonly used for text summarization, classification, or natural language generation. In this work, we evaluate LLMs on the task of feature generation from text and then show how these newly generated features can be used for rule learning.",
+                "cite_spans": [
+                    {
+                        "start": 174,
+                        "end": 196,
+                        "text": "(Touvron et al., 2023)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "As the specific use case, we apply LLM-based feature generation on the task of scholarly document quality prediction. First, we use an LLM to assess a large number of scientific article abstracts, evaluating them according to multiple criteria such as methodological rigor, grammatical correctness, article novelty, or text accessibility.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "Example. Our LLM feature generator applied to a hypothetical initial version of this articles' abstract generated features such as rigor=high (on a three point scale low/medium/high), grammar=0 (on binary scale, where 0 is free of errors and 1 is contains errors), novelty=low, accessibility=high, replicability=0 (not good). Action rules were learnt on a training dataset with similarly LLM-annotated features, and a target corresponding to human expert assessment of article quality. An applicable action rule found for our abstract is: r 15 : novelty = (low \u2192 high)\u2227replicability = (0 \u2192 1) \u21d2 evaluation = (avg \u2192 best). This rule, which used only two of the available features, indicates that in its current form, the article is predicted to receive an average expert evaluation, but if applicability and novelty are improved, the probability of the evaluation increasing to a higher rating will rise. 1 Consequently, we could modify the abstract to emphasize that LLMbased features have not yet been used in rule learning and that our use of an open LLM fosters replicability compared to prior work that used closed commercial LLMs.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "The first contribution of our work is in a multi-pronged evaluation of the quality of LLM-generated features, including their agreement with domain expertise, analysis of interpretability, and predictive performance. As reference methods, we use both state-of-the-art but \"black-box\" embedding-based methods as well as the partly interpretable BoW representation. We also demonstrate the effect of the fusion of LLM-based and BoW features.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In addition to the quantitative results, as the second contribution, we demonstrate how LLM-based features can be used to build actionable rule-based predictions using action rules (Ras & Wieczorkowska, 2000) . We chose this specific recommendation task over the more commonly used classification task because it is one area where rule learning can provide a distinct functionality. Action rule-learning is a method for deriving actionable insights from data by identifying specific changes that can lead to desired outcomes. In this work, action rules are used as counterfactual (what-if) explanations to gain a deeper understanding of the factors that contribute to successful article evaluations or citation rates. By identifying specific changes in attributes that could improve these outcomes, action rules provide valuable insights into the underlying reasons for success. Considering our domain of research article impact, this can lead to recommendations for the article writing process, resulting in better evaluations or higher citation rates.",
+                "cite_spans": [
+                    {
+                        "start": 181,
+                        "end": 208,
+                        "text": "(Ras & Wieczorkowska, 2000)",
+                        "ref_id": "BIBREF13"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "This article is organized as follows. Section 2 presents the methodology, including the two datasets used and the description of LLM-based feature generation methodology and methods for feature quality validation. This part also introduces the concept of action rule learning. Section 3 presents the results. This proceeds from the description of the generated datasets to statistical tests for feature significance, analysis of their predictive performance and SHAP-value analysis of built classifiers. The last part of this section covers the results of action rule mining. Discussion and limitations are present in Section 4 and related work in Section 5. The conclusions summarize the main results and suggest possible future extensions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1"
+            },
+            {
+                "text": "In this research we employ the publicly available open-source LLama2 model and use it to extract several features from scientific article abstracts. These features are then used as inputs for several machine-learning algorithms, and their predictive performance is measured against alternative forms of text representations, such as word embeddings or TF-IDF matrix.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Methods",
+                "sec_num": "2"
+            },
+            {
+                "text": "The data used for experiments in this work are two datasets that contain scientific article titles, abstracts, and a target variable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Input data",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "The CORD-19 dataset is the first dataset of interest. It is primarily composed of scientific articles related to coronaviruses that span from the 1970's to 2020, the beginning of the COVID-19 outbreak. The target variable in this dataset represents either a low or high citation rate. This variable was computed in previous research by Beranov\u00e1, Joachimiak, Kliegr, Rabby, and Sklen\u00e1k (2022) by dividing the number of citations obtained from OpenCitations and Web of Science by the age of the publication in years and then assigning 0 to articles below the median and 1 to articles above the median. In order to reduce the computational complexity, the dataset size was reduced to 3000 articles and was balanced with respect to the target variable.",
+                "cite_spans": [
+                    {
+                        "start": 336,
+                        "end": 391,
+                        "text": "Beranov\u00e1, Joachimiak, Kliegr, Rabby, and Sklen\u00e1k (2022)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Input data",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "The M17+ dataset (Cap, 2024) is also used in this work's experiments. The dataset consists of 7710 articles from Czech research institutions that were graded by a jury of experts in a program subsidized by the government of the Czech Republic, similar to the U.K. Research Excellence Framework 2021 (REF) that has been the subject of previous research in regards to grade prediction of articles by machine-learning methods (Thelwall et al., 2023) . The target variable in this dataset is an ordinal variable ranging from 1 to 5, with 1 meaning that the article is of world-class quality and impact, while 5 means that the article is of mediocre quality and impact. The dataset was downsampled from 7710 articles to 2000 with respect to the target variable. This resulted in an even distribution of 400 articles belonging to each class.",
+                "cite_spans": [
+                    {
+                        "start": 17,
+                        "end": 28,
+                        "text": "(Cap, 2024)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 423,
+                        "end": 446,
+                        "text": "(Thelwall et al., 2023)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Input data",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Both datasets contained several columns beside the article title, abstract, and target variable, such as journal name, impact factors (IF), or article influence score (AIS). The final version of both datasets contained only 3 columns -title, abstract, and target.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Input data",
+                "sec_num": "2.1"
+            },
+            {
+                "text": "Based on the article abstracts, several features were extracted using the non-finetuned LLama2 13B GPTQ Chat model hosted on our own hardware. The features generated in the experiment were based on prior research from various authors that mainly focused on inspecting the relationship between citation rate/count and respective features that were derived by other means than LLM inference.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature derivation",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "The features are defined as outlined in Table 1 . The research type and discipline features were divided into multiple binary variables indicating the articles belonging to respective research types or disciplines. Each article was allowed to belong into more than one discipline and research.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 46,
+                        "end": 47,
+                        "text": "1",
+                        "ref_id": "TABREF0"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Feature derivation",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "We used the LLama2 13B GPTQ Chatfoot_0 model through the transformers library API (Wolf et al., 2019) , which allowed us to set model hyperparameters so that the models produced consistent results.",
+                "cite_spans": [
+                    {
+                        "start": 82,
+                        "end": 101,
+                        "text": "(Wolf et al., 2019)",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature derivation",
+                "sec_num": "2.2"
+            },
+            {
+                "text": "In this research, we generate various categorical features using LLMs. Evaluation of LLM output is difficult, especially when dealing with text characteristics that can be subjective, i.e., methodological rigor or accessibility. Currently, the most reliable way of validating LLM output is human evaluation, which is also the most expensive and can suffer from having high variance and instability, depending on the human evaluators (Chang et al., 2024) .",
+                "cite_spans": [
+                    {
+                        "start": 433,
+                        "end": 453,
+                        "text": "(Chang et al., 2024)",
+                        "ref_id": "BIBREF5"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "LLM feature quality validation",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "We evaluate the generated features in two ways. In the standard quantitative approach, we observe the effect of the feature on predictive performance. In the qualitative approach, we suppose there to be certain relationships between the generated features and the target variables. For example, we suppose that articles with higher methodological rigor will be, on average, graded higher than articles with lower rigor. The qualitative validation is based on checking whether we observe the corresponding correlations between the generated feature and the target.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "LLM feature quality validation",
+                "sec_num": "2.3"
+            },
+            {
+                "text": "In order to compare the performance of machine-learning algorithms trained on LLM-generated features, we also employed two of the common techniques of text representation to compare the predictive performance.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Alternative text data representation",
+                "sec_num": "2.4"
+            },
+            {
+                "text": "Bag-of-Words (BoW) is a method for representing text as an unordered collection of terms. In this context, we use the term frequency-inversed document frequency (TF-IDF) matrix to obtain term weights. The TF-IDF matrix was constructed for 1500 terms, including unigrams, bigrams, and trigrams. To filter out domain-specific stopwords and irrelevant terms, the minimum document frequency was set to 0.005, and the maximum document frequency was set to 0.80 for the TF-IDF terms.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Alternative text data representation",
+                "sec_num": "2.4"
+            },
+            {
+                "text": "Word Embeddings is employed through the use of state-of-the-art language models for scientific text SciBERT (Beltagy, Lo, & Cohan, 2019) . SciBERT was trained on a large amount of scientific data and significantly outperformed the base BERT model (Devlin, Chang, Lee, & Toutanova, 2019) . The embeddings produced by this model are vectors of length 768.",
+                "cite_spans": [
+                    {
+                        "start": 108,
+                        "end": 136,
+                        "text": "(Beltagy, Lo, & Cohan, 2019)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 247,
+                        "end": 286,
+                        "text": "(Devlin, Chang, Lee, & Toutanova, 2019)",
+                        "ref_id": "BIBREF6"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Alternative text data representation",
+                "sec_num": "2.4"
+            },
+            {
+                "text": "For the purposes of a thorough comparison of predictive performance, we utilized various machine-learning algorithms for each feature subset.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Machine-learning algorithms",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "Scikit-learn python library was used as a source for a range of models (Pedregosa et al., 2011) . Specifically, we tested the predictive performance of the Random Forest Classifier, Gradient Boost Classifier, Ada Boost Classifier, Support Vector Machines, and Logistic Regression. For the ensemble models, the best models were chosen from the hyperparameter space in Table 2 using grid search. Out of the aforementioned models, the Gradient Boost Classier consistently showed the best results. Therefore, we used only this model for subsequent experiments with LLM and BoW features.",
+                "cite_spans": [
+                    {
+                        "start": 71,
+                        "end": 95,
+                        "text": "(Pedregosa et al., 2011)",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 373,
+                        "end": 374,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Machine-learning algorithms",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "AutoGluon is a deep-learning API used for training neural networks on a combination of tabular and image, text, or audio data (Tang et al., 2024) . In this study, we employed the AutoGluon Tabular model with title, abstract and LLM-generated Table 2 Hyperparameter space for ensemble models features as input. We tested both regressor and classifier configurations. The classifier configuration provided better results in all observed metrics and was thus used as the only variation of the AutoGluon model.",
+                "cite_spans": [
+                    {
+                        "start": 126,
+                        "end": 145,
+                        "text": "(Tang et al., 2024)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 248,
+                        "end": 249,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Machine-learning algorithms",
+                "sec_num": "2.5"
+            },
+            {
+                "text": "In this study, we used the SHAP (SHapley Additive exPlanations) Python package (Lundberg & Lee, 2017) to enhance the interpretability of features generated by the LLM. SHAP uses Shapley values from game theory to explain the contribution of each feature to the model's predictions. This allowed us to identify the most important LLM-generated features and understand their individual impact on the model's performance. By integrating SHAP, we made our machine learning models more transparent and easier to interpret, ensuring the effectiveness and relevance of the LLM-generated features.",
+                "cite_spans": [
+                    {
+                        "start": 79,
+                        "end": 101,
+                        "text": "(Lundberg & Lee, 2017)",
+                        "ref_id": "BIBREF7"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explainability",
+                "sec_num": "2.6"
+            },
+            {
+                "text": "For the comparisons of predictive performance in a classification task, various feature subsets were generated for both the CORD-19 and M17+ datasets (Table 3 ). For the sake of reproducibility and comparability, both CORD-19 and M17+ sets were split to train and test sets in an 80:20 ratio with fixed random seed before the application of feature subsetting. This resulted in the same articles being tested each time, only with different features: text only dataset uses only title and abstract columns from original datasets as input into the AutoGluon Tabular model.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 157,
+                        "end": 158,
+                        "text": "3",
+                        "ref_id": "TABREF2"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Feature subsets",
+                "sec_num": "2.7"
+            },
+            {
+                "text": "BoW only is a feature set where the only features used are bag-of-words terms weighted by their TF-IDF score along with the target variable. Due to computational constraints, 1500 terms were considered for unigrams, bigrams, and trigrams. These sets have 1501 columns, including the target variable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature subsets",
+                "sec_num": "2.7"
+            },
+            {
+                "text": "SciBERT embeddings only is a feature set where, besides target variables, each abstract was embedded using the SciBERT model. The dataset has 796 columns, including the target variable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature subsets",
+                "sec_num": "2.7"
+            },
+            {
+                "text": "LLM-features only dataset represents CORD-19 and M17+ sets, where every column beside the target variable is LLM-generated. These datasets have 63 columns -62 feature columns and 1 target variable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature subsets",
+                "sec_num": "2.7"
+            },
+            {
+                "text": "BoW + LLM-generated features is a dataset of 1500 TF-IDF-weighted terms and all 62 feature columns from LLM inference, totaling 1564 columns with the target variables, including the target variable.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature subsets",
+                "sec_num": "2.7"
+            },
+            {
+                "text": "text + LLM-generated features combines title and abstract text columns from the original datasets with LLM-generated features. This feature set is used with the AutoGluon Tabular model. ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Feature subsets",
+                "sec_num": "2.7"
+            },
+            {
+                "text": "An action rule is typically generated by combining two classification rules (Ras & Wieczorkowska, 2000) , each indicating different outcomes. The classification rules, which serve as the basis for action rules, can be extracted using algorithms like Apriori (Agrawal, Srikant, et al., 1994) modified to suit classification tasks. A formal representation of the classification rule is in Equation 1.",
+                "cite_spans": [
+                    {
+                        "start": 76,
+                        "end": 103,
+                        "text": "(Ras & Wieczorkowska, 2000)",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 258,
+                        "end": 290,
+                        "text": "(Agrawal, Srikant, et al., 1994)",
+                        "ref_id": "BIBREF0"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "r i : \u03d5 \u21d2 \u03c8,",
+                        "eq_num": "(1)"
+                    }
+                ],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "where the antecedent \u03d5 is a set containing at least one item and the consequent \u03c8 contains one item. A set of items is also referred to as an itemset. The absolute support of a classification rule corresponds to the number of transactions (here articles) t in a dataset D containing all items (conditions) from the antecedent \u03d5 and the consequent \u03c8 (target) of the given rule, see Equation 2.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "sup(\u03d5 \u21d2 \u03c8) = |t \u2208 D : \u03d5 \u2282 t \u2227 \u03c8 \u2282 t|.",
+                        "eq_num": "(2)"
+                    }
+                ],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "The confidence of a rule corresponds to the ratio between the number of articles t that contain all items from both the antecedent \u03d5 and the consequent \u03c8 to the number of articles t that contain all items from the antecedent \u03d5, see Equation 3.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "conf(\u03d5 \u21d2 \u03c8) = sup(\u03d5 \u21d2 \u03c8) |t \u2208 D : \u03d5 \u2282 t| (3)",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "For example, the following classification rules, denoted as r 1 (see Equation 4) and r 2 (see Equation 5), can be extracted from the M17+ dataset (enriched with new features from Section 2.2) if the minimum support is set to 40 and the minimum confidence is set to 0.7: From these classification rules r 1 and r 2 , an action rule r 3 can be constructed. In this case, the 'area' attribute is considered stable, meaning that it does not allow for changes (authors are not advised to change their research area). The 'rigor' attribute, however, is flexible, allowing for recommended changes that could lead to a reclassification of the object to a desired outcome. This action rule r 3 (see Equation 6) suggests that if all articles in the chemistry research area in the training data could improve their methodological rigor from medium to high, the overall probability of receiving a good evaluation (rated as 1 or 2) would increase by 15%. In practical terms, this could mean that approximately 300 articles would transition from poor evaluations (rated as 4 or 5) to good evaluations (rated as 1 or 2).",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "An action rule r a can be decomposed into two classification rules, r undesired and r desired : one that predicts the undesired state of the target (before intervention), and another that predicts the desired state (after intervention), represented as r undesired \u2192 r desired . Uplift is a measure used to predict the incremental response to an action (Radcliffe, 2007) , see Equation 7.",
+                "cite_spans": [
+                    {
+                        "start": 352,
+                        "end": 369,
+                        "text": "(Radcliffe, 2007)",
+                        "ref_id": "BIBREF12"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "EQUATION",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [
+                    {
+                        "start": 0,
+                        "end": 8,
+                        "text": "EQUATION",
+                        "ref_id": "EQREF",
+                        "raw_str": "uplift(r a ) = P (decision | treatment) -P (decision | no treatment) = (conf r desired -(1 -conf r undesired )) * suppr undesired conf r undesired |t \u2208 D : t|",
+                        "eq_num": "(7)"
+                    }
+                ],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "The instances are divided into two groups: control and exposed. The exposed group (treatment) is subjected to the recommended action, whereas the control group (no treatment) does not receive the recommended action. The decision represents the classification of the instances.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "This example demonstrates how action rules can be used to derive counterfactual (what-if) explanations, providing insights into how specific changes in attributes might lead to better outcomes. Such rules can also be employed to recommend improvements for future research, guiding the refinement of methodologies to achieve better results.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "During the generation of action rules, it is necessary to address the issue of generating a large number of highly similar rules. The approach dominant action rule to reducing action rules is inspired by closed association rules (Pasquier, Bastide, Taouil, & Lakhal, 1999) . This concept is analogous to dominant action rules in that closed rules cannot be extended without a loss of support, which can be likened to the reduction in uplift seen in dominant rules. A dominant action rule is one that cannot be further expanded with additional conditions to increase its uplift. For example, the rule r 4 (see Equation 8) is dominant over the longer rule r 5 . In this specific case, the conditions in rule r 4 are not extended in r 5 in a way that increases uplift. Instead, the addition of another condition in r 5 results in a decreased uplift, demonstrating the dominance of r 4 over r 5 .",
+                "cite_spans": [
+                    {
+                        "start": 229,
+                        "end": 272,
+                        "text": "(Pasquier, Bastide, Taouil, & Lakhal, 1999)",
+                        "ref_id": "BIBREF10"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "For example, the rule r 4 (see Equation 8) is a dominant rule for the rule r 5 (see Equation 9). For mining action rules, the Python package 'action-rules'foot_1 was used, which is based on the Action-Apriori algorithm (Sykora & Kliegr, 2023) . This algorithm accepts action rule parameters, such as stable and flexible attributes, as well as thresholds for minimum support and confidence for both the undesired and desired parts, directly into the Apriori algorithm. This integration allows for more efficient pruning of candidate itemsets, improving the overall efficiency of the rule mining process. More detailed examples of action rules mined from the CORD-19 and M17+ datasets can be found in Section 3.5.",
+                "cite_spans": [
+                    {
+                        "start": 219,
+                        "end": 242,
+                        "text": "(Sykora & Kliegr, 2023)",
+                        "ref_id": "BIBREF14"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Action rules",
+                "sec_num": "2.8"
+            },
+            {
+                "text": "The non-finetuned LLama2 13B GPTQ Chat model was run locally with the use of GPU computation as the crucial part of the experiment. The GPU used was NVIDIA RTX A4000 with 16GB of video memory, all of which were utilized for one instance of the LLama2 model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Computational resources and complexity",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "The time complexity was around 40-60 minutes per feature for 3000 abstracts, making the total runtime of the experiment around 60 hours for CORD-19 and 40 hours for M17+.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Computational resources and complexity",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "In total, we generated 62 features for each of the 5,000 abstracts from CORD-19 and M17+ combined, resulting in 310,000 prompts required to generate the LLM features for both datasets.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Computational resources and complexity",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "The features generated by the language model were added to both CORD-19 and M17+ datasets, resulting in the addition of 62 columns. Features rigor, novelty, grammar, accessibility, and replicability were ordinally encoded while disciplines, research were dummy-encoded, increasing the number of columns.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "LLM-augmented datasets",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "After LLM inference of features, only 2 articles in the CORD-19 dataset were assigned feature values outside of the allowed feature space. These instances were removed, making the final length of CORD-19 2,998 articles (instances). All LLMgenerated feature values for the M17+ articles were valid, resulting in a dataset of 2,000 instances. The first few rows from both generated datasets are included in Table 4 and Table 5 5 Sample of enriched M17+ dataset with added LLM-generated features. Target is an ordinal variable of human evaluation of the quality of articles, 1 indicates works of world-class quality, 5 means mediocre articles of low importance and impact.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 411,
+                        "end": 412,
+                        "text": "4",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 417,
+                        "end": 424,
+                        "text": "Table 5",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 425,
+                        "end": 426,
+                        "text": "5",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "LLM-augmented datasets",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "To formally test whether generated features have a relationship with the respective target variables, we employed the chi-squared test of independence at significance level \u03b1 = 0.05.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of relationship between target and LLM-features",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "The results are shown in Table 6 for CORD-19 and in Table 7 for M17+ datasets.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 31,
+                        "end": 32,
+                        "text": "6",
+                        "ref_id": "TABREF4"
+                    },
+                    {
+                        "start": 58,
+                        "end": 59,
+                        "text": "7",
+                        "ref_id": "TABREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Analysis of relationship between target and LLM-features",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "The M17+ dataset has a larger number of features that indicate a statistically significant relationship between the LLM-generated features and the awarded grade. For example, grammar, replicability all have a statistically significant relationship with the target value, which was not the case for the CORD-19 dataset. 1 Categorical features based on abstract quality and contents.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of relationship between target and LLM-features",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "2 Binary features belonging to disciplines values.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of relationship between target and LLM-features",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "3 Binary features belonging to research values. 1 Categorical features based on abstract quality and contents.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of relationship between target and LLM-features",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "2 Binary features belonging to disciplines values.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of relationship between target and LLM-features",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "3 Binary features belonging to research values.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of relationship between target and LLM-features",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "In the classification task on respective datasets -binary classification on CORD-19 and ordinal classification on M17+, we tested various models on multiple datasets and chose the best models based on test accuracy. For the purposes of training the machinelearning models, we did not downsample the feature space to only the statistically significant features, as listed in Tables 6, 7 and used all LLM-generated features.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 381,
+                        "end": 383,
+                        "text": "6,",
+                        "ref_id": "TABREF4"
+                    },
+                    {
+                        "start": 384,
+                        "end": 385,
+                        "text": "7",
+                        "ref_id": "TABREF5"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "LLM-generated features in classification",
+                "sec_num": "3.4"
+            },
+            {
+                "text": "Table 8 reports three crucial model performance metrics -test accuracy, F1 score, and mean average error (MAE). As the M17+ dataset contains an ordinal target variable, it is also useful to track the MAE, which provides information about the average error of the predicted evaluation. We also report the test F1 scores, which do not differ greatly from the accuracy score, as both datasets were balanced in previous steps. Reported scores were selected based on the test accuracy of the best models chosen from the models presented in Section 2.5.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 6,
+                        "end": 7,
+                        "text": "8",
+                        "ref_id": "TABREF6"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Predictive performance",
+                "sec_num": "3.4.1"
+            },
+            {
+                "text": "For CORD-19, the LLM-feature only set showed significant improvement over the naive baseline model, indicating a 9 percentage point (p.p.) improvement. Furthermore, it scored only 3 p.p. lower than the state-of-the-art SciBERT embeddings for scientific text. The combination of LLM-generated features with TF-IDF terms further improved the test accuracy and F1 score, surpassing SciBERT embeddings and TF-IDF both.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predictive performance",
+                "sec_num": "3.4.1"
+            },
+            {
+                "text": "The M17+ features a 5-class ordinal variable, making the task of text classification significantly harder, which is why the overall scores are generally worse for this dataset. Nevertheless, the prediction of human evaluation on the M17+ showed a more pronounced change when compared to the naive baseline model, increasing the test accuracy and F1 score almost twofold. The best-performing model trained on the LLM-features only set was Gradient Boost Classifier and surpassed in terms of test accuracy and F1 score TF-IDF and tied to the state-of-the-art black box AutoGluon model. None of the acquired models reached the results achieved by the model trained on SciBERT embeddings, which scored best in all 3 observed metrics but has the main downside of providing no interpretability to its encoded features.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Predictive performance",
+                "sec_num": "3.4.1"
+            },
+            {
+                "text": "Explanation of features with the use of Shapley values was done on two feature subsets for both CORD-19 and M17+, which are the LLM-feature only and BoW + LLM features, where besides the LLM-generated features, the BoW terms were also observed.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Explanation of generated features",
+                "sec_num": "3.4.2"
+            },
+            {
+                "text": "In Figure 1 , it can be observed that in the case of CORD-19 and prediction of citation rate, the most influential features are basic medicine, rigor, where higher values indicate higher citation rate.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 10,
+                        "end": 11,
+                        "text": "1",
+                        "ref_id": "FIGREF3"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Explanation of generated features",
+                "sec_num": "3.4.2"
+            },
+            {
+                "text": "For the M17+ dataset, the main deciding factor in the evaluation is rigor and grammar, replicablity and novelty. These values can be interpreted as more rigorous, error-free abstracts with high novelty and explicitly mentioned reproducibility abstracts are generally evaluated better. Similarly to the LLM-feature only subsets, the SHAP analysis was performed on BoW + LLM-features subset to compare the importance of LLM-generated features with the importance of TF-IDF weighted BoW terms. Figure 2 shows that the most important features in both datasets are LLM-generated rather than BoW terms. It can be, however, seen that in the case of CORD-19, there is a larger prevalence of BoW terms in the top 20 most influential variables. ",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 498,
+                        "end": 499,
+                        "text": "2",
+                        "ref_id": "FIGREF4"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Explanation of generated features",
+                "sec_num": "3.4.2"
+            },
+            {
+                "text": "Features marked * were generated by LLM, the remaining features are from the BoW model.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CORD-19 M17+",
+                "sec_num": null
+            },
+            {
+                "text": "For action rule mining, attributes are divided into two categories: stable attributes, which remain unchanged and serve as fixed conditions in the rules, and flexible attributes, where changes are pursued to achieve the desired outcome. The attribute area is classified as stable, while novelty, rigor, grammar, replicability, accessibility, and research are categorized as flexible attributes. This classification is used as input in the action-rules Python package and is consistent across both datasets. Four experiments are conducted, and the settings for the action-rules package are detailed in Table 9 . In addition to the settings, this table also presents the number of discovered action rules and the count of dominant action rules derived from them.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 607,
+                        "end": 608,
+                        "text": "9",
+                        "ref_id": "TABREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "rules",
+                "sec_num": "3.5"
+            },
+            {
+                "text": "The first dataset analyzed in this study is M17+. Action rules are identified within the dataset to find those capable of changing the evaluation of articles from bad (rated 4 and 5) to good (rated 1 and 2). A total of 42 action rules are discovered. The rule with the highest impact, as shown in Equation 10, modifies the classification of 16.96% of articles in the dataset. Table 10 presents the action rule r 6 alongside the other discovered dominant action rules. Notably, the first three rules (r 6 , r 7 , and r 8 ) demonstrate the potential to improve the classification of more than 10% of articles to a better evaluation. The dominant action rules identified from this experiment are rules r 6 through r 11 , all of which meet the settings outlined in Table 9 .",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 382,
+                        "end": 384,
+                        "text": "10",
+                        "ref_id": "TABREF9"
+                    },
+                    {
+                        "start": 767,
+                        "end": 768,
+                        "text": "9",
+                        "ref_id": "TABREF7"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "M17+ Dataset -Bad to Good Evaluation Transition",
+                "sec_num": "3.5.1"
+            },
+            {
+                "text": "Action rules are identified that have the potential to transform articles with an average evaluation (rated 3) into articles with the best evaluation (rated 1). In this analysis, 22 action rules are discovered.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "M17+ Dataset -Average to Best Evaluation Transition",
+                "sec_num": "3.5.2"
+            },
+            {
+                "text": "Among these 22 action rules, 5 dominant rules are identified, which are listed in Table 10 . These dominant rules correspond to rules r 12 through r 16 . In this case, the potential impact of the rules is notably reduced compared to the first experiment, with none of the rules achieving an uplift greater than 5%. This suggests that improving an article from average to excellent is a more challenging task than improving it from poor to good.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 88,
+                        "end": 90,
+                        "text": "10",
+                        "ref_id": "TABREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "M17+ Dataset -Average to Best Evaluation Transition",
+                "sec_num": "3.5.2"
+            },
+            {
+                "text": "The action rules with the highest uplift for each area are presented. In this experiment, the parameter min. stable attributes is set to 1, meaning that the discovered rules are fixed to specific areas. The rules discovered through this experiment are r 17 to r 21 . The focus of this experiment is again on identifying changes that could improve the evaluation of articles from bad (rated 4 and 5) to good (rated 1 and 2). One rule with the highest uplift is selected for each area and included in Table 10 . In this case, dominant action rules are not considered. As anticipated, the uplift is lower, which is attributed to the fixation on specific areas, significantly reducing the number of articles to which the recommended actions apply. There are also areas for which no rules were found, and this could be addressed by adjusting the support and confidence thresholds to lower values.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 505,
+                        "end": 507,
+                        "text": "10",
+                        "ref_id": "TABREF9"
+                    }
+                ],
+                "eq_spans": [],
+                "section": "M17+ Dataset -Area-Specific Evaluation Improvement",
+                "sec_num": "3.5.3"
+            },
+            {
+                "text": "The second dataset analyzed in this study is CORD-19. The focus of this analysis is to identify action rules that could enhance the citation impact of articles. The following experiment is conducted:",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CORD-19 Dataset -Citation Impact Enhancement",
+                "sec_num": "3.5.4"
+            },
+            {
+                "text": "The final experiment focuses on identifying action rules that can enhance the citation rate of articles. In this case, 16 action rules are discovered. The rule with the further showed improvement over the use of plain BoW. Incorporating LLM-generated features into the state-of-the-art AutoGluon model in combination with text input improved its performance on both datasets, albeit providing non-explainable results.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CORD-19 Dataset -Citation Impact Enhancement",
+                "sec_num": "3.5.4"
+            },
+            {
+                "text": "Analysis of importance of individual LLM features Interpretation of machinelearning models using SHAP indicated that research rigor has the highest importance in predicting the citation rate (CORD-19) as well as in predicting human evaluation (M17+). Interestingly, the effects of LLM-generated features were more pronounced in their relation to the human evaluation rather than citation rate. This is likely due to the human evaluation being performed by a jury of experts that take these characteristics of text into account, whereas previous bibliometric research Tahamtan, Safipour Afshar, and Ahamdzadeh (2016) indicates that the number of citations is also influenced by the bibliometric features such as journal impact factor or the number of authors, which are features that we did not include into our analysis.",
+                "cite_spans": [
+                    {
+                        "start": 567,
+                        "end": 615,
+                        "text": "Tahamtan, Safipour Afshar, and Ahamdzadeh (2016)",
+                        "ref_id": "BIBREF15"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CORD-19 Dataset -Citation Impact Enhancement",
+                "sec_num": "3.5.4"
+            },
+            {
+                "text": "Rule learning over LLM-based features In our previous research Beranov\u00e1 et al. (2022) , which involved rule mining over the BoW text representation of a subset of CORD-19 dataset, we struggled with the problem of highly specialized rules referring to individual rule conditions. This was partly addressed by rule clustering, which grouped similar rules together, but this had considerable limitations. The use of more general LLM-based features is a leap forward, as it is possible to define features at an arbitrary-level of generality. For example, we had LLM generate a binary feature indicating, whether the article abstract refers to any experiments. In Beranov\u00e1 et al. (2022) , we could infer the presence of experiments only from specific words, such as \"mouse\" that would suggest that experiments using murine models on animals were conducted. Despite the presence of better features, the rule-based experiments in the present article exhibited some redundancy, but not on the level of rules. In the results, we often observed similar rules, which often different only in one or two conditions and covered the same or highly similar set of articles. To counter this problem, the concept of dominant action rules was implemented, which removed rules representing mere extensions of an existing rule without any improvement in uplift.",
+                "cite_spans": [
+                    {
+                        "start": 63,
+                        "end": 85,
+                        "text": "Beranov\u00e1 et al. (2022)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 659,
+                        "end": 681,
+                        "text": "Beranov\u00e1 et al. (2022)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "CORD-19 Dataset -Citation Impact Enhancement",
+                "sec_num": "3.5.4"
+            },
+            {
+                "text": "Despite the large number of works covering LLMs, only the arXiv preprints of Zhang et al. (2024) and Zhou, Farag, and Vlachos (2024) focus on LLM-based feature generation. Both of these preprints were made available shortly before this article was submitted.",
+                "cite_spans": [
+                    {
+                        "start": 77,
+                        "end": 96,
+                        "text": "Zhang et al. (2024)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 101,
+                        "end": 132,
+                        "text": "Zhou, Farag, and Vlachos (2024)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "5"
+            },
+            {
+                "text": "In Zhang et al. (2024) , the authors describe a workflow, where LLM is used to generate agents for feature generation. This work is different from ours in several ways. First, it focuses on tabular datasets. Second, the evaluation is performed through predictive performance and no assessment of the explainability of generated features is included. Our approach is different, as it was specifically designed for text classification, and we also provide a detailed study of feature importance scores. We also provide results on the effect of combining LLM-based features with other feature representations. In the future, the work of Zhang et al. (2024) could serve as an inspiration, as they use an automated way for generating LLM-based feature names. In our approach, feature names such as rigor, or grammar, were manually encoded. Zhou et al. (2024) use LLMs to extract features for dialogue constructiveness assessment. The authors prompt an LLM to assess written dialogues or their parts. Features generated in this way include information content, dialogue tactics, quality of arguments or style. As a machine learning model, they use logistic and ridge regression. We use a similar set of types of baseline models, including bag of words and embedding-based models. The resulting models in Zhou et al. (2024) are interpreted through analyzing model coefficients and using scikit-learn permutation importance. This work is similar to ours in that the authors also use hand-defined feature names. In their speciality case of discourse analysis, these are features such as formality or sentiment. In our case, relating to research articles, these are features such as rigor or novelty. The results of Zhou et al. (2024) support our conclusions that LLM-based interpretable feature generation is feasible.",
+                "cite_spans": [
+                    {
+                        "start": 3,
+                        "end": 22,
+                        "text": "Zhang et al. (2024)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 634,
+                        "end": 653,
+                        "text": "Zhang et al. (2024)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 835,
+                        "end": 853,
+                        "text": "Zhou et al. (2024)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 1298,
+                        "end": 1316,
+                        "text": "Zhou et al. (2024)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 1706,
+                        "end": 1724,
+                        "text": "Zhou et al. (2024)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "5"
+            },
+            {
+                "text": "In terms of methodology, our work uses an open-weight LLM (LLama 2), while Zhang et al. (2024) use GPT 3.5 Turbo and Zhou et al. (2024) use GPT 4, both closed models available through the OpenAI platform. Although Zhou et al. (2024) notes that according to their informal experiments, LLama 3 results in poor annotation quality compared to GPT-4, we have used an open-source LLama 2 model with good success as demonstrated by the attained predictive performance measures.",
+                "cite_spans": [
+                    {
+                        "start": 75,
+                        "end": 116,
+                        "text": "Zhang et al. (2024) use GPT 3.5 Turbo and",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 117,
+                        "end": 135,
+                        "text": "Zhou et al. (2024)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 214,
+                        "end": 232,
+                        "text": "Zhou et al. (2024)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "5"
+            },
+            {
+                "text": "None of the earlier works performs a head-to-head comparison of the interpretability of LLM-based features and the bag of words (TF-IDF) features as we do. Crucially, none of the two previous works aimed to generate LLM-based features for whitebox model learning. The key contribution of our work is that we demonstrated the effectiveness of the use of LLM-generated features in rule learning.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Related work",
+                "sec_num": "5"
+            },
+            {
+                "text": "We provide an extensive evaluation of the LLM-based feature generation involving two datasets from the scientometric domain. The results overall show that the LLMbased features perform well and are interpretable. For example, already at the level of correlations with the target variable, LLM-based features such as rigour demonstrate an (expected) positive correlation with the number of citations a paper has received or how well it was evaluated by experts. The core of the evaluation is done by comparing the predictive performance of classifiers built with LLM-based features to those using other established feature representations and classifiers (TF-IDF, SciBERT embeddings, Autogluon). The results on the CORD-19 dataset show that LLM-based features result only in 3% lower accuracy compared to BoW (TF-IDF), while using much fewer features (62 compared to 1500). Additional reduction could be achievable through feature selection. On the M17 dataset, a classifier built with LLM-based features exceeds the accuracy of one built over TF-IDF. Interestingly, LLM features combined with BoW-weighted words perform on par with SciBERT embeddings. In addition to the quantitative results, we also demonstrated a practical use case, showing how LLM-based features can be used to build actionable rule-based predictions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6"
+            },
+            {
+                "text": "https://huggingface.co/TheBloke/Llama-2-13B-chat-GPTQ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            },
+            {
+                "text": "https://github.com/lukassykora/action-rules",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "",
+                "sec_num": null
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "The authors are grateful for the long-term support of research activities to the Faculty of Informatics and Statistics, Prague University of Economics and Business.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Funding",
+                "sec_num": null
+            },
+            {
+                "text": "We used the implementation of machine learning classifiers from scikit-learn package (Pedregosa et al., 2011) .Code and data is available from the authors at https://github.com/vojtech-balek/ llm-features.",
+                "cite_spans": [
+                    {
+                        "start": 85,
+                        "end": 109,
+                        "text": "(Pedregosa et al., 2011)",
+                        "ref_id": "BIBREF11"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Availability of code and data",
+                "sec_num": null
+            },
+            {
+                "text": "highest impact, as seen in Table 11 , changes the classification of 1.08% of articles in the dataset. Among these 16 action rules, 6 dominant rules are identified, which are listed in Table 11 . The effectiveness of the rules for improving citation rates is notably lower than for the M17+ dataset. This might be related to the higher quality of the M17+ dataset, where the target is based on expert assessment as contrasted with time-adjusted citation counts used in CORD-19.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 33,
+                        "end": 35,
+                        "text": "11",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 190,
+                        "end": 192,
+                        "text": "11",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "annex",
+                "sec_num": null
+            },
+            {
+                "text": "In this work, we evaluated the usability of the freely available LLama2 large language model for generating interpretable high-level features from text.Feature generation We used the base open-source LLama2 language model for a generation of text characteristics based on abstracts. These features are directly derived from the text, meaning, and context provided in the article abstracts. Many of these features would have to be assessed by a human evaluator, making the use of LLM a natural candidate for their extraction.Predictive performance compared to existing representations First, we tested on two different datasets, which resulted in a marked increase in the accuracy over the baseline naive classifiers (50.2% vs 59.8% for CORD-19, 18% vs 37% for M17+). This showed that LLM-generated features are informative, but how do they stand in comparison with standard text representation? In the case of predicting human evaluation (M17+), the model trained on LLM-generated features surpassed the classical TF-IDF-weighted BoW approach in terms of accuracy and was tied on the F1 score and MAE.Fusion of LLM-features with other representations The previously described experiments showed that LLM-generated features are informative, but would they enhance predictive accuracy beyond standard models? The results show that training machinelearning models on the LLM-generated features does increase predictive performance. Combining the LLM-generated features with the BoW approach for text classification",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "4"
+            },
+            {
+                "text": "The authors have no potential conflicts of interest to disclose.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Declarations Competing interests",
+                "sec_num": null
+            },
+            {
+                "text": "V.B. data processing and analysis, L.S. action rule analysis, V.B., T.K. and L.S. writing, T.K. and V.B. methodology, V.S. scientometric expertise, M17+ dataset feature preparation, T.K. conceptualization, approval of the final manuscript, all authors.The authors would like to thank Ngoc Bao Cap for help with preparing the M17+ dataset.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Author contributions",
+                "sec_num": null
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "Fast algorithms for mining association rules",
+                "authors": [
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Agrawal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Srikant",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1994,
+                "venue": "Proc. 20th int. conf. very large databases, VLDB",
+                "volume": "1215",
+                "issue": "",
+                "pages": "487--499",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Agrawal, R., Srikant, R., et al. (1994). Fast algorithms for mining association rules. Proc. 20th int. conf. very large databases, VLDB (Vol. 1215, pp. 487-499). Santiago, Chile: VLDB.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Explainable and interpretable machine learning and data mining",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Atzmueller",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "F\u00fcrnkranz",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Kliegr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "U",
+                        "middle": [],
+                        "last": "Schmid",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "Data Mining and Knowledge Discovery",
+                "volume": "",
+                "issue": "",
+                "pages": "1--25",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Atzmueller, M., F\u00fcrnkranz, J., Kliegr, T., Schmid, U. (2024). Explainable and interpretable machine learning and data mining. Data Mining and Knowledge Discovery, 1-25,",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "Scibert: A pretrained language model for scientific text",
+                "authors": [
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Beltagy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Lo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Cohan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Proceedings of the 2019 conference on empirical methods in natural language processing and the 9th international joint conference on natural language processing",
+                "volume": "",
+                "issue": "",
+                "pages": "3615--3620",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Beltagy, I., Lo, K., Cohan, A. (2019). Scibert: A pretrained language model for scientific text. Proceedings of the 2019 conference on empirical methods in nat- ural language processing and the 9th international joint conference on natural language processing (emnlp-ijcnlp) (pp. 3615-3620).",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Why was this cited? explainable machine learning applied to COVID-19 research literature",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Beranov\u00e1",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "P"
+                        ],
+                        "last": "Joachimiak",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Kliegr",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Rabby",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Sklen\u00e1k",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2022,
+                "venue": "Scientometrics",
+                "volume": "127",
+                "issue": "5",
+                "pages": "2313--2349",
+                "other_ids": {
+                    "DOI": [
+                        "10.1007/s11192-022-04314-9"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Beranov\u00e1, L., Joachimiak, M.P., Kliegr, T., Rabby, G., Sklen\u00e1k, V. (2022, 5). Why was this cited? explainable machine learning applied to COVID-19 research lit- erature. Scientometrics, 127 (5), 2313-2349, https://doi.org/10.1007/s11192 -022-04314-9",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Research article quality prediction [Thesis",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Cap",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Cap, N.B. (2024). Research article quality prediction [Thesis (in Czech)]. Retrieved from https://theses.cz/id/pd9t84/",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "A survey on evaluation of large language models",
+                "authors": [
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Chang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Wu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Zhu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ".",
+                        "middle": [
+                            "."
+                        ],
+                        "last": "Others",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "ACM Transactions on Intelligent Systems and Technology",
+                "volume": "15",
+                "issue": "3",
+                "pages": "1--45",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Chang, Y., Wang, X., Wang, J., Wu, Y., Yang, L., Zhu, K., . . . others (2024). A survey on evaluation of large language models. ACM Transactions on Intelligent Systems and Technology, 15 (3), 1-45,",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "BERT: Pre-training of deep bidirectional transformers for language understanding",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Devlin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M.-W",
+                        "middle": [],
+                        "last": "Chang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Toutanova",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Proceedings of the 2019 conference of the north American chapter of the association for computational linguistics: Human language technologies",
+                "volume": "1",
+                "issue": "",
+                "pages": "4171--4186",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Devlin, J., Chang, M.-W., Lee, K., Toutanova, K. (2019, June). BERT: Pre-training of deep bidirectional transformers for language understanding. J. Burstein, C. Doran, & T. Solorio (Eds.), Proceedings of the 2019 conference of the north American chapter of the association for computational linguistics: Human language technologies, volume 1 (pp. 4171-4186). Minneapolis, Minnesota: Association for Computational Linguistics.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "A unified approach to interpreting model predictions",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Lundberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S.-I",
+                        "middle": [],
+                        "last": "Lee",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lundberg, S.M., & Lee, S.-I. (2017). A unified approach to interpreting model predic- tions.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Advances in neural information processing systems 30",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "4765--4774",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "I. Guyon et al. (Eds.), Advances in neural information processing systems 30 (pp. 4765-4774). Curran Associates, Inc.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Frascati manual",
+                "authors": [
+                    {
+                        "first": "",
+                        "middle": [],
+                        "last": "Oecd",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "OECD (2015). Frascati manual 2015. Retrieved from https://www.oecd- ilibrary.org/content/publication/9789264239012-en",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Discovering frequent closed itemsets for association rules",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Pasquier",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Bastide",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [],
+                        "last": "Taouil",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Lakhal",
+                        "suffix": ""
+                    }
+                ],
+                "year": 1999,
+                "venue": "Database theory-ICDT'99: 7th International Conference",
+                "volume": "",
+                "issue": "",
+                "pages": "398--416",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pasquier, N., Bastide, Y., Taouil, R., Lakhal, L. (1999). Discovering frequent closed itemsets for association rules. Database theory-ICDT'99: 7th International Conference Jerusalem, Israel, january 10-12 (pp. 398-416).",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Scikit-learn: Machine learning in Python",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Pedregosa",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Varoquaux",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Gramfort",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Michel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Thirion",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Grisel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ".",
+                        "middle": [
+                            "."
+                        ],
+                        "last": "Duchesnay",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Journal of Machine Learning Research",
+                "volume": "12",
+                "issue": "",
+                "pages": "2825--2830",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., . . . Duchesnay, E. (2011). Scikit-learn: Machine learning in Python. Journal of Machine Learning Research, 12 , 2825-2830,",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Using control groups to target on predicted lift: Building and assessing uplift model",
+                "authors": [
+                    {
+                        "first": "N",
+                        "middle": [],
+                        "last": "Radcliffe",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2007,
+                "venue": "Direct Marketing Analytics Journal",
+                "volume": "",
+                "issue": "",
+                "pages": "14--21",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Radcliffe, N. (2007). Using control groups to target on predicted lift: Building and assessing uplift model. Direct Marketing Analytics Journal , 14-21,",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Action-rules: How to increase profit of a company",
+                "authors": [
+                    {
+                        "first": "Z",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Ras",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Wieczorkowska",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2000,
+                "venue": "European conference on principles of data mining and knowledge discovery",
+                "volume": "",
+                "issue": "",
+                "pages": "587--592",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ras, Z.W., & Wieczorkowska, A. (2000). Action-rules: How to increase profit of a company. European conference on principles of data mining and knowledge discovery (pp. 587-592). Springer.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Apriori modified for action rules mining",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Sykora",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Kliegr",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "Proceedings of the 12th Knowledge Capture Conference 2023",
+                "volume": "",
+                "issue": "",
+                "pages": "30--34",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sykora, L., & Kliegr, T. (2023). Apriori modified for action rules mining. Proceedings of the 12th Knowledge Capture Conference 2023 (pp. 30-34). ACM.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "Factors affecting number of citations: a comprehensive review of the literature",
+                "authors": [
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Tahamtan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Safipour Afshar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Ahamdzadeh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Tang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Fang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Yang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Zhong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Hu",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ".",
+                        "middle": [
+                            "."
+                        ],
+                        "last": "Karypis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "AutoGluon-multimodal (AutoMM): Supercharging multimodal AutoML with foundation models. International conference on automated machine learning (AutoML)",
+                "volume": "107",
+                "issue": "",
+                "pages": "1195--1225",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tahamtan, I., Safipour Afshar, A., Ahamdzadeh, K. (2016). Factors affecting number of citations: a comprehensive review of the literature. Scientometrics, 107 , 1195- 1225, Tang, Z., Fang, H., Zhou, S., Yang, T., Zhong, Z., Hu, T., . . . Karypis, G. (2024). AutoGluon-multimodal (AutoMM): Supercharging multimodal AutoML with foundation models. International conference on automated machine learning (AutoML).",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Predicting article quality scores with machine learning: The U.K. Research Excellence Framework",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Thelwall",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Kousha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Wilson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Makita",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Abdoli",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "E",
+                        "middle": [],
+                        "last": "Stuart",
+                        "suffix": ""
+                    }
+                ],
+                "year": null,
+                "venue": "Quantitative Science Studies",
+                "volume": "4",
+                "issue": "2",
+                "pages": "547--573",
+                "other_ids": {
+                    "DOI": [
+                        "10.1162/qss_a_00258"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Thelwall, M., Kousha, K., Wilson, P., Makita, M., Abdoli, M., Stuart, E., . . . Can- cellieri, M. (2023, 05). Predicting article quality scores with machine learning: The U.K. Research Excellence Framework. Quantitative Science Studies, 4 (2), 547-573, https://doi.org/10.1162/qss a 00258",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Llama 2: Open foundation and fine-tuned chat models",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Touvron",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Martin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Stone",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Albert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Almahairi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Babaei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ".",
+                        "middle": [
+                            "."
+                        ],
+                        "last": "Others",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2023,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2307.09288"
+                    ],
+                    "arXiv": [
+                        "arXiv:2307.09288"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., . . . others (2023). Llama 2: Open foundation and fine-tuned chat models. arXiv preprint arXiv:2307.09288 , arXiv-2307, https://doi.org/10.48550/arXiv.2307.09288",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "Huggingface's transformers: State-of-the-art natural language processing",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Wolf",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Debut",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Sanh",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Chaumond",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Delangue",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Moi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": ".",
+                        "middle": [
+                            "."
+                        ],
+                        "last": "Brew",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.1910.03771"
+                    ],
+                    "arXiv": [
+                        "arXiv:1910.03771,abs/1910.03771"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., . . . Brew, J. (2019). Huggingface's transformers: State-of-the-art natural language process- ing. arXiv preprint arXiv:1910.03771 , abs/1910.03771 , arXiv-1910, https:// doi.org/10.48550/arXiv.1910.03771",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Dynamic and adaptive feature generation with llm",
+                "authors": [
+                    {
+                        "first": "X",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Zhang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Rekabdar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Wang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Liu",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2406.03505"
+                    ],
+                    "arXiv": [
+                        "arXiv:2406.03505"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhang, X., Zhang, J., Rekabdar, B., Zhou, Y., Wang, P., Liu, K. (2024). Dynamic and adaptive feature generation with llm. arXiv preprint arXiv:2406.03505 , arXiv-2406, https://doi.org/10.48550/arXiv.2406.03505",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "An llm feature-based framework for dialogue constructiveness assessment",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Zhou",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Farag",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Vlachos",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2024,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {
+                    "DOI": [
+                        "10.48550/arXiv.2406.14760"
+                    ],
+                    "arXiv": [
+                        "arXiv:2406.14760"
+                    ]
+                },
+                "num": null,
+                "urls": [],
+                "raw_text": "Zhou, L., Farag, Y., Vlachos, A. (2024). An llm feature-based framework for dialogue constructiveness assessment. arXiv preprint arXiv:2406.14760 , arXiv-2406, https://doi.org/10.48550/arXiv.2406.14760",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "num": null,
+                "text": "r 1 : area = chemistry \u2227 rigor = medium \u21d2 evaluation = bad with support 50 and confidence 71.4%. (4) r 2 : area = chemistry \u2227 rigor = high \u21d2 evaluation = good with support 249 and confidence 71.3%. (5)",
+                "fig_num": null,
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF1": {
+                "num": null,
+                "text": "r 3 : area = chemistry \u2227 rigor = (medium \u2192 high) \u21d2 evaluation = (bad \u2192 good) with uplift 15.0%. (6)",
+                "fig_num": null,
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF2": {
+                "num": null,
+                "text": "r 4 : rigor = (medium \u2192 high) \u21d2 evaluation = (bad \u2192 good) with uplift 16.96%. (8) r 5 : rigor = (medium \u2192 high) \u2227 grammar = (1 \u2192 0) \u21d2 evaluation = (bad \u2192 good) with uplift 10.82%. (9)",
+                "fig_num": null,
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF3": {
+                "num": null,
+                "text": "Fig. 1 SHAP plot the GradientBoost model trained on LLM-feature only feature set for CORD-19 (left) and M17+ (right). The X-axis represents the SHAP value, indicating the feature's effect on the prediction-positive values increase the prediction, while negative values decrease it. Features are ranked by importance on the Y-axis. The color of the points corresponds to the feature values. For binary features like grammar or basic medicine, blue indicates a value of 0, while red represents a value of 1. For categorical features such as rigor or novelty, blue denotes a low value, purple indicates a medium value, and red signifies a high value.",
+                "fig_num": "1",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF4": {
+                "num": null,
+                "text": "Fig. 2 SHAP plot of the GradientBoost model trained on BoW + LLM-features feature set for CORD-19 (left) and M17+ (right). The X-axis represents the SHAP value, indicating the feature's effect on the prediction-positive values increase the prediction, while negative values decrease it.Features are ranked by importance on the Y-axis. The color of the points corresponds to the feature values. For binary features like grammar or basic medicine, blue indicates a value of 0, while red represents a value of 1. For categorical features such as rigor or novelty, blue denotes a low value, purple indicates a medium value, and red signifies a high value.",
+                "fig_num": "2",
+                "uris": null,
+                "type_str": "figure"
+            },
+            "FIGREF6": {
+                "num": null,
+                "text": "r 6 : rigor = (med \u2192 high) \u2227 replicability = (0 \u2192 1) \u21d2 evaluation = (bad \u2192 good) with uplift 16.96%. (10)",
+                "fig_num": null,
+                "uris": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "num": null,
+                "text": "Generated features for article abstracts, a total of 62 features were added to the datasets.",
+                "html": null,
+                "content": "<table><tr><td>Criteria</td><td>Description</td><td>Values</td></tr><tr><td>Rigor</td><td>Assessed methodological soundness</td><td>{low, medium, high}</td></tr><tr><td/><td>of logic presented in the abstract</td><td/></tr><tr><td>Novelty</td><td>Assessed innovativeness of the</td><td>{low, medium, high}</td></tr><tr><td/><td>research based on the abstract</td><td/></tr><tr><td>Accessibility</td><td>Assessed understandability of the</td><td>{low, medium, high}</td></tr><tr><td/><td>language used in the abstract</td><td/></tr><tr><td>Reproducibility</td><td>Assessed the authors' mention of the</td><td>{no, yes}</td></tr><tr><td/><td>reproducibility of results presented in</td><td/></tr><tr><td/><td>the abstract</td><td/></tr><tr><td>Research type</td><td>Assessed type of research types and</td><td>16 research types</td></tr><tr><td/><td>methods mentioned in the abstract</td><td/></tr><tr><td>Discipline</td><td>Assessed all disciplines that the arti-</td><td>41 FORD general categories</td></tr><tr><td/><td>cle concerns</td><td>(OECD, 2015)</td></tr><tr><td>Grammar</td><td>Assessed the presence of grammar</td><td>{no, yes}</td></tr><tr><td/><td>errors in the abstract</td><td/></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF2": {
+                "num": null,
+                "text": "Overview of feature combinations for experiments on the classification tasks, CORD-19 and M17+. The number of features does not include the target variable. \u2020 The two features were text data in abstract and title, vectorization was performed internally in AutoGluon and is not separately reported. *Consistently showed the best results and was used for the final experiments.",
+                "html": null,
+                "content": "<table><tr><td>Feature Combination</td><td colspan=\"2\">No. of Features Used Models</td></tr><tr><td>text only</td><td>2  \u2020</td><td>AutoGluon Tabular</td></tr><tr><td>BoW only</td><td>1500</td><td>SVM, LogReg, GradientBoost*,</td></tr><tr><td/><td/><td>AdaBoost, RandomForest</td></tr><tr><td>SciBERT embeddings only</td><td>768</td><td>LSTM Neural Network</td></tr><tr><td>LLM features only</td><td>62</td><td>SVM, LogReg, GradientBoost*,</td></tr><tr><td/><td/><td>AdaBoost, RandomForest</td></tr><tr><td>BoW + LLM-generated features</td><td>1562</td><td>SVM, LogReg, GradientBoost*,</td></tr><tr><td/><td/><td>AdaBoost, RandomForest</td></tr><tr><td>text + LLM-generated features</td><td>64</td><td>AutoGluon Tabular</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF3": {
+                "num": null,
+                "text": ". Sample of enriched CORD-19 dataset with added LLM-generated features. Target is a binary variable -with 1 representing works cited more than the median value adjusted in time, 0 represents articles with lower or equal to the median citation count (details inBeranov\u00e1 et al. (2022)).",
+                "html": null,
+                "content": "<table><tr><td>abstract</td><td>rigor</td><td>novelty</td><td colspan=\"2\">grammar accessibility</td><td colspan=\"4\">math compsci ... target</td></tr><tr><td>Family...</td><td colspan=\"2\">medium medium</td><td>0</td><td>high</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Patients...</td><td colspan=\"2\">medium low</td><td>0</td><td>medium</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Coronavirus...</td><td>high</td><td>high</td><td>0</td><td>medium</td><td>0</td><td>0</td><td>...</td><td>1</td></tr><tr><td>We present...</td><td>high</td><td>high</td><td>1</td><td>high</td><td>0</td><td>1</td><td>...</td><td>1</td></tr><tr><td>Gender...</td><td>low</td><td>high</td><td>0</td><td>high</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Table 4 abstract</td><td>rigor</td><td>novelty</td><td>grammar</td><td>accessibility</td><td>math</td><td colspan=\"3\">compsci ... target</td></tr><tr><td>This...</td><td>high</td><td>medium</td><td>0</td><td>medium</td><td>0</td><td>0</td><td>...</td><td>1</td></tr><tr><td colspan=\"3\">Introduction... medium medium</td><td>1</td><td>medium</td><td>0</td><td>1</td><td>...</td><td>2</td></tr><tr><td>The present...</td><td colspan=\"2\">medium low</td><td>1</td><td>medium</td><td>0</td><td>0</td><td>...</td><td>4</td></tr><tr><td>The main...</td><td>low</td><td>low</td><td>1</td><td>low</td><td>0</td><td>1</td><td>...</td><td>5</td></tr><tr><td>Previous...</td><td colspan=\"2\">medium low</td><td>0</td><td>medium</td><td>0</td><td>0</td><td>...</td><td>3</td></tr><tr><td>Table</td><td/><td/><td/><td/><td/><td/><td/><td/></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF4": {
+                "num": null,
+                "text": "Statistically significant features according to the p-value of the relation between target and LLM-generated features, CORD-19. The star notation indicates the level of statistical significance based on p-values: * * * p < 0.001, * * p < 0.01, and * p < 0.05. 31 out of 62 generated features are statistically significant for the prediction of citation rate.",
+                "html": null,
+                "content": "<table><tr><td>Feature</td><td colspan=\"2\">Importance p-value</td><td>Feature</td><td colspan=\"2\">Importance p-value</td></tr><tr><td>Rigor 1</td><td>***</td><td>1.62 \u00d7 10 -7</td><td>Nano-tech 2</td><td>*</td><td>1.08 \u00d7 10 -2</td></tr><tr><td>Novelty 1</td><td>**</td><td>8.59 \u00d7 10 -4</td><td>Basic Medicine 2</td><td>***</td><td>3.26 \u00d7 10 -17</td></tr><tr><td>Math 2</td><td>**</td><td>5.44 \u00d7 10 -3</td><td colspan=\"2\">Clinical Medicine 2 ***</td><td>5.16 \u00d7 10 -5</td></tr><tr><td>CompSci 2</td><td>***</td><td>4.87 \u00d7 10 -6</td><td>HealthSci 2</td><td>**</td><td>3.65 \u00d7 10 -3</td></tr><tr><td>PhysSci 2</td><td>***</td><td colspan=\"2\">7.98 \u00d7 10 -12 MedBiotech 2</td><td>***</td><td>1.21 \u00d7 10 -6</td></tr><tr><td>ChemSci 2</td><td>***</td><td colspan=\"2\">1.03 \u00d7 10 -14 OtherMedSci 2</td><td>***</td><td>9.75 \u00d7 10 -7</td></tr><tr><td>EarthSci 2</td><td>***</td><td>4.85 \u00d7 10 -8</td><td>Agriculture 2</td><td>***</td><td>5.78 \u00d7 10 -9</td></tr><tr><td>BioSci 2</td><td>***</td><td colspan=\"2\">2.31 \u00d7 10 -15 AnimalSci 2</td><td>***</td><td>4.49 \u00d7 10 -11</td></tr><tr><td>OtherNatSci 2</td><td>***</td><td>1.99 \u00d7 10 -8</td><td>VeterinarySci 2</td><td>***</td><td>8.40 \u00d7 10 -13</td></tr><tr><td>CivEng 2</td><td>*</td><td>2.03 \u00d7 10 -2</td><td>AgriculBiotech 2</td><td>**</td><td>3.37 \u00d7 10 -3</td></tr><tr><td>MechEng 2</td><td>***</td><td>6.33 \u00d7 10 -6</td><td>OtherAgriculSci 2</td><td>**</td><td>4.30 \u00d7 10 -4</td></tr><tr><td>ChemEng 2</td><td>***</td><td>9.47 \u00d7 10 -9</td><td>Psychology 2</td><td>**</td><td>1.87 \u00d7 10 -3</td></tr><tr><td>MatEng 2</td><td>*</td><td>1.05 \u00d7 10 -2</td><td>Law 2</td><td>*</td><td>1.42 \u00d7 10 -2</td></tr><tr><td>EnviroEng 2</td><td>**</td><td>4.42 \u00d7 10 -3</td><td>Descriptive 3</td><td>*</td><td>1.79 \u00d7 10 -2</td></tr><tr><td colspan=\"2\">EnviroBiotech 2 ***</td><td>5.41 \u00d7 10 -7</td><td>Questionnaires 3</td><td>*</td><td>1.59 \u00d7 10 -2</td></tr><tr><td colspan=\"2\">IndustBiotech 2 ***</td><td>8.33 \u00d7 10 -9</td><td/><td/><td/></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF5": {
+                "num": null,
+                "text": "Statistically significant features according to the p-value of the relation between target and LLM-generated features, M17+. The star notation indicates the level of statistical significance based on p-values: * * * p < 0.001, * * p < 0.01, and * p < 0.05. 58 out of 62 generated features are statistically significant for the prediction of evaluation grade.",
+                "html": null,
+                "content": "<table><tr><td>Feature</td><td colspan=\"2\">Importance p-value</td><td>Feature</td><td colspan=\"2\">Importance p-value</td></tr><tr><td>Rigor 1</td><td>***</td><td colspan=\"2\">7.08 \u00d7 10 -71 VeterinarySci 2</td><td>***</td><td>1.21 \u00d7 10 -25</td></tr><tr><td>Novelty 1</td><td>***</td><td colspan=\"2\">1.99 \u00d7 10 -47 AgriculBiotech 2</td><td>***</td><td>1.76 \u00d7 10 -8</td></tr><tr><td>Grammar 1</td><td>***</td><td colspan=\"2\">4.69 \u00d7 10 -20 OtherAgriculBiotech 2</td><td>***</td><td>1.64 \u00d7 10 -23</td></tr><tr><td>Replicability 1</td><td>***</td><td colspan=\"2\">7.97 \u00d7 10 -44 Psychology 2</td><td>***</td><td>3.73 \u00d7 10 -25</td></tr><tr><td>Math 2</td><td>***</td><td colspan=\"2\">7.00 \u00d7 10 -16 EconomicsBusiness 2</td><td>***</td><td>1.81 \u00d7 10 -5</td></tr><tr><td>CompSci 2</td><td>***</td><td colspan=\"2\">8.25 \u00d7 10 -33 Education 2</td><td>***</td><td>1.05 \u00d7 10 -6</td></tr><tr><td>PhysSci 2</td><td>***</td><td colspan=\"2\">3.17 \u00d7 10 -39 Sociology 2</td><td>***</td><td>2.23 \u00d7 10 -11</td></tr><tr><td>ChemSci 2</td><td>***</td><td colspan=\"2\">2.04 \u00d7 10 -28 Law 2</td><td>***</td><td>8.33 \u00d7 10 -12</td></tr><tr><td>EarthSci 2</td><td>***</td><td colspan=\"2\">1.36 \u00d7 10 -24 PoliticalSci 2</td><td>**</td><td>4.53 \u00d7 10 -3</td></tr><tr><td>BioSci 2</td><td>***</td><td colspan=\"2\">1.68 \u00d7 10 -51 Social Econ Geography 2</td><td>***</td><td>6.61 \u00d7 10 -7</td></tr><tr><td>OtherNatSci 2</td><td>***</td><td colspan=\"2\">4.43 \u00d7 10 -36 MediaCommunications 2</td><td>***</td><td>2.07 \u00d7 10 -11</td></tr><tr><td>CivEng 2</td><td>***</td><td>2.08 \u00d7 10 -6</td><td>OtherSocSci 2</td><td>***</td><td>8.70 \u00d7 10 -19</td></tr><tr><td>ElectrEng 2</td><td>***</td><td colspan=\"2\">1.17 \u00d7 10 -11 HistoryArchaelogy 2</td><td>***</td><td>6.29 \u00d7 10 -13</td></tr><tr><td>MechEng 2</td><td>***</td><td>6.88 \u00d7 10 -6</td><td>LanguagesLiterature 2</td><td>***</td><td>3.62 \u00d7 10 -13</td></tr><tr><td>ChemEng 2</td><td>***</td><td>1.50 \u00d7 10 -9</td><td colspan=\"2\">PhilosophyEthicsReligion 2 ***</td><td>2.32 \u00d7 10 -10</td></tr><tr><td>MatEng 2</td><td>***</td><td>3.84 \u00d7 10 -5</td><td>Arts 2</td><td>**</td><td>1.09 \u00d7 10 -3</td></tr><tr><td>EnviroEng 2</td><td>***</td><td colspan=\"2\">4.70 \u00d7 10 -11 OtherArts 2</td><td>***</td><td>7.49 \u00d7 10 -13</td></tr><tr><td>EnviroBiotech 2</td><td>***</td><td colspan=\"2\">1.53 \u00d7 10 -18 Applied 3</td><td>***</td><td>7.52 \u00d7 10 -10</td></tr><tr><td>IndustBiotech 2</td><td>***</td><td colspan=\"2\">5.26 \u00d7 10 -15 Conclusive 3</td><td>***</td><td>5.23 \u00d7 10 -7</td></tr><tr><td>Nano-tech 2</td><td>***</td><td>8.65 \u00d7 10 -8</td><td>Correlational 3</td><td>**</td><td>2.80 \u00d7 10 -3</td></tr><tr><td>OtherEngTech 2</td><td>***</td><td colspan=\"2\">1.15 \u00d7 10 -11 Descriptive 3</td><td>**</td><td>1.02 \u00d7 10 -2</td></tr><tr><td>Basic Medicine 2</td><td>***</td><td colspan=\"2\">1.33 \u00d7 10 -41 Ethnographic 3</td><td>*</td><td>4.52 \u00d7 10 -2</td></tr><tr><td colspan=\"2\">Clinical Medicine 2 ***</td><td colspan=\"2\">1.60 \u00d7 10 -21 Experiment 3</td><td>**</td><td>1.46 \u00d7 10 -3</td></tr><tr><td>HealthSci 2</td><td>***</td><td colspan=\"2\">7.52 \u00d7 10 -18 Exploratory 3</td><td>***</td><td>1.02 \u00d7 10 -6</td></tr><tr><td>MedBiotech 2</td><td>***</td><td colspan=\"2\">1.31 \u00d7 10 -27 Focus groups 3</td><td>***</td><td>1.18 \u00d7 10 -7</td></tr><tr><td>OtherMedSci 2</td><td>***</td><td colspan=\"2\">2.52 \u00d7 10 -29 Interviews 3</td><td>***</td><td>4.81 \u00d7 10 -5</td></tr><tr><td>Agriculture 2</td><td>***</td><td colspan=\"2\">3.74 \u00d7 10 -17 Mixed methods 3</td><td>***</td><td>3.51 \u00d7 10 -14</td></tr><tr><td>AnimalSci 2</td><td>***</td><td colspan=\"2\">5.21 \u00d7 10 -26 Qualitative 3</td><td>*</td><td>1.62 \u00d7 10 -2</td></tr><tr><td>Quantitative 3</td><td>***</td><td>2.43 \u00d7 10 -4</td><td>Questionnaires 3</td><td>***</td><td>1.52 \u00d7 10 -8</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF6": {
+                "num": null,
+                "text": "Comparison of Accuracy, F1 Score, and MAE for models trained on each dataset variation, CORD-19 (C19) and M17+.",
+                "html": null,
+                "content": "<table><tr><td/><td colspan=\"2\">Accuracy</td><td colspan=\"2\">F1 Score</td><td/><td>MAE</td></tr><tr><td>Model</td><td>C19</td><td colspan=\"2\">M17+ C19</td><td colspan=\"2\">M17+ C19</td><td>M17+</td></tr><tr><td>text + LLM features (Auto-</td><td>0.665</td><td>0.395</td><td>0.664</td><td>0.389</td><td>0.335</td><td>0.855</td></tr><tr><td>Gluon)</td><td/><td/><td/><td/><td/><td/></tr><tr><td>TF-IDF + LLM-features</td><td>0.653</td><td>0.393</td><td>0.653</td><td>0.377</td><td>0.347</td><td>1.068</td></tr><tr><td>text only (AutoGluon)</td><td>0.630</td><td>0.377</td><td>0.628</td><td>0.324</td><td>0.370</td><td>1.001</td></tr><tr><td>SciBERT embeddings</td><td>0.625</td><td>0.408</td><td>0.625</td><td>0.392</td><td>0.335</td><td>0.848</td></tr><tr><td>TF-IDF</td><td>0.625</td><td>0.343</td><td>0.622</td><td>0.332</td><td>0.375</td><td>1.073</td></tr><tr><td>LLM-features only</td><td>0.598</td><td>0.370</td><td>0.598</td><td>0.338</td><td>0.402</td><td>1.103</td></tr><tr><td>Baseline classifier</td><td>0.502</td><td>0.180</td><td>0.502</td><td>0.180</td><td>0.499</td><td>1.620</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF7": {
+                "num": null,
+                "text": "Overview of action rule settings and results across different experiments (experiment ids correspond to paper section numbers).",
+                "html": null,
+                "content": "<table><tr><td>Settings / Experiments</td><td>3.5.1</td><td>3.5.2</td><td>3.5.3</td><td>3.5.4</td></tr><tr><td>Dataset</td><td>M17+</td><td>M17+</td><td>M17+</td><td>CORD-19</td></tr><tr><td>Min. Stable Attributes</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>Min. Flexible Attributes</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>Min. Undesired Support</td><td>60</td><td>30</td><td>35</td><td>20</td></tr><tr><td>Min. Desired Support</td><td>60</td><td>40</td><td>35</td><td>20</td></tr><tr><td>Min. Undesired Conf.</td><td>70%</td><td>70%</td><td>70%</td><td>70%</td></tr><tr><td>Min. Desired Conf.</td><td>70%</td><td>70%</td><td>70%</td><td>70%</td></tr><tr><td>Target</td><td>Evaluation</td><td>Evaluation</td><td>Evaluation</td><td>Cited</td></tr><tr><td>Undesired State</td><td>Bad</td><td>Avg</td><td>Bad</td><td>0</td></tr><tr><td>Desired State</td><td>Good</td><td>Best</td><td>Good</td><td>1</td></tr><tr><td>Discovered Action Rules</td><td>42</td><td>22</td><td>21</td><td>16</td></tr><tr><td>Dominant Action Rules</td><td>6</td><td>5</td><td>-</td><td>6</td></tr></table>",
+                "type_str": "table"
+            },
+            "TABREF9": {
+                "num": null,
+                "text": "Overview of the action rules discovered from the M17+ dataset and their respective uplift percentages.",
+                "html": null,
+                "content": "<table/>",
+                "type_str": "table"
+            }
+        }
+    }
+}

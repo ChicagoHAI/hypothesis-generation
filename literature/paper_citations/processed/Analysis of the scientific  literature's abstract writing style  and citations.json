@@ -1,0 +1,2446 @@
+{
+    "paper_id": "Analysis of the scientific  literature's abstract writing style  and citations",
+    "header": {
+        "generated_with": "S2ORC 1.0.0",
+        "date_generated": "2025-03-23T23:36:51.065027Z"
+    },
+    "title": "Analysis of the scientific literature's abstract writing style and citations",
+    "authors": [
+        {
+            "first": "Haotian",
+            "middle": [],
+            "last": "Hu",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Dongbo",
+            "middle": [],
+            "last": "Wang",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        },
+        {
+            "first": "Sanhong",
+            "middle": [],
+            "last": "Deng",
+            "suffix": "",
+            "affiliation": {},
+            "email": ""
+        }
+    ],
+    "year": "",
+    "venue": null,
+    "identifiers": {},
+    "abstract": "Purpose -The citation counts are an important indicator of scholarly impact. The purpose of this paper is to explore the correlation between citations of scientific articles and writing styles of abstracts in papers and capture the characteristics of highly cited papers' abstracts. Design/methodology/approach -This research selected 10,000 highly cited papers and 10,000 zero-cited papers from the WOS (2008WOS ( -2017) ) database. The Coh-Metrix 3.0 textual cohesion analysis tool was used to quantify the 108 language features of highly cited and zero-cited paper abstracts. The differences of the indicators with significant differences were analyzed from four aspects: vocabulary, sentence, syntax and readability. Findings -The abstracts of highly cited papers contain more complex and professional words, more adjectives, adverbs, conjunctions and personal pronouns, but fewer nouns and verbs. The sentences in the abstracts of highly cited papers are more complex and the sentence length is relatively longer. The syntactic structure in abstracts of highly cited papers is relatively more complex and syntactic similarities between sentences are fewer. Highly cited papers' abstracts are less readable than zero-cited papers' abstracts. Originality/value -This study analyses the differences between the abstracts of highly cited and those of zero-cited papers, reveals the common external and deep semantic features of highly cited papers in abstract writing styles, provide suggestions for researchers on abstract writing. These findings can help increase the scientific impact of articles and improve the review efficiency as well as the researchers' abstract writing skills.",
+    "pdf_parse": {
+        "paper_id": "Analysis of the scientific  literature's abstract writing style  and citations",
+        "_pdf_hash": "",
+        "abstract": [
+            {
+                "text": "Purpose -The citation counts are an important indicator of scholarly impact. The purpose of this paper is to explore the correlation between citations of scientific articles and writing styles of abstracts in papers and capture the characteristics of highly cited papers' abstracts. Design/methodology/approach -This research selected 10,000 highly cited papers and 10,000 zero-cited papers from the WOS (2008WOS ( -2017) ) database. The Coh-Metrix 3.0 textual cohesion analysis tool was used to quantify the 108 language features of highly cited and zero-cited paper abstracts. The differences of the indicators with significant differences were analyzed from four aspects: vocabulary, sentence, syntax and readability. Findings -The abstracts of highly cited papers contain more complex and professional words, more adjectives, adverbs, conjunctions and personal pronouns, but fewer nouns and verbs. The sentences in the abstracts of highly cited papers are more complex and the sentence length is relatively longer. The syntactic structure in abstracts of highly cited papers is relatively more complex and syntactic similarities between sentences are fewer. Highly cited papers' abstracts are less readable than zero-cited papers' abstracts. Originality/value -This study analyses the differences between the abstracts of highly cited and those of zero-cited papers, reveals the common external and deep semantic features of highly cited papers in abstract writing styles, provide suggestions for researchers on abstract writing. These findings can help increase the scientific impact of articles and improve the review efficiency as well as the researchers' abstract writing skills.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Abstract",
+                "sec_num": null
+            }
+        ],
+        "body_text": [
+            {
+                "text": "The citation number of academic papers not only reflects the degree of recognition of the researcher, but also becomes an important indicator of a scholar's research capabilities (e.g. hindex) and journal scholarly impact (e.g. Impact Factor, IF). Therefore, factors that contribute to an increase in the number of citations have aroused research interest among researchers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Most of the existing researches have investigated into factors such as the title of the paper (Guo et al., 2018) , its authors (Potthoff and Zimmermann, 2017) and the references (Gong et al., 2019) . These types of text have been extensively researched because they are readily accessible and would not require too much computational resources to process. Convenient as it is, this approach brings certain drawbacks. Take the title data of the paper as an example. The average number of words in the title of the papers collected by WOS (Web of Science) is 9.53 words (Guo et al., 2018) . That is to say, the number of citations of papers can be judged only by the essays with less than 10 words, which obviously leaves out a lot of information.",
+                "cite_spans": [
+                    {
+                        "start": 94,
+                        "end": 112,
+                        "text": "(Guo et al., 2018)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 127,
+                        "end": 158,
+                        "text": "(Potthoff and Zimmermann, 2017)",
+                        "ref_id": "BIBREF20"
+                    },
+                    {
+                        "start": 178,
+                        "end": 197,
+                        "text": "(Gong et al., 2019)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 568,
+                        "end": 586,
+                        "text": "(Guo et al., 2018)",
+                        "ref_id": "BIBREF9"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "However, the abstract text contains richer information regarding the content of the article. An abstract is a highly concise version of the paper. Researchers often read the abstract to grasp the main idea of a paper (Dowling et al., 2018) and decide whether they would like to continue reading or cite the paper. Therefore, we believe that there is a certain correlation between abstracts and citation numbers. In addition, compared with full-text data, abstracts are easier to obtain. At present, studies on the relationship between the abstract and the number of citations are rare, while the available literature is mainly based on features like the length (Didegah and Thelwall, 2013; Wesel et al., 2014; Sohrabi and Iraj, 2017; Xie et al., 2019) and readability (Gazni, 2011; Didegah and Thelwall, 2013; Wesel et al., 2014; Lei and Yan, 2016; Didegah et al., 2018; Fages, 2020) of abstracts. The research gap is that none of these studies have analyzed and extracted the syntactic structure, lexical complexity and deep semantic information of the abstract texts. We think to some extent the potential influencing factors might be omitted.",
+                "cite_spans": [
+                    {
+                        "start": 217,
+                        "end": 239,
+                        "text": "(Dowling et al., 2018)",
+                        "ref_id": "BIBREF3"
+                    },
+                    {
+                        "start": 661,
+                        "end": 689,
+                        "text": "(Didegah and Thelwall, 2013;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 690,
+                        "end": 709,
+                        "text": "Wesel et al., 2014;",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 710,
+                        "end": 733,
+                        "text": "Sohrabi and Iraj, 2017;",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 734,
+                        "end": 751,
+                        "text": "Xie et al., 2019)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 768,
+                        "end": 781,
+                        "text": "(Gazni, 2011;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 782,
+                        "end": 809,
+                        "text": "Didegah and Thelwall, 2013;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 810,
+                        "end": 829,
+                        "text": "Wesel et al., 2014;",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 830,
+                        "end": 848,
+                        "text": "Lei and Yan, 2016;",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 849,
+                        "end": 870,
+                        "text": "Didegah et al., 2018;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 871,
+                        "end": 883,
+                        "text": "Fages, 2020)",
+                        "ref_id": "BIBREF4"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Our study, a comprehensive one, has taken the surface features and deep features of the abstract into consideration and explored the relationships between the writing styles of abstracts and the number of citations of the paper from the perspectives of linguistic coherence and consistency. With the help of the Coh-Metrix 3.0 tool (Graesser et al., 2004) , we calculated 108 language coherence indicators for top 10,000 highly cited papers and 10,000 zero-cited paper abstracts in the WOS (2008) (2009) (2010) (2011) (2012) (2013) (2014) (2015) (2016) (2017) database. The differences between the abstracts of highly cited and those of zero-cited papers were analyzed from four aspects, namely lexical selection, sentence characteristics, syntactic use and overall readability, and the linguistic features of abstracts of highly cited papers were summarized as well. Our study can help researchers write targeted standard abstracts in a more comprehensive and accurate way. In addition, the findings can help predict the citations to some extent.",
+                "cite_spans": [
+                    {
+                        "start": 332,
+                        "end": 355,
+                        "text": "(Graesser et al., 2004)",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 490,
+                        "end": 496,
+                        "text": "(2008)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 497,
+                        "end": 503,
+                        "text": "(2009)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 504,
+                        "end": 510,
+                        "text": "(2010)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 511,
+                        "end": 517,
+                        "text": "(2011)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 518,
+                        "end": 524,
+                        "text": "(2012)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 525,
+                        "end": 531,
+                        "text": "(2013)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 532,
+                        "end": 538,
+                        "text": "(2014)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 539,
+                        "end": 545,
+                        "text": "(2015)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 546,
+                        "end": 552,
+                        "text": "(2016)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 553,
+                        "end": 559,
+                        "text": "(2017)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Introduction",
+                "sec_num": "1."
+            },
+            {
+                "text": "Title is one of the most accessible, processed and analyzed texts in the paper. Previous studies have explored the relationship between the number of citations and the length of the title (Guo et al., 2018) , the type of sentence involved (Jamali and Nikzad, 2011) and the characteristics of the title (Gnewuch and Wohlrabe, 2017; Rostami et al., 2014; Nair and Gibbert, 2016) . The findings indicate that there is a certain degree of correlation between the title and the number of citations. The above studies have two issues to be resolved. The first issue is that titlebased research usually only analyses the external characteristics of the title, such as the length of the title, the sentence structure, the number of keywords included. However, it is rare to find study mined deeply into the intrinsic features of titles. The second issue is that the title is a very short text, which leads to the inevitable defect that it contains only a very small amount of useful information. Therefore, it is difficult to predict the number of citations only by the title.",
+                "cite_spans": [
+                    {
+                        "start": 188,
+                        "end": 206,
+                        "text": "(Guo et al., 2018)",
+                        "ref_id": "BIBREF9"
+                    },
+                    {
+                        "start": 239,
+                        "end": 264,
+                        "text": "(Jamali and Nikzad, 2011)",
+                        "ref_id": "BIBREF12"
+                    },
+                    {
+                        "start": 302,
+                        "end": 330,
+                        "text": "(Gnewuch and Wohlrabe, 2017;",
+                        "ref_id": "BIBREF6"
+                    },
+                    {
+                        "start": 331,
+                        "end": 352,
+                        "text": "Rostami et al., 2014;",
+                        "ref_id": "BIBREF21"
+                    },
+                    {
+                        "start": 353,
+                        "end": 376,
+                        "text": "Nair and Gibbert, 2016)",
+                        "ref_id": "BIBREF18"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Literature review",
+                "sec_num": "2."
+            },
+            {
+                "text": "As a result, some researchers set their sights on the author data of the paper. Ib a\u00f1ez et al. (2013) revealed that the citation number of papers composed by two or less than two authors outnumbered those with more than two authors, and collaborative papers written by authors from different countries were more cited than the ones written by authors from the same country in computer science field. Potthoff and Zimmermann (2017) found that scholars preferred to cite papers whose authors were of the same gender. These studies revealed that there is a certain bias in the process of citing papers. However, although the author's academic influence, gender and collaborators will significantly affect the number of citations, these tend to be the author's own attributes, rather than the attributes of the text writing style. Therefore, for general researchers, it is difficult to expect to improve the number of citations by adjusting the author factor.",
+                "cite_spans": [
+                    {
+                        "start": 400,
+                        "end": 430,
+                        "text": "Potthoff and Zimmermann (2017)",
+                        "ref_id": "BIBREF20"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Literature review",
+                "sec_num": "2."
+            },
+            {
+                "text": "References can best represent the citation of literature. Therefore, researchers investigated into the rules of citation by means of references. Wesel et al. (2014) found that the number of references is significantly related to citations in disciplines like sociology, general and internal medicine and applied physics. Gong et al. (2019) , on the basis of CSSCI data sources in China, found that for all disciplines, the citation number of papers containing foreign references was significantly higher than that without foreign references. Stevens and Duque (2019) found that when the references were ordered alphabetically, papers rank in the front had a higher possibility of being cited. Reference factor is more feasible as a means to increase the number of citations. However, there is still not much the author can do about this.",
+                "cite_spans": [
+                    {
+                        "start": 145,
+                        "end": 164,
+                        "text": "Wesel et al. (2014)",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 321,
+                        "end": 339,
+                        "text": "Gong et al. (2019)",
+                        "ref_id": "BIBREF7"
+                    },
+                    {
+                        "start": 542,
+                        "end": 566,
+                        "text": "Stevens and Duque (2019)",
+                        "ref_id": "BIBREF26"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Literature review",
+                "sec_num": "2."
+            },
+            {
+                "text": "The above-mentioned information categories such as title, author, reference and other texts are easier to process. However, compared with the abstract and full text, the information contained is quite limited. Sohrabi and Iraj (2017) explored the abstract text further and found that the ratio of the occurrence of keywords in the abstract to the length of the abstract could be used to predict the number of citations. In addition to studying the correlation between the length of abstract and the number of citations (Didegah and Thelwall, 2013; Wesel et al., 2014; Didegah et al., 2018) , the readability of abstract has also been explored. Vergoulis et al. (2019) used four readability metrics and three scientific impact measures to calculate the readability and scientific impact of all abstracts in the Open Citations COCI dataset. The results show that the overall readability of scientific publications is declining, and the readability of abstracts is not significantly related to scientific impact. Lei and Yan (2016) selected four core journals in the field of information science, used FRE and SMOG readability indicators to explore the relationship between the number of citations and the readability of abstracts, also found that there was no significant correlation. Gazni (2011) explored the correlation between abstracts produced by five top institutions in the world and reading difficulty and found that abstracts of highly cited papers are often difficult to read. Didegah et al. (2018) analyzed abstracts of papers written by Finnish authors in WOS and found that the number of citations with easier abstracts to read was significantly reduced compared with those with more difficult abstracts. Didegah and Thelwall (2013) found that the readability of abstract was negatively correlated with the number of citations in Biology and Biochemistry. For Economics (Didegah et al., 2018; Fages, 2020) , the abstracts of papers that are easy to read have a positive correlation with the citations and popularity. In addition, Hafeez et al. (2019) found that in Psychiatry, the use of structured abstracts can enhance the academic impact of journals and papers. The abstract is the data type with the longest text length in the metadata of the paper. It can present the main frame and experimental flow of the paper comprehensively. By analyzing the abstract, more factors affecting the number of citations can be discovered. This is one of the considerations why we chose abstract text in WOS as the experimental data to explore the correlation between abstract and citations. We believe that the readability of the abstract should be related to the number of citations (Gazni, 2011; Didegah et al., 2018; Dowling et al., 2018) . The reason is that an easy-to-understand writing method is certainly more conducive to readers' understanding than an obscure writing method.",
+                "cite_spans": [
+                    {
+                        "start": 210,
+                        "end": 233,
+                        "text": "Sohrabi and Iraj (2017)",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 519,
+                        "end": 547,
+                        "text": "(Didegah and Thelwall, 2013;",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 548,
+                        "end": 567,
+                        "text": "Wesel et al., 2014;",
+                        "ref_id": "BIBREF30"
+                    },
+                    {
+                        "start": 568,
+                        "end": 589,
+                        "text": "Didegah et al., 2018)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 644,
+                        "end": 667,
+                        "text": "Vergoulis et al. (2019)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 1010,
+                        "end": 1028,
+                        "text": "Lei and Yan (2016)",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 1283,
+                        "end": 1295,
+                        "text": "Gazni (2011)",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 1486,
+                        "end": 1507,
+                        "text": "Didegah et al. (2018)",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 1717,
+                        "end": 1744,
+                        "text": "Didegah and Thelwall (2013)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 1882,
+                        "end": 1904,
+                        "text": "(Didegah et al., 2018;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 1905,
+                        "end": 1917,
+                        "text": "Fages, 2020)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 2042,
+                        "end": 2062,
+                        "text": "Hafeez et al. (2019)",
+                        "ref_id": "BIBREF10"
+                    },
+                    {
+                        "start": 2686,
+                        "end": 2699,
+                        "text": "(Gazni, 2011;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 2700,
+                        "end": 2721,
+                        "text": "Didegah et al., 2018;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 2722,
+                        "end": 2743,
+                        "text": "Dowling et al., 2018)",
+                        "ref_id": "BIBREF3"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Literature review",
+                "sec_num": "2."
+            },
+            {
+                "text": "Compared with studies only focused on a few factors, some researchers have explored dozens of factors that influence the citations at the same time, which is more likely to draw more comprehensive and reliable conclusions. Tahamtan et al. (2016) identified 28 relevant OIR 45,7 factors that affected the number of cited papers and summarized the correlation between each influencing factor and the number of citations. Xie et al. (2019) explored 66 influencing factors that may relate to the citation numbers of papers and identified 46 influencing factors that were significantly related to the number of cited papers in the field of library and information science. Such studies are sufficient in breadth but insufficient in depth. Metadata is still rarely analyzed from the semantic level. The conclusions obtained by previous studies were mostly statistical results based on external characteristics. The research of Xie et al. (2019) provided ideas for the selection of indicators for our experiment: extensively identify several potential factors related to the number of citations, filter out significantly related factors and analyze these factors to find their correlation with the number of citations.",
+                "cite_spans": [
+                    {
+                        "start": 223,
+                        "end": 245,
+                        "text": "Tahamtan et al. (2016)",
+                        "ref_id": "BIBREF27"
+                    },
+                    {
+                        "start": 419,
+                        "end": 436,
+                        "text": "Xie et al. (2019)",
+                        "ref_id": "BIBREF33"
+                    },
+                    {
+                        "start": 921,
+                        "end": 938,
+                        "text": "Xie et al. (2019)",
+                        "ref_id": "BIBREF33"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Literature review",
+                "sec_num": "2."
+            },
+            {
+                "text": "We found that most of the previous researches were based on short text level, when exploring the issue of \"what factors are related to the number of citations?\". However, the information that can be expressed in such texts is very limited and cannot fully reflect the true writing style of the paper, making it difficult to find out the significant relationship between them and the number of citations. In addition, when conducting scientific studies, researchers rarely decide whether to cite a paper just by reading the title and author information of the paper. Therefore, previous researches often lack a reasonable explanation of causality; the robustness and universality of conclusions need to be further tested.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Literature review",
+                "sec_num": "2."
+            },
+            {
+                "text": "Abstract is the summary of the paper, which contains far more information than the title and other metadata. Theoretically, it is more closely related to the number of citations and more worthy of investigation. However, most of the previous studies looked at only a few indicators, such as abstract length and readability, and the extraction of abstract semantic information was not deep enough. To solve the problems, we used the 108 indicators provided by the Coh-Metrix tool to conduct a comprehensive and in-depth analysis of the abstracts of WOS papers. Explored deeper text features from vocabulary, syntax, semantics and cohesiveness, so as to help us better understand the relationship between the abstract language style and the number of citations. In addition, we provided suggestions for researchers to write high-level abstracts and to maximize the impact of their papers.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Literature review",
+                "sec_num": "2."
+            },
+            {
+                "text": "The SCI-EXPANDED, SSCI, A&HCI, CPCI-S, CPCI-SSH indexed documents in the WOS (Web of Science) core collection database were selected as the data source. The time range was limited to 2008-2017. Papers after 2017 were not selected because they were published late and have not accumulated enough citations (Lei and Yan, 2016) . We manually downloaded the records in the above time range from WOS and stored them in the SQL Server database. The downloaded WOS data included multiple document formats such as article, proceedings paper, retracted publication, editorial material, etc. To ensure that the articles are all research papers (Didegah and Thelwall, 2013) , we limited the document types to article and proceedings paper. The number of citations in different disciplines is not the same (Slyder et al., 2011; Marx and Bornmann, 2015; Tahamtan et al., 2016) , but because our research wants to explore the universal difference between abstracts with high citation and those with zero citation in the whole field of scientific research, so when selecting highly cited papers, we valued the number of citations more than the subject category. In addition, we have limited the publication type to journal and the language to English. Finally, 10,000 papers with the highest number of citations (between 26,150 and 372) in this decade were selected. The distribution of the number of highly cited papers over time is shown in Figure 1 .",
+                "cite_spans": [
+                    {
+                        "start": 305,
+                        "end": 324,
+                        "text": "(Lei and Yan, 2016)",
+                        "ref_id": "BIBREF13"
+                    },
+                    {
+                        "start": 634,
+                        "end": 662,
+                        "text": "(Didegah and Thelwall, 2013)",
+                        "ref_id": "BIBREF1"
+                    },
+                    {
+                        "start": 794,
+                        "end": 815,
+                        "text": "(Slyder et al., 2011;",
+                        "ref_id": "BIBREF23"
+                    },
+                    {
+                        "start": 816,
+                        "end": 840,
+                        "text": "Marx and Bornmann, 2015;",
+                        "ref_id": "BIBREF15"
+                    },
+                    {
+                        "start": 841,
+                        "end": 863,
+                        "text": "Tahamtan et al., 2016)",
+                        "ref_id": "BIBREF27"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 1435,
+                        "end": 1436,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Source of data",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "As can be seen from Figure 1 , the number of papers gradually decreased with the increase of years. In 2008, the number of highly cited papers was the largest, with 2,432 papers, and in 2017, the number of highly cited papers was the least, with only 2 papers. This is because on the one hand, the earlier a paper is published, the larger the time window it can be retrieved, and on the premise of the same quality of the paper, the more likely it is cited. On the other hand, since the selected top 10,000 cited papers are based on the number of cited papers in all WOS databases from 2008 to 2017, it is understandable that those published earlier enjoy a better chance of being cited, hence a higher possibility of being ranked among the top 10,000 cited papers.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 27,
+                        "end": 28,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Source of data",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "The data extraction process of zero-cited papers is more complicated. The choice of database, time limit, document type, etc. was consistent with the highly cited papers. In order to ensure the consistency of the discipline distribution of the zero-cited papers and the highly cited papers dataset, we classified the selected highly cited papers into 22 disciplines according to the ESI (Essential Science Indicators) discipline category (Didegah and Thelwall, 2013) provided by Clarivate Analytics. Figure 2 shows the distribution of the number of papers from various disciplines over time. We selected the same number of zero-cited papers according to the number of highly cited papers from each discipline in each year. However, since the number of zero-cited papers in \"Multidisciplinary\" in 2008 and 2009 was relatively small, we selected a total of 219 zero-cited papers from the same discipline in 2010 and 2011, which were close in time, as supplements. Through the above restrictions, we finally ensured that the distribution of highly cited papers and zero-cited papers in terms of quantity, time, subject and document type are the same.",
+                "cite_spans": [
+                    {
+                        "start": 438,
+                        "end": 466,
+                        "text": "(Didegah and Thelwall, 2013)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [
+                    {
+                        "start": 507,
+                        "end": 508,
+                        "text": "2",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Source of data",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "The above two sets of data constituted the highly cited group and zero-cited group respectively and were used for subsequent comparisons.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Source of data",
+                "sec_num": "3.1"
+            },
+            {
+                "text": "Coh-Metrix is a text automatic analysis tool developed by the University of Memphis (Graesser et al., 2004; McNamara et al., 2013 McNamara et al., , 2014)) , which can comprehensively analyze the coherence and consistency of input text by calculating surface and deep language features. The latest version is Coh-Metrix 3.0. This tool is widely used for evaluation of writing quality (Zedelius et al., 2019; Macarthur et al., 2019) , writing ability (Perin and Lauterbach, 2018) and cognitive understanding (Wiley et al., 2017) . Some researchers have also proposed new text analysis methods based on Coh-Metrix tools (Wolfe et al., 2019) or developed new application platforms (Shi et al., 2018; McNamara et al., 2013) . In addition, relevant researchers have carried out some research on the measurement of text readability and complexity (Tortorelli, 2020; Spencer et al., 2019) , which also provides some valuable guidance and reference for the selection of method in this paper. ",
+                "cite_spans": [
+                    {
+                        "start": 84,
+                        "end": 107,
+                        "text": "(Graesser et al., 2004;",
+                        "ref_id": "BIBREF8"
+                    },
+                    {
+                        "start": 108,
+                        "end": 129,
+                        "text": "McNamara et al., 2013",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 130,
+                        "end": 155,
+                        "text": "McNamara et al., , 2014))",
+                        "ref_id": "BIBREF17"
+                    },
+                    {
+                        "start": 384,
+                        "end": 407,
+                        "text": "(Zedelius et al., 2019;",
+                        "ref_id": "BIBREF34"
+                    },
+                    {
+                        "start": 408,
+                        "end": 431,
+                        "text": "Macarthur et al., 2019)",
+                        "ref_id": "BIBREF14"
+                    },
+                    {
+                        "start": 450,
+                        "end": 478,
+                        "text": "(Perin and Lauterbach, 2018)",
+                        "ref_id": "BIBREF19"
+                    },
+                    {
+                        "start": 507,
+                        "end": 527,
+                        "text": "(Wiley et al., 2017)",
+                        "ref_id": "BIBREF31"
+                    },
+                    {
+                        "start": 618,
+                        "end": 638,
+                        "text": "(Wolfe et al., 2019)",
+                        "ref_id": "BIBREF32"
+                    },
+                    {
+                        "start": 678,
+                        "end": 696,
+                        "text": "(Shi et al., 2018;",
+                        "ref_id": "BIBREF22"
+                    },
+                    {
+                        "start": 697,
+                        "end": 719,
+                        "text": "McNamara et al., 2013)",
+                        "ref_id": "BIBREF16"
+                    },
+                    {
+                        "start": 841,
+                        "end": 859,
+                        "text": "(Tortorelli, 2020;",
+                        "ref_id": "BIBREF28"
+                    },
+                    {
+                        "start": 860,
+                        "end": 881,
+                        "text": "Spencer et al., 2019)",
+                        "ref_id": "BIBREF25"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Coh-Metrix tool",
+                "sec_num": "3.2"
+            },
+            {
+                "text": "We used the Coh-Metrix tool to calculate a total of 108 indicators such as the cohesiveness and legibility of the highly cited and zero-cited paper abstracts. Using Python 3.5.2, we combined the papers' citation number and 108 Coh-Metrix indexes and stored them in Microsoft Office Excel 2016 workbook. The independent sample t-test was carried out by Python's Scipy library to test the difference between the quantified output indicators of the highly cited group and the zero-cited group.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Data analysis method",
+                "sec_num": "3.3"
+            },
+            {
+                "text": "Independent sample t-test shows that 91 of the 108 Coh-Metrix output indicators have significant differences. The Independent sample t-test uses two-tailed test. In order to reduce the probability of false positives, we used Bonferroni Correction to correct the t-test results. Finally, 85 indicators have differences at the significance level p 5 0.05/108. Because of limited space, we only selected indicators that have significant differences among the following seven easy to interpret and understand categories of indicators: descriptive, word information, connectives, readability, referential cohesion, syntactic complexity and syntactic pattern density. Please note that in Table 1-Table 7 , the highly cited group in the \"Group\" field is represented by \"1\", and the zero-cited group is represented by \"0\".",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 688,
+                        "end": 697,
+                        "text": "1-Table 7",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Result",
+                "sec_num": "4."
+            },
+            {
+                "text": "Descriptive indicators include statistical data such as word length, sentence length and paragraph length. The surface characteristics of the abstract can be analyzed from a macro perspective. Table 1 shows the indicators, scores and significance test results related to descriptiveness.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 199,
+                        "end": 200,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Descriptive",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "The number of sentences and words, length of paragraphs and sentences of the highly cited group abstracts are significantly higher than those in the zero-cited group. This indicates that the length of abstracts of highly cited paper is usually longer and more informative. This finding is consistent with previous research (Sohrabi and Iraj, 2017; Xie et al., 2019) . A longer abstract can provide a more comprehensive and detailed introduction to the overall content of the article, so that readers can understand the core research results. Shorter abstracts, instead, are more likely to suffer from problems such as incomplete introduction to the content of the article. It is safe to conclude that a paper with a longer teams. Therefore, when introducing research in the abstract of the paper, \"our research\" is often used instead of the phrase \"my research\". Meanwhile, \"their research\" is used instead of \"his or her research\".",
+                "cite_spans": [
+                    {
+                        "start": 323,
+                        "end": 347,
+                        "text": "(Sohrabi and Iraj, 2017;",
+                        "ref_id": "BIBREF24"
+                    },
+                    {
+                        "start": 348,
+                        "end": 365,
+                        "text": "Xie et al., 2019)",
+                        "ref_id": "BIBREF33"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Descriptive",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "The highly cited group acquisition age score is higher than the one of zero-cited group, and the word familiarity rating is lower than the one of zero-cited group. These two indicators show that words in the highly cited papers' abstracts belong to those that are acquired by the children in the advanced level and are not familiar to the adults. The following are two sentences from the abstracts with a word acquisition age score of 546 and 309 respectively.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Descriptive",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "(1)\"Furthermore, inhibition of autophagy delays the senescence phenotype, including senescence-associated secretion.\" (2)\"The approach is based on measuring the distances between the faces in an embedding of a planar graph.\" The concreteness rating and the imaginable rating of the highly cited group are lower than those of the zero-cited group, which also indicates that papers with higher citations pose higher difficulty for readers to understand. Combined with the two indicators of the length of word in Table 1 , we can conclude that in the abstracts of highly cited papers, it is more likely to encounter less frequently used, complex words or terms that are difficult to understand. They are generally relating to abstract concepts and methods.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 516,
+                        "end": 517,
+                        "text": "1",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Descriptive",
+                "sec_num": "4.1"
+            },
+            {
+                "text": "Connectives, as an important part of articles, function as connecting contextual contents. Table 3 shows the indicators, scores and significance test results associated with the connectives.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 97,
+                        "end": 98,
+                        "text": "3",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Connectives",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Except for causal connectives (p 5 0.322), the usage rate of all other types of connectives of the highly cited group is higher than that of the zero-citation group. The results show that compared with papers with zero citations, abstracts with more citations usually have more connectives to enhance cohesion between words and sentences, which unite abstracts as a whole. The use of connectives makes the logical expression of sentences more rigorous, makes the expression of research process and conclusion more abundant and organized, but it may increase the difficulty of comprehension to some extent.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Connectives",
+                "sec_num": "4.3"
+            },
+            {
+                "text": "Coh-Metrix provides three common readability calculation methods: the Flesch Reading Ease Score, the Flesch Kincaid Grade Level and the Second Language Readability Score. Table 4 shows the scores and significance test results of these three readability indicators.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 177,
+                        "end": 178,
+                        "text": "4",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Readability",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Flesch Reading Ease Score (Vergoulis et al., 2019) and the Second Language Readability Score (Crossley et al., 2008) of the highly cited group are both lower than the ones of the zerocited group, and Flesch Kincaid Grade Level (Fages, 2020) is higher than that of the zero-cited group. All three indexes indicate that the readability of abstracts with more citations in WOS is lower than that of papers with zero citation. This result suggests that abstracts of highly cited papers are not always easy to read. This finding also verifies the previous studies (Gazni, 2011; Didegah et al., 2018; Didegah and Thelwall, 2013) . The reason lies in the characteristics of the papers in the highly cited group. They involve innovation and professionalism, which means new concepts, methods, models, etc. In order to ensure the conciseness of the abstracts, information is condensed and details omitted, thereby raising the difficulty of reading and understanding of the abstracts. This result also confirms the conclusion drawn in Section 4.1 and Section 4.2, i.e. highly cited abstracts often reflect strong professionalism. In order to present the difference in readability more intuitively, we selected the following two sentences from the abstracts with Flesch Reading Ease Score of 1 and 57 respectively. ( 1) \"Superlenses have great potential in applications such as biomedical imaging, optical lithography and data storage.\" (2) \"It was observed that a total of 33 water harvesting structures were constructed between 2004 and 2007.\"",
+                "cite_spans": [
+                    {
+                        "start": 26,
+                        "end": 50,
+                        "text": "(Vergoulis et al., 2019)",
+                        "ref_id": "BIBREF29"
+                    },
+                    {
+                        "start": 93,
+                        "end": 116,
+                        "text": "(Crossley et al., 2008)",
+                        "ref_id": "BIBREF0"
+                    },
+                    {
+                        "start": 227,
+                        "end": 240,
+                        "text": "(Fages, 2020)",
+                        "ref_id": "BIBREF4"
+                    },
+                    {
+                        "start": 559,
+                        "end": 572,
+                        "text": "(Gazni, 2011;",
+                        "ref_id": "BIBREF5"
+                    },
+                    {
+                        "start": 573,
+                        "end": 594,
+                        "text": "Didegah et al., 2018;",
+                        "ref_id": "BIBREF2"
+                    },
+                    {
+                        "start": 595,
+                        "end": 622,
+                        "text": "Didegah and Thelwall, 2013)",
+                        "ref_id": "BIBREF1"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Readability",
+                "sec_num": "4.4"
+            },
+            {
+                "text": "Referential cohesion refers to the overlap or common reference of content words (i.e. noun, verb, adjective and adverb) between sentences. Referential cohesion is divided into local cohesion (overlap between adjacent sentences) and global cohesion (overlap between all sentences in the abstract). In particular, referential cohesion is subdivided into more specific categories for analysis. Table 5 shows the indicators, scores and significance test results of the referential cohesion module.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 397,
+                        "end": 398,
+                        "text": "5",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Referential cohesion",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "The local and global noun overlap, argument overlap and stem overlap in the highly cited group are all higher than that in the zero-cited group. That is, there is a greater probability of the same noun, pronoun and cognate in the two preceding and following sentences of the highly cited paper abstracts, whether between adjacent sentences or among all sentences in the text. The local anaphor overlap in the highly cited group is also higher than that in the zero-cited group, which indicates that the abstracts of the highly cited papers tend to refer to the noun or pronoun in the preceding sentence by pronouns, thus connecting the text content before and after the pronouns. Global content word overlap is the only indicator in which the highly cited group scores lower than the zerocited group. For noun overlap, argument overlap, stem overlap and content word overlap, the overlapping words in the two sentences are either the same or stem from the same lemma. This ensures that the referential relations between the two sentences are one-toone correspondence, and that the two words refer to the same thing. In anaphor overlap, the pronoun included in the latter sentence can refer to both the pronoun in the preceding sentence and the noun in the preceding sentence, which may cause unclear referential relation to some extent, resulting in difficulty of understanding.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Referential cohesion",
+                "sec_num": "4.5"
+            },
+            {
+                "text": "Simple syntactic structure is easy to understand. On the contrary, complex syntactic structure contains various modifiers, subject-subordinate sentences, inverted sentences and other special sentence patterns, which increases the difficulty of understanding and memorizing. Table 6 shows the indicators, scores and significance test results of the syntactic complexity module.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 280,
+                        "end": 281,
+                        "text": "6",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Syntactic complexity",
+                "sec_num": "4.6"
+            },
+            {
+                "text": "Words before the main verb of the main clause and modifiers per noun phrase in the highly cited group are all fewer than those in the zero-cited group, indicating that the abstracts of the papers with more citations are less likely to use adverbs, adjectives, etc. to modify the main actions and the nouns in noun phrases. The minimum editing distance is one of the common indexes to measure text similarity. The calculation results of the three minimum editing distances based on part of speech tags, words and lemmas show that the score of highly cited group are all higher than that of the zero-cited group, indicating that the similarities between adjacent sentences of the highly cited paper abstract are small and the content differences of the statements are large. Syntactic structure similarity adjacent and global scores of highly cited group are all relatively low, which not only in accord with the finding of minimum editing distance in adjacent sentences, but also demonstrates that the syntactic structure similarity of any two sentences in the highly cited paper abstract is relatively low compared with that of the zero-cited paper. A good abstract must take into account syntactic brevity and content comprehensiveness. Therefore, there will be deletions of unnecessary modifiers and reductions in semantic and syntactic duplication between sentences.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Syntactic complexity",
+                "sec_num": "4.6"
+            },
+            {
+                "text": "Syntactic pattern density is used to illustrate the statistical incidence score of various types of words and phrases. Table 7 shows various indicators, scores and significance test results of the syntactic pattern density module.",
+                "cite_spans": [],
+                "ref_spans": [
+                    {
+                        "start": 125,
+                        "end": 126,
+                        "text": "7",
+                        "ref_id": null
+                    }
+                ],
+                "eq_spans": [],
+                "section": "Syntactic pattern density",
+                "sec_num": "4.7"
+            },
+            {
+                "text": "Compared with the zero-cited group, the highly cited group has a higher incidence of noun phrases, adverbial phrases and gerunds, indicating that the abstracts of the highly cited papers have relatively complex syntax and contain relatively dense information (Graesser et al., 2004) . The incidence of verb phrases, preposition phrase, agentless passive voice forms and negation expressions are lower in the highly cited group. The reason may be the abstract of a highly cited paper often takes gerunds in the beginning of the sentence. Noun phrases and adverbial phrases, instead, are more often used for richer and more precise explanation of the research in the abstract.",
+                "cite_spans": [
+                    {
+                        "start": 259,
+                        "end": 282,
+                        "text": "(Graesser et al., 2004)",
+                        "ref_id": "BIBREF8"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Syntactic pattern density",
+                "sec_num": "4.7"
+            },
+            {
+                "text": "In addition to the above findings, regarding Coh-Metrix indicators with significant differences, the standard deviation (SD) of means of the highly cited group are almost all less than that of the zero-cited group. This indicates that the overall data fluctuation range of papers with more citations is smaller, and the shared characteristics reflected in these papers are consistent and universal, while papers with zero citation are exactly the opposite.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "5."
+            },
+            {
+                "text": "Our study reveals the differences in abstract writing style between highly cited papers and zero-cited papers in WOS database.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "5."
+            },
+            {
+                "text": "First is the difference in lexical selection: (1) Abstracts of highly cited papers tend to use more complex, difficult and professional words. Compared with zero-cited papers, words from highly cited abstract contain more syllables and letters; they require older acquisition age; they have lower familiarity degree of adults; they are involved with concepts and methods that are more abstract and professional. (2) Abstract of highly cited papers tends to use fewer nouns and verbs but more adjectives, adverbs and personal pronouns. As regards personal pronouns, the plural form of first person is more frequently used, but first and third person pronouns singular are less commonly used. (3) Abstracts of highly cited papers contain more conjunctions, but there was no significant difference in the use of causal conjunctions.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "5."
+            },
+            {
+                "text": "In terms of sentence characteristics, (1) the abstract length of highly cited papers is relatively longer. The average number of sentences, the average number of words and the average length of sentences are all larger than those of zero-cited paper. A longer abstract will allow for a more detailed and clearer introduction of the research content. (2) Because of more conjunctions and complex terms involved, sentences in the abstracts of highly cited papers may be harder to understand. (3) The overlap of nouns, pronouns and content words makes the connections between sentences in abstracts of highly cited papers stronger and more accurate.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "5."
+            },
+            {
+                "text": "In terms of syntactic use, the syntactic structure in abstracts of highly cited papers is relatively more complex. The abstracts of highly cited paper use fewer modifiers in noun phases and fewer words before main verbs, but more noun phrases, adverbial phrases and gerunds. There are comparatively fewer similarities between adjacent sentences in both content and syntactic structure.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "5."
+            },
+            {
+                "text": "In terms of overall readability, highly cited paper abstracts are less readable than zerocited paper abstracts, which are mainly reflected in their lower overall syntactic simplicity and more complex concepts. As for referential cohesion, the antecedent reference relationship of highly cited paper abstracts is rather clear and not easy to result in misreference phenomenon, although the anaphor overlap in the abstract is relatively high.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "5."
+            },
+            {
+                "text": "Considering the above differences, we provide the following suggestions for researchers to write better abstracts. (1) Increase the number of words in the abstract and use terms in the abstracts to present the new concepts, methods and models involved. Personal pronouns should be plural in the first person, not in the first and third person pronoun singular. Use more conjunctions between sentences except causal conjunctions. (2) Use complex syntactic structures, more noun phrases, adverbial phrases, gerunds, but fewer verb phrases, prepositional phrases and negative sentences. Reduce the number of modifiers in noun phrases and control the number of nouns and pronouns to ensure one-to-one correspondence between references and avoid the problem of referential ambiguity. (3) Reduce both the adjacent and global similarity of content and syntactic structure between sentences and use referential cohesion strategies to enhance the relevance between adjacent sentences. (4) Although papers with less readable abstracts are more likely to be cited, under the premise of a comprehensive introduction to the research content, the authors should ensure the readability of the abstract as much as possible.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Discussion",
+                "sec_num": "5."
+            },
+            {
+                "text": "Our study adopted Coh-Metrix analysis tool to calculate the characteristics of 11 categories of 108 indexes for highly cited abstracts and zero-cited abstracts in the WOS (2008) (2009) (2010) (2011) (2012) (2013) (2014) (2015) (2016) (2017) database, analyzed and interpreted the indexes that have significant difference between highly cited and zero-cited groups. The characteristics of highly cited paper abstracts were summarized from four aspects: lexical selection, sentence characteristics, syntactic use and overall readability. Based on these characteristics, we provided some suggestions for researchers on writing high quality abstracts.",
+                "cite_spans": [
+                    {
+                        "start": 171,
+                        "end": 177,
+                        "text": "(2008)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 178,
+                        "end": 184,
+                        "text": "(2009)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 185,
+                        "end": 191,
+                        "text": "(2010)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 192,
+                        "end": 198,
+                        "text": "(2011)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 199,
+                        "end": 205,
+                        "text": "(2012)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 206,
+                        "end": 212,
+                        "text": "(2013)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 213,
+                        "end": 219,
+                        "text": "(2014)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 220,
+                        "end": 226,
+                        "text": "(2015)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 227,
+                        "end": 233,
+                        "text": "(2016)",
+                        "ref_id": null
+                    },
+                    {
+                        "start": 234,
+                        "end": 240,
+                        "text": "(2017)",
+                        "ref_id": null
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6."
+            },
+            {
+                "text": "The number of citations is crucial for both researchers and research institutions. Our findings can guide researchers to write abstracts that have higher possibility to be cited and improve researchers' abstract writing skills. In addition, these findings can be used to predict the scientific impact of the paper in the future through the abstract of the paper, which can effectively shorten the review time of journal reviewers and improve review efficiency. Admittedly, there are still some shortcomings in our research. Due to the large amount of papers contained in WOS database, only 10,000 papers with high citation rates and zero citation rates are selected as samples for analysis, which may not be enough to reflect the real situation of the overall data. Therefore, in the follow-up studies, we will increase the sample size and conduct in-depth research on the characteristics of most-cited abstract and zero-cited abstract according to different time periods.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Conclusion",
+                "sec_num": "6."
+            }
+        ],
+        "back_matter": [
+            {
+                "text": "This research is supported by the National Natural Science Foundation of China (Grant No. 71774084, 71503124 and 71673143) and National Social Science Fund of China (Grant No. 19BTQ062). The authors express their sincere gratitude towards Institute for Intelligent Systems, the University of Memphis, provider of Coh-Metrix tool, for their help and guidance. The authors thank two anonymous reviewers for helpful observations and suggestions.The current issue and full text archive of this journal is available on Emerald Insight at: https://www.emerald.com/insight/1468-4527.htm ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "funding",
+                "sec_num": null
+            },
+            {
+                "text": "The incidence scores are occurrence per 1,000 words (McNamara et al., 2014) . Word acquisition age score: the higher the score, the later the word is learned by children (e.g. word cortex scores higher than milk); Word familiarity rating: sentence with more familiar word to adults gets higher score (e.g. word water scores higher than calix); Word concreteness rating: word with higher score is more concrete and less abstract (e.g. word box scores higher than protocol); Word imagery rating: low imagery word is difficult to construct a mental image and has lower score (e.g. word hammer scores higher than overtone) ",
+                "cite_spans": [
+                    {
+                        "start": 52,
+                        "end": 75,
+                        "text": "(McNamara et al., 2014)",
+                        "ref_id": "BIBREF17"
+                    }
+                ],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "annex",
+                "sec_num": null
+            },
+            {
+                "text": "abstract will be more likely to be cited. In addition, readers are prone to such mentality that the papers with long abstracts will be more detailed and serious than those with short abstract papers, and thus the research results will be more valuable.The average word syllables and average word letters of the highly cited group abstracts are also significantly higher than those in the zero-cited group, which indicates that highly cited papers often contain longer, less-frequently used words that are unfamiliar to the readers. Words with the above-mentioned characteristics are often professional terms in a specific scientific field. This shows that the use of terms in the abstracts makes them more professional and might increase the citation number.",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Analysis of writing style and citations",
+                "sec_num": null
+            },
+            {
+                "text": "Words are the basic units of the abstract. The part of speech and the legibility of the words will affect the readability of the abstract. The noun and verb usage of highly cited group are significantly smaller than the zero-cited group, and the adjective and adverb usage rate are significantly higher than the zero-cited group. This implies that if a paper's abstract contains fewer nouns and verbs while contains more adjectives and adverbs, it will be more likely to be cited.With regard to the pronoun usage of the highly cited group, it tends to use more personal pronouns, especially the first person pronoun plural. However, the usage rate of the first person pronoun singular and the third person pronoun singular is lower than that of zerocited group. Although there is no significant difference in the incidence score of third person pronoun plural (p 5 0.265), the highly cited group scores 0.08 higher than the zero-cited group. This implies that the abstracts of highly cited papers reveal a tendency of having group personal pronouns such as \"we/our\". Yet first-person singular pronouns such as \"I/me\" are used less frequently. This is because scientific research is usually carried out by research ",
+                "cite_spans": [],
+                "ref_spans": [],
+                "eq_spans": [],
+                "section": "Word information",
+                "sec_num": "4.2"
+            }
+        ],
+        "bib_entries": {
+            "BIBREF0": {
+                "ref_id": "b0",
+                "title": "LSA as a measure of coherence in second language natural discourse",
+                "authors": [
+                    {
+                        "first": "S",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Crossley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Salsbury",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Mccarthy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Mcnamara",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2008,
+                "venue": "Proceedings of the 30th Annual Conference of the Cognitive Science Society",
+                "volume": "",
+                "issue": "",
+                "pages": "1906--1911",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Crossley, S.A., Salsbury, T., McCarthy, P.M. and McNamara, D.S. (2008), in Sloutsky, V., Love, B. and McRae, K. (Eds), \"LSA as a measure of coherence in second language natural discourse\", Proceedings of the 30th Annual Conference of the Cognitive Science Society, Washington, DC, Cognitive Science Society, pp. 1906-1911.",
+                "links": null
+            },
+            "BIBREF1": {
+                "ref_id": "b1",
+                "title": "Which factors help authors produce the highest impact research? Collaboration, journal and document properties",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Didegah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Thelwall",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Journal of Informetrics",
+                "volume": "7",
+                "issue": "4",
+                "pages": "861--873",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Didegah, F. and Thelwall, M. (2013), \"Which factors help authors produce the highest impact research? Collaboration, journal and document properties\", Journal of Informetrics, Vol. 7 No. 4, pp. 861-873.",
+                "links": null
+            },
+            "BIBREF2": {
+                "ref_id": "b2",
+                "title": "On the differences between citations and altmetrics: an investigation of factors driving altmetrics versus citations for Finnish articles",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Didegah",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Bowman",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Holmberg",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Journal of the Association for information Science and Technology",
+                "volume": "69",
+                "issue": "6",
+                "pages": "832--843",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Didegah, F., Bowman, T.D. and Holmberg, K. (2018), \"On the differences between citations and altmetrics: an investigation of factors driving altmetrics versus citations for Finnish articles\", Journal of the Association for information Science and Technology, Vol. 69 No. 6, pp. 832-843.",
+                "links": null
+            },
+            "BIBREF3": {
+                "ref_id": "b3",
+                "title": "Easy to read, easy to cite?",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Dowling",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Hammami",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "O",
+                        "middle": [],
+                        "last": "Zreik",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Economics Letters",
+                "volume": "173",
+                "issue": "",
+                "pages": "100--103",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Dowling, M., Hammami, H. and Zreik, O. (2018), \"Easy to read, easy to cite?\", Economics Letters, Vol. 173, pp. 100-103.",
+                "links": null
+            },
+            "BIBREF4": {
+                "ref_id": "b4",
+                "title": "Write better, publish better",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Fages",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "Scientometrics",
+                "volume": "122",
+                "issue": "3",
+                "pages": "1671--1681",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Fages, D.M. (2020), \"Write better, publish better\", Scientometrics, Vol. 122 No. 3, pp. 1671-1681.",
+                "links": null
+            },
+            "BIBREF5": {
+                "ref_id": "b5",
+                "title": "Are the abstracts of high impact articles more readable? Investigating the evidence from top research institutions in the world",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Gazni",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Journal of Information Science",
+                "volume": "37",
+                "issue": "3",
+                "pages": "273--281",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gazni, A. (2011), \"Are the abstracts of high impact articles more readable? Investigating the evidence from top research institutions in the world\", Journal of Information Science, Vol. 37 No. 3, pp. 273-281.",
+                "links": null
+            },
+            "BIBREF6": {
+                "ref_id": "b6",
+                "title": "Title characteristics and citations in economics",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Gnewuch",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Wohlrabe",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Scientometrics",
+                "volume": "110",
+                "issue": "3",
+                "pages": "1573--1578",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gnewuch, M. and Wohlrabe, K. (2017), \"Title characteristics and citations in economics\", Scientometrics, Vol. 110 No. 3, pp. 1573-1578.",
+                "links": null
+            },
+            "BIBREF7": {
+                "ref_id": "b7",
+                "title": "The citation advantage of foreign language references for Chinese social science papers",
+                "authors": [
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Gong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Xie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [],
+                        "last": "Larivi Ere",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Sugimoto",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Scientometrics",
+                "volume": "120",
+                "issue": "3",
+                "pages": "1439--1460",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Gong, K., Xie, J., Cheng, Y., Larivi ere, V. and Sugimoto, C.R. (2019), \"The citation advantage of foreign language references for Chinese social science papers\", Scientometrics, Vol. 120 No. 3, pp. 1439-1460.",
+                "links": null
+            },
+            "BIBREF8": {
+                "ref_id": "b8",
+                "title": "Coh-Metrix: analysis of text on cohesion and language",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Graesser",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Mcnamara",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Louwerse",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Cai",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2004,
+                "venue": "Behavior Research Methods, Instruments, andComputers",
+                "volume": "36",
+                "issue": "2",
+                "pages": "193--202",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Graesser, A.C., McNamara, D.S., Louwerse, M.M. and Cai, Z. (2004), \"Coh-Metrix: analysis of text on cohesion and language\", Behavior Research Methods, Instruments, andComputers, Vol. 36 No. 2, pp. 193-202.",
+                "links": null
+            },
+            "BIBREF9": {
+                "ref_id": "b9",
+                "title": "Succinct effect or informative effect: the relationship between title length and the number of citations",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Guo",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Ma",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Shi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Zong",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Scientometrics",
+                "volume": "116",
+                "issue": "3",
+                "pages": "1531--1539",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Guo, F., Ma, C., Shi, Q. and Zong, Q. (2018), \"Succinct effect or informative effect: the relationship between title length and the number of citations\", Scientometrics, Vol. 116 No. 3, pp. 1531-1539.",
+                "links": null
+            },
+            "BIBREF10": {
+                "ref_id": "b10",
+                "title": "Bibliometric analysis of manuscript characteristics that influence citations: a comparison of six major psychiatry journals",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Hafeez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Jalal",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Khosa",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Journal of Psychiatric Research",
+                "volume": "108",
+                "issue": "",
+                "pages": "90--94",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Hafeez, D.M., Jalal, S. and Khosa, F. (2019), \"Bibliometric analysis of manuscript characteristics that influence citations: a comparison of six major psychiatry journals\", Journal of Psychiatric Research, Vol. 108, pp. 90-94.",
+                "links": null
+            },
+            "BIBREF11": {
+                "ref_id": "b11",
+                "title": "Relationship among research collaboration, number of documents and number of citations: a case study in Spanish computer science production in 2000-2009",
+                "authors": [
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Ib A\u00f1ez",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Bielza",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Larranaga",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Scientometrics",
+                "volume": "95",
+                "issue": "2",
+                "pages": "689--716",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Ib a\u00f1ez, A., Bielza, C. and Larranaga, P. (2013), \"Relationship among research collaboration, number of documents and number of citations: a case study in Spanish computer science production in 2000-2009\", Scientometrics, Vol. 95 No. 2, pp. 689-716.",
+                "links": null
+            },
+            "BIBREF12": {
+                "ref_id": "b12",
+                "title": "Article title type and its relation with the number of downloads and citations",
+                "authors": [
+                    {
+                        "first": "H",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Jamali",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Nikzad",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Scientometrics",
+                "volume": "88",
+                "issue": "2",
+                "pages": "653--661",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Jamali, H.R. and Nikzad, M. (2011), \"Article title type and its relation with the number of downloads and citations\", Scientometrics, Vol. 88 No. 2, pp. 653-661.",
+                "links": null
+            },
+            "BIBREF13": {
+                "ref_id": "b13",
+                "title": "Readability and citations in information science: evidence from abstracts and articles of four journals",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Lei",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Yan",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2003,
+                "venue": "Scientometrics",
+                "volume": "108",
+                "issue": "3",
+                "pages": "1155--1169",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Lei, L. and Yan, S. (2016), \"Readability and citations in information science: evidence from abstracts and articles of four journals (2003-2012)\", Scientometrics, Vol. 108 No. 3, pp. 1155-1169.",
+                "links": null
+            },
+            "BIBREF14": {
+                "ref_id": "b14",
+                "title": "Which linguistic features predict quality of argumentative writing for college basic writers, and how do those features change with instruction?",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Macarthur",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Jennings",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Philippakos",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Reading and Writing",
+                "volume": "32",
+                "issue": "6",
+                "pages": "1553--1574",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Macarthur, C.A., Jennings, A. and Philippakos, Z.A. (2019), \"Which linguistic features predict quality of argumentative writing for college basic writers, and how do those features change with instruction?\", Reading and Writing, Vol. 32 No. 6, pp. 1553-1574.",
+                "links": null
+            },
+            "BIBREF15": {
+                "ref_id": "b15",
+                "title": "On the causes of subject-specific citation rates in web of science",
+                "authors": [
+                    {
+                        "first": "W",
+                        "middle": [],
+                        "last": "Marx",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [],
+                        "last": "Bornmann",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2015,
+                "venue": "Scientometrics",
+                "volume": "102",
+                "issue": "2",
+                "pages": "1823--1827",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Marx, W. and Bornmann, L. (2015), \"On the causes of subject-specific citation rates in web of science\", Scientometrics, Vol. 102 No. 2, pp. 1823-1827.",
+                "links": null
+            },
+            "BIBREF16": {
+                "ref_id": "b16",
+                "title": "Natural language processing in an intelligent writing strategy tutoring system",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Mcnamara",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Crossley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "R",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Roscoe",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2013,
+                "venue": "Behavior Research Methods",
+                "volume": "45",
+                "issue": "2",
+                "pages": "499--515",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McNamara, D.S., Crossley, S.A. and Roscoe, R.D. (2013), \"Natural language processing in an intelligent writing strategy tutoring system\", Behavior Research Methods, Vol. 45 No. 2, pp. 499-515.",
+                "links": null
+            },
+            "BIBREF17": {
+                "ref_id": "b17",
+                "title": "Automated Evaluation of Text and Discourse with Coh-Metrix",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Mcnamara",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Graesser",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Mccarthy",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Z",
+                        "middle": [],
+                        "last": "Cai",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "McNamara, D.S., Graesser, A.C., McCarthy, P.M. and Cai, Z. (2014), Automated Evaluation of Text and Discourse with Coh-Metrix, Cambridge University Press, Cambridge.",
+                "links": null
+            },
+            "BIBREF18": {
+                "ref_id": "b18",
+                "title": "What makes a 'good' title and (how) does it matter for citations? A review and general model of article title attributes in management science",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Nair",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Gibbert",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Scientometrics",
+                "volume": "107",
+                "issue": "3",
+                "pages": "1331--1359",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Nair, L.B. and Gibbert, M. (2016), \"What makes a 'good' title and (how) does it matter for citations? A review and general model of article title attributes in management science\", Scientometrics, Vol. 107 No. 3, pp. 1331-1359.",
+                "links": null
+            },
+            "BIBREF19": {
+                "ref_id": "b19",
+                "title": "Assessing text-based writing of low-skilled college students",
+                "authors": [
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Perin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Lauterbach",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "International Journal of Artificial Intelligence in Education",
+                "volume": "28",
+                "issue": "1",
+                "pages": "56--78",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Perin, D. and Lauterbach, M. (2018), \"Assessing text-based writing of low-skilled college students\", International Journal of Artificial Intelligence in Education, Vol. 28 No. 1, pp. 56-78.",
+                "links": null
+            },
+            "BIBREF20": {
+                "ref_id": "b20",
+                "title": "Is there a gender-based fragmentation of communication science? An investigation of the reasons for the apparent gender homophily in citations",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Potthoff",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Zimmermann",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Scientometrics",
+                "volume": "112",
+                "issue": "2",
+                "pages": "1047--1063",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Potthoff, M. and Zimmermann, F. (2017), \"Is there a gender-based fragmentation of communication science? An investigation of the reasons for the apparent gender homophily in citations\", Scientometrics, Vol. 112 No. 2, pp. 1047-1063.",
+                "links": null
+            },
+            "BIBREF21": {
+                "ref_id": "b21",
+                "title": "The effect of characteristics of title on citation rates of articles",
+                "authors": [
+                    {
+                        "first": "F",
+                        "middle": [],
+                        "last": "Rostami",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Mohammadpoorasl",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Hajizadeh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Scientometrics",
+                "volume": "98",
+                "issue": "3",
+                "pages": "2007--2010",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Rostami, F., Mohammadpoorasl, A. and Hajizadeh, M. (2014), \"The effect of characteristics of title on citation rates of articles\", Scientometrics, Vol. 98 No. 3, pp. 2007-2010.",
+                "links": null
+            },
+            "BIBREF22": {
+                "ref_id": "b22",
+                "title": "Exploring an intelligent tutoring system as a conversation-based assessment tool for reading comprehension",
+                "authors": [
+                    {
+                        "first": "G",
+                        "middle": [],
+                        "last": "Shi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Lippert",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [
+                            "T"
+                        ],
+                        "last": "Shubeck",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Fang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Chen",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [
+                            "I"
+                        ],
+                        "last": "Pavlik",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Greenberg",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Graesser",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2018,
+                "venue": "Behaviormetrika",
+                "volume": "45",
+                "issue": "2",
+                "pages": "615--633",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Shi, G., Lippert, A., Shubeck, K.T., Fang, Y., Chen, S., Pavlik, P.I., Greenberg, D. and Graesser, A.C. (2018), \"Exploring an intelligent tutoring system as a conversation-based assessment tool for reading comprehension\", Behaviormetrika, Vol. 45 No. 2, pp. 615-633.",
+                "links": null
+            },
+            "BIBREF23": {
+                "ref_id": "b23",
+                "title": "Citation pattern and lifespan: a comparison of discipline, institution, and individual",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "B"
+                        ],
+                        "last": "Slyder",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Stein",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Sams",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Walker",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Jacob Beale",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Feldhaus",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Copenheaver",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2011,
+                "venue": "Scientometrics",
+                "volume": "89",
+                "issue": "3",
+                "pages": "955--966",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Slyder, J.B., Stein, B.R., Sams, B.S., Walker, D.M., Jacob Beale, B., Feldhaus, J.J. and Copenheaver, C.A. (2011), \"Citation pattern and lifespan: a comparison of discipline, institution, and individual\", Scientometrics, Vol. 89 No. 3, pp. 955-966.",
+                "links": null
+            },
+            "BIBREF24": {
+                "ref_id": "b24",
+                "title": "The effect of keyword repetition in abstract and keyword frequency per journal in predicting citation counts",
+                "authors": [
+                    {
+                        "first": "B",
+                        "middle": [],
+                        "last": "Sohrabi",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Iraj",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "Scientometrics",
+                "volume": "110",
+                "issue": "1",
+                "pages": "243--251",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Sohrabi, B. and Iraj, H. (2017), \"The effect of keyword repetition in abstract and keyword frequency per journal in predicting citation counts\", Scientometrics, Vol. 110 No. 1, pp. 243-251.",
+                "links": null
+            },
+            "BIBREF25": {
+                "ref_id": "b25",
+                "title": "Understanding the influence of text complexity and question type on reading outcomes",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Spencer",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Gilmour",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "C"
+                        ],
+                        "last": "Miller",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Emerson",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "N",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Saha",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "L",
+                        "middle": [
+                            "E"
+                        ],
+                        "last": "Cutting",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Reading and Writing",
+                "volume": "32",
+                "issue": "3",
+                "pages": "603--637",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Spencer, M., Gilmour, A.F., Miller, A.C., Emerson, A.M., Saha, N.M. and Cutting, L.E. (2019), \"Understanding the influence of text complexity and question type on reading outcomes\", Reading and Writing, Vol. 32 No. 3, pp. 603-637.",
+                "links": null
+            },
+            "BIBREF26": {
+                "ref_id": "b26",
+                "title": "Order matters: alphabetizing in-text citations biases citation rates",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Stevens",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Duque",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Psychonomic Bulletin and Review",
+                "volume": "26",
+                "issue": "3",
+                "pages": "1020--1026",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Stevens, J.R. and Duque, J.F. (2019), \"Order matters: alphabetizing in-text citations biases citation rates\", Psychonomic Bulletin and Review, Vol. 26 No. 3, pp. 1020-1026.",
+                "links": null
+            },
+            "BIBREF27": {
+                "ref_id": "b27",
+                "title": "Factors affecting number of citations: a comprehensive review of the literature",
+                "authors": [
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Tahamtan",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Afshar",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Ahamdzadeh",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2016,
+                "venue": "Scientometrics",
+                "volume": "107",
+                "issue": "3",
+                "pages": "1195--1225",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tahamtan, I., Afshar, A.S. and Ahamdzadeh, K. (2016), \"Factors affecting number of citations: a comprehensive review of the literature\", Scientometrics, Vol. 107 No. 3, pp. 1195-1225.",
+                "links": null
+            },
+            "BIBREF28": {
+                "ref_id": "b28",
+                "title": "Beyond first grade: examining word, sentence, and discourse text factors associated with oral reading rate in informational text in second grade",
+                "authors": [
+                    {
+                        "first": "L",
+                        "middle": [
+                            "S"
+                        ],
+                        "last": "Tortorelli",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2020,
+                "venue": "Reading and Writing",
+                "volume": "33",
+                "issue": "1",
+                "pages": "143--170",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Tortorelli, L.S. (2020), \"Beyond first grade: examining word, sentence, and discourse text factors associated with oral reading rate in informational text in second grade\", Reading and Writing, Vol. 33 No. 1, pp. 143-170.",
+                "links": null
+            },
+            "BIBREF29": {
+                "ref_id": "b29",
+                "title": "A study on the readability of scientific publications",
+                "authors": [
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Vergoulis",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "I",
+                        "middle": [],
+                        "last": "Kanellos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [],
+                        "last": "Tzerefos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Chatzopoulos",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [],
+                        "last": "Dalamagas",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Skiadopoulos",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Digital Libraries for Open Knowledge",
+                "volume": "11799",
+                "issue": "",
+                "pages": "136--144",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Vergoulis, T., Kanellos, I., Tzerefos, A., Chatzopoulos, S., Dalamagas, T. and Skiadopoulos, S. (2019), \"A study on the readability of scientific publications\", in Doucet, A., Isaac, A., Golub, K., Aalberg, T. and Jatowt, A. (Eds), Digital Libraries for Open Knowledge. TPDL 2019. Lecture Notes in Computer Science, Vol. 11799, pp. 136-144.",
+                "links": null
+            },
+            "BIBREF30": {
+                "ref_id": "b30",
+                "title": "What a difference a colon makes: how superficial factors influence subsequent citation",
+                "authors": [
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Wesel",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Wyatt",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Haaf",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2014,
+                "venue": "Scientometrics",
+                "volume": "98",
+                "issue": "3",
+                "pages": "1601--1615",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wesel, M., Wyatt, S. and Haaf, J. (2014), \"What a difference a colon makes: how superficial factors influence subsequent citation\", Scientometrics, Vol. 98 No. 3, pp. 1601-1615.",
+                "links": null
+            },
+            "BIBREF31": {
+                "ref_id": "b31",
+                "title": "Different approaches to assessing the quality of explanations following a multipledocument inquiry activity in science",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Wiley",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Hastings",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "D",
+                        "middle": [],
+                        "last": "Blaum",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "A",
+                        "middle": [
+                            "J"
+                        ],
+                        "last": "Jaeger",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "S",
+                        "middle": [],
+                        "last": "Hughes",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "P",
+                        "middle": [],
+                        "last": "Wallace",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "T",
+                        "middle": [
+                            "D"
+                        ],
+                        "last": "Griffin",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [
+                            "A"
+                        ],
+                        "last": "Britt",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2017,
+                "venue": "International Journal of Artificial Intelligence in Education",
+                "volume": "27",
+                "issue": "4",
+                "pages": "758--790",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wiley, J., Hastings, P., Blaum, D., Jaeger, A.J., Hughes, S., Wallace, P., Griffin, T.D. and Britt, M.A. (2017), \"Different approaches to assessing the quality of explanations following a multiple- document inquiry activity in science\", International Journal of Artificial Intelligence in Education, Vol. 27 No. 4, pp. 758-790.",
+                "links": null
+            },
+            "BIBREF32": {
+                "ref_id": "b32",
+                "title": "A theoretically motivated method for automatically evaluating texts for gist inferences",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "R"
+                        ],
+                        "last": "Wolfe",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "M",
+                        "middle": [],
+                        "last": "Dandignac",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "V",
+                        "middle": [
+                            "F"
+                        ],
+                        "last": "Reyna",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Behavior Research Methods",
+                "volume": "51",
+                "issue": "6",
+                "pages": "2419--2437",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Wolfe, C.R., Dandignac, M. and Reyna, V.F. (2019), \"A theoretically motivated method for automatically evaluating texts for gist inferences\", Behavior Research Methods, Vol. 51 No. 6, pp. 2419-2437.",
+                "links": null
+            },
+            "BIBREF33": {
+                "ref_id": "b33",
+                "title": "A probe into 66 factors which are possibly associated with the number of citations an article received",
+                "authors": [
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Xie",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "K",
+                        "middle": [],
+                        "last": "Gong",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [],
+                        "last": "Li",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Q",
+                        "middle": [],
+                        "last": "Ke",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "H",
+                        "middle": [],
+                        "last": "Kang",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "Y",
+                        "middle": [],
+                        "last": "Cheng",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Scientometrics",
+                "volume": "119",
+                "issue": "4",
+                "pages": "1429--1454",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Xie, J., Gong, K., Li, J., Ke, Q., Kang, H. and Cheng, Y. (2019), \"A probe into 66 factors which are possibly associated with the number of citations an article received\", Scientometrics, Vol. 119 No. 4, pp. 1429-1454.",
+                "links": null
+            },
+            "BIBREF34": {
+                "ref_id": "b34",
+                "title": "Beyond subjective judgments: predicting evaluations of creative writing from computational linguistic features",
+                "authors": [
+                    {
+                        "first": "C",
+                        "middle": [
+                            "M"
+                        ],
+                        "last": "Zedelius",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "C",
+                        "middle": [],
+                        "last": "Mills",
+                        "suffix": ""
+                    },
+                    {
+                        "first": "J",
+                        "middle": [
+                            "W"
+                        ],
+                        "last": "Schooler",
+                        "suffix": ""
+                    }
+                ],
+                "year": 2019,
+                "venue": "Behavior Research Methods",
+                "volume": "51",
+                "issue": "2",
+                "pages": "879--894",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Zedelius, C.M., Mills, C. and Schooler, J.W. (2019), \"Beyond subjective judgments: predicting evaluations of creative writing from computational linguistic features\", Behavior Research Methods, Vol. 51 No. 2, pp. 879-894.",
+                "links": null
+            },
+            "BIBREF35": {
+                "ref_id": "b35",
+                "title": "Corresponding author Dongbo Wang can be contacted at: db.wang@njau.edu.cn For instructions on how to order reprints of this article, please visit our website: www.emeraldgrouppublishing.com/licensing/reprints.htm Or contact us for further details: permissions@emeraldinsight",
+                "authors": [],
+                "year": null,
+                "venue": "",
+                "volume": "",
+                "issue": "",
+                "pages": "",
+                "other_ids": {},
+                "num": null,
+                "urls": [],
+                "raw_text": "Corresponding author Dongbo Wang can be contacted at: db.wang@njau.edu.cn For instructions on how to order reprints of this article, please visit our website: www.emeraldgrouppublishing.com/licensing/reprints.htm Or contact us for further details: permissions@emeraldinsight.com",
+                "links": null
+            }
+        },
+        "ref_entries": {
+            "FIGREF0": {
+                "num": null,
+                "text": "Figure 1. Highly cited papers distributed over time",
+                "fig_num": null,
+                "uris": null,
+                "type_str": "figure"
+            },
+            "TABREF0": {
+                "num": null,
+                "text": "Length of paragraphs: average number of sentences in each paragraph; Length of sentences: average number of words in each sentence; Length of words: average number of syllables or letters in all of the words",
+                "html": null,
+                "content": "<table><tr><td>OIR</td><td/><td/><td/><td/><td/></tr><tr><td>45,7</td><td/><td/><td/><td/><td/></tr><tr><td>Indice</td><td>Group</td><td>Mean</td><td>SD</td><td>t</td><td>Sig</td></tr><tr><td>Number of sentences</td><td>1</td><td>8.280</td><td>4.095</td><td>20.061</td><td>0.000</td></tr><tr><td/><td>0</td><td>7.138</td><td>3.954</td><td/><td/></tr><tr><td>Number of words</td><td>1</td><td>196.626</td><td>89.937</td><td>32.235</td><td>0.000</td></tr><tr><td/><td>0</td><td>157.164</td><td>83.052</td><td/><td/></tr><tr><td>Length of paragraphs</td><td>1</td><td>8.280</td><td>4.095</td><td>20.061</td><td>0.000</td></tr><tr><td/><td>0</td><td>7.138</td><td>3.954</td><td/><td/></tr><tr><td>Length of sentences</td><td>1</td><td>26.086</td><td>12.681</td><td>8.428</td><td>0.000</td></tr><tr><td/><td>0</td><td>24.520</td><td>13.586</td><td/><td/></tr><tr><td>Length of words (syllables)</td><td>1</td><td>1.973</td><td>0.161</td><td>25.552</td><td>0.000</td></tr><tr><td/><td>0</td><td>1.910</td><td>0.188</td><td/><td/></tr><tr><td>Length of words (letters)</td><td>1</td><td>5.768</td><td>0.446</td><td>29.993</td><td>0.000</td></tr><tr><td>Note(s): Table 1. Descriptive results and</td><td>0</td><td>5.564</td><td>0.515</td><td/><td/></tr><tr><td>significance test</td><td/><td/><td/><td/><td/></tr></table>",
+                "type_str": "table"
+            }
+        }
+    }
+}

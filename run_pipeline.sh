@@ -1,44 +1,53 @@
 #!/bin/bash
 
 # Model settings
-# MODEL_TYPE="gpt"
-# MODEL_NAME="gpt-4o-mini"
+MODEL_TYPE="gpt"
+MODEL_NAME="gpt-4o-mini"
 
-MODEL_TYPE="vllm"  
-MODEL_NAME="meta-llama/Meta-Llama-3.1-70B-Instruct" 
-MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for local models
+# MODEL_TYPE="vllm"  
+# MODEL_NAME="meta-llama/Meta-Llama-3.1-70B-Instruct" 
+# MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for local models
 
 # MODEL_TYPE="vllm"  
 # MODEL_NAME="Qwen/Qwen2.5-72B-Instruct" 
 # MODEL_PATH="/net/projects/chai-lab/shared_models/Qwen2.5-72B-Instruct"  # only needed for local models
 
-# MODEL_TYPE="vllm-dpskr1"  
+# MODEL_TYPE="vllm"  
 # MODEL_NAME="DeepSeek/DeepSeek-R1-Distill-Llama-70B-local" 
 # MODEL_PATH="/net/projects/chai-lab/shared_models/DeepSeek-R1-Distill-Llama-70B-local"  # only needed for local models
 
 # Define list of tasks to run
 TASKS=(
     "deceptive_reviews"
-    "llamagc_detect"
-    "gptgc_detect"
-    "persuasive_pairs"
-    "dreaddit"
-    "headline_binary"
-    "retweet"
+    # "llamagc_detect"
+    # "gptgc_detect"
+    # "persuasive_pairs"
+    # "dreaddit"
+    # "headline_binary"
+    # "retweet"
+    # "journal_same/same_journal_health"
+    # "journal_same/same_journal_nips"
+    # "journal_same/same_journal_radiology"
+    # "journal_cross/cross_journal_health_nips"
+    # "journal_cross/cross_journal_health_radiology"
+    # "journal_cross/cross_journal_nips_health"
+    # "journal_cross/cross_journal_nips_radiology"
+    # "journal_cross/cross_journal_radiology_health"
+    # "journal_cross/cross_journal_radiology_nips"
 )
 
 # Define methods to run
 
 METHODS=(
-    "zero_shot"
-    "few_shot"
-    "zero_shot_gen"
-    "only_paper"
+    # "zero_shot"
+    # "few_shot"
+    # "zero_shot_gen"
+    # "only_paper"
     "hypogenic"
-    "hyporefine"
-    "union_hypo"
-    "union_refine"
-    "io_refine"
+    # "hyporefine"
+    # "union_hypo"
+    # "union_refine"
+    # "io_refine"
 )
 
 # Algorithm settings
@@ -65,19 +74,16 @@ for TASK_NAME in "${TASKS[@]}"; do
         CMD="${CMD} --model_path ${MODEL_PATH}"
     fi
 
-    # Default methods to run in pipeline
-    # Original commented version kept for reference
-    # CMD="${CMD} \
-    #     --run_zero_shot \
-    #     --run_few_shot \
-    #     --run_zero_shot_gen \
-    #     --run_hypogenic \
-    #     --do_train"
-
     # Add methods dynamically
     for METHOD in "${METHODS[@]}"; do
         CMD="${CMD} --run_${METHOD}"
     done
+
+    # Check if TASK_NAME contains "journal" and add argument
+    if [[ "${TASK_NAME}" == *"journal"* ]]; then
+        CMD="${CMD} --literature_folder=\"paper_citations\""
+    fi
+
     # IND setup
     CMD="${CMD} 
     --do_train
@@ -87,20 +93,6 @@ for TASK_NAME in "${TASKS[@]}"; do
     # CMD="${CMD} 
     # --use_ood
     # "
-    
-    # Additional methods
-    # Uncomment if needed
-    # --run_only_paper \
-    # --run_hyperwrite \
-    # --run_notebooklm \
-    # --run_hyporefine \
-    # --run_union_hypo \
-    # --run_union_refine \
-    # --run_io_refine \
-    # --run_cross_model \
-    # --use_val \
-    # --multihyp \
-    # --use_refine
 
     echo "Executing command: $CMD"
     eval $CMD
