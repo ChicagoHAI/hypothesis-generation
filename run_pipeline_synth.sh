@@ -18,17 +18,6 @@ MODEL_NAME="gpt-4o-mini"
 
 # Define list of tasks to run
 
-# Real tasks
-# TASKS=(
-#     "deceptive_reviews"
-#     "llamagc_detect"
-#     "gptgc_detect"
-#     "persuasive_pairs"
-#     "dreaddit"
-#     "headline_binary"
-#     "retweet"
-# )
-
 # Synthetic tasks
 TASKS=(
     # "admission/level_1/base"
@@ -76,33 +65,52 @@ TASKS=(
     # 'election_controlled/20_0.1_0.1'
     # 'election_controlled/20_0.2_0.2'
     # 'election_controlled/20_0.3_0.3'
-    'preference_controlled/5_0_0',
-    'preference_controlled/10_0_0'
-    'preference_controlled/15_0_0'
-    'preference_controlled/20_0_0'
-    'preference_controlled/20_0.1_0'
-    'preference_controlled/20_0.2_0'
-    'preference_controlled/20_0.3_0'
-    'preference_controlled/20_0_0.1'
-    'preference_controlled/20_0_0.2'
-    'preference_controlled/20_0_0.3'
-    'preference_controlled/20_0.1_0.1'
-    'preference_controlled/20_0.2_0.2'
-    'preference_controlled/20_0.3_0.3'
+    # 'preference_controlled/5_0_0'
+    # 'preference_controlled/10_0_0'
+    # 'preference_controlled/15_0_0'
+    # 'preference_controlled/20_0_0'
+    # 'preference_controlled/20_0.1_0'
+    # 'preference_controlled/20_0.2_0'
+    # 'preference_controlled/20_0.3_0'
+    # 'preference_controlled/20_0_0.1'
+    # 'preference_controlled/20_0_0.2'
+    # 'preference_controlled/20_0_0.3'
+    # 'preference_controlled/20_0.1_0.1'
+    # 'preference_controlled/20_0.2_0.2'
+    # 'preference_controlled/20_0.3_0.3'
+    # 'admission/level_3/depth_3'
+    # 'admission/level_3/distractor_6'
+    # 'admission/level_3/noise_20'
+    # 'admission/level_3/size_10'
+    # 'admission/level_4/depth_4'
+    # 'admission/level_4/distractor_10'
+    # 'admission/level_4/noise_30'
+    # 'admission/level_4/size_15'
+    # "admission_adv/level_1/base"
+    # "admission_adv/level_2/depth_2"
+    # "admission_adv/level_2/distractor_3"
+    # "admission_adv/level_2/noise_10"
+    # "admission_adv/level_2/size_5"
+    # 'admission_adv/level_3/depth_3'
+    # 'admission_adv/level_3/distractor_6'
+    # 'admission_adv/level_3/noise_20'
+    # 'admission_adv/level_3/size_10'
+    # 'admission_adv/level_4/depth_4'
+    # 'admission_adv/level_4/distractor_10'
+    # 'admission_adv/level_4/noise_30'
+    # 'admission_adv/level_4/size_15'
+    # 'election/counterfactual/normal'
+    # 'election/counterfactual/counterfactual'
 )
 
 # Define methods to run
 
 METHODS=(
-    "zero_shot"
-    "few_shot"
-    "zero_shot_gen"
-    # "only_paper"
+    # "zero_shot"
+    # "few_shot"
+    # "zero_shot_gen"
     "hypogenic"
-    # "hyporefine"
-    # "union_hypo"
-    # "union_refine"
-    "io_refine"
+    # "io_refine"
 )
 
 # Algorithm settings
@@ -129,15 +137,6 @@ for TASK_NAME in "${TASKS[@]}"; do
         CMD="${CMD} --model_path ${MODEL_PATH}"
     fi
 
-    # Default methods to run in pipeline
-    # Original commented version kept for reference
-    # CMD="${CMD} \
-    #     --run_zero_shot \
-    #     --run_few_shot \
-    #     --run_zero_shot_gen \
-    #     --run_hypogenic \
-    #     --do_train"
-
     # Add methods dynamically
     for METHOD in "${METHODS[@]}"; do
         CMD="${CMD} --run_${METHOD}"
@@ -146,25 +145,6 @@ for TASK_NAME in "${TASKS[@]}"; do
     CMD="${CMD} 
     --do_train
     "
-
-    # OOD setup
-    # CMD="${CMD} 
-    # --use_ood
-    # "
-    
-    # Additional methods
-    # Uncomment if needed
-    # --run_only_paper \
-    # --run_hyperwrite \
-    # --run_notebooklm \
-    # --run_hyporefine \
-    # --run_union_hypo \
-    # --run_union_refine \
-    # --run_io_refine \
-    # --run_cross_model \
-    # --use_val \
-    # --multihyp \
-    # --use_refine
 
     echo "Executing command: $CMD"
     eval $CMD

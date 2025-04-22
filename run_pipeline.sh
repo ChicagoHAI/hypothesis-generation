@@ -18,7 +18,7 @@ MODEL_NAME="gpt-4o-mini"
 
 # Define list of tasks to run
 TASKS=(
-    # "deceptive_reviews"
+    "deceptive_reviews"
     # "llamagc_detect"
     # "gptgc_detect"
     # "persuasive_pairs"
@@ -28,26 +28,26 @@ TASKS=(
     # "journal_same/same_journal_health"
     # "journal_same/same_journal_nips"
     # "journal_same/same_journal_radiology"
-    "journal_cross/cross_journal_health_nips"
-    "journal_cross/cross_journal_health_radiology"
-    "journal_cross/cross_journal_nips_health"
-    "journal_cross/cross_journal_nips_radiology"
-    "journal_cross/cross_journal_radiology_health"
-    "journal_cross/cross_journal_radiology_nips"
+    # "journal_cross/cross_journal_health_nips"
+    # "journal_cross/cross_journal_health_radiology"
+    # "journal_cross/cross_journal_nips_health"
+    # "journal_cross/cross_journal_nips_radiology"
+    # "journal_cross/cross_journal_radiology_health"
+    # "journal_cross/cross_journal_radiology_nips"
 )
 
 # Define methods to run
 
 METHODS=(
-    "zero_shot"
-    "few_shot"
-    "zero_shot_gen"
-    "only_paper"
+    # "zero_shot"
+    # "few_shot"
+    # "zero_shot_gen"
+    # "only_paper"
     "hypogenic"
-    "hyporefine"
-    "union_hypo"
-    "union_refine"
-    "io_refine"
+    # "hyporefine"
+    # "union_hypo"
+    # "union_refine"
+    # "io_refine"
 )
 
 # Algorithm settings
@@ -74,15 +74,6 @@ for TASK_NAME in "${TASKS[@]}"; do
         CMD="${CMD} --model_path ${MODEL_PATH}"
     fi
 
-    # Default methods to run in pipeline
-    # Original commented version kept for reference
-    # CMD="${CMD} \
-    #     --run_zero_shot \
-    #     --run_few_shot \
-    #     --run_zero_shot_gen \
-    #     --run_hypogenic \
-    #     --do_train"
-
     # Add methods dynamically
     for METHOD in "${METHODS[@]}"; do
         CMD="${CMD} --run_${METHOD}"
@@ -94,28 +85,14 @@ for TASK_NAME in "${TASKS[@]}"; do
     fi
 
     # IND setup
-    # CMD="${CMD} 
-    # --do_train
-    # "
+    CMD="${CMD} 
+    --do_train
+    "
 
     # OOD setup
-    CMD="${CMD} 
-    --use_ood
-    "
-    
-    # Additional methods
-    # Uncomment if needed
-    # --run_only_paper \
-    # --run_hyperwrite \
-    # --run_notebooklm \
-    # --run_hyporefine \
-    # --run_union_hypo \
-    # --run_union_refine \
-    # --run_io_refine \
-    # --run_cross_model \
-    # --use_val \
-    # --multihyp \
-    # --use_refine
+    # CMD="${CMD} 
+    # --use_ood
+    # "
 
     echo "Executing command: $CMD"
     eval $CMD
