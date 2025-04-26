@@ -1,4 +1,4 @@
-0;10;1c#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # put in your doc2json directory here
 export DOC2JSON_HOME=$HOME/s2orc-doc2json
