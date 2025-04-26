@@ -54,6 +54,29 @@ def get_results(pred_list, label_list):
 
     return {"accuracy": accuracy, "f1": f1}
 
+def get_results_regression(pred_list, label_list):
+    """
+    Compute MSE for regression.
+    """
+    print('label_list: ', label_list)
+    print('pred_list: ', pred_list)
+
+    # Check if labels can be turned into floats
+    try:
+        label_list = [float(label) for label in label_list]
+    except:
+        raise ValueError("Labels cannot be turned into floats")
+    
+    # if a prediction cannot be turned into a float, then it is 'unknown' and then we use the mean of the predictions as the prediction
+    mean_pred = np.mean([float(pred) for pred in pred_list if pred != 'unknown'])
+    print('mean_pred: ', mean_pred)
+    pred_list = [mean_pred if pred == 'unknown' else float(pred) for pred in pred_list]
+    print('pred_list: ', pred_list)
+    
+    mse = np.mean((np.array(label_list) - np.array(pred_list))**2)
+
+    return {"mse": mse}
+
 def set_seed(seed):
     logger = LoggerConfig.get_logger(logger_name)
     logger.info(f"Setting seed to {seed}")
