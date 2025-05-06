@@ -9,7 +9,7 @@ wget https://github.com/kermitt2/grobid/archive/0.8.1.zip
 unzip 0.8.1.zip
 rm 0.8.1.zip
 cd $HOME/grobid-0.8.1
-# ./gradlew wrapper --gradle-version 9.0 --distribution-type all
+# ./gradlew wrapper --gradle-version 7.6 --distribution-type all
 
 ./gradlew clean build
 
