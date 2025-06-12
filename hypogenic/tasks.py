@@ -22,6 +22,7 @@ class BaseTask(ABC):
         extract_label: Union[Callable[[str], str], None] = None,
         from_register: Union[Register, None] = None,
         use_ood: bool = False,
+        regression: bool = False,
     ):
         if from_register is None and extract_label is None:
             raise ValueError("Either from_register or extract_label should be provided")
@@ -47,7 +48,12 @@ class BaseTask(ABC):
             self.test_data_path = data["ood_data_path"]
             self.val_data_path = data["ood_data_path"]
 
-        # getting omrpt templates from yaml file
+        if regression:
+            self.y_min = float(data["y_min"])
+            self.y_max = float(data["y_max"])
+            self.y_mu = float(data["y_mu"])
+
+        # getting prompt templates from yaml file
         self.prompt_template = data["prompt_templates"]
 
         # task label
