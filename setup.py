@@ -4,7 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 with open("requirements.txt", "r") as f:
-    requirements = f.read().splitlines()
+    requirements = [
+        line.strip()
+        for line in f
+        if line.strip() and not line.startswith("#") and not line.startswith("//")
+    ]
 
 setuptools.setup(
     name="hypogenic",
