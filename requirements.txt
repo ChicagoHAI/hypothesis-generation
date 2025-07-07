@@ -23,6 +23,5 @@ lxml
 python-magic~=0.4.18
 latex2mathml~=2.16.2
 itsdangerous~=2.0.1
-pyautogen~=0.2.33
 httpx==0.27.2
 doc2json @ git+https://github.com/allenai/s2orc-doc2json@71c022ed4bed3ffc71d22c2ac5cdbc133ad04e3c
