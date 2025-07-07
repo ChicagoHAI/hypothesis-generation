@@ -359,6 +359,7 @@ def original_hypogenic(task_name, api, model_name):
         k=k,
         alpha=alpha,
         update_batch_size=update_batch_size,
+        update_hypotheses_per_batch=update_hypotheses_per_batch,
         num_hypotheses_to_update=num_hypotheses_to_update,
         save_every_n_examples=save_every_10_examples,
     )
