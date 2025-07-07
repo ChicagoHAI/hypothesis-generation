@@ -3,12 +3,8 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open("requirements.txt") as f:
-    requirements = [
-        line.strip()
-        for line in f
-        if line.strip() and not line.startswith("git+")
-    ]
+with open("requirements.txt", "r") as f:
+    requirements = f.read().splitlines()
 
 setuptools.setup(
     name="hypogenic",
@@ -32,4 +28,6 @@ setuptools.setup(
             "hypogenic_inference=hypogenic_cmd.inference:main",
         ],
     },
+    # Note: doc2json must be installed separately via:
+    # pip install git+https://github.com/allenai/s2orc-doc2json@71c022ed4bed3ffc71d22c2ac5cdbc133ad04e3c
 )
