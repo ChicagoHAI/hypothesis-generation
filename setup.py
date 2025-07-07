@@ -21,7 +21,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
-    python_requires="==3.10",
+    python_requires=">=3.10",
     entry_points={
         "console_scripts": [
             "hypogenic_generation=hypogenic_cmd.generation:main",
