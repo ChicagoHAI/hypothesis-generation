@@ -3,12 +3,16 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open("requirements.txt", "r") as f:
-    requirements = f.read().splitlines()
+with open("requirements.txt") as f:
+    requirements = [
+        line.strip()
+        for line in f
+        if line.strip() and not line.startswith("git+")
+    ]
 
 setuptools.setup(
     name="hypogenic",
-    version="0.2.1",
+    version="0.2.2",
     author="Haokun Liu, Mingxuan Li, Chenfei Yuan, Yangqiaoyu Zhou, Tejes Srivastava",
     author_email="haokunliu@uchicago.edu",
     description="A package for generating and evaluating hypotheses.",
