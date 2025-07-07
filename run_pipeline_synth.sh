@@ -20,7 +20,7 @@ MODEL_NAME="gpt-4o-mini"
 
 # Synthetic tasks
 TASKS=(
-    # "admission/level_1/base"
+    "admission/level_1/base"
     # "admission/level_2/depth_2"
     # "admission/level_2/distractor_3"
     # "admission/level_2/noise_10"
