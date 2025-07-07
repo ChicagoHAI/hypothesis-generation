@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as f:
 
 setuptools.setup(
     name="hypogenic",
-    version="0.2.2",
+    version="0.3.1",
     author="Haokun Liu, Mingxuan Li, Chenfei Yuan, Yangqiaoyu Zhou, Tejes Srivastava",
     author_email="haokunliu@uchicago.edu",
     description="A package for generating and evaluating hypotheses.",
