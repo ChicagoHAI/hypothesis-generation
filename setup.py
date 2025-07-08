@@ -3,17 +3,16 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open("requirements.txt", "r") as f:
-    requirements = [
-        line.strip()
-        for line in f
-        if line.strip() and not line.startswith("#") and not line.startswith("//")
-    ]
+import tomllib
+
+with open("pyproject.toml", "rb") as f:
+    pyproject_data = tomllib.load(f)
+    requirements = pyproject_data["project"]["dependencies"]
 
 setuptools.setup(
     name="hypogenic",
     version="0.3.2",
-    author="Haokun Liu, Mingxuan Li, Chenfei Yuan, Yangqiaoyu Zhou, Tejes Srivastava",
+    author="Haokun Liu, Mingxuan Li, Chenfei Yuan, Yangqiaoyu Zhou, Tejes Srivastava, Chenhao Tan",
     author_email="haokunliu@uchicago.edu",
     description="A package for generating and evaluating hypotheses.",
     long_description=long_description,
@@ -32,6 +31,4 @@ setuptools.setup(
             "hypogenic_inference=hypogenic_cmd.inference:main",
         ],
     },
-    # Note: doc2json must be installed separately via:
-    # pip install git+https://github.com/allenai/s2orc-doc2json@71c022ed4bed3ffc71d22c2ac5cdbc133ad04e3c
 )

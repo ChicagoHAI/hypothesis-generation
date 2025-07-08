@@ -59,8 +59,8 @@ cd hypothesis-generation
 conda create --name hypogenic python=3.10
 conda activate hypogenic
 
-pip install -r requirements.txt
 pip install -e .
+# optionally if you would like to develop new features, consider `pip install -e ".[dev]"`
 ```
 
 ## [Optional]: set up [Redis](https://redis.io) server for caching LLM responses
