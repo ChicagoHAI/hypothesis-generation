@@ -13,7 +13,8 @@ authors = [
     {name = "Mingxuan Li"},
     {name = "Chenfei Yuan"},
     {name = "Yangqiaoyu Zhou"},
-    {name = "Tejes Srivastava"}
+    {name = "Tejes Srivastava"},
+    {name = "Chenhao Tan"}
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
