@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-<img src="https://github.com/ChicagoHAI/hypothesis-generation/master/repo_assets/imgs/avatar.jpg" alt="CHAI lab Logo" width="100">
+<img src="./repo_assets/imgs/avatar.jpg" alt="CHAI lab Logo" width="100">
 
 [![Discord](https://img.shields.io/badge/discord-chat-green?logo=discord)](https://discord.gg/BgkfTvBdbV)
 
