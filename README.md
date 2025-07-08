@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-<img src="https://github.com/ChicagoHAI/chicagohai.github.io/blob/main/static/avatar.jpg" alt="CHAI lab Logo" width="100">
+<img src="https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/repo_assets/imgs/" alt="CHAI lab Logo" width="100">
 
 [![Discord](https://img.shields.io/badge/discord-chat-green?logo=discord)](https://discord.gg/BgkfTvBdbV)
 
@@ -16,7 +16,7 @@
 
 <!-- ![hypogenic_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/hypogenic_figure1_large_font.jpg) -->
 
-![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/haokun_dev/hypothesis-agent_figure1_large_font.png)
+![hypothesis-agent_figure1_large_font.jpg](https://raw.githubusercontent.com/ChicagoHAI/hypothesis-generation/master/repo_assets/imgs/hypothesis-agent_figure1_large_font.png)
 
 <!-- **Do we keep the figure1 for hypogenic here or what?** -->
 
