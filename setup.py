@@ -11,7 +11,7 @@ with open("pyproject.toml", "rb") as f:
 
 setuptools.setup(
     name="hypogenic",
-    version="0.3.2",
+    version="0.3.3",
     author="Haokun Liu, Mingxuan Li, Chenfei Yuan, Yangqiaoyu Zhou, Tejes Srivastava, Chenhao Tan",
     author_email="haokunliu@uchicago.edu",
     description="A package for generating and evaluating hypotheses.",
