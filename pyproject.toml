@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hypogenic"
-version = "0.3.2"
+version = "0.3.3"
 description = "A package for generating and evaluating hypotheses."
 readme = "README.md"
 license = {text = "MIT"}
@@ -58,6 +58,11 @@ dev = [
 [project.scripts]
 hypogenic_generation = "hypogenic_cmd.generation:main"
 hypogenic_inference = "hypogenic_cmd.inference:main"
+
+[project.urls]
+Homepage = "https://github.com/ChicagoHAI/hypothesis-generation"
+Repository = "https://github.com/ChicagoHAI/hypothesis-generation"
+Issues = "https://github.com/ChicagoHAI/hypothesis-generation/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
