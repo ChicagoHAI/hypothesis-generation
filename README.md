@@ -105,7 +105,7 @@ cd hypothesis-generation/
 
 ## Detailed Usage
 
-The datasets used in our works are at [HypoGeniC-datasets](https://github.com/ChicagoHAI/HypoGeniC-datasets).
+The datasets used in our works are at [HypoBench-datasets](https://github.com/ChicagoHAI/HypoBench-datasets).
 
 For replicating the results in the paper, you can follow the steps below:
 ### 1. [Optional] Start Redis server
