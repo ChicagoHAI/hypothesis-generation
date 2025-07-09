@@ -174,7 +174,7 @@ class DefaultUpdate(Update):
 
                     # generate new hypotheses
                     for j in range(self.num_hypotheses_to_update):
-                        # Go through poorly performing exmaples and generate hypotheses for them
+                        # Go through poorly performing examples and generate hypotheses for them
                         # TODO: batched?
                         new_hypotheses = (
                             self.generation_class.batched_hypothesis_generation(
@@ -188,7 +188,7 @@ class DefaultUpdate(Update):
                             )
                         )
 
-                        # If we onlt take the best performing hypothesis from the batch
+                        # If we only take the best performing hypothesis from the batch
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
                                 new_hypotheses, key=lambda x: new_hypotheses[x].reward
