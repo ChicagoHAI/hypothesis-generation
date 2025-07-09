@@ -9,12 +9,15 @@ description = "A package for generating and evaluating hypotheses."
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Haokun Liu", email = "haokunliu@uchicago.edu"},
+    {name = "Haokun Liu"},
     {name = "Mingxuan Li"},
     {name = "Chenfei Yuan"},
     {name = "Yangqiaoyu Zhou"},
     {name = "Tejes Srivastava"},
     {name = "Chenhao Tan"}
+]
+maintainers = [
+    {name = "Haokun Liu", email = "haokunliu@uchicago.edu"}
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
