@@ -84,6 +84,7 @@ class DefaultUpdate(Update):
         # initialize variables
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
+        wrong_hypos_accumulated = set()
 
         # ----------------------------------------------------------------------
         # Figuring out starting samples
@@ -138,8 +139,6 @@ class DefaultUpdate(Update):
                 **generate_kwargs,
             )
 
-            wrong_hypos_this_sample = [] # to record which hypos are wrong for this sample
-
             # Comparison of the label and prediction
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
@@ -149,7 +148,7 @@ class DefaultUpdate(Update):
                     )  # let the bank know it got one wrong
 
                     # record the wrong hypothesis
-                    wrong_hypos_this_sample.append(hypothesis)
+                    wrong_hypos_accumulated.add(hypothesis)
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
                         current_sample, self.alpha
@@ -189,7 +188,7 @@ class DefaultUpdate(Update):
                                 self.alpha,
                                 cache_seed=cache_seed,
                                 max_concurrent=max_concurrent,
-                                reference_hypotheses=wrong_hypos_this_sample,
+                                reference_hypotheses=list(wrong_hypos_accumulated),
                                 **generate_kwargs,
                             )
                         )
@@ -206,6 +205,8 @@ class DefaultUpdate(Update):
                             new_hyp_bank.update(new_hypotheses)
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
+                    # reset accumulated wrong hypotheses to be empty
+                    wrong_hypos_accumulated.clear()
 
                     # call replace class to update the bank
                     hypotheses_bank = self.replace_class.replace(
