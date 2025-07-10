@@ -2,6 +2,8 @@ import datetime
 import json
 import logging
 import os
+
+from hypogenic.algorithm.generation.augmented import AugmentedGeneration
 from hypogenic.utils import set_seed, get_results
 from hypogenic.tasks import BaseTask
 from hypogenic.extract_label import extract_label_register
@@ -69,6 +71,7 @@ parser.add_argument("--run_only_paper", action="store_true", help="Run literatur
 parser.add_argument("--run_hyperwrite", action="store_true", help="Run HyperWrite")
 parser.add_argument("--run_notebooklm", action="store_true", help="Run NotebookLM")
 parser.add_argument("--run_hypogenic", action="store_true", help="Run original HypoGeniC")
+parser.add_argument("--run_augmented_hypogenic", action="store_true", help="Run augmented HypoGeniC")
 parser.add_argument("--run_hyporefine", action="store_true", help="Run HypoRefine")
 parser.add_argument("--run_union_hypo", action="store_true", help="Run Union HypoGeniC and Paper")
 parser.add_argument("--run_union_refine", action="store_true", help="Run Union HypoRefine and Paper")
@@ -349,6 +352,69 @@ def original_hypogenic(task_name, api, model_name):
     prompt_class = BasePrompt(task)
     inference_class = DefaultInference(api, prompt_class, train_data, task)
     generation_class = DefaultGeneration(api, prompt_class, inference_class, task)
+
+    update_class = DefaultUpdate(
+        generation_class=generation_class,
+        inference_class=inference_class,
+        replace_class=DefaultReplace(max_num_hypotheses),
+        save_path=output_folder,
+        num_init=num_init,
+        k=k,
+        alpha=alpha,
+        update_batch_size=update_batch_size,
+        num_hypotheses_to_update=num_hypotheses_to_update,
+        save_every_n_examples=save_every_10_examples,
+    )
+
+    hypotheses_bank = {}
+    hypotheses_bank = update_class.batched_initialize_hypotheses(
+        num_init,
+        init_batch_size=init_batch_size,
+        init_hypotheses_per_batch=init_hypotheses_per_batch,
+        cache_seed=cache_seed,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        max_concurrent=64,
+    )
+    update_class.save_to_json(
+        hypotheses_bank,
+        sample=num_init,
+        seed=seed,
+        epoch=0,
+    )
+    for epoch in range(1):
+        hypotheses_bank = update_class.update(
+            current_epoch=epoch,
+            hypotheses_bank=hypotheses_bank,
+            current_seed=seed,
+            cache_seed=cache_seed,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            max_concurrent=64,
+        )
+        update_class.save_to_json(
+            hypotheses_bank,
+            sample="final",
+            seed=seed,
+            epoch=epoch,
+        )
+
+def augmented_hypogenic(task_name, api, model_name):
+    output_folder = f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/"
+
+    os.makedirs(output_folder, exist_ok=True)
+
+    task = BaseTask(
+        config_path=f"./data/{task_name}/config.yaml",
+        from_register=extract_label_register,
+        use_ood=use_ood
+    )
+
+    set_seed(seed)
+    train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
+    prompt_class = BasePrompt(task)
+    inference_class = DefaultInference(api, prompt_class, train_data, task)
+    generation_class = AugmentedGeneration(api, prompt_class, inference_class, task)
 
     update_class = DefaultUpdate(
         generation_class=generation_class,
@@ -871,6 +937,7 @@ def log_arguments(logger, args):
             ("Run HyperWrite", args.run_hyperwrite),
             ("Run NotebookLM", args.run_notebooklm),
             ("Run HypoGeniC", args.run_hypogenic),
+            ("Run Augmented HypoGeniC", args.run_augmented_hypogenic),
             ("Run HypoRefine", args.run_hyporefine),
             ("Run Union HypoGeniC", args.run_union_hypo),
             ("Run Union HypoRefine", args.run_union_refine),
@@ -1022,6 +1089,37 @@ if __name__ == "__main__":
         save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
         method_name = "hypogenic"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_augmented_hypogenic:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Augmented HypoGeniC=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            augmented_hypogenic(task_name=task_name, api=api, model_name=model_name)
+
+        method_name = "augmented_hypogenic_no_update"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+        method_name = "augmented_hypogenic"
         methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
         results = get_res(
