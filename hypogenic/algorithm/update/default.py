@@ -138,6 +138,8 @@ class DefaultUpdate(Update):
                 **generate_kwargs,
             )
 
+            wrong_hypos_this_sample = [] # to record which hypos are wrong for this sample
+
             # Comparison of the label and prediction
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
                 if pred != label:
@@ -145,6 +147,9 @@ class DefaultUpdate(Update):
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
                         current_sample, self.alpha
                     )  # let the bank know it got one wrong
+
+                    # record the wrong hypothesis
+                    wrong_hypos_this_sample.append(hypothesis)
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
                         current_sample, self.alpha
@@ -184,7 +189,7 @@ class DefaultUpdate(Update):
                                 self.alpha,
                                 cache_seed=cache_seed,
                                 max_concurrent=max_concurrent,
-                                reference_hypotheses=top_k_hypotheses,
+                                reference_hypotheses=wrong_hypos_this_sample,
                                 **generate_kwargs,
                             )
                         )
