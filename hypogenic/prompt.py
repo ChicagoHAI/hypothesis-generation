@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import os
 import textwrap
 from string import Template
-from typing import List, Tuple, Union, Dict
+from typing import List, Tuple, Union, Dict, Any
 from copy import deepcopy
 import pandas as pd
 
@@ -184,6 +184,33 @@ class BasePrompt(ABC):
         )
 
         prompt = self._information_prompt(substitute_dict, "batched_generation")
+
+        return prompt
+
+    def batched_error_augmented_generation(self, train_data, num_hypotheses, reference_hypotheses: List[Any]):
+        """
+        Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
+        """
+
+        substitute_dict = {"num_hypotheses": num_hypotheses}
+
+        multi_sub_dicts = {
+            "observations": [],
+            "reference_hypotheses": [
+                {"hypothesis": h, "idx": i + 1} for i, h in enumerate(reference_hypotheses)
+            ]
+        }
+
+        for example_idx in range(len(train_data)):
+            multi_sub_dicts["observations"].append(
+                self._get_substitute_dict(train_data, example_idx)
+            )
+
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "batched_error_augmented_generation"
+        )
+
+        prompt = self._information_prompt(substitute_dict, "batched_error_augmented_generation")
 
         return prompt
 
