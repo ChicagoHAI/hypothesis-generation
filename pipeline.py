@@ -400,7 +400,7 @@ def original_hypogenic(task_name, api, model_name):
         )
 
 def augmented_hypogenic(task_name, api, model_name):
-    output_folder = f"./results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/"
+    output_folder = f"./results/{task_name}/{model_name}/aug_hyp_{max_num_hypotheses}/"
 
     os.makedirs(output_folder, exist_ok=True)
 
