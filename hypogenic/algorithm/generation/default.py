@@ -136,7 +136,7 @@ class DefaultGeneration(Generation):
             alpha: exploration constant in hypogenic reward function
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: The maximum number of concurrent requests
-            reference_hypotheses: the current hypotheses that we have in the bank (if any)
+            reference_hypotheses: A dictionary that accumulates the set of wrong hypotheses for each sample
 
         Returns:
             hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class

@@ -27,26 +27,17 @@ class AugmentedGeneration(DefaultGeneration):
             example_indices: the indices of examples being used to generate hypotheses
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
-            reference_hypotheses: the current hypotheses that we have in the bank (if any)
+            reference_hypotheses: A dictionary that accumulates the set of wrong hypotheses for each sample
 
         Returns:
             hypotheses_list: A list containing all newly generated hypotheses.
         """
-
-        # ----------------------------------------------------------------------
-        # Gather the examples to use for generation
-        # ----------------------------------------------------------------------
-        # Gather examples based on example_indices
-        example_bank = (
-            self.train_data.loc[list(example_indices)].copy().reset_index(drop=True)
-        )
-
         # ----------------------------------------------------------------------
         # Prompt LLM to generate hypotheses
         # ----------------------------------------------------------------------
         # Batch generate a bunch of prompts based on yaml file
         prompt_input = self.prompt_class.batched_error_augmented_generation(
-            example_bank, num_hypotheses_generate, reference_hypotheses
+            self.train_data, num_hypotheses_generate, reference_hypotheses
         )
 
         # Batch generate responses based on the prompts that we just generated
