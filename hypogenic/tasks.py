@@ -47,7 +47,7 @@ class BaseTask(ABC):
             self.test_data_path = data["ood_data_path"]
             self.val_data_path = data["ood_data_path"]
 
-        # getting omrpt templates from yaml file
+        # getting prompt templates from yaml file
         self.prompt_template = data["prompt_templates"]
 
         # task label

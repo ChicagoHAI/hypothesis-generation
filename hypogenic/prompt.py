@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import os
 import textwrap
 from string import Template
-from typing import List, Tuple, Union, Dict
+from typing import List, Tuple, Union, Dict, Any
 from copy import deepcopy
 import pandas as pd
 
@@ -184,6 +184,47 @@ class BasePrompt(ABC):
         )
 
         prompt = self._information_prompt(substitute_dict, "batched_generation")
+
+        return prompt
+
+    def batched_error_augmented_generation(self, train_data, num_hypotheses, reference_hypotheses):
+        """
+        Generate hypotheses that is useful for predicting the color of the shoes given the appearance of the person.
+        
+        Parameters:
+            train_data: Training data
+            num_hypotheses: Number of hypotheses to generate
+            reference_hypotheses: A dictionary that accumulates the set of wrong hypotheses for each sample
+        """
+
+        substitute_dict = {"num_hypotheses": num_hypotheses}
+
+        multi_sub_dicts = {"error_augmented_observation": []}
+
+        for sample_id, wrong_hypos in reference_hypotheses.items():
+            sample_data = self._get_substitute_dict(train_data, sample_id)
+
+            wrong_hypotheses_info = []
+            for idx, hypothesis in enumerate(wrong_hypos):
+                wrong_hypotheses_info.append({
+                    "idx": idx + 1,
+                    "hypothesis_text": hypothesis
+                })
+
+            wrong_hypotheses_text = self._fill_multi_content(
+                ({}, wrong_hypotheses_info),
+                self._get_prompt_template("wrong_hypotheses")
+            )
+            
+            sample_data["wrong_hypotheses"] = wrong_hypotheses_text
+            
+            multi_sub_dicts["error_augmented_observation"].append(sample_data)
+
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "batched_error_augmented_generation"
+        )
+
+        prompt = self._information_prompt(substitute_dict, "batched_error_augmented_generation")
 
         return prompt
 
