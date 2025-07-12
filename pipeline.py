@@ -1110,7 +1110,7 @@ if __name__ == "__main__":
         methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
         results = get_res(
-            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+            f"results/{task_name}/{model_name}/aug_hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
             model_name=model_name,
@@ -1123,7 +1123,7 @@ if __name__ == "__main__":
         methods_run.append(method_name)
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
         results = get_res(
-            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            f"results/{task_name}/{model_name}/aug_hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
             model_name=model_name,
