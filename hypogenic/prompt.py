@@ -215,13 +215,10 @@ class BasePrompt(ABC):
                 ({}, wrong_hypotheses_info),
                 self._get_prompt_template("wrong_hypotheses")
             )
-
-            error_info = {
-                "review_sentence": sample_data["review_sentence"],
-                "label": sample_data["label"],
-                "wrong_hypotheses": wrong_hypotheses_text
-            }
-            multi_sub_dicts["error_augmented_observation"].append(error_info)
+            
+            sample_data["wrong_hypotheses"] = wrong_hypotheses_text
+            
+            multi_sub_dicts["error_augmented_observation"].append(sample_data)
 
         substitute_dict = self._fill_multi_in_sub_dict(
             substitute_dict, multi_sub_dicts, "batched_error_augmented_generation"
