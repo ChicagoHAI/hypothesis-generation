@@ -1,0 +1,192 @@
+task_name: admission/level_3/depth_3
+label_name: admission_depth_3
+
+train_data_path: ./admission_train.json
+val_data_path: ./admission_val.json
+test_data_path: ./admission_test.json
+prompt_templates:
+  observations:
+    multi_content: |
+      Here's a student's info:
+      Math grade: ${math}
+      Number of publications: ${num_publications}
+      Applied major: ${applied_major}
+      History grade: ${history}
+      Art grade: ${art}
+      Community service hours: ${community_service_hours}
+      Leadership roles: ${leadership_roles}
+      Attendance rate: ${attendance_rate}
+      Science grade: ${science}
+      Volunteer projects: ${volunteer_projects}
+      Family wealth index: ${family_wealth_index}
+      Donated to school: ${donated_to_school}
+      
+      This student is ${admission_depth_3}.
+      
+  adaptive_info_prompt:
+    multi_content: |
+      Pattern ${idx}: ${hypothesis_text}
+      ${observations}
+
+  few_shot_prefix: |
+    We have seen some examples:
+
+  initialize_zero_shot:
+    system: |-
+      You are a university admission official.
+      Based on your past experiences, please generate hypotheses that are useful for predicting whether a student should be admitted.
+      The student data includes:
+      - Math grade (A-F)
+      - Number of publications (integer)
+      - Applied major (e.g., Engineering, Arts, Business, etc.)
+      - History grade (A-F)
+      - Art grade (A-F)
+      - Community service hours (integer)
+      - Leadership roles (integer)
+      - Attendance rate (percentage)
+      - Science grade (A-F)
+      - Volunteer projects (integer)
+      - Family wealth index (integer)
+      - Donated to school (True/False)
+
+      These hypotheses should identify patterns that may involve grades, activities, etc. that you can find in the student data. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} refined hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      
+    user: |-
+      Please generate hypotheses that are useful for predicting whether a student should be admitted.
+      Please propose ${num_hypotheses} possible hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Proposed hypotheses:
+
+  batched_generation:
+    system: |-
+      You are a university admission official. You are great at determining whether a student should be admitted.
+      Given a set of student data, we want to generate hypotheses that are useful for predicting whether a student should be admitted.
+
+      Your task is to identify what patterns or traits show up more in admitted students, and what shows up more in rejected students. Focus on the generalizable insight that can be applied in other contexts. Ignore things that are specific to this dataset. Do not make references to this dataset as they may not be applicable to others.
+
+      Using the given examples, please propose ${num_hypotheses} possible hypothesis pairs.
+      When proposing hypotheses, look closely into the given examples and identify specific patterns that occur across the provided student data examples. 
+      The hypotheses should be clear, easy to understand, and have specific details such that one can apply the hypotheses to predict whether a student should be admitted.
+
+      Note that the hypotheses might be a combination of different features, so try to be creative and think about possible interactions between different features.
+      
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      The hypotheses should analyze what kind of student is likely to be admitted or rejected.
+
+    user: |-
+      We have seen some student data:
+      ${observations}
+      Please generate hypotheses that are useful for predicting whether a student should be admitted.
+      Propose ${num_hypotheses} possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      
+      When proposing hypotheses, look closely into the given examples and identify specific patterns that occur across the provided student data examples. 
+
+      Please make sure that the hypotheses are:
+      i. clear (i.e., precise, not too wordy, and easy to understand);
+      ii. generalizable to novel situations (i.e., they would make sense if applied to other student admission prediction experiments or other contexts);
+      iii. empirically plausible (i.e., this is a dimension on which students can vary on);
+      iv. usable (i.e., a human equipped with this insight could use it to predict if a new student should be admitted in a similar way)
+
+      Proposed hypotheses:
+
+  IO_refine_with_feedback:
+    system: |-
+      
+    user: |-
+      Applying your rule to the following inputs does not produce the expected outputs.
+      Here's your proposed hypothesis: ${hypothesis_text}
+      Below is some examples that you predicted wrong using the hypothesis.
+      ${observations}
+      Please generate new hypotheses that maps the given inputs to their corresponding outputs.
+      Propose ${num_hypotheses} possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      
+  few_shot_baseline:
+    system: |-
+      You are a university admission official and want to determine whether a student should be admitted.
+      Now, you will see a new student's data, and you need to predict whether the student should be admitted.
+      Give an answer. The answer should be one word (Admitted or Rejected).
+      You must give your final answer in the format of "Final answer: ANSWER"
+
+    user: |-
+      ${few_shot_prefix}${observations}
+      New student data:
+      Here is the student's info: 
+      Math grade: ${math}
+      Number of publications: ${num_publications}
+      Applied major: ${applied_major}
+      History grade: ${history}
+      Art grade: ${art}
+      Community service hours: ${community_service_hours}
+      Leadership roles: ${leadership_roles}
+      Attendance rate: ${attendance_rate}
+      Science grade: ${science}
+      Volunteer projects: ${volunteer_projects}
+      Family wealth index: ${family_wealth_index}
+      Donated to school: ${donated_to_school}
+
+      Should this student be admitted?
+      You must give your final answer in the format of "Final answer: ANSWER".
+
+  inference:
+    system: |-
+      You are a university admission official and want to determine whether a student should be admitted.
+      From past experiences, you learned a pattern. 
+      You need to determine whether each of the patterns holds for the current student's data, and also predict whether the student should be admitted.
+      Give an answer. The answer should be one word (Admitted or Rejected).
+      You must give your final answer in the format of "Final answer: ANSWER"
+
+    user: |-
+      Our learned patterns: ${hypothesis}                          
+      New student data:
+      Here is the student's info: 
+      Math grade: ${math}
+      Number of publications: ${num_publications}
+      Applied major: ${applied_major}
+      History grade: ${history}
+      Art grade: ${art}
+      Community service hours: ${community_service_hours}
+      Leadership roles: ${leadership_roles}
+      Attendance rate: ${attendance_rate}
+      Science grade: ${science}
+      Volunteer projects: ${volunteer_projects}
+      Family wealth index: ${family_wealth_index}
+      Donated to school: ${donated_to_school}
+
+      Given the pattern you learned above, give an answer of whether the student should be admitted. 
+      Think step by step.
+      First step: Think about if the pattern can be applied to the student's data.
+      Second step: Based on the pattern, should this student be admitted?
+      You must give your final answer in the format of "Final answer: ANSWER". Do not use markdown around your answer.
+      
+  multiple_hypotheses_inference:
+    system: |-
+      You are a university admission official and want to determine whether a student should be admitted.
+      From past experiences, you learned some patterns. 
+      You need to determine whether each of the patterns holds for the current student's data, and also predict whether the student should be admitted. 
+      Give an answer. The answer should be one word (Admitted or Rejected).
+      Give your final answer in the format of "Final answer: ANSWER"
+    user: |-
+      Our learned patterns: ${hypotheses}                          
+      New student data:
+      Here is the student's info: 
+      Math grade: ${math}
+      Number of publications: ${num_publications}
+      Applied major: ${applied_major}
+      History grade: ${history}
+      Art grade: ${art}
+      Community service hours: ${community_service_hours}
+      Leadership roles: ${leadership_roles}
+      Attendance rate: ${attendance_rate}
+      Science grade: ${science}
+      Volunteer projects: ${volunteer_projects}
+      Family wealth index: ${family_wealth_index}
+      Donated to school: ${donated_to_school}
+
+      Given the patterns you learned above, give an answer of whether the student should be admitted. 
+      Think step by step.
+      First step: Think about which pattern can be applied to the student's data.
+      Second step: Based on the pattern, should this student be admitted?
+      You must give your final answer in the format of "Final answer: ANSWER". Do not use markdown around your answer.

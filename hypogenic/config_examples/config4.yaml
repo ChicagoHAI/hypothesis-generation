@@ -1,0 +1,310 @@
+task_name: persuasive_pairs
+
+train_data_path: ./persuasive_pairs_human_gt_ind_train.json
+val_data_path: ./persuasive_pairs_human_gt_ind_val.json
+test_data_path: ./persuasive_pairs_human_gt_ind_test.json
+ood_data_path: ./persuasive_pairs_human_gt_ood.json
+
+prompt_templates:
+  observations:
+    multi_content: |
+      Argument 1: ${argument_1}
+      Argument 2: ${argument_2}
+      Observation: The ${label} argument uses more persuasive language.
+
+  adaptive_info_prompt:
+    multi_content: |
+      Pattern ${idx}: ${hypothesis_text}
+      ${observations}
+    
+  few_shot_prefix: |
+    Here are some previous examples to help you.
+  relevant_papers:
+    multi_content: |
+      Title: ${title}
+      Key Findings: ${summary}
+  
+  summarize_paper:
+    system: |-
+      You are a helpful assistant for summarizing key findings in research papers on a given topic.
+    user: |-
+      Summarize the following research paper, focusing ONLY on this question: What characterizes texts that use more persuasive language? In other words, how can one determine which one of two sentences uses more persuasive language?
+      Focus on hypotheses of what characterizes texts that use more persuasive language, do not include technical details in the paper. 
+      Title: ${title}
+      Text: 
+      ${paper_text}
+
+  initialize_with_paper_only:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      What difference between the two arguments makes one more persuasive than the other?
+      You will be given a set of literature of the format:
+      Title: [title]
+      Key Findings: [summary]
+      Based on the literature, please generate hypotheses that are useful for explaining why one argument uses more persuasive language than the other.
+      These hypotheses should identify patterns, phrases, wordings etc. that you can find in the literature. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} refined hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      
+    user: |-
+      Here are some key findings from a series of research papers that might be useful for generating hypotheses:
+      ${relevant_papers}
+
+      Please generate hypotheses that can help determine which argument uses more persuasive language.
+      Please propose ${num_hypotheses} possible hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Proposed hypotheses:
+
+
+  initialize_zero_shot:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      What differences between the two arguments makes one more persuasive than the other?
+      Based on your past experiences, please generate hypotheses that are useful for explaining why one of the given two arguments uses more persuasive language than the other.
+      These hypotheses should identify patterns, phrases, wordings etc. that you can find in the literature. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} refined hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      
+    user: |-
+      Please generate hypotheses that can help determine which one of the given two arguments uses more persuasive language.
+      Please propose ${num_hypotheses} possible hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Proposed hypotheses:
+  
+  refine_with_data:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      What difference between the two arguments makes one more persuasive than the other?
+      You will be given a set of observations of the format:
+      Argument 1: [argument_1]
+      Argument 2: [argument_2]
+      Observation: The first/second argument uses more persuasive language.
+      Based on the observations, please refine hypotheses provided to make them more useful for explaining why one argument uses more persuasive language than the other.
+      These hypotheses should identify patterns, phrases, wordings etc. that occur across the provided examples. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} refined hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+
+    user: |-
+      Here are the Observations:
+      ${observations}
+
+      And here are the previous hypotheses:
+      ${hypotheses}
+
+      Please generate refined hypotheses that can help determine which argument uses more persuasive language.
+      Please propose ${num_hypotheses} refined hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Refined hypotheses:
+
+
+  refine_with_literature:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      What difference between the two arguments makes one more persuasive than the other?
+      You will be given a set of literature of the format:
+      Title: [title]
+      Key Findings: [summary]
+      Based on the literature, please refine hypotheses provided to make them more useful for explaining why one argument uses more persuasive language than the other.
+      These hypotheses should identify patterns, phrases, wordings etc. that you can find in the literature. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} refined hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+
+    user: |-
+      Here are some key findings from a series of research papers that might be useful for generating hypotheses:
+      ${relevant_papers}
+
+      And here are the previous hypotheses:
+      ${hypotheses}
+
+      Please generate refined hypotheses that can help determine which argument uses more persuasive language.
+      Please propose ${num_hypotheses} refined hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Refined hypotheses:
+
+
+  batched_generation:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      What difference between the two arguments makes one more persuasive than the other?
+      You will be given a set of observations of the format:
+      Argument 1: [argument_1]
+      Argument 2: [argument_2]
+      Observation: The first/second argument uses more persuasive language.
+      Based on the observations, please generate hypotheses that are useful for explaining why one argument uses more persuasive language than the other.
+      These hypotheses should identify patterns, phrases, wordings etc. that occur across the provided examples. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} possible hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+
+    user: |-
+      Here are the Observations:
+      ${observations}
+
+      Please generate hypotheses that can help determine which argument uses more persuasive language.
+      Please propose ${num_hypotheses} possible hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Proposed hypotheses:
+
+  IO_refine_with_feedback:
+    system: |-
+      
+    user: |-
+      Applying your rule to the following inputs does not produce the expected outputs.
+      Here's your proposed hypothesis: ${hypothesis_text}
+      Below is some examples that you predicted wrong using the hypothesis.
+      ${observations}
+      Please generate new hypotheses that maps the given inputs to their corresponding outputs.
+      Propose ${num_hypotheses} possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      
+  batched_generation_with_paper:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      What difference between the two arguments makes one more persuasive than the other?
+      You will be given a set of observations and literature of the format:
+      Argument 1: [argument_1]
+      Argument 2: [argument_2]
+      Observation: The first/second argument uses more persuasive language.
+      or
+      Title: [title]
+      Key Findings: [summary]
+      Based on the observations and literature, please generate hypotheses that are useful for explaining why one argument uses more persuasive language than the other.
+      These hypotheses should identify patterns, phrases, wordings etc. that occur across the provided examples and literature. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} possible hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+
+    user: |-
+      Here are the Observations:
+      ${observations}
+
+      Here are some key findings from a series of research papers that might be useful for generating hypotheses:
+      ${relevant_papers}
+
+      Please generate hypotheses that can help determine which argument uses more persuasive language.
+      Please propose ${num_hypotheses} possible hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Proposed hypotheses:
+
+
+  initialize_hypotheses_only_paper:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      What difference between the two arguments makes one more persuasive than the other?
+      You will be given a set of literature of the format:
+      Title: [title]
+      Key Findings: [summary]
+      Based on the literature, please generate hypotheses that are useful for explaining why one argument uses more persuasive language than the other.
+      These hypotheses should identify patterns, phrases, wordings etc. that you can find in the literature. They should also be generalizable to new instances.
+      Please propose ${num_hypotheses} refined hypotheses and generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      
+    user: |-
+      Here are some key findings from a series of research papers that might be useful for generating hypotheses:
+      ${relevant_papers}
+
+      Please generate hypotheses that can help determine which argument uses more persuasive language.
+      Please propose ${num_hypotheses} possible hypotheses.
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis]. 
+
+      Proposed hypotheses:
+
+  few_shot_baseline:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      You will be given two arguments, and determine which argument uses more persuasive language.
+      You are only asked to give your answer.
+      Give your final answer in the format of "Final answer: [the _ argument uses more persuasive language].", where _ should be "first" or "second". 
+
+    user: |-
+      ${few_shot_prefix}${observations}
+      Which of the following two arguments uses more persuasive language?
+      Argument 1: ${argument_1}
+      Argument 2: ${argument_2}
+      Give your final answer in the following format:
+      "Final answer: [the _ argument uses more persuasive language]."
+
+  boost_specificity:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      From past experiences, you learned a hypothesis for deciding that given a pair of arguments, which argument uses more persuasive language.
+      Now you need to refine the hypothesis by rephrasing the pattern or adding examples to it so it can be more specific and easier to be used.
+      Based on your past experience, generate the refined hypothesis in the format of 1. [hypothesis].
+      The hypotheses should analyze what kind of argument uses more persuasive language.
+    user: |-
+      This is the hypothesis to be refined:
+      ${hypotheses}
+      Please refine the hypothesis by rephrasing the pattern or adding examples to it so it can be more specific and easier to be used to determine what argument uses more persuasive language.
+      Generate the refined hypothesis in the format of 1. [hypothesis].
+      Refined hypothesis:
+
+  inference:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      From past experiences, you learned a pattern.
+      Now, at each time, you should apply the learned pattern to a new pair of arguments and determine which one uses more persuasive language.
+      The answer for the more persuasive language should be of the form "the _ argument" where _ is either first or second. 
+      Please give your final answer in the format of {Final answer: the _ argument uses more persuasive language}
+
+    user: |-
+      Learned pattern: ${hypothesis}
+      Given the pattern you learned above, determine which of the following arguments uses more persuasive language:
+      Argument 1: ${argument_1}
+      Argument 2: ${argument_2}
+
+      Only answer if the pattern above can be applied.
+      Think step by step.
+      Step 1: Think about whether the pattern can be applied to the arguments.
+      Step 2: Analyze the difference between "Argument 1" and "Argument 2".
+      Step 3: Based on the pattern, which argument uses more persuasive language?
+
+  multiple_hypotheses_inference:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      From past experiences, you learned some patterns.
+      Now, at each time, you should apply the learned patterns to a new pair of arguments and determine which one uses more persuasive language.
+      The answer for the more persuasive language should be of the form "the _ argument" where _ is either first or second. 
+      Please give your final answer in the format of {Final answer: the _ argument uses more persuasive language}
+    user: |-
+      Our learned patterns: ${hypotheses}                          
+      Given the patterns you learned above, determine which of the following arguments uses more persuasive language:
+      Argument 1: ${argument_1}
+      Argument 2: ${argument_2}
+
+      Think step by step.
+      Step 1: Think about which learned patterns can be applied to the arguments.
+      Step 2: Analyze the difference between "Argument 1" and "Argument 2".
+      Step 3: Based on the pattern, which argument uses more persuasive language?
+      You MUST give your final answer in the following format:
+      Final answer: the _ argument uses more persuasive language.
+
+  check_hypothesis_pair_repetition:
+    system: |-
+      You are an intelligent rhetorician and debater who masters persuasiveness in language.
+      Given a pair of arguments, you are asked to determine which one of them uses more persuasive language. The two arguments are often on the same topic and are similar, so focus on their differences.
+      From past experiences, you learned some patterns.
+      You need to determine if the two hypotheses are so similar to the level of "repeating hypotheses".
+      Finally, answer "yes" if the two hypotheses are repetitive and "no" if they are not.
+      Keep your answer short.
+      Give your final answer in the format of "Final answer: [answer]".
+    user: |-
+      We have two hypotheses that need you to determine if they are repetitive:
+      ${hypotheses}
+      Are these two hypotheses so similar to the level that they are repetitive? If the both of them can provide significantly more information than only one of them could, and the information is important and useful for explaining why one argument uses more persuasive language than the other.
+      Note that adding specific examples does not count as "provide significantly more information".
+      Give a short explanation of your decision.
+      Then give your final answer in the format of "Final answer: [answer]".
+      Your answer: 
