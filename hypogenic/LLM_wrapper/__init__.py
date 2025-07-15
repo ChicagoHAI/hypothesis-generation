@@ -12,4 +12,4 @@ try:
 except ImportError as e:
     # vllm or other local model dependencies not available
     logger = LoggerConfig.get_logger("LLM_wrapper")
-    logger.warning(f"Could not import local model wrappers: {e}")
+    logger.warning(f"Could not import local model wrappers.\n You can disregard this warning if you are only using api-based models.\n")
