@@ -16,7 +16,8 @@ from hypogenic.extract_label import retweet_extract_label
 
 from hypogenic.tasks import BaseTask
 from hypogenic.utils import set_seed
-from hypogenic.LLM_wrapper import LocalVllmWrapper, LLMWrapper, GPTWrapper
+from hypogenic.LLM_wrapper import LLMWrapper, GPTWrapper
+# from hypogenic.LLM_wrapper import LocalVllmWrapper
 from hypogenic.prompt import BasePrompt
 from hypogenic.logger_config import LoggerConfig
 
@@ -80,7 +81,7 @@ def few_shot(
     return results
 
 
-def preprocess(train_data, k):
+def preprocess(task, train_data, k):
     num_examples = len(train_data)
 
     data = []
@@ -125,7 +126,7 @@ def main():
     train_data, test_data, _ = task.get_data(num_train, num_test, num_val, seed)
 
     if few_shot_k > 0:
-        train_data = preprocess(train_data, few_shot_k)
+        train_data = preprocess(task, train_data, few_shot_k)
 
     results = few_shot(
         api, train_data, test_data, prompt_class, task, few_shot_k, cache_seed

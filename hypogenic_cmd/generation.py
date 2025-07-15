@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument(
         "--model_type",
         type=str,
-        default="vllm",
+        default="gpt",
         choices=["gpt", "claude", "vllm", "huggingface"],
         help="Type of model to use.",
     )

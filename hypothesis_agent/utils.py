@@ -5,7 +5,6 @@ from typing import List, Dict, Tuple, Any
 
 from hypogenic.tasks import BaseTask
 from hypogenic.prompt import BasePrompt
-from hypogenic.LLM_wrapper import GPTWrapper, LocalVllmWrapper
 from hypogenic.algorithm.generation.utils import extract_hypotheses
 
 from hypothesis_agent.data_analysis_agent.prompt import TestPrompt

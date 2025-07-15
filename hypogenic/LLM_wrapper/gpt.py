@@ -9,7 +9,6 @@ import numpy as np
 import random
 import openai
 
-import vllm
 import asyncio
 import tqdm
 from openai import AsyncOpenAI, OpenAI
