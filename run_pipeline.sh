@@ -6,7 +6,7 @@ MODEL_NAME="gpt-4o-mini"
 
 # MODEL_TYPE="vllm"  
 # MODEL_NAME="meta-llama/Meta-Llama-3.1-70B-Instruct" 
-# MODEL_PATH="/net/scratch/llama/Meta-Llama-3.1-70B-Instruct"  # only needed for local models
+# MODEL_PATH="/net/projects/chai-lab/shared_models/Meta-Llama-3.1-70B-Instruct"  # only needed for local models
 
 # MODEL_TYPE="vllm"  
 # MODEL_NAME="Qwen/Qwen2.5-72B-Instruct" 
