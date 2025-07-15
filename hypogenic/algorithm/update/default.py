@@ -84,7 +84,7 @@ class DefaultUpdate(Update):
         # initialize variables
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
-        accumulated_sample_wrong_hypos = {}  # {sample_id: set(wrong_hypothesis)}
+        accumulated_wrong_hyp_samples = {}  # {wrong_hypothesis: set(sample_id)}
 
         # ----------------------------------------------------------------------
         # Figuring out starting samples
@@ -173,7 +173,10 @@ class DefaultUpdate(Update):
 
                 # We note it as a bad sample
                 wrong_example_ids.add(i)
-                accumulated_sample_wrong_hypos[i] = current_sample_wrong_hypos
+                for hypo in current_sample_wrong_hypos:
+                    if hypo not in accumulated_wrong_hyp_samples:
+                        accumulated_wrong_hyp_samples[hypo] = set()
+                    accumulated_wrong_hyp_samples[hypo].add(i)
                 if (
                     len(wrong_example_ids)
                     == self.update_batch_size * self.num_hypotheses_to_update
@@ -192,7 +195,7 @@ class DefaultUpdate(Update):
                                 self.alpha,
                                 cache_seed=cache_seed,
                                 max_concurrent=max_concurrent,
-                                reference_hypotheses=accumulated_sample_wrong_hypos,
+                                reference_hypotheses=accumulated_wrong_hyp_samples,
                                 **generate_kwargs,
                             )
                         )
@@ -210,7 +213,7 @@ class DefaultUpdate(Update):
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
                     # reset accumulated wrong hypotheses to be empty
-                    accumulated_sample_wrong_hypos.clear()
+                    accumulated_wrong_hyp_samples.clear()
 
                     # call replace class to update the bank
                     hypotheses_bank = self.replace_class.replace(

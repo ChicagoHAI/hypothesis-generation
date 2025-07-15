@@ -27,7 +27,7 @@ class AugmentedGeneration(DefaultGeneration):
             example_indices: the indices of examples being used to generate hypotheses
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
-            reference_hypotheses: A dictionary that accumulates the set of wrong hypotheses for each sample
+            reference_hypotheses: A dictionary {wrong_hypothesis: set(sample_id)} that accumulates the set of wrong samples for each hypothesis
 
         Returns:
             hypotheses_list: A list containing all newly generated hypotheses.
@@ -39,6 +39,10 @@ class AugmentedGeneration(DefaultGeneration):
         prompt_input = self.prompt_class.batched_error_augmented_generation(
             self.train_data, num_hypotheses_generate, reference_hypotheses
         )
+
+        print(f">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+              f"Prompt is {str(prompt_input)}"
+              f"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 
         # Batch generate responses based on the prompts that we just generated
         response = self.api.generate(
