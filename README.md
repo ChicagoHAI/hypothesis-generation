@@ -87,7 +87,6 @@ cd hypothesis-generation
 conda create --name hypogenic python=3.10
 conda activate hypogenic
 
-pip install -r requirements.txt
 pip install -e .
 ```
 
