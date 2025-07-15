@@ -206,6 +206,11 @@ class DefaultUpdate(Update):
                         hypotheses_bank, new_hyp_bank
                     )
 
+                    print("[HYPOTHESES_UPDATE]")
+                    for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+                        print(f"{hyp} ||| {info.reward:.4f}")
+                    print("[/HYPOTHESES_UPDATE]")
+
             # save hypotheses to json
             if (i + 1) % self.save_every_n_examples == 0:
                 self.save_to_json(
@@ -214,6 +219,12 @@ class DefaultUpdate(Update):
                     seed=current_seed,
                     epoch=current_epoch,
                 )
+
+            # after training on example, output all hypotheses and their rewards
+            print("[HYPOTHESES_UPDATE]")
+            for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+                print(f"{hyp} ||| {info.reward:.4f}")
+            print("[/HYPOTHESES_UPDATE]")
 
         # Our new bank
         return hypotheses_bank
