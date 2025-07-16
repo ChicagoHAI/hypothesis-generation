@@ -11,8 +11,16 @@ import numpy as np
 import random
 import openai
 
-import vllm
-from vllm.lora.request import LoRARequest
+try:
+    import vllm
+    from vllm.lora.request import LoRARequest
+except ImportError as e:
+    raise ImportError(
+        f"vllm is required to use LocalVllmWrapper but is not installed. "
+        f"Original error: {e}. "
+        f"If you want to use local models, please install HypoGeniC with the [dev] option."
+    )
+
 import asyncio
 import tqdm
 from openai import AsyncOpenAI, OpenAI

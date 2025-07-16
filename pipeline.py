@@ -6,9 +6,7 @@ from hypogenic.utils import set_seed, get_results
 from hypogenic.tasks import BaseTask
 from hypogenic.extract_label import extract_label_register
 from hypogenic.LLM_wrapper import (
-    GPTWrapper,
     LLMWrapper,
-    LocalVllmWrapper,
     llm_wrapper_register,
 )
 from hypogenic.algorithm.update import DefaultUpdate
