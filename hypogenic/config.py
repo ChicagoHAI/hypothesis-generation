@@ -1,12 +1,11 @@
 import os
-import yaml
-from .LLM_wrapper.gpt import GPTWrapper
+from .LLM_wrapper import llm_wrapper_register
+import argparse
 
 BASE_DIR = os.path.join(os.curdir, "hypogenic")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-gpt = GPTWrapper(model="gpt-4o-mini")
 
-def generate(rq, instr):
+def generate(mod, mod_name, rq, instr, task, train_path, val_path, test_path, input_variable_name, label_name):
+    api = llm_wrapper_register.build(mod)(mod_name)
     example_dir = os.path.join(BASE_DIR, "config_examples")
     example_files = [f for f in os.listdir(example_dir) if os.path.isfile(os.path.join(example_dir, f))]
 
@@ -16,7 +15,7 @@ def generate(rq, instr):
             content = f.read()
             examples_text += f"### Example: {fname}\n```\n{content}\n```\n\n"
 
-    prompt = f"""You are an AI that generates configuration files based on instructions and a research question.
+    prompt = f"""You are an AI that generates configuration files based on instructionsl, a research question, and some file metadata.
 
 Research Question:
 {rq}
@@ -24,7 +23,15 @@ Research Question:
 Instructions:
 {instr}
 
-Below are several example configuration files for reference:
+Here is some metadata from the corresponding dataset:
+ - Task: {task}
+ - Training path: {train_path}
+ - Validate path: {val_path}
+ - Test path: {test_path}
+ - Input variable name: {input_variable_name}
+ - Label name: {label_name}
+
+Below are is an example configuration file for reference:
 {examples_text}
 
 Please generate a new configuration file based on the research question and instructions.
@@ -34,16 +41,16 @@ Only return the content of the configuration file. Do not include any extra expl
     try:
         messages = [{"role": "user", "content": prompt}]
 
-        print("Cost before generation:", gpt.get_cost(), "USD")
+        print("Cost before generation:", api.get_cost(), "USD")
 
-        response = gpt.api_with_cache.api_call(
+        response = api.api_with_cache.api_call(
             messages=messages,
             model="gpt-4o-mini",
             temperature=0.3,
             max_tokens=500
         )
 
-        print("Cost after generation:", gpt.get_cost(), "USD")
+        print("Cost after generation:", api.get_cost(), "USD")
 
         return response.strip()
 
@@ -52,18 +59,42 @@ Only return the content of the configuration file. Do not include any extra expl
         return ""
     
 if __name__ == "__main__":
-    question = "What aspects of a speech on the floor of the American Congress indicate the party of the speaker?"
-    instr = '''You are an expert political scientist. Given some key findings in research papers, we want hypotheses that are useful in predicting the political party of a given speaker based on the speech.
 
-Using the given relevant literatures, please propose 10 possible hypothesis pairs.
-These hypotheses should identify specific patterns that occur across the provided speeches.
+    parser = argparse.ArgumentParser()
 
-Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... 10. [hypothesis].
-The hypotheses should analyze what kind of speeches are likely to be democrat, republican, or independent.
-'''
+    parser.add_argument("--research_question", type=str, required=True)
+    parser.add_argument("--instructions", type=str, required=True)
 
-    config = generate(question, instr)
-    file = os.path.expanduser('~/Downloads/config_test_1.yaml')
+    parser.add_argument("--task", type=str, required=True)
+    parser.add_argument("--input_variable_name", type=str, required=True)
+    parser.add_argument("--label_name", type=str, required=True)
+
+
+    parser.add_argument("--train_path", type=str, required=True)
+    parser.add_argument("--val_path", type=str, required=True)
+    parser.add_argument("--test_path", type=str, required=True)
+
+    parser.add_argument("--config_file", type=str, required=False, default = "~/Downloads/config.yaml")
+
+    parser.add_argument("--model_type", type=str, required=False, default="gpt")
+    parser.add_argument("--model_name", type=str, required=False, default="gpt-4o-mini")
+
+    args = parser.parse_args()
+
+    config = generate(
+        args.model_type,
+        args.model_name,
+        args.research_question,
+        args.instructions,
+        args.task,
+        args.train_path,
+        args.val_path,
+        args.test_path,
+        args.input_variable_name,
+        args.label_name
+    )
+
+    file = os.path.expanduser(args.config_file)
 
     with open(file, 'w') as f:
-        yaml.dump(config, f, default_style=None)
+        f.write(config)
