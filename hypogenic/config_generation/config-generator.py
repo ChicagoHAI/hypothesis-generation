@@ -1,12 +1,11 @@
 import os
 import argparse
-import logging
-from .logger_config import LoggerConfig
+from ..logger_config import LoggerConfig
 
-from .LLM_wrapper import llm_wrapper_register
+from ..LLM_wrapper import llm_wrapper_register
 
 
-BASE_DIR = os.path.join(os.curdir, "hypogenic")
+BASE_DIR = os.path.join(os.curdir, "hypogenic", "config_generation")
 logger = LoggerConfig.get_logger("Config logger")
 
 def generate(mod, mod_name, rq, instr, task, train_path, val_path, test_path, input_variable_name, label_name):
@@ -53,8 +52,8 @@ Only return the content of the configuration file. Do not include any extra expl
         response = api.api_with_cache.api_call(
             messages=messages,
             model="gpt-4o-mini",
-            temperature=0.3,
-            max_tokens=500
+            temperature=0.15,
+            max_tokens=5000
         )
 
         logger.info(f"Cost after generation: {api.get_cost()} USD")
