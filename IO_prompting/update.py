@@ -159,10 +159,10 @@ class IOUpdate(DefaultUpdate):
                     # keeping track of good examples as we do in generation
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
 
-            print("[HYPOTHESES_UPDATE]")
+            logger.info(f"[HYPOTHESES_UPDATE]")
             for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
-                print(f"{hyp} ||| {info.reward:.4f}")
-            print("[/HYPOTHESES_UPDATE]")
+                logger.info(f"{hyp} ||| {info.reward:.4f}")
+            logger.info(f"[/HYPOTHESES_UPDATE]")
 
         # ------------------------------------------------------------------
         # Evaluation done. Generate new hypotheses
@@ -191,10 +191,10 @@ class IOUpdate(DefaultUpdate):
         # Use the new hypothesis bank
         hypotheses_bank = new_hyp_bank
 
-        print("[HYPOTHESES_UPDATE]")
+        logger.info(f"[HYPOTHESES_UPDATE]")
         for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
-            print(f"{hyp} ||| {info.reward:.4f}")
-        print("[/HYPOTHESES_UPDATE]")
+            logger.info(f"{hyp} ||| {info.reward:.4f}")
+        logger.info(f"[/HYPOTHESES_UPDATE]")
 
         # save hypotheses to json
         self.save_to_json(

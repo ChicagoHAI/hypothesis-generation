@@ -297,10 +297,10 @@ class MultiHypUpdate(TestUpdate):
                         hypotheses_bank, new_hyp_bank
                     )
 
-                    print("[HYPOTHESES_UPDATE]")
+                    logger.info(f"[HYPOTHESES_UPDATE]")
                     for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
-                        print(f"{hyp} ||| {info.reward:.4f}")
-                    print("[/HYPOTHESES_UPDATE]")
+                        logger.info(f"{hyp} ||| {info.reward:.4f}")
+                    logger.info(f"[/HYPOTHESES_UPDATE]")
 
             if (i + 1) % self.save_every_n_examples == 0:
                 self.save_to_json(
@@ -311,9 +311,9 @@ class MultiHypUpdate(TestUpdate):
                 )
             
             # after training on example, output all hypotheses and their rewards
-            print("[HYPOTHESES_UPDATE]")
+            logger.info(f"[HYPOTHESES_UPDATE]")
             for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
-                print(f"{hyp} ||| {info.reward:.4f}")
-            print("[/HYPOTHESES_UPDATE]")
+                logger.info(f"{hyp} ||| {info.reward:.4f}")
+            logger.info(f"[/HYPOTHESES_UPDATE]")
 
         return hypotheses_bank
