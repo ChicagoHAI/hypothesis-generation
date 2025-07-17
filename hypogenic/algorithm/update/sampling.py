@@ -187,6 +187,11 @@ class SamplingUpdate(Update):
                         hypotheses_bank, new_hyp_bank
                     )
 
+                    logger.info(f"[HYPOTHESES_UPDATE]")
+                    for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+                        logger.info(f"{hyp} ||| {info.reward:.4f}")
+                    logger.info(f"[/HYPOTHESES_UPDATE]")
+
             # save hypotheses to json
             if (i + 1) % self.save_every_n_examples == 0:
                 self.save_to_json(
@@ -195,6 +200,11 @@ class SamplingUpdate(Update):
                     seed=current_seed,
                     epoch=current_epoch,
                 )
+            
+            logger.info(f"[HYPOTHESES_UPDATE]")
+            for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+                logger.info(f"{hyp} ||| {info.reward:.4f}")
+            logger.info(f"[/HYPOTHESES_UPDATE]")
 
         return hypotheses_bank
 
