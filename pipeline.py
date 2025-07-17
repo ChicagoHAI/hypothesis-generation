@@ -58,6 +58,7 @@ parser.add_argument("--literature_folder", type=str)
 # This is needed for local models
 parser.add_argument("--model_path", type=str)
 parser.add_argument("--do_train", action="store_true", default=False)
+parser.add_argument("--debug", action="store_true", default=False, help="Enable debug logging")
 
 # Method toggle arguments
 parser.add_argument("--run_zero_shot", action="store_true", help="Run zero-shot baseline")
@@ -925,8 +926,11 @@ if __name__ == "__main__":
     os.makedirs(task_folder, exist_ok=True)
     os.makedirs(model_folder, exist_ok=True)
     
+    # Set logger level based on debug flag
+    logger_level = logging.DEBUG if args.debug else logging.INFO
+    
     LoggerConfig.setup_logger(
-        logging.INFO,
+        logger_level,
         f"results/{task_name}/{model_name}_seed_{seed}_{datetime.datetime.now().strftime('%Y-%m-%d,%H-%M-%S')}.log",
     )
 
