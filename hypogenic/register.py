@@ -18,6 +18,10 @@ class Register:
     def build(self, type: str):
         logger = LoggerConfig.get_logger(logger_name)
         if type not in self.entries and "default" not in self.entries:
+            if type == "vllm":
+                raise ImportError(
+                    f"vLLM is not imported. Please consider installing HypoGeniC with the [dev] option."
+                )
             raise ValueError(
                 f"Entry {type} not found in registry {self.name}. Available entries: {', '.join(self.entries.keys())}"
             )

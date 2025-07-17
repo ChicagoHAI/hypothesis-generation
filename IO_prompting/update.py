@@ -10,7 +10,7 @@ from hypogenic.tasks import BaseTask
 from hypogenic.algorithm.summary_information import (
     SummaryInformation,
 )
-from hypogenic.LLM_wrapper import LocalVllmWrapper, GPTWrapper, LLMWrapper
+from hypogenic.LLM_wrapper import LLMWrapper
 from hypogenic.algorithm.generation.utils import extract_hypotheses
 from hypogenic.algorithm.update import Update, DefaultUpdate
 from hypogenic.extract_label import extract_label_register
@@ -159,6 +159,10 @@ class IOUpdate(DefaultUpdate):
                     # keeping track of good examples as we do in generation
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
 
+            logger.info(f"[HYPOTHESES_UPDATE]")
+            for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+                logger.info(f"{hyp} ||| {info.reward:.4f}")
+            logger.info(f"[/HYPOTHESES_UPDATE]")
 
         # ------------------------------------------------------------------
         # Evaluation done. Generate new hypotheses
@@ -186,6 +190,11 @@ class IOUpdate(DefaultUpdate):
         new_hyp_bank.update(new_hypotheses)
         # Use the new hypothesis bank
         hypotheses_bank = new_hyp_bank
+
+        logger.info(f"[HYPOTHESES_UPDATE]")
+        for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+            logger.info(f"{hyp} ||| {info.reward:.4f}")
+        logger.info(f"[/HYPOTHESES_UPDATE]")
 
         # save hypotheses to json
         self.save_to_json(

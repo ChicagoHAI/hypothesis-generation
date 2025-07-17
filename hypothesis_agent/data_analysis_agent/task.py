@@ -14,7 +14,7 @@ from hypogenic.tasks import BaseTask
 from hypogenic.algorithm.summary_information import (
     SummaryInformation,
 )
-from hypogenic.LLM_wrapper import LocalVllmWrapper, GPTWrapper, LLMWrapper
+from hypogenic.LLM_wrapper import LLMWrapper
 from hypogenic.algorithm.generation.utils import extract_hypotheses
 from hypogenic.algorithm.update import Update, DefaultUpdate
 from hypogenic.extract_label import extract_label_register

@@ -10,7 +10,7 @@ from hypogenic.tasks import BaseTask
 from hypogenic.algorithm.summary_information import (
     SummaryInformation,
 )
-from hypogenic.LLM_wrapper import LocalVllmWrapper, GPTWrapper, LLMWrapper
+from hypogenic.LLM_wrapper import LLMWrapper
 from hypogenic.algorithm.generation.utils import extract_hypotheses
 from hypogenic.algorithm.update import Update, DefaultUpdate
 from hypogenic.extract_label import extract_label_register
@@ -297,6 +297,11 @@ class MultiHypUpdate(TestUpdate):
                         hypotheses_bank, new_hyp_bank
                     )
 
+                    logger.info(f"[HYPOTHESES_UPDATE]")
+                    for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+                        logger.info(f"{hyp} ||| {info.reward:.4f}")
+                    logger.info(f"[/HYPOTHESES_UPDATE]")
+
             if (i + 1) % self.save_every_n_examples == 0:
                 self.save_to_json(
                     hypotheses_bank,
@@ -304,5 +309,11 @@ class MultiHypUpdate(TestUpdate):
                     seed=current_seed,
                     epoch=current_epoch,
                 )
+            
+            # after training on example, output all hypotheses and their rewards
+            logger.info(f"[HYPOTHESES_UPDATE]")
+            for hyp, info in sorted(hypotheses_bank.items(), key=lambda x: -x[1].reward):
+                logger.info(f"{hyp} ||| {info.reward:.4f}")
+            logger.info(f"[/HYPOTHESES_UPDATE]")
 
         return hypotheses_bank

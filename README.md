@@ -59,8 +59,8 @@ cd hypothesis-generation
 conda create --name hypogenic python=3.10
 conda activate hypogenic
 
-pip install -e .
-# optionally if you would like to develop new features, consider `pip install -e ".[dev]"`
+pip install -e . # This version only supports API-based models
+# optionally if you would like to use local models or develop new features, consider `pip install -e ".[dev]"`
 # To use the literature processing feature, please also intall the following 
 pip install git+https://github.com/allenai/s2orc-doc2json@71c022ed4bed3ffc71d22c2ac5cdbc133ad04e3c
 ```
@@ -87,7 +87,6 @@ cd hypothesis-generation
 conda create --name hypogenic python=3.10
 conda activate hypogenic
 
-pip install -r requirements.txt
 pip install -e .
 ```
 
