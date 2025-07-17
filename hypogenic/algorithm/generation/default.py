@@ -15,7 +15,7 @@ from ...prompt import BasePrompt
 @generation_register.register("default")
 class DefaultGeneration(Generation):
     """
-    Add on extra functionality to the generation fucntion - we consider this
+    Add on extra functionality to the generation function - we consider this
     the "default" task.
     """
 
@@ -29,8 +29,8 @@ class DefaultGeneration(Generation):
         """
         Parameters:
             api: the language model that you're using, which may or may not be local
-            prompt_class: let's us know how the prompt is going to look
-            inference_class: gives us a way to predict labels for accuracy sake
+            prompt_class: let us know how the prompt is going to look
+            inference_class: gives us a way to predict labels for accuracy’s sake
             task: determines the goal to accomplish
         """
         super().__init__(api, prompt_class, inference_class, task)
@@ -38,7 +38,7 @@ class DefaultGeneration(Generation):
     # ------------------------------------------------------------------------ #
     #                                                                          #
     # ------------------------------------------------------------------------ #
-    # BATCH INITLALIZE HYPOTHESES                                              #
+    # BATCH INITIALIZE HYPOTHESES                                              #
     # ------------------------------------------------------------------------ #
     #                                                                          #
     # ------------------------------------------------------------------------ #
@@ -57,7 +57,7 @@ class DefaultGeneration(Generation):
         Parameters:
             num_init: the total amount of examples you want to use for initialize hypotheses
             init_batch size: the number of examples that will be used to generate these hypotheses
-            init_hypotheses_per_batch: the amount of hypotheses that you want to generate per btach
+            init_hypotheses_per_batch: the amount of hypotheses that you want to generate per batch
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: the maximum amount of concurrent calls to the API
 
@@ -123,6 +123,7 @@ class DefaultGeneration(Generation):
         alpha: float,
         cache_seed=None,
         max_concurrent=3,
+        reference_hypotheses=None,
         **generate_kwargs,
     ):
         """
@@ -132,9 +133,10 @@ class DefaultGeneration(Generation):
             example_ids: The ids of the examples for which hypotheses need to be generated
             current_sample: the current sample in data which the algorithm is on
             num_hypotheses_generate: the number of hypotheses that we expect our response to generate
-            alpha: eploration constant in hypogenic reward funciton
+            alpha: exploration constant in hypogenic reward function
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: The maximum number of concurrent requests
+            reference_hypotheses: A dictionary that accumulates the set of wrong hypotheses for each sample
 
         Returns:
             hypotheses_bank: A dictionary with keys as hypotheses and the values as the Summary Information class
@@ -143,6 +145,7 @@ class DefaultGeneration(Generation):
             example_ids,
             num_hypotheses_generate,
             cache_seed=cache_seed,
+            reference_hypotheses=reference_hypotheses,
             **generate_kwargs,
         )
 
