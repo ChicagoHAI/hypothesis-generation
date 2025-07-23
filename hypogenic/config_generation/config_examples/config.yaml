@@ -33,15 +33,6 @@ prompt_templates:
       Please generate hypotheses that are useful for predicting whether a review is truthful or deceptive. 
       Propose ${num_hypotheses} possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
       Proposed hypotheses:
-    system: |-
-      
-    user: |-
-      Applying your rule to the following inputs does not produce the expected outputs.
-      Here's your proposed hypothesis: ${hypothesis_text}
-      Below is some examples that you predicted wrong using the hypothesis.
-      ${observations}
-      Please generate new hypotheses that maps the given inputs to their corresponding outputs.
-      Propose ${num_hypotheses} possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
       
   inference:
     system: |-

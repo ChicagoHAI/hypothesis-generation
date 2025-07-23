@@ -7,23 +7,29 @@ from ..logger_config import LoggerConfig
 
 from ..LLM_wrapper import llm_wrapper_register
 
-BASE_DIR = os.path.join(os.curdir, "hypogenic", "config_generation")
 logger = LoggerConfig.get_logger("Config Generator")
 
 
-def read_dataset(dataset_zip_path):
-    data_dir = os.path.join(BASE_DIR, "data")
-    zip_dataset = os.path.expanduser(os.path.join(data_dir, dataset_zip_path))
-
-    extract_dir = os.path.join(data_dir, "dataset")
+def read_dataset(dataset_path):
+    extract_dir = os.path.join(dataset_path, "dataset")
     os.makedirs(extract_dir, exist_ok=True)
 
-    with zipfile.ZipFile(zip_dataset, 'r') as zip_ref:
-        zip_ref.extractall(extract_dir)
+    if os.path.isfile(dataset_path) and dataset_path.endswith(".zip"):
+        with zipfile.ZipFile(dataset_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_dir)
+    elif os.path.isdir(dataset_path):
+        extract_dir = dataset_path
+    else:
+        logger.error(f"Dataset path '{dataset_path}' is neither a .zip file nor a directory.")
+        return
 
-    csv_files = [f for f in os.listdir(extract_dir) if (f.endswith('.json') or f.endswith('.csv')) and not f.startswith('metadata')]
+    files = [f for f in os.listdir(extract_dir) if (f.endswith('.json') or f.endswith('.csv')) and not f.startswith('metadata')]
+    
+    if not files:
+        logger.error("No data file (CSV/JSON) found in dataset.")
+        return
 
-    file_path = os.path.join(extract_dir, csv_files[0])
+    file_path = os.path.join(extract_dir, files[0])
     ext = os.path.splitext(file_path)[1].lower()
 
     with open(file_path) as f:
@@ -43,9 +49,12 @@ def read_dataset(dataset_zip_path):
     label_name = headers[-1]
     input = headers[0:-1]
 
-    labels = list(set(data_dict[label_name]))
-
-    return csv_files, input, label_name, labels
+    if isinstance(data_dict, list):
+        labels = list(set(row[label_name] for row in data_dict if label_name in row))
+    elif isinstance(data_dict, dict):
+        labels = list(set(data_dict[label_name])) if label_name in data_dict else []
+    
+    return extract_dir, files, input, label_name, labels
 
 def generate_template(task, label_name, labels):
     config_template = f'''task_name: {task}
@@ -95,7 +104,7 @@ prompt_templates:
       First step: Consider if the pattern can be applied to the [stimulus].
       Second step: Based on the pattern, is this [stimulus] {' or '.join(labels)}?
       Final step: give your final answer in the format of "Final answer: answer". Do NOT use markdown format.
-      
+
   multiple_hypotheses_inference:
     system: |-
       # Use the research question and instructions to generate a prompt that would then be used to generate hypotheses
@@ -105,7 +114,7 @@ prompt_templates:
       Give your final answer in the format of "Final answer: answer". Do NOT use markdown format.
 
     user: |-
-      Our learned patterns: $[hypothesis]
+      Our learned patterns: $[hypotheses]
       # Display the inputs of the data as if it is a new set of data points
       Given the pattern you learned above, give an answer of whether [the stimulus fits with which label].
       Think step by step.
@@ -117,14 +126,14 @@ prompt_templates:
     return config_template
 
 
-def generate(mod, mod_name, rq, instr, dataset_zip_path):
+def generate(mod, mod_name, dataset_path, rq="", instr=""):
     api = llm_wrapper_register.build(mod)(mod_name)
     logger.info("API call created.")
 
-    dataset = os.path.splitext(os.path.basename(dataset_zip_path))[0]
-    files, input, label_name, labels = read_dataset(dataset_zip_path)
+    dataset = os.path.splitext(os.path.basename(dataset_path))[0]
+    data_dir, files, input, label_name, labels = read_dataset(dataset_path)
 
-    example_file = os.path.join(BASE_DIR, "config_examples", "config.yaml")
+    example_file = os.path.join("hypogenic", "config_generation", "config_examples", "config.yaml")
 
     with open(example_file) as f:
         example_text = f.read()
@@ -135,15 +144,15 @@ def generate(mod, mod_name, rq, instr, dataset_zip_path):
 
     template = generate_template(dataset, label_name, labels)
 
-    prompt = f"""You are an AI that generates configuration files based on instructions, a research question, and the metadata of the dataset.
+    prompt = f"You are an AI that generates configuration files based on given information and a template.\n\n"
 
-Research Question:
-{rq}
+    if rq != "":
+        prompt += f"The following is the research question:\n{rq}\n\n"
 
-Instructions:
-{instr}
+    if instr != "":
+        prompt += f"The following are the instructions:\n{instr}\n\n"
 
-This is the name of the dataset:
+    prompt += f"""This is the name of the dataset:
 {dataset}
 
 These are the names of the file: 
@@ -185,22 +194,35 @@ Only return the content of the configuration file with NO headers or footers.
 
         logger.info(f"Cost after generation: {api.get_cost()} USD")
 
-        return response.strip()
+        config = response.strip()
 
     except Exception as e:
         logger.error(f"Error generating config: {e}")
         return ""
     
+    logger.info(f"Generated config file:\n{config}")
+
+    try:
+        with open(os.path.join(data_dir, "config.yaml"), 'w') as f:
+            f.write(config)
+    
+    except Exception as e:
+        logger.error(f"Error writing config to file: {e}")
+        return ""
+
+    logger.info("Config generation successful")
+
+    return ""
+
+    
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--research_question", type=str, required=True)
-    parser.add_argument("--instructions", type=str, required=True)
+    parser.add_argument("--dataset_path", type=str, required=True)
 
-    parser.add_argument("--dataset_zip_path", type=str, required=True)
-
-    parser.add_argument("--config_file", type=str, required=False, default = "~/Downloads/")
+    parser.add_argument("--research_question", type=str, required=False, default="")
+    parser.add_argument("--instructions", type=str, required=False, default="")
 
     parser.add_argument("--model_type", type=str, required=False, default="gpt")
     parser.add_argument("--model_name", type=str, required=False, default="gpt-4o-mini")
@@ -210,12 +232,7 @@ if __name__ == "__main__":
     config = generate(
         args.model_type,
         args.model_name,
+        args.dataset_path,
         args.research_question,
-        args.instructions,
-        args.dataset_zip_path
+        args.instructions
     )
-
-    file = os.path.expanduser(args.config_file)
-
-    with open(os.path.join(file, "config.yaml"), 'w') as f:
-        f.write(config)

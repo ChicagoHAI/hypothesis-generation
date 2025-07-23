@@ -16,6 +16,9 @@ MODEL_NAME="gpt-4o-mini"
 # MODEL_NAME="DeepSeek/DeepSeek-R1-Distill-Llama-70B-local" 
 # MODEL_PATH="/net/projects/chai-lab/shared_models/DeepSeek-R1-Distill-Llama-70B-local"  # only needed for local models
 
+# Option to generate config before running the pipeline
+GENERATE_CONFIG=true
+
 # Define list of tasks to run
 TASKS=(
     "deceptive_reviews"
@@ -69,6 +72,10 @@ for TASK_NAME in "${TASKS[@]}"; do
         --max_num_hypotheses ${MAX_NUM_HYPOTHESES} \
         --num_train ${NUM_TRAIN} \
         --num_test ${NUM_TEST}"
+
+    if [ "${GENERATE_CONFIG}" = true ]; then
+        CMD="${CMD} --generate_config"
+    fi
 
     if [ "${MODEL_TYPE}" = "vllm" ]; then
         CMD="${CMD} --model_path ${MODEL_PATH}"
