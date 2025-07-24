@@ -11,25 +11,13 @@ logger = LoggerConfig.get_logger("Config Generator")
 
 
 def read_dataset(dataset_path):
-    extract_dir = os.path.join(dataset_path, "dataset")
-    os.makedirs(extract_dir, exist_ok=True)
-
-    if os.path.isfile(dataset_path) and dataset_path.endswith(".zip"):
-        with zipfile.ZipFile(dataset_path, 'r') as zip_ref:
-            zip_ref.extractall(extract_dir)
-    elif os.path.isdir(dataset_path):
-        extract_dir = dataset_path
-    else:
-        logger.error(f"Dataset path '{dataset_path}' is neither a .zip file nor a directory.")
-        return
-
-    files = [f for f in os.listdir(extract_dir) if (f.endswith('.json') or f.endswith('.csv')) and not f.startswith('metadata')]
+    files = [f for f in os.listdir(dataset_path) if (f.endswith('.json') or f.endswith('.csv')) and not f.startswith('metadata')]
     
     if not files:
         logger.error("No data file (CSV/JSON) found in dataset.")
         return
 
-    file_path = os.path.join(extract_dir, files[0])
+    file_path = os.path.join(dataset_path, files[0])
     ext = os.path.splitext(file_path)[1].lower()
 
     with open(file_path) as f:
@@ -54,7 +42,7 @@ def read_dataset(dataset_path):
     elif isinstance(data_dict, dict):
         labels = list(set(data_dict[label_name])) if label_name in data_dict else []
     
-    return extract_dir, files, input, label_name, labels
+    return files, input, label_name, labels
 
 def generate_template(task, label_name, labels):
     config_template = f'''task_name: {task}
@@ -131,7 +119,7 @@ def generate(mod, mod_name, dataset_path, rq="", instr=""):
     logger.info("API call created.")
 
     dataset = os.path.splitext(os.path.basename(dataset_path))[0]
-    data_dir, files, input, label_name, labels = read_dataset(dataset_path)
+    files, input, label_name, labels = read_dataset(dataset_path)
 
     example_file = os.path.join("hypogenic", "config_generation", "config_examples", "config.yaml")
 
@@ -203,7 +191,7 @@ Only return the content of the configuration file with NO headers or footers.
     logger.info(f"Generated config file:\n{config}")
 
     try:
-        with open(os.path.join(data_dir, "config.yaml"), 'w') as f:
+        with open(os.path.join(dataset_path, "config.yaml"), 'w') as f:
             f.write(config)
     
     except Exception as e:
