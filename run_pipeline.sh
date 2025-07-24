@@ -21,11 +21,11 @@ GENERATE_CONFIG=true
 
 # Define list of tasks to run
 TASKS=(
-    "deceptive_reviews"
+    # "deceptive_reviews"
     # "llamagc_detect"
     # "gptgc_detect"
     # "persuasive_pairs"
-    # "dreaddit"
+    "dreaddit"
     # "headline_binary"
     # "retweet"
     # "journal_same/same_journal_health"
@@ -59,12 +59,21 @@ NUM_TRAIN=200
 NUM_TEST=300
 SEED=42
 
+# Check version of Python on machine
+PYTHON="python"
+
+if command -v python &>/dev/null; then
+    PYTHON="python"
+elif command -v python3 &>/dev/null; then
+    PYTHON="python3"
+fi
+
 # Iterate through each task
 for TASK_NAME in "${TASKS[@]}"; do
     echo "Running pipeline for task: $TASK_NAME"
     
     # Create command with base required arguments
-    CMD="python pipeline.py \
+    CMD="${PYTHON} pipeline.py \
         --model_type ${MODEL_TYPE} \
         --model_name ${MODEL_NAME} \
         --task_name ${TASK_NAME} \
