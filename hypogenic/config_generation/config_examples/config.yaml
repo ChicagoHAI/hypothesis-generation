@@ -1,0 +1,72 @@
+task_name: deceptive_reviews
+label_name: review_truthfulness
+
+train_data_path: ./hotel_reviews_train.json
+val_data_path: ./hotel_reviews_val.json
+test_data_path: ./hotel_reviews_test.json
+ood_data_path: ./ood_hotel_reviews_all.json
+
+prompt_templates:
+  observations:
+    multi_content: |
+      A hotel review is the following: "${review_sentence}"
+      The review is: ${review_truthfulness}.
+
+  batched_generation:
+    system: |-
+      You're a professional hotel review analyst.
+      Given a set of hotel reviews, we want to generate hypotheses that are useful for predicting whether a review is truthful or deceptive. In other words, we want to know whether the review is written by a someone who actually lived in the hotel.
+
+      Using the given examples, please propose ${num_hypotheses} possible hypothesis pairs.
+      These hypotheses should identify specific patterns that occur across the provided reviews.
+
+      Each hypothesis should contain a pair of the following:
+      a. A hypothesis about what makes reviews more likely to be truthful
+      b. The opposite hypothesis about what makes reviews more likely to be deceptive 
+
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      The hypotheses should analyze what kind of reviews are likely to be truthful or deceptive.
+
+    user: |-
+      We have seen some hotel reviews:
+      ${observations}
+      Please generate hypotheses that are useful for predicting whether a review is truthful or deceptive. 
+      Propose ${num_hypotheses} possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${num_hypotheses}. [hypothesis].
+      Proposed hypotheses:
+      
+  inference:
+    system: |-
+      You are a professional deceptive detection agent and your job is to determine whether a hotel review is truthful or deceptive. 
+      In other words, we want to know whether the review is written by someone who had real experiences with the hotel. 
+      From past experiences, you learned a pattern. 
+      You need to determine whether each of the patterns holds for the current hotel review, and also predict whether the current hotel review is truthful or deceptive. 
+      Give an answer. The answer should be one word (truthful or deceptive).
+      Give your final answer in the format of {Final answer: answer}
+
+    user: |-
+      Our learned patterns: ${hypothesis}                          
+      A hotel review is the following: "${review_sentence}"
+
+      Given the pattern you learned above, give an answer of whether the hotel review above is deceptive or truthful.
+      Think step by step.
+      First step: Consider if the pattern can be applied to the hotel review.
+      Second step: Based on the pattern, is this hotel review deceptive or truthful?
+      Final step: give your final answer in the format of {Final answer: answer}
+
+  multiple_hypotheses_inference:
+    system: |-
+      You are a professional deceptive detection agent and your job is to determine whether a hotel review is truthful or deceptive. 
+      In other words, we want to know whether the review is written by someone who had real experiences with the hotel. 
+      From past experiences, you learned some patterns. 
+      You need to determine whether each of the patterns holds for the current hotel review, and also predict whether the current hotel review is truthful or deceptive. 
+      Give an answer. The answer should be one word (truthful or deceptive).
+      Give your final answer in the format of {Final answer: answer}
+    user: |-
+      Our learned patterns: ${hypotheses}                          
+      A hotel review is the following: "${review_sentence}"
+
+      Given the pattern you learned above, give an answer of whether the hotel review above is deceptive or truthful.
+      Think step by step.
+      First step: Think about which pattern can be applied to the hotel review.
+      Second step: Based on the pattern, is this hotel review deceptive or truthful?
+      Final step: give your final answer in the format of {Final answer: answer}
