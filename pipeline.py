@@ -104,6 +104,10 @@ parser.add_argument("--seed", type=int, default=42)
 parser.add_argument("--generate_config", action="store_true", default=False)
 parser.add_argument("--use_ood", action="store_true", default=False, help="Use out-of-distribution data for testing")
 
+# All web-related arguments
+parser.add_argument("--research_question")
+parser.add_argument("--instructions")
+
 args = parser.parse_args()
 
 multihyp = args.multihyp
@@ -128,6 +132,8 @@ max_tokens = args.max_tokens
 use_refine = args.use_refine
 max_refine = args.max_refine
 seed = args.seed
+research_question = args.research_question
+instructions = args.instructions
 
 if args.literature_folder is None:
     literature_folder = args.task_name
@@ -950,7 +956,9 @@ if __name__ == "__main__":
         generate_config(
             mod=model_type,
             mod_name=model_name,
-            dataset_path=dataset_folder
+            dataset_path=dataset_folder,
+            rq=research_question,
+            instr=instructions
         )
 
     methods_run = []  # Track which methods were executed
