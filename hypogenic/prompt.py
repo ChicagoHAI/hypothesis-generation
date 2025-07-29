@@ -189,26 +189,38 @@ class BasePrompt(ABC):
 
     def batched_error_augmented_generation(self, train_data, num_hypotheses, reference_hypotheses):
         """
-        reference_hypotheses: {wrong_hypothesis: set(sample_id)}
+        reference_hypotheses: {hypo: {"correct": set(), "wrong": set()}}
         """
-        substitute_dict = {"num_hypotheses": num_hypotheses}
+        substitute_dict = {}
         multi_sub_dicts = {"error_augmented_observation": []}
 
-        for hypo_idx, (hypothesis, sample_ids) in enumerate(reference_hypotheses.items()):
-            # 收集所有 wrong sample 的详细信息
+        for hypo_idx, (hypothesis, sample_dict) in enumerate(reference_hypotheses.items()):
+            # 处理 correct samples，只取前3个
+            correct_samples_info = []
+            correct_ids = list(sample_dict.get("correct", []))[:3]
+            for idx, sample_id in enumerate(correct_ids):
+                sample_data = self._get_substitute_dict(train_data, sample_id)
+                sample_data["idx"] = idx + 1
+                correct_samples_info.append(sample_data)
+            correct_samples_text = self._fill_multi_content(
+                ({}, correct_samples_info),
+                self._get_prompt_template("correct_samples")
+            )
+
+            # 处理 wrong samples
             wrong_samples_info = []
-            for idx, sample_id in enumerate(sample_ids):
+            for idx, sample_id in enumerate(sample_dict.get("wrong", [])):
                 sample_data = self._get_substitute_dict(train_data, sample_id)
                 sample_data["idx"] = idx + 1
                 wrong_samples_info.append(sample_data)
-            # 组装 wrong_samples 的文本
             wrong_samples_text = self._fill_multi_content(
                 ({}, wrong_samples_info),
                 self._get_prompt_template("wrong_samples")
             )
-            # 组装每个 hypothesis 的内容
+
             hyp_info = {
                 "hypothesis_text": hypothesis,
+                "correct_samples": correct_samples_text,
                 "wrong_samples": wrong_samples_text
             }
             multi_sub_dicts["error_augmented_observation"].append(hyp_info)
