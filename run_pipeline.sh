@@ -16,24 +16,12 @@ MODEL_NAME="gpt-4o-mini"
 # MODEL_NAME="DeepSeek/DeepSeek-R1-Distill-Llama-70B-local" 
 # MODEL_PATH="/net/projects/chai-lab/shared_models/DeepSeek-R1-Distill-Llama-70B-local"  # only needed for local models
 
+# Option to generate config before running the pipeline
+GENERATE_CONFIG=true
+
 # Define list of tasks to run
 TASKS=(
-    "deceptive_reviews"
-    # "llamagc_detect"
-    # "gptgc_detect"
-    # "persuasive_pairs"
-    # "dreaddit"
-    # "headline_binary"
-    # "retweet"
-    # "journal_same/same_journal_health"
-    # "journal_same/same_journal_nips"
-    # "journal_same/same_journal_radiology"
-    # "journal_cross/cross_journal_health_nips"
-    # "journal_cross/cross_journal_health_radiology"
-    # "journal_cross/cross_journal_nips_health"
-    # "journal_cross/cross_journal_nips_radiology"
-    # "journal_cross/cross_journal_radiology_health"
-    # "journal_cross/cross_journal_radiology_nips"
+    "dataset"
 )
 
 # Define methods to run
@@ -56,19 +44,44 @@ NUM_TRAIN=200
 NUM_TEST=300
 SEED=42
 
+# User instructions
+RESEARCH_QUESTION=""
+INSTRUCTIONS=""
+
+PYTHON="python"
+
+if command -v python &>/dev/null; then
+    PYTHON="python"
+elif command -v python3 &>/dev/null; then
+    PYTHON="python3"
+fi
+
 # Iterate through each task
 for TASK_NAME in "${TASKS[@]}"; do
     echo "Running pipeline for task: $TASK_NAME"
     
     # Create command with base required arguments
-    CMD="python pipeline.py \
+    CMD="${PYTHON} pipeline.py \
         --model_type ${MODEL_TYPE} \
         --model_name ${MODEL_NAME} \
         --task_name ${TASK_NAME} \
         --seed ${SEED} \
         --max_num_hypotheses ${MAX_NUM_HYPOTHESES} \
         --num_train ${NUM_TRAIN} \
-        --num_test ${NUM_TEST}"
+        --num_test ${NUM_TEST}" \
+
+    if [ "${GENERATE_CONFIG}" = true ]; then
+        CMD="${CMD} --generate_config"
+    fi
+
+    if [ "${RESEARCH_QUESTION}" != "" ]; then
+        CMD="${CMD} --research_question ${RESEARCH_QUESTION}"
+    fi
+    
+    if [ "${INSTRUCTIONS}" != "" ]; then
+        CMD="${CMD} --instructions ${INSTRUCTIONS}"
+    fi
+
 
     if [ "${MODEL_TYPE}" = "vllm" ]; then
         CMD="${CMD} --model_path ${MODEL_PATH}"

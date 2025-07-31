@@ -9,6 +9,9 @@ from hypogenic.LLM_wrapper import (
     LLMWrapper,
     llm_wrapper_register,
 )
+
+from hypogenic.config_generation.config_generator import generate as generate_config
+
 from hypogenic.algorithm.update import DefaultUpdate
 from hypogenic.algorithm.replace import DefaultReplace, Replace
 from hypogenic.algorithm.inference import Inference, DefaultInference
@@ -98,7 +101,12 @@ parser.add_argument("--max_tokens", type=int, default=8000)
 parser.add_argument("--use_refine", action="store_true", default=False)
 parser.add_argument("--max_refine", type=int, default=6)
 parser.add_argument("--seed", type=int, default=42)
+parser.add_argument("--generate_config", action="store_true", default=False)
 parser.add_argument("--use_ood", action="store_true", default=False, help="Use out-of-distribution data for testing")
+
+# All web-related arguments
+parser.add_argument("--research_question")
+parser.add_argument("--instructions")
 
 args = parser.parse_args()
 
@@ -124,6 +132,8 @@ max_tokens = args.max_tokens
 use_refine = args.use_refine
 max_refine = args.max_refine
 seed = args.seed
+research_question = args.research_question
+instructions = args.instructions
 
 if args.literature_folder is None:
     literature_folder = args.task_name
@@ -860,6 +870,7 @@ def log_arguments(logger, args):
             ("Model Name", args.model_name),
             ("Model Path", args.model_path),
             ("Task Name", args.task_name),
+            ("Generate Configuration", args.generate_config),
             ("Do Train", args.do_train),
             ("Use OOD", args.use_ood)
         ],
@@ -916,6 +927,8 @@ if __name__ == "__main__":
     task_name = args.task_name
     DO_TRAIN = args.do_train
 
+    dataset_folder = os.path.join(os.curdir, "data", task_name)
+
     task_folder = (
         f"./results/{task_name}/"
     )
@@ -938,6 +951,16 @@ if __name__ == "__main__":
     log_arguments(logger, args)
     
     api = llm_wrapper_register.build(model_type)(model=model_name, path_name=model_path)
+
+    if args.generate_config:
+        generate_config(
+            mod=model_type,
+            mod_name=model_name,
+            dataset_path=dataset_folder,
+            rq=research_question,
+            instr=instructions
+        )
+
     methods_run = []  # Track which methods were executed
     
     logger.info(f"=-=-=-=-=-=-=-=-=-=-=-={model_name}=-=-=-=-=-=-=-=-=-=-=-=")
@@ -1181,4 +1204,3 @@ if __name__ == "__main__":
                 "timestamp": datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
                 "total_cost_usd": total_cost
             }, f, indent=2)
-
