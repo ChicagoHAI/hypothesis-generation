@@ -140,19 +140,23 @@ def generate(mod, mod_name, dataset_path, rq="", instr=""):
     if instr != "":
         prompt += f"The following are the instructions:\n{instr}\n\n"
 
+    files_str = "\n".join(files)
+    input_str = "\n".join(input)
+    labels_str = "\n".join(labels)
+    
     prompt += f"""This is the name of the dataset:
 {dataset}
 
 These are the names of the file: 
-{"\n".join(files)}
+{files_str}
 
 This is the input(s) for the dataset:
-{"\n".join(input)}
+{input_str}
 
 This is the name of the label: {label_name}
 
 These are the possible labels:
-{"\n".join(labels)}
+{labels_str}
 
 Below is a template with some basic information that the output should adhere to:
 {template}
