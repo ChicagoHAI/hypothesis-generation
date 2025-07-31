@@ -184,7 +184,7 @@ Only return the content of the configuration file with NO headers or footers.
 
         response = api.api_with_cache.api_call(
             messages=messages,
-            model="gpt-4o-mini",
+            model=mod_name,
             temperature=0.05,
             max_tokens=5000
         )
