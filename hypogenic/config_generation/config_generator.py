@@ -11,7 +11,7 @@ logger = LoggerConfig.get_logger("Config Generator")
 
 
 def read_dataset(dataset_path):
-    files = [f for f in os.listdir(dataset_path) if (f.endswith('.json') or f.endswith('.csv')) and not f.startswith('metadata')]
+    files = [f for f in os.listdir(dataset_path) if (f.endswith('.json') or f.endswith('.csv')) and not f.startswith('metadata') and not f.startswith('gt')]
     
     if not files:
         logger.error("No data file (CSV/JSON) found in dataset.")
@@ -34,8 +34,13 @@ def read_dataset(dataset_path):
     elif isinstance(data_dict, dict):
         headers = list(data_dict.keys())
         
-    label_name = headers[-1]
-    input = headers[0:-1]
+    if "label" in headers:
+        label_name = "label"
+        headers.remove("label")
+        input = headers
+    else:
+        input = headers[0:-1]
+        label_name = headers[-1]
 
     if isinstance(data_dict, list):
         labels = list(set(row[label_name] for row in data_dict if label_name in row))
@@ -66,14 +71,14 @@ prompt_templates:
     system: |-
       # Explain the instructions and research question and what exactly should be generated
     
-      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... $[num_hypotheses]. [hypothesis].
+      Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... ${{num_hypotheses}}. [hypothesis].
       The hypotheses should analyze [objective of task].
 
     user: |-
       We have seen some hotel reviews:
-      $[observations]
+      ${{observations}}
       Please generate hypotheses that are useful for predicting [objective of task].
-      Propose $[num_hypotheses] possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... $[num_hypotheses]. [hypothesis].
+      Propose ${{num_hypotheses}} possible hypotheses. Generate them in the format of 1. [hypothesis], 2. [hypothesis], ... $[num_hypotheses]. [hypothesis].
       Proposed hypotheses:
             
   inference:
@@ -81,11 +86,11 @@ prompt_templates:
       # Use the research question and instructions to generate a prompt that would then be used to generate hypotheses
       From past experiences, you learned a pattern. 
       You need to determine whether each of the patterns holds for [name what the inputs determine], and also predict whether [which of the given labels fit]. 
-      Give an answer. The answer should be one word ({' or '.join(labels).title()}).
+      Give an answer. The answer should be one of these options ({' or '.join(labels).title()}).
       Give your final answer in the format of "Final answer: answer". Do NOT use markdown format.
 
     user: |-
-      Our learned patterns: $[hypothesis]
+      Our learned patterns: ${{hypothesis}}
       # Display the inputs of the data as if it is a new set of data points
       Given the pattern you learned above, give an answer of whether [the stimulus fits with which label].
       Think step by step.
@@ -98,11 +103,11 @@ prompt_templates:
       # Use the research question and instructions to generate a prompt that would then be used to generate hypotheses
       From past experiences, you learned a pattern. 
       You need to determine whether each of the patterns holds for [name what the inputs determine], and also predict whether [which of the given labels fit]. 
-      Give an answer. The answer should be one word ({' or '.join(labels).title()}).
+      Give an answer. The answer should be one of these options ({' or '.join(labels).title()}).
       Give your final answer in the format of "Final answer: answer". Do NOT use markdown format.
 
     user: |-
-      Our learned patterns: $[hypotheses]
+      Our learned patterns: ${{hypotheses}}
       # Display the inputs of the data as if it is a new set of data points
       Given the pattern you learned above, give an answer of whether [the stimulus fits with which label].
       Think step by step.
@@ -158,7 +163,7 @@ This is the name of the label: {label_name}
 These are the possible labels:
 {labels_str}
 
-Below is a template with some basic information that the output should adhere to:
+Below is a template with some basic information that the output must adhere to:
 {template}
 
 
