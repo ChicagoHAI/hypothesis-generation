@@ -30,7 +30,7 @@ from hypothesis_agent.data_analysis_agent.generation import (
     OnlyPaperGeneration,
     ZeroShotGeneration,
 )
-from hypothesis_agent.data_analysis_agent.inference import MultiHypDefaultInference
+from hypothesis_agent.data_analysis_agent.inference import MultiHypDefaultInference, MultiHypHierarchicalInference
 from hypothesis_agent.data_analysis_agent.update import TestUpdate
 from hypothesis_agent.literature_review_agent import LiteratureAgent
 from hypothesis_agent.literature_review_agent.literature_processor.extract_info import (
@@ -72,6 +72,7 @@ parser.add_argument("--run_hyperwrite", action="store_true", help="Run HyperWrit
 parser.add_argument("--run_notebooklm", action="store_true", help="Run NotebookLM")
 parser.add_argument("--run_hypogenic", action="store_true", help="Run original HypoGeniC")
 parser.add_argument("--run_augmented_hypogenic", action="store_true", help="Run augmented HypoGeniC")
+parser.add_argument("--run_hierarchical_inference", action="store_true", help="Run hierarchical inference")
 parser.add_argument("--run_hyporefine", action="store_true", help="Run HypoRefine")
 parser.add_argument("--run_union_hypo", action="store_true", help="Run Union HypoGeniC and Paper")
 parser.add_argument("--run_union_refine", action="store_true", help="Run Union HypoRefine and Paper")
@@ -744,6 +745,49 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
         }
         return formatted_results
 
+def get_res_hierarchical(filename: str, task_name, api, model_name, use_val=False, multihyp=False):
+    logger = LoggerConfig.get_logger("Agent - get_res_hierarchical")
+
+    set_seed(seed)
+
+    task = BaseTask(
+        config_path=f"./data/{task_name}/config.yaml",
+        from_register=extract_label_register,
+        use_ood=use_ood
+    )
+
+    train_data, test_data, val_data = task.get_data(num_train, num_test, num_val, seed)
+    if use_val:
+        test_data = val_data
+
+    prompt_class = TestPrompt(task)
+
+    with open(filename) as f:
+        hyp_dict = json.load(f)
+    hyp_bank = {}
+    for hypothesis in hyp_dict:
+        hyp_bank[hypothesis] = SummaryInformation.from_dict(hyp_dict[hypothesis])
+
+
+    inference_class = MultiHypHierarchicalInference(api, prompt_class, train_data, task)
+    pred_list, label_list = inference_class.run_inference_final(
+        test_data,
+        hyp_bank,
+        cache_seed=cache_seed,
+        max_concurrent=64,
+        temperature=temperature,
+        max_tokens=max_tokens,
+    )
+
+    results_dict = get_results(pred_list, label_list)
+    f1 = results_dict["f1"]
+    acc = results_dict["accuracy"]
+    logger_str = "Results:\n"
+    logger_str += f"Accuracy: {acc}\n"
+    logger_str += f"F1: {f1}\n\n"
+    logger.info(logger_str)
+    return results_dict  # Return results dictionary
+
 def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     def few_shot(
         api: LLMWrapper,
@@ -938,6 +982,7 @@ def log_arguments(logger, args):
             ("Run NotebookLM", args.run_notebooklm),
             ("Run HypoGeniC", args.run_hypogenic),
             ("Run Augmented HypoGeniC", args.run_augmented_hypogenic),
+            ("Run Hierarchical Inference", args.run_hierarchical_inference),
             ("Run HypoRefine", args.run_hyporefine),
             ("Run Union HypoGeniC", args.run_union_hypo),
             ("Run Union HypoRefine", args.run_union_refine),
@@ -1124,6 +1169,20 @@ if __name__ == "__main__":
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
         results = get_res(
             f"results/{task_name}/{model_name}/aug_hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_hierarchical_inference:
+        method_name = "hypogenic"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res_hierarchical(
+            f"results/{task_name}/{model_name}/hierarchical_hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
             model_name=model_name,

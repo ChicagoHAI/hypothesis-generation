@@ -169,3 +169,83 @@ class MultiHypInferenceWithRank(DefaultInference):
         actual_labels = [data[self.task.label_name][index] for index, _ in idx_hyp_pair]
 
         return predictions, actual_labels, idx_hyp_pair
+
+class MultiHypHierarchicalInference(DefaultInference):
+    def __init__(
+        self,
+        api,
+        prompt_class: TestPrompt,
+        train_data: pd.DataFrame,
+        task: BaseTask,
+    ):
+        super().__init__(api, prompt_class, train_data, task)
+
+    def create_stump_from_hypotheses(
+        self,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        **generate_kwargs,
+    ):
+        prompt_inputs = [
+            self.prompt_class.create_stump_from_hypotheses(hyp_bank)
+        ]
+        responses = self.api.batched_generate(
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
+        )
+        print(responses)
+        return {responses[0]:SummaryInformation}
+
+    def multiple_hypotheses_batched_predict(
+            self,
+            data: pd.DataFrame,
+            idx_hyp_pair=List[Tuple[int, Dict[str, SummaryInformation]]],
+            cache_seed=None,
+            max_concurrent=3,
+            **generate_kwargs,
+    ):
+        prompt_inputs = [
+            self.prompt_class.multiple_hypotheses_inference(hyp_bank, data, index)
+            for index, hyp_bank in idx_hyp_pair
+        ]
+        responses = self.api.batched_generate(
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
+        )
+        actual_labels = [data[self.task.label_name][index] for index, _ in idx_hyp_pair]
+        predictions = [self.task.extract_label(responses[i]) for i in range(len(responses))]
+
+        return predictions, actual_labels
+
+    def run_inference_final(
+            self,
+            data,
+            hyp_bank,
+            cache_seed=None,
+            max_concurrent=3,
+            **generate_kwargs,
+    ):
+        stump_hyp = self.create_stump_from_hypotheses(
+            hyp_bank,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
+        )
+
+        num_samples = len(data)
+
+        return self.multiple_hypotheses_batched_predict(
+            data,
+            [
+                (i, stump_hyp)
+                for i in range(num_samples)
+            ],
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
+        )

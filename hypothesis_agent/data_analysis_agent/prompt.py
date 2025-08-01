@@ -197,6 +197,15 @@ class TestPrompt(BasePrompt):
 
         return prompt
 
+    def create_stump_from_hypotheses(self, hypotheses_dict):
+        hypotheses_list = list(hypotheses_dict.keys())
+
+        substitute_dict= {"hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])}
+
+        prompt = self._information_prompt(substitute_dict, "create_stump_from_hypotheses")
+
+        return prompt
+
     def test_autogen(
         self, train_data: pd.DataFrame, num_hypotheses, paper_infos: List[Dict[str, str]]
     ):
