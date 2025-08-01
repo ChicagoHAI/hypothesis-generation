@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import os
 import textwrap
 from string import Template
-from typing import List, Tuple, Union, Dict
+from typing import List, Tuple, Union, Dict, Any
 from copy import deepcopy
 import pandas as pd
 
@@ -185,6 +185,51 @@ class BasePrompt(ABC):
 
         prompt = self._information_prompt(substitute_dict, "batched_generation")
 
+        return prompt
+
+    def batched_error_augmented_generation(self, train_data, num_hypotheses, reference_hypotheses):
+        """
+        reference_hypotheses: {hypo: {"correct": set(), "wrong": set()}}
+        """
+        substitute_dict = {}
+        multi_sub_dicts = {"error_augmented_observation": []}
+
+        for hypo_idx, (hypothesis, sample_dict) in enumerate(reference_hypotheses.items()):
+            # 处理 correct samples，只取前3个
+            correct_samples_info = []
+            correct_ids = list(sample_dict.get("correct", []))[:3]
+            for idx, sample_id in enumerate(correct_ids):
+                sample_data = self._get_substitute_dict(train_data, sample_id)
+                sample_data["idx"] = idx + 1
+                correct_samples_info.append(sample_data)
+            correct_samples_text = self._fill_multi_content(
+                ({}, correct_samples_info),
+                self._get_prompt_template("correct_samples")
+            )
+
+            # 处理 wrong samples
+            wrong_samples_info = []
+            for idx, sample_id in enumerate(sample_dict.get("wrong", [])):
+                sample_data = self._get_substitute_dict(train_data, sample_id)
+                sample_data["idx"] = idx + 1
+                wrong_samples_info.append(sample_data)
+            wrong_samples_text = self._fill_multi_content(
+                ({}, wrong_samples_info),
+                self._get_prompt_template("wrong_samples")
+            )
+
+            hyp_info = {
+                "hypothesis_text": hypothesis,
+                "correct_samples": correct_samples_text,
+                "wrong_samples": wrong_samples_text
+            }
+            multi_sub_dicts["error_augmented_observation"].append(hyp_info)
+
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "batched_error_augmented_generation"
+        )
+
+        prompt = self._information_prompt(substitute_dict, "batched_error_augmented_generation")
         return prompt
 
     def inference(self, hypotheses_dict, test_data, test_idx):

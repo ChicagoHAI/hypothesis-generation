@@ -84,6 +84,7 @@ class DefaultUpdate(Update):
         # initialize variables
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
+        accumulated_wrong_hyp_samples = {}  # {hypo: {"correct": set(), "wrong": set()}}
 
         # ----------------------------------------------------------------------
         # Figuring out starting samples
@@ -127,6 +128,9 @@ class DefaultUpdate(Update):
             # We need to see how good our hypothesis is, which we do by way of the inference class
             # ------------------------------------------------------------------
             num_wrong_hypotheses = 0
+            # record the hypotheses that are wrong for the current sample
+            current_hypo_samples = {}   # {hypo: {"correct": set(), "wrong": set()}}
+            
             preds, labels = self.inference_class.batched_predict(
                 self.train_data,
                 [
@@ -140,11 +144,14 @@ class DefaultUpdate(Update):
 
             # Comparison of the label and prediction
             for pred, label, hypothesis in zip(preds, labels, top_k_hypotheses):
+                if hypothesis not in current_hypo_samples:
+                    current_hypo_samples[hypothesis] = {"correct": set(), "wrong": set()}
                 if pred != label:
                     num_wrong_hypotheses += 1
                     hypotheses_bank[hypothesis].update_info_if_not_useful(
                         current_sample, self.alpha
                     )  # let the bank know it got one wrong
+                    current_hypo_samples[hypothesis]["wrong"].add(i)
                 else:
                     hypotheses_bank[hypothesis].update_info_if_useful(
                         current_sample, self.alpha
@@ -152,6 +159,7 @@ class DefaultUpdate(Update):
 
                     # keeping track of good examples as we do in generation
                     hypotheses_bank[hypothesis].update_useful_examples(i, label)
+                    current_hypo_samples[hypothesis]["correct"].add(i)
 
             # ------------------------------------------------------------------
             # Generating a new hypothesis
@@ -166,6 +174,13 @@ class DefaultUpdate(Update):
 
                 # We note it as a bad sample
                 wrong_example_ids.add(i)
+                for hypothesis in current_hypo_samples:
+                    if hypothesis not in accumulated_wrong_hyp_samples:
+                        accumulated_wrong_hyp_samples[hypothesis] = {"correct": set(), "wrong": set()}
+                    accumulated_wrong_hyp_samples[hypothesis]["correct"].update(
+                        current_hypo_samples[hypothesis]["correct"])
+                    accumulated_wrong_hyp_samples[hypothesis]["wrong"].update(
+                        current_hypo_samples[hypothesis]["wrong"])
                 if (
                     len(wrong_example_ids)
                     == self.update_batch_size * self.num_hypotheses_to_update
@@ -174,7 +189,7 @@ class DefaultUpdate(Update):
 
                     # generate new hypotheses
                     for j in range(self.num_hypotheses_to_update):
-                        # Go through poorly performing exmaples and generate hypotheses for them
+                        # Go through poorly performing examples and generate hypotheses for them
                         # TODO: batched?
                         new_hypotheses = (
                             self.generation_class.batched_hypothesis_generation(
@@ -184,11 +199,12 @@ class DefaultUpdate(Update):
                                 self.alpha,
                                 cache_seed=cache_seed,
                                 max_concurrent=max_concurrent,
+                                reference_hypotheses=accumulated_wrong_hyp_samples,
                                 **generate_kwargs,
                             )
                         )
 
-                        # If we onlt take the best performing hypothesis from the batch
+                        # If we only take the best performing hypothesis from the batch
                         if self.only_best_hypothesis:
                             best_hypothesis = max(
                                 new_hypotheses, key=lambda x: new_hypotheses[x].reward
@@ -200,6 +216,8 @@ class DefaultUpdate(Update):
                             new_hyp_bank.update(new_hypotheses)
                     # reset wrong examples to be empty
                     wrong_example_ids = set()
+                    # reset accumulated wrong hypotheses to be empty
+                    accumulated_wrong_hyp_samples.clear()
 
                     # call replace class to update the bank
                     hypotheses_bank = self.replace_class.replace(

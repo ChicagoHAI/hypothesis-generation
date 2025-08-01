@@ -35,7 +35,7 @@ class DefaultInference(Inference):
         **generate_kwargs,
     ):
         """
-        Makes a batch of preductions on a hypothesis.
+        Makes a batch of predictions on a hypothesis.
 
         Parameters:
             data: the data to predict on
@@ -78,7 +78,7 @@ class DefaultInference(Inference):
         """
         Function for testing the best hypothesis
 
-        Prameters:
+        Parameters:
             data: the data to predict on
             hyp_bank: the hypotheses that we want to predict from
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
