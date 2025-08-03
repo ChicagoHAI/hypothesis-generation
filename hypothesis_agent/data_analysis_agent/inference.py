@@ -196,8 +196,9 @@ class MultiHypHierarchicalInference(DefaultInference):
             max_concurrent=max_concurrent,
             **generate_kwargs,
         )
+        responses = re.sub(r'<think>.*?</think>', '', responses[0], flags=re.IGNORECASE | re.DOTALL)
         print(responses)
-        return {responses[0]:SummaryInformation}
+        return {responses:SummaryInformation}
 
     def multiple_hypotheses_batched_predict(
             self,
