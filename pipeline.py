@@ -4,6 +4,7 @@ import logging
 import os
 
 from hypogenic.algorithm.generation.augmented import AugmentedGeneration
+from hypogenic.algorithm.update.augmented import AugmentedUpdate
 from hypogenic.utils import set_seed, get_results
 from hypogenic.tasks import BaseTask
 from hypogenic.extract_label import extract_label_register
@@ -417,7 +418,7 @@ def augmented_hypogenic(task_name, api, model_name):
     inference_class = DefaultInference(api, prompt_class, train_data, task)
     generation_class = AugmentedGeneration(api, prompt_class, inference_class, task)
 
-    update_class = DefaultUpdate(
+    update_class = AugmentedUpdate(
         generation_class=generation_class,
         inference_class=inference_class,
         replace_class=DefaultReplace(max_num_hypotheses),
@@ -430,7 +431,6 @@ def augmented_hypogenic(task_name, api, model_name):
         save_every_n_examples=save_every_10_examples,
     )
 
-    hypotheses_bank = {}
     hypotheses_bank = update_class.batched_initialize_hypotheses(
         num_init,
         init_batch_size=init_batch_size,
@@ -454,6 +454,7 @@ def augmented_hypogenic(task_name, api, model_name):
             cache_seed=cache_seed,
             temperature=temperature,
             max_tokens=max_tokens,
+            redundancy_threshold=5,
             max_concurrent=64,
         )
         update_class.save_to_json(

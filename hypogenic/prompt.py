@@ -232,6 +232,15 @@ class BasePrompt(ABC):
         prompt = self._information_prompt(substitute_dict, "batched_error_augmented_generation")
         return prompt
 
+    def remove_redundancy(self, hypotheses_dict):
+        hypotheses_list = list(hypotheses_dict.keys())
+
+        substitute_dict = {"hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])}
+
+        prompt = self._information_prompt(substitute_dict, "remove_redundancy")
+
+        return prompt
+
     def inference(self, hypotheses_dict, test_data, test_idx):
         """
         Create inference prompt.
