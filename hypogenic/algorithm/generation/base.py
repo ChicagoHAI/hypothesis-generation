@@ -206,12 +206,22 @@ class Generation(ABC):
         pass
 
     @abstractmethod
-    def remove_redundancy(
+    def clear_redundancy_update(
         self,
         example_ids,
         current_sample,
         current_hyp_bank,
         alpha: float,
+        cache_seed=None,
+        max_concurrent=3,
+        **generate_kwargs,
+    ):
+        pass
+
+    @abstractmethod
+    def clear_redundancy_final(
+        self,
+        hyp_bank,
         cache_seed=None,
         max_concurrent=3,
         **generate_kwargs,

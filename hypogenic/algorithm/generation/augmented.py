@@ -88,7 +88,7 @@ class AugmentedGeneration(DefaultGeneration):
             all_new_hypos.extend(extract_hypotheses(response, 1))
         return all_new_hypos
 
-    def remove_redundancy(
+    def clear_redundancy_update(
         self,
         example_ids,
         current_sample,
@@ -114,3 +114,22 @@ class AugmentedGeneration(DefaultGeneration):
             max_concurrent=max_concurrent,
             **generate_kwargs,
         )
+    
+    def clear_redundancy_final(
+        self,
+        hyp_bank,
+        cache_seed=None,
+        max_concurrent=3,
+        **generate_kwargs,
+    ):
+        prompt_inputs = [
+            self.prompt_class.remove_redundancy(hyp_bank)
+        ]
+        responses = self.api.batched_generate(
+            prompt_inputs,
+            cache_seed=cache_seed,
+            max_concurrent=max_concurrent,
+            **generate_kwargs,
+        )
+        new_hyp_list = extract_hypotheses(responses[0])
+        return new_hyp_list

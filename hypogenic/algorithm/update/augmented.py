@@ -63,6 +63,8 @@ class AugmentedUpdate(Update):
             cache_seed=None,
             max_concurrent=3,
             redundancy_threshold = 5,
+            clear_redundancy_update = False,
+            clear_redundancy_final = True,
             **generate_kwargs,
     ):
         """
@@ -75,6 +77,8 @@ class AugmentedUpdate(Update):
             cache_seed: If `None`, will not use cache, otherwise will use cache with corresponding seed number
             max_concurrent: The maximum number of concurrent requests
             redundancy_threshold: The threshold for removing redundancy in the hypotheses bank
+            clear_redundancy_update: Whether to remove redundancy in the hypotheses bank during the update process
+            clear_redundancy_final: Whether to remove redundancy in the final hypotheses bank
         """
         logger = LoggerConfig.get_logger(logger_name)
 
@@ -219,8 +223,8 @@ class AugmentedUpdate(Update):
                         hypotheses_bank, new_hyp_bank
                     )
 
-                    if generate_count >= redundancy_threshold:
-                        hypotheses_bank = self.generation_class.remove_redundancy(
+                    if clear_redundancy_update and generate_count >= redundancy_threshold:
+                        hypotheses_bank = self.generation_class.clear_redundancy_update(
                             wrong_example_ids,
                             current_sample,
                             hypotheses_bank,
@@ -243,6 +247,14 @@ class AugmentedUpdate(Update):
                     seed=current_seed,
                     epoch=current_epoch,
                 )
+
+        if clear_redundancy_final:
+            hypotheses_bank = self.generation_class.clear_redundancy_final(
+                hyp_bank=hypotheses_bank,
+                cache_seed=cache_seed,
+                max_concurrent=max_concurrent,
+                **generate_kwargs,
+            )
 
         # Our new bank
         return hypotheses_bank
