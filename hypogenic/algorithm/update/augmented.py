@@ -86,7 +86,7 @@ class AugmentedUpdate(Update):
         num_train_examples = len(self.train_data)
         wrong_example_ids = set()
         accumulated_wrong_hyp_samples = {}  # {hypo: {"correct": set(), "wrong": set()}}
-        generate_count = 0
+        generation_count = 0
 
         # ----------------------------------------------------------------------
         # Figuring out starting samples
@@ -187,7 +187,7 @@ class AugmentedUpdate(Update):
                         len(wrong_example_ids)
                         == self.update_batch_size * self.num_hypotheses_to_update
                 ):
-                    generate_count += 1
+                    generation_count += 1
                     new_hyp_bank = {}
 
                     # generate new hypotheses
@@ -223,7 +223,8 @@ class AugmentedUpdate(Update):
                         hypotheses_bank, new_hyp_bank
                     )
 
-                    if clear_redundancy_update and generate_count >= redundancy_threshold:
+                    if clear_redundancy_update and generation_count >= redundancy_threshold:
+                        generation_count = 0
                         hypotheses_bank = self.generation_class.clear_redundancy_update(
                             wrong_example_ids,
                             current_sample,

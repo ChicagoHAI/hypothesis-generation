@@ -79,8 +79,10 @@ class AugmentedGeneration(DefaultGeneration):
         
         prompt_inputs = []
         for i in range(0, total):
+            hypothesis, sample_dict = reference_items[i]
+            batch = {hypothesis: sample_dict}
             prompt_input = self.prompt_class.error_augmented_generation(
-                self.train_data, dict(reference_items[i])
+                self.train_data, batch
             )
             prompt_inputs.append(prompt_input)
         
