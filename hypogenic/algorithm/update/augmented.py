@@ -202,7 +202,7 @@ class AugmentedUpdate(Update):
                                 self.alpha,
                                 cache_seed=cache_seed,
                                 max_concurrent=max_concurrent,
-                                reference_hypotheses=accumulated_wrong_hyp_samples,
+                                reference_info=accumulated_wrong_hyp_samples,
                                 **generate_kwargs,
                             )
                         )

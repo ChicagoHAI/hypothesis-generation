@@ -200,7 +200,6 @@ class Generation(ABC):
         alpha: float,
         cache_seed=None,
         max_concurrent=3,
-        reference_hypotheses=None,
         **generate_kwargs,
     ):
         pass

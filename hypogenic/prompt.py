@@ -187,14 +187,14 @@ class BasePrompt(ABC):
 
         return prompt
 
-    def batched_error_augmented_generation(self, train_data, num_hypotheses, reference_hypotheses):
+    def error_augmented_generation(self, train_data, reference_info):
         """
-        reference_hypotheses: {hypo: {"correct": set(), "wrong": set()}}
+        reference_info: {hypo: {"correct": set(), "wrong": set()}}
         """
         substitute_dict = {}
         multi_sub_dicts = {"error_augmented_observation": []}
 
-        for hypo_idx, (hypothesis, sample_dict) in enumerate(reference_hypotheses.items()):
+        for hypo_idx, (hypothesis, sample_dict) in enumerate(reference_info.items()):
             # 处理 correct samples，只取前3个
             correct_samples_info = []
             correct_ids = list(sample_dict.get("correct", []))[:3]
@@ -226,10 +226,10 @@ class BasePrompt(ABC):
             multi_sub_dicts["error_augmented_observation"].append(hyp_info)
 
         substitute_dict = self._fill_multi_in_sub_dict(
-            substitute_dict, multi_sub_dicts, "batched_error_augmented_generation"
+            substitute_dict, multi_sub_dicts, "error_augmented_generation"
         )
 
-        prompt = self._information_prompt(substitute_dict, "batched_error_augmented_generation")
+        prompt = self._information_prompt(substitute_dict, "error_augmented_generation")
         return prompt
 
     def remove_redundancy(self, hypotheses_dict):
