@@ -31,7 +31,8 @@ from hypothesis_agent.data_analysis_agent.generation import (
     OnlyPaperGeneration,
     ZeroShotGeneration,
 )
-from hypothesis_agent.data_analysis_agent.inference import MultiHypDefaultInference, MultiHypHierarchicalInference
+from hypothesis_agent.data_analysis_agent.hierarchical_inference import MultiHypHierarchicalInference
+from hypothesis_agent.data_analysis_agent.inference import MultiHypDefaultInference
 from hypothesis_agent.data_analysis_agent.update import TestUpdate
 from hypothesis_agent.literature_review_agent import LiteratureAgent
 from hypothesis_agent.literature_review_agent.literature_processor.extract_info import (
