@@ -347,3 +347,34 @@ class BasePrompt(ABC):
         prompt = self._information_prompt(substitute_dict, "is_relevant")
 
         return prompt
+
+    def create_stump_from_hypotheses(self, hypotheses_dict):
+        hypotheses_list = list(hypotheses_dict.keys())
+
+        substitute_dict= {"hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])}
+
+        prompt = self._information_prompt(substitute_dict, "create_stump_from_hypotheses")
+
+        return prompt
+
+    def determine_group(self, group_conditions, test_data, test_idx):
+        """
+        Create prompt to determine which group a sample belongs to.
+        """
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+        substitute_dict["group_conditions"] = group_conditions
+
+        prompt = self._information_prompt(substitute_dict, "determine_group")
+        return prompt
+
+    def hierarchical_inference(self, hypotheses_dict, test_data, test_idx, group_condition):
+        hypotheses_list = list(hypotheses_dict.keys())
+
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+        substitute_dict["hypotheses"] = "\n".join([f"{idx+1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])
+        
+        substitute_dict["group_condition"] = group_condition
+
+        prompt = self._information_prompt(substitute_dict, "hierarchical_inference")
+
+        return prompt
