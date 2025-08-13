@@ -45,6 +45,7 @@ METHODS=(
     # "only_paper"
     "hypogenic"
     # "augmented_hypogenic"
+    #"hierarchical_inference"
     # "hyporefine"
     # "union_hypo"
     # "union_refine"

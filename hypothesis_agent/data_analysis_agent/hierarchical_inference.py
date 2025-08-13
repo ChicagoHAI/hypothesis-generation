@@ -150,8 +150,15 @@ class MultiHypHierarchicalInference(DefaultInference):
                 child_path = (current_path or []) + [group_info['condition']]
                 logger.info(f"--- Recursing to Group {group_num} ---")
                 logger.info(f"Child condition path: {child_path}")
+                
+                # Create a new hypothesis bank that includes both hypotheses and examples
+                child_hyp_bank = group_info['hypotheses'].copy()
+                if group_info.get('examples'):
+                    # Add examples as additional context for child nodes
+                    child_hyp_bank.extend(group_info['examples'])
+                
                 child_node = self._tree_split(
-                    group_info['hypotheses'],
+                    child_hyp_bank,  # Pass both hypotheses and examples
                     cache_seed=cache_seed,
                     max_depth=max_depth,
                     current_depth=current_depth + 1,
@@ -167,65 +174,75 @@ class MultiHypHierarchicalInference(DefaultInference):
     # --------------------------------
     # Tree update (validation and refinement)
     # --------------------------------
-    def _visualize_tree(self, node, depth=0, prefix=""):
+    def _visualize_tree_log(self, node, depth=0):
         if node.is_leaf:
-            # Leaf node - show hypotheses
-            result = f"{prefix}LEAF: {len(node.hypotheses)} hypotheses\n"
-            for i, hyp in enumerate(node.hypotheses):
-                if i == len(node.hypotheses) - 1:
-                    result += f"{prefix}    └── {hyp}\n"
-                else:
-                    result += f"{prefix}    ├── {hyp}\n"
+            # Leaf node
+            result = f"LEAF NODE:\n"
+            if node.hypotheses:
+                result += "Hypotheses:\n"
+                for i, hyp in enumerate(node.hypotheses, 1):
+                    result += f"  {i}. {hyp}\n"
             return result
         else:
-            # Internal node - show groups and recurse
-            result = f"{prefix}NODE: {len(node.groups)} groups, {len(node.hypotheses)} hypotheses\n"
+            # Internal node
+            result = f"INTERNAL NODE:\n"
+            if node.hypotheses:
+                result += "General Hypotheses:\n"
+                for i, hyp in enumerate(node.hypotheses, 1):
+                    result += f"  {i}. {hyp}\n"
             
-            group_items = list(node.groups.items())
-            for i, (group_num, group_info) in enumerate(group_items):
-                is_last_group = (i == len(group_items) - 1)
+            result += "Groups:\n"
+            for group_num, group_info in node.groups.items():
+                result += f"  Group {group_num}: {group_info['condition']}\n"
                 
-                # Group header
-                if is_last_group:
-                    result += f"{prefix}    └── Group {group_num}: {group_info['condition']}\n"
-                else:
-                    result += f"{prefix}    ├── Group {group_num}: {group_info['condition']}\n"
-                
-                # Group details
                 if group_info.get('hypotheses'):
-                    hyp_items = group_info['hypotheses']
-                    for j, hyp in enumerate(hyp_items):
-                        is_last_hyp = (j == len(hyp_items) - 1)
-                        if is_last_group:
-                            if is_last_hyp:
-                                result += f"{prefix}        └── {hyp}\n"
-                            else:
-                                result += f"{prefix}        ├── {hyp}\n"
-                        else:
-                            if is_last_hyp:
-                                result += f"{prefix}        └── {hyp}\n"
-                            else:
-                                result += f"{prefix}        ├── {hyp}\n"
+                    result += "    Refined Hypotheses:\n"
+                    for i, hyp in enumerate(group_info['hypotheses'], 1):
+                        result += f"      {i}. {hyp}\n"
                 
                 if group_info.get('examples'):
-                    example_items = group_info['examples']
-                    for j, example in enumerate(example_items):
-                        is_last_example = (j == len(example_items) - 1)
-                        if is_last_group:
-                            if is_last_example:
-                                result += f"{prefix}        └── Example: {example}\n"
-                            else:
-                                result += f"{prefix}        ├── Example: {example}\n"
-                        else:
-                            if is_last_example:
-                                result += f"{prefix}        └── Example: {example}\n"
-                            else:
-                                result += f"{prefix}        ├── Example: {example}\n"
+                    result += "    Examples:\n"
+                    for i, example in enumerate(group_info['examples'], 1):
+                        result += f"      {i}. {example}\n"
                 
                 # Recurse to children
                 if group_num in node.children:
-                    child_prefix = f"{prefix}        " if is_last_group else f"{prefix}        "
-                    result += self._visualize_tree(node.children[group_num], depth + 1, child_prefix)
+                    child_result = self._visualize_tree(node.children[group_num], depth + 1)
+                    # Indent child result
+                    child_lines = child_result.split('\n')
+                    indented_child = '\n'.join(f"    {line}" if line else "" for line in child_lines)
+                    result += f"    Subtree:\n{indented_child}\n"
+            
+            return result
+
+    def _visualize_tree(self, node, depth=0):
+        if node.is_leaf:
+            # Leaf node - show hypotheses
+            result = f"LEAF NODE:\n"
+            if node.hypotheses:
+                result += "Hypotheses:\n"
+                for i, hyp in enumerate(node.hypotheses, 1):
+                    result += f"  {i}. {hyp}\n"
+            return result
+        else:
+            # Internal node
+            result = f"INTERNAL NODE:\n"
+            
+            result += "Groups:\n"
+            for group_num, group_info in node.groups.items():
+                result += f"  Group {group_num}: {group_info['condition']}\n"
+                if group_info.get('examples'):
+                    result += "    Examples:\n"
+                    for i, example in enumerate(group_info['examples'], 1):
+                        result += f"      {i}. {example}\n"
+                
+                # Recurse to children
+                if group_num in node.children:
+                    child_result = self._visualize_tree(node.children[group_num], depth + 1)
+                    # Indent child result
+                    child_lines = child_result.split('\n')
+                    indented_child = '\n'.join(f"    {line}" if line else "" for line in child_lines)
+                    result += f"    Subtree:\n{indented_child}\n"
             
             return result
 
@@ -243,7 +260,6 @@ class MultiHypHierarchicalInference(DefaultInference):
         logger.info("--- LLM Output for Tree Validation ---")
         logger.info(f"Validation response: {validation_response}")
         validation_passed = self._check_validation_result(validation_response)
-        logger.info(f"Validation passed: {validation_passed}")
         if not validation_passed:
             logger.warning(f"Validation failed.")
         return validation_response, validation_passed
@@ -298,162 +314,152 @@ class MultiHypHierarchicalInference(DefaultInference):
             return None
 
     def _parse_complete_tree_structure(self, refinement_response):
+        """Parse the structured tree format from LLM response"""
         response = re.sub(r'<think>.*?</think>', '', refinement_response, flags=re.IGNORECASE | re.DOTALL)
         lines = response.strip().split('\n')
-        # Parse the tree structure recursively
-        tree_structure = self._parse_nested_groups(lines, 0, len(lines))
+        
+        # Parse the structured tree format
+        tree_structure = self._parse_structured_tree(lines, 0, len(lines))
         return tree_structure
 
-    def _parse_nested_groups(self, lines, start_idx, end_idx):
+    def _parse_structured_tree(self, lines, start_idx, end_idx):
+        """Parse the new structured tree format"""
         groups = {}
         i = start_idx
-
+        
         while i < end_idx:
             line = lines[i].strip()
-
             if not line:
                 i += 1
                 continue
-
-            # Check for group start - handle both formats:
-            # 1. "├── Group X: condition" (indented format)
-            # 2. "Group X: condition" (direct format)
-            group_match = None
-
-            # Try indented format first
-            indented_match = re.match(r'^[├└]──\s*Group\s*(\d+):\s*(.*)', line, re.IGNORECASE)
-            if indented_match:
-                group_match = indented_match
-            else:
-                # Try direct format
-                direct_match = re.match(r'^Group\s*(\d+):\s*(.*)', line, re.IGNORECASE)
-                if direct_match:
-                    group_match = direct_match
-
+            
+            # Look for group start
+            group_match = re.match(r'^Group\s*(\d+):\s*(.*)', line, re.IGNORECASE)
             if group_match:
                 group_num = int(group_match.group(1))
                 condition = group_match.group(2).strip()
-
+                
                 # Initialize new group
                 groups[group_num] = {
                     'condition': condition,
                     'hypotheses': [],
                     'examples': [],
                     'subgroups': {},
-                    'is_leaf': True  # Default to leaf, will be updated if subgroups found
+                    'is_leaf': True  # Default to leaf
                 }
-
-                # Look ahead to see if this group has subgroups
+                
+                # Parse group content
                 j = i + 1
-                nested_start = None
-
                 while j < end_idx:
                     next_line = lines[j].strip()
                     if not next_line:
                         j += 1
                         continue
-
-                    # Check if next line is a nested group (more indented)
-                    # Look for deeper indentation patterns
-                    if (next_line.startswith('├──') or next_line.startswith('└──')) and 'Group' in next_line:
-                        # This is a nested group
-                        nested_start = j
+                    
+                    # Check if we've reached the next group or section
+                    if re.match(r'^Group\s*\d+:', next_line, re.IGNORECASE):
                         break
-                    elif re.match(r'^Group\s*\d+:', next_line, re.IGNORECASE):
-                        # This is a sibling group at same level
+                    if next_line.startswith('INTERNAL NODE:') or next_line.startswith('LEAF NODE:'):
                         break
-                    elif re.match(r'^[├└]──\s*Group\s*\d+:', next_line, re.IGNORECASE):
-                        # This is a sibling group at same level (indented format)
-                        break
-                    j += 1
-
-                # If we found nested groups, parse them
-                if nested_start is not None:
-                    # Find the end of nested structure
-                    nested_end = self._find_nested_end(lines, nested_start, end_idx)
-
-                    # Parse nested subgroups
-                    nested_groups = self._parse_nested_groups(lines, nested_start, nested_end)
-                    groups[group_num]['subgroups'] = nested_groups
-                    groups[group_num]['is_leaf'] = False
-
-                    # Skip to end of nested structure
-                    i = nested_end
-                else:
-                    # This is a leaf group, look for hypotheses/examples
-                    j = i + 1
-                    while j < end_idx:
-                        next_line = lines[j].strip()
-                        if not next_line:
-                            j += 1
-                            continue
-
-                        # Check if we've reached the next group at same level
-                        if re.match(r'^Group\s*\d+:', next_line, re.IGNORECASE):
-                            break
-                        if re.match(r'^[├└]──\s*Group\s*\d+:', next_line, re.IGNORECASE):
-                            break
-
-                        # Extract content from indented lines
-                        if next_line.startswith('├──') or next_line.startswith('└──'):
-                            # Extract hypothesis from indented line
-                            content = re.sub(r'^[├└]──\s*', '', next_line).strip()
-                            if content:
-                                groups[group_num]['hypotheses'].append(content)
-                        elif next_line.startswith('-') or next_line.startswith('•'):
-                            # Bullet points
-                            content = next_line.lstrip('- ').lstrip('• ').strip()
-                            if content:
-                                groups[group_num]['hypotheses'].append(content)
-                        elif next_line.startswith('"') and next_line.endswith('"'):
-                            # Quoted examples
-                            content = next_line.strip('"')
-                            if content:
-                                groups[group_num]['examples'].append(content)
-
+                    
+                    # Parse refined hypotheses
+                    if next_line.startswith('Refined Hypotheses:'):
                         j += 1
-
-                    i = j - 1  # Adjust for the loop increment
-
+                        while j < end_idx:
+                            hyp_line = lines[j].strip()
+                            if not hyp_line:
+                                j += 1
+                                continue
+                            
+                            # Check for end of hypotheses section
+                            if (hyp_line.startswith('Examples:') or 
+                                hyp_line.startswith('Subtree:') or
+                                re.match(r'^Group\s*\d+:', hyp_line, re.IGNORECASE) or
+                                hyp_line.startswith('INTERNAL NODE:') or
+                                hyp_line.startswith('LEAF NODE:')):
+                                break
+                            
+                            # Extract hypothesis
+                            hyp_match = re.match(r'^\s*\d+\.\s*(.+)', hyp_line)
+                            if hyp_match:
+                                hypothesis = hyp_match.group(1).strip()
+                                groups[group_num]['hypotheses'].append(hypothesis)
+                            
+                            j += 1
+                        continue
+                    
+                    # Parse examples
+                    if next_line.startswith('Examples:'):
+                        j += 1
+                        while j < end_idx:
+                            ex_line = lines[j].strip()
+                            if not ex_line:
+                                j += 1
+                                continue
+                            
+                            # Check for end of examples section
+                            if (ex_line.startswith('Subtree:') or
+                                re.match(r'^Group\s*\d+:', ex_line, re.IGNORECASE) or
+                                ex_line.startswith('INTERNAL NODE:') or
+                                ex_line.startswith('LEAF NODE:')):
+                                break
+                            
+                            # Extract example
+                            ex_match = re.match(r'^\s*\d+\.\s*(.+)', ex_line)
+                            if ex_match:
+                                example = ex_match.group(1).strip()
+                                groups[group_num]['examples'].append(example)
+                            
+                            j += 1
+                        continue
+                    
+                    # Parse subtree
+                    if next_line.startswith('Subtree:'):
+                        j += 1
+                        subtree_start = j
+                        
+                        # Find subtree end
+                        subtree_end = self._find_subtree_end(lines, subtree_start, end_idx)
+                        
+                        # Parse nested subgroups
+                        nested_groups = self._parse_structured_tree(lines, subtree_start, subtree_end)
+                        groups[group_num]['subgroups'] = nested_groups
+                        groups[group_num]['is_leaf'] = False
+                        
+                        j = subtree_end
+                        continue
+                    
+                    j += 1
+                
+                i = j - 1  # Adjust for the loop increment
+            
             i += 1
-
+        
         return groups
 
     @staticmethod
-    def _find_nested_end(lines, start_idx, end_idx):
-        i = start_idx + 1
-
+    def _find_subtree_end(lines, start_idx, end_idx):
+        """Find the end of a subtree section"""
+        i = start_idx
+        
         while i < end_idx:
             line = lines[i].strip()
             if not line:
                 i += 1
                 continue
-
-            # Check if we've reached the end of nested structure
-            # Look for next group at same level (either direct or indented)
-            if re.match(r'^Group\s*\d+:', line, re.IGNORECASE):
-                # Found next group at same level, end of nested structure
+            
+            # Check for end of subtree
+            if (line.startswith('Group') or
+                line.startswith('INTERNAL NODE:') or
+                line.startswith('LEAF NODE:') or
+                (line.startswith('Group') and ':' in line)):
                 return i
-            elif re.match(r'^[├└]──\s*Group\s*\d+:', line, re.IGNORECASE):
-                # Found next group at same level (indented format), end of nested structure
-                return i
-
-            # Check for other structural markers that might indicate end
-            if line.startswith('###') or line.startswith('##'):
-                # Found section header, end of nested structure
-                return i
-
-            # Check for deeper nesting - if we see more indentation, continue
-            if line.startswith('├──') or line.startswith('└──'):
-                # This is still part of nested structure
-                pass
 
             i += 1
 
         return end_idx
 
-    @staticmethod
-    def _build_tree_from_structure(tree_structure, original_hypotheses, current_path):
+    def _build_tree_from_structure(self, tree_structure, original_hypotheses, current_path):
         logger = LoggerConfig.get_logger("TreeRefinement")
 
         if not tree_structure:
@@ -494,14 +500,38 @@ class MultiHypHierarchicalInference(DefaultInference):
                             )
                             internal_node.children[subgroup_num] = subgroup_node
                         else:
-                            # Handle deeper nesting if needed
-                            logger.warning(f"Deep nesting detected in subgroup {subgroup_num}, treating as leaf")
-                            subgroup_node = TreeNode(
-                                is_leaf=True,
-                                hypotheses=subgroup_info.get('hypotheses', []),
-                                path=internal_node.path + [subgroup_info['condition']]
-                            )
-                            internal_node.children[subgroup_num] = subgroup_node
+                            # Handle deeper nesting recursively
+                            if subgroup_info.get('subgroups'):
+                                # This is an internal node with its own subgroups
+                                nested_node = self._build_tree_from_structure(
+                                    subgroup_info['subgroups'], 
+                                    subgroup_info.get('hypotheses', []),
+                                    internal_node.path + [subgroup_info['condition']]
+                                )
+                                if nested_node:
+                                    nested_node.groups = subgroup_info['subgroups']
+                                    nested_node.hypotheses = subgroup_info.get('hypotheses', [])
+                                    nested_node.path = internal_node.path + [subgroup_info['condition']]
+                                    internal_node.children[subgroup_num] = nested_node
+                                    logger.info(f"Created nested internal node for Group {group_num} -> Subgroup {subgroup_num}")
+                                else:
+                                    # Fallback: treat as leaf node
+                                    logger.warning(f"Failed to build nested node for subgroup {subgroup_num}, treating as leaf")
+                                    subgroup_node = TreeNode(
+                                        is_leaf=True,
+                                        hypotheses=subgroup_info.get('hypotheses', []),
+                                        path=internal_node.path + [subgroup_info['condition']]
+                                    )
+                                    internal_node.children[subgroup_num] = subgroup_node
+                            else:
+                                # Fallback: treat as leaf node
+                                logger.warning(f"Subgroup {subgroup_num} has no subgroups but is not marked as leaf, treating as leaf")
+                                subgroup_node = TreeNode(
+                                    is_leaf=True,
+                                    hypotheses=subgroup_info.get('hypotheses', []),
+                                    path=internal_node.path + [subgroup_info['condition']]
+                                )
+                                internal_node.children[subgroup_num] = subgroup_node
 
                     root.children[group_num] = internal_node
                     logger.info(
@@ -719,7 +749,7 @@ class MultiHypHierarchicalInference(DefaultInference):
             sample_data = leaf_data.iloc[[idx]]
             sample_data = sample_data.reset_index(drop=True)
             prompt_input = self.prompt_class.multiple_hypotheses_inference_with_path(
-                hyp_dict, sample_data, 0, leaf_node.path, leaf_node.path
+                hyp_dict=hyp_dict, sample_data=sample_data, condition_path=leaf_node.path
             )
             prompt_inputs.append(prompt_input)
         responses = self.api.batched_generate(
@@ -764,31 +794,49 @@ class MultiHypHierarchicalInference(DefaultInference):
             **generate_kwargs,
         )
 
+        # Display the built tree structure after Phase 1
+        logger.info("=== Phase 1 Complete: Built Decision Tree ===")
+        logger.info("Tree Structure:")
+        tree_structure = self._visualize_tree(tree_root)
+        logger.info(tree_structure)
+        logger.info("=" * 80)
+
         logger.info("--- Phase 2: Tree Validation and Refinement ---")
         current_tree_root = tree_root
         iteration_count = 0
         validation_passed = False
 
-        # while iteration_count < max_iterations and not validation_passed:
-        #     iteration_count += 1
-        #     logger.info(f"--- Iteration {iteration_count}/{max_iterations} ---")
-        #     validation_analysis, validation_passed = self._tree_validation(
-        #         tree_root=current_tree_root, original_hypotheses=hyp_bank, cache_seed=cache_seed, **generate_kwargs
-        #     )
-        #     if validation_passed:
-        #         logger.info(f"=== Tree Validation Passed at Iteration {iteration_count} ===")
-        #         break
-        #     else:
-        #         logger.info(f"=== Tree Validation Failed at Iteration {iteration_count} ===")
-        #         if iteration_count >= max_iterations:
-        #             logger.warning(f"Reached maximum iterations ({max_iterations}), using current tree")
-        #             break
-        #         logger.info(f"--- Proceeding to Tree Refinement for Iteration {iteration_count} ---")
-        #         refined_tree_root = self._tree_refinement(
-        #             tree_root=current_tree_root, original_hypotheses=hyp_bank, validation_analysis=validation_analysis, cache_seed=cache_seed, **generate_kwargs
-        #         )
-        #         current_tree_root = refined_tree_root
+        while iteration_count < max_iterations and not validation_passed:
+            iteration_count += 1
+            logger.info(f"--- Iteration {iteration_count}/{max_iterations} ---")
 
+            # Show current tree structure before validation
+            logger.info(f"Current tree structure before validation):")
+            current_tree_structure = self._visualize_tree(current_tree_root)
+            logger.info(current_tree_structure)
+
+            validation_analysis, validation_passed = self._tree_validation(
+                tree_root=current_tree_root, original_hypotheses=hyp_bank, cache_seed=cache_seed, **generate_kwargs
+            )
+            if validation_passed:
+                logger.info(f"=== Tree Validation Passed at Iteration {iteration_count} ===")
+                break
+            else:
+                logger.info(f"=== Tree Validation Failed at Iteration {iteration_count} ===")
+                if iteration_count >= max_iterations:
+                    logger.warning(f"Reached maximum iterations ({max_iterations}), using current tree")
+                    break
+                logger.info(f"--- Proceeding to Tree Refinement for Iteration {iteration_count} ---")
+                refined_tree_root = self._tree_refinement(
+                    tree_root=current_tree_root, original_hypotheses=hyp_bank, validation_analysis=validation_analysis, cache_seed=cache_seed, **generate_kwargs
+                )
+                current_tree_root = refined_tree_root
+
+                # Show refined tree structure after refinement
+                logger.info(f"Refined tree structure (after iteration {iteration_count}):")
+                refined_tree_structure = self._visualize_tree(current_tree_root)
+                logger.info(refined_tree_structure)
+                logger.info("-" * 60)
         logger.info("--- Tree Validation and Refinement Complete ---")
         logger.info(f"Total iterations: {iteration_count}")
         if validation_passed:

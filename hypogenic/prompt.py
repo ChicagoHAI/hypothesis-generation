@@ -396,7 +396,7 @@ class BasePrompt(ABC):
         prompt = self._information_prompt(substitute_dict, "internal_inference")
         return prompt
 
-    def multiple_hypotheses_inference_with_path(self, hyp_dict, sample_data, param, tree_path=None, condition_path=None):
+    def multiple_hypotheses_inference_with_path(self, hyp_dict, sample_data, condition_path=None):
         """
         Enhanced inference prompt that includes tree path context
         """
