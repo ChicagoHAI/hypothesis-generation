@@ -60,10 +60,17 @@ class SummaryInformation:
     def update_useful_examples(self, example, label):
         self.correct_examples.append((example, label))
 
-    # In the update function, if it got the ith smample wrong, adjust accuracy accordinly
+    # In the update function, if it got the ith sample wrong, adjust accuracy accordinly
     def update_info_if_not_useful(self, current_example, alpha):
         self.acc = (self.acc * self.num_visits) / (self.num_visits + 1)
         self.num_visits += 1
+        self.update_reward(alpha, current_example)
+
+    def update_info_continuous(self, current_example, alpha, diff_value,):
+        self.acc = self.acc * self.num_visits
+        self.acc += float(- (diff_value ** 2))
+        self.num_visits += 1
+        self.acc = self.acc / self.num_visits
         self.update_reward(alpha, current_example)
 
     def __reduce__(self):
