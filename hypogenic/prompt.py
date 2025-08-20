@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import os
 import textwrap
 from string import Template
-from typing import List, Tuple, Union, Dict
+from typing import List, Tuple, Union, Dict, Any
 from copy import deepcopy
 import pandas as pd
 
@@ -187,6 +187,58 @@ class BasePrompt(ABC):
 
         return prompt
 
+    def error_augmented_generation(self, train_data, reference_info):
+        """
+        reference_info: {hypo: {"correct": set(), "wrong": set()}}
+        """
+        substitute_dict = {}
+        multi_sub_dicts = {"error_augmented_observation": []}
+
+        for hypo_idx, (hypothesis, sample_dict) in enumerate(reference_info.items()):
+            correct_samples_info = []
+            correct_ids = list(sample_dict.get("correct", []))[:3]
+            for idx, sample_id in enumerate(correct_ids):
+                sample_data = self._get_substitute_dict(train_data, sample_id)
+                sample_data["idx"] = idx + 1
+                correct_samples_info.append(sample_data)
+            correct_samples_text = self._fill_multi_content(
+                ({}, correct_samples_info),
+                self._get_prompt_template("correct_samples")
+            )
+
+            wrong_samples_info = []
+            for idx, sample_id in enumerate(sample_dict.get("wrong", [])):
+                sample_data = self._get_substitute_dict(train_data, sample_id)
+                sample_data["idx"] = idx + 1
+                wrong_samples_info.append(sample_data)
+            wrong_samples_text = self._fill_multi_content(
+                ({}, wrong_samples_info),
+                self._get_prompt_template("wrong_samples")
+            )
+
+            hyp_info = {
+                "hypothesis_text": hypothesis,
+                "correct_samples": correct_samples_text,
+                "wrong_samples": wrong_samples_text
+            }
+            multi_sub_dicts["error_augmented_observation"].append(hyp_info)
+
+        substitute_dict = self._fill_multi_in_sub_dict(
+            substitute_dict, multi_sub_dicts, "error_augmented_generation"
+        )
+
+        prompt = self._information_prompt(substitute_dict, "error_augmented_generation")
+        return prompt
+
+    def remove_redundancy(self, hypotheses_dict):
+        hypotheses_list = list(hypotheses_dict.keys())
+
+        substitute_dict = {"hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])}
+
+        prompt = self._information_prompt(substitute_dict, "remove_redundancy")
+
+        return prompt
+
     def inference(self, hypotheses_dict, test_data, test_idx):
         """
         Create inference prompt.
@@ -292,4 +344,146 @@ class BasePrompt(ABC):
 
         prompt = self._information_prompt(substitute_dict, "is_relevant")
 
+        return prompt
+
+    def tree_split(self, hypotheses_dict, current_path):
+        if isinstance(hypotheses_dict, (list, tuple, set)):
+            hypotheses_list = list(hypotheses_dict)
+        else:
+            hypotheses_list = list(hypotheses_dict.keys())
+
+        substitute_dict = {"hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])}
+        
+        if current_path:
+            substitute_dict["current_path"] = self._format_condition_path(current_path)
+        else:
+            substitute_dict["current_path"] = "Root"
+
+        prompt = self._information_prompt(substitute_dict, "tree_split")
+
+        return prompt
+
+    def tree_split_decision(self, hypotheses_dict, current_depth, current_path):
+        """
+        Prompt for LLM to decide whether to continue splitting or create a leaf node
+        """
+        if isinstance(hypotheses_dict, (list, tuple, set)):
+            hypotheses_list = list(hypotheses_dict)
+        else:
+            hypotheses_list = list(hypotheses_dict.keys())
+        
+        substitute_dict = {
+            "hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)]),
+            "current_depth": current_depth
+        }
+
+        if current_path:
+            substitute_dict["current_path"] = self._format_condition_path(current_path)
+        else:
+            substitute_dict["current_path"] = "Root"
+
+        prompt = self._information_prompt(substitute_dict, "tree_split_decision")
+
+        return prompt
+
+    def internal_inference(self, group_conditions, test_data, test_idx):
+        """
+        Create prompt to determine which group a sample belongs to.
+        """
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+        substitute_dict["group_conditions"] = group_conditions
+
+        prompt = self._information_prompt(substitute_dict, "internal_inference")
+        return prompt
+
+    def multiple_hypotheses_inference_with_path(self, hyp_dict, sample_data, condition_path=None):
+        """
+        Enhanced inference prompt that includes tree path context
+        """
+        hypotheses_list = list(hyp_dict.keys())
+        substitute_dict = self._get_substitute_dict(sample_data, 0)
+        substitute_dict["hypotheses"] = "\n".join([f"{idx+1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])
+        
+        if condition_path:
+            substitute_dict["current_path"] = self._format_condition_path(condition_path)
+        else:
+            substitute_dict["current_path"] = "Root"
+        
+        prompt = self._information_prompt(substitute_dict, "multiple_hypotheses_inference_with_path")
+        return prompt
+
+    def tree_refinement(self, original_hypotheses, tree_structure, validation_analysis):
+        if isinstance(original_hypotheses, (list, tuple, set)):
+            hypotheses_list = list(original_hypotheses)
+        else:
+            hypotheses_list = list(original_hypotheses.keys())
+        
+        substitute_dict = {
+            'original_hypotheses': "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)]),
+            'tree_structure': tree_structure,
+            'validation_analysis': validation_analysis
+        }
+        
+        return self._information_prompt(substitute_dict, "tree_refinement")
+
+    def tree_validation(self, original_hypotheses, tree_structure):
+        if isinstance(original_hypotheses, (list, tuple, set)):
+            hypotheses_list = list(original_hypotheses)
+        else:
+            hypotheses_list = list(original_hypotheses.keys())
+        
+        substitute_dict = {
+            'original_hypotheses': "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)]),
+            'tree_structure': tree_structure
+        }
+        
+        return self._information_prompt(substitute_dict, "tree_validation")
+
+    @staticmethod
+    def _format_condition_path(condition_path):
+        if not condition_path:
+            return "Root"
+        
+        path_parts = []
+        for i, condition_name in enumerate(condition_path):
+            path_parts.append(f"Condition {i+1}: {condition_name}")
+        
+        return " → ".join(path_parts)
+
+    def create_stump(self, hyp_bank):
+        """
+        Create stump (decision groups) from hypotheses.
+        """
+        if isinstance(hyp_bank, (list, tuple, set)):
+            hypotheses_list = list(hyp_bank)
+        else:
+            hypotheses_list = list(hyp_bank.keys())
+
+        substitute_dict = {
+            "hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])
+        }
+
+        prompt = self._information_prompt(substitute_dict, "create_stump")
+        return prompt
+
+    def determine_group(self, group_conditions, test_data, test_idx):
+        """
+        Determine which group a sample belongs to based on decision stump conditions.
+        """
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+        substitute_dict["group_conditions"] = group_conditions
+
+        prompt = self._information_prompt(substitute_dict, "determine_group")
+        return prompt
+
+    def stump_predict(self, hyp_dict, test_data, test_idx, group_condition):
+        """
+        Create prediction prompt for decision stump.
+        """
+        hypotheses_list = list(hyp_dict.keys())
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+        substitute_dict["hypotheses"] = "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])
+        substitute_dict["group_condition"] = group_condition
+
+        prompt = self._information_prompt(substitute_dict, "stump_predict")
         return prompt

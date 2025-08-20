@@ -2,6 +2,9 @@ import datetime
 import json
 import logging
 import os
+
+from hypogenic.algorithm.generation.augmented import AugmentedGeneration
+from hypogenic.algorithm.update.augmented import AugmentedUpdate
 from hypogenic.utils import set_seed, get_results
 from hypogenic.tasks import BaseTask
 from hypogenic.extract_label import extract_label_register
@@ -26,6 +29,8 @@ from hypothesis_agent.data_analysis_agent.generation import (
     OnlyPaperGeneration,
     ZeroShotGeneration,
 )
+from hypothesis_agent.data_analysis_agent.stump_inference import StumpInference
+# from hypothesis_agent.data_analysis_agent.tree_inference import TreeInference
 from hypothesis_agent.data_analysis_agent.inference import MultiHypDefaultInference
 from hypothesis_agent.data_analysis_agent.update import TestUpdate
 from hypothesis_agent.literature_review_agent import LiteratureAgent
@@ -55,6 +60,11 @@ parser.add_argument("--model_name", type=str, required=True)
 parser.add_argument("--task_name", type=str, required=True)
 parser.add_argument("--literature_folder", type=str)
 
+# This is needed for the grouping model
+parser.add_argument("--grouping_model_type", type=str)
+parser.add_argument("--grouping_model_name", type=str)
+parser.add_argument("--grouping_model_path", type=str)
+
 # This is needed for local models
 parser.add_argument("--model_path", type=str)
 parser.add_argument("--do_train", action="store_true", default=False)
@@ -68,6 +78,8 @@ parser.add_argument("--run_only_paper", action="store_true", help="Run literatur
 parser.add_argument("--run_hyperwrite", action="store_true", help="Run HyperWrite")
 parser.add_argument("--run_notebooklm", action="store_true", help="Run NotebookLM")
 parser.add_argument("--run_hypogenic", action="store_true", help="Run original HypoGeniC")
+parser.add_argument("--run_augmented_hypogenic", action="store_true", help="Run augmented HypoGeniC")
+parser.add_argument("--run_hierarchical_inference", action="store_true", help="Run hierarchical inference")
 parser.add_argument("--run_hyporefine", action="store_true", help="Run HypoRefine")
 parser.add_argument("--run_union_hypo", action="store_true", help="Run Union HypoGeniC and Paper")
 parser.add_argument("--run_union_refine", action="store_true", help="Run Union HypoRefine and Paper")
@@ -396,6 +408,69 @@ def original_hypogenic(task_name, api, model_name):
             epoch=epoch,
         )
 
+def augmented_hypogenic(task_name, api, model_name):
+    output_folder = f"./results/{task_name}/{model_name}/aug_hyp_{max_num_hypotheses}/"
+
+    os.makedirs(output_folder, exist_ok=True)
+
+    task = BaseTask(
+        config_path=f"./data/{task_name}/config.yaml",
+        from_register=extract_label_register,
+        use_ood=use_ood
+    )
+
+    set_seed(seed)
+    train_data, _, _ = task.get_data(num_train, num_test, num_val, seed)
+    prompt_class = BasePrompt(task)
+    inference_class = DefaultInference(api, prompt_class, train_data, task)
+    generation_class = AugmentedGeneration(api, prompt_class, inference_class, task)
+
+    update_class = AugmentedUpdate(
+        generation_class=generation_class,
+        inference_class=inference_class,
+        replace_class=DefaultReplace(max_num_hypotheses),
+        save_path=output_folder,
+        num_init=num_init,
+        k=k,
+        alpha=alpha,
+        update_batch_size=update_batch_size,
+        num_hypotheses_to_update=num_hypotheses_to_update,
+        save_every_n_examples=save_every_10_examples,
+    )
+
+    hypotheses_bank = update_class.batched_initialize_hypotheses(
+        num_init,
+        init_batch_size=init_batch_size,
+        init_hypotheses_per_batch=init_hypotheses_per_batch,
+        cache_seed=cache_seed,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        max_concurrent=64,
+    )
+    update_class.save_to_json(
+        hypotheses_bank,
+        sample=num_init,
+        seed=seed,
+        epoch=0,
+    )
+    for epoch in range(1):
+        hypotheses_bank = update_class.update(
+            current_epoch=epoch,
+            hypotheses_bank=hypotheses_bank,
+            current_seed=seed,
+            cache_seed=cache_seed,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            redundancy_threshold=5,
+            max_concurrent=64,
+        )
+        update_class.save_to_json(
+            hypotheses_bank,
+            sample="final",
+            seed=seed,
+            epoch=epoch,
+        )
+
 def IO_iterative_refinement(task_name, api, model_name):
     output_folder = f"./results/{task_name}/{model_name}/IO_refinement/"
 
@@ -678,6 +753,62 @@ def get_res(filename: str, task_name, api, model_name, use_val=False, multihyp=F
         }
         return formatted_results
 
+def get_res_hierarchical(filename: str, task_name, api, model_name, use_val=False, multihyp=False):
+    logger = LoggerConfig.get_logger("Agent - get_res_hierarchical")
+
+    set_seed(seed)
+
+    task = BaseTask(
+        config_path=f"./data/{task_name}/config.yaml",
+        from_register=extract_label_register,
+        use_ood=use_ood
+    )
+
+    train_data, test_data, val_data = task.get_data(num_train, num_test, num_val, seed)
+    if use_val:
+        test_data = val_data
+
+    prompt_class = TestPrompt(task)
+
+    with open(filename) as f:
+        hyp_dict = json.load(f)
+    hyp_bank = {}
+    for hypothesis in hyp_dict:
+        hyp_bank[hypothesis] = SummaryInformation.from_dict(hyp_dict[hypothesis])
+
+    # Initialize the API for the grouping model
+    grouping_model_type = args.grouping_model_type
+    grouping_model_name = args.grouping_model_name
+    groping_model_path = args.grouping_model_path
+    if grouping_model_type and grouping_model_name:
+        logger.info(f"Using grouping model: {grouping_model_type} - {grouping_model_name}")
+        grouping_api = llm_wrapper_register.build(grouping_model_type)(model=grouping_model_name, path_name=groping_model_path)
+    else:
+        logger.warning('Grouping model type or name not provided, using the same API as the main model.')
+        grouping_api = api
+
+    # inference_class = TreeInference(api, prompt_class, train_data, task)
+    # inference_class = DefaultInference(api, prompt_class, train_data, task)
+    inference_class = StumpInference(api, prompt_class, train_data, task, grouping_api)
+
+    pred_list, label_list = inference_class.run_inference_final(
+        test_data,
+        hyp_bank,
+        cache_seed=cache_seed,
+        max_concurrent=64,
+        temperature=temperature,
+        max_tokens=max_tokens,
+    )
+
+    results_dict = get_results(pred_list, label_list)
+    f1 = results_dict["f1"]
+    acc = results_dict["accuracy"]
+    logger_str = "Results:\n"
+    logger_str += f"Accuracy: {acc}\n"
+    logger_str += f"F1: {f1}\n\n"
+    logger.info(logger_str)
+    return results_dict  # Return results dictionary
+
 def baseline(few_shot_k, task_name, api, model_name, seed=42, use_val=False):
     def few_shot(
         api: LLMWrapper,
@@ -871,6 +1002,8 @@ def log_arguments(logger, args):
             ("Run HyperWrite", args.run_hyperwrite),
             ("Run NotebookLM", args.run_notebooklm),
             ("Run HypoGeniC", args.run_hypogenic),
+            ("Run Augmented HypoGeniC", args.run_augmented_hypogenic),
+            ("Run Hierarchical Inference", args.run_hierarchical_inference),
             ("Run HypoRefine", args.run_hyporefine),
             ("Run Union HypoGeniC", args.run_union_hypo),
             ("Run Union HypoRefine", args.run_union_refine),
@@ -1029,6 +1162,51 @@ if __name__ == "__main__":
         logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
         results = get_res(
             f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_augmented_hypogenic:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Augmented HypoGeniC=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            augmented_hypogenic(task_name=task_name, api=api, model_name=model_name)
+
+        method_name = "augmented_hypogenic_no_update"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/aug_hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+        method_name = "augmented_hypogenic"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/aug_hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=multihyp,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_hierarchical_inference:
+        method_name = "hypogenic"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=With Update=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res_hierarchical(
+            f"results/{task_name}/{model_name}/hierarchical_hyp_{max_num_hypotheses}/hypotheses_training_sample_final_seed_{seed}_epoch_0.json",
             task_name=task_name,
             api=api,
             model_name=model_name,
