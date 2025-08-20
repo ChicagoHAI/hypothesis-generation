@@ -449,3 +449,41 @@ class BasePrompt(ABC):
             path_parts.append(f"Condition {i+1}: {condition_name}")
         
         return " → ".join(path_parts)
+
+    def create_stump(self, hyp_bank):
+        """
+        Create stump (decision groups) from hypotheses.
+        """
+        if isinstance(hyp_bank, (list, tuple, set)):
+            hypotheses_list = list(hyp_bank)
+        else:
+            hypotheses_list = list(hyp_bank.keys())
+
+        substitute_dict = {
+            "hypotheses": "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])
+        }
+
+        prompt = self._information_prompt(substitute_dict, "create_stump")
+        return prompt
+
+    def determine_group(self, group_conditions, test_data, test_idx):
+        """
+        Determine which group a sample belongs to based on decision stump conditions.
+        """
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+        substitute_dict["group_conditions"] = group_conditions
+
+        prompt = self._information_prompt(substitute_dict, "determine_group")
+        return prompt
+
+    def stump_predict(self, hyp_dict, test_data, test_idx, group_condition):
+        """
+        Create prediction prompt for decision stump.
+        """
+        hypotheses_list = list(hyp_dict.keys())
+        substitute_dict = self._get_substitute_dict(test_data, test_idx)
+        substitute_dict["hypotheses"] = "\n".join([f"{idx + 1}. {hyp}" for idx, hyp in enumerate(hypotheses_list)])
+        substitute_dict["group_condition"] = group_condition
+
+        prompt = self._information_prompt(substitute_dict, "stump_predict")
+        return prompt

@@ -31,7 +31,8 @@ from hypothesis_agent.data_analysis_agent.generation import (
     OnlyPaperGeneration,
     ZeroShotGeneration,
 )
-from hypothesis_agent.data_analysis_agent.hierarchical_inference import MultiHypHierarchicalInference
+from hypothesis_agent.data_analysis_agent.stump_inference import StumpInference
+# from hypothesis_agent.data_analysis_agent.tree_inference import TreeInference
 from hypothesis_agent.data_analysis_agent.inference import MultiHypDefaultInference
 from hypothesis_agent.data_analysis_agent.update import TestUpdate
 from hypothesis_agent.literature_review_agent import LiteratureAgent
@@ -60,6 +61,11 @@ parser.add_argument("--model_type", type=str, required=True)
 parser.add_argument("--model_name", type=str, required=True)
 parser.add_argument("--task_name", type=str, required=True)
 parser.add_argument("--literature_folder", type=str)
+
+# This is needed for the grouping model
+parser.add_argument("--grouping_model_type", type=str)
+parser.add_argument("--grouping_model_name", type=str)
+parser.add_argument("--grouping_model_path", type=str)
 
 # This is needed for local models
 parser.add_argument("--model_path", type=str)
@@ -770,8 +776,21 @@ def get_res_hierarchical(filename: str, task_name, api, model_name, use_val=Fals
     for hypothesis in hyp_dict:
         hyp_bank[hypothesis] = SummaryInformation.from_dict(hyp_dict[hypothesis])
 
+    # Initialize the API for the grouping model
+    grouping_model_type = args.grouping_model_type
+    grouping_model_name = args.grouping_model_name
+    groping_model_path = args.grouping_model_path
+    if grouping_model_type and grouping_model_name:
+        logger.info(f"Using grouping model: {grouping_model_type} - {grouping_model_name}")
+        grouping_api = llm_wrapper_register.build(grouping_model_type)(model=grouping_model_name, path_name=groping_model_path)
+    else:
+        logger.warning('Grouping model type or name not provided, using the same API as the main model.')
+        grouping_api = api
 
-    inference_class = MultiHypHierarchicalInference(api, prompt_class, train_data, task)
+    # inference_class = TreeInference(api, prompt_class, train_data, task)
+    # inference_class = DefaultInference(api, prompt_class, train_data, task)
+    inference_class = StumpInference(api, prompt_class, train_data, task, grouping_api)
+
     pred_list, label_list = inference_class.run_inference_final(
         test_data,
         hyp_bank,

@@ -20,7 +20,7 @@ class TreeNode:
         self.path = path or [] # [condition1, condition2, ...]
 
 
-class MultiHypHierarchicalInference(DefaultInference):
+class TreeInference(DefaultInference):
     def __init__(
             self,
             api,
