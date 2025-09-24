@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import pickle
 import math
 import json
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Union
 import torch
 import re
 import os
@@ -60,6 +60,7 @@ class GPTWrapper(LLMWrapper):
         timeout=20,
         redis_kwargs: Dict = {},
         use_openrouter=False,
+        preprocess_messages: Union[bool, Callable[[List[Dict[str, str]], str], List[Dict[str, str]]]] = False,  # True, False, or custom function
         **kwargs,
     ):
         super().__init__(
@@ -70,6 +71,19 @@ class GPTWrapper(LLMWrapper):
         )
         self.timeout = timeout
         self.use_openrouter = use_openrouter
+        
+        # Configure message preprocessing
+        self.preprocess_messages = preprocess_messages
+        if callable(preprocess_messages):
+            self._validate_custom_preprocessor(preprocess_messages)
+            
+        logger = LoggerConfig.get_logger("GPTWrapper")
+        if preprocess_messages is True:
+            logger.info("Using built-in message preprocessing (e.g., /no_think for Qwen models)")
+        elif preprocess_messages is False:
+            logger.info("Message preprocessing disabled")
+        elif callable(preprocess_messages):
+            logger.info("Using custom message preprocessing function")
 
         # Initialize OpenAI client with OpenRouter support
         client_kwargs = {}
@@ -88,6 +102,42 @@ class GPTWrapper(LLMWrapper):
 
         # Store client kwargs for async client initialization
         self._client_kwargs = client_kwargs
+
+    def _validate_custom_preprocessor(self, preprocessor_func):
+        """Validate that a custom preprocessing function works correctly."""
+        # Sample test messages
+        test_messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Hello, how are you?"}
+        ]
+        
+        try:
+            result = preprocessor_func(test_messages, "test-model")
+            
+            # Check if result is a list
+            if not isinstance(result, list):
+                raise ValueError("Custom preprocessor must return a list of messages")
+                
+            # Check if all elements are dictionaries with required keys
+            for i, msg in enumerate(result):
+                if not isinstance(msg, dict):
+                    raise ValueError(f"Message {i} must be a dictionary")
+                if 'role' not in msg or 'content' not in msg:
+                    raise ValueError(f"Message {i} must have 'role' and 'content' keys")
+                    
+        except Exception as e:
+            raise ValueError(f"Custom preprocessing function validation failed: {str(e)}")
+
+    def _apply_preprocessing(self, messages, model):
+        """Apply the configured preprocessing to messages."""
+        if self.preprocess_messages is False:
+            return messages
+        elif self.preprocess_messages is True:
+            return self._preprocess_messages_for_model(messages, model)
+        elif callable(self.preprocess_messages):
+            return self.preprocess_messages(messages, model)
+        else:
+            raise ValueError("preprocess_messages must be True, False, or a callable function")
 
     def get_cost(self):
         return self.total_cost
@@ -125,8 +175,8 @@ class GPTWrapper(LLMWrapper):
         if len(messages) == 0:
             return []
 
-        # Preprocess messages for model-specific requirements
-        messages = [self._preprocess_messages_for_model(msg_list, model) for msg_list in messages]
+        # Apply configured preprocessing
+        messages = [self._apply_preprocessing(msg_list, model) for msg_list in messages]
 
         client = AsyncOpenAI(**self._client_kwargs)
         status_bar = tqdm.tqdm(total=len(messages))
@@ -188,8 +238,8 @@ class GPTWrapper(LLMWrapper):
         n=1,
         **kwargs,
     ):
-        # Preprocess messages for model-specific requirements
-        messages = self._preprocess_messages_for_model(messages, model)
+        # Apply configured preprocessing
+        messages = self._apply_preprocessing(messages, model)
 
         self.rate_limiter.add_event()
         logger = LoggerConfig.get_logger("GPTWrapper")
