@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 import pickle
 import math
-from typing import Callable, Dict, List
+import json
+from typing import Callable, Dict, List, Union
 import torch
 import re
 import os
@@ -13,6 +14,7 @@ import asyncio
 import tqdm
 from openai import AsyncOpenAI, OpenAI
 from anthropic import AsyncAnthropic, Anthropic
+import httpx
 
 from sklearn.metrics import accuracy_score, f1_score
 
@@ -29,34 +31,23 @@ from pprint import pprint
 from . import llm_wrapper_register
 from .base import LLMWrapper
 from .rate_limiter import RateLimiter
+from .model_costs import calculate_cost
 from ..LLM_cache import ClaudeAPICache, LocalModelAPICache, OpenAIAPICache
 from ..tasks import BaseTask
+from ..logger_config import LoggerConfig
 
-MODEL_COSTS = {
-    'gpt-4o-mini': {
-        'input': 0.15,
-        'output': 0.6
-    },
-    'gpt-4o': {
-        'input': 2.5,
-        'output': 10
-    },
-    'o1': {
-        'input': 15,
-        'output': 60
-    },
-    'o3-mini': {
-        'input': 1.1,
-        'output': 4.4
-    }
-
-}
 @llm_wrapper_register.register("gpt")
 class GPTWrapper(LLMWrapper):
     exceptions_to_catch = (
         openai.RateLimitError,
         openai.APIError,
         openai.APITimeoutError,
+        json.JSONDecodeError,  # Handle malformed API responses from OpenRouter/OpenAI
+        ConnectionError,       # Network issues
+        TimeoutError,         # Generic timeout errors
+        httpx.HTTPError,      # HTTP-related errors from underlying httpx client
+        httpx.ConnectError,   # Connection failures
+        httpx.ReadTimeout,    # Read timeout errors
     )
 
     def __init__(
@@ -68,6 +59,8 @@ class GPTWrapper(LLMWrapper):
         port=6832,
         timeout=20,
         redis_kwargs: Dict = {},
+        use_openrouter=False,
+        preprocess_messages: Union[bool, Callable[[List[Dict[str, str]], str], List[Dict[str, str]]]] = False,  # True, False, or custom function
         **kwargs,
     ):
         super().__init__(
@@ -77,18 +70,98 @@ class GPTWrapper(LLMWrapper):
             max_backoff=max_backoff,
         )
         self.timeout = timeout
-        self.api = OpenAI()
+        self.use_openrouter = use_openrouter
+        
+        # Configure message preprocessing
+        self.preprocess_messages = preprocess_messages
+        if callable(preprocess_messages):
+            self._validate_custom_preprocessor(preprocess_messages)
+            
+        logger = LoggerConfig.get_logger("GPTWrapper")
+        if preprocess_messages is True:
+            logger.info("Using built-in message preprocessing (e.g., /no_think for Qwen models)")
+        elif preprocess_messages is False:
+            logger.info("Message preprocessing disabled")
+        elif callable(preprocess_messages):
+            logger.info("Using custom message preprocessing function")
+
+        # Initialize OpenAI client with OpenRouter support
+        client_kwargs = {}
+        if use_openrouter:
+            openrouter_api_key = os.getenv('OPENROUTER_API_KEY')
+            if not openrouter_api_key:
+                raise ValueError("OPENROUTER_API_KEY environment variable is required when use_openrouter=True")
+            client_kwargs['base_url'] = 'https://openrouter.ai/api/v1'
+            client_kwargs['api_key'] = openrouter_api_key
+
+        self.api = OpenAI(**client_kwargs)
         self.api_with_cache = OpenAIAPICache(port=port, **redis_kwargs)
         self.api_with_cache.api_call = self._generate
         self.api_with_cache.batched_api_call = self._batched_generate
         self.total_cost = 0
+
+        # Store client kwargs for async client initialization
+        self._client_kwargs = client_kwargs
+
+    def _validate_custom_preprocessor(self, preprocessor_func):
+        """Validate that a custom preprocessing function works correctly."""
+        # Sample test messages
+        test_messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Hello, how are you?"}
+        ]
+        
+        try:
+            result = preprocessor_func(test_messages, "test-model")
+            
+            # Check if result is a list
+            if not isinstance(result, list):
+                raise ValueError("Custom preprocessor must return a list of messages")
+                
+            # Check if all elements are dictionaries with required keys
+            for i, msg in enumerate(result):
+                if not isinstance(msg, dict):
+                    raise ValueError(f"Message {i} must be a dictionary")
+                if 'role' not in msg or 'content' not in msg:
+                    raise ValueError(f"Message {i} must have 'role' and 'content' keys")
+                    
+        except Exception as e:
+            raise ValueError(f"Custom preprocessing function validation failed: {str(e)}")
+
+    def _apply_preprocessing(self, messages, model):
+        """Apply the configured preprocessing to messages."""
+        if self.preprocess_messages is False:
+            return messages
+        elif self.preprocess_messages is True:
+            return self._preprocess_messages_for_model(messages, model)
+        elif callable(self.preprocess_messages):
+            return self.preprocess_messages(messages, model)
+        else:
+            raise ValueError("preprocess_messages must be True, False, or a callable function")
 
     def get_cost(self):
         return self.total_cost
     
     def reset_cost(self):
         self.total_cost = 0
-        
+
+    def _preprocess_messages_for_model(self, messages, model):
+        """Preprocess messages based on model-specific requirements."""
+        # Check if this is a Qwen model that needs /no_think
+        if 'qwen3-32b' in model.lower():
+            # Create a copy to avoid modifying the original
+            processed_messages = []
+            for msg in messages:
+                if msg.get('role') == 'user':
+                    # Prepend /no_think\n to user messages
+                    new_msg = msg.copy()
+                    new_msg['content'] = f"/no_think\n{msg['content']}"
+                    processed_messages.append(new_msg)
+                else:
+                    processed_messages.append(msg)
+            return processed_messages
+        return messages
+
     def _batched_generate(
         self,
         messages: List[List[Dict[str, str]]],
@@ -102,18 +175,25 @@ class GPTWrapper(LLMWrapper):
         if len(messages) == 0:
             return []
 
-        client = AsyncOpenAI()
+        # Apply configured preprocessing
+        messages = [self._apply_preprocessing(msg_list, model) for msg_list in messages]
+
+        client = AsyncOpenAI(**self._client_kwargs)
         status_bar = tqdm.tqdm(total=len(messages))
 
         async def _async_generate(sem, **kwargs):
             async with sem:
-                for _ in range(self.max_retry):
+                logger = LoggerConfig.get_logger("GPTWrapper")
+                for retry_count in range(self.max_retry):
                     try:
                         resp = await client.chat.completions.create(timeout=self.timeout, **kwargs)
                         status_bar.update(1)
                         self.rate_limiter.add_event()
                         return resp
                     except self.exceptions_to_catch as e:
+                        logger.warning(
+                            f"API request failed (attempt {retry_count + 1}/{self.max_retry}): {type(e).__name__}: {str(e)}"
+                        )
                         self.rate_limiter.backoff(e)
                         continue
                 raise Exception(
@@ -138,11 +218,16 @@ class GPTWrapper(LLMWrapper):
         resp = loop.run_until_complete(asyncio.gather(*tasks))
         
         for r in resp:
-            input_cost = r.usage.prompt_tokens * MODEL_COSTS[model]['input'] / 1000000
-            output_cost = r.usage.completion_tokens * MODEL_COSTS[model]['output'] / 1000000
-            self.total_cost += input_cost + output_cost
-            
-        return [r.choices[0].message.content for r in resp]
+            cost = calculate_cost(model, r.usage.prompt_tokens, r.usage.completion_tokens)
+            self.total_cost += cost
+
+        # Extract responses and log them in debug mode
+        responses = [r.choices[0].message.content for r in resp]
+        logger = LoggerConfig.get_logger("GPTWrapper")
+        for i, response in enumerate(responses):
+            logger.debug(f"Batch response {i+1}: {response}")
+
+        return responses
 
     def _generate(
         self,
@@ -153,8 +238,12 @@ class GPTWrapper(LLMWrapper):
         n=1,
         **kwargs,
     ):
+        # Apply configured preprocessing
+        messages = self._apply_preprocessing(messages, model)
+
         self.rate_limiter.add_event()
-        for _ in range(self.max_retry):
+        logger = LoggerConfig.get_logger("GPTWrapper")
+        for retry_count in range(self.max_retry):
             try:
                 resp = self.api.chat.completions.create(
                     messages=messages,
@@ -165,13 +254,27 @@ class GPTWrapper(LLMWrapper):
                     timeout=self.timeout,
                     **kwargs,
                 )
-                input_cost = resp.usage.prompt_tokens * MODEL_COSTS[model]['input'] / 1000000
-                output_cost = resp.usage.completion_tokens * MODEL_COSTS[model]['output'] / 1000000
-                self.total_cost += input_cost + output_cost
-                return resp.choices[0].message.content
+                cost = calculate_cost(model, resp.usage.prompt_tokens, resp.usage.completion_tokens)
+                self.total_cost += cost
+                response_content = resp.choices[0].message.content
+                logger.debug(f"Model response: {response_content}")
+                return response_content
             except self.exceptions_to_catch as e:
+                logger.warning(
+                    f"API request failed (attempt {retry_count + 1}/{self.max_retry}): {type(e).__name__}: {str(e)}"
+                )
                 self.rate_limiter.backoff(e)
                 continue
         raise Exception(
             "Max retry exceeded and failed to get response from API, possibly due to bad API requests."
         )
+
+
+@llm_wrapper_register.register("openrouter")
+class OpenRouterWrapper(GPTWrapper):
+    """OpenRouter wrapper that automatically configures GPTWrapper for OpenRouter usage."""
+
+    def __init__(self, model, **kwargs):
+        # Force use_openrouter=True for this wrapper
+        kwargs['use_openrouter'] = True
+        super().__init__(model=model, **kwargs)

@@ -1,0 +1,32 @@
+{
+  "Filtered Heuristics for Text Classification": {
+    "Description": "Research heuristics specifically selected for their relevance to text classification hypothesis generation from observational data.",
+    "Most_Suitable": [
+      "Investigate deviations from expectations: Notice outliers or anomalies and ask why they occur.",
+      "Question the norm: Explore why a widely accepted pattern exists.",
+      "Generate theories from conflict: Integrate contradictory findings from different sources.",
+      "Challenge core assumptions: Consider circumstances where the opposite of a familiar assumption or a reverse in causal direction might be true.",
+      "Stress-test ideas: Strengthen your argument by actively trying to find flaws or alternative explanations."
+    ],
+    "Moderately_Suitable": [
+      "Create novel syntheses: Connect concepts from unrelated research to find new insights.",
+      "Alternate induction and deduction: Use iterative cycles of inducing general principles and inferring new specific hypotheses.",
+      "Transferring conceptualizations analogously: Transfer concepts or methods from one field to another."
+    ]
+  },
+  "Literature-Based Heuristics": {
+    "Description": "Research heuristics specifically designed for generating hypotheses from existing literature and research papers.",
+    "Most_Suitable": [
+      "Generate theories from conflict: Integrate contradictory findings from different sources.",
+      "Create novel syntheses: Connect concepts from unrelated research to find new insights.",
+      "Interpret incidental findings: Examine unexpected interactions or side effects in prior studies.",
+      "Reorganize current knowledge: Reorganize existing literature of one field and chart new research directions.",
+      "Stress-test ideas: Strengthen your argument by actively trying to find flaws or alternative explanations."
+    ],
+    "Moderately_Suitable": [
+      "Transferring conceptualizations analogously: Transfer concepts or methods from one field to another.",
+      "Investigate deviations from expectations: Notice outliers or anomalies and ask why they occur.",
+      "Challenge core assumptions: Consider circumstances where the opposite of a familiar assumption or a reverse in causal direction might be true."
+    ]
+  }
+}

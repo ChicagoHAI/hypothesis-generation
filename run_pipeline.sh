@@ -1,8 +1,13 @@
 #!/bin/bash
 
 # Model settings
-MODEL_TYPE="gpt"
-MODEL_NAME="gpt-4o-mini"
+# MODEL_TYPE="gpt"
+# MODEL_NAME="gpt-4.1-mini"
+
+# OpenRouter example (uncomment to use)
+MODEL_TYPE="openrouter"
+# MODEL_NAME="qwen/qwen3-32b"  # or any other OpenRouter model
+MODEL_NAME="meta-llama/llama-3.1-70b-instruct"
 
 # MODEL_TYPE="vllm"  
 # MODEL_NAME="meta-llama/Meta-Llama-3.1-70B-Instruct" 
@@ -19,15 +24,27 @@ MODEL_NAME="gpt-4o-mini"
 # Define list of tasks to run
 TASKS=(
     "deceptive_reviews"
-    # "llamagc_detect"
-    # "gptgc_detect"
-    # "persuasive_pairs"
-    # "dreaddit"
-    # "headline_binary"
-    # "retweet"
-    # "journal_same/same_journal_health"
-    # "journal_same/same_journal_nips"
-    # "journal_same/same_journal_radiology"
+    "llamagc_detect"
+    "gptgc_detect"
+    "persuasive_pairs"
+    "dreaddit"
+    "headline_binary"
+    "retweet"
+    "journal_same/same_journal_health"
+    "journal_same/same_journal_nips"
+    "journal_same/same_journal_radiology"
+
+    "with_heuristics/deceptive_reviews"
+    "with_heuristics/llamagc_detect"
+    "with_heuristics/gptgc_detect"
+    "with_heuristics/persuasive_pairs"
+    "with_heuristics/dreaddit"
+    "with_heuristics/headline_binary"
+    "with_heuristics/retweet"
+    "with_heuristics/journal_same/same_journal_health"
+    "with_heuristics/journal_same/same_journal_nips"
+    "with_heuristics/journal_same/same_journal_radiology"
+
     # "journal_cross/cross_journal_health_nips"
     # "journal_cross/cross_journal_health_radiology"
     # "journal_cross/cross_journal_nips_health"
@@ -42,9 +59,10 @@ METHODS=(
     # "zero_shot"
     # "few_shot"
     # "zero_shot_gen"
-    # "only_paper"
+    "few_shot_gen"
+    "only_paper"
     "hypogenic"
-    # "hyporefine"
+    "hyporefine"
     # "union_hypo"
     # "union_refine"
     # "io_refine"
@@ -85,13 +103,17 @@ for TASK_NAME in "${TASKS[@]}"; do
     fi
 
     # IND setup
-    CMD="${CMD} 
-    --do_train
-    "
+    # CMD="${CMD} 
+    # --do_train
+    # "
 
     # OOD setup
+    CMD="${CMD} 
+    --use_ood
+    "
+
     # CMD="${CMD} 
-    # --use_ood
+    # --debug
     # "
 
     echo "Executing command: $CMD"
