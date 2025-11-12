@@ -73,6 +73,7 @@ parser.add_argument("--run_union_hypo", action="store_true", help="Run Union Hyp
 parser.add_argument("--run_union_refine", action="store_true", help="Run Union HypoRefine and Paper")
 parser.add_argument("--run_cross_model", action="store_true", help="Run cross-model evaluation")
 parser.add_argument("--run_io_refine", action="store_true", help="Run IO iterative refinement")
+parser.add_argument("--run_few_shot_gen", action="store_true", help="Run few-shot generation")
 parser.add_argument("--cross_model_name", type=str, help="Name of the cross model")
 parser.add_argument("--cross_hyp_folder", type=str, help="Folder containing cross model hypotheses")
 
@@ -396,8 +397,11 @@ def original_hypogenic(task_name, api, model_name):
             epoch=epoch,
         )
 
-def IO_iterative_refinement(task_name, api, model_name):
-    output_folder = f"./results/{task_name}/{model_name}/IO_refinement/"
+def IO_iterative_refinement(task_name, api, model_name, num_examples=10, num_epochs=3):
+    if num_epochs == 0:
+        output_folder = f"./results/{task_name}/{model_name}/few_shot_gen/"
+    else:
+        output_folder = f"./results/{task_name}/{model_name}/IO_refinement/"
 
     os.makedirs(output_folder, exist_ok=True)
 
@@ -408,7 +412,7 @@ def IO_iterative_refinement(task_name, api, model_name):
     )
 
     set_seed(seed)
-    train_data, _, _ = task.get_data(10, num_test, num_val, seed)
+    train_data, _, _ = task.get_data(num_examples, num_test, num_val, seed)
     prompt_class = IOPrompt(task)
     inference_class = DefaultInference(api, prompt_class, train_data, task)
     generation_class = IOGeneration(api, prompt_class, inference_class, task)
@@ -418,7 +422,7 @@ def IO_iterative_refinement(task_name, api, model_name):
         inference_class=inference_class,
         replace_class=DefaultReplace(max_num_hypotheses),
         save_path=output_folder,
-        num_init=10,
+        num_init=num_examples,
         k=k,
         alpha=alpha,
         update_batch_size=update_batch_size,
@@ -429,8 +433,8 @@ def IO_iterative_refinement(task_name, api, model_name):
     hypotheses_bank = {}
     # Use the Qiu et al. 2024 paper hyperparameters
     hypotheses_bank = update_class.batched_initialize_hypotheses(
-        num_init=10,
-        init_batch_size=num_init,
+        num_init=num_examples,
+        init_batch_size=num_examples,
         init_hypotheses_per_batch=5,
         cache_seed=cache_seed,
         temperature=0.7,
@@ -450,14 +454,14 @@ def IO_iterative_refinement(task_name, api, model_name):
         seed=seed,
         epoch=0,
     )
-    for epoch in range(3):
+    for epoch in range(num_epochs):
         # if there exist a hypothesis with accuracy 1.0, stop the training
         if any(hypotheses_bank[h].acc == 1.0 for h in hypotheses_bank):
             update_class.save_to_json(
                 hypotheses_bank,
                 sample="final",
                 seed=seed,
-                epoch=2,
+                epoch=num_epochs-1,
             )
             break
         # Else, iteratively refine
@@ -1011,18 +1015,18 @@ if __name__ == "__main__":
         if DO_TRAIN:
             original_hypogenic(task_name=task_name, api=api, model_name=model_name)
         
-        method_name = "hypogenic_no_update"
-        methods_run.append(method_name)
-        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
-        results = get_res(
-            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
-            task_name=task_name,
-            api=api,
-            model_name=model_name,
-            use_val=use_val,
-            multihyp=multihyp,
-        )
-        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+        # method_name = "hypogenic_no_update"
+        # methods_run.append(method_name)
+        # logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        # results = get_res(
+        #     f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+        #     task_name=task_name,
+        #     api=api,
+        #     model_name=model_name,
+        #     use_val=use_val,
+        #     multihyp=multihyp,
+        # )
+        # save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
         method_name = "hypogenic"
         methods_run.append(method_name)
@@ -1042,18 +1046,18 @@ if __name__ == "__main__":
         if DO_TRAIN:
             with_paper(task_name=task_name, api=api, model_name=model_name)
         
-        method_name = "hyporefine_no_update"
-        methods_run.append(method_name)
-        logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
-        results = get_res(
-            f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
-            task_name=task_name,
-            api=api,
-            model_name=model_name,
-            use_val=use_val,
-            multihyp=multihyp,
-        )
-        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+        # method_name = "hyporefine_no_update"
+        # methods_run.append(method_name)
+        # logger.info("=-=-=-=-=-=-=-=-=-=-=-=No Update=-=-=-=-=-=-=-=-=-=-=-=")
+        # results = get_res(
+        #     f"results/{task_name}/{model_name}/hyp_{max_num_hypotheses}_with_paper/hypotheses_training_sample_10_seed_{seed}_epoch_0.json",
+        #     task_name=task_name,
+        #     api=api,
+        #     model_name=model_name,
+        #     use_val=use_val,
+        #     multihyp=multihyp,
+        # )
+        # save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
         
         method_name = "hyporefine"
         methods_run.append(method_name)
@@ -1140,7 +1144,7 @@ if __name__ == "__main__":
             api=api,
             model_name=model_name,
             use_val=use_val,
-            multihyp=False,
+            multihyp=True,
         )
         save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
         
@@ -1154,6 +1158,24 @@ if __name__ == "__main__":
             model_name=model_name,
             use_val=use_val,
             multihyp=False,
+        )
+        save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
+
+    if args.run_few_shot_gen:
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Few shot generation=-=-=-=-=-=-=-=-=-=-=-=")
+        if DO_TRAIN:
+            IO_iterative_refinement(task_name=task_name, api=api, model_name=model_name, num_examples=3, num_epochs=0)
+
+        method_name = "few_shot_gen"
+        methods_run.append(method_name)
+        logger.info("=-=-=-=-=-=-=-=-=-=-=-=Few shot generation=-=-=-=-=-=-=-=-=-=-=-=")
+        results = get_res(
+            f"results/{task_name}/{model_name}/few_shot_gen/hypotheses_training_sample_init_seed_{seed}_epoch_0.json",
+            task_name=task_name,
+            api=api,
+            model_name=model_name,
+            use_val=use_val,
+            multihyp=True,
         )
         save_method_results(method_name, results, task_name, model_name, seed, use_ood=use_ood)
 
